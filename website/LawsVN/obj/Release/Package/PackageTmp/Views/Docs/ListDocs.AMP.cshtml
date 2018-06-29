@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using LawsVN.Models.Docs
+@model DocsModel
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-van-ban.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="Keywords" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <input type="hidden" name="LanguageId" value="@Model.PartialPaginationAjax.LanguageId" />
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a> »
+        <span class="breadcrumb-item">@(Model.PartialPaginationAjax.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId ? "Mới cập nhật" : "Văn bản tiếng anh")</span>
+    </div>
+    <!-- Bengin section -->
+    <section class="content-section">
+        <div class="title2">
+            <h1 class="title-cat2 vien"> @(Model.PartialPaginationAjax.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId ? "Mới cập nhật" : "Văn bản tiếng anh")</h1>
+        </div>
+        @*<div class="rows">
+            <select class="select-locvb">
+                <option>Tất cả lĩnh vực</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+            </select>
+            <select class="select-locvb">
+                <option>Tất cả lĩnh vực</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+            </select>
+            <select class="select-locvb">
+                <option>Tất cả lĩnh vực</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+                <option>Doanh nghiệp</option>
+                <option>Đất đai - Nhà ở</option>
+            </select>
+        </div>*@
+        @if (Model.ListDocsView.HasValue())
+        {
+         <div class="cat-box-content">
+                @for (int index = 0; index < Model.ListDocsView.Count; index++)
+                {
+                    var mDocsView = Model.ListDocsView[index];
+                    <div class="other-news @(index==0?"":"dashed")">
+                        <h2>
+                            <a class="post-title other" href="@mDocsView.GetDocUrl()">
+                               @mDocsView.DocName
+                            </a>
+                        </h2>
+                        <div class="post-time">
+                            @{ Html.RenderAction("PartialLinkDocumentAttributeAMP", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsView[index] } });}
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        
+        @*<div class="pagination">
+            <div class="pagination-right">
+                <a href="#" class="pagination-item ">1</a>
+                <a href="#" class="pagination-item active">2</a>
+                <a href="#" class="pagination-item">3</a>
+                <a href="#" class="pagination-item">»</a>
+            </div>
+        </div>*@
+    </section>

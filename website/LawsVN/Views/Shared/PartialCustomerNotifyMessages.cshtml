@@ -1,0 +1,33 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.HeaderModel
+<div class="notification">
+    <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" title="@Resource.MyMessage">
+        <span class="img-dk">
+            <img alt="img-dk" style="float: left; height: 18px;" src="@Url.Content("~/assets/images/thong-bao.png")" />
+        </span>
+        <span class="thong-bao">(<span id="RowCountNotifyMessages">@Model.RowCountNotifyMessages</span>)</span>
+    </a>
+    @if (Model.ListMessages.HasValue())
+    {
+        <div id="notification-header" class="notification-content">
+            <div class="from-thong-bao-2 content-scroll-1" style="max-height: 500px;">
+                    <div class="rows-thongbao center" style="font-size: 16px; font-weight: bold; text-transform: uppercase;">
+                        @Resource.Notification
+                    </div>
+                    @for (int index = 0; index < Model.ListMessages.Count; index++)
+                    {
+                        var message = Model.ListMessages[index];
+                        <div id="thongbao-@message.MessageId" class="rows-thongbao item-thongbao" @(index % 2 == 0 ? "style=background:#eeeeee" : string.Empty)>
+                            <a href="@string.Format("{0}user/chi-tiet-tin-nhan-{1}.html",CmsConstants.ROOT_PATH,message.MessageId)" title="Chi tiết thông báo" class="tie-tbao">@message.Subject.Truncate(180)</a>
+                        </div>
+                    }
+                    <div class="danh-dau">
+                        <a href="#" id="MarkAllRead" class="ada">Đánh dấu tất cả đã đọc</a>
+                        <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" title="Xem tất cả" class="xemall"> <img alt="xemall" class="xemall-img" src="@Url.Content("~/assets/images/xem-tiep.png")" /> Xem tất cả</a>
+                    </div>
+            </div>
+        </div>
+    }
+</div>

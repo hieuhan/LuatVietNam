@@ -1,0 +1,294 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model LawsVN.Models.LawerInsertModel
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage</a> » 
+                      <a href="@(CmsConstants.ROOT_PATH)danh-ba-luat-su.html" class="breadcrumb-item">Danh bạ luật sư</a> »
+                      <span class="breadcrumb-item colorrumb">Thêm luật sư</span>
+        </div>
+
+        <div class="content page">
+        <div class="from-page">
+        @using (Ajax.BeginForm("Insert", "Lawers", null, new AjaxOptions
+        {
+            HttpMethod = "Post",
+            OnBegin = "lawsVn.ajaxEvents.OnBegin",
+            OnComplete = "lawsVn.ajaxEvents.OnComplete",
+            OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccess"
+        }, new { id = "RegisterForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="cat-title">
+                <div class="cat-box-title">Thông tin luật sư</div>
+                <span class="vien-title nav-fd daxem"></span>
+            </div>
+
+            <div class="cat-box-content">
+
+                <div class="col-xs-2">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <label class="col-sm-1">Họ và tên: <span class="redcolor">*</span> </label>
+                            <div class="col-sm-2">
+                                @Html.TextBoxFor(m => m.FullName, new { @class = "form-control-input" })
+                                @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1">Địa chỉ: <span class="redcolor">*</span></label>
+                            <div class="col-sm-2">
+                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control-input" })
+                                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-1">Điện thoại: <span class="redcolor">*</span> </label>
+                            <div class="col-sm-2">
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control-input" })
+                                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1">Di động: <span class="redcolor">*</span> </label>
+                            <div class="col-sm-2">
+                                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control-input" })
+                                @Html.ValidationMessageFor(m => m.Mobile, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1">Email: <span class="redcolor">*</span></label>
+                            <div class="col-sm-2">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control-input" })
+                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1">Địa chỉ công tác: <span class="redcolor">*</span></label>
+                            <div class="col-sm-2">
+                                @Html.TextBoxFor(m => m.LawOfficeName, new { @class = "form-control-input" })
+                                @Html.ValidationMessageFor(m => m.LawOfficeName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1">Tài liệu tải lên:</label>
+                            <div class="col-sm-2">
+                                @*<div class="tailieu-item">
+                                    <span>Giay_chung_nhan_01.PDF</span>
+                                    <span>
+                                        <img class="iconxoatl" alt="s" src="images/xoa.png"></span>
+                                </div>
+                                <div class="tailieu-item">
+                                    <span>Giay_chung_nhan_01.PDF</span>
+                                    <span>
+                                        <img class="iconxoatl" alt="s" src="images/xoa.png"></span>
+                                </div>*@
+                                <div class="tailieu-item">
+                                    <div class="tai-len">
+                                        <input type="file" id="avatarFiles" multiple />
+                                        <span id="uploadfiles" class="btn-tailen">Tải lên</span>
+                                        <span class="name-tailen"></span>
+                                        @*<img class="icontl" alt="" src="@Url.Content("~/assets/images/tailen-ok.png")"/>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="item-avata-2 mg0">
+                                <div class="rows-avata"><strong>@Resource.UploadARepresentativeImage:</strong></div>
+                                <div class="rows-avata"><span style="color: #777777; font-style: italic;">(@Resource.ImageSizeLessThan2Mb)</span></div>
+                                <div class="rows-avata uploadfile">
+                                    <input type="file" id="avatarFile" />
+                                    <a href="#" id="uploadAvatar" class="taiFile">@Resource.SelectAPhotoFromYourComputer</a>
+                                    @Html.HiddenFor(m => m.Avatar)
+                                </div>
+                                <div class="rows-avata"><a href="javascript:lawsVn.clearAvatar();" class="delete-img">@Resource.DeletePhotos</a></div>
+                                <div id="progress-group"></div>
+                            </div>
+                            <div class="item-avata-2 mg1">
+                                <a href="#" class="thumb150x180-avata">
+                                    <img id="AccountAvatar" alt="xem trước avatar" src="@Url.Content("~/assets/images/150x180.png")">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-2" style="margin-right: 0; float: right;">
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <div class="ms0">
+                                <label class="col-sm-0">Ngày sinh: <span class="redcolor">*</span> </label>
+                                @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control-input  form-control-ns icon3 datepicker", style="width: 123px" })
+                            </div>
+                            <div class="ms0">
+                                <label class="col-sm-0">Giới tính: <span class="redcolor">*</span></label>
+                                <div class="gioi-tinh">
+                                    <select name="GenderId" class="dropdown3">
+                                        <option value="0">...</option>
+                                        <option value="1">@Resource.Male</option>
+                                        <option value="2">@Resource.Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "text-danger", style = "float: left;width: 100%;" })
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1">Tỉnh/Thành phố: <span class="redcolor">*</span></label>
+                            <div class="col-sm-2">
+                                @Html.DropDownListFor(model => model.ProvinceId, new SelectList(Model.ListProvinces, "ProvinceId", "ProvinceDesc", Model.ProvinceId), new { @class = "dropdown3" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1">Học vấn: <span class="redcolor">*</span> </label>
+                            <div class="col-sm-2">
+                                @Html.TextAreaFor(m=>m.Education,new{@class="form-control-input",style="height: 154px;"})
+                                @Html.ValidationMessageFor(m => m.Education, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1">Kinh nghiệm: <span class="redcolor">*</span> </label>
+                            <div class="col-sm-2">
+                                @Html.TextAreaFor(m=>m.Experience,new{@class="form-control-input",style="height: 154px;"})
+                                @Html.ValidationMessageFor(m => m.Experience, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1">Giới thiệu: <span class="redcolor">*</span> </label>
+                            <div class="col-sm-2">
+                                @Html.TextAreaFor(m=>m.Content,new{@class="form-control-input",style="height: 154px;"})
+                                @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cat-box-content form2">
+            <p style="color: #333; font-size: 15px; padding: 10px 0;"><strong>2. Lĩnh vực hoạt động: </strong><span class="redcolor">*</span>
+            </p>
+            <div class="example-checkbox">
+            <div class="content-scroll-1" style="height: 320px;">
+                <div class="form-inline-checkbox">
+                    @if (Model.ListFields.HasValue())
+                    {
+                        for (int index = 0; index < Model.ListFields.Count; index++)
+                        {
+                            <div class="checkbox-col">
+                                <div class="pure-checkbox">
+                                    <input id="chkFieldId_@index" name="FieldId" type="checkbox" value="@Model.ListFields[index].FieldId">
+                                    <label for="chkFieldId_@index">@Model.ListFields[index].FieldDesc</label>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            </div>
+                @Html.HiddenFor(m => m.FieldId)
+                @Html.ValidationMessageFor(m => m.FieldId, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="cat-box-content">
+                <div class="cat-title">
+                    <div class="cat-box-title" id="QuyUocBaoMat">Quy ước và bảo mật</div>
+                    <span class="vien-title nav-fd daxem"></span>
+                </div>
+                <div class="cat-box-content">
+                    <div class="example-entry">
+                        <div class="content-scroll-1" style="height: 530px;">
+                            <div class="padding">
+                                <div class="entry">
+                                    @Html.Raw(Model.QuyUocBaoMat.mArticlesView.ArticleContent)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rows-check">
+                    <div class="pure-checkbox">
+                        @Html.CheckBoxFor(m => m.TermsAndConditions)
+                        <label for="TermsAndConditions">Tôi đã đọc và đồng ý với <a href="#QuyUocBaoMat" style="color: #a67942;">Quy ước sử dụng</a> của LuatVietnam.vn</label><br />
+                        <br/>@Html.ValidationMessageFor(m => m.TermsAndConditions, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="rows-check1">
+                    <div class="col-xs-2">
+                        <div class="ma-code1">
+                            Mã an toàn của bạn:
+                        </div>
+                        <div class="ma-code1">
+                            <img alt="captcha" src="@Url.Action("CaptchaImage", "Home", new { id = Guid.NewGuid(), prefix = "LawerInsert" })">
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="ma-code1">
+                            Nhập mã an toàn:
+                        </div>
+                        <div class="ma-code1">
+                            @Html.TextBoxFor(m => m.LawerInsertCaptchaCode, new { @class = "form-control-input" })
+                            <br/>@Html.ValidationMessageFor(m => m.LawerInsertCaptchaCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rows-check-2">
+                    <div class="col-xs-2">
+                        <button onclick="javascript:lawsVn.FormReset();" class="btn-nhap-lai">@Resource.Retype</button>
+                    </div>
+                    <div class="col-xs-2">
+                        <button class="btn-dang-ky">Đăng ký</button>
+                    </div>
+                </div>
+
+            </div>
+        }
+            </div>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @Html.Partial("PartialTaisaochonLuatVietNam")
+            @Html.Partial("PartialManualInstruction")
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new {advertPositionId = 234});}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+@*<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>*@
+@section FooterSection{
+    <script type="text/javascript">
+        $(".datepicker").datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1945:c"
+        });
+        $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+        $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+        $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+        lawsValidate.termsAndConditions();
+        lawsValidate.formatDate();
+    </script>
+}

@@ -1,0 +1,78 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using ICSoft.CMSViewLib
+@using ICSoft.CMSLib
+@using LawsVN.Models.Docs
+@model TNPLViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-van-ban.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="Keywords" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a> »
+    <span class="breadcrumb-item"> Thuật ngữ pháp lý</span>
+</div>
+<!-- Bengin section -->
+<div class="cat-box-content">
+    <div class="rows item3">
+        <div class="view-post thuatngu" id="txtnumberresultfound">
+            <span>Hiển thị <strong>1-@Model.PartialPaginationAjax.PageSize</strong> trong <strong>@Model.PartialPaginationAjax.TotalPage </strong>thuật ngữ</span>
+        </div>
+    </div>
+    <div id="ListLawTerminsTab">
+        @if (Model.l_LawTermins.HasValue())
+        {
+            <table class="table table-bordered thuatngu">
+                <thead>
+                    <tr>
+                        <th class="xs1">Stt</th>
+                        <th class="xs2"> Thuật ngữ </th>
+                        <th class="xs3"> Mô tả / Định nghĩa </th>
+                        <th class="xs2"> Nguồn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.l_LawTermins.Count; i++)
+                    {
+                        <tr>
+                            <td class="xs1">@((i + 1).ToString("#00"))</td>
+                            <td class="xs2">@Model.l_LawTermins[i].TermName</td>
+                            <td class="xs3">
+                                @Model.l_LawTermins[i].TermDesc
+                            </td>
+                            <td class="xs2">@Model.l_LawTermins[i].TermSource</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <table class="table table-bordered">
+                <tbody>
+                    <tr class="row-first-news">
+                        <th class="count-123" scope="row"></th>
+                        <td class="news-center-post">
+                            <h3>
+                                <span class="post-title lvn">@Resource.UpdatingData</span>
+                            </h3>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+<div class="xemthem" id="phantrang1">
+    <a href="@(CmsConstants.ROOT_PATH)thuat-ngu-phap-ly.html" class="xem_them">Xem thêm</a>
+</div>
+<!-- End section -->

@@ -1,0 +1,13 @@
+﻿.tie-drop {
+    background: #3aa7e2;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px;
+    cursor: pointer;
+}
+.rows-luocdo2 {
+    border-bottom: solid 1px #b4e3ff;
+    padding: 10px;
+    line-height: 22px;
+}

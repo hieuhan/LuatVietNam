@@ -1,0 +1,26 @@
+﻿@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@if (string.IsNullOrEmpty(Request.RawUrl) || Request.RawUrl == "/")
+{ 
+<div class="widget">
+    <div class="widget-top">
+        <h3><span class="title-widget">@Resource.LinkNeedToKnow</span></h3>
+    </div>
+    <div class="widget-container-wg">
+        <script type="text/javascript">
+            if (typeof advsite_237 != 'undefined') {
+                advsite_237 = advsite_237.replace(new RegExp('quang-cao-right', 'g'), 'link-wg');
+                document.write(advsite_237);
+            }
+            if (typeof advsite_243 != 'undefined') {
+                advsite_243 = advsite_243.replace(new RegExp('quang-cao-right', 'g'), 'link-wg');
+                document.write(advsite_243);
+            }
+            if (typeof advsite_244 != 'undefined') {
+                advsite_244 = advsite_244.replace(new RegExp('quang-cao-right', 'g'), 'link-wg');
+                document.write(advsite_244);
+            }
+        </script>
+    </div>
+</div>
+}

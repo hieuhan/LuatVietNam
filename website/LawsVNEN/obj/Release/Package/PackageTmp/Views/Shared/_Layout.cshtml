@@ -1,0 +1,131 @@
+﻿@using LawsVNEN.Library
+@using LawsVNEN.Models
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@model ViewModelBase
+@if (Model != null)
+{
+    <!DOCTYPE html>
+    <html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>@Html.Raw(Model.WebsiteTitle)</title>
+        <meta name="description" @Html.Raw(Model.WebsiteDescription) />
+        <meta name="keywords" @Html.Raw(Model.WebsiteKeywords) />
+        <link rel="alternate" href="@Model.AbsoluteUri" hreflang="vi-vn" />
+        <link rel="canonical" href="@(Model.WebsiteCanonical.TrimmedOrDefault(Model.AbsoluteUri))" />
+        <meta name="robots" content="@(Model.IsIndex? "index,follow,noodp": "noindex, nofollow, noarchive, noodp, noydir")" />
+        <link rel="image_src" href="@Model.WebsiteImage" />
+        <meta property="fb:app_id" content="@Constants.FacebookAppId" />
+        <meta property="og:site_name" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="@Model.AbsoluteUri" />
+        <meta property="og:locale" content="vi_VN" />
+        <meta property="og:title" @Html.Raw(Model.MetaTitle) />
+        <meta property="og:description" @Html.Raw(Model.WebsiteDescription) />
+        <meta property="og:image" content="@Model.WebsiteImage" />
+        <meta name="copyright" content="Copyright © 2016 by " />
+        <meta name="author" content="" />
+        <meta http-equiv="refresh" content="1200" />
+        <meta name="language" content="English" />
+        <script src="http://cms.luatvietnam.vn/js/advs/advs_site_1.js"></script>
+        <link rel="shortcut icon" href="@Url.Content("~/assets/images/favicon.ico")">
+        <link href="@Url.Content("~/assets/css/stylesAll.min.css")" rel="stylesheet" />
+        @RenderSection("HeaderSection", required: false)
+    </head>
+    <body>
+        <div class="wrapper full-site">
+            @{Html.RenderAction("_PartialHeader", "Shared", new { returnUrl = Model.ReturnUrl });}
+            <div class="container">
+                <div class="main-content">
+                    <div class="page-content">
+                        @{Html.RenderAction("_PartialContentLeft", "Shared");}
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            @{Html.RenderAction("_PartialFooter", "Shared");}
+        </div>
+        <button onclick="lawsVn.topFunction()" id="myBtn" title="Go to top"></button>
+        <span id="loading">@Resource.Loading</span>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-10721740-7"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-10721740-7');
+        </script>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/Js")
+        @Scripts.Render("~/bundles/jqueryval")
+        
+        <!-- Load Facebook SDK for JavaScript -->
+        <div id="fb-root"></div>
+        <script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id))
+                    return;
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '@Constants.FacebookAppId',
+                    status: true,
+                    xfbml: true,
+                    cookie: true
+                });
+            };
+        </script>
+
+        @RenderSection("FooterSection", required: false)
+        
+        <script type="text/javascript">
+            jQuery(function () {
+                $(".datepicker").datepicker({
+                    dateFormat: 'dd/mm/yy',
+                    yearRange: "1945:c",
+                    changeMonth: true,
+                    changeYear: true
+                });
+                $('#DateFrom').datepicker({
+                    numberOfMonths: 1,
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "1945:c",
+                    onSelect: function (selected) {
+                        $('#DateTo').datepicker("option", "minDate", selected);
+                    }
+                });
+                $('#DateTo').datepicker({
+                    numberOfMonths: 1,
+                    dateFormat: 'dd/mm/yy',
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "1945:c",
+                    onSelect: function (selected) {
+                        $('#DateFrom').datepicker("option", "maxDate", selected);
+                    }
+                });
+                $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+                $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+                $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+            });
+        </script>
+
+
+    </body>
+</html>
+}
+else
+{
+    //throw new NullReferenceException(Resource.BaseModelNull);
+}

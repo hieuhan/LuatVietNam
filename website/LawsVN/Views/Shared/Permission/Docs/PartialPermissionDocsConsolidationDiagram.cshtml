@@ -1,0 +1,66 @@
+﻿@using LawsVN.Library
+@model LawsVN.Models.Docs.DocsViewDetailModel
+@if (Model.ListDocRelates.HasValue())
+{
+    <div id="docPrint" class="box-content box-shadow">
+        <div class="padding2">
+            <div class="box-content">
+                <div class="cat-title left">
+                    <div class="cat-box-title vien">Lược đồ</div>
+                </div>
+                <div class="chu-thich">
+                    <span class="chuthich-text">Chú thích:</span>
+                    <p>
+                        + Hợp nhất văn bản:
+                                    <img class="icon-chuthich" alt="icon-user" src="~/assets/images/chuthich1.png">
+                    </p>
+                    <p>
+                        + Văn bản sau hợp nhất:
+                                    <img class="icon-chuthich" alt="icon-user" src="~/assets/images/chuthich2.png">
+                    </p>
+                </div>
+
+                <div class="content-giao-dich" style="margin-top: 20px;">
+
+                    <div class="box-left-luocdo">
+                        <div class="box-1">
+                            <p style="text-transform: uppercase; font-size: 15px; font-weight: bold;">Văn bản được hợp nhất</p>
+                            <p style="font-size: 14px">(Văn bản gốc)</p>
+                        </div>
+                        @for (int i = 0; i < Model.ListDocRelates.Count; i++)
+                        {
+                            <div class="box-12">
+                                <span>Văn bản @(i + 1). </span>
+                                <p class="tips">
+                                    <a href="@(Model.ListDocRelates[i].DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : Model.ListDocRelates[i].DocUrl)" data-hasqtip="0" title="" id="properties-1-@Model.ListDocRelates[i].DocId" class="doc-properties @(Model.ListDocRelates[i].DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "vb-khong-co-nd" : string.Empty)">@Model.ListDocRelates[i].DocName</a>
+                                </p>
+                            </div> 
+                            <div class="muiten"></div>
+                        }
+                    </div>
+                    <div class="box-right-luocdo" style="float: right;">
+                        <div class="box-2">
+                            <p style="text-transform: uppercase; font-size: 15px; font-weight: bold; padding-top: 12px;">Văn bản hợp nhất</p>
+                        </div>
+
+                        <div class="box-12 right">
+                            <a href="@(Model.mDocsViewDetail.mDocsView.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : Model.mDocsViewDetail.mDocsView.GetDocUrl())" id="properties-1-@Model.mDocsViewDetail.mDocsView.DocId" class="doc-properties title-luocdo @(Model.mDocsViewDetail.mDocsView.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "vb-khong-co-nd" : string.Empty)" title="@Model.mDocsViewDetail.mDocsView.DocName">
+                                @Model.mDocsViewDetail.mDocsView.DocName
+                            </a>
+                        </div>
+
+                        <div class="muiten"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="thong-bao-2">
+        <div class="thongbao-item2">
+            <em>Lược đồ văn bản đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+        </div>
+    </div>
+}

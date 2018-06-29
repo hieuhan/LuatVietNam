@@ -1,0 +1,95 @@
+﻿@using LawsVN.App_GlobalResources
+@model LawsVN.Models.PartialPaginationAjax
+<div class="pagination">
+    <div class="pagination-left">
+        <span class="text-pagination">@Resource.Display:</span>
+        <div class="select-pagination">
+            <select id="dllNumberOfResults" tabindex="1" name="showNumberOfResults" class="dropdown" onchange="$(this.form).submit();">
+                @for (int index = 1; index <= 5; index++)
+                {
+                    <option value="@(index*10)" @(index * 10 == Model.ShowNumberOfResults ? "selected" : string.Empty) data-title="@string.Format("Hiển thị {0} {1}", index*10, Resource.Result)">@(index * 10) @Resource.Result</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="pagination-right">
+        @Resource.Page<input class="input-page-item" id="txtChangePage" name="page" value="@(Model.PageIndex)">của @Model.pageCount
+        <div class="load-more">
+            @if (Model.PageIndex > 1)
+            {
+                using (Ajax.BeginForm(Model.ActionName, Model.ControllerName, 
+    new
+    {
+        
+        cateId = Model.CategoryId
+        ,
+        languageId = Model.LanguageId
+        ,
+        updateTargetId = Model.LawsAjaxOptions.UpdateTargetId
+        ,
+        insertionMode = Model.LawsAjaxOptions.InsertionMode
+        ,
+        loadingElementId = Model.LawsAjaxOptions.LoadingElementId
+        ,
+        controllerName = "Ajax"
+        ,
+        actionName = "GetArticleByCate"
+        ,
+        pageSize = Model.PageSize
+        ,
+        linkLimit = Model.LinkLimit
+        ,
+        page = Model.PageIndex-1
+    },
+    new AjaxOptions
+    {
+        UpdateTargetId = Model.LawsAjaxOptions.UpdateTargetId,
+        InsertionMode = Model.LawsAjaxOptions.InsertionMode,
+        LoadingElementId = Model.LawsAjaxOptions.LoadingElementId,
+        HttpMethod = "Get"
+    }))
+    {
+                <a href="javascript:void(0)" id="prevPage" title="Trang trước" class="load-more-item x1"></a>
+            }
+            }
+            @if (Model.PageIndex < Model.pageCount)
+            {
+                using (Ajax.BeginForm(Model.ActionName, Model.ControllerName, 
+    new
+    {
+        
+        cateId = Model.CategoryId
+        ,
+        languageId = Model.LanguageId
+        ,
+        updateTargetId = Model.LawsAjaxOptions.UpdateTargetId
+        ,
+        insertionMode = Model.LawsAjaxOptions.InsertionMode
+        ,
+        loadingElementId = Model.LawsAjaxOptions.LoadingElementId
+        ,
+        controllerName = "Ajax"
+        ,
+        actionName = "GetArticleByCate"
+        ,
+        pageSize = Model.PageSize
+        ,
+        linkLimit = Model.LinkLimit
+        ,
+        page = Model.PageIndex+1
+    },
+    new AjaxOptions
+    {
+        UpdateTargetId = Model.LawsAjaxOptions.UpdateTargetId,
+        InsertionMode = Model.LawsAjaxOptions.InsertionMode,
+        LoadingElementId = Model.LawsAjaxOptions.LoadingElementId,
+        HttpMethod = "Get"
+    }))
+    {
+                <a href="javascript:void(0);" id="nextPage" title="Trang sau" class="load-more-item x2"></a>
+            }
+            }
+        </div>
+    </div>
+    
+</div>

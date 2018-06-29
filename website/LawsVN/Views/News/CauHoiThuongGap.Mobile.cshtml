@@ -1,0 +1,89 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+@model NewsViewModel
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>»
+    <span class="breadcrumb-item color1">Câu hỏi thường gặp</span>
+</div>
+@if (Model.ListArticlesView.HasValue())
+{
+    <article class="post-single" id="ListByField">
+        <div class="box-hieuluc">
+            @for (int i = 0; i < Model.ListArticlesView.Count; i++)
+            {
+                ArticlesView mArticlesView = Model.ListArticlesView[i];
+            <div class="drop-luocdo">
+                <div id="dropbox">
+                    <div class="dropcontent">
+                        <div class="tieloto">
+                            <a href="#" title="@mArticlesView.Title" class="tie-drop luocdo accordion">
+                                @(i+1). @mArticlesView.Title
+                            </a>
+                            <div class="dropsub accordion-content" style="display: @(i == 0 ? "block" : "none");">
+                                <div class="content-huong-dan">
+                                    @Html.Raw(mArticlesView.ArticleContent)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        @{ 
+            Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax }); }
+    </article>
+}
+
+<div class="box-section">
+    <div class="box-hoi-dap">
+        <p><img src="@Url.Content("~/Assets/Mobile/images/ihoidap0.png")"></p>
+        <p>Gửi câu hỏi đến trung tâm dịch vụ KH</p>
+        <div class="btnhoidap">
+            <a href="#" class="btn-nav send-question-mobile"><img src="@Url.Content("~/Assets/Mobile/images/ihoidap.png")"></a>
+            
+        </div>
+    </div>
+</div>
+<section class="box-section">
+    <div class="title">
+        <h2 class="title-cat"> Điểm tin văn bản mới</h2>
+    </div>
+    <div class="cat-box-content">
+@for (int i=0; i <Model.mArticlesViewMaster.lCategoriesTop1[0].lArticlesView.Count(); i++)
+{
+    ArticlesView mArticlesView = Model.mArticlesViewMaster.lCategoriesTop1[0].lArticlesView[i];
+    string imgUrl = string.IsNullOrEmpty(mArticlesView.GetImageUrl_Mobile()) ? Constants.NoImageUrl : mArticlesView.GetImageUrl_Mobile();
+    if(i==0)
+    {
+        <div class="first-news">
+            <h3 class="post-title padding-btt10"><a href="@mArticlesView.GetArticleUrl()">@mArticlesView.Title</a></h3>
+            <div class="post-thumb">
+                <a href="@mArticlesView.GetArticleUrl()" class="thumb125x70"><img src="@imgUrl"></a>
+            </div>
+            <div class="sapo">
+                @Html.Raw(mArticlesView.Summary)
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="other-news">
+            <h3 class="post-title"><a href="@mArticlesView.GetArticleUrl()">
+                <i class="fa-m"></i> @mArticlesView.Title</a></h3>
+        </div>
+    }
+     
+}
+    </div>
+</section>
+

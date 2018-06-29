@@ -1,0 +1,16 @@
+﻿@using ICSoft.LawDocsLib
+@using ICSoft.CMSLib
+@model List<CustomerProvinces>
+@if (Model != null && Model.Any())
+{
+    Provinces myProvinces = Provinces.Static_Get(Model[0].ProvinceId, LawsVN.Library.DropDownListHelpers.GetAllProvinces());
+    <div class="item-ttp">
+        <a href="#" class="item-tt1 select-customer-province">
+            <img class="icon-add1" alt="icon-add1" src="@Url.Content("~/assets/images/icon-add1.png")">
+            @myProvinces.ProvinceDesc
+        </a>
+        <a href="#" class="item-tt1 select-customer-province">
+            <img class="icon-add3" alt="MyLuatChuyenDoi" src="@Url.Content("~/assets/images/MyLuatChuyenDoi.png")">
+        </a>
+    </div>
+}

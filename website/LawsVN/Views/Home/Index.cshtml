@@ -1,0 +1,695 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@model HomeViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutV2.cshtml";
+}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+<div class="content-left">
+    <section class="cat-box search-box">
+        @{Html.RenderAction("PartialFullSearchHomeV2", "Shared");}
+    </section>
+    <section class="cat-box recent-box">
+        <div class="padding-left20">
+            @{Html.RenderAction("PartialDiemTinVanBanMoi", "Shared", new { model = Model.mArticlesViewMaster.lCategoriesTop1.HasValue() ? Model.mArticlesViewMaster.lCategoriesTop1[0] : null });}
+            @{Html.RenderAction("PartialTinTucPhapLuat", "Shared", new { model = Model.mArticlesViewMaster.lCategoriesTop2.HasValue() ? Model.mArticlesViewMaster.lCategoriesTop2[0] : null });}
+        </div>
+    </section>
+</div>
+<div class="content-right">
+    <aside class="sidebar">
+        @Html.Partial("PartialTaisaochonLuatVietNam")
+        @{Html.RenderAction("PartialTinVan", "Shared", new { model = Model.mArticlesViewMaster.lCategoriesRight1.HasValue() ? Model.mArticlesViewMaster.lCategoriesRight1[0] : null });}
+    </aside>
+</div>
+<div class="cat-box flexslider">
+    <div class="slive">
+        <div id="slider1_container_2" style="display: none; position: relative; float:left; width: 1200px; height: 160px; overflow: hidden;">
+            <!-- Slides Container -->
+            <div u="slides" style="cursor: move; position: absolute; float:left; width: 1200px; height: 160px; overflow: hidden;">
+                <div><img u="image" src="@Url.Content("~/assets/images/slider-1.png")" />
+                    <a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan.html" title="Giao diện cá nhân" style="position: absolute; z-index: 999;border-radius: 4px; bottom: 20px; left: 38%; color: #fff; height: 30px; line-height: 30px; padding: 0 10px; text-decoration: none; font-size: 15px; font-weight: bold; float: left;">Vào giao diện cá nhân <img src="@Url.Content("~/assets/images/arrow.png")" alt="" style="float: right;margin-top: 3px;margin-left: 5px;"/></a>
+                    <a href="@(CmsConstants.ROOT_PATH)user/dang-ky-giao-dien-ca-nhan.html" title="Đăng ký giao diện cá nhân" style="position: absolute; z-index: 999;border-radius: 4px; bottom: 20px; left: 54%; height: 30px; line-height: 30px; padding: 0 10px;color: #cecece; text-decoration: none; font-style: italic; font-size: 15px; float: left;margin-left: 20px;">Đăng ký</a>
+                </div>
+                <div><img u="image" src="@Url.Content("~/assets/images/slider-2.png")" /></div>
+            </div>               
+            <!-- Arrow Left -->
+            <span u="arrowleft" class="jssora11l" style="top: 130px; left: 10px;"><img src="@Url.Content("~/assets/images/icon-sider-1.png")"/></span>
+            <!-- Arrow Right -->
+            <span u="arrowright" class="jssora11r" style="top: 130px; right: 10px;"><img src="@Url.Content("~/assets/images/icon-sider-2.png")"/></span>
+        </div>
+    </div>	
+</div>
+<div class="cat-box content-wrap">
+    <div id="PannelRelateTop" class="fix100"></div>
+    <aside class="sidebar-nav" id="widgetcategories" style="">
+        <div class="widget widget_categories">
+            <div class="widget-top">
+                <span class="title-widget">@Resource.FieldSearch</span>
+            </div>
+            <div class="nav-categories">
+                @{ Html.RenderAction("PartialFieldOfSearchHome", "Shared");}
+                @{Html.RenderPartial("PartialLinksNeedToKnow");}
+            </div>
+        </div>
+    </aside>
+    <div class="content-center" id="contentcenter">
+        <section class="cat-box box-content">
+            <div class="tab-conten">
+                <div id="FirstBoxTab" class="tab-nav">
+                    @Ajax.ActionLink(Resource.DocsNewest, string.Empty, string.Empty, null,
+                                  new AjaxOptions
+                                  {
+                                      HttpMethod = "Get"
+                                      ,
+                                      Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName, new
+                                      {
+                                          docGroupId = Model.PartialPaginationAjaxFirst.DocGroupId
+                                          ,
+                                          usingDisplayTable = Model.PartialPaginationAjaxFirst.UsingDisplayTable
+                                          ,
+                                          languageId = LawsVnLanguages.GetCurrentLanguageId()
+                                          ,
+                                          updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                          ,
+                                          insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                          ,
+                                          controllerName = Model.PartialPaginationAjaxFirst.ControllerName
+                                          ,
+                                          actionName = Model.PartialPaginationAjaxFirst.ActionName
+                                          ,
+                                          pageSize = Model.PartialPaginationAjaxFirst.PageSize
+                                          ,
+                                          linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+                                          ,
+                                          urlPaging = Model.PartialPaginationAjaxFirst.UrlPaging
+                                      })
+                                      ,
+                                      UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                      ,
+                                      InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                      ,
+                                      OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                      ,
+                                      OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                  }, new { @class = "tab-nav-item1 active" })
+                    @Ajax.ActionLink(Resource.NewDispatch, string.Empty, string.Empty, null,
+                                  new AjaxOptions
+                                  {
+                                      HttpMethod = "Get"
+                                      ,
+                                      Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName, new
+                                      {
+                                          docGroupId = Constants.DocGroupIdCongVan
+                                          ,
+                                          usingDisplayTable = Model.PartialPaginationAjaxFirst.UsingDisplayTable
+                                          ,
+                                          languageId = Model.PartialPaginationAjaxFirst.LanguageId
+                                          ,
+                                          updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                          ,
+                                          insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                          ,
+                                          controllerName = Model.PartialPaginationAjaxFirst.ControllerName
+                                          ,
+                                          actionName = Model.PartialPaginationAjaxFirst.ActionName
+                                          ,
+                                          pageSize = Model.PartialPaginationAjaxFirst.PageSize
+                                          ,
+                                          linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+                                          ,
+                                          urlPaging = string.Concat(CmsConstants.ROOT_PATH, "cong-van.html")
+                                      })
+                                      ,
+                                      UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                      ,
+                                      InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                      ,
+                                      OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                      ,
+                                      OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                  }, new { @class = "tab-nav-item1" })
+                    @Ajax.ActionLink(Resource.DocsEnglish, string.Empty, string.Empty,
+                                  null,
+                                  new AjaxOptions
+                                  {
+                                      HttpMethod = "Get"
+                                      ,
+                                      Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName, new
+                                      {
+                                          docGroupId = Model.PartialPaginationAjaxFirst.DocGroupId
+                                          ,
+                                          usingDisplayTable = Model.PartialPaginationAjaxFirst.UsingDisplayTable
+                                          ,
+                                          languageId = LawsVnLanguages.AvailableLanguages[1].LanguageId
+                                          ,
+                                          updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                          ,
+                                          insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                          ,
+                                          controllerName = Model.PartialPaginationAjaxFirst.ControllerName
+                                          ,
+                                          actionName = Model.PartialPaginationAjaxFirst.ActionName
+                                          ,
+                                          pageSize = Model.PartialPaginationAjaxFirst.PageSize
+                                          ,
+                                          linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+                                          ,
+                                          urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-tieng-anh.html")
+                                      })
+                                      ,
+                                      UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                      ,
+                                      InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                      ,
+                                      OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                      ,
+                                      OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                  }, new { @class = "tab-nav-item1" })
+                    @Ajax.ActionLink(Resource.PeoplesCommitteesOfProvinces, string.Empty, string.Empty,
+                                  null,
+                                  new AjaxOptions
+                                  {
+                                      HttpMethod = "Get"
+                                      ,
+                                      Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName, new
+                                      {
+                                          docGroupId = Constants.DocGroupIdUbnd
+                                          ,
+                                          usingDisplayTable = Model.PartialPaginationAjaxFirst.UsingDisplayTable
+                                          ,
+                                          languageId = LawsVnLanguages.GetCurrentLanguageId()
+                                          ,
+                                          updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                          ,
+                                          insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                          ,
+                                          controllerName = Model.PartialPaginationAjaxFirst.ControllerName
+                                          ,
+                                          actionName = Model.PartialPaginationAjaxFirst.ActionName
+                                          ,
+                                          pageSize = Model.PartialPaginationAjaxFirst.PageSize
+                                          ,
+                                          linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+                                          ,
+                                          urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-uy-ban-nhan-dan.html")
+                                      })
+                                      ,
+                                      UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                      ,
+                                      InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                      ,
+                                      OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                      ,
+                                      OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                  }, new { @class = "tab-nav-item1" })
+                </div>
+                <div class="cat-box-content">
+                    <div id="FirstBox" class="click-1">
+                        @if (Model.ListDocsViewFirst.HasValue())
+                        {
+                        <table class="table table-bordered">
+                            <tbody>
+                                @for (int index = 1; index <= Model.ListDocsViewFirst.Count; index++)
+                                    {
+                                    <tr class="row-first-news @(index % 2 != 0 ? "" : "bgcolor")">
+                                        <th class="count-123" scope="row">@index.ToString("#00")</th>
+                                        <td class="news-left-post">
+                                            <h3>
+                                                <a href="@Model.ListDocsViewFirst[index - 1].GetDocUrl()" title="@Model.ListDocsViewFirst[index - 1].DocName.StripTags()" class="post-title lvn">@Model.ListDocsViewFirst[index - 1].DocName</a>
+                                            </h3>
+                                            <div class="item-meta">
+                                                @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsViewFirst[index - 1], ClassName = "tag-item item" } });}
+                                            </div>
+                                        </td>
+                                        <td class="post-time-right">
+                                            @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsViewFirst[index - 1] } });}
+                                        </td>
+                                    </tr>
+                                    }
+                            </tbody>
+                        </table>
+                            { Html.RenderAction("PartialPaginationAjax3", "Shared", new { model = Model.PartialPaginationAjaxFirst }); }
+                        }
+                        else
+                        {
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr class="row-first-news">
+                                    <th class="count-123" scope="row"></th>
+                                    <td class="news-center-post">
+                                        <h3>
+                                            <span class="post-title lvn">@Resource.UpdatingData</span>
+                                        </h3>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="cat-box box-content">
+            <div class="tab-conten">
+                <div id="SecondBoxTab" class="tab-nav">
+                    @Ajax.ActionLink(Resource.ComingIntoEffect, string.Empty, string.Empty,
+                                 null,
+                                 new AjaxOptions
+                                 {
+                                     HttpMethod = "Get"
+                                     ,
+                                     Url = Url.Action(Model.PartialPaginationAjaxSecond.ActionName, Model.PartialPaginationAjaxSecond.ControllerName, new
+                                     {
+                                         effectStatusName = Model.PartialPaginationAjaxSecond.EffectStatusName
+                                         ,
+                                         languageId = LawsVnLanguages.GetCurrentLanguageId()
+                                         ,
+                                         usingDisplayTable = Model.PartialPaginationAjaxSecond.UsingDisplayTable
+                                         ,
+                                         updateTargetId = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId
+                                         ,
+                                         insertionMode = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.InsertionMode
+                                         ,
+                                         controllerName = Model.PartialPaginationAjaxSecond.ControllerName
+                                         ,
+                                         actionName = Model.PartialPaginationAjaxSecond.ActionName
+                                         ,
+                                         pageSize = Model.PartialPaginationAjaxSecond.PageSize
+                                         ,
+                                         linkLimit = Model.PartialPaginationAjaxSecond.LinkLimit
+                                         ,
+                                         urlPaging = Model.PartialPaginationAjaxSecond.UrlPaging
+                                     })
+                                     ,
+                                     UpdateTargetId = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId
+                                     ,
+                                     InsertionMode = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.InsertionMode
+                                     ,
+                                     OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId)
+                                     ,
+                                     OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId)
+                                 }, new { @class = "tab-nav-item2 active" })
+                    @Ajax.ActionLink(Resource.Altering, string.Empty, string.Empty,
+                                 null,
+                                 new AjaxOptions
+                                 {
+                                     HttpMethod = "Get"
+                                     ,
+                                     Url = Url.Action(Model.PartialPaginationAjaxSecond.ActionName, Model.PartialPaginationAjaxSecond.ControllerName, new
+                                     {
+                                         effectStatusName = Constants.EffectStatusSapSuaDoi
+                                         ,
+                                         languageId = Model.PartialPaginationAjaxSecond.LanguageId
+                                         ,
+                                         usingDisplayTable = Model.PartialPaginationAjaxSecond.UsingDisplayTable
+                                         ,
+                                         updateTargetId = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId
+                                         ,
+                                         insertionMode = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.InsertionMode
+                                         ,
+                                         controllerName = Model.PartialPaginationAjaxSecond.ControllerName
+                                         ,
+                                         actionName = Model.PartialPaginationAjaxSecond.ActionName
+                                         ,
+                                         pageSize = Model.PartialPaginationAjaxSecond.PageSize
+                                         ,
+                                         linkLimit = Model.PartialPaginationAjaxSecond.LinkLimit
+                                         ,
+                                         urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-sap-sua-doi.html")
+                                     })
+                                     ,
+                                     UpdateTargetId = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId
+                                     ,
+                                     InsertionMode = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.InsertionMode
+                                     ,
+                                     OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId)
+                                     ,
+                                     OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId)
+                                 }, new { @class = "tab-nav-item2" })
+                    @Ajax.ActionLink(Resource.AlmostOutOfDate, string.Empty, string.Empty,
+                                 null,
+                                 new AjaxOptions
+                                 {
+                                     HttpMethod = "Get"
+                                     ,
+                                     Url = Url.Action(Model.PartialPaginationAjaxSecond.ActionName, Model.PartialPaginationAjaxSecond.ControllerName, new
+                                     {
+                                         effectStatusName = Constants.EffectStatusSapHetHieuLuc
+                                         ,
+                                         languageId = LawsVnLanguages.GetCurrentLanguageId()
+                                         ,
+                                         usingDisplayTable = Model.PartialPaginationAjaxSecond.UsingDisplayTable
+                                         ,
+                                         updateTargetId = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId
+                                         ,
+                                         insertionMode = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.InsertionMode
+                                         ,
+                                         controllerName = Model.PartialPaginationAjaxSecond.ControllerName
+                                         ,
+                                         actionName = Model.PartialPaginationAjaxSecond.ActionName
+                                         ,
+                                         pageSize = Model.PartialPaginationAjaxSecond.PageSize
+                                         ,
+                                         linkLimit = Model.PartialPaginationAjaxSecond.LinkLimit
+                                         ,
+                                         urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-sap-het-hieu-luc.html")
+                                     })
+                                     ,
+                                     UpdateTargetId = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId
+                                     ,
+                                     InsertionMode = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.InsertionMode
+                                     ,
+                                     OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId)
+                                     ,
+                                     OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId)
+                                 }, new { @class = "tab-nav-item2" })
+                    @Ajax.ActionLink(Resource.Expire, string.Empty, string.Empty,
+                                 null,
+                                 new AjaxOptions
+                                 {
+                                     HttpMethod = "Get"
+                                     ,
+                                     Url = Url.Action(Model.PartialPaginationAjaxSecond.ActionName, Model.PartialPaginationAjaxSecond.ControllerName, new
+                                     {
+                                         effectStatusName = Constants.EffectStatusHetHieuLuc
+                                         ,
+                                         languageId = LawsVnLanguages.GetCurrentLanguageId()
+                                         ,
+                                         usingDisplayTable = Model.PartialPaginationAjaxSecond.UsingDisplayTable
+                                         ,
+                                         updateTargetId = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId
+                                         ,
+                                         insertionMode = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.InsertionMode
+                                         ,
+                                         controllerName = Model.PartialPaginationAjaxSecond.ControllerName
+                                         ,
+                                         actionName = Model.PartialPaginationAjaxSecond.ActionName
+                                         ,
+                                         pageSize = Model.PartialPaginationAjaxSecond.PageSize
+                                         ,
+                                         linkLimit = Model.PartialPaginationAjaxSecond.LinkLimit
+                                         ,
+                                         urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-het-hieu-luc.html")
+                                     })
+                                     ,
+                                     UpdateTargetId = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId
+                                     ,
+                                     InsertionMode = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.InsertionMode
+                                     ,
+                                     OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId)
+                                     ,
+                                     OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId)
+                                 }, new { @class = "tab-nav-item2" })
+                </div>
+                <div class="cat-box-content">
+                    <div id="SecondBox" class="click-1">
+                        @if (Model.ListDocsViewSecond.HasValue())
+                        {
+                        <table class="table table-bordered">
+                            <tbody>
+                                @for (int index = 1; index <= Model.ListDocsViewSecond.Count; index++)
+                                    {
+                                    <tr class="row-first-news @(index % 2 != 0 ? "" : "bgcolor")">
+                                        <th class="count-123" scope="row">@index.ToString("#00")</th>
+                                        <td class="news-left-post">
+                                            <h3>
+                                                <a href="@Model.ListDocsViewSecond[index - 1].GetDocUrl()" title="@Model.ListDocsViewSecond[index - 1].DocName.StripTags()" class="post-title lvn">@Model.ListDocsViewSecond[index - 1].DocName</a>
+                                            </h3>
+                                            <div class="item-meta">
+                                                @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsViewSecond[index - 1], ClassName = "tag-item item" } });}
+                                            </div>
+                                        </td>
+                                        <td class="post-time-right">
+                                            @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsViewSecond[index - 1] } });}
+                                        </td>
+                                    </tr>
+                                    }
+                            </tbody>
+                        </table>
+                            { Html.RenderAction("PartialPaginationAjax3", "Shared", new { model = Model.PartialPaginationAjaxSecond }); }
+                        }
+                        else
+                        {
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr class="row-first-news">
+                                    <th class="count-123" scope="row"></th>
+                                    <td class="news-center-post">
+                                        <h3>
+                                            <span class="post-title lvn">@Resource.UpdatingData</span>
+                                        </h3>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="cat-box box-content">
+            <div class="tab-conten">
+                <div id="ThirdBoxTab" class="tab-nav">
+                    <h4>
+                        @Ajax.ActionLink(Resource.VietNamStandard, string.Empty, string.Empty,
+                                      null,
+                                      new AjaxOptions
+                                      {
+                                          HttpMethod = "Get"
+                                          ,
+                                          Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName, new
+                                          {
+                                              docGroupId = Model.PartialPaginationAjaxThird.DocGroupId
+                                              ,
+                                              usingDisplayTable = Model.PartialPaginationAjaxThird.UsingDisplayTable
+                                              ,
+                                              languageId = Model.PartialPaginationAjaxThird.LanguageId
+                                              ,
+                                              updateTargetId = Model.PartialPaginationAjaxThird.LawsAjaxOptions.UpdateTargetId
+                                              ,
+                                              insertionMode = Model.PartialPaginationAjaxThird.LawsAjaxOptions.InsertionMode
+                                              ,
+                                              controllerName = Model.PartialPaginationAjaxThird.ControllerName
+                                              ,
+                                              actionName = Model.PartialPaginationAjaxThird.ActionName
+                                              ,
+                                              pageSize = Model.PartialPaginationAjaxThird.PageSize
+                                              ,
+                                              linkLimit = Model.PartialPaginationAjaxThird.LinkLimit
+                                              ,
+                                              urlPaging = string.Concat(CmsConstants.ROOT_PATH, "tieu-chuan-viet-nam.html")
+                                          })
+                                          ,
+                                          UpdateTargetId = Model.PartialPaginationAjaxThird.LawsAjaxOptions.UpdateTargetId
+                                          ,
+                                          InsertionMode = Model.PartialPaginationAjaxThird.LawsAjaxOptions.InsertionMode
+                                          ,
+                                          OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxThird.LawsAjaxOptions.UpdateTargetId)
+                                          ,
+                                          OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxThird.LawsAjaxOptions.UpdateTargetId)
+                                      }, new { @class = "tab-nav-item3 active" })
+                    </h4>
+
+                    <h4>
+                        @Ajax.ActionLink(Resource.UnifiedText, string.Empty, string.Empty,
+                                      null,
+                                      new AjaxOptions
+                                      {
+                                          HttpMethod = "Get"
+                                          ,
+                                          Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName, new
+                                          {
+                                              docGroupId = Constants.DocGroupIdVbhn
+                                              ,
+                                              usingDisplayTable = Model.PartialPaginationAjaxThird.UsingDisplayTable
+                                              ,
+                                              languageId = LawsVnLanguages.GetCurrentLanguageId()
+                                              ,
+                                              updateTargetId = Model.PartialPaginationAjaxThird.LawsAjaxOptions.UpdateTargetId
+                                              ,
+                                              insertionMode = Model.PartialPaginationAjaxThird.LawsAjaxOptions.InsertionMode
+                                              ,
+                                              controllerName = Model.PartialPaginationAjaxThird.ControllerName
+                                              ,
+                                              actionName = Model.PartialPaginationAjaxThird.ActionName
+                                              ,
+                                              pageSize = Model.PartialPaginationAjaxThird.PageSize
+                                              ,
+                                              linkLimit = Model.PartialPaginationAjaxThird.LinkLimit
+                                              ,
+                                              urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-hop-nhat.html")
+                                          })
+                                          ,
+                                          UpdateTargetId = Model.PartialPaginationAjaxThird.LawsAjaxOptions.UpdateTargetId
+                                          ,
+                                          InsertionMode = Model.PartialPaginationAjaxThird.LawsAjaxOptions.InsertionMode
+                                          ,
+                                          OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxThird.LawsAjaxOptions.UpdateTargetId)
+                                          ,
+                                          OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxThird.LawsAjaxOptions.UpdateTargetId)
+                                      }, new { @class = "tab-nav-item3" })
+                    </h4>
+                </div>
+                <div class="cat-box-content">
+                    <div id="ThirdBox" class="click-3">
+                        @if (Model.ListDocsViewThird.HasValue())
+                        {
+                        <table class="table table-bordered">
+                            <tbody>
+                                @for (int index = 1; index <= Model.ListDocsViewThird.Count; index++)
+                                    {
+                                    <tr class="row-first-news @(index % 2 != 0 ? "" : "bgcolor")">
+                                        <th class="count-123" scope="row">@index.ToString("#00")</th>
+                                        <td class="news-left-post">
+                                            <h3>
+                                                <a href="@Model.ListDocsViewThird[index - 1].GetDocUrl()" title="@Model.ListDocsViewThird[index - 1].DocName.StripTags()" class="post-title lvn">
+                                                    @Model.ListDocsViewThird[index - 1].DocName
+                                                </a>
+                                            </h3>
+                                            <div class="item-meta">
+                                                @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsViewThird[index - 1], ClassName = "tag-item item" } });}
+                                            </div>
+                                        </td>
+                                        <td class="post-time-right">
+                                            @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsViewThird[index - 1] } });}
+                                        </td>
+                                    </tr>
+                                    }
+                            </tbody>
+                        </table>
+                            { Html.RenderAction("PartialPaginationAjax3", "Shared", new { model = Model.PartialPaginationAjaxThird }); }
+                        }
+                        else
+                        {
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr class="row-first-news">
+                                    <th class="count-123" scope="row"></th>
+                                    <td class="news-center-post">
+                                        <h3>
+                                            <span class="post-title lvn">@Resource.UpdatingData</span>
+                                        </h3>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialBanTinLuatVietNam", "Shared", new { model = Model.mArticlesViewMaster.lCategoriesRight2.HasValue() ? Model.mArticlesViewMaster.lCategoriesRight2[0] : null });}
+            @{Html.RenderAction("PartialDocsMostView", "Shared");}
+            @{Html.RenderAction("PartialVanBanCapNhatHangTuan", "Shared", new { model = Model.mArticlesViewMaster.lCategoriesRight3.HasValue() ? Model.mArticlesViewMaster.lCategoriesRight3[0] : null });}
+        </aside>
+    </div>
+</div>
+<div class="cat-box partner">
+    <div class="cat-title center"><h4><span class="title-post-kh">Khách hàng nói về chúng tôi!</span></h4></div>
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>
+@section FooterSection
+{
+    <script type="text/javascript">
+        jQuery(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd/mm/yy',
+                yearRange: "1945:c",
+                changeMonth: true,
+                changeYear: true
+            });
+            $('#DateFrom').datepicker({
+                numberOfMonths: 1,
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1945:c",
+                onSelect: function (selected) {
+                    $('#DateTo').datepicker("option", "minDate", selected);
+                }
+            });
+            $('#DateTo').datepicker({
+                numberOfMonths: 1,
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1945:c",
+                onSelect: function (selected) {
+                    $('#DateFrom').datepicker("option", "maxDate", selected);
+                }
+            });
+            $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+
+
+            var hotnewoffset = $("#widgetcategories").offset();
+            var hotnewtop = hotnewoffset.top | 0;
+            var hotnewleft = hotnewoffset.left | 0;
+            var hotnewheight = $("#widgetcategories").height();
+            var panneltop = $("#contentcenter").offset().top;
+            var pannelheight = $("#contentcenter").height();
+            var offsetstart = 10;
+            var maxtop = pannelheight + panneltop - hotnewheight;
+            $(window).scroll(function () {
+                if ($("#contentcenter").height() != pannelheight) {
+                    pannelheight = $("#contentcenter").height();
+                    maxtop = pannelheight + panneltop - hotnewheight;
+                }
+                var hotnewoffsetcurent = $("#PannelRelateTop").offset();
+                var hotnewtopcurent = hotnewoffsetcurent.top;
+                var hotnewleftcurent = hotnewoffsetcurent.left;
+                if (hotnewtopcurent >= hotnewtop + offsetstart && hotnewtopcurent <= maxtop) {
+                    if (!$('#widgetcategories').hasClass('fixcontentleft')) {
+                        $('#widgetcategories').addClass('fixcontentleft');
+                    }
+                    if (!$('#contentcenter').hasClass('fixcenter')) {
+                        $('#contentcenter').addClass('fixcenter');
+                    }
+                    if ($("#widgetcategories").css("margin-top") != "0px") {
+                        $("#widgetcategories").css("margin-top", "0px");
+                    }
+                }
+                else if (hotnewtopcurent > maxtop) {
+                    if ($('#widgetcategories').hasClass('fixcontentleft')) {
+                        $('#widgetcategories').removeClass('fixcontentleft');
+                    }
+                    if ($('#contentcenter').hasClass('fixcenter')) {
+                        $('#contentcenter').removeClass('fixcenter');
+                    }
+                    if ($("#widgetcategories").css("margin-top") == "0px") {
+                        $("#widgetcategories").css("margin-top", maxtop - panneltop + "px");
+                    }
+                }
+                else {
+                   if ($('#widgetcategories').hasClass('fixcontentleft')) {
+                        $('#widgetcategories').removeClass('fixcontentleft');
+                    }
+                    if ($('#contentcenter').hasClass('fixcenter')) {
+                        $('#contentcenter').removeClass('fixcenter');
+                    }
+                    if ($("#widgetcategories").css("margin-top") != "0px") {
+                        $("#widgetcategories").css("margin-top", "0px");
+                    }
+                }
+            });
+           
+        });
+    </script>
+}

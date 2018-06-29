@@ -1,0 +1,93 @@
+﻿@using ICSoft.ViewLibV3
+@using VanBanLuat.Models
+@using VanBanLuat.Librarys
+@using VanBanLuatVN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+}
+@model NewViewModel
+<!-- Bengin content-->
+<div class="content-left">
+    <div class="breadcrumb">
+        <a class="breadcrumb-item" href="@VanBanLuat.Librarys.Constants.ROOT_PATH">Trang chủ</a> /
+        <span class="breadcrumb-item xanh">@Model.mCategoryArticles.mCategory.CategoryName</span>
+    </div>
+    <!-- Bengin section-box-->
+    <section class="cat-box-section">
+        <div class="title-cat-new">
+            <h1><span class="title-page-new">@Model.mCategoryArticles.mCategory.CategoryName</span></h1>
+        </div>
+        <div id="contentsWrapper" class="cat-box-content">
+            @if (Model.mCategoryArticles.lArticle.Count > 0)
+            {
+                <div class="pcontent">
+                    @foreach (Articles mArticles in Model.mCategoryArticles.lArticle)
+                    {
+                        <div class="new-list-other ">
+                            <div class="post-thumbnail-370">
+                                <a href="@mArticles.GetArticleUrl()" class="thumb-full-mobi" title="@mArticles.Title"><img class="thumb-full boder5 h210" src="@mArticles.GetImageUrl_Mobile()" alt="@mArticles.Title" /><span class="post-time">@mArticles.PublishTime.ToString("dd/MM")</span></a>
+                            </div>
+                            <h3 class="post-title fixmobi font24"><a href="@mArticles.GetArticleUrl()" title="@mArticles.Title">@mArticles.Title</a></h3>
+                            <div class="sapo font15">
+                                <p>@Html.Raw(mArticles.Summary)</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+                {
+                    Html.RenderAction("PartialPagination", "Shared", new
+                    {
+                        model = new PaginationModel
+                        {
+                            Page= Model.Page,
+                            TotalPage = Model.mCategoryArticles.RowCount,
+                            AjaxUrl = "/Ajax/ArticlesGetPage",
+                            QueryString = string.Concat("page=", Model.Page+1)
+                        }
+                    });
+                }
+
+            }
+            else
+            {
+                <div class="new-list-other">
+                    <p class="post-title vbl bold">Nội dung đang được cập nhật.</p>
+                </div>
+            }
+        </div>
+
+    </section>
+    <!-- End section-box-->
+
+</div>
+<!-- End content-->
+<!-- Bengin aside-270-->
+<aside class="sidebar-270">
+    <!-- Bengin widget-->
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = VanBanLuat.Librarys.Constants.CateId_ChinhSachMoi, rowAmount = VanBanLuat.Librarys.Constants.RowAmount5, viewName = "PartialChinhSachMoi" });}
+    <!-- End widget-->
+    <!-- Bengin widget-->
+    <div class="widget">
+        <div class="ads">
+            @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 254 });}
+        </div>
+    </div>
+    <!-- End widget-->
+    <!-- Bengin widget-->
+    @{Html.RenderAction("PartialTinXemNhieu", "Shared");}
+    <!-- End widget-->
+</aside>
+<!-- End aside-270-->
+@section FooterSection
+{
+    <script type="text/javascript">
+        jQuery(function () {
+            $('#contentsWrapper').vbluatInfiteScroll({
+                contentsWrapperSelector: '#contentsWrapper',
+                contentSelector: '.pcontent',
+                nextSelector: '#pnext',
+                article:true
+            });
+        });
+    </script>
+}

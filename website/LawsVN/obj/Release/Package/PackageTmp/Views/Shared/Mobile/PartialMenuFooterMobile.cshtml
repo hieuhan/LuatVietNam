@@ -1,0 +1,66 @@
+﻿@using LawsVN.Library
+@model LawsVN.Models.FooterModel
+<div class="nav-bottom">
+    <div class="logo-bottom"><img src="@Url.Content("~/assets/Mobile/Images/logo.png")" /></div>
+    <div class="vien-btom"></div>
+    <div class="cat-box-content">
+        @if (Model.ListMenuItemsViewParent.HasValue())
+        {
+            for (int index = 0; index < Model.ListMenuItemsViewParent.Count; index++)
+            {
+                if(index>=2){ break;}
+                var menuItemViewParent = Model.ListMenuItemsViewParent[index];
+                <div class="col2-bottom">
+                    <ul>
+                        <li class="tie-bottom">@menuItemViewParent.ItemName</li>
+                        @foreach (var item in Model.ListMenuItemsView)
+                        {
+                            if (item.ParentItemId != menuItemViewParent.MenuItemId)
+                            {
+                                continue;
+                            }
+                            <li class="item-bottom"><a href="@item.GetUrl()"><i class="fa-m"></i>@item.ItemName</a></li>
+                        }
+                    </ul>
+                </div>
+            }
+        }
+    </div>
+</div>
+@if (Model.ListMenuItemsViewParent.Count > 2)
+{
+    <div class="nav-bottom">
+        <div class="tiedv">Dịch vụ</div>
+        <div class="vien-btom" style="margin-top: 12px;"></div>
+        @for (int index = 2; index < Model.ListMenuItemsViewParent.Count; index++)
+        {
+            var menuItemViewParent = Model.ListMenuItemsViewParent[index];
+            <div class="cat-box-content">
+                @foreach (var item in Model.ListMenuItemsView)
+                {
+                    if (item.ParentItemId != menuItemViewParent.MenuItemId)
+                    {
+                        continue;
+                    }
+
+                    <div class="col2-bottom">
+                        <ul>
+                            <li class="item-bottom"><a href="@item.GetUrl()"><i class="fa-m"></i>@item.ItemName</a></li>
+                            @foreach (var itemChild in Model.ListMenuItemsView)
+                            {
+                                if (itemChild.ParentItemId != item.MenuItemId)
+                                {
+                                    continue;
+                                }
+                                <li class="item-bottom-2"> <a href="@itemChild.GetUrl()"><i class="fa-dot"></i>@itemChild.ItemName</a></li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        }
+        @{Html.RenderAction("PartialNewsLetterEmailMobile", "Shared");}
+    </div>
+}
+
+

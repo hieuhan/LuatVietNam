@@ -1,0 +1,23 @@
+﻿@using LawsVN.Library
+@model ICSoft.CMSViewLib.ArticlesViewCate
+@if (Model.lArticlesNewest.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h3>
+                <span class="title-widget">@LawsVN.App_GlobalResources.Resource.ArticlesMostView</span>
+            </h3>
+        </div>
+        <div class="widget-container">
+            @foreach (var articleMostView in Model.lArticlesNewest)
+            {
+                <div class="recent-post">
+                    <span class="icon-new-22"></span>
+                    <div class="post-conten news">
+                        <a href="@articleMostView.GetArticleUrl()" title="@articleMostView.Title" class="post-title-widget">@articleMostView.Title</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

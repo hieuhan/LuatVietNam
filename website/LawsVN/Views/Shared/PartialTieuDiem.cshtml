@@ -1,0 +1,26 @@
+﻿
+@using LawsVN.Library
+@using ICSoft.CMSViewLib
+@model CategoriesView
+@if (Model!= null && Model.lArticlesView.Any())
+{
+<div class="widget">
+<div class="widget-top">
+    <h3><span class="title-widget">Tiêu điểm</span></h3>
+</div>
+<div class="widget-container-wg">
+@foreach (var article in Model.lArticlesView)
+{
+    string imgUrl = string.IsNullOrEmpty(article.GetImageUrl_Icon()) ? Constants.NoImageUrl_Article : article.GetImageUrl_Thumb();
+    <div class="recent-post-wg">
+        <div class="post-thumbnail">
+            <a href="@article.GetArticleUrl()" title="@article.Title" class="thumb80"><img alt="thumb80" src="@imgUrl" title="@article.Title"></a>
+        </div>
+        <div class="post-conten-wg">
+            <a href="@article.GetArticleUrl()" title="@article.Title" class="post-title-widget">@article.Title</a>
+        </div>
+    </div>
+}
+</div>
+</div>
+}

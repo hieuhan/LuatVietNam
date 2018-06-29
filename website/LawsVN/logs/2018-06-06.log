@@ -1,0 +1,3 @@
+2018-06-06 10:59:58.1310 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-06-06 16:25:58.0362 ERROR Path '/Views/Docs/DetailFull.cshtml' was not found.
+2018-06-06 16:26:22.0571 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.

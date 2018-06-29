@@ -1,0 +1,632 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using ICSoft.CMSLib
+@{
+    Layout = "~/Views/Shared/_LayoutMyLuatVN.cshtml";
+}
+@model CustomerDocsViewModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+<!--Bengin page-content -->
+<div class="page-content" style="margin-bottom:0px !important">
+    <!--Bengin content-left -->
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>Trang chủ </a> »
+            <span class="breadcrumb-item colorrumb">My LuatVietnam</span>
+        </div>
+        <!--Bengin section-->
+        <section class="cat-box search-box">
+            @{Html.RenderAction("PartialFullSearchHome", "Shared");}
+        </section>
+        <!--End section-->
+        <!--Bengin section-->
+        <section class="cat-box content-wrap">
+            <div class="cat-title titlemyluat">
+                <div class="cat-box-title myluat vien">Văn bản, Chính sách mới</div>
+            </div>
+            <!-- tab-conten-->
+            <div class="tab-conten">
+                <!-- Bengin tab-title-->
+                <div class="tab-nav">
+                    @Ajax.ActionLink(Resource.NewlyIssued, Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName,
+                          new
+                          {
+                              effectStatusName = "",
+                              languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                              updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                              insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                              controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                              actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                              pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                              linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit,
+                              urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-moi.html")
+                          },
+                          new AjaxOptions
+                          {
+                              HttpMethod = "Get",
+                              UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                              InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                              OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId),
+                              OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId),
+                          }, new { @class = "tab-nav-item2 active" })
+                    @Ajax.ActionLink(Resource.ComingIntoEffect, Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName,
+                         new
+                         {
+                             effectStatusName = Constants.EffectStatusSapCoHieuLuc,
+                             languageId = Model.PartialPaginationAjaxFirst.LanguageId,
+                             updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                             insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                             controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                             actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                             pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                             linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit,
+                             urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-sap-co-hieu-luc.html")
+                         },
+                         new AjaxOptions
+                         {
+                             HttpMethod = "Get",
+                             UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                             InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                             OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId),
+                             OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                         }, new { @class = "tab-nav-item2" })
+                    @Ajax.ActionLink(Resource.Altering, Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName,
+                         new
+                         {
+                             effectStatusName = Constants.EffectStatusSapSuaDoi,
+                             languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                             updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                             insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                             controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                             actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                             pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                             linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit,
+                             urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-sap-sua-doi.html")
+                         },
+                         new AjaxOptions
+                         {
+                             HttpMethod = "Get",
+                             UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                             InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                             OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId),
+                             OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                         }, new { @class = "tab-nav-item2" })
+                    @Ajax.ActionLink(Resource.AlmostOutOfDate, Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName,
+                         new
+                         {
+                             effectStatusName = Constants.EffectStatusSapHetHieuLuc,
+                             languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                             updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                             insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                             controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                             actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                             pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                             linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit,
+                             urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-sap-het-hieu-luc.html")
+                         },
+                         new AjaxOptions
+                         {
+                             HttpMethod = "Get",
+                             UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                             InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                             OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId),
+                             OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                         }, new { @class = "tab-nav-item2" })
+
+                </div>
+                <!-- End tab-title-->
+                <!-- Bengin-cat-box-content-->
+                <div class="cat-box-content">
+                    <!-- Bengin-tab-item-1-->
+                    <div id="FirstBox" class="click-1" style="display: block;">
+                        @if (Model.ListDocsViewFirst.HasValue())
+                        {
+                            <table class="table table-bordered">
+                                <tbody>
+                                    @for (int index = 1; index <= Model.ListDocsViewFirst.Count; index++)
+                                    {
+                                        string effectStatusName = Model.ListEffectStatus.GetEffectStatusNameById(Model.ListDocsViewFirst[index - 1].EffectStatusId).TrimmedOrDefault(string.Empty);
+                                        <tr class="row-first-news @(index % 2 != 0 ? "" : "bgcolor")">
+                                            <th class="count-123 page" scope="row">@index.ToString("#00")</th>
+                                            <td class="news-left-post">
+                                                <h2>
+                                                    <a href="@Model.ListDocsViewFirst[index - 1].GetDocUrl()" title="@Model.ListDocsViewFirst[index - 1].DocName.StripTags()" class="post-title lvn">@Model.ListDocsViewFirst[index - 1].DocName</a>
+                                                </h2>
+                                                <div class="item-meta">
+                                                    @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsViewFirst[index - 1], ClassName = "tag-item item7" } });}
+                                                </div>
+                                            </td>
+                                            <td class="post-time-right page">
+                                                @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsViewFirst[index - 1], EffectStatusName = effectStatusName } });}
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <a href="@(CmsConstants.ROOT_PATH)van-ban-moi.html" class="edit2 fix"><img alt="edit2" src="@Url.Content("~/assets/images/xem-tiep.png")"> Xem tiếp</a>
+                            @*@{ Html.RenderAction("PartialPaginationAjax", "Shared", new { model = Model.PartialPaginationAjaxFirst }); }*@
+                        }
+                        else
+                        {
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr class="row-first-news">
+                                        <th class="count-123" scope="row"></th>
+                                        <td class="news-center-post">
+                                            <h3>
+                                                <span class="post-title lvn">Đang cập nhật dữ liệu.</span>
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                </div>
+                <!-- End cat-box-content-->
+            </div>
+            <!-- tab-conten-->
+        </section>
+        <!--End section-->
+        <!--Bengin cat-box-->
+        @if (Model.ListDocsViewrelated.HasValue())
+        {
+            <div class="cat-box box-content">
+                <div class="content-blog">
+                    <p style="font-size: 15px; font-weight: bold; color: #231f20; padding-bottom: 15px; padding-left: 30px; font-style: italic;">Văn bản liên quan, có thể bạn quan tâm!</p>
+                    @for (int i = 0; i < Model.ListDocsViewrelated.Count; i++)
+                    {
+                        if (i >= 2) { break; }
+                        DocsView mDocsView = Model.ListDocsViewrelated[i];
+                        <div class="colum-blog2">
+                            <span class="icon-new-2"></span>
+                            <a href="@mDocsView.GetDocUrl("")" class="post-title blogmy">@mDocsView.DocName</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        <!--End cat-box-->
+        <!--Bengin section-->
+        @if (Model.lCustomerFields.HasValue())
+        {
+            <section class="cat-box box-content" data-fieldid="@Model.lCustomerFields[0].FieldId" id="sectionContent">
+                <div class="cat-title titlemyluat">
+                    <div class="cat-box-title myluat vien">LĨNH VỰC văn bản QUAN TÂM</div>
+                    <a href="#" class="edit2 select-customer-fieldsV2" style="font-style: italic;"><img class="edit2-img" alt="edit2" src="@Url.Content("~/assets/images/edit2.png")"> Thay đổi lĩnh vực</a>
+                </div>
+                <!-- tab-conten-->
+                <div class="tab-conten" id="ContentByField">
+                    <!-- Bengin tab-title-->
+                    <div class="tab-nav">
+                        @for (int i = 0; i < Model.lCustomerFields.Count; i++)
+                        {
+                            if (i >= 4) { break; }
+                            Fields myFields = Fields.Static_Get(Model.lCustomerFields[i].FieldId, 0);
+                            if (myFields.FieldId > 0)
+                            {
+                                <a class="tab-nav-item1 @(i == 0 ? "active" : "")" id="tabItemFields" href="javascript:void(0)" onclick='lawsVn.CustomerInterFaceChangeField("@(myFields.FieldId)")'>@myFields.FieldName</a>
+                            }
+                        }
+                        @if (Model.lCustomerFields.Count > 4)
+                        {
+                            <div class="chon-right">
+                                <div class="dropdown33">
+                                    <select tabindex="1" class="dropdown fontbold" id="dllAllField" onchange='lawsVn.CustomerInterFaceChangeDllField()'>
+                                        <option value="0" data-title="">@Resource.AllFields</option>
+                                        @for (int i = 4; i < Model.lCustomerFields.Count; i++)
+                                        {
+                                            Fields myFields = Fields.Static_Get(Model.lCustomerFields[i].FieldId, 0);
+                                            if (myFields.FieldId > 0)
+                                            {
+                                                <option value="@myFields.FieldId">@myFields.FieldDesc</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <!-- End tab-title-->
+                    <!-- Bengin-lockq-->
+                    <div class="lockq">
+                        <div class="item-loctheo">
+                            <span class="icon-loc-kq"></span>Lọc theo:
+                        </div>
+                        <div class="item-lockq ">
+                            <select tabindex="1" class="dropdown" id="dllDocTypes" onchange='lawsVn.CustomerInterFaceChange()'>
+                                <option value="0" data-title="">@Resource.DocTypes</option>
+                                @foreach (var item in Model.ListDocTypes)
+                                {
+                                    <option value="@item.DocTypeId" data-title="@item.DocTypeName">@item.DocTypeName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="item-lockq ">
+                            @if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+                            {
+                                <select id="dllEffectStatus" tabindex="1" class="dropdown" onchange='lawsVn.CustomerInterFaceChange()'>
+                                    <option value="0" data-title="">@Resource.EffectStatus</option>
+                                    @foreach (var item in Model.ListEffectStatus)
+                                    {
+                                        <option value="@item.EffectStatusId" data-title="@item.EffectStatusDesc">@item.EffectStatusDesc</option>
+                                    }
+                                </select>
+                            }
+                            else
+                            {
+                                <select tabindex="1" class="dropdown no-permission" title="@Resource.NoPermission">
+                                    <option value="0" data-title="">@Resource.EffectStatus</option>
+                                </select>
+                            }
+                        </div>
+                        @*<div class="item-lockq" style="display:@(Model.lCustomerProvinces.Any()?"block":"none");">*@
+                        <div class="item-lockq" style="display:none">
+                            <select id="dllCustomerProvinces" tabindex="1" class="dropdown" onchange='lawsVn.CustomerInterFaceChange()'>
+                                <option value="0" data-title="">@Resource.ProvinceCity</option>
+                                @foreach (var item in Model.lCustomerProvinces)
+                                {
+                                    Provinces myProvinces = Provinces.Static_Get(item.ProvinceId, DropDownListHelpers.GetAllProvinces());
+                                    <option value="@item.ProvinceId" data-title="@myProvinces.ProvinceDesc">@myProvinces.ProvinceDesc</option>
+                                }
+                            </select>
+                        </div>
+
+                    </div>
+                    <!-- End-lockq-->
+                    <!-- Bengin-cat-box-content-->
+                    <div class="cat-box-content">
+                        <!-- Bengin-tab-item-1-->
+                        <div class="click-2" style="display: block;">
+                            @if (Model.lMyDocs.HasValue())
+                            {
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        @for (int index = 1; index <= Model.lMyDocs.Count; index++)
+                                        {
+                                            string effectStatusName = Model.ListEffectStatus.GetEffectStatusNameById(Model.lMyDocs[index - 1].EffectStatusId).TrimmedOrDefault(string.Empty);
+                                            <tr class="row-first-news @(index % 2 != 0 ? "" : "bgcolor")">
+                                                <th class="count-123 page" scope="row">@index.ToString("#00")</th>
+                                                <td class="news-left-post">
+                                                    <h2>
+                                                        <a href="@Model.lMyDocs[index - 1].GetDocUrl()" title="@Model.lMyDocs[index - 1].DocName.StripTags()" class="post-title lvn">@Model.lMyDocs[index - 1].DocName</a>
+                                                    </h2>
+                                                    <div class="item-meta">
+                                                        @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new LawsVN.Models.PartialLinkDocumentAttributeModel { mDocsView = Model.lMyDocs[index - 1], ClassName = "tag-item item7" } });}
+                                                    </div>
+                                                </td>
+                                                <td class="post-time-right page">
+                                                    @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.lMyDocs[index - 1], EffectStatusName = effectStatusName } });}
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                                { Html.RenderAction("PartialPaginationAjax", "Shared", new { model = Model.PartialPaginationAjaxSecond }); }
+                            }
+                            else
+                            {
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="row-first-news">
+                                            <th class="count-123" scope="row"></th>
+                                            <td class="news-center-post">
+                                                <h3>
+                                                    <span class="post-title lvn">@Resource.NoMatchingDocumentFound</span>
+                                                </h3>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            }
+
+                        </div>
+                    </div>
+                    <!-- End cat-box-content-->
+                </div>
+                <!-- tab-conten-->
+            </section>
+        }
+        <!--End section-->
+        <!--Bengin section-->
+        <section class="cat-box box-content">
+            @*<div class="title-myblog">
+                    Thời sự pháp luật
+                </div>*@
+            <div class="content-myblog">
+                @if (Model.mArticlesViewMaster.lCategoriesTop1.Count > 0)
+                {
+                    CategoriesView categoriesTinVbMoi = Model.mArticlesViewMaster.lCategoriesTop1[0];
+                    <div class="col-xs-2">
+                        <div class="cat-title">
+                            <a href="@categoriesTinVbMoi.GetCategoryUrl()" title="@categoriesTinVbMoi.CategoryName">
+                                <h3><span class="cat-box-title title-gdcn vien">@categoriesTinVbMoi.CategoryName</span></h3>
+                            </a>
+                        </div>
+                        <div class="cat-box-content">
+                            @if (categoriesTinVbMoi.lArticlesView.HasValue())
+                            {
+                                for (var index = 0; index < categoriesTinVbMoi.lArticlesView.Count; index++)
+                                {
+                                    if (index > 2) { break; }
+                                    var articleView = categoriesTinVbMoi.lArticlesView[index];
+                                    if (index == 0)
+                                    {
+                                        <div class="first-news pkg">
+                                            <div class="post-thumbnail">
+                                                <a href="@articleView.GetArticleUrl()" title="@articleView.Title" class="thumb200">
+                                                    <img alt="@articleView.Title" src="@(string.IsNullOrEmpty(articleView.GetImageUrl_Mobile()) ? Constants.NoImageUrl_Article : articleView.GetImageUrl_Mobile())" />
+                                                </a>
+                                            </div>
+                                            <a href="@articleView.GetArticleUrl()" title="@articleView.Title" class="post-title">@articleView.Title</a>
+                                            <div class="sapo">
+                                                <p>@Html.Raw(articleView.Summary)</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="other-news pkg @(index == categoriesTinVbMoi.lArticlesView.Count - 1 ? "ms3" : string.Empty)">
+                                            <span class="icon-new"></span>
+                                            <div class="post-conten news">
+                                                <a href="@articleView.GetArticleUrl()" title="@articleView.Title" class="post-title">
+                                                    @articleView.Title
+                                                    @*<span class="tie-date">(@articleView.PublishTime.toString())</span>*@
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                <div class="more">
+                                    <a href="@categoriesTinVbMoi.GetCategoryUrl()" title="Xem tiếp" class="more-link">
+                                        <img alt="Xem tiếp" src="@Url.Content("~/assets/images/xem-tiep.png")" />
+                                        Xem tiếp
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                @if (Model.mArticlesViewMaster.lCategoriesTop2.HasValue()) //|| Model.ListArticlesByCustomerId.HasValue()
+                {
+                    CategoriesView categoriesTinTucPhapLuat = Model.mArticlesViewMaster.lCategoriesTop2[0];
+                    //if (Model.ListArticlesByCustomerId.Count > 2)
+                    //{
+                    //    categoriesTinTucPhapLuat.lArticlesView = Model.ListArticlesByCustomerId;
+                    //}
+                    <div class="col-xs-2">
+                        <div class="cat-title">
+                            <a href="@categoriesTinTucPhapLuat.GetCategoryUrl()" title="@categoriesTinTucPhapLuat.CategoryName">
+                                <h3><span class="cat-box-title title-gdcn vien">@categoriesTinTucPhapLuat.CategoryName</span></h3>
+                            </a>
+                        </div>
+                        <div class="cat-box-content">
+
+                            @if (categoriesTinTucPhapLuat.lArticlesView.HasValue())
+                            {
+                                for (int index = 0; index < categoriesTinTucPhapLuat.lArticlesView.Count; index++)
+                                {
+                                    if (index > 2) { break; }
+                                    var articleView = categoriesTinTucPhapLuat.lArticlesView[index];
+                                    <div class="other-news">
+                                        <div class="post-thumbnail">
+                                            <a href="@articleView.GetArticleUrl()" title="@articleView.Title" class="thumb90">
+                                                <img alt="@articleView.Title" src="@(string.IsNullOrEmpty(articleView.GetImageUrl_Thumb()) ? Constants.NoImageUrl_Article : articleView.GetImageUrl_Thumb())" />
+                                            </a>
+                                        </div>
+                                        <a href="@articleView.GetArticleUrl()" title="@articleView.Title" class="post-title">
+                                            @articleView.Title
+                                            @*<span class="tie-date">(@articleView.PublishTime.toString())</span>*@
+                                        </a>
+                                    </div>
+                                }
+                                <div class="more">
+                                    <a href="@categoriesTinTucPhapLuat.GetCategoryUrl()" title="Xem tiếp" class="more-link">
+                                        <img alt="Xem tiếp" src="@Url.Content("~/assets/images/xem-tiep.png")" />
+                                        Xem tiếp
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+        <!--End section-->
+        <!--Bengin section-->
+        @if (Model.lDocsView_TCVN.HasValue() || Model.lDocsView_UBND.HasValue())
+        {
+            <section class="cat-box">
+                <div class="content-myblog">
+                    <div class="col-xs-2">
+                        <div class="cat-title">
+                            <div class="cat-box-title myblog title-gdcn vien">@Resource.VietNamStandard</div>
+                        </div>
+                        @if (Model.lDocsView_TCVN.HasValue())
+                        {
+                            <div class="cat-box-content">
+                                @foreach (DocsView mDocsView in Model.lDocsView_TCVN)
+                                {
+                                    <div class="other-news">
+                                        <div class="post-thumbnail">
+                                            <a href="@mDocsView.GetDocUrl("")" class="thumb48x62"><img alt="thumb48x62" src="@Url.Content("~/assets/images/doc1.png")"></a>
+                                        </div>
+                                        <a href="@mDocsView.GetDocUrl("")" class="post-title">@mDocsView.DocName</a>
+                                        <p class="tie-date">@mDocsView.CrDateTime.toString("", "dd/MM/yyy HH:mm")</p>
+                                    </div>
+                                }
+                                <div class="more"><a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan/van-ban-tieu-chuan-viet-nam.html" class="more-link"><img alt="alt" src="@Url.Content("~/assets/images/xem-tiep.png")"> Xem tiếp </a></div>
+                            </div>
+                        }
+                        else
+                        {
+                            <table class="table">
+                                <tbody>
+                                    <tr class="row-first-news">
+                                        <td class="news-center-post">
+                                            <h3>
+                                                <span class="post-title lvn">Không tìm thấy văn bản Tiêu chuẩn Việt Nam quý khách quan tâm.</span>
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                    <tr class="row-first-news">
+                                        <td class="news-center-post">
+                                            <a href="#" class="select-customer-fieldsV2" style="font-style: italic; margin-top:0px"><img class="edit2-img" alt="edit2" src="@Url.Content("~/assets/images/edit2.png")"> Cập nhật lĩnh vực</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+
+
+                    @if (Model.lDocsView_UBND.HasValue())
+                    {
+                        <div class="col-xs-2">
+                            <div class="cat-title">
+                                <div class="cat-box-title myblog title-gdcn vien">Văn bản địa phương</div>
+                            </div>
+                            <div class="cat-box-content">
+                                @foreach (DocsView mDocsView in Model.lDocsView_UBND)
+                                {
+                                    <div class="other-news">
+                                        <div class="post-thumbnail">
+                                            <a href="@mDocsView.GetDocUrl("")" class="thumb48x62"><img alt="thumb48x62" src="@Url.Content("~/assets/images/doc1.png")"></a>
+                                        </div>
+                                        <a href="@mDocsView.GetDocUrl("")" class="post-title">@mDocsView.DocName</a>
+                                        <p class="tie-date">@mDocsView.CrDateTime.toString("", "dd/MM/yyy HH:mm")</p>
+                                    </div>
+                                }
+                                <div class="more"><a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan/van-ban-uy-ban-nhan-dan.html" class="more-link"><img alt="alt" src="@Url.Content("~/assets/images/xem-tiep.png")"> Xem tiếp </a></div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </section>
+        }
+        <!--End section-->
+    </div>
+    <!--End content left-->
+    <!--Bengin content-right-->
+    <div class="content-right">
+        <aside class="sidebar">
+            <!--Bengin widget ads-->
+            <div class="widget" style="margin-bottom: 15px;">
+                <div class="banner">
+                    <a href="@CmsConstants.ROOT_PATH"><img alt="banner quang cao" src="@Url.Content("~/assets/images/hompage.png")"></a>
+                </div>
+            </div>
+            <!--End widget ads-->
+            @{Html.RenderAction("PartialWidgetUser", "Shared", true);}
+            <!--Bengin widget-->
+            @{Html.RenderAction("PartialCustomerInterFaceFields", "Shared");}
+            @*@if (Model.DataTableField != null)
+        {
+            <div class="widget">
+                <div class="widget-top">
+                    <span class="title-widget" style="float: left; text-align: left; padding: 0 15px;">Lĩnh vực Văn Bản quan tâm</span>
+                    <a href="#" class="thaydoi-3 select-customer-fieldsV2"><img src="@Url.Content("~/assets/images/my-edit.png")"></a>
+                </div>
+                <div class="widget-container">
+                    <div class="row-s1">
+                        <div class="tie-s1 bold">Van ban quy pham</div>
+                        <ul class="wg-vban">
+                            <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                        </ul>
+                    </div>
+                    <div class="row-s1">
+                        <div class="tie-s1 bold">Van ban quy pham</div>
+                        <ul class="wg-vban">
+                            <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                             <li><a href="#">VAn ban moi</a></li>
+                        </ul>
+                    </div>
+                    @foreach (System.Data.DataRow row in Model.DataTableField.Rows)
+                    {
+                        if (row.ItemArray.Length > 3)
+                        {
+                            Fields myFields = Fields.Static_Get(short.Parse(row.ItemArray[2].ToString()), 0);
+                            <div class="recent-post-linhvuc">
+                                <span class="icon-new-23"></span>
+                                <div class="post-conten news">
+                                    <a href="@string.Format(CmsConstants.ROOT_PATH + myFields.GetUrl().Replace("giao-dien-ca-nhan/",""))" class="post-title">@myFields.FieldDesc<span style="color: #b28247;"> (@(row.ItemArray[3].ToString()))</span></a>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        }*@
+
+            @{Html.RenderAction("PartialTinVan", "Shared", new { model = Model.mArticlesViewMaster.lCategoriesRight1.HasValue() ? Model.mArticlesViewMaster.lCategoriesRight1[0] : null });}
+            <!--End widget-->
+            <!--Bengin widget ads-->
+            @*<div class="widget">
+            <div class="banner">
+                @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 245 });}
+            </div>
+        </div>*@
+            <!--End widget ads-->
+            <!--Bengin widget-->
+            @{Html.RenderAction("PartialDocsMostView", "Shared");}
+            <!--End widget-->
+            <!--Bengin widget-->
+            @if (Model.mArticlesViewMaster.lCategoriesRight2.Count > 0)
+    {
+        CategoriesView mCategoriesView = Model.mArticlesViewMaster.lCategoriesRight2[0];
+        if (mCategoriesView.lArticlesView.Count > 0)
+        {
+            <div class="widget ">
+                <div class="widget-top">
+                    <h3><span class="title-widget">@mCategoriesView.CategoryName</span></h3>
+                </div>
+                <div class="widget-container">
+                    @foreach (ArticlesView mArticlesView in mCategoriesView.lArticlesView)
+            {
+                <div class="recent-post">
+                    <div class="post-thumbnail">
+                        <a href="@mArticlesView.GetArticleUrl()" class="thumb70"><img alt="thumb70" src="@mArticlesView.GetImageUrl_Thumb()"></a>
+                    </div>
+                    <div class="post-wg">
+                        <a href="@mArticlesView.GetArticleUrl()" class="post-title-widget">@mArticlesView.Title</a>
+                        <p><span class="tie-date">@mArticlesView.PublishTime.toString("", "dd/MM/yyyy HH:mm") </span></p>
+                    </div>
+                </div>
+    }
+                </div>
+            </div>
+}
+}
+        </aside>
+    </div>
+    <!--End content-right-->
+</div>
+@*@Html.Partial("PartialContentViewed")*@
+<!--End page-content-->
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>

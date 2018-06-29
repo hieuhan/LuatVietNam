@@ -1,0 +1,45 @@
+﻿@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using LawsVN.Library
+@model LawsVN.Models.Account.LoginModel
+<div class="from-thong-bao-4">
+    <div class="content-thongbao">
+        <div class="rows-thongbao center" style="font-size: 16px; font-weight: bold; text-transform: uppercase;">
+            @Resource.btnLogin
+        </div>
+        @using (Ajax.BeginForm("DoLogin", "Account", null, new AjaxOptions
+        {
+            HttpMethod = "Post",
+            OnBegin = "lawsVn.ajaxEvents.OnBegin",
+            OnComplete = "lawsVn.ajaxEvents.OnComplete",
+            OnSuccess = "lawsVn.ajaxEvents.AccountLoginOnSuccess"
+        },new { id="lawsVnLoginForm" }))
+        {
+            <div class="rows-thongbao">
+                @Html.TextBoxFor(m => m.CustomerName, new { @class = "text-tbao icon-tkhoan" })
+                @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger-login" })
+            </div>
+            <div class="rows-thongbao">
+                @Html.TextBoxFor(m => m.CustomerPass, new { @class = "text-tbao icon-pass", type = "password" })
+                @Html.ValidationMessageFor(m => m.CustomerPass, "", new { @class = "text-danger-login" })
+            </div>
+            <div class="rows-thongbao">
+                <div class="checkbox-left">
+                    <div class="pure-checkbox">
+                        @Html.HiddenFor(m => m.ReturnUrl)
+                        @Html.CheckBoxFor(m => m.RememberMe)
+                        <label for="RememberMe">@Resource.Remember</label>
+                    </div>
+                </div>
+                <div class="quen-pass"><a href="#" class="@(Extensions.IsMobile() ? "pass-no" : "forgot-password")" title="@Resource.ForgotPassword" style="color: #d81c22;">@Resource.ForgotPassword</a></div>
+            </div>
+            <div class="rows-thongbao center">
+                <button class="btn-thongbao1 btn-login xn" style="font-size: 12px; height: 32px; margin-right: 15px;width:105px!important;"> ĐĂNG NHẬP </button>
+                <button class="btn-thongbao1 btn-close" style="font-size: 12px;height: 32px;"> ĐÓNG </button>
+            </div>
+            <div class="rows-thongbao">
+                <p style="font-size: 12px; font-weight: normal;"> @Resource.YouDoNotHaveAnAccount? <a href="@(CmsConstants.ROOT_PATH)user/dang-ky-tai-khoan.html" title="Đăng ký tài khoản" class="dkctt">@Resource.RegisterNow</a></p>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Models.Account
+@model LoginModel
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-right target-hidden" style="right: 0; top: 0; z-index: 9999;" id="loginForm">
+    <button class="closeright" data-toggle-target="#loginForm">
+        <img src="@Url.Content("~/assets/mobile/images/close.png")"/></button>
+    <div class="user-right">
+    @using (Ajax.BeginForm("DoLogin", "Account", null, new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.AccountLoginOnSuccess"
+    }, new { id = "lawsVnLoginFormHeader" }))
+    {
+        <div class="login">
+            <div class="tie-login">Đăng nhập</div>
+            <div class="form-login">
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.CustomerName, new { @class = "input-text", placeholder = "Tên tài khoản", autocomplete = "off", autocapitalize="off", autocorrect="off" })
+                    @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger-login" })
+                </div>
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.CustomerPass, new { @class = "input-text", type="password", placeholder="Mật khẩu", autocomplete = "off", autocapitalize="off", autocorrect="off" })
+                    @Html.ValidationMessageFor(m => m.CustomerPass, "", new { @class = "text-danger-login" })
+                </div>
+                <div class="item-login">
+                    <div class="left-login">
+                        <div class="pure-checkbox">
+                            @Html.HiddenFor(m => m.ReturnUrl)
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            <label for="RememberMe">@Resource.Remember</label>
+                        </div>
+                    </div>
+                    <div class="right-login">
+                        <a href="#" class="pass-no">Quên mật khẩu</a>
+                    </div>
+                </div>
+                <div class="item-login">
+                    Chưa có tài khoản? <a href="@(CmsConstants.ROOT_PATH)user/dang-ky-tai-khoan.html" title="Đăng ký tài khoản"><strong>Đăng ký ngay</strong></a>
+                </div>
+            </div>
+        </div>
+        <div class="rows-login">
+            <a href="#" class="user-out btn-xacnhan">
+                <img class="iconout" src="@Url.Content("~/assets/mobile/images/ic_input_24px.png")"/>
+                Đăng nhập</a>
+        </div>
+    }
+    </div>
+</div>

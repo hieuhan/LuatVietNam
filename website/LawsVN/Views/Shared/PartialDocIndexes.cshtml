@@ -1,0 +1,27 @@
+﻿@using LawsVN.Library
+@model List<ICSoft.LawDocsLib.DocIndexes>
+@if (Model.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h3><span class="title-widget">Mục lục</span>
+            </h3>
+        </div>
+
+        <div class="widget-container bgf9f9f9" id="DocIndexes">
+            <div class="content-scroll-1" style="max-height: 500px; background-color: #f9f9f9;">
+                @foreach (var item in Model)
+                {
+                    <div class="item-article">
+                        <a href="#@item.Bookmark">• @item.Title</a>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="hidden-article">
+            <a href="javascript:void(0)" id="ToggleDocIndexes">
+                <img class="icon-hidden-article" alt="icon-hidden-article" src="@Url.Content("~/assets/images/an-dmuc.png")">
+                Ẩn mục lục</a>
+        </div>
+    </div>
+}

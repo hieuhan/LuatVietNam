@@ -1,0 +1,177 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.PartialLinkDocumentAttributeModel
+@if (Model.mDocsView != null)
+{
+    if (Model.mDocsView.DocGroupId == 0 || Model.mDocsView.DocGroupId == Constants.DocGroupIdVbpq)
+    {
+        if (Model.mDocsView.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId)
+        {
+            <a href="@Model.mDocsView.GetDocUrl("tomtat")" class="@Model.ClassName" title="@Resource.Summary">@(Resource.Summary)</a>
+            <a href="@Model.mDocsView.GetDocUrl("lienquan")" class="@Model.ClassName" title="@Resource.Relate">@Resource.Relate</a>
+            <a href="@Model.mDocsView.GetDocUrl("hieuluc")" class="@Model.ClassName" title="@Resource.Effect">@Resource.Effect</a>
+            <a href="@Model.mDocsView.GetDocUrl("luocdo")" class="@Model.ClassName" title="@Resource.Diagram">@Resource.Diagram</a>
+            <a href="@Model.mDocsView.GetDocUrl("tienganh")" class="@Model.ClassName" title="@Resource.English">@Resource.English</a>
+            <a href="@Model.mDocsView.GetDocUrl("taive")" class="@Model.ClassName" title="@Resource.DownLoad">@Resource.DownLoad</a>
+             if (Model.EnableSaveDoc)
+             {
+                 <a href="#" data-id="@Model.mDocsView.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+             }
+        }
+        else
+        {
+            <a href="@Model.mDocsView.GetDocUrl("tomtat")" class="@Model.ClassName" title="@Resource.SummaryEn">@Resource.SummaryEn</a>
+            <a href="@Model.mDocsView.GetDocUrl("lienquan")" class="@Model.ClassName" title="@Resource.RelateEn">@Resource.RelateEn</a>
+            <a href="@Model.mDocsView.GetDocUrl("hieuluc")" class="@Model.ClassName" title="@Resource.EffectEn">@Resource.EffectEn</a>
+            <a href="@Model.mDocsView.GetDocUrl("luocdo")" class="@Model.ClassName" title="@Resource.DiagramEn">@Resource.DiagramEn</a>
+            <a href="@Model.mDocsView.GetDocUrl("noidung")" class="@Model.ClassName" title="@Resource.Vietnamese">@Resource.VietnameseEn</a>
+            <a href="@Model.mDocsView.GetDocUrl("taive")" class="@Model.ClassName" title="@Resource.DownloadEn">@Resource.DownloadEn</a>
+            if (Model.EnableSaveDoc)
+            {
+                <a href="#" data-id="@Model.mDocsView.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterestEn"></a>
+            }
+        }
+    }
+    else if (Model.mDocsView.DocGroupId == Constants.DocGroupIdUbnd)
+    {
+        <a href="@Model.mDocsView.GetDocUrl("tomtat")" class="@Model.ClassName" title="@Resource.Properties">@Resource.Properties</a>
+        <a href="@Model.mDocsView.GetDocUrl("luocdo")" class="@Model.ClassName" title="@Resource.Diagram">@Resource.Diagram</a>
+        <a href="@Model.mDocsView.GetDocUrl("hieuluc")" class="@Model.ClassName" title="@Resource.Effect">@Resource.Effect</a>
+        <a href="@Model.mDocsView.GetDocUrl("lienquan")" class="@Model.ClassName" title="@Resource.Relate">@Resource.Relate2</a>
+        <a href="@Model.mDocsView.GetDocUrl("taive")" class="@Model.ClassName" title="@Resource.DownLoad">@Resource.DownLoad</a>
+        if (Model.EnableSaveDoc)
+        {
+            <a href="#" data-id="@Model.mDocsView.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+        }
+    }
+    else if (Model.mDocsView.DocGroupId == Constants.DocGroupIdCongVan)
+    {
+        <a href="@Model.mDocsView.GetDocUrl("tomtat")" class="@Model.ClassName" title="@Resource.Properties">@Resource.Properties</a>
+        <a href="@Model.mDocsView.GetDocUrl("lienquan")" class="@Model.ClassName" title="@Resource.Relate">@Resource.Relate</a>
+        <a href="@Model.mDocsView.GetDocUrl("hieuluc")" class="@Model.ClassName" title="@Resource.Effect">@Resource.Effect</a>
+        <a href="@Model.mDocsView.GetDocUrl("luocdo")" class="@Model.ClassName" title="@Resource.Diagram">@Resource.Diagram</a>
+        <a href="@Model.mDocsView.GetDocUrl("taive")" class="@Model.ClassName" title="@Resource.DownLoad">@Resource.DownLoad</a>
+        if (Model.EnableSaveDoc)
+        {
+            <a href="#" data-id="@Model.mDocsView.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+        }
+    }
+    else if (Model.mDocsView.DocGroupId == Constants.DocGroupIdVbhn)
+    {
+        <a href="@Model.mDocsView.GetDocUrl()" class="@Model.ClassName.Replace("item7","item8")" title="@Resource.Properties">@Resource.Properties</a>
+        <a href="@Model.mDocsView.GetDocUrl("noidung")" class="@Model.ClassName.Replace("item7","item8")" title="@Resource.Content">@Resource.Content</a>
+        <a href="@Model.mDocsView.GetDocUrl("lienquan")" class="@Model.ClassName.Replace("item7","item8")" title="@Resource.TheDocumentIsMerged">@Resource.TheDocumentIsMerged</a>
+        <a href="@Model.mDocsView.GetDocUrl("luocdo")" class="@Model.ClassName.Replace("item7","item8")" title="@Resource.Diagram">@Resource.Diagram</a>
+        <a href="@Model.mDocsView.GetDocUrl("taive")" class="@Model.ClassName.Replace("item7","item8")" title="@Resource.DownLoad">@Resource.DownLoad</a>
+        if (Model.EnableSaveDoc)
+        {
+            <a href="#" data-id="@Model.mDocsView.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+        }
+    }
+    else if (Model.mDocsView.DocGroupId == Constants.DocGroupIdTcvn)
+    {
+        if (Extensions.IsAuthenticated)
+        {
+            <a href="@Model.mDocsView.GetDocUrl("tomtat")" class="@Model.ClassName" title="@Resource.Properties">@Resource.Properties</a>
+            <a href="@Model.mDocsView.GetDocUrl("noidung")" class="@Model.ClassName" title="@Resource.OriginalDocument">@Resource.OriginalDocument</a>
+            <a href="@Model.mDocsView.GetDocUrl("luocdo")" class="@Model.ClassName" title="@Resource.Diagram">@Resource.Diagram</a>
+            <a href="@Model.mDocsView.GetDocUrl("lienquan")" class="@Model.ClassName" title="@Resource.RelatedStandards">@Resource.RelatedStandards</a>
+            <a href="@Model.mDocsView.GetDocUrl("taive")" class="@Model.ClassName" title="@Resource.DownLoad">@Resource.DownLoad</a>
+            if (Model.EnableSaveDoc)
+            {
+                <a href="#" data-id="@Model.mDocsView.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+            }
+        }
+        else
+        {
+            <span class="@Model.ClassName no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.Properties</span>
+            <span class="@Model.ClassName no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.OriginalDocument</span>
+            <span class="@Model.ClassName no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.Diagram</span>
+            <span class="@Model.ClassName no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.RelatedStandards</span>
+            <span class="@Model.ClassName no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.DownLoad</span>
+            if (Model.EnableSaveDoc)
+            {
+                <span class="icon-save no-permission" title="@Html.Raw(Resource.NoPermission)"></span>
+            }
+        }
+    }
+}
+else if (Model.mDocRelates != null)
+{
+    if (Model.mDocRelates.DocGroupId == 0 || Model.mDocRelates.DocGroupId == Constants.DocGroupIdVbpq)
+    {
+        if (Model.mDocRelates.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId)
+        {
+            <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "luocdo")" class="@Model.ClassName" title="@Resource.Diagram">@Resource.Diagram</a>
+            <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "hieuluc")" class="@Model.ClassName" title="@Resource.Effect">@Resource.Effect</a>
+            <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "lienquan")" class="@Model.ClassName" title="@Resource.Relate">@Resource.Relate</a>
+            <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "tienganh")" class="@Model.ClassName" title="@Resource.English">@Resource.English</a>
+            <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "taive")" class="@Model.ClassName" title="@Resource.DownLoad">@Resource.DownLoad</a>
+            if (Model.EnableSaveDoc)
+            {
+                <a href="#" data-id="@Model.mDocRelates.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+            }
+        }
+        else
+        {
+            <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "luocdo")" class="@Model.ClassName" title="@Resource.DiagramEn">@Resource.DiagramEn</a>
+            <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "hieuluc")" class="@Model.ClassName" title="@Resource.EffectEn">@Resource.EffectEn</a>
+            <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "lienquan")" class="@Model.ClassName" title="@Resource.RelateEn">@Resource.RelateEn</a>
+            <a href="@Model.mDocRelates.DocUrl" class="@Model.ClassName" title="@Resource.Vietnamese">@Resource.Vietnamese</a>
+            <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "taive")" class="@Model.ClassName" title="@Resource.DownloadEn">@Resource.DownloadEn</a>
+            if (Model.EnableSaveDoc)
+            {
+                <a href="#" data-id="@Model.mDocRelates.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterestEn"></a>
+            }
+        }
+    }
+    else if (Model.mDocRelates.DocGroupId == Constants.DocGroupIdUbnd)
+    {
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "tomtat")" class="@Model.ClassName" title="@Resource.Properties">@Resource.Properties</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "luocdo")" class="@Model.ClassName" title="@Resource.Diagram">@Resource.Diagram</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "hieuluc")" class="@Model.ClassName" title="@Resource.Effect">@Resource.Effect</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "lienquan")" class="@Model.ClassName" title="@Resource.Relate">@Resource.Relate2</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "taive")" class="@Model.ClassName" title="@Resource.DownLoad">@Resource.DownLoad</a>
+        if (Model.EnableSaveDoc)
+        {
+            <a href="#" data-id="@Model.mDocRelates.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+        }
+    }
+    else if (Model.mDocRelates.DocGroupId == Constants.DocGroupIdCongVan)
+    {
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "tomtat")" class="@Model.ClassName" title="@Resource.Properties">@Resource.Properties</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "lienquan")" class="@Model.ClassName" title="@Resource.Relate">@Resource.Relate</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "hieuluc")" class="@Model.ClassName" title="@Resource.Effect">@Resource.Effect</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "luocdo")" class="@Model.ClassName" title="@Resource.Diagram">@Resource.Diagram</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "taive")" class="@Model.ClassName" title="@Resource.DownLoad">@Resource.DownLoad</a>
+        if (Model.EnableSaveDoc)
+        {
+            <a href="#" data-id="@Model.mDocRelates.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+        }
+    }
+    else if (Model.mDocRelates.DocGroupId == Constants.DocGroupIdVbhn)
+    {
+        <a href="@Model.mDocRelates.DocUrl" class="@Model.ClassName.Replace("item7","item8")" title="@Resource.Properties">@Resource.Properties</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "noidung")" class="@Model.ClassName.Replace("item7","item8")" title="@Resource.Content">@Resource.Content</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "lienquan")" class="@Model.ClassName.Replace("item7","item8")" title="@Resource.TheDocumentIsMerged">@Resource.TheDocumentIsMerged</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "luocdo")" class="@Model.ClassName.Replace("item7","item8")" title="@Resource.Diagram">@Resource.Diagram</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "taive")" class="@Model.ClassName.Replace("item7","item8")" title="@Resource.DownLoad">@Resource.DownLoad</a>
+        if (Model.EnableSaveDoc)
+        {
+            <a href="#" data-id="@Model.mDocRelates.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+        }
+    }
+    else if (Model.mDocRelates.DocGroupId == Constants.DocGroupIdTcvn)
+    {
+        <a href="@Model.mDocRelates.DocUrl" class="@Model.ClassName" title="@Resource.Properties">@Resource.Properties</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "noidung")" class="@Model.ClassName" title="@Resource.OriginalDocument">@Resource.OriginalDocument</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "luocdo")" class="@Model.ClassName" title="@Resource.Diagram">@Resource.Diagram</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "lienquan")" class="@Model.ClassName" title="@Resource.RelatedStandards">@Resource.RelatedStandards</a>
+        <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "taive")" class="@Model.ClassName" title="@Resource.DownLoad">@Resource.DownLoad</a>
+        if (Model.EnableSaveDoc)
+        {
+            <a href="#" data-id="@Model.mDocRelates.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+        }
+    }
+}

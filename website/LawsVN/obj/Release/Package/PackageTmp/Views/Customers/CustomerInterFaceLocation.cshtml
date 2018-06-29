@@ -1,0 +1,375 @@
+﻿@using System.Data
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using ICSoft.LawDocsLib
+@using ICSoft.CMSLib
+@model CusomersInterfaceModel
+@{
+    Layout = "~/Views/Shared/_LayoutMyLuatVN.cshtml";
+}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+<div class="page-content" style="margin-bottom:0px !important">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>Trang chủ </a> »
+            <a class="breadcrumb-item" href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan.html">My luatVietnam</a>  »
+            <span class="breadcrumb-item colorrumb"> Văn bản UBND</span>
+        </div>
+
+        <section class="cat-box search-box">
+            @{Html.RenderAction("PartialFullSearchHome", "Shared");}
+        </section>
+
+
+        <section class="cat-box box-content">
+            <div class="cat-title titlemyluat">
+                <div class="cat-box-title myluat vien">VĂN BẢN UBND</div>
+                @*<a href="#" class="edit2"><img class="edit2-img" alt="edit2" src="@Url.Content("~/assets/images/edit2.png")"> Thay đổi địa phương</a>*@
+            </div>
+
+            <div class="lockq">
+                <div class="item-loctheo">
+                    <span class="icon-loc-kq"></span>Lọc theo:
+                </div>
+                @using (Ajax.BeginForm(Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName, new
+            {
+                docGroupId = Model.PartialPaginationAjaxFirst.DocGroupId
+                ,
+                languageId = Model.PartialPaginationAjaxFirst.LanguageId
+                ,
+                updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                ,
+                insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                ,
+                controllerName = Model.PartialPaginationAjaxFirst.ControllerName
+                ,
+                actionName = Model.PartialPaginationAjaxFirst.ActionName
+                ,
+                pageSize = Model.PartialPaginationAjaxFirst.PageSize
+                ,
+                linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+            }, new AjaxOptions
+            {
+                HttpMethod = "Get",
+                UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                InsertionMode = InsertionMode.Replace,
+                OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId),
+                OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+            }))
+                {
+                    <div class="item-lockq md4">
+                        <select name="FieldId" tabindex="1" class="dropdown select-onchange">
+                            <option value="0" data-title="">@Resource.AllFields</option>
+                            @foreach (var item in Model.ListFields)
+                            {
+                                <option value="@item.FieldId">@item.FieldDesc</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="item-lockq md4">
+                        <select name="docTypeId" tabindex="2" class="dropdown select-onchange">
+                            <option value="0" data-title="">@Resource.DocTypes</option>
+                            @foreach (var item in Model.ListDocTypesUbnd)
+                            {
+                                <option value="@item.DocTypeId">@item.DocTypeDesc</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="item-lockq md4">
+                        <select tabindex="3" name="Year" class="dropdown select-onchange">
+                            <option value="0">Từ trước đến nay</option>
+                            <option value="1">Tuần qua</option>
+                            <option value="2">Tháng qua</option>
+                            <option value="3">Năm qua</option>
+                        </select>
+                    </div>
+
+                    <div class="item-lockq md4">
+                        <select name="ProvinceId" tabindex="4" class="dropdown select-onchange">
+                            <option value="0" data-title="">@Resource.ProvinceCity</option>
+                            @if (Model.ListProvinces.HasValue())
+                            {
+                                foreach (var province in Model.ListProvinces)
+                                {
+                                    <option value="@province.ProvinceId">@province.ProvinceDesc</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                }
+            </div>
+
+            <div class="cat-box-content" id="FirstBox">
+                @if (Model.lDocsView_UBND.HasValue())
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            @for (int index = 1; index <= Model.lDocsView_UBND.Count; index++)
+                            {
+                                var docView = Model.lDocsView_UBND[index - 1];
+                                <tr class="row-first-news @(index % 2 != 0 ? "" : "bgcolor")">
+                                    <th class="count-123 page" scope="row">@index.ToString("#00")</th>
+                                    <td class="news-left-post">
+                                        <h2>
+                                            <a href="@docView.GetDocUrl()" title="@docView.DocName.StripTags()" class="post-title lvn">@docView.DocName</a>
+                                        </h2>
+                                        <div class="item-meta">
+                                            @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView, ClassName = Model.PartialPaginationAjaxFirst.ClassTagItem } });}
+                                        </div>
+                                    </td>
+                                    <td class="post-time-right page">
+                                        @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView } });}
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                            { Html.RenderAction("PartialPaginationAjax", "Shared", new { model = Model.PartialPaginationAjaxFirst }); }
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr class="row-first-news">
+                                <th class="count-123" scope="row"></th>
+                                <td class="news-center-post">
+                                    <h3>
+                                        <span class="post-title lvn">@Resource.NoMatchingDocumentFound</span>
+                                    </h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+
+        </section>
+
+        <section class="cat-box ">
+            <div class="cat-title titlemyluat">
+                <div class="cat-box-title myluat vien"> VĂN BẢN TRUNG ƯƠNG LIÊN QUAN</div>
+            </div>
+
+            <div class="lockq">
+                <div class="item-loctheo">
+                    <span class="icon-loc-kq"></span>Lọc theo:
+                </div>
+                @using (Ajax.BeginForm(Model.PartialPaginationAjaxSecond.ActionName, Model.PartialPaginationAjaxSecond.ControllerName, new
+            {
+                docGroupId = Model.PartialPaginationAjaxSecond.DocGroupId
+                ,
+                languageId = Model.PartialPaginationAjaxSecond.LanguageId
+                ,
+                updateTargetId = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId
+                ,
+                insertionMode = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.InsertionMode
+                ,
+                controllerName = Model.PartialPaginationAjaxSecond.ControllerName
+                ,
+                actionName = Model.PartialPaginationAjaxSecond.ActionName
+                ,
+                pageSize = Model.PartialPaginationAjaxSecond.PageSize
+                ,
+                linkLimit = Model.PartialPaginationAjaxSecond.LinkLimit
+            }, new AjaxOptions
+            {
+                HttpMethod = "Get",
+                UpdateTargetId = Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId,
+                InsertionMode = InsertionMode.Replace,
+                OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId),
+                OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');", Model.PartialPaginationAjaxSecond.LawsAjaxOptions.UpdateTargetId)
+            }))
+                {
+                    <div class="item-lockq md4">
+                        <select name="FieldId" tabindex="1" class="dropdown select-onchange">
+                            <option value="0" data-title="">@Resource.AllFields</option>
+                            @foreach (var item in Model.ListFields)
+                            {
+                                <option value="@item.FieldId">@item.FieldDesc</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="item-lockq md4">
+                        <select tabindex="2" name="DocTypeId" class="dropdown select-onchange">
+                            <option value="0" data-title="">@Resource.DocTypes</option>
+                            @foreach (var item in Model.ListDocTypes)
+                            {
+                                <option value="@item.DocTypeId">@item.DocTypeDesc</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="item-lockq md4">
+                        <select tabindex="3" name="OrganId" class="dropdown select-onchange">
+                            <option value="0" data-title="">@Resource.Organs</option>
+                            @foreach (var item in Model.ListOrgans)
+                            {
+                                <option value="@item.OrganId">@item.OrganDesc</option>
+                            }
+                        </select>
+                    </div>
+                }
+            </div>
+
+            <div class="cat-box box-content" id="SecondBox">
+                @if (Model.lDocsView_TrungUongLienQuan.HasValue())
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            @for (int index = 1; index <= Model.lDocsView_TrungUongLienQuan.Count; index++)
+                            {
+                                var docView = Model.lDocsView_TrungUongLienQuan[index - 1];
+                                <tr class="row-first-news @(index % 2 != 0 ? "" : "bgcolor")">
+                                    <th class="count-123 page" scope="row">@index.ToString("#00")</th>
+                                    <td class="news-left-post">
+                                        <h2>
+                                            <a href="@docView.GetDocUrl()" title="@docView.DocName.StripTags()" class="post-title lvn">@docView.DocName</a>
+                                        </h2>
+                                        <div class="item-meta">
+                                            @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView, ClassName = Model.PartialPaginationAjaxSecond.ClassTagItem } });}
+                                        </div>
+                                    </td>
+                                    <td class="post-time-right page">
+                                        @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView } });}
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    { Html.RenderAction("PartialPaginationAjax", "Shared", new { model = Model.PartialPaginationAjaxSecond }); }
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr class="row-first-news">
+                                <th class="count-123" scope="row"></th>
+                                <td class="news-center-post">
+                                    <h3>
+                                        <span class="post-title lvn">@Resource.NoMatchingDocumentFound</span>
+                                    </h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+
+        </section>
+
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+
+            <div class="widget">
+                <div class="banner">
+                    <a href="@CmsConstants.ROOT_PATH"><img alt="banner quang cao" src="@Url.Content("~/assets/images/hompage.png")"></a>
+                </div>
+            </div>
+
+            @{Html.RenderAction("PartialWidgetUser", "Shared", true);}
+
+            <div class="widget">
+                <div class="widget-top">
+                    <span class="title-widget">Văn bản địa phương của bạn</span>
+                </div>
+                <div class="widget-container">
+                    <div id="ListProvinces">
+                        @if (Model.ListProvinces.HasValue())
+                        {
+                            foreach (var province in Model.ListProvinces)
+                            {
+                                <div class="item-vbdp" id="CustomerProvinces@(province.CustomerProvinceId)">
+                                    @province.ProvinceDesc
+                                    <a href='javascript:lawsVn.CustomerProvincesDelete("@(province.CustomerProvinceId)")' class="icon-my">
+                                        <img alt="avata-canhan" src="@Url.Content("~/assets/images/xoa2.png")">
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <div class="rows item1">
+                        <a href="#" class="edit3 select-customer-province">
+                            <img class="edit3-img" alt="edit3" src="@Url.Content("~/assets/images/cap-nhat.png")"> Thay đổi hoặc thêm nhiều địa phương
+                        </a>
+                    </div>
+                    @*<div class="rows item3">
+                    <div class="item-vbdp-1">
+                        <div class="dropdown2">
+                            <select id="dllProvince" tabindex="1" class="dropdown2">
+                                @foreach (var item in Model.lProvinces)
+                                {
+                                    <option value="@item.ProvinceId" data-title="@item.ProvinceDesc">@item.ProvinceDesc.Truncatevalue(Constants.Truncate20)</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="item-vbdp-2">
+                        <button class="btn-diaphuong" onclick='lawsVn.AddCustomerProvince("@Model.CustomerId")'>Cập nhật</button>
+                    </div>
+                </div>*@
+                </div>
+            </div>
+
+            @{Html.RenderAction("PartialCustomerInterFaceFields", "Shared");}
+            @*@if (Model.ListFieldsQuanTam.HasValue())
+        {
+            <div class="widget">
+                <div class="widget-top">
+                    <span class="title-widget" style="float: left; text-align: left; padding: 0 15px;">Lĩnh vực Văn Bản quan tâm</span>
+                    <a href="#" class="thaydoi-3 select-customer-fields"><img src="@Url.Content("~/assets/images/my-edit.png")"></a>
+                </div>
+                <div class="widget-container">
+                    @foreach (var field in Model.ListFieldsQuanTam)
+                    {
+                        string fieldUrl = field.GetUrl();
+                        if (!fieldUrl.StartsWith("/"))
+                        {
+                            fieldUrl = string.Concat(CmsConstants.ROOT_PATH, fieldUrl);
+                        }
+                        <div class="recent-post-linhvuc">
+                            <span class="icon-new-23"></span>
+                            <div class="post-conten news">
+                                <a href="@fieldUrl" class="post-title">@field.FieldDesc<span style="color: #b28247;"> (@field.SoLuong.ToString("##,###"))</span></a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }*@
+
+            @{Html.RenderAction("PartialTinVan", "Shared");}
+
+            @*<div class="widget">
+            <div class="banner">
+                <a href="#"><img alt="banner quang cao" src="@Url.Content("~/assets/images/banner1.png")"></a>
+            </div>
+        </div>*@
+
+            @{Html.RenderAction("PartialDocsMostView", "Shared");}
+
+        </aside>
+    </div>
+
+</div>
+
+@*@Html.Partial("PartialContentViewed")*@
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+﻿@using LawsVN.Models
+@using LawsVN.Library
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using sms.utils
+@model ArticleViewDetailModel
+@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="keyword" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>»
+    <a href="@Model.m_ArticlesViewDetail.mCategoriesView.GetCategoryUrl()" class="breadcrumb-item">@Model.m_ArticlesViewDetail.mCategoriesView.CategoryDesc</a> »
+    <span class="breadcrumb-item">@Model.m_ArticlesViewDetail.mArticlesView.Title</span>
+</div>
+
+<article class="the-post">
+    <div class="singer">
+        <div class="time-post">@DateTimeUtil.GetLongDateTime(Model.m_ArticlesViewDetail.mArticlesView.PublishTime)</div>
+        <h1 class="title-post-singer">@Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.Title)</h1>
+        <div class="entry">
+            @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent)
+        </div>
+    </div>
+</article>
+@if (Model.m_ArticlesViewDetail.lArticlesOther.HasValue())
+{
+    <section class="content-section">
+        <div class="title2">
+            <h2 class="title-cat2 vien">@Resource.OtherLegalNews</h2>
+        </div>
+        <div class="cat-box-content">
+            @foreach (var articleViewOther in Model.m_ArticlesViewDetail.lArticlesOther)
+            {
+                <div class="other-news">
+                    <div class="post-thumbnail">
+                        <a href="@articleViewOther.GetArticleUrl()">
+                            <amp-img src="@articleViewOther.GetImageUrl_Mobile2()" width="300" height="200" layout="responsive"
+                             class="-amp-element -amp-layout-responsive -amp-layout-size-defined -amp-layout" id="amp-1">
+                    </amp-img>
+                        </a>
+                    </div>
+                    <h3 class="post-title bold">
+                        <a href="@articleViewOther.GetArticleUrl()">@articleViewOther.Title</a>
+                    </h3>
+                </div>
+            }
+        </div>
+    </section>
+}

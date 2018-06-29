@@ -1,0 +1,90 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.Library
+@using LawsVNEN.Models
+@using ICSoft.CMSViewLib
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.AppCode
+@{
+    ViewBag.Title = "User Guide";
+    Layout = "~/Views/Shared/_LayoutContent.cshtml";
+}
+@model ArticleViewModel
+<!--Bengin content-left -->
+<div class="content-left">
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.Home </a> »
+        <span class="breadcrumb-item colorrumb"> @Resource.UserGuide</span>
+    </div>
+
+    <!--Bengin section-->
+    <section class="cat-box">
+        <!-- tab-conten-->
+        <div class="tab-conten">
+            <!-- Bengin tab-title-->
+            <div class="tab-nav">
+                @{int k= 0;}
+                @foreach (CategoriesView mCategoriesView in Model.l_CategoriesView)
+                {
+                    k++;
+                <a class="tab-nav-item1 @(k == 1 ? "active" : "")" onclick="openCity('tab-item-@k', 'click-1')" href="javascript:void(0)" style="font-size: 15px; text-transform:uppercase;">@mCategoriesView.CategoryName</a>
+            }
+            </div>
+            <!-- End tab-title-->
+            <!-- Bengin-cat-box-content-->
+            <div class="cat-box-content">
+                @for (int index = 0; index < Model.m_ArticlesViewMaster.lCategoriesMain1.Count; index++ )
+                {<!-- Bengin-tab-item-1-->
+    <div id="tab-item-@(index+1)" class="click-1" style="@(index == 0 ? "" : "display: none;")">
+        @if (Model.m_ArticlesViewMaster.lCategoriesMain1[index].lArticlesView.Count > 0)
+        {
+            int i = 0;
+            foreach (ArticlesView mArticlesView in Model.m_ArticlesViewMaster.lCategoriesMain1[index].lArticlesView)
+            {
+                i++;
+                    <!-- Bengin-tab-conten-hd1-->
+                <div class="tab-conten-hd1">
+                    <div id="cssmenu">
+                        <ul>
+                            <li class="has-sub">
+                                <a href="javascript:void(0)" id="article@(i+1)" class="title-blt en">
+                                    @i. @mArticlesView.Title
+                                    <span class="xem_them_loto"></span>
+                                </a>
+                                <ul style="display: @(i == 1 ? "block" : "none");">
+                                    <div class="content-huong-dan">
+                                        @Html.Raw(mArticlesView.ArticleContent)
+                                    </div>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                    <!-- End-tab-conten-hd1-->
+            }
+            if (Model.m_ArticlesViewMaster.lCategoriesMain2.HasValue() && Model.m_ArticlesViewMaster.lCategoriesMain2[index].lArticlesView.Count > 0)
+            {
+                foreach (ArticlesView mArticlesView in Model.m_ArticlesViewMaster.lCategoriesMain2[index].lArticlesView)
+                {
+                    <div class="rows">@Html.Raw(mArticlesView.ArticleContent)  </div>
+                    
+                }
+            }
+        }
+    </div>
+                <!-- End-tab-item-1-->
+
+                }
+                
+
+            </div>
+            <!-- End cat-box-content-->
+        </div>
+        <!-- tab-conten-->
+    </section>
+    <!--End section-->
+</div>
+@section FooterSection
+{
+<script type="text/javascript" src="@Url.Content("~/assets/scripts/ui/jquery.min.js")"></script>
+}
+<!--End content left-->

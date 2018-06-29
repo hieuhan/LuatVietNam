@@ -1,0 +1,79 @@
+﻿@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@model DocByFieldViewModel
+@if (Model.DocList.lDocs.HasValue())
+{
+    <table class="tablecontent">
+        <body>
+            @for (int index = 0; index < Model.DocList.lDocs.Count; index++)
+            {
+                ICSoft.ViewLibV3.Docs mDocs = Model.DocList.lDocs[index];
+                if (string.IsNullOrEmpty(mDocs.DocUrl)) { mDocs.DocUrl = string.Empty; }
+                <tr class="rows-vb">
+                    <td class="number bold">@string.Format("{0:#00}", index + 1)</td>
+                    <td>
+                        <a class="post-title vbl bold" href="@mDocs.GetDocUrl()">@Html.Raw(mDocs.DocName)</a>
+                        <div class="post-tag">
+                            @if (mDocs.DocGroupId == Constants.DocGroupIdTcvn)
+                            {
+                                <div class="tag-item">Ban hành: <span class="tag-time">@mDocs.IssueDate.toString(mDocs.IssueYear.ToString()) </span></div>
+                            }
+                            else if (mDocs.DocGroupId == Constants.DocGroupIdVbhn)
+                            {
+                                <div class="tag-item">Xác thực: <span class="tag-time">@mDocs.IssueDate.toString() </span></div>
+                            }
+                            else
+                            {
+                                <div class="tag-item">Ban hành: <span class="tag-time">@mDocs.IssueDate.toString() </span></div>
+                            }
+                            @if (mDocs.DocGroupId != Constants.DocGroupIdTcvn && mDocs.DocGroupId != Constants.DocGroupIdVbhn)
+                            {
+                                <div class="tag-item">
+                                    Hiệu lực:
+                                    @if (mDocs.EffectDate != DateTime.MinValue)
+                                    {
+                                        <span class="tag-time">@mDocs.EffectDate.toString()</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="tag-time">Đang cập nhật</span>
+                                    }
+                                </div>
+                            }
+                            <div class="tag-item">
+                                Tình trạng:
+                                @if (!string.IsNullOrEmpty(mDocs.EffectStatusName))
+                                {
+                                    <span class="tag-time">@mDocs.EffectStatusName</span>
+                                }
+                                else
+                                {
+                                    <span class="tag-time">Đang cập nhật </span>
+                                }
+                            </div>
+                            <div class="tag-item"><a href="@mDocs.GetDocUrl("taive")" class="download"></a></div>
+                        </div>
+                    </td>
+                    <td style="padding-left: 20px;">
+                        <a href="javascript:vbluat.myDocuments.deleteCustomerDocs(@Model.DocList.lDocs[index].DocGroupId,@Model.DocList.lDocs[index].DocId,1);" class="xoavb">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </body>
+    </table>
+    <div class="loadmore">
+        <button class="btn-default xemthem">Xem thêm</button>
+    </div>
+}
+else
+{
+    <table class="tablecontent full">
+        <body>
+            <tr class="rows-vb">
+                <td>
+                    <p class="post-title vbl bold">Không tìm thấy dữ liệu phù hợp.</p>
+                </td>
+            </tr>
+        </body>
+    </table>
+}

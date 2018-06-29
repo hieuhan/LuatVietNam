@@ -1,0 +1,9 @@
+﻿@model ICSoft.CMSViewLib.ArticlesViewDetail
+<div class="content-scroll-2" style="height: 500px;">
+    <div class="padding">
+        <div class="entry-en">
+            <p style="font-size: 16px; color: #c5282d">@Model.mArticlesView.Title</p>
+            @Html.Raw(Html.Raw(Model.mArticlesView.ArticleContent))
+        </div>
+    </div>
+</div>

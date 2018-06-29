@@ -1,0 +1,366 @@
+﻿@using ICSoft.LawDocsLib
+@using ICSoft.CMSViewLib
+@using ICSoft.CMSLib
+@using LawsVN.Models
+@using LawsVN.Library
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model LawerViewModel
+<!--Bengin page-content-->
+<div class="page-content">
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>Trang chủ </a> »
+        <span class="breadcrumb-item colorrumb">  Danh bạ luật sư</span>
+    </div>
+
+
+    <!--Bengin cat-box-->
+    <div class="cat-box">
+        <!--Bengin aside-->
+        <aside class="sidebar-nav searchblog">
+            @if (Model.mLawersView.lProvinces != null && Model.mLawersView.lProvinces.Count>0)
+            {
+            <!--Bengin widget-->
+            <div class="widget">
+                <div class="widget-top">
+                    <span class="title-widget">Luật sư các Tỉnh/tp</span>
+                </div>
+                <div class="widget-container">
+                    @for (int i = 0; i < Model.mLawersView.lProvinces.Count; i++ )
+                    {
+                        Provinces mProvinces = Model.mLawersView.lProvinces[i];
+                        string textLink = Provinces.Static_Get(mProvinces.ProvinceId).ProvinceDesc +"("+mProvinces.SoLuong+")";
+                        <div class="item-lv1">
+                        @Ajax.ActionLink(textLink, "Lawer_GetViewSearch", "Ajax",
+                    new
+                    {
+                        LawTerminGroupId = 0,
+                        ProvinceId = mProvinces.ProvinceId,
+                        languageId = LawsVN.Library.LawsVnLanguages.GetCurrentLanguageId(),
+                        updateTargetId = "ListByField",
+                        insertionMode = InsertionMode.Replace,
+                        controllerName = "Ajax",
+                        actionName = "Lawer_GetViewSearch",
+                        pageSize = Model.PartialPaginationAjax.PageSize,
+                        linkLimit = Model.PartialPaginationAjax.PageSize
+                    },
+                    new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        UpdateTargetId = "ListByField",
+                        InsertionMode = InsertionMode.Replace,
+                        OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", "ListByField"),
+                        OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", InsertionMode.Replace)
+                    })
+                    
+                    </div>
+                        if (i == 10) { break; }
+                    }
+                    @if(Model.mLawersView.lProvinces.Count>10)
+                    {
+                        <div class="more11">
+                        <a class="menu more-lvn" href="javascript:void(0)">
+                            Xem thêm
+                            <img alt="xem-tiep" class="icon-moretext" src="@Url.Content("~/Assets/images/mtdp.png")" />
+                        </a>
+                        <div class="tooltiptext">
+                            <span class="icon-tooltip"></span>
+                            <div class="tooltip-item">
+                                <div class="padding20">
+                                    @for (int i = 10; i < Model.mLawersView.lProvinces.Count; i++)
+			                        {
+                                        Provinces mProvinces = Model.mLawersView.lProvinces[i];
+			                            <div class="item-checkbox-list">
+                                        <div class="radio">
+                                            <input id="Province - @mProvinces.ProvinceId" onclick="$(this).parent().children('a').trigger('click');" name="radio" type="radio" />
+                                            <label for="Province - @mProvinces.ProvinceId" onclick="$(this).parent().children('input[type=\'radio\']').trigger('click');" class="radio-label" title="@Provinces.Static_Get(mProvinces.ProvinceId).ProvinceDesc"> @Provinces.Static_Get(mProvinces.ProvinceId).ProvinceDesc.Truncate(Constants.Truncate20) </label>
+                                            <a href="@Url.Action("Lawer_GetViewSearch", "Ajax", new { ProvinceId = mProvinces.ProvinceId, languageId = LawsVnLanguages.GetCurrentLanguageId(), updateTargetId = "ListByField", insertionMode = InsertionMode.Replace, controllerName = "Ajax", actionName = "Lawer_GetViewSearch", pageSize = 10, linkLimit = 10 })"
+                                               data-ajax="true" data-ajax-begin="lawsVn.ajaxEvents.OnBegin('ListByField')"
+                                               data-ajax-complete="lawsVn.ajaxEvents.OnComplete('Replace')"
+                                               data-ajax-method="Get" data-ajax-mode="replace"
+                                               data-ajax-update="#ListByField"></a>
+                                        </div>
+                                        </div>
+			                        }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    
+
+
+                </div>
+            </div>
+            <!--End widget-->
+            }
+            <!--Bengin widget-->
+            @if (Model.mLawersView.lLawersMostView != null && Model.mLawersView.lLawersMostView.Count > 0)
+            { 
+                <div class="widget">
+                <div class="widget-top">
+                    <span class="title-widget">Luật sư tìm kiếm nhiều</span>
+                </div>
+                <div class="widget-container">
+                    @foreach (Lawers mLawers in Model.mLawersView.lLawersMostView)
+	                {
+		                <div class="list-other">
+                            <a class="thumb30" href="@LawersView.GetLawerUrl(mLawers.LawerID, mLawers.FullName)">
+                                <img alt="thumb30" src="@(mLawers.GetImageUrl_Mobile())">
+                            </a>
+                        <div class="info-user">
+                            <a href="@mLawers.LawerUrl">Ls: @mLawers.FullName</a>
+                            <p>Nơi công tác: @mLawers.LawOfficeName</p>
+                        </div>
+                        </div>
+	                }
+                </div>
+            </div>
+            }
+            <!--End widget-->
+            <!--Bengin widget-->
+            <div class="widget">
+                <div class="ads">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 241 });}
+                </div>
+            </div>
+            <!--End widget-->
+
+        </aside>
+        <!--End aside-->
+        <!--Bengin content-center-pages-->
+        <div class="content-center-pages searchblog">
+
+            <div class="page-head thuatngu">
+                <div class="cat-box-title"><img class="img-lss" alt="img-lss" src="@Url.Content("~/Assets/images/icon-gioi-thieu-ls.png")">Danh bạ luật sư</div>
+                <span class="vien-title nav-fd daxem"></span>
+                <a href="#" class="iconthemls"><img class="iconthemls2" alt="iconthemls" src="@Url.Content("~/Assets/images/icon-themls.png")"> Thêm luật sư </a>
+            </div>
+
+            <div class="post-abc">
+                @{
+                    string[] chuso = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "all" };
+                }
+                @for (int i = 0; i < chuso.Length; i++)
+                {
+                    @Ajax.ActionLink(chuso[i], "Lawer_GetViewSearch", "Ajax",
+                    new
+                    {
+                        LawTerminGroupId = 0,
+                        StartName = chuso[i] == "all" ? "" : chuso[i],
+                        languageId = LawsVN.Library.LawsVnLanguages.GetCurrentLanguageId(),
+                        updateTargetId = "ListByField",
+                        insertionMode = InsertionMode.Replace,
+                        controllerName = "Ajax",
+                        actionName = "Lawer_GetViewSearch",
+                        pageSize = Model.PartialPaginationAjax.PageSize,
+                        linkLimit = Model.PartialPaginationAjax.PageSize
+                    },
+                    new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        UpdateTargetId = "ListByField",
+                        InsertionMode = InsertionMode.Replace,
+                        OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", "ListByField"),
+                        OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", InsertionMode.Replace)
+                    }, new { @class = "post-tag-abc " })
+                }
+            </div>
+            <div class="rows item7">
+
+                <div class="col-ms22"><input class="form-control-input thuatngu" name="fname" id="Keyword" value="" placeholder="Nhập từ khóa tìm kiếm..." type="text" style="font-style: normal;"></div>
+                <div class="col-ms3">
+                    <button class="btn btn-default" onclick="lawsVn.LawerFilter()">Tìm kiếm</button>
+                </div>
+            </div>
+            <!-- Bengin-lockq-->
+            <div class="rows item7">
+                <div class="item-loctheo m1">
+                    <span class="icon-loc-kq"></span>Lọc theo:
+                </div>
+                <div class="item-lockq">
+                    <select id="dllFields" tabindex="1" class="dropdown2" onchange="lawsVn.LawerFilter()">
+                        <option value="0" data-title="">@Resources.Resource.AllFields</option>
+                        @foreach (var item in Model.GetAllFieldsLawer)
+                        {
+                            <option value="@item.FieldId" data-title="@item.FieldName" @(item.FieldId == Model.PartialPaginationAjax.FieldId ? "selected" : string.Empty)>@item.FieldName.Truncate(Constants.Truncate20)</option>
+                        }
+                    </select>
+
+                </div>
+                <div class="item-lockq">
+                    <select id="dllProvinces" tabindex="1" class="dropdown2" onchange="lawsVn.SearchLawerProvinceChange(this.value)">
+                        @foreach (var item in Model.GetAllProvinces)
+                        {
+                            <option value="@item.ProvinceId" data-title="@item.ProvinceDesc" @(item.ProvinceId == Model.PartialPaginationAjax.ProvinceId ? "selected" : string.Empty)>@item.ProvinceDesc.Truncate(Constants.Truncate20)</option>
+                        }
+                    </select>
+                </div>
+                <div class="item-lockq c3">
+                    <select id="dllDistricts" tabindex="1" class="dropdown2" onchange="lawsVn.SearchLawerDistrictChange(this.value)">
+                        <option value="0" data-title="">Quận/Huyện</option>
+                    </select>
+                </div>
+                <div class="item-lockq c3">
+                    <select id="dllWards" tabindex="1" class="dropdown2" onchange="lawsVn.LawerFilter()">
+                        <option value="0" data-title="">Phường xã</option>
+                    </select>
+                </div>
+            </div>
+            <!-- End-lockq-->
+
+            <div class="rows item7">
+                <div class="left-view">
+                    Tìm thấy  <strong class="color2">@Model.PartialPaginationAjax.TotalPage kết quả</strong> với từ khóa <strong class="color2">"@Model.PartialPaginationAjax.KeyWord"</strong>
+                </div>
+                <div class="right-view">
+                    <span>Hiển thị <strong>@Model.PartialPaginationAjax.PageSize kết quả</strong> trong <strong> @Model.PartialPaginationAjax.TotalPage </strong>Luật sư</span>
+                </div>
+            </div>
+            <!--Bengin cat-box-->
+            @if (Model.mLawersView.lLawers != null && Model.mLawersView.lLawers.Count > 0)
+{
+    <div class="cat-box content-wrap" id="ListByField">
+        <table class="table table-bordered luatsu">
+            <thead>
+                <tr>
+                    <th class="col-info">Thông tin luật sư</th>
+                    <th class="col-ttp"> TỈnh / TP</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Lawers mLawers in Model.mLawersView.lLawers)
+                {
+                    <tr>
+                        <td class="col-info">
+                            <a class="thumb120" href="@LawersView.GetLawerUrl(mLawers.LawerID, mLawers.FullName)">
+                                <img src="@mLawers.GetImageUrl_Mobile()" height="135px" alt="@mLawers.FullName">
+                            </a>
+                            <div class="info-thumb120">
+                                <div class="rows item3">
+                                    <p class="font16">Luật sư: @mLawers.FullName</p>
+                                    <span class="vien1px"></span>
+                                </div>
+                                <p><strong>Lĩnh vực hoạt động:</strong> @Fields.Static_Get(mLawers.FieldId, 0).FieldName</p>
+                                <p><strong>Nơi công tác:</strong> @mLawers.LawOfficeName</p>
+                                <p><strong>Thông tin liên hệ:</strong></p>
+                                <p>• Địa chỉ: @mLawers.Address</p>
+                                <p>• Điện thoại: @mLawers.PhoneNumber </p>
+                                <p>• Di động: @mLawers.Mobile</p>
+                                @( string.IsNullOrEmpty(mLawers.Email) ? "" : "• Email: " + mLawers.Email)
+                            </div>
+                        </td>
+                        <td class="col-ttp">@Provinces.Static_Get(short.Parse(mLawers.ProviceId.ToString())).ProvinceDesc</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+        <!--Bengin pagination -->
+        @{ Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.PartialPaginationAjax }); }
+        <!--End pagination -->
+    </div>
+}else {
+                <div class="cat-box content-wrap" id="ListByField">
+                    <table class="table table-bordered luatsu">
+                        <thead>
+                            <tr>
+                                <th class="col-info">Thông tin luật sư</th>
+                                <th class="col-ttp"> TỈnh / TP</th>
+                            </tr>
+                            <tr><td colspan="2">Nội dung đang được cập nhật...</td></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                    </div>
+                    }
+                    <!--End cat-box-->
+
+                </div>
+        <!--End content-center-pages-->
+    </div>
+    <!--End cat-box-->
+
+</div>
+<!--End page-content-->
+@if (Model.mLawersView.lLawersByGroupView != null && Model.mLawersView.lLawersByGroupView.Count>0)
+{
+    
+<!--Bengin cat-box content-wrap-->
+<div class="cat-box content-recent">
+    <div class="box-sl">
+        <div class="padding-view">
+            <div class="cat-title">
+                <h3><span class="cat-box-title"> <img alt="gioi-thieu" src="@Url.Content("~/Assets/images/icon-gioi-thieu-ls.png")"> Giới thiệu luật sư</span></h3>
+                <span class="vien-title nav-fd daxem"></span>
+            </div>
+            <div class="noibat"><img class="noibatimg" src="@Url.Content("~/Assets/images/bg-noi-bat.png")"></div>
+            <!-- Bengin flexslider box-widget -->
+            <div class="flexslider box-widget">
+                <div id="slider1_container" style="display: none; position: relative; float:left; width: 1200px; height: 190px; overflow: hidden;">
+                    <!-- Slides Container -->
+                    <div u="slides" style="position: absolute; float:left; width: 1200px; height: 190px; overflow: hidden;">
+                        @{ int slideCount = 0;
+                           slideCount = Model.mLawersView.lLawersByGroupView.Count % 3 > 0 ? Model.mLawersView.lLawersByGroupView.Count / 3 + 1 : Model.mLawersView.lLawersByGroupView.Count / 3;
+                           }
+                        @for (int slide = 1; slide <= slideCount; slide++ ){
+                            <div>
+                            @for (int i = 1; i <= 3; i++)
+                            {
+                                if (((slide - 1) * 3 + i) > Model.mLawersView.lLawersByGroupView.Count) {
+                                    break;
+                                }
+                                Lawers mLawers = Model.mLawersView.lLawersByGroupView[(slide - 1) * 3 + i - 1];
+                                    <div class="colx-ls3">
+                                        <a class="thumb120" href="@LawersView.GetLawerUrl(mLawers.LawerID, mLawers.FullName)">
+                                            <img alt="thumb120" height="135px" src="@mLawers.GetImageUrl_Mobile()">
+                                        </a>
+                                        <div class="info-thumb120">
+                                            <div class="rows item3">
+                                                <p class="font16">Luật sư: @mLawers.FullName</p>
+                                                <span class="vien1px"></span>
+                                            </div>
+                                            <p><strong>Lĩnh vực hoạt động:</strong> @Fields.Static_Get(mLawers.FieldId, 0).FieldName</p>
+                                            <p><strong>Nơi công tác:</strong> @mLawers.LawOfficeName</p>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                        }
+                    </div>
+                    <!-- Bengin bullet -->
+                    <div u="navigator" class="jssorb052 sl2">
+                        <div u="prototype"></div>
+                    </div>
+                    <!-- End bullet  -->
+
+                </div>
+            </div>
+            <!-- End flexslider box-widget -->
+
+        </div>
+    </div>
+</div>
+<!--Bengin cat-box content-wrap-->
+}
+<!--Bengin cat-box content-wrap-->
+@*<div class="cat-box partner">
+
+    <div class="cat-box-content">
+        <!--Bengin col-xs-2-->
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <!--End col-xs-2-->
+        <!--Bengin col-xs-2-->
+        <div class="col-xs-2 md2">
+            <!--Begin carousel-->
+            @{Html.RenderAction("PartialSharedCorner", "Shared", new { model = Model.mSharedCorner });}
+            <!--End carousel-->
+        </div>
+        <!--End col-xs-2-->
+    </div>
+</div>
+<!--End cat-box content-wrap-->*@

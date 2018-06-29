@@ -1,0 +1,111 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using LawsVN.Models.Docs
+@model DocsModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.PartialPaginationAjax.PageIndex, totalPage = Model.PartialPaginationAjax.TotalPage, pageSize = Model.PartialPaginationAjax.PageSize });}
+}
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared", new { model = new PartialDocSearchModel { LanguageId = Model.PartialPaginationAjax.LanguageId } });}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>»
+    <span class="breadcrumb-item color1">@(Model.PartialPaginationAjax.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId ? "Mới cập nhật" : "Văn bản tiếng anh")</span>
+</div>
+
+<section class="box-section">
+    <div class="title" style="margin-bottom: 0">
+        <h2 class="title-cat"> @(Model.PartialPaginationAjax.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId ? "Mới cập nhật" : "Văn bản tiếng anh")</h2>
+        <div class="btn-more">
+            <ul class="usernav">
+                <li class="button-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/mobile/images/more-nv.png")" /></a>
+                    @if (Model.PartialPaginationAjax.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId)
+                    { 
+                    <ul class="dropdown-menu" style="right: 0;  width: 130px;margin-top: 3px;">
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)cong-van.html" class="item-more-2"> Công văn</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)van-ban-tieng-anh.html" class="item-more-2">Văn bản Tiếng anh</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)van-ban-uy-ban-nhan-dan.html" class="item-more-2">Văn bản UBND</a>
+                        </li>
+                    </ul>
+                    }
+                    else if (Model.PartialPaginationAjax.LanguageId == LawsVnLanguages.AvailableLanguages[1].LanguageId)
+                    {
+                        <ul class="dropdown-menu" style="right: 0;  width: 130px;margin-top: 3px;">
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)cong-van.html" class="item-more-2"> Công văn</a>
+                            </li>
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)van-ban-moi.html" class="item-more-2">Văn bản mới</a>
+                            </li>
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)van-ban-uy-ban-nhan-dan.html" class="item-more-2">Văn bản UBND</a>
+                            </li>
+                        </ul>
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="cat-box-content" id="ListByFieldTab">
+        <div id="ListByField" class="click-1">
+        @if (Model.ListDocsView.HasValue())
+        {
+            for (int index = 0; index < Model.ListDocsView.Count; index++)
+            {
+                var mDocsView = Model.ListDocsView[index];
+                var number = index + (Model.PartialPaginationAjax.PageIndex > 0 ? Model.PartialPaginationAjax.PageIndex - 1 : Model.PartialPaginationAjax.PageIndex) * Model.PartialPaginationAjax.PageSize + 1;
+                <div class="@(index == Model.ListDocsView.Count ? "first-news last" : "first-news dashed")">
+                    <h3 class="post-title"><a href="@(Model.PartialPaginationAjax.LanguageId == LawsVnLanguages.AvailableLanguages[1].LanguageId ? mDocsView.GetDocUrl("tienganh") : mDocsView.GetDocUrl())" title="@mDocsView.DocName.StripTags()">
+                        <span class="stt">(@(number.ToString("#00")))</span>
+                        @mDocsView.DocName
+                    </a></h3>
+                    <div class="post-time">
+                        @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView } });}
+                    </div>
+                </div>
+            }
+            {
+                Model.PartialPaginationAjax.IsMobile = true;
+                Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.PartialPaginationAjax }); }
+        }
+        else
+        {
+            <div class="first-news dashed">
+                <span>@Resource.NoMatchingDocumentFound</span>
+            </div>
+        }
+        </div>
+    </div>
+</section>
+
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+@section FooterSection
+{
+    <script type="text/javascript">
+    $('#boxContentViewed').lawsVnContentViewed({
+        doc: {
+            id: '@Model.ListDocsView[0].DocId',
+            name: '@Model.ListDocsView[0].TruncateDocName(30)',
+                effect:'@Model.ListDocsView[0].EffectStatusName',
+                title: '@Model.ListDocsView[0].DocName',
+            summary: '',
+            datetime: '@Model.ListDocsView[0].IssueDate.toString()',
+            url: '@Model.ListDocsView[0].DocUrl',
+            image: '@Constants.NoImageUrl'
+        }
+    });
+    </script>
+}

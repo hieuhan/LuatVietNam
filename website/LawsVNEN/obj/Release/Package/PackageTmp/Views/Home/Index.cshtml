@@ -1,0 +1,150 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Library
+@using LawsVNEN.Models
+@using LawsVNEN.AppCode
+@model HomeViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-center-pages searchblog">
+    @{Html.RenderAction("PartialFullSearchHome", "Shared");}
+    <section class="cat-box">
+        <div class="tab-conten">
+            <div class="tab-nav" id="boxcontentTab">
+                @Ajax.ActionLink(Resource.NewDocuments, string.Empty, string.Empty,
+                null,
+                new AjaxOptions
+                {
+                    HttpMethod = "Get"
+                    ,Url = Url.Action(Model.PartialPaginationAjax.ActionName, Model.PartialPaginationAjax.ControllerName,new
+                    {
+                        docGroupId = Model.PartialPaginationAjax.DocGroupId,
+                        displayTypeId = Constants.DisplayTypeIdVBMoi,
+                        languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                        Page = Model.PartialPaginationAjax.PageIndex,
+                        updateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+                        insertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode,
+                        controllerName = Model.PartialPaginationAjax.ControllerName,
+                        actionName = Model.PartialPaginationAjax.ActionName,
+                        pageSize = Model.PartialPaginationAjax.PageSize,
+                        linkLimit = Model.PartialPaginationAjax.LinkLimit,
+                        urlPaging = Model.PartialPaginationAjax.UrlPaging
+                    })
+                    ,UpdateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                    ,InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                    ,OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                    ,OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                }, new { @class = "tab-nav-item1 active" })
+            @Ajax.ActionLink(Resource.OfficialGazette, string.Empty, string.Empty,
+                null,
+                new AjaxOptions
+                {
+                    HttpMethod = "Get"
+                    ,Url = Url.Action(Model.PartialPaginationAjax.ActionName, Model.PartialPaginationAjax.ControllerName,new
+                    {
+                        docGroupId = Model.PartialPaginationAjax.DocGroupId,
+                        displayTypeId = Constants.DisplayTypeIdCongBaoPDF,
+                        languageId = Model.PartialPaginationAjax.LanguageId,
+                        Page = Model.PartialPaginationAjax.PageIndex,
+                        updateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+                        insertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode,
+                        controllerName = Model.PartialPaginationAjax.ControllerName,
+                        actionName = Model.PartialPaginationAjax.ActionName,
+                        pageSize = Model.PartialPaginationAjax.PageSize,
+                        linkLimit = Model.PartialPaginationAjax.LinkLimit,
+                        urlPaging = string.Concat(CmsConstants.ROOT_PATH, "official-gazette.html")
+                    })
+                    ,UpdateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                    ,InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                    ,OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                    ,OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                }, new { @class = "tab-nav-item1" })
+            @Ajax.ActionLink(Resource.Others, string.Empty, string.Empty,
+                null,
+                new AjaxOptions
+                {
+                    HttpMethod = "Get"
+                    ,Url = Url.Action(Model.PartialPaginationAjax.ActionName, Model.PartialPaginationAjax.ControllerName,new
+                    {
+                        docGroupId = Model.PartialPaginationAjax.DocGroupId,
+                        displayTypeId = Constants.DisplayTypeIdCongBaoDOC,
+                        languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                        updateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+                        insertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode,
+                        controllerName = Model.PartialPaginationAjax.ControllerName,
+                        actionName = Model.PartialPaginationAjax.ActionName,
+                        pageSize = Model.PartialPaginationAjax.PageSize,
+                        linkLimit = Model.PartialPaginationAjax.LinkLimit,
+                        urlPaging = string.Concat(CmsConstants.ROOT_PATH,"others-documents.html")
+                    })
+                    ,UpdateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                    ,InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                    ,OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                    ,OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                }, new { @class = "tab-nav-item1" })
+            </div>
+
+            <div class="cat-box-content">
+                <div class="click-1" id="boxcontent">
+                    @if (Model.ListDocsView.HasValue())
+                    {
+                        <table class="table table-bordered">
+                            <tbody>
+                                @for (int index = 1; index <= Model.ListDocsView.Count; index++)
+                                {
+                                    <tr class="row-first-news @(index % 2 != 0 ? string.Empty : "bgcolor")">
+                                        <th class="count-123" scope="row">@string.Format("{0:#00}",index)</th>
+                                        <td class="news-left-post">
+                                            <h2>
+                                                <a href="@Model.ListDocsView[index - 1].GetDocUrl()" title="@Model.ListDocsView[index - 1].DocName.StripTags()" class="post-title lvn">@Model.ListDocsView[index - 1].DocName</a>
+                                            </h2>
+                                            <div class="item-meta">
+                                                @{ Html.RenderAction("_PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsView[index - 1] } });}
+                                            </div>
+                                        </td>
+                                        <td class="post-time-right page">
+                                            @{ Html.RenderAction("_PartialLinkDocumentAttributeRight", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsView[index - 1] } });}
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        { Html.RenderAction("PartialPaginationAjaxPageNumber", "Shared", new { model = Model.PartialPaginationAjax }); }
+                    }
+                    else
+                    {
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr class="row-first-news">
+                                    <th class="count-123" scope="row"></th>
+                                    <td class="news-center-post">
+                                        <h3>
+                                            <span class="post-title lvn">@Resource.UpdatingData</span>
+                                        </h3>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+        </div>
+        </div>
+    </section>
+</div>
+@section FooterSection
+{
+    @if (!string.IsNullOrEmpty(Model.LoginMessages))
+    {
+        <script type="text/javascript">
+            $().lawsDialog({
+                messages: ['@Model.LoginMessages'],
+                dialogClass: 'lawsVnDialogTitle',
+                onClose: function () {
+                    var activeDialogs = $(".ui-dialog:visible").find('.ui-dialog-content');
+                    activeDialogs.dialog('close');
+                }
+            });
+        </script>
+    }
+}

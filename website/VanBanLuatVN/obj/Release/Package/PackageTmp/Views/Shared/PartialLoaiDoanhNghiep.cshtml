@@ -1,0 +1,22 @@
+﻿@using VanBanLuat.Librarys
+@using ICSoft.ViewLibV3
+@using VanBanLuat.Models
+@model NewViewModel
+@if (Model.lCategories.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h3 class="widget-title ply">Loại hình doanh nghiệp</h3>
+        </div>
+        <div class="widget-container">
+            <ul class="navply bgdn">
+                @for (int i = 0; i < Model.lCategories.Count; i++)
+                {
+                    <li style="@(i == Model.lCategories.Count - 1 ? "border-bottom: 0;" : string.Empty)">
+                        <a href="@Model.lCategories[i].GetCategoryUrl()" title="@Model.lCategories[i].CategoryDesc" class="post-title-loaihinhdn @(Model.CategoryId == Model.lCategories[i].CategoryId ? "active" : string.Empty)"><i class="icondash" style="margin-top: 6px;"></i>@Model.lCategories[i].CategoryDesc</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+}

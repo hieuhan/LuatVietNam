@@ -1,0 +1,137 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVN.Library
+@model LawsVN.Models.NewsViewModel
+<form action="" method="post">
+    <div class="loc-theo">
+        <div class="locright">
+            <span class="text-pagination"><img style="float: left;margin-top: 8px;margin-right: 5px;" src="@Url.Content("~/assets/images/lockq.png")" />Lọc theo:</span>
+            <div class="loc-item">
+                <select class="dropdown3 select-onchange" name="month" style="text-indent: 0;">
+                    <option value="">Tháng</option>
+                    @for (int index = 1; index <= 12; index++)
+                    {
+                        <option value="@index" @(Model.mPartialPaginationAjax.Month == index ? "selected" : string.Empty)>@index</option>
+                    }
+                </select>
+            </div>
+            <div class="loc-item">
+                <select class="dropdown3 select-onchange" name="year" style="text-indent: 0;">
+                    <option value="">Năm</option>
+                    @for (int i = DateTime.Now.Year; i > DateTime.Now.Year - 50; i--)
+                    {
+                        <option value="@i" @(Model.mPartialPaginationAjax.Year == i ? "selected" : string.Empty)>@i</option>
+                    }
+                </select>
+            </div>
+
+        </div>
+    </div>
+</form>
+@if (Model.mPartialPaginationAjax.CategoryId == Constants.CateIdBanTinLuat)
+{
+    if (Model.ListDateRange.IsAny() && Model.ListArticlesView.HasValue())
+    {
+        CategoriesView categoriesView = null;
+        List<ArticlesView> listArticlesView;
+        ArticlesView articleView;
+        foreach (var date in Model.ListDateRange.Reverse())
+        {
+            listArticlesView = Model.ListArticlesView.Where(x => x.PublishTime >= date.Item1 && x.PublishTime < date.Item2.AddDays(1)).ToList();
+            articleView = listArticlesView.FirstOrDefault(m => m.Title.StartsWith("Danh sách văn bản tiêu biểu có hiệu lực từ tháng", StringComparison.Ordinal));
+            if (articleView != null)
+            {
+                listArticlesView.Remove(articleView);
+            }
+            if (listArticlesView.HasValue())
+            {<div class="cat-box-content">
+                 <div class="title-tuan">
+                     Tuần @date.Item1.GetWeekNumber() (@date.Item1.ToString("dd/MM") - @date.Item2.ToString("dd/MM/yyyy"))
+                 </div>
+                    @if (articleView != null)
+                    {<div class="news-tuan">
+                            <div class="item_tuan">
+                                <div class="thumb_tuan"><img class="imgthumb_vb3" alt="luat viet nam" src="@articleView.CategoryId.GetImageUrlByCategoryId()"></div>
+                            </div>
+                            <div class="sapo_tuan">
+                                <h3><a href="@articleView.GetArticleUrl()" class="title-vb3" style="font-size: 18px;">@articleView.Title</a></h3>
+                                <div class="sapo_vb3">
+                                    @Html.Raw(articleView.Summary)
+                                </div>
+                            </div>
+                        </div>
+                        articleView = null;
+                    }
+                    <div class="content-tuan">
+                        @foreach (var item in listArticlesView)
+                        {
+                            if (!item.CategoryId.IsDiemTin())
+                            {
+                                categoriesView = Model.ListCategoriesViewByParentId.FirstOrDefault(c => c.CategoryId == item.CategoryId);
+                            }
+                            <div class="item_vb3@(Model.IsDiemTin ? "3" : string.Empty)">
+                                <div class="thumb_vb3"><img class="imgthumb_vb3" alt="luat viet nam" src="@item.CategoryId.GetImageUrlByCategoryId()"></div>
+                                <h3><a href="@item.GetArticleUrl()" title="@item.Title" class="title-vb3" @(!Model.IsDiemTin ? "style=font-weight:normal;" : string.Empty)> @item.Title </a></h3>
+                                @if (!string.IsNullOrEmpty(item.Summary))
+                                {
+                                    <div class="sapo_vb3">
+                                        @Html.Raw(item.Summary)
+                                    </div>
+                                }
+                                else if(categoriesView != null)
+                                {
+                                    <div class="sapo_vb3">
+                                        @categoriesView.MetaDesc.TrimmedOrDefault(string.Empty)
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    }
+    else
+    {
+        <p style="margin: 20px; text-align: center;"><b>Không tìm thấy bản tin nào phù hợp.</b></p>
+    }
+    if (Model.mPartialPaginationAjax.TotalPage > 0)
+    {
+        {
+            Html.RenderAction("PartialPaginationAjax7", "Shared", new { model = Model.mPartialPaginationAjax });
+        }
+    }
+}
+else
+{
+    <div class="cat-box-content">
+        @if (Model.ListArticlesView.HasValue())
+        {
+            foreach (var item in Model.ListArticlesView)
+            {
+                <div class="item_vb3@(Model.IsDiemTin ? "3" : string.Empty)">
+                    <div class="thumb_vb3">
+                        <div class="weekNumber"><b>@item.PublishTime.GetWeekNumber()</b></div>
+                        <img class="imgthumb_vb3" alt="luat viet nam" src="@Model.mCategoriesView.GetImageUrl()">
+                    </div>
+                    <h3><a href="@item.GetArticleUrl()" title="@item.Title" class="title-vb3" @(!Model.IsDiemTin ? "style=font-weight:normal;" : string.Empty)> @item.Title </a></h3>
+                    @if (item.CategoryId.IsDiemTin() && !string.IsNullOrEmpty(item.Summary))
+                    {
+                        <div class="sapo_vb3">
+                            @Html.Raw(item.Summary)
+                        </div>
+                    }
+                </div>
+            }
+        }
+        else
+        {
+            <p style="margin: 20px; text-align: center;"><b>Không tìm thấy bản tin nào phù hợp.</b></p>
+        }
+    </div>
+    if (Model.mPartialPaginationAjax.TotalPage > 0)
+    {
+        {
+            Html.RenderAction("PartialPaginationAjax6", "Shared", new { model = Model.mPartialPaginationAjax });
+        }
+    }
+}

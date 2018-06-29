@@ -1,0 +1,150 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Docs
+@{
+    Layout = "~/Views/Shared/_LayoutDoc.cshtml";
+}
+@model DocsViewDetailModel
+<div class="cat-box">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>
+            @if (Model.mDocsViewDetail.lFieldDisplays.HasValue())
+            {
+                <span> »</span>
+                for (int index = 0; index < Model.mDocsViewDetail.lFieldDisplays.Count; index++)
+                {
+                    FieldDisplays mFieldDisplays = Model.mDocsViewDetail.lFieldDisplays[index];
+                    if (index == 0)
+                    {
+                        <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item">@mFieldDisplays.FieldName</a>
+                    }
+                    else
+                    {
+                        <span>, </span>
+                        <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item">@mFieldDisplays.FieldName</a>
+                    }
+                }
+            }
+        </div>
+
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title vblq">@Model.mDocsViewDetail.mDocsView.DocName</h1>
+                <p class="info-page">@Html.Raw(Model.mDocsViewDetail.mDocsView.MetaDesc)</p>
+            </div>
+        </div>
+
+        <div class="cat-box-content page">
+        </div>
+
+        <div class="tab-nav">
+            <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()" title="@Resource.Properties">@Resource.Properties</a>
+            <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("noidung")" title="@Resource.Content">@Resource.Content</a>
+            <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("luocdo")" title="@Resource.Diagram">@Resource.Diagram</a>
+            <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("hieuluc")" title="@Resource.Effect">@Resource.Effect</a>
+            <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("lienquan")" title="@Resource.Relate">@Resource.Relate2</a>
+            <a class="tab-nav-item-ad active" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("taive")" title="@Resource.DownLoad">@Resource.DownLoad</a>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialFullSearchDetail", "Shared", new { model = new PartialFullSearchDetailModel { SearchOptions = 1, DocGroupId = Constants.DocGroupIdUbnd, FieldId = Model.FieldId } });}
+            @{Html.RenderPartial("PartialDocUtilityMini", Model);}
+        </aside>
+    </div>
+</div>
+
+<div class="page-content">
+    <div class="cat-box-content">
+        <div class="download-post">
+            <div class="rows vbitem">
+                @*@if (!Extensions.IsAuthenticated)
+                {
+                    <div class="vbitem-m1">
+                        <a href="#" class="lawsVnLogin" title="Đăng nhập" style="color: #d81c22; font-weight: bold; text-decoration: underline;">Đăng nhập</a> tài khoản LuatVietnam để tải văn bản miễn phí. Nếu bạn chưa có tài khoản, vui lòng đăng ký miễn phí <a href="@(CmsConstants.ROOT_PATH)user/dang-ky-tai-khoan.html" title="Đăng ký tài khoản" style="color: #d81c22; font-weight: bold; text-decoration: underline;">tại đây!</a>
+                    </div>
+                }
+                
+                @*<div class="vbitem-m2">
+                    <img class="taivbb" alt="dma" src="images/taivb.png">
+                    Bạn đang tải văn bản: Tên_Văn_Bản</div>*@*
+            </div>
+
+            <div class="box-tai-vb">
+                
+                <div class="col-vbitem-3">
+                    <div class="cat-title">
+                        <div class="cat-box-title vien">File Văn bản</div>
+                    </div>
+                    @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == 1) > 0)
+                    {
+                        foreach (DocFiles mDocFiles in Model.mDocsViewDetail.lDocFiles)
+                        {
+                            if (mDocFiles.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId)
+                            {
+                                string filePath = mDocFiles.FilePath.ToLower();
+                                if (filePath.EndsWith(".doc") || filePath.EndsWith(".docx"))
+                                {
+                                    <div class="rows-vbitem-md2">
+                                        <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)"><img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc1.png")" /> Bản Word (.doc)</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    if (filePath.EndsWith(".zip"))
+                                    {
+                                        <div class="rows-vbitem-md2">
+                                            <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)"><img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc4.png")" /> Bản Word Nén (.zip)</a>
+                                        </div>
+                                    }
+                                    else if (filePath.EndsWith(".pdf"))
+                                    {
+                                        <div class="rows-vbitem-md2">
+                                            <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)"><img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc2.png")" /> Bản PDF (.pdf)</a>
+                                        </div>
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <div class="thongbao-item2">
+                            <em>File văn bản đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+                        </div>
+                    }
+                </div>
+
+                <div class="col-ghichu">
+                    <div class="ghichu"><a href="#" style="color: #d81c22; font-weight: bold;">Ghi chú:</a> Để đọc được văn bản tải trên Luatvietnam.vn,bạn cần cài phần mềm đọc file DOC, DOCX và phần mềm đọc file PDF.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@{Html.RenderAction("PartialDocOthers", "Shared", new { model = new DocOthersModel { ListDocsView = Model.mDocsViewDetail.lDocOthers } });}
+@Html.Partial("PartialContentViewed")
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.mDocsViewDetail.mDocsView.DocId',
+                name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+                title: '@Model.mDocsViewDetail.mDocsView.DocName',
+                summary: '',
+                datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+                url: '@Model.mDocsViewDetail.mDocsView.GetDocUrl()',
+                image: '@Constants.NoImageUrl'
+            }
+        });
+    </script>
+}

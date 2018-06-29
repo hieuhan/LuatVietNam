@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xml="http://www.w3.org/XML/1998/namespace" language="English" code="en">
+  <page name="DEFAULT">
+    <Resource tag="FOOTER">
+      Phòng 202, Tầng 2, 18 Trần Hưng Đạo, Hà Nội [br]
+      Điện thoại: (844) 3 946 0331[br]
+      Fax: (844) 3 946 0329[br]
+      Email: contact@cxo-club.com
+    </Resource>
+    <Resource tag="MORE">MORE</Resource>
+    <Resource tag="NEWMEMBER">Welcom new member</Resource>
+    <Resource tag="MEMBERLOGIN">Login</Resource>
+    <Resource tag="SEARCH">Search</Resource>
+    <Resource tag="READFULL">Read Full</Resource>
+    <Resource tag="PAGEFIRST">First</Resource>
+    <Resource tag="PAGELAST">Last</Resource>
+    <Resource tag="HOME">Home</Resource>
+    <Resource tag="OTHER">More</Resource>
+    <Resource tag="BIOGRAPHY">THÔNG TIN CÁ NHÂN</Resource>
+    <Resource tag="MEMBERMORE">Chi tiết !...</Resource>
+    <Resource tag="FILTERALL">All</Resource>
+    <Resource tag="COMPANYPROFILE">THÔNG TIN CÔNG TY</Resource>
+    <Resource tag="NOTELOGIN">Please enter your username or email and password</Resource>
+    <Resource tag="EMAIL">Email: </Resource>
+    <Resource tag="PASSWORD">Password: </Resource>
+    <Resource tag="FORGOTPASSWORD">Forgot password</Resource>
+    <Resource tag="INCORRECTPASS">Username or password invalid !!!</Resource>
+    <Resource tag="UNACTIVECUSTOMER">Tài khoản của bạn chưa kích hoạt hoặc đang tạm khóa, mời bạn vào trang hướng dẫn hoặc liên hệ với nhân viên hỗ trợ để được trợ giúp</Resource>
+    <Resource tag="WELCOME">Welcom: </Resource>
+    <Resource tag="LOGOUT">Logout</Resource>
+    <Resource tag="SENDPASSWORD">Send Password</Resource>
+    <Resource tag="SENDPASSWORDSUCCESS">Mật khẩu mới đã được gửi vào email của bạn, mời bạn làm theo hướng dẫn từ email này để cập nhật mật khẩu mới</Resource>
+    <Resource tag="SENDPASSWORDERROR">Rất tiếc. Đổi mật khẩu không thành công, mời bạn thử lại sau hoặc liên hệ với chúng tôi để được hỗ trợ</Resource>
+    <Resource tag="EMAILNOTEXISTS">Rất tiếc, không tìm thấy thành viên tương ứng với thông tin bạn nhập</Resource>
+    <Resource tag="SENDPASSERROR">Rất tiếc. Đổi mật khẩu không thành công, mời bạn thử lại sau hoặc liên hệ với chúng tôi để được hỗ trợ</Resource>
+    <Resource tag="NOTELOCKLOGIN">You are temporarily locked use this function, please try again after [Second] seconds</Resource>
+    <Resource tag="NOTELOCKSENDMAIL">You are temporarily locked use this function, please try again after [Second] seconds</Resource>
+    <Resource tag="EMAILINVALID">Invalid Email Address</Resource>
+    <Resource tag="NOTESENDPASS">
+      Please enter your e-mail address then click on the Send Password button.
+      You will receive a new password shortly. Use this new password to access the site.
+    </Resource>
+    <Resource tag="HEADSENDPASS">Forgot password</Resource>
+    <Resource tag="SENDMAILSUBJECT">Reset Password</Resource>
+    <Resource tag="HEADCONFIRMRESETPASS">Reset Password</Resource>
+    <Resource tag="NOTERESETPASSSUC">Mật khẩu của bạn đã được thay đổi thành công, mời bạn dùng mật khẩu nhận được qua email để đăng nhập</Resource>
+    <Resource tag="NOTERESETPASSERROR">Rất tiếc, thay đổi mật khẩu không thành công, mời bạn liên hệ với chúng tôi để được hỗ trợ</Resource>
+    <Resource tag="CHANGEPASSWORD">Change password</Resource>
+    <Resource tag="CHANGEPASSWORDMENU">Change password</Resource>
+    <Resource tag="OLDPASSWORD">Old password: </Resource>
+    <Resource tag="NEWPASSWORD">New password: </Resource>
+    <Resource tag="RETYPEPASSWORD">Confirm new password: </Resource>
+    <Resource tag="INCORRECTOLDPASS">Old password incorrect</Resource>
+    <Resource tag="COMPAREPASSWORD">These passwords don't match</Resource>
+    <Resource tag="PASSWORDTOSHORT">A password at least includes 6 character</Resource>
+    <Resource tag="CHANGEPASSWORDSUC">Your password has been changed</Resource>
+    <Resource tag="DATE">Ngày: </Resource>
+    <Resource tag="VENUE">Địa điểm: </Resource>
+    <Resource tag="CONTACTUS">Liên hệ</Resource>
+    <Resource tag="CONTACTNOTE">Please complete all information in this form.</Resource>
+    <Resource tag="FIRSTNAME">Full Name *</Resource>
+    <Resource tag="LASTNAME">Last Name *</Resource>
+    <Resource tag="TITLE">Tiêu đề *</Resource>
+    <Resource tag="COMPANY">Company * </Resource>
+    <Resource tag="E_MAIL">E-Mail *</Resource>
+    <Resource tag="ADDITIONCOMMENT">Thông tin thêm *</Resource>
+    <Resource tag="CONTACTNOTEBOTTON">Để biết thêm chi tiết, xin vui lòng liên hệ: </Resource>
+    <Resource tag="CONTACTDETAIL">
+      CEO &amp; CIO Club[br]
+      Phòng 202, Tầng 2, 18 Trần Hưng Đạo, Hà Nội, Việt Nam[br]
+      Điện thoại: (844) 946 0331 [br]
+      Fax: (844) 946 0329[br]
+      Email: contact@cxo-club.com
+    </Resource>
+    <Resource tag="CONTACTFAIL">Please complete all information in this form.</Resource>
+    <Resource tag="CONTACTSUC">Thank you for your feedback, This email has been sent to us</Resource>
+    <Resource tag="MEMBERSHIP">Membership Application</Resource>
+    <Resource tag="MEMBERSHIPNOTE">Please complete all information in this form.</Resource>
+    <Resource tag="MEMBERSHIPFAIL">Please complete all information in this form.</Resource>
+    <Resource tag="MEMBERSHIPFAILOTHER">Registration failed, please try again later or contact us for assistance. </Resource>
+    <Resource tag="MEMBERSHIPREQUIRE">You need to login to use this feature</Resource>
+    <Resource tag="MEMBERSHIPSUC">Cảm ơn bạn đã gửi đăng ký thành viên, chúng tôi sẽ sớm liên hệ với bạn để hoàn tất đăng ký</Resource>
+    <Resource tag="MEMBERSHIPTITLE">Mr/Ms: </Resource>
+    <Resource tag="MEMBERSHIPFIRSTNAME">Full Name: </Resource>
+    <Resource tag="MEMBERSHIPCOMPANY">Company: </Resource>
+    <Resource tag="MEMBERSHIPTEL">Tel: </Resource>
+    <Resource tag="MEMBERSHIPE_MAIL">E-Mail: </Resource>
+    <Resource tag="MEMBERSHIPUSERNAME">Username: </Resource>
+    <Resource tag="MEMBERSHIPPASS">Password: </Resource>
+    <Resource tag="MEMBERSHIPPASSRE">Confirm password: </Resource>
+    <Resource tag="MEMBERSHIPNOTEBOTTON">Để biết thêm chi tiết, xin vui lòng liên hệ:</Resource>
+    <Resource tag="MEMBERSHIPDETAIL">
+      CEO &amp; CIO Club[br]
+      Phòng 202, Tầng 2, 18 Trần Hưng Đạo, Hà Nội, Việt Nam[br]
+      Điện thoại: (844) 946 0331 [br]
+      Fax: (844) 946 0329[br]
+      Email: contact@cxo-club.com
+    </Resource>
+    <Resource tag="MEMBERSHIPEXIST">This email address or username is already registered, if you have forgotten your password please [clickhere] to get back.</Resource>
+    <Resource tag="MEMBERSHIPEXISTAPP">Địa chỉ email này đã được đăng ký, nếu bạn quên mật khẩu vui lòng liên hệ với chúng tôi để lấy lại.</Resource>
+    <Resource tag="CLICKHERE">click here</Resource>
+    <Resource tag="NOTELOCKFUNCTION">You are temporarily locked use this function, please try again after [Second] seconds</Resource>
+
+    <Resource tag="MEMBERSHIPINFO">Customer Information</Resource>
+    <Resource tag="MEMBERSHIPINFOPRIVATE">Personal Information</Resource>
+    <Resource tag="MEMBERSHIPINFOSERVICE">Services Information</Resource>
+    <Resource tag="COPANYINFO">Company Information</Resource>
+    <Resource tag="MEMBERSHIPFULLNAME">Full Name</Resource>
+    <Resource tag="MEMBERSHIPDIRDDAY">Date of Birth</Resource>
+    <Resource tag="MEMBERSHIPGENDER">Gender</Resource>
+    <Resource tag="MEMBERSHIPADDRESS">Address</Resource>
+    <Resource tag="MEMBERSHIPPROVINCE">Province</Resource>
+    <Resource tag="MEMBERSHIPJOB">Career field</Resource>
+
+    <Resource tag="COPANYNAME">Company Name</Resource>
+    <Resource tag="COPANYACOUNT">Account number</Resource>
+    <Resource tag="COPANYADDRESS">Address</Resource>
+    <Resource tag="COPANYTEL">Tel</Resource>
+    <Resource tag="COPANYFAX">Fax</Resource>
+    <Resource tag="RECEIVED">Yes</Resource>
+    <Resource tag="NOTRECEIVED">No</Resource>
+    <Resource tag="MEMBERINFOHEAD">Profile</Resource>
+    <Resource tag="MEMBERSERVICEHEAD">Pay history</Resource>
+    <Resource tag="TOTALMONEY">Total amount: </Resource>
+    <Resource tag="TOTALTRANS">Total transactions: </Resource>
+
+
+
+    <Resource tag="VOTETITLE">Vote</Resource>
+    <Resource tag="VOTEACTION">Send</Resource>
+    <Resource tag="VOTEVIEW">Result</Resource>
+    <Resource tag="ALERTTITLE">Alert</Resource>
+    <Resource tag="WRONGCAPCHA">The verification code you entered is incorrect, please try again</Resource>
+    <Resource tag="VOTECONFIRM">Confirm</Resource>
+    <Resource tag="VOTERESULT">Vote Result</Resource>
+    <Resource tag="BALLOT"> Ballot</Resource>
+    <Resource tag="TOTALVOTE">Total [VoteTotal] ballots</Resource>
+    <Resource tag="REGIST">New register</Resource>
+    <Resource tag="UNREGIST">Unsubscribe</Resource>
+    <Resource tag="NEWSLETTERTITLE">Đăng ký/hủy nhận bản tin hàng tuần</Resource>
+    <Resource tag="NEWSLETTERNOTE">Mời bạn nhập vào địa chỉ hộp thư và mã xác nhận</Resource>
+    <Resource tag="CONFIRMCODE">Confirm code </Resource>
+    <Resource tag="REGISTSUCCESS">Bạn đã đăng ký nhận bản tin hàng tuần thành công, chúng tôi sẽ tự động gửi thông báo đến email của bạn khi có bản tin mới. Cảm ơn bạn đã sử dụng dịch vụ.</Resource>
+    <Resource tag="REGISTERROR">Bạn chưa đăng ký thành công, mời bạn thử lại sau hoặc liên hệ với chúng tôi để được hỗ trợ. </Resource>
+    <Resource tag="UNREGISTSUCCESS">Bạn đã hủy đăng ký thành công. Bất cứ khi nào bạn có nhu cầu nhận lại bản tin hàng tuần, mời bạn đăng ký lại tại trang này. Rất hân hạnh được phục vụ bạn.</Resource>
+    <Resource tag="UNREGISTERROR">Bạn chưa hủy đăng ký thành công, mời bạn thử lại sau hoặc liên hệ với chúng tôi để được hỗ trợ. </Resource>
+    <Resource tag="NEWSLETTERWRONGINPUT">Mời bạn nhập đầy đủ địa chỉ hộp thư và mã xác nhận. </Resource>
+
+    <Resource tag="FEEDBACKTITLE">Feedback</Resource>
+    <Resource tag="FEEDBACKNOTE">Please comment for LuatVietNam so we can meet your requirements better and better. Thank you.</Resource>
+    <Resource tag="FEEDBACKCONFIRMNOTE">Please enter confirmation code below</Resource>
+    <Resource tag="FBEFULLNAME">Full Name</Resource>
+    <Resource tag="FBEMAIL">E-Mail</Resource>
+    <Resource tag="FBFONE">Tel</Resource>
+    <Resource tag="FBCONTENT">Content</Resource>
+    <Resource tag="FBSEND">Send</Resource>
+    <Resource tag="FBWRONGINPUT">Please give us your full name, address, email and content. </Resource>
+    <Resource tag="FBSUCCESS">Your comments have been sent to us, thank you for contribution.</Resource>
+    <Resource tag="FBERROR">Send comments are not successful, please try again later or contact us for assistance.</Resource>
+
+    <Resource tag="DLHELP">
+      Để xem và tải văn bản, hãy soạn tin:[br]
+      VB Sốvănbản[br]
+      hoặc[br]
+      VB Sốvănbản Email_nhận[br]
+      [br]
+      VD: Muốn xem Nghị định 09/2009/NĐ-CP, soạn tin: VB 09/2009/ND-CP hoặc VB 09/2009/ND-CP abc@yahoo.com gửi 6689
+    </Resource>
+    <Resource tag="DLNOTE">
+      Lưu ý:	- Nhắn Số văn bản bằng chữ không dấu [br]
+      - Nếu nhắn tin theo cấu trúc: VB Sốvănbản, bạn sẽ nhận được 01 mã số để tải văn bản. Hãy nhập mã số này vào ô dưới đây và bấm nút Tải văn bản.
+    </Resource>
+    <Resource tag="ENTERCODE">Enter code: </Resource>
+    <Resource tag="DOWNLOADDOC">Download</Resource>
+
+    <Resource tag="FAQTITLE">LAW CONSULTING</Resource>
+    <Resource tag="FAQVIEWTITLE">Most viewed</Resource>
+
+    <Resource tag="NEWDOCTITLE1">New Document</Resource>
+    <Resource tag="NEWDOCTITLE2">Official Gazette</Resource>
+    <Resource tag="NEWDOCTITLE3">Others</Resource>
+    <Resource tag="WAITING">Please wait</Resource>
+    <Resource tag="UPDATING">Updating</Resource>
+
+    <Resource tag="SMS">SMS</Resource>
+    <Resource tag="SUMMARY">Summary</Resource>
+    <Resource tag="SUMMARYTITLE">Click here to view Summary</Resource>
+    <Resource tag="PROPERTIE">Attribute</Resource>
+    <Resource tag="EFFECT">Effect</Resource>
+    <Resource tag="RELATE">Related documents</Resource>
+    <Resource tag="DOWNLOAD">Download</Resource>
+    <Resource tag="APPLY">Effect</Resource>
+    <Resource tag="DOCNO">Number</Resource>
+    <Resource tag="DOCNAME">Description</Resource>
+    <Resource tag="DAY">Date</Resource>
+    <Resource tag="PUBLICDATE">Date issued</Resource>
+    <Resource tag="EFFECTDATE">In forced</Resource>
+    <Resource tag="DOCSMS">SMS</Resource>
+    <Resource tag="DOCRELATE">List of related documents</Resource>
+    <Resource tag="ORGANHEAD">Issuring body </Resource>
+    <Resource tag="ISSUEDATEHEAD">Date issued </Resource>
+    <Resource tag="EFFECTDATEHEAD">In forced </Resource>
+    <Resource tag="EXPIREDATEHEAD">Expired date </Resource>
+    <Resource tag="DOCTYPEHEAD">Legislation Type </Resource>
+    <Resource tag="SIGNERHEAD">Signer </Resource>
+    <Resource tag="FIELDHEAD">Category</Resource>
+    <Resource tag="EFFECTSTATUS">Effect</Resource>
+
+    <Resource tag="DOCVIEWTITLE1">Most Viewed</Resource>
+    <Resource tag="DOCVIEWTITLE2">Expired</Resource>
+
+    <Resource tag="CUSTOMERMENUTITLE">ACCOUNT INFOMATION</Resource>
+    <Resource tag="INTERESTEDDOC">Interested documents</Resource>
+    <Resource tag="VIEWEDDOC">Viewed documents</Resource>
+    <Resource tag="ACOUNTINFO">Profile</Resource>
+    <Resource tag="CHANGEPASS">Change password</Resource>
+    <Resource tag="LOGOUT">Logout</Resource>
+    <Resource tag="ENDTIME">Expiry time: </Resource>
+    <Resource tag="FREEACCOUNT">free account</Resource>
+    <Resource tag="LOGINTITLE">LOGIN</Resource>
+    <Resource tag="LOGINNAME">Username</Resource>
+    <Resource tag="LOGINPASS">Password</Resource>
+    <Resource tag="LOGINBUTTON">Login</Resource>
+    <Resource tag="REMEMBER">Save Password</Resource>
+    <Resource tag="REGIST">New register</Resource>
+    <Resource tag="FORGOTPASS">Forgot password</Resource>
+    <Resource tag="LOCKACCOUNT">Your account has expired or is temporarily locked, please contact us for assistance</Resource>
+
+    <Resource tag="CONTAIN">All</Resource>
+    <Resource tag="EXACTLY">Sensitive</Resource>
+    <Resource tag="ISSUEFROM">Issue from</Resource>
+    <Resource tag="ISSUETO">To</Resource>
+    <Resource tag="EFFECTFROM">In forced from</Resource>
+    <Resource tag="EFFECTTO">To</Resource>
+    <Resource tag="KEYWORDSEARCH">Keyword</Resource>
+    <Resource tag="ADVANCEDSEARCH">Advanced Search</Resource>
+    <Resource tag="ADVANCEDSEARCHCLOSE">Simple Search</Resource>
+    <Resource tag="SELECTDOCTYPE">Select Type</Resource>
+    <Resource tag="SELECTFIELD">Select Category</Resource>
+    <Resource tag="SELECTEFFECTSTATUS">Select Effect</Resource>
+    <Resource tag="SELECTORGAN">Select Issuing body</Resource>
+    <Resource tag="SELECTSIGNER">Select Signer</Resource>
+    <Resource tag="RESET">Reset</Resource>
+
+    <Resource tag="ISSUELISTHEAD">Issuing </Resource>
+    <Resource tag="EFFECTLISTHEAD">Effect </Resource>
+    <Resource tag="GAZETTE">Gazette </Resource>
+    <Resource tag="BYBASE"> </Resource>
+
+    <Resource tag="DOCCONTENT">Content </Resource>
+    <Resource tag="DOCBASECONTENT">Văn bản gốc </Resource>
+    <Resource tag="DOCRELATEDETAIL">Related documents </Resource>
+    <Resource tag="DOCMAP">Related diagram </Resource>
+
+    <Resource tag="DOCFILEWORD">Download Vietnamese version </Resource>
+    <Resource tag="DOCFILEPDF">Download English version </Resource>
+    <Resource tag="DOCFILEWORDEN">Download Vietnamese version (.pdf) </Resource>
+    <Resource tag="DOCFILEPDFEN">Download English version (.pdf)</Resource>
+    <Resource tag="RELATEDTYPE">Related Type </Resource>
+
+    <Resource tag="DISPATCHALL">All Dispatch</Resource>
+    <Resource tag="DISPATCHTAC">Dispatch tax</Resource>
+    <Resource tag="DISPATCHCUSTOMS">Dispatch customs</Resource>
+
+    <Resource tag="FAQQUEST">Question</Resource>
+    <Resource tag="FAQCODE">SMS Code</Resource>
+    <Resource tag="FAQFIELD">Field</Resource>
+    <Resource tag="EFFTITLE">Title</Resource>
+    <Resource tag="EFFCODE">SMS Code</Resource>
+    <Resource tag="NOFEE">No fee</Resource>
+    <Resource tag="HASFEE">Has fee</Resource>
+    <Resource tag="FAQTYPEHEAD">Type</Resource>
+    <Resource tag="SELECTFAQTYPE">Select type</Resource>
+    <Resource tag="FAQDOCLIST">Related documents</Resource>
+    <Resource tag="FAQFILETITLE">Download file content</Resource>
+
+    <Resource tag="TERMINNAME">Thuật ngữ</Resource>
+    <Resource tag="TERMINDES">Giải thích</Resource>
+    <Resource tag="TERMINSOURCE">Nguồn</Resource>
+    <Resource tag="MENUFIELD">SEARCH BY CATEGORY </Resource>
+    <Resource tag="SELECTOTHERFIELD">Select Category</Resource>
+
+    <Resource tag="REGISTRULEHEAD">Terms &amp; Conditions of using English documents - LuatVietNam</Resource>
+    <Resource tag="REGISTRULENOTE">--</Resource>
+    <Resource tag="REGISTRULECHEK">I agree</Resource>
+    <Resource tag="REGISTRULENOTACEPT">You must agree with Terms and Conditions of using legal documents in English - LuatVietnam </Resource>
+    <Resource tag="CAPCHA">Confirm code </Resource>
+    <Resource tag="CUSTOMERDOCTITLE">Interested documents</Resource>
+    <Resource tag="VIEWDDOCTITLE">Viewed documents</Resource>
+    <Resource tag="SAVEDOCSUC">You have successfully saved to interested documents</Resource>
+    <Resource tag="SAVEDOCNOTE">Save this document to interested documents</Resource>
+    <Resource tag="DOCLISTTOTAL">Display from [FROM] to [TO] in [TOTAL] result</Resource>
+    <Resource tag="DOCLISTZERO">Sorry not find any results, please select other filter conditions or keywords.</Resource>
+    <Resource tag="NOTELOGINVIEW">
+      » This content is only available for members registerd in the website LuatVietnam.[br]
+      » Please [LOGIN] to view or [REGIST] if you have not had an account yet![br]
+      - Official translations(Official Gazette): For the customers who pay subscription charge for English version.[br]
+      - Others: For the customers who pay subscription charge for Vietnamese documents.[br]
+      - Free searching: The trial data is only including all the translations which are issued from 2009 and before.
+    </Resource>
+    <Resource tag="NOTENOTINROLEDOC">
+      » This content is only available for members registerd in the website LuatVietnam.[br]
+      » Please [LOGIN] to view or [REGIST] if you have not had an account yet![br]
+      - Official translations(Official Gazette): For the customers who pay subscription charge for English version.[br]
+      - Others: For the customers who pay subscription charge for Vietnamese documents.[br]
+      - Free searching: The trial data is only including all the translations which are issued from 2009 and before.
+    </Resource>
+    <Resource tag="NOTENOTINROLEDOCEN">
+      » This content is only available for members registerd in the website LuatVietnam.[br]
+      » Please [LOGIN] to view or [REGIST] if you have not had an account yet![br]
+      - Official translations(Official Gazette): For the customers who pay subscription charge for English version.[br]
+      - Others: For the customers who pay subscription charge for Vietnamese documents.[br]
+      - Free searching: The trial data is only including all the translations which are issued from 2009 and before.
+    </Resource>
+    <Resource tag="BUYSERVICE">Mua gói dịch vụ</Resource>
+    <Resource tag="CONSULTINGCODE">Code view consulting</Resource>
+    <Resource tag="SUBMITCODE">View</Resource>
+    <Resource tag="INCORRECTCODE">The code you entered is incorrect or expired, please try again</Resource>
+    <Resource tag="NOTELOCKENTERCODE">You are temporarily locked use this function, please try again after [Second] seconds</Resource>
+    <Resource tag="CODEEXPIRED">The code you entered is incorrect or expired, please try again</Resource>
+    <Resource tag="DOCNOTFOUND">This document does not exist, or does not have the corresponding language version</Resource>
+
+  </page>
+  <page name="SHARE">
+    <Resource tag="FACEBOOK">https://www.facebook.com/IDG.ASEAN</Resource>
+    <Resource tag="LINKEDIN">http://www.linkedin.com/company/3731</Resource>
+  </page>
+  <page name="LINK">
+    <Resource tag="INTERESTEDDOC">Interested-documents.html</Resource>
+    <Resource tag="VIEWEDDOC">Viewed-documents.html</Resource>
+    <Resource tag="ACOUNTINFO">Profile.html</Resource>
+    <Resource tag="CHANGEPASS">Change-password.html</Resource>
+    <Resource tag="LOGOUT">logout.html</Resource>
+    <Resource tag="LOGIN">login.html</Resource>
+    <Resource tag="REGIST">New-register.html</Resource>
+    <Resource tag="FORGOTPASS">Forgot password.html</Resource>
+    <Resource tag="DOCNEWUPDATE">New-documents.html</Resource>
+    <Resource tag="SEARCH">Search-documents-c18-215.html</Resource>
+    <Resource tag="SEARCHFAQ">law-consulting-c24-220.html</Resource>
+    <Resource tag="DOCNOTFOUND">notice.html</Resource>
+    <Resource tag="LAWCONSULTING">law-consulting-c24-198.html</Resource>
+    <Resource tag="GOOGLEDOC">https://docs.google.com/viewer?url=http://luatvietnam.vn/uploaded/13218881.pdf&amp;embedded=true</Resource>
+    <Resource tag="GOOGLEDOC1">http://docs.google.com/gview?url=[DOMAIN]Pages/ajaxs/DocFilePdf.aspx?DocFileId=[FILEID]</Resource>
+    <Resource tag="DOCFILEDOWNLOAD">download-document-file-[FILEID].html</Resource>
+    <Resource tag="FAQFILEDOWNLOAD">download-content-file-[FILEID].html</Resource>
+    <Resource tag="MENUFIELD">[FIELDNAME]-c30.html?&amp;fd=[FIELDID]</Resource>
+    <Resource tag="BUYSERVICE">Search-documents-c18-215.html</Resource>
+
+  </page>
+  <page name="PAGESEO">
+    <Resource tag="HOMETITLE">Vietnam Legal Documents </Resource>
+    <Resource tag="HOMEDES">Database of legal documents are updated directly from the Office of the National Assembly, the Government Office and ministries, People's Committees of provinces and cities.</Resource>
+    <Resource tag="HOMEKEYWORD">documents, legal documents,laws data</Resource>
+    <Resource tag="DOCNEWTITLE">New update documents , New Dispatch, the documents of the People's Committees</Resource>
+    <Resource tag="DOCNEWDES">Database of legal documents are updated directly from the Office of the National Assembly, the Government Office and ministries, People's Committees of provinces and cities.</Resource>
+    <Resource tag="DOCNEWKEYWORD">documents, legal documents,laws data</Resource>
+    <Resource tag="DOCDETAILKEYWORD">documents, legal documents,laws data,[DOCTYPE],[FIELD]</Resource>
+    <Resource tag="FAQDETAILKEYWORD">law consulting,[OTHERKEY]</Resource>
+    <Resource tag="FAQDETAILDES">law consulting [OTHERDES]</Resource>
+    <Resource tag="FAQDETAILEFFECTKEYWORD">law consulting,[OTHERKEY]</Resource>
+    <Resource tag="FAQDETAILEFFECTDES">law consulting [OTHERDES]</Resource>
+    <Resource tag="DOCSEARCHBYFIELDNAME">legal documents [FIELDNAME]</Resource>
+    <Resource tag="DOCSEARCHBYFIELDDESC">legal documents [FIELDNAME]</Resource>
+    <Resource tag="DOCSEARCHBYFIELDKEY">legal documents,[FIELDNAME]</Resource>
+    <Resource tag="CUSTOMERDOCTITLE">Interested documents</Resource>
+    <Resource tag="CUSTOMERDOCDES">Interested documents</Resource>
+    <Resource tag="CUSTOMERDOCKEY">Interested documents</Resource>
+    <Resource tag="VIEWDDOCTITLE">Interested documents</Resource>
+    <Resource tag="VIEWDDOCDES">Interested documents</Resource>
+    <Resource tag="VIEWDDOCKEY">Interested documents</Resource>
+  </page>
+</Resources>

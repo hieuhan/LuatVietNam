@@ -1,0 +1,111 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Account
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model MyMessagesModel
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage</a> »
+    <span class="breadcrumb-item color1">@Resource.MyMessage</span>
+</div>
+<div class="box-section">
+    <div class="title">
+        <h2 class="title-cat"> Tin nhắn</h2>
+        <div class="btn-more">
+            <ul class="usernav">
+                <li class="button-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/mobile/images/more-nv.png")"></a>
+                    <ul class="dropdown-menu" style="right: 0px; width: 180px; margin-top: 3px; display: none;">
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html " class=" item-more-2 boder">@Resource.AccountInformation</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html" class="item-more-2 boder">@Resource.TransactionHistory </a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html" class="item-more-2 boder"> @Resource.MyDocuments </a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/thong-bao-hieu-luc.html" class="item-more-2 boder"> @Resource.NoticeOfValidity </a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" class="item-more-2 boder">@Resource.Messages</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="cat-box-content">
+        <div class="title2">
+            <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" class="tinnhan-item1 active">Hộp thư đến</a>
+            <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan-da-luu.html" class="tinnhan-item1">Tin nhắn đã lưu</a>
+        </div>
+        <div id="MyMessagesBox" class="mail-content">
+            @if (Model.RowCount > 0)
+            {
+                <div class="boxmail">
+                    <div class="col3-de">
+                        <div class="pure-checkbox">
+                            <input id="checkbox_All" name="checkbox_All" type="checkbox">
+                            <label for="checkbox_All" title="Chọn tất cả">Tất cả</label>
+                        </div>
+                    </div>
+                    <div class="col3-de">
+                        <a href="#" class="item-x save-messages" data-actiontypeid="1"><img class="iconx" src="@Url.Content("~/assets/mobile/images/iconluu.png")" /> Lưu </a>
+                    </div>
+                    <div class="col3-de">
+                        <a href="#" class="item-x delete-messages" data-actiontypeid="1"> <img class="iconx" src="@Url.Content("~/assets/mobile/images/iconluux.png")" />Xóa</a>
+                    </div>
+                </div>
+            }
+            @if (Model.ListMessages.HasValue())
+            {
+                <div class="bang-thongke">
+                    <table class=" table-bordered boder0">
+                        <tbody>
+                            @for (int index = 0; index < Model.ListMessages.Count; index++)
+                            {
+                                var message = Model.ListMessages[index];
+                                <tr>
+                                    <td class="pure1 checkbox-mail">
+                                        <div class="pure-checkbox">
+                                            <input id="checkbox_@index" name="chkMessages" value="@message.MessageId" type="checkbox">
+                                            <label for="checkbox_@index"></label>
+                                        </div>
+                                    </td>
+                                    <td class="pure1">
+                                        @if (message.HasStar == 1)
+                                        {
+                                            <a href="javascript:lawsVn.myMesssages.unStart(@message.MessageId,1);"><img src="@Url.Content("~/assets/mobile/images/ic_star_24px.png")" /></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="javascript:lawsVn.myMesssages.setStart(@message.MessageId,1);"><img src="@Url.Content("~/assets/mobile/images/ic_star_border_24px.png")" /></a>
+                                        }
+
+                                    </td>
+                                    <td class="@(message.HasRead == 1 ? string.Empty : "fontb")"><a href="@string.Format("{0}user/chi-tiet-tin-nhan-{1}.html",CmsConstants.ROOT_PATH,message.MessageId)" title="Chi tiết tin nhắn">@message.Subject.Truncatevalue(56) </a></td>
+                                    <td class="@(message.HasRead == 1 ? string.Empty : "fontb") time2 " id="message-time-@message.MessageId">@message.CrDateTime.ToString("HH:mm")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                { 
+                    Model.mPartialPaginationAjax.IsMobile = true;
+                    Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax });}
+            }
+            else
+            {
+                <div class="box-thongbao">
+                    <img style="float: left; margin-right: 5px;margin-top: 3px;" src="@Url.Content("~/assets/mobile/images/ic_notifications_active_24px.png")" /><em>Bạn chưa có tin nhắn nào từ LuatVietnam</em>
+                </div>
+            }
+        </div>
+    </div>
+</div>

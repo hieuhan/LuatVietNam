@@ -1,0 +1,109 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Library
+@using LawsVNEN.Models
+@using LawsVNEN.AppCode
+@model DocFieldModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-center-pages searchblog">
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.Home</a>
+        @if (Model.mFieldDisplays != null)
+        {
+            <span> »</span>  <span class="breadcrumb-item colorrumb"> @Model.mFieldDisplays.FieldName </span>
+        }
+    </div>
+    @{Html.RenderAction("PartialFullSearchHome", "Shared", new {model = new PartialDocSearchModel{FileTypeId = Model.mPartialPaginationAjax.FileTypeId}});}
+    @if (!Request.Url.AbsoluteUri.Contains("new-documents.html")){
+    <div class="content-huong-dan">
+        <b>@Resource.Tips:</b>
+        <p>- @Resource.Choosing <b>@Resource.OfficialNumber</b> @Resource.ForTheSearchingByOfficialNumber</p>
+        <p>- @Resource.Choosing <b>@Resource.Content</b> @Resource.ForSeachingByDocumentContent</p>
+        <p>- @Resource.Choosing <b>@Resource.AdvancedSearch</b> @Resource.ForFearchingByOtherWays</p>
+    </div>
+    }
+        <section class="cat-box" id="ListByFieldTab">
+
+            <div class="sort-by">
+                <div class="view-post" id="txtnumberresultfound">
+                    <span>
+                        @Resource.Find <strong>@Model.mPartialPaginationAjax.TotalPage @Resource.Result </strong>
+                        @if (Model.mPartialPaginationAjax.pageCount >= 0)
+                        {
+                            @(string.Format("({0}/{1} {2})", Model.mPartialPaginationAjax.PageIndex + 1, Model.mPartialPaginationAjax.pageCount, Resource.Page.ToLower()))
+                        }
+                    </span>
+                </div>
+                @*<div class="sortright">
+                        <div class="select-item">
+                            <div class="text-item">Sort:</div>
+                            <div class="text-item x2">
+                                <select class="select2" id="dllOrderby" onchange="lawsVn.ListbyFieldOrderBy(@Model.FieldId)">
+                                    <option value="">Ascending</option>
+                                    <option value="DESC">Descending</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="select-item">
+                            <div class="text-item">by:</div>
+                            <div class="text-item x2">
+                                <select class="select2" id="dllOrderbyName" onchange="lawsVn.ListbyFieldOrderBy(@Model.FieldId)">
+                                    <option value="CrDateTime">Public date</option>
+                                    <option value="DocName">Description</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>*@
+            </div>
+            <!-- tab-conten-->
+            <div class="cat-box-content">
+                <!-- Bengin-tab-item-1-->
+                <div id="ListByField">
+                    @if (Model.ListDocsView.HasValue())
+                    {
+                        <table class="table table-bordered">
+                            <tbody>
+                                @for (int index = 1; index <= Model.ListDocsView.Count; index++)
+                                {
+                                    string effectname = Model.ListEffectStatus.GetEffectStatusNameById(Model.ListDocsView[index - 1].EffectStatusId).TrimmedOrDefault(Resource.Updating);
+                                    <tr class="row-first-news @(index % 2 != 0 ? "" : "bgcolor")">
+                                        <th class="count-123" scope="row">@index.ToString("#00")</th>
+                                        <td class="news-left-post">
+                                            <h2>
+                                                <a href="@Model.ListDocsView[index - 1].GetDocUrl()" title="@Model.ListDocsView[index - 1].DocName.StripTags()" class="post-title lvn">@Model.ListDocsView[index - 1].DocName</a>
+                                            </h2>
+                                            <div class="item-meta">
+                                                @{ Html.RenderAction("_PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsView[index - 1] } });}
+                                            </div>
+                                        </td>
+                                        <td class="post-time-right page">
+                                            @{ Html.RenderAction("_PartialLinkDocumentAttributeRight", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsView[index - 1], EffectStatusName = effectname } });}
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                                { Html.RenderAction("PartialPaginationAjaxPageNumber", "Shared", new { model = Model.mPartialPaginationAjax }); }
+                    }
+                    else
+                    {
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr class="row-first-news">
+                                    <th class="count-123" scope="row"></th>
+                                    <td class="news-center-post">
+                                        <h3>
+                                            <span class="post-title lvn">@Resource.UpdatingData</span>
+                                        </h3>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+        </section>
+    </div>
+

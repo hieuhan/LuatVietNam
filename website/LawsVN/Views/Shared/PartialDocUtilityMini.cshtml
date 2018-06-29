@@ -1,0 +1,115 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Docs.DocsViewDetailModel
+<div class="tss23" style="float: left; width: 100%; height:45px;">
+    <ul class="icon-na tieni">
+        <li>
+            <a href="#" title="Tiện ích cho văn bản" id="minitoolbarhead" style="display:none;">
+                <img alt="img-tb-ti" class="img-tb-ti" src="@Url.Content("~/assets/images/tien-ich.png")"></a>
+            <div class="fulldrop" style="margin-top: -3px; overflow: visible;">
+                <div class="widget-container bg">
+                    <div class="padding">
+                        <div class="item-tien-ich">
+                            <a href="#" data-id="@Model.mDocsViewDetail.mDocsView.DocId" class="save-doc-of-interest" title="@Resource.SaveDocumentOfInterest">
+                                <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/save-2.png")">
+                                Lưu</a>
+                        </div>
+                        <div class="item-tien-ich">
+                            <a href="#" class="gop-y" data-name="@Model.mDocsViewDetail.mDocsView.DocName">
+                                <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/gopy.png")">
+                                Góp ý</a>
+                        </div>
+                        <div class="item-tien-ich">
+                            <a href="#" class="doc-send-mail" data-url="@Model.mDocsViewDetail.mDocsView.DocUrl">
+                                <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/email2.png")">
+                                Email</a>
+                        </div>
+                        <div class="item-tien-ich">
+                            <a href="#" class="docPrint">
+                                <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/in2.png")">
+                                In</a>
+                        </div>
+                        <div class="item-tien-ich" style="margin-right: 0;">
+                            <div class="thong-bao-hieu-luc">
+                            @if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+                            {
+                                <a href="javascript:lawsVn.myDocuments.subscriptionNoticeOfValidity(@Model.mDocsViewDetail.mDocsView.DocId);">
+                                    <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/thong-bao2.png")">
+                                    Thông báo hiệu lực<img class="iconhd" alt="icon-user" src="@Url.Content("~/assets/images/thong-bao3.png")" title="LuatVietnam.vn sẽ gửi thông báo cho thành viên khi văn bản này có thay đổi về Hiệu lực văn bản."></a>
+                                <div class="notification-content" style="width: auto;">
+                                    <div class="from-thong-bao-2">
+                                        <div class="rows-thongbao2" style="padding: 5px;">
+                                            <p><strong style="color: #d81c22">LuatVietNam.vn</strong> sẽ gửi
+                                            </p>
+                                            <p>thông báo cho thành viên</p>
+                                            <p>khi văn bản này có thay đổi</p>
+                                            <p>về Hiệu lực văn bản.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <a href="#" title="@Html.Raw(Resource.NoPermission)" class="no-permission-view">
+                                    <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/thong-bao2.png")">
+                                    Thông báo hiệu lực<img class="iconhd" alt="icon-user" src="@Url.Content("~/assets/images/thong-bao3.png")" title="LuatVietnam.vn sẽ gửi thông báo cho thành viên khi văn bản này có thay đổi về Hiệu lực văn bản."></a>
+
+                            }
+                            </div>
+                        </div>
+                        <div class="rows">
+                            <span class="mxh-like">
+                                <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/chia-se2.png")">
+                                <b>Chia sẻ:</b></span>
+                            <a href="#" class="socialShare fb2" data-social="facebook"></a>
+                            <a href="#" class="socialShare" data-social="gplus gg2"></a>
+                            <a href="#" class="socialShare" data-social="twitter tw2"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+@*<a href="#" class="tien-ich-bg docUtilityPannel">
+    <img alt="tien-ich-bg" src="@Url.Content("~/assets/images/tien-ich.png")"></a>
+<div class="widget" id="docUtilityPannel" style="display: none;">
+    <div class="widget-container">
+        <div class="padding">
+            <div class="item-tien-ich">
+                <a href="javascript:lawsVn.SaveDoc(@Model);" data-id="@Model" class="save-doc-of-interest" title="@Resource.SaveDocumentOfInterest">
+                    <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/save-2.png")">
+                    Lưu</a>
+            </div>
+            <div class="item-tien-ich">
+                <a href="#">
+                    <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/gopy.png")">
+                    Góp ý</a>
+            </div>
+            <div class="item-tien-ich">
+                <a href="#">
+                    <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/email2.png")">
+                    Email</a>
+            </div>
+            <div class="item-tien-ich">
+                <a href="#">
+                    <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/in2.png")">
+                    In</a>
+            </div>
+            <div class="item-tien-ich" style="margin-right: 0;">
+                <a href="javascript:lawsVn.myDocuments.subscriptionNoticeOfValidity(@Model);">
+                    <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/thong-bao2.png")">
+                    Thông báo hiệu lực<img class="iconhd" alt="icon-user" src="@Url.Content("~/assets/images/thong-bao3.png")" title="LuatVietnam.vn sẽ gửi thông báo cho thành viên khi văn bản này có thay đổi về Hiệu lực văn bản."></a>
+            </div>
+            <div class="rows">
+                <span class="mxh-like">
+                    <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/chia-se2.png")">
+                    Chia sẻ:</span>
+                <a href="#" class="fb2"></a>
+                <a href="#" class="gg2"></a>
+                <a href="#" class="tw2"></a>
+            </div>
+        </div>
+    </div>
+</div>*@

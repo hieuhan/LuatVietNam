@@ -1,0 +1,89 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.LawsCustomerFieldsV2
+@using (Ajax.BeginForm("EditCustomerFieldsV2", "Account", null, new AjaxOptions()
+{
+    HttpMethod = "Post",
+    OnBegin = "lawsVn.ajaxEvents.OnBegin",
+    OnComplete = "lawsVn.ajaxEvents.OnComplete",
+    OnSuccess = (Extensions.IsMobile() ? "lawsVn.ajaxEvents.UpdateFieldOnSuccessful" : "lawsVn.ajaxEvents.LoginOnSuccessful")//LoginOnSuccessful
+}, new { id = "EditCustomerFieldsV2" }))
+{
+    @Html.AntiForgeryToken()
+<div class="padding20">
+    <div style="margin: 15px 0">
+        <span style="color: #333; font-size: 15px; padding: 20px 0;">
+            <strong>@Resource.FieldOfInterestDocument: </strong><span class="redcolor">*</span>
+        </span>
+    </div>
+
+    <div class="example-checkbox">
+        <div class="content-scroll-1" style="height: 200px;">
+            <div class="form-inline-checkbox ListFieldDisplays">
+                @if (Model.ListFieldDisplaysVb.HasValue())
+                {
+                    for (int index = 0; index < Model.ListFieldDisplaysVb.Count; index++)
+                    {
+                        var field = Model.ListFieldDisplaysVb[index];
+                        <div class="checkbox-col">
+                            <div class="pure-checkbox1">
+                                @if (Model.ListCustomerFields.HasValue() && Model.ListCustomerFields.Select(e => e).Any(e => e.FieldId == field.FieldId && e.DocGroupId == Constants.DocGroupIdVbpq))
+                                {
+                                    <input id="chkFieldIdVb_@index" name="FieldIdVb" class="mycheckbox" data-fieldname="@field.FieldName" type="checkbox" checked="checked" value="@field.FieldId">
+                                }
+                                else
+                                {
+                                    <input id="chkFieldIdVb_@index" name="FieldIdVb" class="mycheckbox" data-fieldname="@field.FieldName" type="checkbox" value="@field.FieldId">
+                                }
+                                <label for="chkFieldIdVb_@index">@field.FieldName</label>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div style="float: left; width: 100%; margin-bottom: 10px;">
+        @Html.HiddenFor(m => m.FieldIdVb)
+        @Html.ValidationMessageFor(m => m.FieldIdVb, "", new {@class = "text-danger"})
+    </div>
+
+    <div style="margin: 15px 0">
+        <span style="color: #333; font-size: 15px; padding: 20px 0;">
+            <strong>Lĩnh vực Tiêu chuẩn Việt Nam quan tâm: </strong><span class="redcolor">*</span>
+        </span>
+    </div>
+    <div class="example-checkbox">
+        <div class="content-scroll-1" style="height: 200px;">
+            <div class="form-inline-checkbox ListFieldDisplays">
+                @if (Model.ListFieldDisplaysTcvn.HasValue())
+                {
+                    for (int index = 0; index < Model.ListFieldDisplaysTcvn.Count; index++)
+                    {
+                        var field = Model.ListFieldDisplaysTcvn[index];
+                        <div class="checkbox-col">
+                            <div class="pure-checkbox1">
+                                @if (Model.ListCustomerFields.HasValue() && Model.ListCustomerFields.Select(e => e).Any(e => e.FieldId == field.FieldId && e.DocGroupId == Constants.DocGroupIdTcvn))
+                                {
+                                    <input id="chkFieldIdTcvn_@index" name="FieldIdTcvn" class="mycheckbox" data-fieldname="@field.FieldName" type="checkbox" checked="checked" value="@field.FieldId">
+                                }
+                                else
+                                {
+                                    <input id="chkFieldIdTcvn_@index" name="FieldIdTcvn" class="mycheckbox" data-fieldname="@field.FieldName" type="checkbox" value="@field.FieldId">
+                                }
+                                <label for="chkFieldIdTcvn_@index">@field.FieldName</label>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.FieldIdTcvn)
+    @Html.ValidationMessageFor(m => m.FieldIdTcvn, "", new { @class = "text-danger" })
+    <div class="huy-capnhat bottom">
+        <div class="btn-huy"><a href="#" class="icon-huy closeDialog" title="@Resource.Cancel"> @Resource.Cancel</a></div>
+        <div class="btn-huy"><a href="#" class="icon-capnhat submit-link" title="@Resource.Update"> @Resource.Update</a></div>
+    </div>
+</div>
+}

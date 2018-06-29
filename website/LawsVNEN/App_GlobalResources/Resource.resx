@@ -1,0 +1,1627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountInformation" xml:space="preserve">
+    <value>Account Information</value>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>Account name</value>
+  </data>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>Account number</value>
+  </data>
+  <data name="Accuracy" xml:space="preserve">
+    <value>Accuracy</value>
+  </data>
+  <data name="AddDocumentOfInterestToSuccess" xml:space="preserve">
+    <value>Successfully saved</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AdvancedSearch" xml:space="preserve">
+    <value>Advanced search</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+    <comment>Tìm tất cả</comment>
+  </data>
+  <data name="AllContent" xml:space="preserve">
+    <value>All content</value>
+    <comment>Tất cả nhóm văn bản</comment>
+  </data>
+  <data name="AllFields" xml:space="preserve">
+    <value>All fields</value>
+    <comment>Form Search</comment>
+  </data>
+  <data name="AlmostOutOfDate" xml:space="preserve">
+    <value>Almost out of date</value>
+  </data>
+  <data name="Altering" xml:space="preserve">
+    <value>Altering</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="ApplyEn" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="ArticlesMostView" xml:space="preserve">
+    <value>Articles most view</value>
+  </data>
+  <data name="AuthorizeAttributeCannotUseWithinChildActionCache" xml:space="preserve">
+    <value>AuthorizeAttribute cannot use within ChildActionCache</value>
+  </data>
+  <data name="BaseModelNull" xml:space="preserve">
+    <value>The base model has not been initialized</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Both </value>
+    <comment>Cả văn bản tiếng Việt và tiếng Anh</comment>
+  </data>
+  <data name="btnLogin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="BusinessInformation" xml:space="preserve">
+    <value>Business information</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CanNotDeleteSingleFieldOfInterest" xml:space="preserve">
+    <value>Can not delete single field of interest</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="ComingIntoEffect" xml:space="preserve">
+    <value>Coming into effect</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+    <comment>RegisterModel</comment>
+  </data>
+  <data name="ConfirmPasswordNotMatch" xml:space="preserve">
+    <value>Confirm password does not match</value>
+    <comment>Error ConfirmPassword Not Match RegisterModel</comment>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Content</value>
+  </data>
+  <data name="ConventionsAndPrivacy" xml:space="preserve">
+    <value>Conventions and Privacy</value>
+  </data>
+  <data name="CreateAnAcount" xml:space="preserve">
+    <value>Create an acount</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="CustomersTalkAboutUs" xml:space="preserve">
+    <value>Customers talk about us</value>
+  </data>
+  <data name="DateFrom" xml:space="preserve">
+    <value>Date From</value>
+  </data>
+  <data name="DateFromInvalidDataType" xml:space="preserve">
+    <value>Filter time from date is not the correct format: day / month / year</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Date of birth</value>
+  </data>
+  <data name="DateTo" xml:space="preserve">
+    <value>Date To</value>
+  </data>
+  <data name="DateToInvalidDataType" xml:space="preserve">
+    <value>Filter time from date is not the correct format: day / month / year</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>Delete all</value>
+  </data>
+  <data name="DeletePhotos" xml:space="preserve">
+    <value>Delete photos</value>
+  </data>
+  <data name="DeleteTheFieldOfSuccess" xml:space="preserve">
+    <value>Delete the field of success.</value>
+  </data>
+  <data name="Diagram" xml:space="preserve">
+    <value>Diagram</value>
+  </data>
+  <data name="DiagramEn" xml:space="preserve">
+    <value>Diagram</value>
+  </data>
+  <data name="Display" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="DocNumber" xml:space="preserve">
+    <value>Doc number</value>
+  </data>
+  <data name="DocRelate" xml:space="preserve">
+    <value>Doc Relate</value>
+  </data>
+  <data name="DocsEnglish" xml:space="preserve">
+    <value>English</value>
+    <comment>Văn bản tiếng Anh</comment>
+  </data>
+  <data name="DocsNewest" xml:space="preserve">
+    <value>Docs Newest</value>
+  </data>
+  <data name="DocTypes" xml:space="preserve">
+    <value>Doc Types</value>
+    <comment>Form Search</comment>
+  </data>
+  <data name="DocumentFomat" xml:space="preserve">
+    <value>Document fomat</value>
+  </data>
+  <data name="DownLoad" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DownloadEn" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="EditInformation" xml:space="preserve">
+    <value>Change information</value>
+  </data>
+  <data name="Effect" xml:space="preserve">
+    <value>Effect</value>
+  </data>
+  <data name="EffectEn" xml:space="preserve">
+    <value>Effect</value>
+  </data>
+  <data name="EffectStatus" xml:space="preserve">
+    <value>Effect</value>
+  </data>
+  <data name="EmailRegularExpression" xml:space="preserve">
+    <value>Invalid email</value>
+    <comment>RegisterModel</comment>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Email required</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="EnglishDocument" xml:space="preserve">
+    <value>English document</value>
+  </data>
+  <data name="EnterTheSecurityCode" xml:space="preserve">
+    <value>Enter Code Verification</value>
+  </data>
+  <data name="EnterWhatToFind" xml:space="preserve">
+    <value>Enter what to find ...</value>
+  </data>
+  <data name="EnterYourEmail" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="ExactPhrase" xml:space="preserve">
+    <value>Exact phrase</value>
+  </data>
+  <data name="Expire" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="FieldMustBeDate" xml:space="preserve">
+    <value>The field {0} must be a date.</value>
+  </data>
+  <data name="FieldOfInterestDocument" xml:space="preserve">
+    <value>Field of interest document</value>
+  </data>
+  <data name="FieldRequired" xml:space="preserve">
+    <value>* Sign up to receive the latest text information about your area of interest.</value>
+    <comment>Field Required RegisterModel</comment>
+  </data>
+  <data name="FieldSearch" xml:space="preserve">
+    <value>Lĩnh vực tra cứu </value>
+  </data>
+  <data name="FieldWork" xml:space="preserve">
+    <value>Field work</value>
+  </data>
+  <data name="FilterBy" xml:space="preserve">
+    <value>Filter by</value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="FirstAndLastName" xml:space="preserve">
+    <value>Full name</value>
+  </data>
+  <data name="Focus" xml:space="preserve">
+    <value>Focus</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot password</value>
+  </data>
+  <data name="Free" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Home Page</value>
+  </data>
+  <data name="HowServiceAreYouInterestedIn" xml:space="preserve">
+    <value>How do you know about LuatVietnam's service?</value>
+  </data>
+  <data name="ImageSizeLessThan2Mb" xml:space="preserve">
+    <value>Image size less than 2Mb</value>
+  </data>
+  <data name="InterestedDocuments" xml:space="preserve">
+    <value>Interested Documents</value>
+  </data>
+  <data name="JavascriptClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="JavascriptNoticeFileTypeSupport" xml:space="preserve">
+    <value>Vietnamese law supports the following file types: jpg, jpeg, png, gif</value>
+  </data>
+  <data name="Job" xml:space="preserve">
+    <value>Job</value>
+  </data>
+  <data name="JoinDate" xml:space="preserve">
+    <value>Join date</value>
+  </data>
+  <data name="JsonRequest_GetNotAllowed" xml:space="preserve">
+    <value>Json Request Get Not Allowed</value>
+  </data>
+  <data name="Keyword" xml:space="preserve">
+    <value>Keyword...</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LegalNewsRelated" xml:space="preserve">
+    <value>Legal News Related</value>
+  </data>
+  <data name="LinkNeedToKnow" xml:space="preserve">
+    <value>Link need to know</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Please wait</value>
+  </data>
+  <data name="Local" xml:space="preserve">
+    <value>Local</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginAccount" xml:space="preserve">
+    <value>Login account</value>
+  </data>
+  <data name="LoginToUseTheService" xml:space="preserve">
+    <value>Log in to use the service</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>LogOut</value>
+  </data>
+  <data name="LookingForMoreInformation" xml:space="preserve">
+    <value>Looking for more information</value>
+  </data>
+  <data name="LookUpForFree" xml:space="preserve">
+    <value>Look up for free</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="ManualInstruction" xml:space="preserve">
+    <value>Manual instruction</value>
+  </data>
+  <data name="MaxFileSizeUpload" xml:space="preserve">
+    <value>Image storage exceeds 2MB allowed.</value>
+    <comment>RegisterModel</comment>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="MsgContent" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="MyDocuments" xml:space="preserve">
+    <value>My documents</value>
+  </data>
+  <data name="MyMessage" xml:space="preserve">
+    <value>My message</value>
+  </data>
+  <data name="NewDispatch" xml:space="preserve">
+    <value>New dispatch</value>
+    <comment>Công văn mới</comment>
+  </data>
+  <data name="NewDocuments" xml:space="preserve">
+    <value>New documents</value>
+  </data>
+  <data name="NewlyIssued" xml:space="preserve">
+    <value>Newly Issued</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NewPolicyBriefs" xml:space="preserve">
+    <value>New policy briefs</value>
+  </data>
+  <data name="NewsletterInfo" xml:space="preserve">
+    <value>Newsletter only available to Customers using the English or Advanced lookup package</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoDocumentsYet" xml:space="preserve">
+    <value>No documents yet</value>
+  </data>
+  <data name="NoHttpContext" xml:space="preserve">
+    <value>No Http Context</value>
+  </data>
+  <data name="NoMatchingDocumentFound" xml:space="preserve">
+    <value>No matching document found</value>
+  </data>
+  <data name="NoticeOfValidity" xml:space="preserve">
+    <value>Notice of validity</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value>Of</value>
+  </data>
+  <data name="OfficialGazette" xml:space="preserve">
+    <value>Official Gazette</value>
+  </data>
+  <data name="Organs" xml:space="preserve">
+    <value>Organs</value>
+    <comment>Form Search</comment>
+  </data>
+  <data name="OriginalDocument" xml:space="preserve">
+    <value>Original document</value>
+  </data>
+  <data name="OtherField" xml:space="preserve">
+    <value>Other fields</value>
+  </data>
+  <data name="OtherInformations" xml:space="preserve">
+    <value>Other Information</value>
+  </data>
+  <data name="OtherLegalNews" xml:space="preserve">
+    <value>Other legal news</value>
+  </data>
+  <data name="Others" xml:space="preserve">
+    <value>Others</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+    <comment>Class Register</comment>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Password (*)</value>
+    <comment>Class Register</comment>
+  </data>
+  <data name="PeoplesCommitteesOfProvinces" xml:space="preserve">
+    <value>People's Committees of provinces</value>
+    <comment>UBND các tỉnh</comment>
+  </data>
+  <data name="PersonalInformation" xml:space="preserve">
+    <value>Personal information</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="PleaseAelectTheFieldOfActivityOfTheLawyer" xml:space="preserve">
+    <value>Please select the field of activity of the lawyer</value>
+  </data>
+  <data name="PleaseSelectAtLeastOneField" xml:space="preserve">
+    <value>Please select at least one field.</value>
+  </data>
+  <data name="PleaseSelectAtLeastOneProvices" xml:space="preserve">
+    <value>Please select at least one provices</value>
+  </data>
+  <data name="PleaseSelectTheField" xml:space="preserve">
+    <value>Please select the field</value>
+  </data>
+  <data name="PleaseTryAgainLater" xml:space="preserve">
+    <value>Please try again later</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Promulgate" xml:space="preserve">
+    <value>Promulgate</value>
+  </data>
+  <data name="PromulgateEn" xml:space="preserve">
+    <value>Promulgate</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="ProvinceCity" xml:space="preserve">
+    <value>Province / City</value>
+  </data>
+  <data name="ProvinceOfInterestDocument" xml:space="preserve">
+    <value>Province Of Interest Document</value>
+  </data>
+  <data name="ReceiveWeeklyNewslettersByEmail" xml:space="preserve">
+    <value>Receive weekly newsletters by Email</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="RegisterAPersonalInterface" xml:space="preserve">
+    <value>Register a personal interface</value>
+  </data>
+  <data name="RegisterForTrialService" xml:space="preserve">
+    <value>Register for trial service</value>
+  </data>
+  <data name="RegisterNow" xml:space="preserve">
+    <value>Register now</value>
+  </data>
+  <data name="RegisterToUseTheService" xml:space="preserve">
+    <value>Register to use the service</value>
+  </data>
+  <data name="Relate" xml:space="preserve">
+    <value>Relate</value>
+  </data>
+  <data name="RelatedStandards" xml:space="preserve">
+    <value>Related Standards</value>
+  </data>
+  <data name="RelateEn" xml:space="preserve">
+    <value>Relate</value>
+  </data>
+  <data name="Remember" xml:space="preserve">
+    <value>Remember</value>
+  </data>
+  <data name="RenewalOfService" xml:space="preserve">
+    <value>Service Extension</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>result</value>
+  </data>
+  <data name="Retype" xml:space="preserve">
+    <value>Retype</value>
+  </data>
+  <data name="SaveDocumentOfInterest" xml:space="preserve">
+    <value>Save interested documents</value>
+  </data>
+  <data name="SaveDocumentOfInterestEn" xml:space="preserve">
+    <value>Save interested documents</value>
+  </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchByCategory" xml:space="preserve">
+    <value>Search by category</value>
+  </data>
+  <data name="SearchForDocuments" xml:space="preserve">
+    <value>Search for documents</value>
+  </data>
+  <data name="SearchForDocumentsOnVietnameseLaw" xml:space="preserve">
+    <value>SEARCH FOR DOCUMENTS ON VIETNAMESE LAW</value>
+  </data>
+  <data name="SearchKeywords" xml:space="preserve">
+    <value>Search Keywords</value>
+  </data>
+  <data name="SearchKeywordsRequired" xml:space="preserve">
+    <value>Please enter a keyword search</value>
+  </data>
+  <data name="SelectAPhotoFromYourComputer" xml:space="preserve">
+    <value>Select a photo from your computer</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SetANewPassword" xml:space="preserve">
+    <value>Set a new password</value>
+  </data>
+  <data name="SetstarTheMessageForSuccess" xml:space="preserve">
+    <value>Setstar the message for success.</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="Signers" xml:space="preserve">
+    <value>Signers</value>
+    <comment>Form Search</comment>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="SignUpForANewLetterEmail" xml:space="preserve">
+    <value>Sign up for a new letter email</value>
+  </data>
+  <data name="SignUpToReceiveTheLatestDocumentInformationAboutYourAreaOfInterest" xml:space="preserve">
+    <value>Sign up to receive the latest document information about your area of interest</value>
+  </data>
+  <data name="Standardcontrol" xml:space="preserve">
+    <value>Related standards</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>Original document</value>
+  </data>
+  <data name="StringLengthConfirmPassword" xml:space="preserve">
+    <value>{0} 
+includes at least {2} characters and maximum of 100.</value>
+    <comment>Error StringLength ConfirmPassword RegisterModel</comment>
+  </data>
+  <data name="StringLengthPassword" xml:space="preserve">
+    <value>{0} 
+includes at least {2} characters and maximum of 100.</value>
+    <comment>Error StringLength Password RegisterModel</comment>
+  </data>
+  <data name="SubscribeNewsletter" xml:space="preserve">
+    <value>Subscribe newsletter</value>
+  </data>
+  <data name="SubscribeToReceiveWeeklyFreeNewsletters" xml:space="preserve">
+    <value>Subscribe to receive weekly free newsletters</value>
+  </data>
+  <data name="SubscriptionNoticeOfValidity" xml:space="preserve">
+    <value>Subscription notice of validity</value>
+  </data>
+  <data name="SubscriptionNoticeOfValiditySuccessful" xml:space="preserve">
+    <value>Subscription notice of validity successful</value>
+  </data>
+  <data name="SuccessfulBusinessInformationUpdates" xml:space="preserve">
+    <value>Successfully updated</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="SummaryEn" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="TaxCode" xml:space="preserve">
+    <value>Tax code</value>
+  </data>
+  <data name="TermsConditions" xml:space="preserve">
+    <value>Terms &amp; Conditions of using English documents - LuatVietNam</value>
+  </data>
+  <data name="TheDocumentIsMerged" xml:space="preserve">
+    <value>The document is merged</value>
+  </data>
+  <data name="TheResultsAreFilteredBy" xml:space="preserve">
+    <value>The results are filtered by</value>
+  </data>
+  <data name="TheSecurityCodeIsIncorrect" xml:space="preserve">
+    <value>The security code is incorrect</value>
+  </data>
+  <data name="TinPhapLuat" xml:space="preserve">
+    <value>TinPhapLuat</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+    <comment>Tìm theo tiêu đề</comment>
+  </data>
+  <data name="Topic" xml:space="preserve">
+    <value>Topic</value>
+  </data>
+  <data name="TransactionHistory" xml:space="preserve">
+    <value>Transaction history</value>
+  </data>
+  <data name="TrySubscriptionServiceFor15Days" xml:space="preserve">
+    <value>Try subscription service for 15 days</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Sorry. You can not view this content. Please log in to your account or contact your webmaster for more information.</value>
+  </data>
+  <data name="UnifiedText" xml:space="preserve">
+    <value>Unified text</value>
+    <comment>Văn bản hợp nhất</comment>
+  </data>
+  <data name="UnitName" xml:space="preserve">
+    <value>Unit name</value>
+  </data>
+  <data name="UnstarTheMessageForSuccess" xml:space="preserve">
+    <value>Unstar the message for success.</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="UpdateProvinceOfSuccess" xml:space="preserve">
+    <value>Update Province Of Success</value>
+  </data>
+  <data name="UpdateSuccessfulAccountInformation" xml:space="preserve">
+    <value>Successfully updated</value>
+  </data>
+  <data name="UpdateTheFieldOfSuccess" xml:space="preserve">
+    <value>Update the field of success.</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Updating</value>
+  </data>
+  <data name="UpdatingData" xml:space="preserve">
+    <value>Updating data.</value>
+  </data>
+  <data name="UpdatingEn" xml:space="preserve">
+    <value>Updating</value>
+  </data>
+  <data name="UpgradeAndRenewService" xml:space="preserve">
+    <value>Upgrade and renew service</value>
+  </data>
+  <data name="UploadARepresentativeImage" xml:space="preserve">
+    <value>Upload a representative image</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Username</value>
+    <comment>Class Register</comment>
+  </data>
+  <data name="UserNameRegularExpression" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UserNameRequired" xml:space="preserve">
+    <value>UserName (*)</value>
+    <comment>Class Register</comment>
+  </data>
+  <data name="UsingTheService" xml:space="preserve">
+    <value>Using the service</value>
+  </data>
+  <data name="VietNamConstruct" xml:space="preserve">
+    <value>VietNam Construct</value>
+  </data>
+  <data name="VietNamDepartment" xml:space="preserve">
+    <value>VietNam Department</value>
+  </data>
+  <data name="Vietnamese" xml:space="preserve">
+    <value>Vietnamese</value>
+  </data>
+  <data name="VietnameseAndEnglish" xml:space="preserve">
+    <value>Vietnamese and English</value>
+  </data>
+  <data name="VietnameseDocument" xml:space="preserve">
+    <value>Vietnamese document</value>
+  </data>
+  <data name="VietnameseEn" xml:space="preserve">
+    <value>Vietnamese</value>
+  </data>
+  <data name="VietNamRegulations" xml:space="preserve">
+    <value>VietNam Regulations</value>
+  </data>
+  <data name="VietNamStandard" xml:space="preserve">
+    <value>VietNam Standard</value>
+  </data>
+  <data name="WhatServiceAreYouInterestedIn" xml:space="preserve">
+    <value>What service are you interested in?</value>
+  </data>
+  <data name="WhyChooseLuatVietnam" xml:space="preserve">
+    <value>Why choose LuatVietnam.vn?</value>
+  </data>
+  <data name="WordPhrase" xml:space="preserve">
+    <value>Word/Phrase</value>
+  </data>
+  <data name="YearIssued" xml:space="preserve">
+    <value>Year issued</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="YouDoNotHaveAnAccount" xml:space="preserve">
+    <value>You do not have an account</value>
+  </data>
+  <data name="YourCompanyInformations" xml:space="preserve">
+    <value>Your Company Information</value>
+  </data>
+  <data name="YourInformations" xml:space="preserve">
+    <value>Your Information</value>
+  </data>
+  <data name="YourSecurityCode" xml:space="preserve">
+    <value>Code Verification</value>
+  </data>
+  <data name="YouSignupForASuccessfulNewsletter" xml:space="preserve">
+    <value>You have successfully subscribed to receive Newsletter</value>
+  </data>
+  <data name="YouWantToDeleteThisField" xml:space="preserve">
+    <value>You want to delete this field?</value>
+  </data>
+  <data name="RetypeNewPassword" xml:space="preserve">
+    <value>Retype new password</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="AccountNotExits" xml:space="preserve">
+    <value>Account does not exist</value>
+  </data>
+  <data name="AnnouncesChangePass" xml:space="preserve">
+    <value>LuatVietNam notifies customer password change</value>
+  </data>
+  <data name="CheckEmailRessetPass" xml:space="preserve">
+    <value>Please check Email to reset password.</value>
+  </data>
+  <data name="ComparePass" xml:space="preserve">
+    <value>Old password can not be the same password</value>
+  </data>
+  <data name="NewRegister" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="SavePassword" xml:space="preserve">
+    <value>Remember me</value>
+  </data>
+  <data name="DataNotFound" xml:space="preserve">
+    <value>Data not found</value>
+  </data>
+  <data name="UserGuide" xml:space="preserve">
+    <value>User guide</value>
+    <comment>Hướng dẫn</comment>
+  </data>
+  <data name="EditProfile" xml:space="preserve">
+    <value>Edit Profile</value>
+  </data>
+  <data name="GeneralInformation" xml:space="preserve">
+    <value>General Information</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Application</value>
+  </data>
+  <data name="Attribute" xml:space="preserve">
+    <value>Attribute</value>
+  </data>
+  <data name="ContentIsBeingUpdated" xml:space="preserve">
+    <value>The content is being updated. Please come back later.</value>
+  </data>
+  <data name="DateIssued" xml:space="preserve">
+    <value>Date issued</value>
+  </data>
+  <data name="EnglishTextFileIsBeingUpdated" xml:space="preserve">
+    <value>English text file is being updated, please come back later</value>
+  </data>
+  <data name="ExpiredDate" xml:space="preserve">
+    <value>Expired date</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="InForced" xml:space="preserve">
+    <value>In Forced</value>
+  </data>
+  <data name="IssuringBody" xml:space="preserve">
+    <value>Issuing bodies</value>
+  </data>
+  <data name="LegislationType" xml:space="preserve">
+    <value>Legislation Type</value>
+  </data>
+  <data name="OfficialNumber" xml:space="preserve">
+    <value>Official number</value>
+  </data>
+  <data name="Signer" xml:space="preserve">
+    <value>Signer</value>
+  </data>
+  <data name="TheListOfRelatedDocumentsIsBeingUpdated" xml:space="preserve">
+    <value>The list of related documents is being updated. Please come back later.</value>
+  </data>
+  <data name="TheSummaryIsBeingUpdated" xml:space="preserve">
+    <value>The summary is being updated, would you please comback later!</value>
+  </data>
+  <data name="VietnameseTextFileIsBeingUpdated" xml:space="preserve">
+    <value>Vietnamese text file is being updated, please come back later</value>
+  </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Change language</value>
+  </data>
+  <data name="NotPermissionDocContent" xml:space="preserve">
+    <value>To view the document content</value>
+  </data>
+  <data name="NotPermissionDocDownload" xml:space="preserve">
+    <value>To download the free text, please Login to the system before loading</value>
+  </data>
+  <data name="NotPermissionDocRelate" xml:space="preserve">
+    <value>To view the Related, understand the relationship, the text related to the text is watching</value>
+  </data>
+  <data name="NotPermissionDocSummary" xml:space="preserve">
+    <value>To see a summary of the document</value>
+  </data>
+  <data name="NotAuthenticate" xml:space="preserve">
+    <value>Please &lt;a href="#" class="lawsVnLogin" style="color:#a67942" title="Log Account"&gt; &lt;strong&gt; Sign In &lt;/ strong&gt; &lt;/a&gt; for your LuatVietNam account and &lt;a href=class="dang-ky-dv" data-id="17" title="Sign up for the service"&gt; &lt;strong style = "color: # a67942"&gt; sign up for the text search service &lt;/ strong&gt; &lt;/a&gt;</value>
+  </data>
+  <data name="NotAuthorize" xml:space="preserve">
+    <value>Please click here to &lt;a href="http://luat.icsoft.vn/dich-vu.html" title="Sign up for a service"&gt; &lt;strong style = "color: # a67942"&gt; subscription &lt;/ strong&gt; &lt;/a&gt; to use The Laws of Vietnam &lt;/ span&gt; &lt;text style = "color: # a67942"&gt;.</value>
+  </data>
+  <data name="Benefits" xml:space="preserve">
+    <value>Benefits</value>
+  </data>
+  <data name="LuatVietnamEnglishDatabaseFree" xml:space="preserve">
+    <value>LuatVietnam’s English database - Free</value>
+  </data>
+  <data name="Objective" xml:space="preserve">
+    <value>Objective</value>
+  </data>
+  <data name="OrderConfirmation" xml:space="preserve">
+    <value>Order confirmation</value>
+  </data>
+  <data name="SelectBankPayment" xml:space="preserve">
+    <value>Online Payment</value>
+  </data>
+  <data name="SelectTheServicePackage" xml:space="preserve">
+    <value>Select the service package</value>
+  </data>
+  <data name="Setp1SelectTheServicePackage" xml:space="preserve">
+    <value>Step 1: Select the service package</value>
+  </data>
+  <data name="Subscriber" xml:space="preserve">
+    <value>Subscriber</value>
+  </data>
+  <data name="ForUsersWithinSameOrganization" xml:space="preserve">
+    <value>For {0} users within same organization</value>
+  </data>
+  <data name="ChoosingTheTermOfSubscription" xml:space="preserve">
+    <value>Choosing the term of subscription</value>
+  </data>
+  <data name="ContinuteToPay" xml:space="preserve">
+    <value>CONTINUE TO PAY</value>
+  </data>
+  <data name="Known" xml:space="preserve">
+    <value>Known</value>
+  </data>
+  <data name="PersonsUsingAtTheSameTime" xml:space="preserve">
+    <value>{0} persons using at the same time</value>
+  </data>
+  <data name="DeleteInterestDocumentSuccessful" xml:space="preserve">
+    <value>Delete interested document successfully</value>
+  </data>
+  <data name="InformationAddedInvoiceValue" xml:space="preserve">
+    <value>Information added invoice value</value>
+  </data>
+  <data name="BillContent" xml:space="preserve">
+    <value>Bill content </value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Company Name</value>
+  </data>
+  <data name="PleaseAgreeToThePaymentRegulationsOfVietnameseLaws" xml:space="preserve">
+    <value>Please agree to the Payment Regulations of Vietnamese Laws</value>
+  </data>
+  <data name="LuatVietNamSendDocumentLink" xml:space="preserve">
+    <value>LuatVietNam send document link</value>
+  </data>
+  <data name="NotAuthenticateDownload" xml:space="preserve">
+    <value>&lt;a href="#" class="lawsVnLogin" style="color: #d81c22; font-weight: bold; text-decoration: underline;"&gt;Sign in&lt;/a&gt; tthe LuatVietnam's account to download for free.&lt;a href="/user/register.html" style="color: #d81c22; font-weight: bold; text-decoration: underline;"&gt; Please register here&lt;/a&gt; if you haven't had any account</value>
+  </data>
+  <data name="NotAuthorizeDownload" xml:space="preserve">
+    <value>To download the English translation, please click &lt;a href="/user/subscriber.html" title="Sign up for the service"&gt; &lt;strong style = "color: # a67942"&gt; here &lt;/strong&gt; &lt;/a&gt; to sign up for &lt;span style = "color: # a67942"&gt; Text Lookup Service &lt;/ span&gt;</value>
+  </data>
+  <data name="SendDocumentLinkSuccessful" xml:space="preserve">
+    <value>Send document link successful</value>
+  </data>
+  <data name="ThankYouForYourFeedback" xml:space="preserve">
+    <value>Thank you for your feedback</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Notice</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>contact</value>
+  </data>
+  <data name="NewRegisterForm" xml:space="preserve">
+    <value>New Register Form</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Months</value>
+  </data>
+  <data name="NumberOfTransactions" xml:space="preserve">
+    <value>Number of transactions</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="Times" xml:space="preserve">
+    <value>times</value>
+  </data>
+  <data name="TotalTransactionAmount" xml:space="preserve">
+    <value>Total payment</value>
+  </data>
+  <data name="TransactionHistoryOfAccount" xml:space="preserve">
+    <value>Transaction history of the account</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Weeks</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Years</value>
+  </data>
+  <data name="AddressInHaNoi" xml:space="preserve">
+    <value>Hanoi: 3rd Floor, IC Building, No.82, Duy Tan Street, Dich Vong Hau Ward, Cau Giay District, Hanoi. Tel: 04.37833688 (Ext 518) - Fax: 04.37833699</value>
+  </data>
+  <data name="AddressInHCM" xml:space="preserve">
+    <value>Ho Chi Minh: No. 456 Phan Xich Long, Ward No. 02, Phu Nhuan District, Ho Chi Minh Tel: (08) 399 507 24 - (08) 399 502 62 – Fax: (08) 399 507 27</value>
+  </data>
+  <data name="comein" xml:space="preserve">
+    <value>come in</value>
+  </data>
+  <data name="ContactHotline" xml:space="preserve">
+    <value>or contact the hotline: 016-9696-8989 for assistance</value>
+  </data>
+  <data name="ContactMe" xml:space="preserve">
+    <value>For more information please contact:</value>
+  </data>
+  <data name="ContinueUsingService" xml:space="preserve">
+    <value>To continue using the text search service, you can</value>
+  </data>
+  <data name="DaysToUse" xml:space="preserve">
+    <value>days to use</value>
+  </data>
+  <data name="DayTrading" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="NameCompany" xml:space="preserve">
+    <value>LUATVIETNAM CENTER - INCOM COMMUNICATIONS., JSC</value>
+  </data>
+  <data name="Package" xml:space="preserve">
+    <value>Package</value>
+  </data>
+  <data name="PaymentChannel" xml:space="preserve">
+    <value>Payment channel</value>
+  </data>
+  <data name="service" xml:space="preserve">
+    <value>service</value>
+  </data>
+  <data name="ServiceAnnouncement" xml:space="preserve">
+    <value>Service announcement</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="TextSearchService" xml:space="preserve">
+    <value>Text Search Service</value>
+  </data>
+  <data name="ThankYou" xml:space="preserve">
+    <value>Thank you for using the service of LuatVietnam.vn!</value>
+  </data>
+  <data name="toregister" xml:space="preserve">
+    <value>to register</value>
+  </data>
+  <data name="TotalMoney" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TradingCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="TransactionDetails" xml:space="preserve">
+    <value>Transaction details</value>
+  </data>
+  <data name="Unsuccessful" xml:space="preserve">
+    <value>Unsuccessful</value>
+  </data>
+  <data name="YouHaveNotATransactions" xml:space="preserve">
+    <value>You have not made any transactions! Click</value>
+  </data>
+  <data name="YouHaveNotMadeTransaction" xml:space="preserve">
+    <value>You have not made a transaction.</value>
+  </data>
+  <data name="YourAccountHasOnly" xml:space="preserve">
+    <value>Your account has only</value>
+  </data>
+  <data name="Choosing" xml:space="preserve">
+    <value>Choosing</value>
+  </data>
+  <data name="ForFearchingByOtherWays" xml:space="preserve">
+    <value>for searching by other ways.</value>
+  </data>
+  <data name="ForSeachingByDocumentContent" xml:space="preserve">
+    <value>for seaching by document’s content.</value>
+  </data>
+  <data name="ForTheSearchingByOfficialNumber" xml:space="preserve">
+    <value>for the searching by official number.</value>
+  </data>
+  <data name="Tips" xml:space="preserve">
+    <value>Tips</value>
+  </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="DocName" xml:space="preserve">
+    <value>Doc Name</value>
+  </data>
+  <data name="PublicDate" xml:space="preserve">
+    <value>Public date</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>By</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="Hi" xml:space="preserve">
+    <value>Hi</value>
+  </data>
+  <data name="CheckWarning" xml:space="preserve">
+    <value>Please check the information with red warning.</value>
+  </data>
+  <data name="OrderCodeOfCustomer" xml:space="preserve">
+    <value>Order code of customer :</value>
+  </data>
+  <data name="ABBank" xml:space="preserve">
+    <value>An Binh Commercial Joint Stock Bank (ABBank)</value>
+  </data>
+  <data name="ACB" xml:space="preserve">
+    <value>Asia Commercial Bank (ACB)</value>
+  </data>
+  <data name="AgriBank" xml:space="preserve">
+    <value>Vietnam Bank For Agriculture and Rural Development (Agribank)</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="BankAcceptPayment" xml:space="preserve">
+    <value>Banks accept the payment:</value>
+  </data>
+  <data name="BaoViet" xml:space="preserve">
+    <value>Bao Viet Joint Stock Commercial Bank (BAOVIET Bank)</value>
+  </data>
+  <data name="BIDV" xml:space="preserve">
+    <value>Bank for Investment &amp; Dof Vietnam (BIDV)</value>
+  </data>
+  <data name="ContactToUs" xml:space="preserve">
+    <value>to tailor your multi-user subscription.</value>
+  </data>
+  <data name="DAB" xml:space="preserve">
+    <value>DongA Bank (DAB)</value>
+  </data>
+  <data name="DisCountForPaying12Month" xml:space="preserve">
+    <value>Discount 5% total charge for paying 12 months and above</value>
+  </data>
+  <data name="EmailDetailWhenConfirmOrder" xml:space="preserve">
+    <value>The order shall be sent to your email after the confirmation.</value>
+  </data>
+  <data name="EximBank" xml:space="preserve">
+    <value>Vietnam Export Import Commercial Joint Stock Bank (Eximbank)</value>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>Expiry date</value>
+  </data>
+  <data name="GPBank" xml:space="preserve">
+    <value>Global Petro Bank (GBBank)</value>
+  </data>
+  <data name="HDBank" xml:space="preserve">
+    <value>HoChiMinh City Development Joint Stock Commercial Bank (HDBank)</value>
+  </data>
+  <data name="INSTRUCTIONFORPAYMENT" xml:space="preserve">
+    <value>INSTRUCTION FOR PAYMENT</value>
+  </data>
+  <data name="InternationalCards" xml:space="preserve">
+    <value>International cards</value>
+  </data>
+  <data name="LienViet" xml:space="preserve">
+    <value>Lien Viet Post Joint Stock Commercial Bank (LienVietPostBank)</value>
+  </data>
+  <data name="MaritimeBank" xml:space="preserve">
+    <value>Vietnam Maritime Commercial Joint Stock Bank (MaritimeBank)</value>
+  </data>
+  <data name="MB" xml:space="preserve">
+    <value>Military Commercial Joint Stock Bank (MB Bank)</value>
+  </data>
+  <data name="MultiUser" xml:space="preserve">
+    <value>Multi-user subscription</value>
+  </data>
+  <data name="NamABank" xml:space="preserve">
+    <value>Nam A Commercial Joint Stock Bank (Nam A Bank)</value>
+  </data>
+  <data name="NASB" xml:space="preserve">
+    <value>North Asia Commercial Joint Stock Bank (NASB)</value>
+  </data>
+  <data name="NCB" xml:space="preserve">
+    <value>National Citizen Commercial Joint Stock Bank (NCB)</value>
+  </data>
+  <data name="NumberOfUsers" xml:space="preserve">
+    <value>Number of users</value>
+  </data>
+  <data name="ObjectiveForEn" xml:space="preserve">
+    <value>Customers registering Account and pay searching charges for Vietnamese legal documents.</value>
+  </data>
+  <data name="OCB" xml:space="preserve">
+    <value>Orient Commercial Joint Stock Bank (OCB)</value>
+  </data>
+  <data name="OceanBank" xml:space="preserve">
+    <value>OceanBank</value>
+  </data>
+  <data name="OptionA" xml:space="preserve">
+    <value>OPTION A: Single user subscription</value>
+  </data>
+  <data name="Organizationmultiuser" xml:space="preserve">
+    <value>If your organization has other specific multi-user needs</value>
+  </data>
+  <data name="Pay" xml:space="preserve">
+    <value>Pay</value>
+  </data>
+  <data name="PGBank" xml:space="preserve">
+    <value>Petrolimex Group Commercial Joint Stock Bank (PG Bank)</value>
+  </data>
+  <data name="PleaseComplete" xml:space="preserve">
+    <value>Please complete</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="PriceMonth" xml:space="preserve">
+    <value>Price / Month</value>
+  </data>
+  <data name="SacomBank" xml:space="preserve">
+    <value>Saigon Thuong Tin Commercial Joint Stock Bank (Sacombank)</value>
+  </data>
+  <data name="SeaBank" xml:space="preserve">
+    <value>Southeast Asia Commercial Joint Stock Bank (SeABank)</value>
+  </data>
+  <data name="SeachingByLuatVn" xml:space="preserve">
+    <value>Searching the other translations supplied by LuatVietnam, not including the official gazette's translations.</value>
+  </data>
+  <data name="ServiceCharge" xml:space="preserve">
+    <value>Service charge</value>
+  </data>
+  <data name="SHB" xml:space="preserve">
+    <value>Saigon – Hanoi Commercial Joint Stock Bank (SHB)</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>Step 2: Order confirmation</value>
+  </data>
+  <data name="Step3" xml:space="preserve">
+    <value>step3: Select bank payment</value>
+  </data>
+  <data name="SubjectTo" xml:space="preserve">
+    <value>Subject To</value>
+  </data>
+  <data name="TechcomBank" xml:space="preserve">
+    <value>Vietnam Technological And Commercial Joint Stock Bank (Techcombank)</value>
+  </data>
+  <data name="TienPhong" xml:space="preserve">
+    <value>Tien Phong Commercial Joint Stock Bank (Tien Phong Bank)</value>
+  </data>
+  <data name="VAT" xml:space="preserve">
+    <value>Request to issue the VAT invoice</value>
+  </data>
+  <data name="VATTax" xml:space="preserve">
+    <value>VAT Tax (10%)</value>
+  </data>
+  <data name="VIB" xml:space="preserve">
+    <value>Vietnam International Commercial Joint Stock Bank (VIB)</value>
+  </data>
+  <data name="VietABank" xml:space="preserve">
+    <value>Vietnam Asia Commercial Joint Stock Bank (VietABank)</value>
+  </data>
+  <data name="VietComBank" xml:space="preserve">
+    <value>Bank for Foreign Trade of Vietnam (VietcomBank)</value>
+  </data>
+  <data name="VietinBank" xml:space="preserve">
+    <value>Vietnam Bank for Industry and Trade (VietinBank)</value>
+  </data>
+  <data name="ViettinBank" xml:space="preserve">
+    <value>Vietnam Bank for Industry and Trade (VietinBank)</value>
+  </data>
+  <data name="VpBank" xml:space="preserve">
+    <value>Vietnam Prosperity Bank (VPBank)</value>
+  </data>
+  <data name="WatchedContents" xml:space="preserve">
+    <value>Watched Contents</value>
+  </data>
+  <data name="ErrorMessageLogin" xml:space="preserve">
+    <value>{0} does not include spaces, including only letters and numbers.</value>
+  </data>
+  <data name="ChooseYear" xml:space="preserve">
+    <value>Choose year</value>
+  </data>
+  <data name="BenefitsText" xml:space="preserve">
+    <value>Searching the other translations supplied by LuatVietnam, not including the official gazette's translations.</value>
+  </data>
+  <data name="IAgree" xml:space="preserve">
+    <value>I agree with all</value>
+  </data>
+  <data name="agree" xml:space="preserve">
+    <value>I agree</value>
+  </data>
+  <data name="BestBrowersForLuatVietnam" xml:space="preserve">
+    <value>Best browers for LuatVietnam</value>
+  </data>
+  <data name="Compressed" xml:space="preserve">
+    <value>Compressed</value>
+  </data>
+  <data name="EffectNotify" xml:space="preserve">
+    <value>Effect</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>Print</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="SupportSoftwares" xml:space="preserve">
+    <value>SUPPORT SOFTWARES</value>
+  </data>
+  <data name="TermOfSubscription" xml:space="preserve">
+    <value>Term of subscription</value>
+  </data>
+  <data name="ActiveNewUser" xml:space="preserve">
+    <value>Active new user</value>
+  </data>
+  <data name="PleaseSelectTheNumberOfUsers" xml:space="preserve">
+    <value>Please select the number of users</value>
+  </data>
+  <data name="ServicePackageName" xml:space="preserve">
+    <value>Service package name</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>Number of users</value>
+  </data>
+  <data name="SubscriptionPeriod" xml:space="preserve">
+    <value>Subscription period</value>
+  </data>
+  <data name="TheServicePackInformationIsInUse" xml:space="preserve">
+    <value>The service pack information is in use</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="ExpirationDate" xml:space="preserve">
+    <value>Expiration date</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>FullName</value>
+  </data>
+  <data name="RegisterService" xml:space="preserve">
+    <value>Register Service</value>
+  </data>
+  <data name="RegistrationDate" xml:space="preserve">
+    <value>Registration Date</value>
+  </data>
+  <data name="RegulationOfServiceConversion" xml:space="preserve">
+    <value>Regulation of service conversion</value>
+  </data>
+  <data name="ServiceConversion" xml:space="preserve">
+    <value>Service conversion</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Step</value>
+  </data>
+  <data name="SubscriberInformation" xml:space="preserve">
+    <value>Subscriber Information</value>
+  </data>
+  <data name="PackageListNotFound" xml:space="preserve">
+    <value>Package list not found.</value>
+  </data>
+  <data name="SignUpForTheTextSearchService" xml:space="preserve">
+    <value>Sign up for the text search service</value>
+  </data>
+  <data name="SupportOneWayConversion" xml:space="preserve">
+    <value>Current Vietnamese Law supports one-way conversion from: Standard&gt; English&gt; Advanced.</value>
+  </data>
+  <data name="YouAreNotCurrentlyRegistered" xml:space="preserve">
+    <value>You are not currently registered.</value>
+  </data>
+  <data name="AccountInformationOfCustomers" xml:space="preserve">
+    <value>Account information of customers</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>Bank</value>
+  </data>
+  <data name="PleaseSelectBankPayment" xml:space="preserve">
+    <value>Please select {0} payment</value>
+  </data>
+  <data name="PaymentRegulationsOfVietnameseLaw" xml:space="preserve">
+    <value>Payment regulations of Vietnamese Law</value>
+  </data>
+  <data name="SuggestedContent" xml:space="preserve">
+    <value>Suggested content</value>
+  </data>
+  <data name="SuggestingDocument" xml:space="preserve">
+    <value>Suggesting document</value>
+  </data>
+  <data name="PleaseSelectTheSubscriptionPeriod" xml:space="preserve">
+    <value>Please select</value>
+  </data>
+  <data name="WaitingForProgressing" xml:space="preserve">
+    <value>Waiting for progressing</value>
+  </data>
+  <data name="Ever" xml:space="preserve">
+    <value>Ever</value>
+  </data>
+  <data name="LastMonth" xml:space="preserve">
+    <value>Last month</value>
+  </data>
+  <data name="LastWeek" xml:space="preserve">
+    <value>Last week</value>
+  </data>
+  <data name="LastYear" xml:space="preserve">
+    <value>Last year</value>
+  </data>
+  <data name="TransactionType" xml:space="preserve">
+    <value>Transaction type</value>
+  </data>
+  <data name="People" xml:space="preserve">
+    <value> people</value>
+  </data>
+  <data name="AccountInfomation" xml:space="preserve">
+    <value>The username &lt;strong style="color: #d81d22;"&gt;{0}&lt;/strong&gt; has &lt;strong style="color: #d81d22;"&gt;{1} of using&lt;/strong&gt; the service of &lt;span style="font-weight: bold;"&gt;{2}&lt;/span&gt;</value>
+  </data>
+  <data name="ChoosingService" xml:space="preserve">
+    <value>Choosing service</value>
+  </data>
+  <data name="ServiceName" xml:space="preserve">
+    <value>Service name</value>
+  </data>
+  <data name="TimeOfPayment" xml:space="preserve">
+    <value>Time of payment</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="ForgotPassText" xml:space="preserve">
+    <value>If you forget the password, please type your username in the box and your new password will be send back to your registered email address</value>
+  </data>
+  <data name="TitleForgetPass" xml:space="preserve">
+    <value>Forget Password</value>
+  </data>
+  <data name="ToolTipEffectUtility" xml:space="preserve">
+    <value>&lt;p&gt;&lt;strong style="color: #d81c22"&gt;LuatVietNam.vn&lt;/strong&gt; will send&lt;/p&gt;
+                            &lt;p&gt;notification to members&lt;/p&gt;
+                            &lt;p&gt;there are changes&lt;/p&gt;
+                            &lt;p&gt;of document effect.&lt;/p&gt;</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>&lt;p&gt;&lt;strong style="color: #231f20; font-size: 14px;"&gt;Copyright© 2000 - 2018 by LuatVietNam– Member of INCOM Communications.,JSC All Rights Reserved&lt;/strong&gt;&lt;/p&gt;
+                &lt;p&gt;License No. 692/GP-TTĐT dated October 29, 2010 issued by the Department of Information and Communications of Hanoi for the establishment of general electronic information page,&lt;br /&gt; replaces the License No. 322/GP - BC dated July 26, 2007 issued by &lt;strong style="color: #222222;"&gt;the Ministry of Information and Communications&lt;/strong&gt;&lt;/p&gt;
+                &lt;p&gt;Copyright No. 280/2009/QTG dated January 16, 2009 by the Ministry of Culture, Sports and Tourism.&lt;/p&gt;
+                &lt;p&gt;Authority: INCOM International Communications Joint Stock Company. Responsor: Mr. Vu Manh Cuong&lt;/p&gt;
+                &lt;p&gt;Address: &lt;strong style="color: #222222;"&gt;3rd Floor, IC Building, No. 82, Duy Tan Street, Cau Giay District, Hanoi.&lt;/strong&gt; Tel: &lt;strong style="color: #222222;"&gt;(024) 37833688 &lt;/strong&gt;- Fax: &lt;strong style="color: #222222;"&gt;(024) 37833699&lt;/strong&gt; * Email: &lt;strong style="color: #222222;"&gt;lawdata@luatvietnam.vn &lt;/strong&gt;&lt;/p&gt;</value>
+  </data>
+  <data name="Hotline" xml:space="preserve">
+    <value>Hotline</value>
+  </data>
+  <data name="packages" xml:space="preserve">
+    <value>package</value>
+  </data>
+  <data name="SocialNetwork" xml:space="preserve">
+    <value>Social networks</value>
+  </data>
+  <data name="InvalidPhoneNumber" xml:space="preserve">
+    <value>Invalid phone number !</value>
+  </data>
+  <data name="ClickIAgree" xml:space="preserve">
+    <value>Please click i agree with Use convention of LuatVietnam.vn</value>
+  </data>
+  <data name="Incorrect" xml:space="preserve">
+    <value>Safety code is incorrect</value>
+  </data>
+  <data name="Safetycode" xml:space="preserve">
+    <value>Safety code</value>
+  </data>
+  <data name="RelatedContentCategories" xml:space="preserve">
+    <value>Related content categories</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="RemoveAll" xml:space="preserve">
+    <value>Remove all</value>
+  </data>
+  <data name="ServiceAnnouncement1" xml:space="preserve">
+    <value>&lt;p style = "color: # 505050;"&gt;Your account is &lt;span style = "color: # d81d22;"&gt; {0} months {1} days, using &lt;/span&gt; service &lt;span style = "color: # a67942; font-weight: bold"&gt; {2} &lt;/span&gt; To continue using the text search service, you can &lt;a href ="#" class="dang-ky-dv" data-id="17" title = "Renewal service" style = "color: # a67942; text-decoration: underline; "&gt; Renew your service &lt;/a&gt; or contact the hotline: 016-9696-8989 for assistance.
+ &lt;/p&gt;</value>
+  </data>
+  <data name="ServiceAnnouncement2" xml:space="preserve">
+    <value>&lt;p style = "color: # 505050;"&gt;Your account is still &lt;span style = "color: # d81d22;"&gt; {0} month of use &lt;/span&gt; service &lt;span style = "color: bold;"&gt; {1}  &lt;/span&gt;. To continue using the text search service, you can &lt;a href ="#" class="dang-ky-dv" data-id="17" title = "Renewal service" style = "color: # a67942; text-decoration: underline; "&gt; Renew your service &lt;/a&gt; or contact the hotline: 016-9696-8989 for assistance.
+&lt;/p&gt;</value>
+  </data>
+  <data name="ServiceAnnouncement3" xml:space="preserve">
+    <value>&lt;p style = "color: # 505050;"&gt;Your account has &lt;span style = "color: # d81d22;"&gt; {0} date of use &lt;/span&gt; service &lt;span style = "color: bold;"&gt; {1} &lt;/span&gt;. To continue using the text search service, you can &lt;a href = "#" class="dang-ky-dv" data-id="17" title = "Renewal service" style = "color: # a67942; text-decoration: underline; "&gt; Renew your service &lt;/a&gt; or contact the hotline: 016-9696-8989 for assistance.
+&lt;/p&gt;</value>
+  </data>
+  <data name="ServiceAnnouncement4" xml:space="preserve">
+    <value>&lt;p style = "color: # 505050;"&gt;Your account has &lt;span style = "color: # d81d22;"&gt; {0} date of use &lt;/span&gt; service &lt;span style = "color: bold;"&gt; {1} &lt;/span&gt;. To continue using the text search service, you can &lt;a href = "#" class="dang-ky-dv" data-id="17" title = "Renewal service" style = "color: # a67942; text-decoration: underline ; "&gt; Renew your service &lt;/a&gt; or contact the hotline: 016-9696-8989 for assistance.
+&lt;/p&gt;</value>
+  </data>
+  <data name="ServiceAnnouncement5" xml:space="preserve">
+    <value>&lt;p style = "color: # 505050;"&gt;Your account has expired. &lt;span style = "color: # a67942; font-weight: bold;"&gt; {0} &lt;/span&gt; To continue using the text search service, you can &lt;a href = "#" class="dang-ky-dv" data-id="17" title = "Renewal service" style = "color: # a67942; text-decoration: underline; "&gt; Renew your service &lt;/a&gt; or contact the hotline: 016-9696-8989 for assistance.
+&lt;/ p&gt;</value>
+  </data>
+  <data name="ServiceAnnouncement6" xml:space="preserve">
+    <value>&lt;p style = "color: # 505050;"&gt; Thank you for using the service of LuatVietnam.vn! &lt;/p&gt;&lt;p&gt;For more information, please contact: &lt;/p&gt;
+&lt;strong&gt; VIETNAM LAW CENTER - INCOM INTERNATIONAL COMMUNICATION CORPORATION &lt;/strong&gt;
+
+&lt;p style = "color: # 505050;"&gt;In Ho Chi Minh City: Ha Phan Building, 456 Phan Xich Long Street, Ward 2, Phu Nhuan District, Ho Chi Minh City. HCM - Tel: 08. 39950724 &lt;/p&gt;email: &lt;a href="#" style="color: #a67942;"&gt; lawdata@luatvietnam.vn &lt;/a&gt;&lt;/p&gt;</value>
+  </data>
+  <data name="SuccessfullyUpdatedTheNewsletter" xml:space="preserve">
+    <value>Successfully updated</value>
+  </data>
+  <data name="DownloadDocNotAuthencation" xml:space="preserve">
+    <value>You need to have an English Lookup or Advanced Lookup to download the text</value>
+  </data>
+  <data name="NotificationDownloadDocNotAuth" xml:space="preserve">
+    <value>&lt;div class="vbitem-m1"&gt;
+     &lt;a href="#" class="lawsVnLogin" title="Sign in" style="color:#d81c22; font-weight: bold; text-decoration: underline;"&gt; Login &lt;/a&gt; to LuatVietnam account download free text. If you do not have an account, please register for free &lt;a href = "/user/register.html" title ="Account Registration" style = "color: # d81c22; font-weight: bold; : underline;"&gt; here! &lt;/a&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="EffectiveDate" xml:space="preserve">
+    <value>Effective date</value>
+  </data>
+  <data name="IssuingDate" xml:space="preserve">
+    <value>Issuing date</value>
+  </data>
+  <data name="RelatedDocuments" xml:space="preserve">
+    <value>Related documents</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="LegislationTypes" xml:space="preserve">
+    <value>Legislation Types</value>
+  </data>
+  <data name="EmailAlreadynUse" xml:space="preserve">
+    <value>Email: {0} already in use.</value>
+  </data>
+  <data name="UserNameAlreadynUse" xml:space="preserve">
+    <value>Username: {0} already in use.</value>
+  </data>
+  <data name="NoPermission" xml:space="preserve">
+    <value>&lt;p&gt;This is a utility for members to sign up for the service.&lt;/p&gt;&lt;em&gt; Please &lt;a href='#' class ='lawsVnLogin' style='color:# a67942' title ='Post enter your account'&gt;&lt;strong&gt; Sign in &lt;/strong&gt;&lt;/a&gt; your LuatVietNam account and &lt;a href='/dich-vu.html'home='Sign up for the service'&gt;&lt;strong style= 'color:#a67942'&gt; sign up for the text search service &lt;/strong&gt;&lt;/a&gt;.&lt;/em&gt;</value>
+  </data>
+  <data name="DeleteInterestDocumentsSuccessful" xml:space="preserve">
+    <value>Delete interested documents successfully</value>
+  </data>
+  <data name="here" xml:space="preserve">
+    <value>Click here</value>
+  </data>
+  <data name="SeeDetails" xml:space="preserve">
+    <value>For further details of the</value>
+  </data>
+  <data name="DichVu" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="GoiDichVu" xml:space="preserve">
+    <value>package</value>
+  </data>
+  <data name="Package2" xml:space="preserve">
+    <value>package</value>
+  </data>
+  <data name="Service2" xml:space="preserve">
+    <value>Service</value>
+  </data>
+  <data name="AllOrgans" xml:space="preserve">
+    <value>All Organs</value>
+  </data>
+  <data name="AllFileType" xml:space="preserve">
+    <value>All Types</value>
+  </data>
+  <data name="ForUserWithinSameOrganization" xml:space="preserve">
+    <value>For {0} user within same organization</value>
+  </data>
+  <data name="PersonUsingAtTheSameTime" xml:space="preserve">
+    <value>{0} person using at the same time</value>
+  </data>
+</root>

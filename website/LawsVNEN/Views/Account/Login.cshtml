@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using ICSoft.CMSLib
+@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.Account.LoginModel
+<div class="content-center-pages searchblog">
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage</a>  »
+        <span class="breadcrumb-item colorrumb">@Resource.Login</span>
+    </div>
+    <div class="cat-box-content">
+        <div class="forgetpassword">
+            <div class="form-forget">
+                <div class="rows item6" style="text-align: center"><span class="tie-for"><img class="Forget-password_03" src="@Url.Content("~/assets/images/Forget-password_03.png")" />@Resource.LoginAccount</span></div>
+                        @using (Ajax.BeginForm("Login", "Account", null, new AjaxOptions()
+                        {
+                            HttpMethod = "Post",
+                            OnBegin = "lawsVn.ajaxEvents.OnBegin",
+                            OnComplete = "lawsVn.ajaxEvents.OnComplete",
+                            OnSuccess = "lawsVn.ajaxEvents.AccountLoginOnSuccess"
+                        }, new { id = "LoginForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-group en">
+                                <label class="col-sm-1 en">Current password: <span class="redcolor">*</span> </label>
+                                <div class="col-sm-2 en ">
+                                    @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control-input" })
+                                    @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group en">
+                                <label class="col-sm-1 en">New password: <span class="redcolor">*</span> </label>
+                                <div class="col-sm-2 en ">
+                                    @Html.TextBoxFor(m => m.CustomerPass, new { @class = "form-control-input", type = "password" })
+                                    @Html.ValidationMessageFor(m => m.CustomerPass, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="rows">
+                                <button class="btn-nhap-lai dk2">@Resource.btnLogin</button>
+                            </div>
+                        }
+            </div>
+        </div>
+    </div>
+</div>

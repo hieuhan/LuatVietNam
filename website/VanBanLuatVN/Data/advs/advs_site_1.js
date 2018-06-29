@@ -1,0 +1,2 @@
+var advsite_233 = '<div class="quang-cao-right"><a href="/phap-ly-doanh-nghiep.html " target="_blank"><img src="https://static.vanbanluat.vn/uploaded/Images/Original/2018/06/06/banner_1104085648_0606103119.jpg" alt="" title="" /></a></div>';
+var advsite_246 = '<div class="quang-cao-right"><a href="https://vanbanluat.vn/user/dang-ky.html"><img src="https://static.vanbanluat.vn/uploaded/Images/Original/2018/06/06/DKTK_mien_phi_1105103011_0606103125.png" alt="" title="" /></a></div>';

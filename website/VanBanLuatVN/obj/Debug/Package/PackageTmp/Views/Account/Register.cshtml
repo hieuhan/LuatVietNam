@@ -1,0 +1,204 @@
+﻿@using VanBanLuat.Librarys
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model VanBanLuat.Models.AccountModel.RegisterModel
+<div class="breadcrumb">
+    <a class="breadcrumb-item" href="@Constants.ROOT_PATH" title="Trang chủ">Trang chủ</a> /
+    <span class="breadcrumb-item xanh">Đăng ký tài khoản</span>
+</div>
+<div class="title-from">
+    <h1 class="title-from-cat">Đăng ký tài khoản</h1>
+    <p style="color:#555;">Đăng ký tài khoản để sử dụng miễn phí tra cứu văn bản trên Vanbanluat</p>
+</div>
+
+<div class="content-dk">
+    <div class="content-dk" style="padding-bottom: 20px;">
+        @using (Ajax.BeginForm("Register", "Account", null, new AjaxOptions
+        {
+            HttpMethod = "Post",
+            OnBegin = "vbluat.ajaxEvents.OnBegin('Đăng ký')",
+            OnSuccess = "vbluat.ajaxEvents.OnSuccessAlert(data, status, xhr)",
+            OnFailure = "vbluat.ajaxEvents.OnFailure"
+        }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="p20px">
+                <div class="box-ttcn">
+                    <div class="title-2 font15 bold" style="margin-bottom: 10px;">Thông tin cá nhân / doanh nghiệp</div>
+                    <div class="cat-box-content">
+                        <div class="item-col2">
+                            <div class="padding-right">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.CustomerName, new { @class = "input-text ms1 font14", placeholder = "Tên đăng nhập *" })
+                                    @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Phone, new { @class = "input-text ms1 font14", placeholder = "Điện thoại di động" })
+                                    @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.OrganPhone, new { @class = "input-text ms1 font14", placeholder = "Điện thoại bàn" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.EmailRegister, new { @class = "input-text ms1 font14", placeholder = "Email *" })
+                                    @Html.ValidationMessageFor(m => m.EmailRegister, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.Password, new { @class = "input-text ms1 font14", type = "password", placeholder = "Mật khẩu *" })
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "input-text ms1 font14", type = "password", placeholder = "Nhập lại mật khẩu *" })
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-col2">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.FullName, new { @class = "input-text ms1 font14", placeholder = "Họ và tên" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.OrganName, new { @class = "input-text ms1 font14", placeholder = "Tên doanh nghiệp" })
+                            </div>
+                            <div class="form-group">
+                                <div class="item-gt">
+                                    <label>Giới tính:</label>
+                                </div>
+                                <div class="item-gt">
+                                    <div class="radio">
+                                        <input class="none" id="gt" name="GenderId" value="1" type="radio">
+                                        <label for="gt" class="radio-label">Nam</label>
+                                    </div>
+                                </div>
+                                <div class="item-gt">
+                                    <div class="radio">
+                                        <input class="none" id="gt1" name="GenderId" value="2" type="radio">
+                                        <label for="gt1" class="radio-label">Nữ</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="item-gt">
+                                    <select id="day" name="Day" class="dropdown bd" style="width: 70px;">
+                                        <option value="0">Ngày</option>
+                                        @for (int i = 1; i < DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month); i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="item-gt">
+                                    <select id="month" name="Month" class="dropdown bd" style="width: 90px;">
+                                        <option value="0">Tháng</option>
+                                        @for (int i = 1; i <= 12; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="item-gt">
+                                    <select id="year" name="Year" class="dropdown bd" style="width: 70px;">
+                                        <option value="0">Năm</option>
+                                        @for (int i = DateTime.Now.Year; i >= 1900; i--)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Address, new { @class = "input-text ms1 font14", placeholder = "Địa chỉ" })
+                                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-ttcn">
+                    <div class="title-2 font15 bold" style="margin-top: 10px;">Lĩnh vực văn bản quan tâm</div>
+                    <div class="cat-box-content">
+                        <div class="item-col2-ds">
+                            <div class="ds-bg">
+                                <div class="title-ds">Danh sách lĩnh vực văn bản</div>
+                                <div class="content-ds">
+                                    @if (Model.ListFields.HasValue())
+                                    {
+                                        <div class="content-scroll-1 mCustomScrollbar _mCS_3" style="height: 400px;">
+                                            <div id="mCSB_3" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0">
+                                                <div id="mCSB_3_container1" class="mCSB_container" style="position: relative; top: 0; left: 0;" dir="ltr">
+                                                    @foreach (var item in Model.ListFields)
+                                                    {
+                                                    <div class="customer-fields">
+                                                        <a href="#" class="selectFieldsId" title="@string.Format("Chọn lĩnh vực: {0}",item.FieldDesc)"><img class="arrow" src="@Url.Content("~/assets/images/arrow-right.png")" />@item.FieldDesc</a>
+                                                        <input class="none" name="FieldId" type="hidden" value="0" data-id="@item.FieldId">
+                                                    </div>
+                                                    }
+                                                </div>
+                                                <div id="mCSB_3_scrollbar_vertical" class="mCSB_scrollTools mCSB_3_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: block;">
+                                                    <a href="#" class="mCSB_buttonUp" oncontextmenu="return false;" style="display: block;"></a>
+                                                    <div class="mCSB_draggerContainer">
+                                                        <div id="mCSB_3_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; display: block; height: 296px; max-height: 390px; top: 0px;" oncontextmenu="return false;">
+                                                            <div class="mCSB_dragger_bar" style="line-height: 30px;"></div>
+                                                        </div>
+                                                        <div class="mCSB_draggerRail"></div>
+                                                    </div><a href="#" class="mCSB_buttonDown" oncontextmenu="return false;" style="display: block;"></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="icondoi"><img src="@Url.Content("~/assets/images/icondoi.png")" /></div>
+                        <div class="item-col2-ds">
+                            <div class="ds-bg">
+                                <div class="title-ds">Lĩnh vực văn bản của tôi</div>
+                                <div class="content-ds">
+                                    <div class="content-scroll-1 fixheight mCustomScrollbar _mCS_4 mCS_no_scrollbar" style="max-height: 400px;">
+                                        <div id="mCSB_4" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" style="max-height: none;" tabindex="0">
+                                            <div id="mCSB_4_container1" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position: relative; top: 0; left: 0;" dir="ltr">
+                                                
+                                            </div>
+                                            <div id="mCSB_4_scrollbar_vertical" class="mCSB_scrollTools mCSB_4_scrollbar mCS-light mCSB_scrollTools_vertical" style="display: none;">
+                                                <a href="#" class="mCSB_buttonUp" oncontextmenu="return false;"></a>
+                                                <div class="mCSB_draggerContainer">
+                                                    <div id="mCSB_4_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; height: 0px; top: 0px;" oncontextmenu="return false;">
+                                                        <div class="mCSB_dragger_bar" style="line-height: 30px;"></div>
+                                                    </div>
+                                                    <div class="mCSB_draggerRail"></div>
+                                                </div><a href="#" class="mCSB_buttonDown" oncontextmenu="return false;"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-ttcn">
+                    <div class="pure-checkbox quantam font15 bold" style="line-height: 18px;">Dịch vụ tra cứu quan tâm:</div>
+                    <div class="pure-checkbox quantam">
+                        <input class="none" id="dss1" name="ServiceOfInterest" value="@Constants.ViNewsletterGroupId" type="checkbox">
+                        <label for="dss1">Văn bản tiếng Việt</label>
+                    </div>
+                    <div class="pure-checkbox quantam">
+                        <input class="none" id="dss2" name="ServiceOfInterest" value="@Constants.EnNewsletterGroupId" type="checkbox">
+                        <label for="dss2">Văn bản tiếng Anh</label>
+                    </div>
+                </div><input class="none" name="FieldId" type="checkbox">
+                <center>
+                    <button class="btn-form btndangky btn-default capnhat">Đăng ký</button>
+                    <button class="btn-default capnhat" onclick="window.location.href='@(Request.UrlReferrer != null ? Request.UrlReferrer.AbsoluteUri : Constants.ROOT_PATH)'" style="color: #222; background: #ddd; margin-left: 10px;">Hủy</button>
+                </center>
+            </div>
+        }
+    </div>
+</div>
+@section FooterSection
+{
+    <script type="text/javascript">
+        $(function () {
+            $().birthday();
+        });
+    </script>
+}

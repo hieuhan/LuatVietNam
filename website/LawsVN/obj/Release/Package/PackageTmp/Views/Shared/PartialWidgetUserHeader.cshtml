@@ -1,0 +1,91 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@model LawsVN.Models.Account.WidgetUserModel
+<div class="notification">
+    <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html"><span style="color: #333; font-weight: normal;">Xin chào:</span> <span style="font-weight: bold;color: #a67942;">@LawsUser.CustomerName</span></a>
+    <div class="user-info-content">
+        <div class="content-right">
+            <aside class="sidebar">
+                <div class="widget">
+                    <div class="widget-user">
+                        <div class="padding">
+                            <div class="widget-left">
+                                <div class="item-tt">
+                                    <a href="#" title="@LawsUser.CustomerName" style="font-weight: bold;">
+                                        <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/hoten.png")" />
+                                        <span id="customerNameSub">@Model.CustomerNameSubstring</span>
+                                    </a>
+                                    @if (Model.IsUserVip)
+                                    {
+                                        <span id="user-vip" class="tvv">VIP</span>
+                                    }
+                                </div>
+                                <div class="item-tt">
+                                    <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" title="Thông tin cá nhân">
+                                        <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/thongtincn.png")" />
+                                        Thông tin tài khoản
+                                    </a>
+                                </div>
+                                <div class="item-tt">
+                                    <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" title="Tin nhắn của tôi">
+                                        <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/tinnhan.png")" />
+                                        Tin nhắn của tôi <span id="countMyMessages" style="color: #b28247; font-weight: bold;">(@Model.CountMessages)</span>
+                                    </a>
+                                </div>
+                                <div class="item-tt">
+                                    <a href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html" title="Văn bản của tôi">
+                                        <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/vanban.png")" />Văn bản của tôi <span id="countMyDocuments" data-count="@Model.CountCustomerDocs" style="color: #b28247; font-weight: bold;">(@Model.CountCustomerDocs)</span>
+                                    </a>
+                                </div>
+                                <div class="item-tt">
+                                    <a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan.html" title="Giao diện cá nhân">
+                                        <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/ca-nhan.png")"/>
+                                        Giao diện cá nhân</a>
+                                </div>
+                                <div id="gia-han-dv-header" class="item-tt">
+                                    @if (Model.IsRegistService < 1)
+                                    {
+                                        <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Gia hạn dịch vụ">
+                                            <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/gia-han.png")"/>
+                                            Đăng ký dich vụ
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@(CmsConstants.ROOT_PATH)user/gia-han-dich-vu.html" title="Gia hạn dịch vụ">
+                                            <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/gia-han.png")"/>
+                                            Gia hạn dịch vụ
+                                        </a>
+                                    }
+                                </div>
+                                <div class="item-tt">
+                                    <a href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html" title="Lịch sử giao dịch">
+                                        <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/lichsu.png")" />
+                                        Lịch sử giao dịch
+                                    </a>
+                                </div>
+                                <div class="item-tt">
+                                    <a href="#" class="lawsVnChangePassword" title="Đổi mật khẩu">
+                                        <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/pass.png")" />
+                                        Đổi mật khẩu
+                                    </a>
+                                </div>
+                                <div class="item-tt">
+                                    <a href="#" class="lawsVnLogOut" title="Đăng xuất">
+                                        <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/logout.png")" />
+                                        Đăng xuất
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="widget-right">
+                                <img class="thumbavata-canhan" alt="avata-canhan" src="@LawsUser.GetAvatarMobile()">
+                            </div>
+                            <span id="countNoticeOfValidity"> (@Model.CountThongBaoHieuLuc)</span>
+                            <span id="countPaymentTransactionSuccess"> (@Model.CountPaymentTransactionSuccess)</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>

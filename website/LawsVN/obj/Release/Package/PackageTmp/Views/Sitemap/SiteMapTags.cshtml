@@ -1,0 +1,21 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@model List<Tags>
+@{
+    Layout = null;
+    Response.ContentType = "text/xml";
+    Response.Write("<?xml version='1.0' encoding='UTF-8' ?>");
+}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    @foreach (var item in Model)
+    {
+        <url>
+            <loc>@string.Concat(CmsConstants.WEBSITE_DOMAIN,item.TagName.TagsUrl(item.TagId))</loc>
+            <lastmod>@item.CrDateTime.toString(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),"yyyy-MM-ddTHH:mm:sszzz")</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>0.5</priority>
+        </url>
+    }
+</urlset>

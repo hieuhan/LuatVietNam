@@ -1,0 +1,208 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model LawsVN.Models.Account.NoticeOfValidityModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader)</h1>
+}
+<div class="page-content">
+<div class="content-left">
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>» 
+    <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="breadcrumb-item">@Resource.AccountInformation</a> »
+    <span class="breadcrumb-item colorrumb">Thông báo hiệu lực</span>
+</div>
+<div id="NoticeOfValidityBoxTab" class="tab-nav">
+    <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html">@Resource.AccountInformation</a>
+    <a class="tab-nav-item-ad " href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html">@Resource.TransactionHistory <span class="countPaymentTransactionSuccess" style="color: #a67942;">()</span></a>
+    <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html">@Resource.MyDocuments <span class="countMyDocuments" style="color: #a67942;">()</span></a>
+    <a class="tab-nav-item-ad active" href="@(CmsConstants.ROOT_PATH)user/thong-bao-hieu-luc.html">@Resource.NoticeOfValidity <span class="countNoticeOfValidity" style="color: #fff;">()</span></a>
+    <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html">@Resource.Messages <span class="countMyMessages" style="color: #a67942;">()</span></a>
+</div>
+    @if (Model.mDocsViewSearch.lDocsView.HasValue())
+    {
+        <div class="cat-box-content">
+            @using (Ajax.BeginForm(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName,
+                new
+                {
+                    updateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                    , insertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                    , controllerName = Model.mPartialPaginationAjax.ControllerName
+                    , actionName = Model.mPartialPaginationAjax.ActionName
+                    , pageSize = Model.mPartialPaginationAjax.PageSize
+                    , linkLimit = Model.mPartialPaginationAjax.LinkLimit
+                    , docGroupId = Model.mPartialPaginationAjax.DocGroupId
+                    , registTypeId = Model.mPartialPaginationAjax.RegistTypeId
+                    , languageId = Model.mPartialPaginationAjax.LanguageId
+                },
+                new AjaxOptions
+                {
+                    HttpMethod = "Get"
+                    , UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                    , InsertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                    , OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                    , OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                }))
+            {
+                <div class="padding-left">
+                    <div class="rows item1">
+                        <p>
+                            <img alt="img-tthl" src="@Url.Content("~/assets/images/thong-bao.png")"/>Danh sách văn bản đăng ký nhận Thông báo hiệu lực. Thành viên sẽ nhận được thông báo qua email, tin nhắn hệ thống LuatVietnam.vn hoặc sms về tình trạng hiệu lực của văn bản, khi có bất kỳ sự thay đổi hiệu lực nào liên quan đến văn bản.
+                        </p>
+                    </div>
+
+                    <div class="rows item2 ">
+                        <div class="giao-dich1">
+                            <div class="text-pagination"><strong>Số văn bản đăng ký:<span style="color: #a67942; font-size: 14px;"> @(Model.RowCount > 0 ? Model.RowCount.ToString("#00") : "0")</span></strong>
+                            </div>
+                        </div>
+
+                        <div class="giao-dich2">
+                            <div class="select-item">
+                                <div class="text-item"> Lọc theo lĩnh vực:</div>
+                                <div class="text-item md1">
+                                    <select tabindex="1" name="fieldId" class="dropdown2 select-onchange">
+                                        <option value="0">@Resource.AllFields</option>
+                                        @foreach (var item in Model.ListFields)
+                                        {
+                                            <option value="@item.FieldId">@item.FieldDesc</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="select-item">
+                                <div class="text-item">Thời gian:</div>
+                                <div class="text-item md2">
+                                    <select name="year" tabindex="2" class="dropdown2 select-onchange">
+                                        <option value="0">Từ trước đến nay</option>
+                                        <option value="1">Năm qua </option>
+                                        <option value="2">Tháng qua </option>
+                                        <option value="3">Tuần qua </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="NoticeOfValidityBox" class="content-giao-dich">
+                    @if (Model.ListMyDocuments.IsAny())
+                    {
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr class="row-tr">
+                                <th class="row-th fontnolmar">Stt</th>
+                                <th class="row-th fontnolmar">Tên Văn bản</th>
+                                <th class="row-th fontnolmar">Ngày áp dụng</th>
+                                <th class="row-th fontnolmar">Tình trạng hiệu lực</th>
+                                <th class="row-th fontnolmar">Hủy</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            @for (int index = 1; index <= Model.ListMyDocuments.Count(); index++)
+                            {
+                                var docView = Model.ListMyDocuments.ElementAt(index - 1);
+                                <tr class="row-tr" style="vertical-align: top;">
+                                    <td class="rows-td fontbold">@index.ToString("#00")</td>
+                                    <td class="rows-td" style="text-align: left;">
+                                        <h2><a href="@docView.DocsView.GetDocUrl()" title="@docView.DocsView.DocName.StripTags()" class="post-title lvn">
+                                                @docView.DocsView.DocName
+                                            </a>
+                                        </h2>
+                                        <div class="item-meta">
+                                            @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView.DocsView, ClassName = "tag-item", EnableSaveDoc = false } }); }
+                                        </div>
+                                    </td>
+                                    <td class="rows-td wight">
+                                        @if (docView.DocsView.DocGroupId != Constants.DocGroupIdTcvn || docView.DocsView.DocGroupId != Constants.DocGroupIdVbhn)
+                                        {
+                                            @docView.DocsView.EffectDate.toString()
+                                        }
+                                    </td>
+                                    <td class="rows-td wight">@docView.EffectStatusName</td>
+                                    <td class="rows-td"><a href="javascript:lawsVn.myDocuments.deleteCustomerDocs(@Model.mPartialPaginationAjax.DocGroupId,@docView.DocsView.DocId,2);">
+                                        <img alt="img-tthl" src="@Url.Content("~/assets/images/xoa.png")"></a></td>
+                                </tr>
+                            }
+
+                            </tbody>
+                        </table>
+                        {
+                            Html.RenderAction("PartialPaginationAjax2", "Shared", new {model = Model.mPartialPaginationAjax});
+                        }
+                    }
+                    else
+                    {
+                        <table class="table table-bordered">
+                            <tbody>
+                            <tr class="row-first-news">
+                                <th class="count-123" scope="row"></th>
+                                <td class="news-center-post">
+                                    <h3>
+                                        <span class="post-title lvn">@Resource.UpdatingData</span>
+                                    </h3>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="cat-box-content">
+                <div class="padding-left">
+                    <div class="rows item1">
+                        <p>
+                            <img alt="img-tthl" src="@Url.Content("~/assets/images/khuyencao.png")"/>Thành viên sẽ nhận được thông báo qua email, tin nhắn hệ thống LuatVietNam hoặc sms về tình trạng hiệu lực của văn bản đăng ký, khi có bất
+                            kỳ sự thay đổi hiệu lực nào liên quan đến văn bản đó.
+                        </p>
+                    </div>
+
+                    <div class="thong-bao-3">
+                        <div class="thongbao-item3" style="width: 800px;">
+                            <em>Quý khách chưa đăng ký Thông báo hiệu lực cho văn bản! <br /> 
+                                Hãy bấm vào mục Thông báo hiệu lực (<img alt="img-tthl" src="@Url.Content("~/assets/images/thong-bao2.png")"/>) trong box tiện ích khi xem chi tiết nội dung văn bản để đăng ký tính năng này!
+                            </em>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    }
+</div>
+   
+<div class="content-right">
+    <aside class="sidebar">
+        @{Html.RenderAction("PartialCustomerDocs", "Shared");}
+        @Html.Partial("PartialManualInstruction")
+        <div class="widget bottom0">
+            <div class="banner">
+                @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+            </div>
+        </div>
+    </aside>
+</div>
+</div>
+@Html.Partial("PartialContentViewed")
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>

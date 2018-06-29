@@ -1,0 +1,174 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.AccountProfileModel
+@{
+    ViewBag.Title = "AccountEditProfileMobile";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@{
+    int yearnow = DateTime.Now.Year;
+    int day_birthday = 0, month_birthday = 0 , year_birthday = 0;
+    if(!string.IsNullOrEmpty(Model.DateOfBirth))
+    {
+        string[] arrbirthday = Model.DateOfBirth.Replace("-", "/").Split('/');
+        if (arrbirthday != null && arrbirthday.Any())
+        {
+            day_birthday = int.Parse(arrbirthday[0]);
+            if(arrbirthday.Length >1)
+            {
+                month_birthday = int.Parse(arrbirthday[1]);
+            }
+            if (arrbirthday.Length > 2)
+            {
+                year_birthday = int.Parse(arrbirthday[2]);
+            }
+        }
+    }
+}
+
+@using (Ajax.BeginForm("EditAccountProfile", "Account", null
+    , new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccessful"
+    }, new { id = "EditAccountProfileForm" }
+    ))
+{
+    @Html.AntiForgeryToken()
+    
+
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>»
+        <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="breadcrumb-item">@Resource.AccountInformation</a> »
+        <span class="breadcrumb-item color1">Chỉnh sửa</span>
+    </div>
+    <div class="box-section">
+        <div class="title">
+            <h2 class="title-cat">@Resource.AccountInformation</h2>
+            @*<div class="btn-more">
+            <ul class="usernav">
+                <li class="button-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/mobile/images/more-nv.png")"></a>
+                    <ul class="dropdown-menu" style="right: 0px; width: 160px; margin-top: 3px; display: none;">
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="item-more-2 boder"> Thông tin tài khoản</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Lịch sử giao dịch</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Văn bản của tôi</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Thông báo hiệu lực</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Tin nhắn</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>*@
+        </div>
+        <div class="login-content">
+            <div class="title2">
+                <div class="title-cat2 vien">@Resource.PersonalInformation</div>
+            </div>
+            <div class="form-login">
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.FullName, new { placeholder = Resource.FirstAndLastName, @class = "input-text font2" })
+                    @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                </div>
+                <div class="item-login">
+                    <strong>@Resource.AccountName: </strong>@Model.CustomerName<em>(Không được chỉnh sửa)</em>
+                </div>
+                <input type="hidden" id="DateOfBirth" name="DateOfBirth" value="@Model.DateOfBirth" />
+                <div class="item-login">
+                    <div class="col4-seclect">
+                        <select class="select-option1" id="dlldaybirthday" onchange="lawsVn.onbirthdaychange()">
+                            @for (int i = 1; i < 32; i++)
+                            {
+                                <option @(day_birthday == i ? "selected" : string.Empty)>@i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col4-seclect">
+                        <select class="select-option1" id="dllmonthbirthday" onchange="lawsVn.onbirthdaychange()">
+                            @for (int i = 1; i < 13; i++)
+                            {
+                                <option value="@i" @(month_birthday == i ? "selected" : string.Empty)>@i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col4-seclect">
+                        <select class="select-option1" id="dllyearbirthday" onchange="lawsVn.onbirthdaychange()">
+                            @for (int i = yearnow; i > yearnow - 80; i--)
+                            {
+                                <option value="@i" @(year_birthday == i ? "selected" : string.Empty)>@i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col4-seclect">
+                        <select name="GenderId" class="select-option1">
+                            <option value="0" @(Model.GenderId == 0 ? "selected" : string.Empty)>...</option>
+                            <option value="1" @(Model.GenderId == 1 ? "selected" : string.Empty)>@Resource.Male</option>
+                            <option value="2" @(Model.GenderId == 2 ? "selected" : string.Empty)>@Resource.Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.Address, new { placeholder = Resource.Address, @class = "input-text font2" })
+                    @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                </div>
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.CustomerMobile, new { placeholder = Resource.PhoneNumber, @class = "input-text font2" })
+                    @Html.ValidationMessageFor(m => m.CustomerMobile, "", new { @class = "text-danger" })
+                </div>
+                @if (string.IsNullOrEmpty(Model.Email))
+                {
+                    <div class="item-login">
+                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "input-text font2" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                }
+                else
+                {
+                    <div class="item-login">
+                        <strong>Email: </strong>@Model.Email
+                    </div>
+                }
+                <div class="item-login">
+                    @Html.DropDownListFor(model => model.ProvinceId, new SelectList(Model.ListProvinces, "ProvinceId", "ProvinceDesc", Model.ProvinceId), new { @class = "select-option" })
+                </div>
+                <div class="item-login">
+                    <div class="text-avata-left uploadfile">
+                        <p><strong>Tải ảnh đại diện</strong></p>
+                        <p><em>Dung lượng dưới 10Mb, tỉ lệ khuyến nghị 3x4</em></p>
+                        <input type="file" id="avatarFile" />
+                        <a href="#" class="tai-anh taiFile" id="uploadAvatar">Duyệt từ thiết bị</a>
+                        @Html.HiddenFor(m => m.Avatar)
+                    </div>
+                    <div class="avata-mobi">
+                        <a href="#" class="thumb-3x4"><img id="AccountAvatar" src="@Model.GetAvatar()" /></a>
+                        <div class="container-bar">
+                            <div class="progress">
+                                <div class="progress-bar"></div>
+                            </div>
+                        </div>
+                        <a href="javascript:lawsVn.clearAvatar();" class="xoa-avata">Xóa ảnh</a>
+                    </div>
+                    
+                </div>
+                @Html.HiddenFor(m => m.Email)
+                @Html.HiddenFor(m => m.CustomerName)
+                <div class="item-center">
+                    <a href="#" class="btn1 submit-link">CẬP NHẬT</a>
+                    <a href="@(Request.UrlReferrer != null ? Request.UrlReferrer.AbsoluteUri : CmsConstants.ROOT_PATH)" class="btn2">HỦY</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,46 @@
+﻿@model LawsVN.Models.Account.GopYModel
+<div class="cat-box-content">
+    @using (Ajax.BeginForm("GopY", "Ajax", null, new AjaxOptions()
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.OnSuccess"
+    }, new {id = "FormGopY"}))
+    {
+        @Html.AntiForgeryToken()
+        <div class="padding20">
+            <div class="rows-thongbao " style="font-size: 16px; font-weight: bold; text-align: center; text-transform: uppercase; margin-bottom: 15px;">
+              <span style="float: left; line-height: 30px; width: 100%;"> Góp ý văn bản</span>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 full2">Tài khoản: </label>
+                <div class="col-sm-2 full2 right tax-invoice2 " style="float: left">
+                    <span><strong>@LawsUser.CustomerName <span style="color: #a67942">@(!string.IsNullOrEmpty(LawsUser.CustomerFullName) ?  string.Format("({0})",LawsUser.CustomerFullName.Trim()): string.Empty)</span></strong></span>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-1 full2">Tiêu đề: </label>
+                <div class="col-sm-2 full2 tax-invoice2 " style="float: left">
+                    <span style="color: #a67942"><strong id="TitleText"></strong></span>
+                    @Html.HiddenFor(m=>m.Title)
+                </div>
+            </div>
+          
+            <div class="form-group">
+                <label class="col-sm-1 full2">Nội dung góp ý: <span class="redcolor">*</span></label>
+                <div class="col-sm-2 full2">
+                    @Html.TextAreaFor(m => m.Content, new {@class = "form-control-input textarea-control internal-content full"})
+                    @Html.ValidationMessageFor(m => m.Content, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="rows">
+                <div class="btn-right">
+                    <button class="btn-thongbao1 mau1 btn-reset" style="font-size: 13px; height: 32px;">Nhập lại </button>
+                    <button class="btn-thongbao1 mau2" style="font-size: 13px; height: 32px; margin-right: 0;">Xác nhận </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

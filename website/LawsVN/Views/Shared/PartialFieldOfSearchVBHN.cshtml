@@ -1,0 +1,92 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@model LawsVN.Models.Shared.PartialFieldOfSearchModel
+<div class="categories-list1">
+    <div class="categories list sub">
+        <a href="@(CmsConstants.ROOT_PATH)van-ban-moi.html" title="Văn bản mới" class="categories-item">Văn bản mới</a>
+    </div>
+    <div class="categories-sub">
+        @if (Model.ListFieldDisplays.HasValue())
+        {
+            foreach (var item in Model.ListFieldDisplays)
+            {
+                if (string.IsNullOrEmpty(item.FieldName))
+                {
+                    continue;
+                }
+                <h2>
+                    @Ajax.ActionLink(item.FieldName, string.Empty, string.Empty,
+                    null,
+                    new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        Url = Url.Action("DocsConsolidation_GetViewSearch", "Ajax",new
+                        {
+                            docGroupId = Constants.DocGroupIdVbhn,
+                            fieldId = item.FieldId,
+                            languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                            updateTargetId = "ListByField",
+                            controllerName = "Ajax",
+                            actionName = "DocsConsolidation_GetViewSearch",
+                            pageSize = Constants.RowAmount20
+                        }),
+                        UpdateTargetId = "ListByField",
+                        InsertionMode = InsertionMode.Replace,
+                        OnBegin = "lawsVn.ajaxEvents.OnBegin('ListByField')",
+                        OnComplete = "lawsVn.ajaxEvents.OnComplete('ListByField');lawsVn.DropdownlistDefaulValue();"
+                    }, new { @class = "categories-sub-item" })
+                </h2>
+            }
+        }
+        @if (Model.ListFieldsOther.HasValue())
+        {
+            <div class="categories-sub-item">
+                <a class="menu" href="#" data-hasqtip="0">Lĩnh vực khác <img alt="xem-tiep" class="icon-more" src="@Url.Content("~/assets/images/mt2.png")"> </a>
+
+                <div class="tooltiptext" style="margin-top: -150px; height: 220px; background: #fff; float: left; width: 100%;">
+                    <span class="icon-tooltip" style="margin-top: 150px;"></span>
+
+                    <div class="tooltip-item">
+                        <div class="content-scroll-1" style="height: 200px;">
+                            <div class="padding20" style="width:100%;">
+                                @foreach (var item in Model.ListFieldsOther)
+                                {
+                                    if (string.IsNullOrEmpty(item.FieldName))
+                                    {
+                                        continue;
+                                    }
+                                    <div class="item-checkbox-list">
+                                        <div class="radio">
+                                            <input id="radio-@item.FieldId" data-id="@item.FieldId" name="radio" type="radio" />
+                                            <label for="radio-@item.FieldId" class="radio-label" title="@item.FieldName"> @item.FieldName </label>
+                                            @Ajax.ActionLink(item.FieldName, string.Empty, string.Empty,
+                                                null,
+                                                new AjaxOptions
+                                                {
+                                                    HttpMethod = "Get",
+                                                    Url = Url.Action("DocsConsolidation_GetViewSearch", "Ajax",new
+                                                    {
+                                                        docGroupId = Constants.DocGroupIdVbhn,
+                                                        fieldId = item.FieldId,
+                                                        languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                                                        updateTargetId = "ListByField",
+                                                        controllerName = "Ajax",
+                                                        actionName = "DocsConsolidation_GetViewSearch",
+                                                        pageSize = Constants.RowAmount20
+                                                    }),
+                                                    UpdateTargetId = "ListByField",
+                                                    InsertionMode = InsertionMode.Replace,
+                                                    OnBegin = "lawsVn.ajaxEvents.OnBegin('ListByField')",
+                                                    OnComplete = "lawsVn.ajaxEvents.OnComplete('ListByField');lawsVn.DropdownlistDefaulValue();"
+                                                }, new { style = "display:none;", id= string.Concat("rbFieldId", item.FieldId) })
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

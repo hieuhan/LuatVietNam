@@ -1,0 +1,49 @@
+﻿@using LawsVN.Library
+@model LawsVN.Models.Templates.DocsNewest
+@if (Model.l_LawTermins.HasValue())
+{
+    <table class="table table-bordered thuatngu">
+        <thead>
+        <tr>
+            <th class="xs1">Stt</th>
+            <th class="xs3">Mô tả / Định nghĩa </th>
+        </tr>
+        </thead>
+        <tbody>
+        @for (int i = 0; i < Model.l_LawTermins.Count; i++)
+        {
+            var number = i + Model.PartialPaginationAjax.PageIndex * Model.PartialPaginationAjax.PageSize + 1;
+            <tr>
+                <td class="xs1">@(number.ToString("#00"))</td>
+                <td class="xs3">
+                    <div class="rowthuatngu" style="font-size: 13px; padding-top: 5px;">
+                        <p>Thuật ngữ:@Model.l_LawTermins[i].TermName</p>
+                    </div>
+                    <div class="rowthuatngu" style="font-weight: bold;">@Model.l_LawTermins[i].TermDesc</div>
+                    <div class="rowthuatngu" style="font-size: 13px; padding-top: 5px;">
+                        <p>Nguồn:  @Model.l_LawTermins[i].TermSource</p>
+                    </div>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    {
+        Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.PartialPaginationAjax });
+    }
+}
+else
+{
+<table class="table table-bordered" data-totalpage="@Model.PartialPaginationAjax.TotalPage" data-pageindex="@Model.PartialPaginationAjax.PageIndex" data-pagecount="@Model.PartialPaginationAjax.pageCount" data-pagesize="@Model.PartialPaginationAjax.PageSize">
+    <tbody>
+        <tr class="row-first-news">
+            <th class="count-123" scope="row"></th>
+            <td class="news-center-post">
+                <h3>
+                    <span class="post-title lvn">Đang cập nhật dữ liệu.</span>
+                </h3>
+            </td>
+        </tr>
+    </tbody>
+</table>
+}

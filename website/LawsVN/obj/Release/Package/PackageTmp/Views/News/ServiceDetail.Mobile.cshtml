@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using sms.utils
+@model LawsVN.Models.ArticleViewDetailModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.Title.ToString())</h1>
+}
+<div class="box-search">
+    <div class="search-input">
+        @using (Html.BeginForm("Search", "News", FormMethod.Get))
+        {
+            <input class="search-q" type="text" name="keyword" placeholder="Nhập nội dung cần tìm ...">
+            <button class="btn-isearch"></button>
+        }
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>»
+    <a href="@Model.m_ArticlesViewDetail.mCategoriesView.GetCategoryUrl()" class="breadcrumb-item">@Model.m_ArticlesViewDetail.mCategoriesView.CategoryDesc</a> »
+    <span class="breadcrumb-item color1">@Model.m_ArticlesViewDetail.mArticlesView.Title.StripTags().Truncate(160)</span>
+</div>
+
+<article class="post-single">
+    <div class="socal-entry">
+        <div class="left-socal">
+            <a href="javascript:lawsVn.FontZoom(-1)"><img src="@Url.Content("~/assets/mobile/images/A-.png")" /></a>
+            <a href="javascript:lawsVn.FontZoom(1)"><img src="@Url.Content("~/assets/mobile/images/A.png")" /></a>
+        </div>
+        <div class="right-zom vb" style="padding-top: 6px;">
+            <a href="#"><img src="@Url.Content("~/assets/mobile/images/facenew.png")"></a>
+            <a href="#" style="padding-left: 5px;"><img src="@Url.Content("~/assets/mobile/images/twiternew.png")"></a>
+            <a href="#" style="padding-left: 5px;"><img src="@Url.Content("~/assets/mobile/images/googlenew.png")"></a>
+            <a href="#" style="padding-left: 5px;" class="docPrint"><img src="@Url.Content("~/assets/mobile/images/printnew.png")"></a>
+            <a href="#" style="padding-left: 5px;" data-url="@Model.m_ArticlesViewDetail.mArticlesView.GetArticleUrl()" class="doc-send-mail"><img src="@Url.Content("~/assets/mobile/images/emailnew.png")"></a>
+        </div>
+    </div>
+        @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent)
+</article>
+<section class="box-section">
+    @Html.Partial("~/Views/Shared/Mobile/PartialContentViewedMobile.cshtml")
+</section>
+@section FooterSection
+{
+    <script type="text/javascript">
+        lawsVn.logs.articleLogs(@Model.m_ArticlesViewDetail.mArticlesView.ArticleId,@Model.m_ArticlesViewDetail.mArticlesView.CategoryId);
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.m_ArticlesViewDetail.mArticlesView.ArticleId'
+                , name: '@Model.m_ArticlesViewDetail.mArticlesView.TruncateTitle(45)'
+                , title: '@Model.m_ArticlesViewDetail.mArticlesView.Title'
+                , summary: ''
+                , datetime: '@Model.m_ArticlesViewDetail.mArticlesView.PublishTime.toString()'
+                , url: '@Model.m_ArticlesViewDetail.mArticlesView.GetArticleUrl()'
+                , image: '@Model.m_ArticlesViewDetail.mArticlesView.GetImageUrl_Mobile()'
+            }
+        });
+    </script>
+}

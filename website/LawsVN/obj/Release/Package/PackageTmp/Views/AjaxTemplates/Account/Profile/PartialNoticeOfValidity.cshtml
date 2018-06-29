@@ -1,0 +1,63 @@
+﻿@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@model LawsVN.Models.Account.NoticeOfValidityModel
+@if (Model.ListMyDocuments.IsAny())
+{
+    <table class="table table-bordered">
+        <thead>
+        <tr class="row-tr">
+            <th class="row-th fontnolmar">Stt</th>
+            <th class="row-th fontnolmar">Tên Văn bản</th>
+            <th class="row-th fontnolmar">Ngày ban hành</th>
+            <th class="row-th fontnolmar">Tình trạng hiệu lực</th>
+            <th class="row-th fontnolmar">Hủy</th>
+        </tr>
+        </thead>
+        <tbody>
+                    
+        @for (int index = 1; index <= Model.ListMyDocuments.Count(); index++)
+        {
+            var docView = Model.ListMyDocuments.ElementAt(index - 1);
+            var number = index + Model.mPartialPaginationAjax.PageIndex * Model.mPartialPaginationAjax.PageSize;
+            <tr class="row-tr" style="vertical-align:top;">
+                <td class="rows-td fontbold">@number.ToString("#00")</td>
+                <td class="rows-td" style="text-align: left;">
+                    <h2><a href="@docView.DocsView.GetDocUrl()" title="@docView.DocsView.DocName.StripTags()" class="post-title lvn">
+                        @docView.DocsView.DocName
+                    </a></h2>
+                    <div class="item-meta">
+                        @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView.DocsView, ClassName = "tag-item" } }); }
+                    </div>
+                </td>
+                <td class="rows-td wight"></td>
+                <td class="rows-td wight">
+                        @docView.DocsView.EffectDate.toString()
+                </td>
+                <td class="rows-td wight">@docView.EffectStatusName</td>
+                <td class="rows-td"><a href="javascript:lawsVn.myDocuments.deleteCustomerDocs(@Model.mPartialPaginationAjax.DocGroupId,@docView.DocsView.DocId,2);">
+                    <img alt="img-tthl" src="@Url.Content("~/assets/images/xoa.png")"></a></td>
+            </tr>
+        }
+                
+        </tbody>
+    </table>
+    { Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.mPartialPaginationAjax }); }
+}
+else
+{
+    <table class="table table-bordered">
+        <tbody>
+        <tr class="row-first-news">
+            <th class="count-123" scope="row"></th>
+            <td class="news-center-post">
+                <h3>
+                    <span class="post-title lvn">@Resource.UpdatingData</span>
+                </h3>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+}

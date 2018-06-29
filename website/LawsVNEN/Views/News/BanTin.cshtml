@@ -1,0 +1,44 @@
+﻿@using LawsVNEN.Models
+@using ICSoft.CMSLib
+
+@{
+    ViewBag.Title = "BanTin";
+    Layout = "~/Views/Shared/_LayoutBanTin.cshtml";
+}
+
+@model ArticleViewModel
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>Home</a>  »
+        <a href="@Model.m_ArticlesViewDetail.mCategoriesView.GetCategoryUrl()" class="breadcrumb-item"> @Model.m_ArticlesViewDetail.mCategoriesView.CategoryName </a>  »
+        <span class="breadcrumb-item colorrumb">@Model.m_ArticlesViewDetail.mArticlesView.Title</span>
+    </div>
+    <div class="page-head">
+        <div class="banner-en"><a href="@Model.m_ArticlesViewDetail.mCategoriesView.GetCategoryUrl()"><img style="width:100%;" src="@Url.Content("~/assets/images/bg-tinnhan-en.png")" /></a></div>
+        <p style="text-align: right; font-weight: bold; font-size: 17px; font-style: italic; padding-bottom: 10px;">@(string.IsNullOrEmpty(Model.m_ArticlesViewDetail.mArticlesView.ArticleCode) ? Model.m_ArticlesViewDetail.mArticlesView.Title : Model.m_ArticlesViewDetail.mArticlesView.ArticleCode)</p>
+        <p class="info-page" style="line-height: 24px; color: #333;">
+            @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.Summary)
+        </p>
+    </div>
+
+    <div class="cat-box content-wrap">
+        @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent)
+        </div>
+<div id="boxContentViewed" class="cat-box content-recent"></div>
+
+@section FooterSection
+{
+    <script type="text/javascript">
+        lawsVn.logs.articleLogs(@Model.m_ArticlesViewDetail.mArticlesView.ArticleId,@Model.m_ArticlesViewDetail.mArticlesView.CategoryId);
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.m_ArticlesViewDetail.mArticlesView.ArticleId',
+                name: '@Model.m_ArticlesViewDetail.mArticlesView.TruncateTitle(30)',
+                title: '@Model.m_ArticlesViewDetail.mArticlesView.Title',
+                summary: '',
+                datetime: '@Model.m_ArticlesViewDetail.mArticlesView.PublishTime.ToString()',
+                url: '@Model.m_ArticlesViewDetail.mArticlesView.GetArticleUrl()',
+                image: '@Model.m_ArticlesViewDetail.mArticlesView.GetImageUrl_Icon()'
+            }
+        });
+    </script>
+}

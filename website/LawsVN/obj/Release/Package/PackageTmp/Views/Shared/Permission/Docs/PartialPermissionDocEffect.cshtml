@@ -1,0 +1,80 @@
+﻿@using LawsVN.Library
+@using LawsVN.Models
+@model LawsVN.Models.Docs.DocsViewDetailModel
+<div class="page-content box-shadow boxhieuluc">
+    <div class="box-vblienquan">
+        <div class="content-page-left">
+            <div class="cat-title">
+                <div class="cat-box-title vien">Hiệu lực</div>
+            </div>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr class="row-first-news">
+                        <td class="post-col1">
+                            <h2>
+                                <a href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()" title="@Model.mDocsViewDetail.mDocsView.DocName" class="post-title lvn">@Model.mDocsViewDetail.mDocsView.DocName</a>
+                            </h2>
+                            <div class="item-meta">
+                                @*@{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.mDocsViewDetail.mDocsView, ClassName = "tag-item " } });}*@
+                            </div>
+                        </td>
+                        <td class="post-col2 colxs2">
+                            @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.mDocsViewDetail.mDocsView } });}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-right">
+               <div class="cat-title">
+                   <div class="cat-box-title vien" style="text-transform: none;">Hiệu lực liên quan</div>
+               </div>
+               <div class="cat-box-content">
+                    @if (Model.ListRelateTypesRight.HasValue())
+                    {
+                        bool isHaveDoc = false;
+                        foreach (var item in Model.ListRelateTypesRight)
+                        {
+                            var listDocsRelates = Model.ListDocRelates.GetDocsRelatesByRelateType(item.RelateTypeId, "Right");
+                            if (!listDocsRelates.HasValue()) { continue; }
+                            <div class="tab-conten-hd1">
+                                <div id="cssmenu">
+                                    <ul>
+                                        <li class="has-sub">
+                                            <a href="#" class="title-blt">
+                                                @item.RelateTypeName <span class="colora67942">(@listDocsRelates.Count) </span>
+                                                <span class="xem_them_loto"></span>
+                                            </a>
+                                            <ul style="display: block;">
+                                                <div class="content-cssmenu">                                                    
+                                                    @foreach (var docRelates in listDocsRelates)
+                                                    {
+                                                        <div class="rows item4 luocdo">
+                                                            <a href="@(docRelates.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : docRelates.DocUrl)" title="@docRelates.DocName" @(docRelates.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "class=vb-khong-co-nd" : string.Empty)>@docRelates.DocName</a>
+                                                        </div>
+                                                    }
+                                                </div>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            isHaveDoc = true;
+                        }
+                        if (!isHaveDoc)
+                        {
+                            <div class="rows item4">
+                                <p>Không có văn bản liên quan</p>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="rows item4">
+                            <p>Không có văn bản liên quan</p>
+                        </div>
+                    }  
+               </div>
+           </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.LawsCustomerFields
+@using (Ajax.BeginForm("EditCustomerFields", "Account", null, new AjaxOptions
+{
+    HttpMethod = "Post",
+    OnBegin = "lawsVn.ajaxEvents.OnBegin",
+    OnComplete = "lawsVn.ajaxEvents.OnComplete",
+    OnSuccess = "lawsVn.ajaxEvents.UpdateFieldOnSuccessful"
+}))
+{
+    @Html.AntiForgeryToken()
+    <div class="popup full target-hidden" id="UpdateCustomerFields">
+        <div class="wrapper">
+            <div class="content-popup-90">
+                <div class="title" style="margin-bottom:0 !important">
+                    <h2 class="title-cat">@Resource.FieldOfInterestDocument</h2>
+                </div>
+                <div class="content-popup-post scrol2">
+                    <div class="checkbox-box">
+                        @if (Model.ListFields.HasValue())
+                        {
+                            for (int index = 0; index < Model.ListFields.Count; index++)
+                            {
+                                <div class="checkbox-item-mobi">
+                                    <div class="pure-checkbox">
+                                        <input id="chkFieldId_@(index)" name="FieldId" type="checkbox" @(Model.ListCustomerFields.CustomerFieldsIsChecked(Model.ListFields[index].FieldId, 1) ? "checked" : string.Empty) value="@Model.ListFields[index].FieldId">
+                                        <label class="fixcheck" for="chkFieldId_@(index)">@Model.ListFields[index].FieldName</label>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="rows-item6">
+                    <div class="rightbtn">
+                        <div class="btn-huy"><a href="#" class="icon-huy" data-toggle-target="#UpdateCustomerFields" title="@Resource.Cancel"> @Resource.Cancel</a></div>
+                        <div class="btn-huy"><a href="#" class="icon-capnhat submit-link" title="@Resource.Update"> @Resource.Update</a></div>
+                    </div>
+                </div>
+              
+            </div>
+            
+            <button name="close" class="dong-close full" data-toggle-target="#UpdateCustomerFields">
+                <img src="@Url.Content("~/assets/mobile/images/close.png")" />
+            </button>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.FieldId)
+    @Html.ValidationMessageFor(m => m.FieldId, "", new { @class = "text-danger" })
+}

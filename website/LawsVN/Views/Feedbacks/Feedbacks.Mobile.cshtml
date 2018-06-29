@@ -1,0 +1,92 @@
+﻿@using LawsVN.Models
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@model FeedbacksViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+
+
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>»
+            <span class="breadcrumb-item color1">Liên hệ</span>
+        </div>
+
+        <div class="box-section">
+            <div class="contact-content">
+                <div class="title2">
+                    <h1 class="title-cat2 vien"> Liên hệ với LuatVietnam.vn</h1>
+                </div>
+                <div class="form-login">
+                @using (Ajax.BeginForm("FeedBacks", "FeedBacks", new AjaxOptions
+                    {
+                        HttpMethod = "POST",
+                        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+                        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+                        OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccess"
+                    }, new { id = "RegisterForm" }))
+                        {
+                        @Html.AntiForgeryToken()
+                        <div class="item-login">
+                            
+                            @Html.TextBoxFor(m => m.FullName, new { @class = "input-text h35 color3", placeholder = "Họ và tên" })
+                            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                           
+                        </div>
+                        <div class="item-login">
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "input-text h35 color3", placeholder = "Điện thoại" })
+                            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                           
+                        </div>
+                        <div class="item-login">
+                            
+                            @Html.TextBoxFor(m => m.Email, new { @class = "input-text h35 color3", placeholder = "Email *" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                           
+                        </div>
+                        <div class="item-login">
+                            @Html.TextAreaFor(m => m.Comment, new { @class = "input-text textarea color3", placeholder = "Nội dung " })
+                            @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "text-danger", style = "padding-left: 139px;" })
+                         
+                        </div>
+                        <div class="item-login">
+                        <div class="ma-code">
+                            @Html.TextBoxFor(m => m.CaptchaCode, new { @class = "input-text h35 color3", placeholder = "Mã xác nhận" })
+                            
+                        </div>
+                        <div class="ma-code">
+                            <img alt="CaptchaImg" style="height: 35px;" id="CaptchaImg1" src="@Url.Action("CaptchaImage", "Feedbacks", new { id = Guid.NewGuid() })"><br />
+                            @Html.ValidationMessageFor(m => m.CaptchaCode, "", new { @class = "text-danger", style = " float: left;width: 60%;" })
+                            
+                        </div>
+                    </div>
+                    <div class="item-center">
+                        <button class="btn1 contact">Gửi</button>
+                        <button onclick="javascript:lawsVn.FormReset();" class="btn2">Nhập lại</button>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="box-section">
+            <div class="contact-content">
+                <div class="title2">
+                    <h2 class="title-cat2 vien"> Địa chỉ văn phòng</h2>
+                </div>
+                <div class="dc-contact">
+                    <p style="text-transform: uppercase; font-weight: bold;">Công ty CP truyền thông quốc tế Incom</p>
+                    <p><strong>Điện thoại</strong>: (024) 37833688 | <strong>Fax</strong>: (024) 37833699</p>
+                    <p><strong style="color: #c50000;">Hotline</strong>: 016 9696 8989</p>
+                    <p><strong>Email</strong>: lawdata@luatvietnam.vn</p>
+                    <p><strong>Địa chỉ</strong>: Tầng 3, Tòa nhà IC, 82 phố Duy Tân, Cầu Giấy, Hà Nội</p>
+                </div>
+                <div class="googlemaps">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14896.133974347265!2d105.7826221!3d21.0313458!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xdb81710b86d5e598!2sIC+Building!5e0!3m2!1svi!2s!4v1510761368998" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+
+    
+   
+

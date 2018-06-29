@@ -1,0 +1,64 @@
+﻿@using LawsVN.Models
+@model LawerQuestionModel
+<div class="cat-box-content">
+    @using (Ajax.BeginForm("LawerQuestion", "Lawers", null, new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.LaweQuestionOnSuccess"
+    }, new { id = "lawsVnQuestionForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="rows-thongbao center" style="font-size: 16px; font-weight: bold; text-transform: uppercase; margin-bottom: 15px;">
+            Gửi câu hỏi
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1">Họ và tên: </label>
+            <div class="col-sm-2 tax-invoice">
+                @Html.TextBoxFor(m => m.FullName, new { @class = "form-control-input" })
+                @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1">Email: <span class="redcolor">*</span> </label>
+            <div class="col-sm-2 tax-invoice">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control-input" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger", placeholder = "Nơi đăng ký kinh doanh" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1">Điện thoại: </label>
+            <div class="col-sm-2 tax-invoice">
+                @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control-input" })
+                @Html.ValidationMessageFor(m => m.Mobile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-1">Nội dung câu hỏi: </label>
+            <div class="col-sm-2 tax-invoice">
+                @Html.TextAreaFor(m => m.Question, new { @class = "form-control-input textarea-control internal-content" })
+                @Html.ValidationMessageFor(m => m.Question, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.LawerId)
+        <div class="form-group">
+            <label class="col-sm-1">Mã an toàn: </label>
+            <div class="col-sm-2 tax-invoice">
+                <div class="ma-code1">
+                    <img class="captcha" alt="captcha" src="@Url.Action("CaptchaImage", "Home", new { id = Guid.NewGuid(), prefix = "LawerQuestions" })">
+                </div>
+                <div class="text-captcha">
+                    @Html.TextBoxFor(m => m.CaptchaCode, new { @class = "form-control-input internal-content" })
+                    @Html.ValidationMessageFor(m => m.CaptchaCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="rows">
+            <div class="btn-center">
+                <button class="btn-thongbao1 mau1 btn-reset" style="font-size: 13px; height: 32px;">Nhập lại </button>
+                <button class="btn-thongbao1 mau2" style="font-size: 13px; height: 32px; margin-right: 15px;">Xác nhận </button>
+            </div>
+        </div>
+    }
+</div>

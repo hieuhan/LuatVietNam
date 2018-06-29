@@ -1,0 +1,94 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model NewsViewModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.mPartialPaginationAjax.PageIndex, totalPage = Model.mPartialPaginationAjax.TotalPage, pageSize = Model.mPartialPaginationAjax.PageSize });}
+}
+<div class="box-search">
+    <div class="search-input">
+        @using (Html.BeginForm("Search", "News", FormMethod.Get))
+        {
+            <input class="search-q" type="text" name="keyword" placeholder="Nhập nội dung cần tìm ...">
+            <button class="btn-isearch"></button>
+        }
+    </div>
+</div>
+<div id="ArticlesByCateBoxTab" class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>
+    @if (Model.mArticlesViewCate.lParentCategories.HasValue())
+    {
+        for (int index = 0; index < Model.mArticlesViewCate.lParentCategories.Count; index++)
+        {
+            var categoriesView = Model.mArticlesViewCate.lParentCategories[index];
+            if (index == Model.mArticlesViewCate.lParentCategories.Count - 1)
+            {
+                <span> » </span><span class="breadcrumb-item color1">@categoriesView.CategoryName</span>
+            }
+            else
+            {
+                if (categoriesView.CategoryId != 229)
+                {
+                    <span> » </span><a href="@categoriesView.GetCategoryUrl()" class="breadcrumb-item">@categoriesView.CategoryName</a>}
+            }
+        }
+    }
+</div>
+
+<section class="box-section">
+    <div class="title">
+        <h2 class="title-cat">@Model.mCategoriesView.CategoryName</h2>
+    </div>
+    <div id="ArticlesByCateBox" class="cat-box-content">
+        @if (Model.mArticlesViewCate.lArticlesNewest.HasValue())
+        {
+            <div class="post-listing" data-page="@(Model.mPartialPaginationAjax.PageIndex+2)">
+                @foreach (var articleView in Model.mArticlesViewCate.lArticlesNewest)
+                {
+                    <div class="first-news page">
+                        <div class="post-thumb">
+                            <a href="@articleView.GetArticleUrl()" class="thumb125x70">
+                                <img src="@articleView.GetImageUrl_Thumb()" />
+                            </a>
+                        </div>
+                        <div class="pks">
+                            <div class="rows-time">
+                                <span class="item-time">@articleView.PublishTime.toString()</span>
+                            </div>
+                            <h3 class="post-title-bold">
+                                <a href="@articleView.GetArticleUrl()">@articleView.Title</a>
+                            </h3>
+                        </div>
+                    </div>
+                }
+            </div>
+            if (Model.mPartialPaginationAjax.TotalPage > 0)
+            {
+                Model.mPartialPaginationAjax.IsMobile = true;
+                { Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax }); }
+            }
+        }
+    </div>
+
+</section>
+<section class="box-section">
+    @Html.Partial("~/Views/Shared/Mobile/PartialContentViewedMobile.cshtml")
+</section>
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: { id: 0 }
+        });
+        lawsVn.initArticlePagination();
+    </script>
+}
+

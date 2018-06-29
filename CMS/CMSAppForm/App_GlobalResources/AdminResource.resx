@@ -1,0 +1,441 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="admin_pages_articles_categories" xml:space="preserve">
+    <value>Category list</value>
+  </data>
+  <data name="admin_default" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="FooterText" xml:space="preserve">
+    <value>Developed by ICSoft</value>
+  </data>
+  <data name="HeaderText" xml:space="preserve">
+    <value>Content management system</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hi</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="admin_pages_security_actions" xml:space="preserve">
+    <value>Funtion List</value>
+  </data>
+  <data name="admin_pages_security_roles" xml:space="preserve">
+    <value>Role list</value>
+  </data>
+  <data name="AdminPageTitle" xml:space="preserve">
+    <value>.:Content manager system:.</value>
+  </data>
+  <data name="admin_pages_security_changepassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="admin_pages_security_changeprofile" xml:space="preserve">
+    <value>Change profile</value>
+  </data>
+  <data name="admin_pages_security_users" xml:space="preserve">
+    <value>User list</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="ChangeProfile" xml:space="preserve">
+    <value>Change profile</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="admin_pages_articles_Tags" xml:space="preserve">
+    <value>Tag list</value>
+  </data>
+  <data name="admin_pages_articles_Sponsors" xml:space="preserve">
+    <value>Sponsors List</value>
+  </data>
+  <data name="admin_pages_articles_MeetingGroups" xml:space="preserve">
+    <value>MeetingGroups List</value>
+  </data>
+  <data name="admin_pages_articles_Meetings" xml:space="preserve">
+    <value>Meetings List</value>
+  </data>
+  <data name="admin_pages_articles_MeetingSponsors" xml:space="preserve">
+    <value>MeetingSponsors list</value>
+  </data>
+  <data name="admin_pages_articles_FeedBacks" xml:space="preserve">
+    <value>FeedBack List</value>
+  </data>
+  <data name="admin_pages_articles_ServiceRegists" xml:space="preserve">
+    <value>Service Regists List</value>
+  </data>
+  <data name="admin_pages_articles_ServicePakages" xml:space="preserve">
+    <value>Service Pakages List</value>
+  </data>
+  <data name="admin_pages_articles_ServicePakageGroups" xml:space="preserve">
+    <value>Service Pakage Groups</value>
+  </data>
+  <data name="admin_pages_articles_Votes" xml:space="preserve">
+    <value>Votes List</value>
+  </data>
+  <data name="admin_pages_articles_Members" xml:space="preserve">
+    <value>Members List</value>
+  </data>
+  <data name="admin_pages_articles_Awards" xml:space="preserve">
+    <value>Awards List</value>
+  </data>
+  <data name="admin_pages_articles_DataSources" xml:space="preserve">
+    <value> DataSources List</value>
+  </data>
+  <data name="admin_pages_articles_Partners" xml:space="preserve">
+    <value>Partners List</value>
+  </data>
+  <data name="admin_pages_articles_EventStreams" xml:space="preserve">
+    <value>Event Streams List</value>
+  </data>
+  <data name="admin_pages_displays_menupages" xml:space="preserve">
+    <value>Menu detail</value>
+  </data>
+  <data name="admin_pages_displays_pages" xml:space="preserve">
+    <value>Page list</value>
+  </data>
+  <data name="admin_pages_displays_pagesedit" xml:space="preserve">
+    <value>Add/Edit Page</value>
+  </data>
+  <data name="admin_pages_articles_articles" xml:space="preserve">
+    <value>Articles List </value>
+  </data>
+  <data name="admin_pages_articles_articlesedit" xml:space="preserve">
+    <value>Add/Edit Articles</value>
+  </data>
+  <data name="admin_pages_articles_advertpositions" xml:space="preserve">
+    <value>Advert Positions</value>
+  </data>
+  <data name="admin_pages_articles_adverts" xml:space="preserve">
+    <value>Adverts list</value>
+  </data>
+  <data name="admin_pages_articles_MeetingsEdit" xml:space="preserve">
+    <value>Add/Edit Meeting</value>
+  </data>
+  <data name="admin_pages_articles_Medias" xml:space="preserve">
+    <value>Media Files</value>
+  </data>
+  <data name="admin_pages_lawsdocs_Organs" xml:space="preserve">
+    <value>Organs List</value>
+  </data>
+  <data name="admin_pages_lawsdocs_signers" xml:space="preserve">
+    <value>Signers List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Fields" xml:space="preserve">
+    <value>Fields List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Regencies" xml:space="preserve">
+    <value>Regencies List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_RelateTypes" xml:space="preserve">
+    <value>RelateTypes List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_OrganTypes" xml:space="preserve">
+    <value>OrganTypes List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_OfficeTypes" xml:space="preserve">
+    <value>OfficeTypes List</value>
+  </data>
+  <data name="admin_pages_lawsdocs_DocTypes" xml:space="preserve">
+    <value>DocTypes List</value>
+  </data>
+  <data name="admin_pages_lawsdocs_Keywords" xml:space="preserve">
+    <value>Keywords List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_LawTermins" xml:space="preserve">
+    <value>LawTermins List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Docs" xml:space="preserve">
+    <value>Docs List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_NewsletterGroups" xml:space="preserve">
+    <value>NewsletterGroups List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Newsletters" xml:space="preserve">
+    <value>Newsletters List</value>
+  </data>
+  <data name="admin_pages_lawsdocs_NewsletterMembers" xml:space="preserve">
+    <value>NewsletterMembers List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Faqs" xml:space="preserve">
+    <value>FAQ List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_MessageTemplates" xml:space="preserve">
+    <value>MessageTemplates List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_SmsMos" xml:space="preserve">
+    <value>MO List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_SmsMts" xml:space="preserve">
+    <value>MT List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_NewsletterReadLogs" xml:space="preserve">
+    <value>NewsletterReadLogs Report</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocViewCount" xml:space="preserve">
+    <value>DocViewCount Report</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocSearchLogs" xml:space="preserve">
+    <value>DocSearchLogs List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocViewLogs" xml:space="preserve">
+    <value>DocViewLogs List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_OrganDisplays" xml:space="preserve">
+    <value>OrganDisplays List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_FieldDisplays" xml:space="preserve">
+    <value>FieldDisplays List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_FaqsBTHL" xml:space="preserve">
+    <value>Valid Newsletter List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_FaqsTVPL" xml:space="preserve">
+    <value>Legal Counseling List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_ArticleViewCount" xml:space="preserve">
+    <value>ArticleViewCount Report</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Articles_StatisticBy" xml:space="preserve">
+    <value>Articles Statistic</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocsEdit" xml:space="preserve">
+    <value>Add/Edit Docs</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Docs_StatisticBy" xml:space="preserve">
+    <value>Docs StatisticBy</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocRelatesReview" xml:space="preserve">
+    <value>DocRelates Review</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocsReview" xml:space="preserve">
+    <value>Docs Review</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocDisplays" xml:space="preserve">
+    <value>DocDisplays List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_MessageSends" xml:space="preserve">
+    <value>MessageSends List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_NewsletterSends" xml:space="preserve">
+    <value>NewsletterSends List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Services" xml:space="preserve">
+    <value>Services List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_ServicePackages" xml:space="preserve">
+    <value>ServicePackages List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Promotions" xml:space="preserve">
+    <value>Promotions List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_PaymentTransactions" xml:space="preserve">
+    <value>PaymentTransactions List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Customers" xml:space="preserve">
+    <value>Customers List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomersEdit" xml:space="preserve">
+    <value>Customers Add/Edit</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Customers_StatisticBy" xml:space="preserve">
+    <value>Customers StatisticBy</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocRelates_StatisticBy" xml:space="preserve">
+    <value>DocRelates_StatisticBy</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_PaymentTransactions_StatisticBy" xml:space="preserve">
+    <value>PaymentTransactions_StatisticBy Reports</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomersFull" xml:space="preserve">
+    <value>CustomersFull List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomersEditFull" xml:space="preserve">
+    <value>Add/Edit Customer Information</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_SystemErrors" xml:space="preserve">
+    <value>SystemErrors List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_ArticleViewLogs" xml:space="preserve">
+    <value>ArticleViewLogs List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_UserLogs" xml:space="preserve">
+    <value>Users log List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomerAccessLogs" xml:space="preserve">
+    <value>CustomerAccessLogs List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DisplayTypes" xml:space="preserve">
+    <value>DisplayTypes List</value>
+  </data>
+  <data name="admin_Pages_Articles_UserCategories" xml:space="preserve">
+    <value>UserCategories List</value>
+  </data>
+  <data name="admin_Pages_Articles_AdvertViewLogs" xml:space="preserve">
+    <value>AdvertViewLogs List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocTypeDisplays" xml:space="preserve">
+    <value>DocTypeDisplays List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocsContentRelation" xml:space="preserve">
+    <value>ContentRelation</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocsContentRelationReview" xml:space="preserve">
+    <value>ContentRelation</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocsReviewEdit" xml:space="preserve">
+    <value>Add/Edit Docs</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_FaqViewCount" xml:space="preserve">
+    <value>FaqViewCount List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_FaqViewLogs" xml:space="preserve">
+    <value>FaqViewLogs List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_NewsletterEmails" xml:space="preserve">
+    <value>NewsletterEmails List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocDisplaysBTHL" xml:space="preserve">
+    <value>DocDisplays EffectNewsLetters List</value>
+  </data>
+  <data name="admin_Pages_Articles_ArticleDisplays" xml:space="preserve">
+    <value>ArticleDisplays List</value>
+  </data>
+  <data name="admin_Pages_Articles_ArticleDisplaysBTHL" xml:space="preserve">
+    <value>ArticleDisplaysEffect List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocRelatesGenBTHL" xml:space="preserve">
+    <value>DocRelates List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomersRegisterNew" xml:space="preserve">
+    <value>CustomersRegisterNew List</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomersResetPassword" xml:space="preserve">
+    <value>Reset Password for Customers</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocRelatesEditandReview" xml:space="preserve">
+    <value>DocRelatesEditandReview</value>
+  </data>
+  <data name="DeleteConfirm" xml:space="preserve">
+    <value>Do you want delete this item?</value>
+  </data>
+</root>

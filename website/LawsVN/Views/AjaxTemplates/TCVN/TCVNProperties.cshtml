@@ -1,0 +1,43 @@
+﻿@model ICSoft.CMSViewLib.DocsView
+@using LawsVN.Library
+<div class="padding2">
+    <!--Bengin box-content-->
+    <div class="box-content">
+        <div class="cat-title">
+            <div class="cat-box-title">Tiêu chuẩn Việt Nam</div>
+            <span class="vien-title nav-fd daxem"></span>
+        </div>
+        <div class="info-2">@Model.DocName</div>
+        <div class="content-giao-dich">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr class="row-tr">
+                        <td class="rows-td col4 bgf9f9f9">Số hiệu:</td>
+                        <td class="rows-td col4">@(string.IsNullOrEmpty(Model.DocIdentity) ? Constants.DangCapNhat : Model.DocIdentity)</td>
+                        <td class="rows-td col4 bgf9f9f9">Loại Văn bản:</td>
+                        <td class="rows-td col4">@(string.IsNullOrEmpty(Model.DocTypeId.ToString()) ? Constants.DangCapNhat : Model.DocTypeId.ToString())</td>
+                    </tr>
+                    <tr class="row-tr">
+                        <td class="rows-td col4 bgf9f9f9">Nơi ban hành: </td>
+                        <td class="rows-td col4">@(string.IsNullOrEmpty(Model.FieldsText) ? Constants.DangCapNhat : Model.FieldsText)</td>
+                        <td class="rows-td col4 bgf9f9f9">   Lĩnh vực:</td>
+                        <td class="rows-td col4">@(string.IsNullOrEmpty(Model.FieldsText) ? Constants.DangCapNhat : Model.FieldsText)</td>
+                    </tr>
+                    <tr class="row-tr">
+                        <td class="rows-td col4 bgf9f9f9">Ngày ban hành:  </td>
+                        <td class="rows-td col4">@(Model.IssueDate != DateTime.MinValue ? Model.IssueDate.ToString("dd/MM/yyyy") : Constants.DangCapNhat)</td>
+                        <td class="rows-td col4 bgf9f9f9"> Hiệu lực:  </td>
+                        <td class="rows-td col4">@(Model.ExpireDate != DateTime.MinValue ? Model.ExpireDate.ToString("dd/MM/yyyy") : Constants.DangCapNhat)</td>
+                    </tr>
+                    <tr class="row-tr">
+                        <td class="rows-td col4 bgf9f9f9">Người ký:   </td>
+                        <td class="rows-td col4">@(string.IsNullOrEmpty(Model.SignersText) ? Constants.DangCapNhat : Model.SignersText)</td>
+                        <td class="rows-td col4 bgf9f9f9"> Tình trạng hiệu lực:  </td>
+                        <td class="rows-td col4">@(string.IsNullOrEmpty(Model.EffectStatusName) ? Constants.DangCapNhat : Model.EffectStatusName)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--End box-content-->
+</div>

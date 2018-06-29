@@ -1,0 +1,21 @@
+﻿@using VanBanLuat.Librarys
+@model ICSoft.ViewLibV3.CategoryArticles
+@if (Model.lArticle.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h3 class="widget-title wg2"> <a href="@Model.mCategory.GetCategoryUrl()" title="@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)">@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)</a> <img class="thongbaoicon" src="@Url.Content("~/assets/images/thongbao.png")" /></h3>
+        </div>
+        <div class="widget-container bodertop">
+            @foreach (var aritce in Model.lArticle)
+            {
+                <div class="list-new-wget">
+                    <a href="@aritce.GetArticleUrl()" title="@aritce.Title" class="thumnal-50"><img class="thumb-full h40" src="@aritce.GetImageUrl_Mobile()"/></a>
+                    <div class="tie-new">
+                        <a class="post-title-wget" href="@aritce.GetArticleUrl()" title="@aritce.Title">@aritce.Title</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

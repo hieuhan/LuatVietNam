@@ -1,0 +1,251 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Account
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model RegisterServicePackagesModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader)</h1>
+}
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>» 
+            <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Dịch vụ" class="breadcrumb-item">Dịch vụ</a> »
+            <span class="breadcrumb-item colorrumb">Đăng ký gói dịch vụ</span>
+        </div>
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title" style="padding-bottom: 0; font-size: 15px;">Đăng ký gói dịch vụ tra cứu văn bản</h1>
+                <div class="rows" style="margin-bottom: 15px;"><span class="vien-title nav-fd daxem"></span></div>
+                <p class="info-page">Xin chào <span style="color: #a67942; font-weight: bold;">@LawsUser.CustomerFullName.TrimmedOrDefault(LawsUser.CustomerName)</span>, Quý khách đang chọn mua gói dịch vụ <a style="color: #a67942; font-weight: bold; text-decoration: underline;" href="#">@Model.mServices.ServiceDesc</a> của LuatVietnam.vn</p>
+            </div>
+        </div>
+
+        <div class="cat-box-content">
+
+            <div class="navstep">
+                <div class="steps"><a href="#" class="nav-step" data-id="1" title="1. Đăng ký dịch vụ"><span class="itemstep active boder0">1. Đăng ký dịch vụ</span></a></div>
+                <div class="steps"><a href="#" class="nav-step" data-id="2" title="2. Thông tin đơn hàng"><span class="itemstep undone">2. Thông tin đơn hàng</span></a></div>
+                <div class="steps"><a href="#" class="nav-step" data-id="3" title="3. Thanh toán đơn hàng"><span class="itemstep undone">3. Thanh toán đơn hàng <b>(Thanh toán Online giảm 10%)</b></span></a></div>
+                <div class="steps"><span class="itemstep undone no" style="width:125px;"></span></div>
+            </div>
+            <div class="law-wizard">
+                <div class="step law-steps">
+                    <div class="tie-step"><span class="tie-step-cat">Bước 1: Đăng ký dịch vụ</span></div>
+                    <div class="step-content">
+                        <div class="form-group">
+                            <label class="title-item4 normal">Gói dịch vụ: <span class="redcolor">*</span></label>
+                            <div class="col-sm-item4">
+                                <div class="col item4">
+                                    <div class="radio">
+                                        <input type="radio" id="rbGoiTieuChuan" name="ServiceId" class="rbServices" value="@Constants.ServiceIdTraCuuTieuChuan" @(Model.ServiceId == Constants.ServiceIdTraCuuTieuChuan ? "checked" : string.Empty) />
+                                        <label for="rbGoiTieuChuan" class="radio-label @(Model.ServiceId == Constants.ServiceIdTraCuuTieuChuan ? "colora67942" : "color999999")">Tra cứu tiêu chuẩn</label>
+                                    </div>
+                                </div>
+                                <div class="col item4 ">
+                                    <div class="radio">
+                                        <input type="radio" id="rbGoiTiengAnh" name="ServiceId" class="rbServices" value="@Constants.ServiceIdTraCuuTiengAnh" @(Model.ServiceId == Constants.ServiceIdTraCuuTiengAnh ? "checked" : string.Empty) />
+                                        <label for="rbGoiTiengAnh" class="radio-label @(Model.ServiceId == Constants.ServiceIdTraCuuTiengAnh ? "colora67942" : "color999999")">Tra cứu tiếng Anh</label>
+                                    </div>
+                                </div>
+                                <div class="col item4">
+                                    <div class="radio">
+                                        <input type="radio" id="rbGoiNangCao" name="ServiceId" class="rbServices" value="@Constants.ServiceIdTraCuuNangCao" @(Model.ServiceId == Constants.ServiceIdTraCuuNangCao ? "checked" : string.Empty) />
+                                        <label for="rbGoiNangCao" class="radio-label @(Model.ServiceId == Constants.ServiceIdTraCuuNangCao ? "colora67942" : "color999999")">Tra cứu nâng cao</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-item normal ">Số người sử dụng: <span class="redcolor">*</span></label>
+                            <div class="col-sm-22">
+                                @Html.DropDownListFor(model => model.ServicePackageParentId, new SelectList(Model.ListServicePackagesParent, "ServicePackageId", "ServicePackageDesc"), new { @class = "dropdown3 select-servicePackageParentId-onchange" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-item normal">Thời hạn thuê bao: <span class="redcolor">*</span></label>
+                            <div class="col-sm-22">
+                                @Html.DropDownListFor(model => model.ServicePackageId, new SelectList(Model.ListServicePackages, "ServicePackageId", "ServicePackageDesc"), new { @class = "dropdown3 select-servicePackageId-onchange" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @{ Html.RenderAction("PartialPromotionCodeCheck", "Shared"); }
+                        </div>
+                        <div class="form-group">
+                            <p style="color: #90622a; font-style: italic; line-height: 24px;">* Chi phí dịch vụ đang chọn: <em><b id="price-selected-span" style="color: #d81c22;margin-left: 13px;">0</b></em></p>
+                            <p style="color: #90622a; font-style: italic; line-height: 24px;">* Chi phí trên chưa bao gồm 10% VAT</p>
+                        </div>
+                    </div>
+                    <div class="rows">
+                        <a href="#" class="btn-pay next-step">Tiếp tục </a>
+                        <a href="#" class="btn-pay service-reset" style="margin-right: 20px; background: #dddddd; color: #222;">Chọn lại</a>
+                    </div>
+                </div>
+
+                <div class="step law-steps">
+                    <div class="tie-step"><span class="tie-step-cat">Bước 2: Thông tin đơn hàng</span></div>
+                    <div class="step-content">
+                        <div class="rows item6">
+                            <div class="p-rows">
+                                <span class="left-col">Gói đăng ký:</span>
+                                <span id="serviceDesc-span" class="right-col">@Model.mServices.ServiceDesc</span>
+                            </div>
+                            <div class="p-rows">
+                                <span class="left-col">Thời hạn thuê bao:</span>
+                                <span id="termOfSubscription-span" class="right-col"></span>
+                            </div>
+                            <div class="p-rows">
+                                <span class="left-col">Số người sử dụng:</span>
+                                <span id="numberOfUsers-span" class="right-col"></span>
+                            </div>
+                            <div class="p-rows">
+                                <span class="left-col">Thời hạn sử dụng: </span>
+                                <span id="expiryDate-span" class="right-col"></span>
+                            </div>
+                        </div>
+
+                        <div class="rows">
+                            <div class="rows item6">
+                                <div class="left-col">
+                                    <strong>Chi phí dịch vụ:</strong>
+                                </div>
+                                <div class="right-col">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr style="background: #a67942;">
+                                                <th class="step2col3" style="color: #fff; font-size: 14px;">Giá dịch vụ </th>
+                                                <th class="step2col3" style="color: #fff; font-size: 14px;">Thuế VAT (10%) </th>
+                                                <th class="step2col3" style="color: #fff; font-size: 14px;">Khuyến mại </th>
+                                                <th class="step2col3" style="color: #fff; font-size: 14px;">Tổng tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th class="step2col3 price-td">0</th>
+                                                <th class="step2col3 priceVat-td">0 </th>
+                                                <th class="step2col3 promotionPrice-td">0 </th>
+                                                <th class="step2col3 total-td" style="color: #ac0909;">0</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="rows-step">
+                                <div class="col2-step" style="float: left; width: auto;">
+                                    <p style="color: #444444; font-style: italic; line-height: 20px; padding-left: 145px;">* Đơn hàng sẽ được gửi về email Quý khách sau khi xác nhận.</p>
+                                </div>
+                                <div class="col2-step" style="float: right; width: auto;">
+                                    <a href="#" class="btn-pay next-step">Xác nhận đơn hàng </a>
+                                    <a href="#" class="btn-pay back-step" style="margin-right: 20px; background: #dddddd; color: #222;">Quay lại</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step law-steps">
+                    <div class="tie-step">
+                        <span class="tie-step-cat">Bước 3: Thanh toán đơn hàng </span>
+                    </div>
+
+                    <div class="tab-nav">
+                        <a class="tab-nav-item1 active" href="#"  data-id="#tab-item-2">Thanh toán Online <b>(Giảm 10%)</b></a>
+                        <a class="tab-nav-item1 " href="#" data-id="#tab-item-3">Chuyển khoản Ngân hàng</a>
+                        <a class="tab-nav-item1" href="#" data-id="#tab-item-1">Văn phòng LuatVietnam</a>
+                    </div>
+                    <div id="tab-item-2" class="cat-box-content tab-item" >
+                        @{Html.RenderAction("PartialBankPaymentZalo", "Shared", new
+                          {
+                              model = new BankPaymentModel
+                              {
+                                  ServiceId = Model.ServiceId
+                                  , ServiceIdFixed = Model.ServiceId
+                                  , ServiceName = Model.ServiceName
+                                  , ServicePackageId = Model.ServicePackageId
+                                  , ServicePackageName = Model.ServicePackageName
+                                  , Total = Model.Total
+                                  , Price = Model.Price
+                                  , TransactionTypeId = Constants.TransactionTypeIdDangKy
+                                  , BankCode="ZPG"
+                              }
+                          });}
+                    </div>
+                    <div id="tab-item-3" class="cat-box-content tab-item" style="display: none;" >
+                        <div class="tabcontent-dv">
+                            <div class="padding vanphong">
+                                <p><strong>Thông tin chuyển khoản:</strong>
+                                </p>
+                                <p>- Số tài khoản: <strong>0451 00128 2747</strong> tại Ngân hàng TMCP Ngoại thương Việt Nam, chi nhánh Thành Công - Lô 3, ô 4.1, CC đường Hoàng Đạo Thúy, Nhân Chính, Thanh Xuân, Hà Nội.
+                                </p>
+
+                                <p>hoặc</p>
+
+                                <p>- Số tài khoản: <strong>00 40 40 18 0001</strong> tại Ngân hàng TMCP Đông Á - Phòng giao dịch Ba Đình, Số 9A Láng Hạ, Hà Nội
+                                </p>
+
+                                <p>Đơn vị nhận tiền: <strong>Công ty CP Truyền thông Quốc tế INCOM.</strong>
+                                </p>
+
+                                <p>Nội dung ghi rõ: Phí dịch vụ Luật Việt Nam - Tên truy cập: ………… (tên đã đăng ký trên website, để được cấp quyền sử dụng dịch vụ)</p>
+
+                                <p style="color: #b62827;">(Quý khách chuyển tiền theo hình thức “I-Banking”, vui lòng chọn chi phí chuyển tiền do người chuyển trả).</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-item-1" class="cat-box-content tab-item" style="display: none;">
+                        @{Html.RenderAction("PartialOnlinePayment", "Shared", new
+                          {
+                              model = new PaymentMethodsOnlineModel
+                              {
+                                  ServiceId = Model.mServices.ServiceId
+                                  , ServiceName = Model.mServices.ServiceDesc
+                                  , TransactionTypeId = Constants.TransactionTypeIdDangKy
+                              }
+                          });}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialWidgetUser", "Shared", true);}
+            @Html.Partial("PartialManualInstruction")
+            <div class="widget bottom0">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('.law-wizard').lawServicesWizard({
+            validate: true,
+            stepValidate: 1
+        });
+        $.validator.setDefaults({
+            ignore: ''
+        });
+        lawsValidate.termsAndConditions();
+    </script>
+}

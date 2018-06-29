@@ -1,0 +1,82 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+@model NewsViewModel
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="keyword" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+<div id="ArticlesByCateBoxTab" class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>
+    <span> » </span><span class="breadcrumb-item color1">@Model.mCategoriesView.CategoryName</span>
+            
+</div>
+
+<section class="box-section">
+    <div class="title">
+        <h1 class="title-cat">@Html.Raw(Model.mCategoriesView.CategoryName.ToString())</h1>
+    </div>
+    <div id="ArticlesByCateBox" class="cat-box-content">
+        @if (Model.ListArticlesView.HasValue())
+        {
+            foreach (var articleView in Model.ListArticlesView)
+            {
+            <div class="other-news">
+                <div class="post-thumbnail">
+                    <a href="@articleView.GetArticleUrl()">
+                        <amp-img src="@articleView.GetImageUrl_Mobile2()" width="300" height="200" layout="responsive"
+                                 class="-amp-element -amp-layout-responsive -amp-layout-size-defined -amp-layout" id="amp-1">
+                        </amp-img>
+                    </a>
+                </div>
+                <div class="pks">
+                    <div class="rows-time">
+                        <span class="item-time">@articleView.PublishTime.toString()</span>
+                    </div>
+                    <h2 class="post-title other"><a href="@articleView.GetArticleUrl()">@articleView.Title</a>
+                    </h2>
+                </div>
+            </div>
+            }
+            if (Model.mPartialPaginationAjax.TotalPage > 0)
+            {
+                <div class="pagination">
+                       <div class="pagination-left">
+                             @*<select class="select-page">
+                             	<option>5 kết quả</option>
+                             	<option>10 kết quả</option>
+                             	<option>15 kết quả</option>
+                                 <option selected>20 kết quả</option>
+                                 <option>25 kết quả</option>
+                             </select>*@
+                      </div>
+                        <div class="pagination-right">
+                            <a href="@(Request.Url.AbsolutePath)" class="pagination-item active">1</a>
+                            <a href="@(Request.Url.AbsolutePath)" class="pagination-item ">2</a>
+                            <a href="@(Request.Url.AbsolutePath)" class="pagination-item">3</a>
+                            <a href="@(Request.Url.AbsolutePath)" class="pagination-item">»</a>
+                            
+                      </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="first-news page">
+                <div class="pks">
+                    <h3 class="post-title">@Resource.UpdatingData</h3>
+                </div>
+            </div>
+        }
+    </div>
+
+</section>
+

@@ -1,0 +1,63 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.Library
+@model LawsVN.Models.HeaderMobileModel
+<amp-sidebar id='sidebar' layout="nodisplay" side="left">
+            <div class="close-sidebar">
+                <button class="fa fa-angle-left-close" on="tap:sidebar.close">
+                  <amp-img src="@Url.Content("~/assets/images/amp/close.png")" class="-amp-fill-content -amp-replaced-content" alt="img" 
+                      width=29 height=29>
+                    </amp-img>
+                </button>
+            </div>
+    <form id="top-search-form" action="@(CmsConstants.ROOT_PATH)tim-van-ban.html" method="get" target="_blank" novalidate class="-amp-form">
+        <button id="btn-search-form" class="btn-reset btn-search fa fa-search-search right" aria-hidden="true">
+            <amp-img src="@Url.Content("~/assets/images/amp/search.png")" class="-amp-fill-content -amp-replaced-content" alt="img" 
+                     width=22 height=22>
+            </amp-img>
+        </button>
+        <input id="search-term" name="Keywords" placeholder="Tìm kiếm..." type="text">
+    </form>
+    @if (Model.ListMenuItemsViewParent.HasValue())
+    {
+        <ul>
+            @foreach (MenuItemsView menuItem in Model.ListMenuItemsViewParent)
+            {
+                if (!Model.Havechild(menuItem.MenuItemId))
+                {
+                    <li class="navitemli"><a href="@menuItem.GetUrl()"><i class="menu-icon"><amp-img width="16" height="16" src="@menuItem.GetImageUrl()"></amp-img></i>@menuItem.ItemName</a></li>
+                }
+                else
+                {
+                    <li class="navitemli"><i class="icon-tracuu"></i>@menuItem.ItemName</li>
+                    <ul class="subnav">
+                        @foreach (var menuItemChild in Model.ListMenuItemsView)
+                        {
+                            if (menuItemChild.MenuItemId == Constants.MenuItemIdTatCaLinhVuc)
+                            {
+                                continue;
+                            }
+                            if (menuItemChild.ParentItemId == menuItem.MenuItemId)
+                            {
+                                <li><a href="@menuItemChild.GetUrl()">@menuItemChild.ItemName</a></li>
+                            }
+                        }
+                    </ul>
+                }
+            }
+        </ul>
+    }
+        </amp-sidebar>
+
+
+<header id="main-header">
+    <button id="btn-menu" class="btn-reset fa fa-2x" on="tap:sidebar.open">
+        <amp-img src="@Url.Content("~/assets/images/amp/mo_rong.png")" class="-amp-fill-content -amp-replaced-content" alt="img"
+            width="24" height="24">
+        </amp-img>
+    </button>
+    <div class="logomobile">
+        <a href="@CmsConstants.ROOT_PATH" class="logo" title="@Model.WebsiteTitle"></a>
+    </div>
+</header>
+

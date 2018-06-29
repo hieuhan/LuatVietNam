@@ -1,0 +1,119 @@
+﻿@using LawsVN.Library
+@model LawsVN.Models.FooterModel
+<footer class="theme-footer">
+    <div class="container">
+        <div class="footer-content">
+            @if (Model.ListMenuItemsViewParent.HasValue())
+            {
+                for (int index = 0; index < Model.ListMenuItemsViewParent.Count; index++)
+                {
+                    var menuItemViewParent = Model.ListMenuItemsViewParent[index];
+                    <div class="col-xs-4">
+                        <nav class="categories-nav @(index == Model.ListMenuItemsViewParent.Count-1 ? "nav-fd" : string.Empty)">
+                            <div class="cat-title">
+                                <div class="cat-box-title vien">@menuItemViewParent.ItemName</div>
+                            </div>
+                            <ul class="nav-bottom">
+                                @foreach (var item in Model.ListMenuItemsView)
+                                {
+                                    if (item.ParentItemId != menuItemViewParent.MenuItemId)
+                                    {
+                                        continue;
+                                    }
+                                    <li><a href="@item.GetUrl()" title="@item.ItemName" class="item-categories">@item.ItemName</a></li>
+                                }
+                            </ul>
+                        </nav>
+                    </div>
+                }
+            }
+            <div class="col-xs-4">
+                <div class="cat-title">
+                    <div class="cat-box-title vien">Đăng ký nhận tin văn bản mới</div>
+                </div>
+                @{Html.RenderAction("PartialNewsLetterEmail", "Shared");}
+            </div>
+
+            <div class="footer-text">
+                <div class="footer-left">
+                    <p>
+                        <img alt="luat viet nam" src="@Url.Content("~/assets/images/logo.png")"/>
+                    </p>
+                    <p><strong>Bản quyền © 2000-2018 bởi LuatVietNam - Thành viên INCOM Communications ., JSC</strong>
+                    </p>
+                    <p>Giấy phép thiết lập trang Thông tin điện tử tổng hợp số: 692/GP-TTĐT cấp ngày 29/10/2010 bởi</p>
+                    <p>Sở TT-TT Hà Nội, thay thế giấy phép số: 322/GP - BC, ngày 26/07/2007, cấp bởi Bộ Thông tin và Truyền thông</p>
+                    <p>Chứng nhận bản quyền tác giả số 280/2009/QTG ngày 16/02/2009, cấp bởi Bộ Văn hoá - Thể thao - Du lịch</p>
+                    <p>Cơ quan chủ quản: Công ty Cổ phần Truyền thông Quốc tế INCOM. Chịu trách nhiệm: Ông Vũ Mạnh Cường</p>
+                    <p>Giấy chứng nhận đăng ký DN số: 0102011152, do Sở Kế hoạch và Đầu tư Hà Nội cấp ngày 11/08/2006.</p>
+                </div>
+                <div class="footer-right">
+                    <div class="rows-dk hot">
+                        <div class="cat-box-title vien">Mạng xã hội</div>
+                    </div>
+                    <div class="cat-box-content">
+                        <div class="rows-dk">
+                            <a rel="nofollow" href="https://www.facebook.com/Luatvietnam.vn/" target="_blank" class="mxh"><img alt="Facebook" src="@Url.Content("~/assets/images/fb.png")" /></a>
+                            <a rel="nofollow" href="https://plus.google.com/u/1/communities/113796949546534964680" target="_blank" class="mxh"><img alt="mxh" src="@Url.Content("~/assets/images/gg.png")"/></a>
+                            <a rel="nofollow" href="https://twitter.com/LuatVietNam_VN" target="_blank" class="mxh"><img alt="mxh" src="@Url.Content("~/assets/images/tw.png")"/></a>
+                            <a rel="nofollow" href="#" class="mxh"><img alt="mxh" src="@Url.Content("~/assets/images/rs.png")"/></a>
+                        </div>
+                        <div class="rows-dk">
+                            <a rel="nofollow" href="http://www.online.gov.vn/CustomWebsiteDisplay.aspx?DocId=22884" target="_blank" title="Cổng thông tin quản lý hoạt động thương mại điện tử"><img alt="mxh" src="@Url.Content("~/assets/images/bb.png")" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="add">
+        <div class="container">
+            <div class="add-left">
+                <p><strong>Địa chỉ: Tầng 3, Tòa nhà IC, 82 phố Duy Tân, Cầu Giấy, Hà Nội.</strong></p>
+                <p><strong>Điện thoại: (024) 37833688 - Fax: (024) 37833699 * Email: lawdata@luatvietnam.vn </strong></p>
+            </div>
+            <div class="nav-right">     
+                <a rel="nofollow" class="add-item mda" href="//www.dmca.com/Protection/Status.aspx?ID=d3c31922-f131-4450-98b7-8c56b50687e1" target="_blank" title="DMCA.com Protection Status" > <img src="//images.dmca.com/Badges/dmca_protected_sml_120l.png?ID=d3c31922-f131-4450-98b7-8c56b50687e1" alt="DMCA.com Protection Status" /></a>
+            </div>
+        </div>
+    </div>
+    <div class="add">
+        <div class="container">
+            <script src="~/Assets/Scripts/backLinks.js"></script>      
+            <script type="text/javascript"> getBackLinkByWebsiteId('19');</script>
+            @if (Request.Url.PathAndQuery == "/")
+            {
+               @Html.Raw(" | ")
+               <a href="https://xoso.com.vn/xo-so-mien-bac/xsmb-p1.html" target="_blank">KQ XSMB</a>
+            }
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 819551577;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+</script>
+<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+    <div style="display:inline;">
+        <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/819551577/?guid=ON&amp;script=0" />
+    </div>
+</noscript>
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/5a1d0b46bb0c3f433d4cba52/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+<!--End of Tawk.to Script-->

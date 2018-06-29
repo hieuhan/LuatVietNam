@@ -1,0 +1,33 @@
+﻿@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.Account.SubscribeToNewsletters
+<div class="cat-title ">
+    <div class="cat-box-title en">@Resource.Others</div>
+    @Ajax.ActionLink(Resource.EditInformation, "SubscribeToNewsletters", "Ajax"
+        , new
+        {
+            mode = "edit"
+        }
+        , new AjaxOptions
+        {
+            HttpMethod = "Post"
+            ,
+            UpdateTargetId = "dangkinhanbantin"
+            ,
+            InsertionMode = InsertionMode.Replace
+            ,
+            OnBegin = "lawsVn.ajaxEvents.OnBegin"
+            ,
+            OnComplete = "lawsVn.ajaxEvents.OnComplete"
+        }, new { @class = "edit-tt icon-edit" })
+</div>
+<div class="cat-box-content form">
+    <div class="rows" style="margin-top: -10px; margin-bottom: 5px;">
+        <div class="dk-item1">
+            <p style="line-height: 36px;"><strong>@Resource.SubscribeToReceiveWeeklyFreeNewsletters ?: </strong></p>
+        </div>
+        <div class="col-sm-222" style="padding-top: 10px;">
+            @(Model.RegisterNewsletter == 1 ? Resource.Yes : Resource.No)
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,27 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@model List<Articles>
+@{
+    Layout = null;
+    Response.ContentType = "text/xml";
+    Response.Write("<?xml version='1.0' encoding='UTF-8' ?>");
+}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    @foreach (var item in Model)
+    {
+        <url>
+            <loc>@(item.ArticleUrl.StartsWith("http") ? item.ArticleUrl : string.Concat(CmsConstants.WEBSITE_DOMAIN,item.ArticleUrl))</loc>
+            @if (!string.IsNullOrEmpty(item.ImagePath))
+            {
+            <image:image>
+                <image:loc>@string.Concat(CmsConstants.WEBSITE_IMAGEDOMAIN,item.ImagePath)</image:loc>
+            </image:image>
+            } 
+            <lastmod>@item.PublishTime.toString(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),"yyyy-MM-ddTHH:mm:sszzz")</lastmod>
+            <changefreq>daily</changefreq>
+            <priority>1.00</priority>
+        </url>
+    }
+</urlset>

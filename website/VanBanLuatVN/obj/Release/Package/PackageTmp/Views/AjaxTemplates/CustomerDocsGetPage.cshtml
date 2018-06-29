@@ -1,0 +1,47 @@
+﻿@using System.Collections.Specialized
+@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@using VanBanLuatVN.Models
+@model PaginationModel
+
+@if (Model.DocList.lDocs.HasValue())
+{
+    <table id="contentsWrapper" class="tablecontent">
+        <tbody class="pcontent">
+        @for (int index = 0; index < Model.DocList.lDocs.Count; index++)
+        {
+            var number = index + (Model.Page > 0 ? Model.Page - 1 : Model.Page) * Model.PageSize + 1;
+            <tr class="rows-vb">
+                <td class="number bold">@string.Format("{0:#00}", number)</td>
+                <td>
+                    @{ Html.RenderAction("PartialDocumentAttribute", "Shared", new { model = new SharedViewModel.DocumentAttribute { Docs = Model.DocList.lDocs[index], EnableSaveDoc = false} });}
+                </td>
+                <td style="padding-left: 20px;">
+                    <a href="javascript:vbluat.myDocuments.deleteCustomerDocs(@Model.DocList.lDocs[index].DocGroupId,@Model.DocList.lDocs[index].DocId,1);" class="xoavb">Xóa</a>
+                </td>
+            </tr>
+        }
+        @if (Model.DocList.lDocs.Count == Constants.RowAmount20)
+        {
+            Html.RenderAction("PartialPagination", "Shared", new
+            {
+                model = new PaginationModel
+                {
+                    Page = Model.Page,
+                    TotalPage = Model.DocList.RowCount,
+                    AjaxUrl = "/Ajax/CustomerDocsGetPage",
+                    QueryString = "".BuildQueryStringUrl(new NameValueCollection
+                    {
+                        {"DocGroupId",Model.DocGroupId.ToString() },
+                        {"FieldId",Model.FieldId.ToString() },
+                        {"EffectStatusId",Model.EffectStatusId.ToString() },
+                        {"DocTypeId",Model.DocTypeId.ToString() },
+                        {"OrganId",Model.OrganId.ToString() },
+                        {"page",(Model.Page+1).ToString() }
+                    })
+                }
+            });
+        }
+        </tbody>
+    </table>
+}

@@ -1,0 +1,384 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using ICSoft.CMSLib
+@{
+    ViewBag.Title = "CustomerInterFace.Mobile";
+    Layout = "~/Views/Shared/_LayoutMyLuatVNMobile.cshtml";
+}
+@model CustomerDocsViewModel
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>»
+    <span class="breadcrumb-item color1">My Luatvietnam</span>
+</div>
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+<section class="box-section">
+    <div class="title" style="margin-bottom: 0px;">
+        <h2 class="title-cat"> Văn bản, chính sách mới</h2>
+        <div class="btn-more">
+            <ul class="usernav">
+                <li class="button-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/Mobile/Images/more-nv.png")" /></a>
+                    <ul class="dropdown-menu" style="right: 0;  width: 130px;margin-top: 3px;">
+                        <li class="item-more">
+                            @Ajax.ActionLink(Resource.NewlyIssued, string.Empty, string.Empty, null,
+                            new AjaxOptions
+                            {
+                                HttpMethod = "Get"
+                                ,Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName,Model.PartialPaginationAjaxFirst.ControllerName,new
+                                {
+                                    effectStatusName = "",
+                                    languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                                    updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                    insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                    controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                                    actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                                    pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                                    linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit,
+                                    urlPaging = Model.PartialPaginationAjaxFirst.UrlPaging
+                                })
+                                ,UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                ,InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                ,OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                ,OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                            }, new { @class = "item-more-2"})
+                        </li>
+                        <li class="item-more">
+                            @Ajax.ActionLink(Resource.ComingIntoEffect, string.Empty, string.Empty, null,
+                            new AjaxOptions
+                            {
+                                HttpMethod = "Get"
+                                ,Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName,Model.PartialPaginationAjaxFirst.ControllerName,new
+                                {
+                                    effectStatusName = Constants.EffectStatusSapCoHieuLuc,
+                                    languageId = Model.PartialPaginationAjaxFirst.LanguageId,
+                                    updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                    insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                    controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                                    actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                                    pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                                    linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit,
+                                    urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-sap-co-hieu-luc.html")
+                                })
+                                ,UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                ,InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                ,OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                ,OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                            }, new { @class = "item-more-2" })
+                        </li>
+                        <li class="item-more">
+                            @Ajax.ActionLink(Resource.Altering, string.Empty, string.Empty,
+                            null,
+                            new AjaxOptions
+                            {
+                                HttpMethod = "Get"
+                                ,Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName,Model.PartialPaginationAjaxFirst.ControllerName,new
+                                {
+                                    effectStatusName = Constants.EffectStatusSapSuaDoi,
+                                    languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                                    updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                    insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                    controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                                    actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                                    pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                                    linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit,
+                                    urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-sap-sua-doi.html")
+                                })
+                                ,UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                ,InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                ,OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                ,OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                            }, new { @class = "item-more-2" })
+                        </li>
+                        <li class="item-more">
+                            @Ajax.ActionLink(Resource.AlmostOutOfDate, string.Empty, string.Empty,
+                            null,
+                            new AjaxOptions
+                            {
+                                HttpMethod = "Get"
+                                ,Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName,Model.PartialPaginationAjaxFirst.ControllerName,new
+                                {
+                                    effectStatusName = Constants.EffectStatusSapHetHieuLuc,
+                                    languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                                    updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                    insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                    controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                                    actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                                    pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                                    linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit,
+                                    urlPaging = string.Concat(CmsConstants.ROOT_PATH, "van-ban-sap-het-hieu-luc.html")
+                                })
+                                ,UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                                ,InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                ,OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                                ,OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                            }, new { @class = "item-more-2" })
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="cat-box-content" id="FirstBox">
+        @if (Model.ListDocsViewFirst.HasValue())
+        {
+            for (int index = 1; index <= Model.ListDocsViewFirst.Count; index++)
+            {
+                string effectStatusName = Model.ListEffectStatus.GetEffectStatusNameById(Model.ListDocsViewFirst[index - 1].EffectStatusId).TrimmedOrDefault(string.Empty);
+                <div class="first-news dashed">
+                    <h3 class="post-title"><a href="@Model.ListDocsViewFirst[index - 1].GetDocUrl()">@Model.ListDocsViewFirst[index - 1].DocName</a></h3>
+                    @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsViewFirst[index - 1], EffectStatusName = effectStatusName } });}
+                </div>
+            }
+        }
+        else
+        {
+            <div class="first-news dashed">
+                <h3 class="post-title">@Resource.UpdatingData</h3>
+            </div>
+        }
+    </div>
+
+</section>
+@if (Model.ListDocsViewrelated.HasValue())
+{
+    <div class="box-vbqt">
+        <div class="p10">
+            <p style="font-size: 15px; font-style: italic; padding-bottom: 5px;"><strong> Văn bản liên quan có thể bạn quan tâm!</strong></p>
+            @for (int i = 0; i < Model.ListDocsViewrelated.Count; i++)
+            {
+                if (i >= 2) { break; }
+                DocsView mDocsView = Model.ListDocsViewrelated[i];
+                <div class="item-quantam">
+                    <i class="fa-vbqt"><img src="@Url.Content("~/assets/Mobile/Images/vbxemnhieu.png")"></i>
+                    <div class="post-title-vnqt">
+                        <a href="@mDocsView.GetDocUrl("")">@mDocsView.DocName</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+<div class="rows-giahan">
+    <a href="#" class="thaydoi-linhvuc select-customer-fieldsV2"><img src="@Url.Content("~/assets/Mobile/Images/thaydoi-linhvuc.png")"> Thay đổi lĩnh vực</a>
+</div>
+@if (Model.lCustomerFields.HasValue())
+{
+<section class="box-section">
+    <div class="title" style="margin-bottom: 0px;">
+        <h2 class="title-cat"> Lĩnh vực văn bản quan tâm</h2>
+        <div class="btn-more">
+            <ul class="usernav">
+                <li class="button-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/Mobile/Images/more-nv.png")" /></a>
+                    <ul class="dropdown-menu" style="right: 0;  width: 130px;margin-top: 3px; max-height:400px; overflow:scroll">
+                        @for (int i = 0; i < Model.lCustomerFields.Count; i++)
+                        {
+                            Fields myFields = Fields.Static_Get(Model.lCustomerFields[i].FieldId, 0);
+                            if (myFields.FieldId > 0)
+                            {
+                                <li class="item-more">
+                                    @Ajax.ActionLink(myFields.FieldName, string.Empty, string.Empty,
+                                    null,
+                                    new AjaxOptions
+                                    {
+                                        HttpMethod = "Get"
+                                        ,Url = Url.Action("Customers_InterfaceByField","Ajax",new
+                                        {
+                                            ProvinceId = 0,
+                                            fieldId = myFields.FieldId,
+                                            effectStatusId = 0,
+                                            docTypeId = 0,
+                                            updateTargetId = "Customers_InterfaceByField",
+                                            actionName = "Ajax",
+                                            pageSize = 5,
+                                        })
+                                        ,UpdateTargetId = "ContentByField"
+                                        ,InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                                        ,OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", "ContentByField")
+                                        ,OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", "ContentByField")
+                                    }, new { @class = "item-more-2" })
+                                </li>
+                            }
+                        }
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="cat-box-content" id="ContentByField">
+        @if (Model.lMyDocs.HasValue())
+        {
+            for (int index = 0; index < Model.lMyDocs.Count; index++)
+            {
+                if (index > 4) {break;}
+                string effectStatusName = Model.ListEffectStatus.GetEffectStatusNameById(Model.lMyDocs[index].EffectStatusId).TrimmedOrDefault(string.Empty);
+                <div class="first-news dashed">
+                    <h3 class="post-title"><a href="@Model.lMyDocs[index].GetDocUrl()">@Model.lMyDocs[index].DocName</a></h3>
+                    @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.lMyDocs[index], EffectStatusName = effectStatusName } });}
+                </div>
+            }
+        }
+        else
+        {
+            <div class="first-news dashed">
+                <h3 class="post-title">@Resource.UpdatingData</h3>
+            </div>
+        }
+    </div>
+</section>
+}
+@if (Model.mArticlesViewMaster.lCategoriesTop1.Count > 0)
+{
+    CategoriesView categoriesTinVbMoi = Model.mArticlesViewMaster.lCategoriesTop1[0];
+    <section class="box-section">
+        <div class="title">
+            <h2 class="title-cat">@categoriesTinVbMoi.CategoryName</h2>
+        </div>
+        <div class="cat-box-content">
+            @for (int index = 0; index < categoriesTinVbMoi.lArticlesView.Count && index < Constants.RowAmount5; index++)
+            {
+                ArticlesView articleTinTucPhapLuat = categoriesTinVbMoi.lArticlesView[index];
+                if (index == 0)
+                {
+                    <div class="first-news">
+                        <h3 class="post-title padding-btt10"><a href="@articleTinTucPhapLuat.GetArticleUrl()">@articleTinTucPhapLuat.Title</a></h3>
+                        <div class="post-thumb">
+                            <a href="@articleTinTucPhapLuat.GetArticleUrl()" class="thumb125x70"><img src="@articleTinTucPhapLuat.GetImageUrl_Thumb()" /></a>
+                        </div>
+                        <div class="sapo">
+                            <p>@Html.Raw(articleTinTucPhapLuat.Summary)</p>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="other-news">
+                        <h3 class="post-title"><a href="@articleTinTucPhapLuat.GetArticleUrl()"><i class="fa-m"></i>@articleTinTucPhapLuat.Title</a></h3>
+                    </div>
+                }
+            }
+        </div>
+
+    </section>
+}
+@if (Model.mArticlesViewMaster.lCategoriesTop2.HasValue()) //|| Model.ListArticlesByCustomerId.HasValue()
+{
+    CategoriesView categoriesTinTucPhapLuat = Model.mArticlesViewMaster.lCategoriesTop2[0];
+<section class="box-section">
+    <div class="title">
+        <h2 class="title-cat">@categoriesTinTucPhapLuat.CategoryName</h2>
+    </div>
+    <div class="cat-box-content">
+        @for (int index = 0; index < categoriesTinTucPhapLuat.lArticlesView.Count && index < Constants.RowAmount5; index++)
+        {
+            ArticlesView articleTinTucPhapLuat = categoriesTinTucPhapLuat.lArticlesView[index];
+            if (index == 0)
+            {
+                <div class="first-news">
+                    <h3 class="post-title padding-btt10"><a href="@articleTinTucPhapLuat.GetArticleUrl()">@articleTinTucPhapLuat.Title</a></h3>
+                    <div class="post-thumb">
+                        <a href="@articleTinTucPhapLuat.GetArticleUrl()" class="thumb125x70"><img src="@articleTinTucPhapLuat.GetImageUrl_Thumb()" /></a>
+                    </div>
+                    <div class="sapo">
+                        <p>@Html.Raw(articleTinTucPhapLuat.Summary)</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="other-news">
+                    <h3 class="post-title"><a href="@articleTinTucPhapLuat.GetArticleUrl()"><i class="fa-m"></i>@articleTinTucPhapLuat.Title</a></h3>
+                </div>
+            }
+        }
+    </div>
+
+</section>
+}
+@if (Model.lDocsView_TCVN.HasValue())
+{
+<section class="box-section">
+    <div class="title" style="margin-bottom: 0px;">
+        <h2 class="title-cat">@Resource.VietNamStandard</h2>
+    </div>
+    <div class="cat-box-content">
+        @if (Model.lDocsView_TCVN.HasValue())
+        {
+            foreach (DocsView mDocsView in Model.lDocsView_TCVN)
+            {
+                string effectStatusName = Model.ListEffectStatus.GetEffectStatusNameById(mDocsView.EffectStatusId).TrimmedOrDefault(string.Empty);
+                <div class="first-news dashed">
+                    <h3 class="post-title"><a href="@mDocsView.GetDocUrl()">@mDocsView.DocName</a></h3>
+                    @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView, EffectStatusName = effectStatusName } });}
+                </div>
+            }
+        }
+        else
+        {
+            <div class="first-news dashed">
+                <h3 class="post-title">@Resource.UpdatingData</h3>
+            </div>
+        }
+        
+    </div>
+</section>
+}
+@if (Model.lDocsView_UBND.HasValue())
+{
+<section class="box-section">
+    <div class="title" style="margin-bottom: 0px;">
+        <h2 class="title-cat"> Văn bản địa phương</h2>
+    </div>
+    <div class="cat-box-content">
+        @if (Model.lDocsView_UBND.HasValue())
+        {
+            foreach (DocsView mDocsView in Model.lDocsView_UBND)
+            {
+                string effectStatusName = Model.ListEffectStatus.GetEffectStatusNameById(mDocsView.EffectStatusId).TrimmedOrDefault(string.Empty);
+                <div class="first-news dashed">
+                    <h3 class="post-title"><a href="@mDocsView.GetDocUrl()">@mDocsView.DocName</a></h3>
+                    @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView, EffectStatusName = effectStatusName } });}
+                </div>
+            }
+        }
+        else
+        {
+            <div class="first-news dashed">
+                <h3 class="post-title">@Resource.UpdatingData</h3>
+            </div>
+        }
+    </div>
+</section>
+}
+@if (Model.mArticlesViewMaster.lCategoriesRight2.Count > 0)
+{
+    CategoriesView mCategoriesView = Model.mArticlesViewMaster.lCategoriesRight2[0];
+    if (mCategoriesView.lArticlesView.Count > 0)
+    {
+    <section class="box-section">
+        <div class="title" style="margin-bottom: 0px;">
+            <h2 class="title-cat">@mCategoriesView.CategoryName</h2>
+        </div>
+        <div class="cat-box-content">
+            @foreach (ArticlesView mArticlesView in mCategoriesView.lArticlesView)
+            {
+                <div class="first-news page">
+                    <div class="post-thumb">
+                        <a href="@mArticlesView.GetArticleUrl()" class="thumb125x70"><img src="@mArticlesView.GetImageUrl_Thumb()"></a>
+                    </div>
+                    <div class="pks">
+                        <h3 class="post-title"><a href="@mArticlesView.GetArticleUrl()">@mArticlesView.Title</a></h3>
+                        <div class="post-time"><em>@mArticlesView.PublishTime.toString("", "dd/MM/yyyy HH:mm")</em> </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+}
+}
+
+

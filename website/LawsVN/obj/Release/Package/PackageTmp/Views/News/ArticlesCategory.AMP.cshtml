@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+@using ICSoft.CMSLib
+@using LawsVN.Models
+@using LawsVN.Library
+@model NewsViewModel
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="keyword" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+<div class="breadcrumb">
+    @if (Model.mArticlesViewCate.lParentCategories.HasValue())
+    {
+        for (int index = 0; index < Model.mArticlesViewCate.lParentCategories.Count; index++)
+        {
+            var categoriesView = Model.mArticlesViewCate.lParentCategories[index];
+            if (index < Model.mArticlesViewCate.lParentCategories.Count - 1 && categoriesView.CategoryId != 229)
+            {
+                <a href="@categoriesView.GetCategoryUrl()" class="breadcrumb-item">@categoriesView.CategoryName </a> @("»")
+            }
+            else
+            {
+                <span class="breadcrumb-item">@categoriesView.CategoryName</span>
+            }
+        }
+    }
+</div>
+
+<section class="content-section">
+    <div class="title">
+        <h1 class="title-cat">@Model.mCategoriesView.CategoryName</h1>
+    </div>
+    <div class="cat-box-content">
+    @if (Model.mArticlesViewCate.lArticlesNewest.HasValue())
+    {
+        foreach (var articleView in Model.mArticlesViewCate.lArticlesNewest)
+        {
+            <div class="other-news">
+                <div class="post-thumbnail">
+                    <a href="@articleView.GetArticleUrl()">
+                        <amp-img src="@articleView.GetImageUrl_Mobile2()" width="300" height="200" layout="responsive"
+                                 class="-amp-element -amp-layout-responsive -amp-layout-size-defined -amp-layout" id="amp-1">
+                        </amp-img>
+                    </a>
+                </div>
+                <div class="pks">
+                    <div class="rows-time">
+                        <span class="item-time">@articleView.PublishTime.toString()</span>
+                    </div>
+                    <h2 class="post-title other"><a href="@articleView.GetArticleUrl()">@articleView.Title</a>
+                    </h2>
+                </div>
+            </div>
+        }
+    }
+    </div>
+    @*<div class="pagination">
+        <div class="pagination-right">
+            <a href="#" class="pagination-item ">1</a>
+            <a href="#" class="pagination-item active">2</a>
+            <a href="#" class="pagination-item">3</a>
+            <a href="#" class="pagination-item">»</a>
+        </div>
+    </div>*@
+</section>

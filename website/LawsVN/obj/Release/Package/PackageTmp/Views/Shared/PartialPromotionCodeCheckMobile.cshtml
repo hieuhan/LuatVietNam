@@ -1,0 +1,26 @@
+﻿@model LawsVN.Models.Account.PromotionCodeCheckModel
+@using (Ajax.BeginForm("PromotionCodeCheck", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    ,OnSuccess = "lawsVn.ajaxEvents.PromotionCodeCheckOnSuccess"
+}, new { id = "PromotionCodeCheckForm" }))
+{
+    @Html.AntiForgeryToken()
+<div class="rows-giahan">
+    <div class="left-giahan">
+        <strong>Mã giảm giá (nếu có):</strong>
+    </div>
+    <div class="right-giahan">
+        <button class="kiemtra">Kiểm tra</button>
+        @Html.TextBoxFor(m => m.PromotionCode, new { @class = "search-input h30", placeholder = "Nhập mã và bấm kiểm tra" })
+        @Html.ValidationMessageFor(m => m.PromotionCode, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m => m.ServicePackageParentId)
+        @Html.ValidationMessageFor(m => m.ServicePackageParentId, "", new { @class = "text-danger" })<br />
+        @Html.HiddenFor(m => m.ServicePackageId)
+        @Html.ValidationMessageFor(m => m.ServicePackageId, "", new { @class = "text-danger" })
+        <div id="promotionCodeCheckResult" class="rows"></div>
+    </div>
+</div>
+}

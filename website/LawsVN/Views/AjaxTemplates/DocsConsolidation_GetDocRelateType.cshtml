@@ -1,0 +1,60 @@
+﻿@model LawsVN.Models.Templates.DocsNewest
+@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVN.Library
+@if (Model.mDocsViewDetail!= null)
+{
+    <table class="table table-bordered">
+        <tbody>
+            @{DocRelates m_DocsView = new DocRelates();}
+            @for (int index = 0; index < Model.mDocsViewDetail.lDocRelates.Count; index++)
+            {
+                m_DocsView = @Model.mDocsViewDetail.lDocRelates[index];
+                var number = index + (Model.PartialPaginationAjax.PageIndex > 0 ? Model.PartialPaginationAjax.PageIndex - 1 : Model.PartialPaginationAjax.PageIndex) * Model.PartialPaginationAjax.PageSize + 1;
+                <tr class="row-first-news @(index % 2 != 0 ? "bgcolor" : "")">
+                    <th class="count-123" scope="row">@((index + 1).ToString("#00"))</th>
+                    <td class="news-left-post">
+                        <h2>
+                            <a href="@(DocsView.GetDocUrl(m_DocsView.DocId, m_DocsView.DocName))" class="post-title lvn">@m_DocsView.DocName.Truncate(150)</a>
+                        </h2>
+                        <div class="item-meta">
+                            <a href="@(DocsView.GetDocUrl(m_DocsView.DocId, m_DocsView.DocName))" class="tag-item page">Thuộc tính</a>
+                            <a href="@(DocsView.GetDocUrl(m_DocsView.DocId, m_DocsView.DocName)+"?tab=noidung")" class="tag-item page">Nội dung</a>
+                            <a href="@(DocsView.GetDocUrl(m_DocsView.DocId, m_DocsView.DocName)+"?tab=lienquan")" class="tag-item page">VB được hợp nhất</a>
+                            <a href="@(DocsView.GetDocUrl(m_DocsView.DocId, m_DocsView.DocName)+"?tab=taive")" class="tag-item page">Tải về</a>
+                            <a href="javascript:lawsVn.SaveDoc(@m_DocsView.DocId)" title="Lưu văn bản quan tâm" class="icon-save"></a>
+                        </div>
+                    </td>
+                    <td class="post-time-right">
+                        <p class="post-time">
+                            Xác thực: <span class="color2">@(m_DocsView.IssueDate != DateTime.MinValue ? m_DocsView.IssueDate.ToString("dd/MM/yyyy") : Constants.DangCapNhat)</span>
+                        </p>
+                        <p class="post-time">
+                            Áp dụng: <span class="color2">@(m_DocsView.EffectDate != DateTime.MinValue ? m_DocsView.EffectDate.ToString("dd/MM/yyyy") : Constants.DangCapNhat)</span>
+                        </p>
+                        <p class="post-time bottom0">
+                            Hiệu lực: <span class="color2">@(string.IsNullOrEmpty(m_DocsView.EffectStatusName) ? (EffectStatus.Static_Get(m_DocsView.EffectStatusId).EffectStatusDesc) : m_DocsView.EffectStatusName)</span>
+                            @*Hiệu lực: <span class="color2">@(string.IsNullOrEmpty(m_DocsView.EffectStatusName) ? Constants.DangCapNhat : m_DocsView.EffectStatusName)</span>*@
+                        </p>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+            { Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.PartialPaginationAjax }); }
+}
+else
+{
+    <table class="table table-bordered">
+        <tbody>
+            <tr class="row-first-news">
+                <th class="count-123" scope="row"></th>
+                <td class="news-center-post">
+                    <h3>
+                        <span class="post-title lvn">Đang cập nhật dữ liệu.</span>
+                    </h3>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

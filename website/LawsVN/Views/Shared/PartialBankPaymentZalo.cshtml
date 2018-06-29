@@ -1,0 +1,79 @@
+﻿@model LawsVN.Models.Account.BankPaymentModel
+@using (Ajax.BeginForm("PaymentServiceUsingBankAccountZalo", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    , OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    , OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    , OnSuccess = "lawsVn.ajaxEvents.PaymentServiceUsingBankAccountOnSuccess"
+}, new {id = "ValidPaymentMethodsBankAccountForm"}))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m=>m.ServiceId)
+    @Html.HiddenFor(m=>m.ServiceIdFixed)
+    @Html.HiddenFor(m=>m.ServiceName)
+    @Html.HiddenFor(m=>m.ServicePackageId)
+    @Html.HiddenFor(m=>m.ServicePackageName)
+    @Html.HiddenFor(m=>m.Total)
+    @Html.HiddenFor(m=>m.Price)
+    @Html.HiddenFor(m=>m.Amount)
+    @Html.HiddenFor(m=>m.PercentDecrease)
+    @Html.HiddenFor(m=>m.PromotionCodeBankAccount)
+    @Html.HiddenFor(m=>m.CompanyName)
+    @Html.HiddenFor(m=>m.CompanyAddress)
+    @Html.HiddenFor(m=>m.CompanyTaxCode)
+    @Html.HiddenFor(m=>m.InternalContent)
+    @Html.HiddenFor(m=>m.TransactionTypeId)
+    @*<div class="step-content-pay">
+        <div class="rows item55">
+            <div class="pay3">
+                Quý khách đang chọn kênh thanh toán dịch vụ LuatVietnam qua <span style="color: #d81c22;">Thẻ ATM nội địa</span> hoặc thẻ <span style="color: #d81c22;">Thẻ thanh toán quốc tế</span>.
+            </div>   
+        </div>
+        <div class="rows item8">
+            <div class="pure-checkbox">
+                @Html.CheckBoxFor(m => m.TermsAndConditions)
+                <label for="TermsAndConditions">Tôi đồng ý với các <a href="#" class="quy-dinh-thanh-toan" style="color: #a67942; font-weight: bold;">Quy định thanh toán</a> LuatVietnam.vn</label>
+                <br />@Html.ValidationMessageFor(m => m.TermsAndConditions, "", new { @class = "text-danger" })
+                <div class="rows item8">
+                    @Html.CheckBoxFor(m => m.TaxInvoice)
+                    <label for="TaxInvoice">Yêu cầu xuất hóa đơn GTGT</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="rows btn">
+            @Html.HiddenFor(m=> m.BankCode, new { id="hdfBankCode"})       
+            <a href="#" class="btn-pay btn-xacnhan" style="background: #a67942">Thanh toán </a>
+            <a href="#" class="btn-pay back-step" style="margin-right: 20px; background: #dddddd; color: #222;">Quay lại</a>
+        </div>
+    </div>*@
+
+
+    <div class="tabcontent-dv">
+        <div style="margin: 20px 0 0 20px;">
+            <p>
+                Quý khách đang chọn kênh thanh toán dịch vụ LuatVietnam qua <span style="color: #d81c22;">Thẻ ATM nội địa</span> hoặc <span style="color: #d81c22;">Thẻ thanh toán quốc tế</span>.
+            </p>
+            <p class="text-danger" style="padding: 20px; font-weight:bold; font-size:18px;">
+                Khuyến mại 10% khi thanh toán Online, quý khách chỉ cần thanh toán  <b class="total-promotion">0</b>
+            </p>
+        </div>
+        <div class="pure-checkbox">
+            <div style="margin: 20px;">
+                @Html.CheckBoxFor(m => m.TermsAndConditions)
+                <label for="TermsAndConditions">Tôi đồng ý với các <a href="#" class="quy-dinh-thanh-toan" style="color: #a67942; font-weight: bold;">Quy định thanh toán</a> LuatVietnam.vn</label><br/>
+                @Html.ValidationMessageFor(m => m.TermsAndConditions, "", new {@class = "text-danger"})
+            </div>
+            <div style="margin: 20px;">
+                @Html.CheckBoxFor(m => m.TaxInvoice)
+                <label for="TaxInvoice">Yêu cầu xuất hóa đơn GTGT</label>
+            </div>
+        </div>
+    </div>
+    <div class="rows item8"></div>
+    <div class="rows btn">
+        @Html.HiddenFor(m=> m.BankCode, new { id="hdfBankCode"})       
+        <a href="#" class="btn-pay btn-xacnhan" style="background: #a67942">Tiếp tục thanh toán </a>
+        <a href="#" class="btn-pay back-step" style="margin-right: 20px; background: #dddddd; color: #222;">Quay lại</a>
+    </div>
+}

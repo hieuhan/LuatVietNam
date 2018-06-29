@@ -1,0 +1,57 @@
+﻿@using ICSoft.CMSViewLib
+@using ICSoft.CMSLib
+@using LawsVN.Models
+@using LawsVN.Library
+@model LawerViewModel
+@if (Model.mLawersView.lLawers != null && Model.mLawersView.lLawers.Count>0){
+<table class="table table-bordered luatsu">
+    <thead>
+        <tr>
+            <th class="col-info">Thông tin luật sư</th>
+            <th class="col-ttp"> TỈnh / TP</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (ICSoft.LawDocsLib.Lawers mLawers in Model.mLawersView.lLawers)
+        {
+            <tr>
+                <td class="col-info">
+                    <a class="thumb120" href="@LawersView.GetLawerUrl(mLawers.LawerID, mLawers.FullName)">
+                        <img src="@mLawers.GetImageUrl_Mobile()" height="135px" alt="@mLawers.FullName">
+                    </a>
+                    <div class="info-thumb120">
+                        <div class="rows item3">
+                            <p class="font16">Luật sư: @mLawers.FullName</p>
+                            <span class="vien1px"></span>
+                        </div>
+                        <p><strong>Lĩnh vực hoạt động:</strong> @ICSoft.LawDocsLib.Fields.Static_Get(mLawers.FieldId, 0).FieldName</p>
+                        <p><strong>Nơi công tác:</strong> @mLawers.LawOfficeName</p>
+                        <p><strong>Thông tin liên hệ:</strong></p>
+                        <p>• Địa chỉ: @mLawers.Address</p>
+                        <p>• Điện thoại: @mLawers.PhoneNumber  </p>
+                        <p>• Di động: @mLawers.Mobile</p>
+                        @( string.IsNullOrEmpty(mLawers.Email) ? "" : "• Email: " + mLawers.Email)
+                    </div>
+                </td>
+                <td class="col-ttp">@Provinces.Static_Get(short.Parse(mLawers.ProviceId.ToString())).ProvinceDesc</td>
+            </tr>
+        }
+    </tbody>
+</table> <!--Bengin pagination -->
+{ Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.PartialPaginationAjax }); }
+
+}else
+{
+    <table class="table table-bordered luatsu">
+        <thead>
+            <tr>
+                <th class="col-info">Thông tin luật sư</th>
+                <th class="col-ttp"> TỈnh / TP</th>
+            </tr>
+            <tr><td colspan="2">Nội dung đang được cập nhật...</td></tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+}
+
+<!--End pagination -->

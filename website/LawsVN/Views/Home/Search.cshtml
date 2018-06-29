@@ -1,0 +1,543 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using ICSoft.CMSViewLib
+@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@model SearchModel
+@{
+    Layout = "~/Views/Shared/_LayoutDoc.cshtml";
+}
+<div class="page-content">
+    <div class="cat-box">
+        <div class="content-left">
+            <div class="breadcrumb">
+                <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>Trang chủ </a> »
+                <span class="breadcrumb-item ">Tìm kiếm Văn bản</span>
+            </div>
+            <section class="cat-box search-box">
+                @{Html.RenderPartial("PartialFullSearch");}
+            </section>
+        </div>
+        <div class="content-right">
+            <div class="widget ">
+                <div class="banner">
+                    <a href="#"><img alt="banner quang cao" src="~/Assets/Images/banner-tk.png"></a>
+                </div>
+            </div>
+            <!--End widget ads-->
+        </div>
+        <!--End content-right-->
+    </div>
+    <!--End cat-box-->
+    <!--Bengin cat-box-->
+    
+    <div id="divcontent" class="cat-box" data-keyword="@Model.Keyword" data-searchoptions="@Model.SearchOptions" data-docgroupid="@Model.DocGroupId" 
+         data-datefrom="@Model.DateFrom" data-dateto="@Model.DateTo" data-organid="@Model.OrganId" data-languageid="@Model.LanguageId" 
+         data-signername="@Model.SignerName" data-doctypeid="@Model.DocTypeId" data-effectstatusid="@Model.EffectStatusId" data-fieldid="@Model.FieldId">
+        <!--Bengin aside-->
+        <aside class="sidebar-nav searchblog">
+            <!--Bengin widget-->
+            <div class="widget">
+                <div class="widget-top" style="background: #49c5c7;">
+                    <span class="title-widget tk">Kết quả đang lọc theo:</span>
+                    <div class="more1">
+                        <a class="text-delete" href="javascript:lawsVn.UncheckSearchAll()">Xóa tất cả</a>
+                    </div>
+                </div>
+                <div class="categories-sub">
+                    @{List<Fields> lFieldsfound = new List<Fields>();
+                      if (Model.mDocsViewSearch.lFields != null && Model.mDocsViewSearch.lFields.Any())
+                      { lFieldsfound = Model.mDocsViewSearch.lFields.FindAll(m => m.FieldId == Model.FieldId); }}
+                    <div class="@(lFieldsfound != null && lFieldsfound.Any() ? "item-kqtk" : "item-kqtk-noitem")" style="border: 0;" id="listnameField">
+                        @if (lFieldsfound != null && lFieldsfound.Any())
+                        {
+                            foreach (Fields mFields in lFieldsfound)
+                            {
+                                <div class="item-sub-qktk">
+                                    <span class="texttk">@(mFields.FieldName + " (" + mFields.SoLuong + ")")</span>
+                                    <a href='javascript:lawsVn.UncheckSearch("@("checkboxFields"+ (mFields.FieldId))")' class="xoa"><img alt="xoa" src="~/Assets/Images/xoa-tiemkiem.png"></a>
+                                </div>
+                            }
+                        }
+                    </div>
+                    
+                    @{List<EffectStatus> lEffectStatusfound = new List<EffectStatus>();
+                      if (Model.mDocsViewSearch.lEffectStatus != null && Model.mDocsViewSearch.lEffectStatus.Any())
+                      { lEffectStatusfound = Model.mDocsViewSearch.lEffectStatus.FindAll(m => m.EffectStatusId == Model.EffectStatusId); }}
+                    <div class="@(lEffectStatusfound != null && lEffectStatusfound.Any() ? "item-kqtk" : "item-kqtk-noitem")" id="listnameEffectStatus">
+                        @if (lEffectStatusfound != null && lEffectStatusfound.Any())
+                        {
+                            foreach (EffectStatus mEffectStatus in lEffectStatusfound)
+                            {
+                                <div class="item-sub-qktk">
+                                    <span class="texttk">@(mEffectStatus.EffectStatusDesc + " (" + mEffectStatus.SoLuong + ")")</span>
+                                    <a href='javascript:lawsVn.UncheckSearch("@("checkboxEffectStatus" + mEffectStatus.EffectStatusId)")' class="xoa"><img alt="xoa" src="~/Assets/Images/xoa-tiemkiem.png"></a>
+                                </div>
+                                
+                            }
+                        }
+                    </div>
+                    @{List<DocTypes> lDocTypesfound = new List<DocTypes>();
+                      if (Model.mDocsViewSearch.lDocTypes != null && Model.mDocsViewSearch.lDocTypes.Any())
+                      { lDocTypesfound = Model.mDocsViewSearch.lDocTypes.FindAll(m => m.DocTypeId == Model.DocTypeId); } }
+                    <div class="@(lDocTypesfound != null && lDocTypesfound.Any() ? "item-kqtk" : "item-kqtk-noitem")" id="listnameDoctype">
+                        @if (lDocTypesfound != null && lDocTypesfound.Any())
+                        {
+                            foreach (DocTypes mDocTypes in lDocTypesfound)
+                            {
+                                <div class="item-sub-qktk">
+                                    <span class="texttk">@(mDocTypes.DocTypeName + " (" + mDocTypes.SoLuong + ")")</span>
+                                    <a href='javascript:lawsVn.UncheckSearch("@("checkboxDocTypes" + mDocTypes.DocTypeId)")'  class="xoa"><img alt="xoa" src="~/Assets/Images/xoa-tiemkiem.png"></a>
+                                </div>
+                            }
+                        }
+                    </div>
+                    @{List<Organs> lOrgansfound = new List<Organs>();
+                      if (Model.mDocsViewSearch.lOrgans != null && Model.mDocsViewSearch.lOrgans.Any())
+                      { lOrgansfound =  Model.mDocsViewSearch.lOrgans.FindAll(m => m.OrganId == Model.OrganId); }}
+                    <div class="@(lOrgansfound != null && lOrgansfound.Any() ? "item-kqtk" : "item-kqtk-noitem")" id="listnameOrgan">
+                        @if (lOrgansfound != null && lOrgansfound.Any())
+                        {
+                            foreach (Organs mOrgans in lOrgansfound)
+                            {
+                                <div class="item-sub-qktk">
+                                    <span class="texttk">@(mOrgans.OrganName + " (" + mOrgans.SoLuong + ")")</span>
+                                    <a href='javascript:lawsVn.UncheckSearch("@("checkboxOrgans" + mOrgans.OrganId)")' class="xoa"><img alt="xoa" src="~/Assets/Images/xoa-tiemkiem.png"></a>
+                                </div>
+                            }
+                        }
+                    </div>
+                    @{ int yearfrom = Extensions.getYearfromString(Model.DateFrom);
+                       int yearto = Extensions.getYearfromString(Model.DateTo);
+                       List<YearView> lYearViewfound = new List<YearView>();
+                       if (Model.mDocsViewSearch.YearView != null && Model.mDocsViewSearch.YearView.Any())
+                       { lYearViewfound =  Model.mDocsViewSearch.YearView.FindAll(m => m.Year < yearto && m.Year > yearfrom);} }
+                    <div class="@(lYearViewfound != null && lYearViewfound.Any() ? "item-kqtk" : "item-kqtk-noitem")" id="listnameyear">
+                        @if (lYearViewfound != null && lYearViewfound.Any())
+                        {
+                            foreach (YearView mYearView in Model.mDocsViewSearch.YearView)
+                            {
+                                <div class="item-sub-qktk">
+                                    <span class="texttk">@(mYearView.Year + " (" + mYearView.SoLuong + ")")</span>
+                                    <a href='javascript:lawsVn.UncheckSearch("@("checkboxYearView" + mYearView.Year)")' class="xoa"><img alt="xoa" src="~/Assets/Images/xoa-tiemkiem.png"></a>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <!--End widget-->
+            <!--Bengin widget-->
+            @if (Model.mDocsViewSearch.lFields != null && Model.mDocsViewSearch.lFields.Any())
+            {
+                <div class="widget">
+
+                    <div class="widget-top">
+                        <span class="title-widget tk">Lĩnh vực tra cứu</span>
+                        @if (Model.mDocsViewSearch.lFields.Count > 10)
+                        {
+                            <div class="more1">
+                                <a class="menu moretext" href="#" data-hasqtip="0">
+                                    Xem thêm <img alt="xem-tiep" class="icon-moretext" src="~/Assets/Images/moretext.png">
+                                </a>
+                                <div class="tooltiptext">
+                                    <span class="icon-tooltip"></span>
+                                    <div class="tooltip-item">
+                                        <div class="padding20">
+                                            @for (int i = 10; i < Model.mDocsViewSearch.lFields.Count; i++)
+                                            {
+                                                Fields mFields = Model.mDocsViewSearch.lFields[i];
+                                                <div class="item-checkbox-list">
+                                                    <div class="radio">
+                                                        <input id="checkboxFields@(mFields.FieldId)" name="@(mFields.FieldName + " (" + mFields.SoLuong + ")")" @(mFields.FieldId == Model.FieldId ? "checked" : "") type="radio" value="@mFields.FieldId" onclick="lawsVn.SearchSelect()">
+                                                        <label for="checkboxFields@(mFields.FieldId)" class="radio-label">@(mFields.FieldName + " (" + mFields.SoLuong + ")")</label>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="widget-nav">
+                        <div class="categories-sub ttp">
+                            @for (int i = 0; i < Model.mDocsViewSearch.lFields.Count; i++)
+                            {
+                                if (i >= 10) { break; }
+                                Fields mFields = Model.mDocsViewSearch.lFields[i];
+                                <div class="nav-item-page-ttp">
+                                    <div class="pure-checkbox item">
+                                        <input id="checkboxFields@(mFields.FieldId)" name="@(mFields.FieldName + " (" + mFields.SoLuong + ")")" @(mFields.FieldId == Model.FieldId ? "checked" : "") value="@mFields.FieldId" type="checkbox" onchange="lawsVn.Search()">
+                                        <label for="checkboxFields@(mFields.FieldId)">@(mFields.FieldName + " (" + mFields.SoLuong + ")")</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            }
+            <!--End widget-->
+            <!--Bengin widget-->
+            @if (Model.mDocsViewSearch.lEffectStatus != null && Model.mDocsViewSearch.lEffectStatus.Any())
+            {
+                <div class="widget">
+                    <div class="widget-top">
+                        <span class="title-widget tk">Tình trạng hiệu lực</span>
+                    </div>
+                    <div class="widget-nav">
+                        <div class="categories-sub ttp">
+                            @foreach (EffectStatus mEffectStatus in Model.mDocsViewSearch.lEffectStatus)
+                            {
+                                <div class="nav-item-page-ttp">
+                                    <div class="pure-checkbox item">
+                                        <input id="checkboxEffectStatus@(mEffectStatus.EffectStatusId)" name="@(mEffectStatus.EffectStatusDesc + " (" + mEffectStatus.SoLuong + ")")" type="checkbox" @(mEffectStatus.EffectStatusId == Model.EffectStatusId ? "checked" : "") value="@mEffectStatus.EffectStatusId" onclick="lawsVn.Search()">
+                                        <label for="checkboxEffectStatus@(mEffectStatus.EffectStatusId)">@(mEffectStatus.EffectStatusDesc + " (" + mEffectStatus.SoLuong + ")")</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            }
+            <!--End widget-->
+            <!--Bengin widget-->
+            @if (Model.mDocsViewSearch.lDocTypes != null && Model.mDocsViewSearch.lDocTypes.Any())
+            {
+                <div class="widget">
+                    <div class="widget-top">
+                        <span class="title-widget tk">Loại văn bản</span>
+                        @if (Model.mDocsViewSearch.lDocTypes.Count > 4)
+                        {
+                            <div class="more1">
+                                <a class="menu moretext" href="#" data-hasqtip="1">
+                                    Xem thêm <img alt="xem-tiep" class="icon-moretext" src="~/Assets/Images/moretext.png">
+                                </a>
+                                <div class="tooltiptext">
+                                    <span class="icon-tooltip"></span>
+                                    <div class="tooltip-item">
+                                        <div class="padding20">
+                                            @for (int i = 4; i < Model.mDocsViewSearch.lDocTypes.Count; i++)
+                                            {
+                                                DocTypes mDocTypesother = Model.mDocsViewSearch.lDocTypes[i];
+                                                <div class="item-checkbox-list">
+                                                    <div class="radio">
+                                                        <input id="checkboxDocTypes@(mDocTypesother.DocTypeId)" @(mDocTypesother.DocTypeId == Model.DocTypeId ? "checked" : "") value="@mDocTypesother.DocTypeId" name="@(mDocTypesother.DocTypeName + " (" + mDocTypesother.SoLuong + ")")" type="radio" onclick="lawsVn.Search()">
+                                                        <label for="checkboxDocTypes@(mDocTypesother.DocTypeId)" class="radio-label">@(mDocTypesother.DocTypeName + " (" + mDocTypesother.SoLuong + ")")</label>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="widget-nav">
+                        <div class="categories-sub ttp">
+                            @for (int i = 0; i < Model.mDocsViewSearch.lDocTypes.Count; i++)
+                            {
+                                if (i > 3) { break; }
+                                DocTypes mDocTypes = Model.mDocsViewSearch.lDocTypes[i];
+                                <div class="nav-item-page-ttp">
+                                    <div class="pure-checkbox item">
+                                        <input id="checkboxDocTypes@(mDocTypes.DocTypeId)" @(mDocTypes.DocTypeId == Model.DocTypeId ? "checked" : "") value="@mDocTypes.DocTypeId" name="@(mDocTypes.DocTypeName + " (" + mDocTypes.SoLuong + ")")" type="checkbox">
+                                        <label for="checkboxDocTypes@(mDocTypes.DocTypeId)">@(mDocTypes.DocTypeName + " (" + mDocTypes.SoLuong + ")")</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            }
+            <!--End widget-->
+            <!--Bengin widget-->
+            @if (Model.mDocsViewSearch.lOrgans != null && Model.mDocsViewSearch.lOrgans.Any())
+            {
+                <div class="widget">
+                    <div class="widget-top">
+                        <span class="title-widget tk">Cơ quan ban hành</span>
+                        @if (Model.mDocsViewSearch.lOrgans.Count > 4)
+                        {
+                            <div class="more1">
+                                <a class="menu moretext" href="#" data-hasqtip="2">
+                                    Xem thêm
+                                    <img alt="xem-tiep" class="icon-moretext" src="~/Assets/Images/moretext.png">
+                                </a>
+                                <div class="tooltiptext">
+                                    <span class="icon-tooltip"></span>
+                                    <div class="tooltip-item">
+                                        <div class="padding20">
+                                            @for (int i = 4; i < Model.mDocsViewSearch.lOrgans.Count; i++)
+                                            {
+                                                Organs mOrgans = Model.mDocsViewSearch.lOrgans[i];
+                                                <div class="item-checkbox-list">
+                                                    <div class="radio">
+                                                        <input id="checkboxOrgans@(mOrgans.OrganId)" name="@(mOrgans.OrganName + " (" + mOrgans.SoLuong + ")")" @(mOrgans.OrganId == Model.OrganId ? "checked" : "") value="@mOrgans.OrganId" type="radio" onclick="lawsVn.Search()">
+                                                        <label for="checkboxOrgans@(mOrgans.OrganId)" class="radio-label">@(mOrgans.OrganName + " (" + mOrgans.SoLuong + ")")</label>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="widget-nav">
+                        <div class="categories-sub ttp">
+                            @for (int i = 0; i < Model.mDocsViewSearch.lOrgans.Count; i++)
+                            {
+                                if (i > 3) { break; }
+                                Organs mOrgans = Model.mDocsViewSearch.lOrgans[i];
+                                <div class="nav-item-page-ttp">
+                                    <div class="pure-checkbox item">
+                                        <input id="checkboxOrgans@(mOrgans.OrganId)" name="@(mOrgans.OrganName + " (" + mOrgans.SoLuong + ")")" @(mOrgans.OrganId == Model.OrganId ? "checked" : "") value="@mOrgans.OrganId" type="checkbox" onclick="lawsVn.Search()">
+                                        <label for="checkboxOrgans@(mOrgans.OrganId)">@(mOrgans.OrganName + " (" + mOrgans.SoLuong + ")")</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            }
+            <!--End widget-->
+            <!--Bengin widget-->
+            @if (Model.mDocsViewSearch.YearView != null && Model.mDocsViewSearch.YearView.Any())
+            {
+                <div class="widget">
+                    <div class="widget-top">
+                        <span class="title-widget tk">Năm ban hành</span>
+                    </div>
+                    <div class="widget-nav">
+                        <div class="categories-sub ttp">
+                            @foreach (YearView myearview in Model.mDocsViewSearch.YearView)
+                            {
+
+                                <div class="nav-item-page-ttp">
+                                    <div class="pure-checkbox item">
+                                        <input id="checkboxYearView@(myearview.Year)" name="@(myearview.Year + " (" + myearview.SoLuong + ")")" value="@myearview.Year" type="checkbox" onclick="lawsVn.Search()">
+                                        <label for="checkboxYearView@(myearview.Year)">@(myearview.Year + " (" + myearview.SoLuong + ")")</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            }
+            <!--End widget-->
+            <!--Bengin widget-->
+            <div class="widget">
+                <div class="widget-top">
+                    <span class="title-widget tk">Định dạng văn bản</span>
+                </div>
+                <div class="widget-nav">
+                    <div class="categories-sub ttp">
+
+                        <div class="nav-item-page-ttp">
+                            <div class="pure-checkbox item">
+                                <input id="checkbox1046" name="checkbox" type="checkbox">
+                                <label for="checkbox1046">Doc (123)</label>
+                            </div>
+                        </div>
+                        <div class="nav-item-page-ttp">
+                            <div class="pure-checkbox item">
+                                <input id="checkbox1047" name="checkbox" type="checkbox">
+                                <label for="checkbox1047">PDF (357)</label>
+                            </div>
+                        </div>
+                        <div class="nav-item-page-ttp">
+                            <div class="pure-checkbox item">
+                                <input id="checkbox1048" name="checkbox" type="checkbox">
+                                <label for="checkbox1048">Doc &amp; PDF (961)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--End widget-->
+
+        </aside>
+        <!--End aside-->
+        <!--Bengin content-center-pages-->
+        <div class="content-center-pages searchblog">
+            <section class="cat-box">
+                <!-- Bengin-lockq-->
+                <div class="row item5">
+                    <div class="left" id="txtnumberresultfound">
+                        <strong>Tìm thấy <span class="color2">@Model.RowCount</span> kết quả với từ khóa "<span class="color2">@Model.Keyword</span>"</strong>
+                    </div>
+                    <div class="right-123">
+                        <div class="dropdown22">
+                            <select tabindex="1" class="" id="dllOrderByClauses">
+                                @if (Model.ListOrderByClauses != null && Model.ListOrderByClauses.Any())
+                                {
+                                    int count = 0;
+                                    foreach (OrderByClauses mOrderByClauses in Model.ListOrderByClauses)
+                                    {
+                                        <option @(count==0?"selected":"")  value="@mOrderByClauses.OrderBy">@mOrderByClauses.OrderByDesc</option>
+                                        count++;
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="lockq-from2">
+                    <div class="item-loctheo m1">
+                        <span class="icon-loc-kq"></span>Lọc theo:
+                    </div>
+                    <div class="item-lockq m4">
+                        <div class="dropdown2">
+                            <select id="dllField" tabindex="1" class="dropdown" onchange="lawsVn.SearchFilter()">
+                                <option value="0" data-title="">@Resource.AllFields</option>
+                                @foreach (var item in Model.ListFields)
+                                {
+                                    <option value="@item.FieldId" data-title="@item.FieldName" @(item.FieldId == Model.FieldId ? "selected" : string.Empty)>@item.FieldDesc.Truncatevalue(Constants.Truncate20)</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="item-lockq m4">
+                        <div class="dropdown2">
+                            <select id="dllEffectStatus" tabindex="1" class="dropdown" onchange="lawsVn.SearchFilter()">
+                                <option value="0" data-title="">@Resource.EffectStatus</option>
+                                @foreach (var item in Model.ListEffectStatus)
+                                {
+                                    <option value="@item.EffectStatusId" data-title="@item.EffectStatusDesc" @(item.EffectStatusId == Model.EffectStatusId ? "selected" : string.Empty)>@item.EffectStatusDesc.Truncatevalue(Constants.Truncate20)</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="item-lockq m5">
+                        <div class="dropdown2">
+                            <select id="dllDocTypes" tabindex="1" class="dropdown" onchange="lawsVn.SearchFilter()">
+                                <option value="0" data-title="">@Resource.DocTypes</option>
+                                @foreach (var item in Model.ListDocTypes)
+                                {
+                                    <option value="@item.DocTypeId" data-title="@item.DocTypeDesc" @(item.DocTypeId == Model.DocTypeId ? "selected" : string.Empty)>@item.DocTypeDesc</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="view-post" id="txtnumberpage">
+                        <strong>Kết quả 1-10 trong @(Model.RowCount) văn bản </strong>
+                    </div>
+                </div>
+                <!-- End-lockq-->
+                <!-- Bengin content-->
+                @if (Model.lDocsViewSuggest != null && Model.lDocsViewSuggest.Any())
+                {
+                    <table class="table-tk-boder ">
+                        <tbody>
+                            <tr class="row-first-news-tk-boder title ">
+                                <th class="count-123 page title" scope="row"><img class="bongtk" alt="sao-tk" src="~/Assets/Images/bong-tim-kiem.png"></th>
+                                <td class="news-left-post-timkiem title" style="border: 0;">
+                                    <strong style="font-size: 14px;">Gợi ý kết quả tìm kiếm <span style="color: #90622a;">(@Model.lDocsViewSuggest.Count)</span></strong>
+                                </td>
+
+                                <td class="title">
+                                    <a href="#" class="thugon">Thu gọn <img class="thugon-img" alt="thugon" src="~/Assets/Images/thu-gon-tk.png"> </a>
+                                </td>
+                            </tr>
+                            @foreach (DocsView mDocsViewSuggest in Model.lDocsViewSuggest)
+                            {
+                                <tr class="row-first-news-tk-boder ">
+                                    <th class="count-123 page" scope="row"><img class="sao-tk" alt="sao-tk" src="~/Assets/Images/sao-tim-kiem.png"></th>
+                                    <td class="news-left-post-timkiem ">
+                                        <a href="@mDocsViewSuggest.DocUrl" class="post-title lvn">@Html.Raw(mDocsViewSuggest.DocName)</a>
+                                        <div class="sapo lvn">
+                                            <p>@Html.Raw(mDocsViewSuggest.DocSummary)</p>
+                                        </div>
+                                        <div class="item-meta">
+                                            <a href="@mDocsViewSuggest.DocUrl" class="tag-item page">Tóm tắt  </a>
+                                            <a href="@mDocsViewSuggest.GetDocUrl("luocdo")" class="tag-item page">Lược đồ </a>
+                                            <a href="@mDocsViewSuggest.GetDocUrl("hieuluc")" class=" tag-item page">Hiệu lực </a>
+                                            <a href="@mDocsViewSuggest.GetDocUrl("lienquan")" class="tag-item page">Liên quan</a>
+                                            <a href="@mDocsViewSuggest.GetDocUrl("tienganh")" class="tag-item page">Tiếng Anh</a>
+                                            <a href="@mDocsViewSuggest.GetDocUrl("taive")" class="tag-item page">Tải về</a>
+                                            <a href="#" class="icon-save"></a>
+                                        </div>
+                                    </td>
+                                    <td class="post-time-right-timkiem">
+                                        <p class="post-time"> Ban hành: <span class="color2">@(mDocsViewSuggest.IssueDate != DateTime.MinValue ? mDocsViewSuggest.IssueDate.ToString("dd/MM/yyyy") : Constants.DangCapNhat)</span></p>
+                                        <p class="post-time"> Áp dụng: <span class="color2">@(mDocsViewSuggest.EffectDate != DateTime.MinValue ? mDocsViewSuggest.EffectDate.ToString("dd/MM/yyyy") : Constants.DangCapNhat)</span></p>
+                                        <p class="post-time bottom0"> Hiệu lực: <span class="color2">@(string.IsNullOrEmpty(mDocsViewSuggest.EffectStatusName) ? Constants.DangCapNhat : mDocsViewSuggest.EffectStatusName)</span> </p>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                <div id="ListDocsViews">
+                    @if (Model.mDocsViewSearch.lDocsView != null && Model.mDocsViewSearch.lDocsView.Any())
+                    {
+                        <table class="table table-bordered" style="margin-top: 10px;">
+                            <tbody>
+                                @{DocsView m_DocsView = new DocsView();}
+                                @for (int index = 0; index < Model.mDocsViewSearch.lDocsView.Count; index++)
+                                {
+                                    m_DocsView = Model.mDocsViewSearch.lDocsView[index];
+                                    <tr class="row-first-news @(index%2==1?"bgcolorf0f0f0":"")">
+                                        <th class="count-123 page" scope="row">@((index + 1).ToString("#00"))</th>
+                                        <td class="news-left-post">
+                                            <a href="@m_DocsView.DocUrl" class="post-title lvn">@Html.Raw(m_DocsView.DocName)</a>
+                                            <div class="sapo lvn">
+                                                <p>@Html.Raw(m_DocsView.DocSummary)</p>
+                                            </div>
+                                            <div class="item-meta">
+                                                <a href="@m_DocsView.DocUrl" class="tag-item page">Tóm tắt  </a>
+                                                <a href="@m_DocsView.GetDocUrl("luocdo")" class="tag-item page">Lược đồ </a>
+                                                <a href="@m_DocsView.GetDocUrl("hieuluc")" class=" tag-item page">Hiệu lực </a>
+                                                <a href="@m_DocsView.GetDocUrl("lienquan")" class="tag-item page">Liên quan</a>
+                                                <a href="@m_DocsView.GetDocUrl("tienganh")" class="tag-item page">Tiếng Anh</a>
+                                                <a href="@m_DocsView.GetDocUrl("taive")" class="tag-item page">Tải về</a>
+                                                <a href="#" class="icon-save"></a>
+                                            </div>
+                                        </td>
+                                        <td class="post-time-right-timkiem">
+                                            <p class="post-time"> Ban hành: <span class="color2">@(m_DocsView.IssueDate != DateTime.MinValue ? m_DocsView.IssueDate.ToString("dd/MM/yyyy") : Constants.DangCapNhat)</span></p>
+                                            <p class="post-time"> Áp dụng: <span class="color2">@(m_DocsView.EffectDate != DateTime.MinValue ? m_DocsView.EffectDate.ToString("dd/MM/yyyy") : Constants.DangCapNhat)</span></p>
+                                            <p class="post-time bottom0"> Hiệu lực: <span class="color2">@(string.IsNullOrEmpty(m_DocsView.EffectStatusName) ? Constants.DangCapNhat : m_DocsView.EffectStatusName)</span> </p>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    <!-- End content-->
+                    <!--Bengin pagination -->
+                                { Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.mPartialPaginationAjax }); }
+                    }
+                    else
+                    {
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr class="row-first-news">
+                                    <th class="count-123" scope="row"></th>
+                                    <td class="news-center-post">
+                                        <h3>
+                                            <span class="post-title lvn">Đang cập nhật dữ liệu.</span>
+                                        </h3>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+                <!--End pagination -->
+            </section>
+        </div>
+        <!--End content-center-pages-->
+    </div>
+    <!--End cat-box-->
+</div>
+<!--End page-content-->

@@ -1,0 +1,85 @@
+﻿@using LawsVN.Library
+@using LawsVN.Models
+@model LawsVN.Models.Docs.DocsViewDetailModel
+<div class="box-content box-shadow" id="FirstBox">
+    <div id="docPrint" class="padding2">
+        @if (Model.ListDocRelatesEffect.IsAny() || Model.ListDocRelatesContent.IsAny())
+        {
+            if (Model.ListDocRelatesEffect.IsAny())
+            {
+            <div class="content luocdo">
+                <div class="cat-title left">
+                    <div class="cat-box-title vien">Liên quan hiệu lực <span style="color: #a67942;">(@(Model.ListDocRelatesEffect.Count()))</span></div>
+                </div>
+                <div class="right-vb1">
+                    <a href="#" title="In tiêu chuẩn liên quan" class="docPrint" style="font-weight: bold;">
+                        <img class="in-print" alt="in-print" src="@Url.Content("~/assets/images/in2.png")">
+                        In tiêu chuẩn liên quan</a>
+                </div>
+                <table class="table table-bordered">
+                    <tbody>
+                        @for(int index = 0; index < Model.ListDocRelatesEffect.Count(); index ++)
+                        {
+                            var docRelate = Model.ListDocRelatesEffect.ElementAt(index);
+                            <tr class="row-first-news @(index % 2 == 1 ? "bgcolor" : "")">
+                                <th class="count-123" scope="row">@((index + 1).ToString("#00"))</th>
+                                <td class="post-col1">
+                                    <h2>
+                                        <a href="@docRelate.DocUrl" title="@docRelate.DocName" class="post-title lvn">@docRelate.DocName</a>
+                                    </h2>
+                                    <div class="item-meta">
+                                        @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocRelates = docRelate, ClassName = "tag-item item8" } });}
+                                    </div>
+                                </td>
+                                <td class="post-col2">
+                                    @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocRelates = docRelate, EffectStatusName = docRelate.EffectStatusName } });}
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            }
+            if (Model.ListDocRelatesContent.IsAny())
+            {
+            <div class="content ">
+                <div class="cat-title left">
+                    <div class="cat-box-title vien">Liên quan nội dung <span style="color: #a67942;">(@(Model.ListDocRelatesContent.Count()))</span></div>
+                </div>
+                <table class="table table-bordered">
+                    <tbody>
+                    @for (int index = 0; index < Model.ListDocRelatesContent.Count(); index++)
+                    {
+                        var docRelate = Model.ListDocRelatesContent.ElementAt(index);
+                            <tr class="row-first-news @(index % 2 == 1 ? "bgcolor" : "")">
+                                <th class="count-123" scope="row">@((index + 1).ToString("#00"))</th>
+                                <td class="post-col1">
+                                    <h2>
+                                        <a href="@docRelate.DocUrl" title="@docRelate.DocName" class="post-title lvn">@docRelate.DocName</a>
+                                    </h2>
+                                    <div class="item-meta">
+                                        @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocRelates = docRelate, ClassName = "tag-item item8" } });}
+                                    </div>
+                                </td>
+                                <td class="post-col2">
+                                    @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocRelates = docRelate, EffectStatusName = docRelate.EffectStatusName } });}
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            }
+        }
+        else
+        {
+            <div class="cat-box-content">
+                <div class="thong-bao-2">
+                    <div class="thongbao-item2">
+                        <em>Danh sách văn bản liên quan đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

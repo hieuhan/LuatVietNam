@@ -1,0 +1,93 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model NewsViewModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.mPartialPaginationAjax.PageIndex, totalPage = Model.mPartialPaginationAjax.TotalPage });}
+}
+@*@{Html.RenderAction("PartialFullSearchArticleMobile", "Shared");}*@  
+    <div id="ArticlesByCateBoxTab" class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item">@Resource.HomePage </a>
+        <span> » </span><span class="breadcrumb-item color1">Tìm kiếm</span>
+    </div>
+
+    <section class="box-section">
+@using (Html.BeginForm("Search", "News", FormMethod.Get))
+{
+
+        <div class="box-search">
+
+                <button class="icon-search" style="background: none; border: none; padding-right:10px;"><img src="@Url.Content("~/assets/Mobile/Images/fa-search1.png")" /></button>
+                <input class="search-input" type="text" name="keyword" value="@Model.mPartialPaginationAjax.Keywords" placeholder="Nhập nội dung cần tìm ...">
+            <div style="width:98.5%;"><strong style="line-height:35px;">Kết quả tìm kiếm: <span class="color1">@Model.mPartialPaginationAjax.TotalPage.ToString("#,###")</span> bài viết</strong></div>
+            <div style="width:98.5%;">
+                <div class="item-loctheo m1">
+                    <span class="icon-loc-kq"></span>@Resource.FilterBy:
+                </div>
+                <div class="item-lockq m4">
+                    <select id="ddlProvinceId" name="provinceId" class="select-option select-onchange" style="padding-right:16px;">
+                        <option value="0" @(Model.ProvinceId == 0 ? "selected" : "")>Cả nước</option>
+                        @foreach (var item in Model.ListProvinces)
+                            {
+                            <option value="@item.ProvinceId" data-title="@item.ProvinceDesc" @(item.ProvinceId == Model.mPartialPaginationAjax.ProvinceId ? "selected" : string.Empty)>@item.ProvinceDesc.Truncate(Constants.Truncate20)</option>
+                            }
+                    </select>
+                </div>
+                </div>
+            </div>
+            
+}
+        <div id="ArticlesByCateBox" class="cat-box-content">
+            @if (Model.ListArticlesView.HasValue())
+            {
+                foreach (var articleView in Model.ListArticlesView)
+                {
+                    <div class="first-news page">
+                        <div class="post-thumb">
+                            <a href="@articleView.GetArticleUrl()" class="thumb125x70">
+                                <img src="@articleView.GetImageUrl_Mobile()" />
+                            </a>
+                        </div>
+                        <div class="pks">
+                            <div class="rows-time">
+                                <span class="item-time">@articleView.PublishTime.toString()</span>
+                            </div>
+                            <h3 class="post-title-bold">
+                                <a href="@articleView.GetArticleUrl()">@articleView.Title</a>
+                            </h3>
+                        </div>
+                    </div>
+                }
+                if (Model.mPartialPaginationAjax.TotalPage > 0)
+                {
+                    Model.mPartialPaginationAjax.IsMobile = true;
+                    { Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax }); }
+                }
+            }
+            else
+            {
+                <em>Không tìm thấy bài viết nào@(String.IsNullOrEmpty(Model.mPartialPaginationAjax.Keywords) == true ? "" : " với từ khóa " + Model.mPartialPaginationAjax.Keywords)! </em>
+            }
+        </div>
+
+    </section>
+<section class="box-section">
+    @Html.Partial("~/Views/Shared/Mobile/PartialContentViewedMobile.cshtml")
+</section>
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: { id: 0 }
+        });
+    </script>
+}
+

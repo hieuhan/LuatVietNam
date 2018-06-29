@@ -1,0 +1,43 @@
+﻿@using LawsVN.Models
+@using LawsVN.Library
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@model ArticleViewDetailModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumb" style="margin-bottom: 10px;">
+    <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>Home </a> »
+    <a href="@Model.m_ArticlesViewDetail.mCategoriesView.GetCategoryUrl()" class="breadcrumb-item">@(LawsVnLanguages.GetCurrentLanguageId() == 1 ? Model.m_ArticlesViewDetail.mCategoriesView.CategoryDesc : Model.m_ArticlesViewDetail.mCategoriesView.CategoryName)</a> »
+    <span class="breadcrumb-item colora67942">@Model.m_ArticlesViewDetail.mArticlesView.Title</span>
+</div>
+
+<div class="page-head" style="margin-bottom: 0;">
+    <div class="banner-en"><a href="@Model.m_ArticlesViewDetail.mCategoriesView.GetCategoryUrl()"><img src="@Url.Content("~/assets/images/bg-tinnhan-en.png")" /></a></div>
+    <h1 style="text-align: right; font-weight: bold; font-size: 17px; font-style: italic;">@Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.Title.ToString())</h1>
+    @*<p class="info-page" style="line-height: 24px; color: #333;">@Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.Summary)</p>*@
+</div>
+
+<div class="page-content">
+    @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent)
+</div>
+@Html.Partial("PartialContentViewed")
+@section FooterSection
+{
+    <script type="text/javascript">
+        lawsVn.logs.articleLogs(@Model.m_ArticlesViewDetail.mArticlesView.ArticleId,@Model.m_ArticlesViewDetail.mArticlesView.CategoryId);
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.m_ArticlesViewDetail.mArticlesView.ArticleId'
+                , name: '@Model.m_ArticlesViewDetail.mArticlesView.TruncateTitle(30)'
+                , title: '@Model.m_ArticlesViewDetail.mArticlesView.Title'
+                , summary: ''
+                , datetime: '@Model.m_ArticlesViewDetail.mArticlesView.PublishTime.toString()'
+                , url: '@Model.m_ArticlesViewDetail.mArticlesView.GetArticleUrl()'
+                , image: '@Model.m_ArticlesViewDetail.mArticlesView.GetImageUrl_Mobile()'
+            }
+        });
+    </script>
+}
+ 

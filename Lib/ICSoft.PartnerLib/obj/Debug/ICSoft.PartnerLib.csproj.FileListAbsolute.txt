@@ -1,0 +1,5 @@
+E:\Solutions\2017\LuatVietNamV2\DLL\ICSoft.PartnerLib.dll.config
+E:\Solutions\2017\LuatVietNamV2\DLL\ICSoft.PartnerLib.dll
+E:\Solutions\2017\LuatVietNamV2\DLL\ICSoft.PartnerLib.pdb
+E:\Solutions\2017\LuatVietNamV2\Lib\ICSoft.PartnerLib\obj\Debug\ICSoft.PartnerLib.dll
+E:\Solutions\2017\LuatVietNamV2\Lib\ICSoft.PartnerLib\obj\Debug\ICSoft.PartnerLib.pdb

@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutDocument.cshtml";
+}
+@model VanBanLuatVN.Models.FeedbacksViewModel
+<div class="breadcrumb">
+    <a class="breadcrumb-item" href="@VanBanLuat.Librarys.Constants.ROOT_PATH" title="Trang chủ">Trang chủ</a> /
+    <span class="breadcrumb-item xanh">Liên hệ</span>
+</div>
+<div class="title-from">
+    <h1 class="title-from-cat">Liên hệ với vanbanluat.vn</h1>
+    <p style="color:#555;">Gửi phản hồi ý kiến và liên hệ với chúng tôi</p>
+</div>
+
+<!-- Bengin content-->
+<div class="content-dk">
+    <div class="p20px">
+        @using (Ajax.BeginForm("FeedBacks", "FeedBacks", new AjaxOptions
+        {
+            HttpMethod = "POST",
+            OnBegin = "vbluat.ajaxEvents.OnBegin",
+            OnSuccess = "vbluat.ajaxEvents.OnSuccessAlert(data, status, xhr)",
+            OnFailure = "vbluat.ajaxEvents.OnFailure"
+        }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="rows-dk">
+                <div class="item-col3">
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "input-text ms1 font14", placeholder = "Họ và tên" })
+                        @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="item-col3">
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "input-text ms1 font14", placeholder = "Điện thoại" })
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="item-col3">
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "input-text ms1 font14", placeholder = "Email *" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="rows-dk">
+                <div class="form-group">
+                    @Html.TextAreaFor(m => m.Comment, new { @class = "input-text ms1 font14", placeholder = "Nội dung *", style = "height: 150px; color: #888888;" })
+                    @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="rows-dk">
+                <center class="form-group">
+                    <button class="btn-default guingay">Gửi ngay</button>
+                </center>
+            </div>
+        }
+        <div class="rows-dk2" style="line-height: 24px;">
+            <p style="font-size: 16px; text-transform: uppercase; color: #222; padding-bottom: 10px;"><strong>Thông tin liên hệ</strong></p>
+            <p style="color: #222; font-size: 13px;"><img src="@Url.Content("~/Assets/images/hotline.png")"> <strong>Hotline:</strong> 1900561589</p>
+            <p style="color: #222;font-size: 13px;"><img src="@Url.Content("~/Assets/images/email22.png")"> <strong>Email:</strong> lawdata@vanbanluat.vn</p>
+        </div>
+    </div>
+</div>

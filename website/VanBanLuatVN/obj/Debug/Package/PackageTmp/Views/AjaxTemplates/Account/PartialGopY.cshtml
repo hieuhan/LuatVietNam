@@ -1,0 +1,33 @@
+﻿@model VanBanLuat.Models.AccountModel.GopYModel
+<div class="cat-box-content">
+    @using (Ajax.BeginForm("GopY", "Ajax", null, new AjaxOptions()
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.OnSuccess"
+    }, new {id = "FormGopY"}))
+    {
+        @Html.AntiForgeryToken()
+    <div class="wrapper">
+			       		<button name="close" class="dong-the"><img src="@Url.Content("~/Assets/images/close.png")"></button>
+				       <div class="content-up">
+					    	<div class="form-up">
+								<strong>@(Model.FullName == ""?"Khách hàng":VbLuatUser.CustomerFullName)</strong> <span style="color: #888;">(@Model.CustommerName)</span>
+								<span class="nocheck" style="margin-top: 0;"><img src="@Url.Content("~/Assets/images/warning.png")"></span>
+							</div>
+                           <div class="form-up" id="TitleText">
+                           </div>
+                            @Html.HiddenFor(m => m.Title)
+							<div class="form-up">
+                                @Html.TextAreaFor(m => m.Content, new { @class = "input-text ms1 font14", @style = "height: 80px; color: #888888; border: none;", @placeholder = "Nội dung góp ý *" })
+                                @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+							</div>
+							<center class="form-center">
+								<button class="btn-default guingay" style="margin-right: 20px;">Gửi ngay</button>
+                                <button class="btn-default guingay btn-reset" style="color: #888;">Hủy</button>
+							</center>
+				        </div>
+				    </div>
+    }
+</div>

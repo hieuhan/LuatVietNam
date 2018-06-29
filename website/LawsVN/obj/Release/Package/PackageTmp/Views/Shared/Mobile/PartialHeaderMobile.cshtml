@@ -1,0 +1,102 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@using ICSoft.CMSViewLib
+@model LawsVN.Models.HeaderMobileModel
+<header class="header">
+    <div class="menu-icon-sammo">
+        <button class="btn-nav" data-toggle-target="#leftMenu">
+            <img src="@Url.Content("~/assets/Mobile/Images/imenu.png")" /></button>
+        <div class="w3-sidebar w3-animate-left target-hidden" id="leftMenu">
+    <button class="closeleft" data-toggle-target="#leftMenu">
+        <img src="@Url.Content("~/assets/Mobile/Images/close.png")" />
+    </button>
+    <nav class="nav-main">
+        @{Html.RenderAction("PartialFullSearchMenuMobile", "Shared");}
+        @if (Model.ListMenuItemsViewParent.HasValue())
+        {
+            foreach (MenuItemsView menuItem in Model.ListMenuItemsViewParent)
+            {
+
+                if (!Model.Havechild(menuItem.MenuItemId))
+                {
+                    <div class="rows-nav">
+                        <a href="@menuItem.GetUrl()" class="nav-item">
+                            <i class="fa-icon">
+                                <img src="@menuItem.GetImageUrl()" />
+                            </i> @menuItem.ItemName
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="nav-sub2">
+                        <div class="rows-navsub22">
+                            <span class="nav-item"><i class="fa-icon"><img src="@menuItem.GetImageUrl()"></i> @menuItem.ItemName </span>
+                        </div>
+                       
+                        @foreach (var menuItemChild in Model.ListMenuItemsView)
+                        {
+                            if (menuItemChild.ParentItemId == menuItem.MenuItemId)
+                            {
+                                if (menuItemChild.MenuItemId == Constants.MenuItemIdTatCaLinhVuc)
+                                {
+                                    if(Model.ListField.HasValue())
+                                    {
+                                    <div class="accordion-container">
+                                        <div class="ac active">
+                                            <a href="#" class="ac-q">Tất cả lĩnh vực</a>
+                                            <div class="ac-a scrolsub" style="height: 0px; transition-duration: 600ms;">
+                                                @foreach (var item in Model.ListField)
+                                                {
+                                                    if (string.IsNullOrEmpty(item.FieldName))
+                                                    {
+                                                        continue;
+                                                    }
+                                                    <div class="dropsub-nav">
+                                                        <a href="@(CmsConstants.ROOT_PATH+ item.GetUrl(Model.DocGroupId))" class="dropsub-item sub3">@item.FieldName</a>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                }
+                                else
+                                {
+                                <div class="dropsub-nav">
+                                    <a href="@(menuItemChild.GetUrl())" class="dropsub-item">@menuItemChild.ItemName</a>
+                                </div>
+                                 }
+                            }
+                        }
+                    </div>
+                }
+
+            }
+        }
+            </nav>
+        </div>
+
+    </div>
+
+
+    <div class="logo">
+        <a href="@CmsConstants.ROOT_PATH">
+            <img alt="@Model.WebsiteTitle" src="@Url.Content("~/assets/Mobile/Images/logo.png")" /></a>
+    </div>
+
+    <div class="user">
+        @if (Request.IsAuthenticated)
+{
+    { Html.RenderAction("PartialWidgetUserHeaderMobile", "Shared", new { getCountPaymentTransactionSuccess = Model.GetCountPaymentTransactionSuccess, getCountThongBaoHieuLuc = Model.GetCountThongBaoHieuLuc }); }
+}
+else
+{
+    { Html.RenderAction("PartialLogin", "Shared"); }
+    <button class="btn-right" data-toggle-target="#loginForm">
+        <img src="@Url.Content("~/assets/Mobile/Images/hoten.png")" />
+    </button>
+}
+
+    </div>
+</header>

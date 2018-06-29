@@ -1,0 +1,61 @@
+﻿@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Library
+@using LawsVNEN.AppCode
+@model LawsVNEN.Models.Account.MyDocuments
+@try
+{ 
+if (Model.mDocsViewSearch.lDocsView.HasValue())
+{
+    <table class="table table-bordered">
+        <tbody>
+            @for (int index = 0; index < Model.mDocsViewSearch.lDocsView.Count; index++)
+            {
+                var docView = Model.mDocsViewSearch.lDocsView[index];
+                var number = index + Model.mPartialPaginationAjax.PageIndex * Model.mPartialPaginationAjax.PageSize + 1;
+                string effectname = Model.ListEffectStatus.GetEffectStatusNameById(docView.EffectStatusId).TrimmedOrDefault(Resource.Updating);
+                <tr class="row-first-news @(index % 2 != 0 ? "" : "bgcolor")">
+                    <th class="count-123 page" scope="row">
+                        <div class="pure-checkbox">
+                            <input id="@docView.DocId" name="checkboxDocument" value="@docView.DocId" type="checkbox">
+                            <label for="@docView.DocId"></label>
+                        </div>
+                    </th>
+                    <th class="count-123 page" scope="row">@number.ToString("#00")</th>
+                    <td class="news-left-post">
+                        <h2><a href="@docView.GetDocUrl()" class="post-title lvn">@docView.DocName</a></h2>
+                        <div class="item-meta">
+                            @{ Html.RenderAction("_PartialLinkDocumentAttribute", "Shared", new { model = new LawsVNEN.Models.PartialLinkDocumentAttributeModel { mDocsView = docView } });}
+                        </div>
+                    </td>
+                    <td class="post-time-right page">
+                        @{ Html.RenderAction("_PartialLinkDocumentAttributeRight", "Shared", new { model = new LawsVNEN.Models.PartialLinkDocumentAttributeModel { mDocsView = docView, EffectStatusName = effectname } });}
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    { Html.RenderAction("PartialPaginationAjaxPageNumber", "Shared", new { model = Model.mPartialPaginationAjax }); }
+}
+else
+{
+    <table class="table table-bordered">
+        <tbody>
+            <tr class="row-first-news">
+                <th class="count-123" scope="row"></th>
+                <td class="news-center-post">
+                    <h3>
+                        <span class="post-title lvn">@Resource.UpdatingData</span>
+                    </h3>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+           }
+           catch(Exception ex)
+           {
+               throw ex;
+           }

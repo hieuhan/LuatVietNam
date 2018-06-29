@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using LawsVNEN.App_GlobalResources
+@using ICSoft.CMSLib
+@model LawsVNEN.Models.Account.NewUserActiveModel
+<div class="content-center-pages searchblog">
+    <div class="breadcrumb">
+     <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home">
+         </span>@Resource.HomePage</a> » 
+    <span class="breadcrumb-item colorrumb">@Resource.ActiveNewUser</span> </div>
+
+    <div class="cat-box-content">
+        <div class="forgetpassword">
+            <div class="form-forget">
+                <div class="rows" style="text-align: center"><span class="tie-for"><img class="Forget-password_03" src="images/Forget-password_03.png">@Resource.ActiveNewUser</span></div>
+                <div class="rows item6">
+                    <span style="color:#ca2c32;">Notice:</span> @Model.ActiveMessage
+                </div>
+                    
+            </div>
+        </div>
+    </div>
+</div>

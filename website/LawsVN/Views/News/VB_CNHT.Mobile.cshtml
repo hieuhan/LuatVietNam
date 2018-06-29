@@ -1,0 +1,111 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.AppCode
+@using LawsVN.Library
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using sms.utils
+@model ArticleViewDetailModel
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+<div class="box-search">
+    @using (Html.BeginForm("Search", "News", FormMethod.Get))
+    {
+        <div class="search-form">
+            <button class="icon-search" style="background: none; border: none;"><img src="@Url.Content("~/assets/Mobile/Images/fa-search1.png")" /></button>
+            <input class="search-input" type="search" name="keyword" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+        </div>
+    }
+</div>
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>»
+    <a href="@Model.m_ArticlesViewDetail.mCategoriesView.GetCategoryUrl()" class="breadcrumb-item">@Model.m_ArticlesViewDetail.mCategoriesView.CategoryDesc</a> »
+    <span class="breadcrumb-item color1">@Model.m_ArticlesViewDetail.mArticlesView.Title</span>
+</div>
+
+<article class="post-single">
+    <div class="post-time-single">@DateTimeUtil.GetLongDateTime(Model.m_ArticlesViewDetail.mArticlesView.PublishTime)</div>
+    <h1 class="post-title-single">@Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.Title.ToString())</h1>
+    <div class="entry1 doc-content-new">
+        @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent)
+    </div>
+</article>
+@if (Model.m_ArticlesViewDetail.mArticlesView.lTagsView.HasValue())
+{
+    <div class="post-tag">
+        <span style="float: left; font-weight: bold; margin-right: 10px;">
+            <img src="@Url.Content("~/assets/images/icon-tag.png")" />
+            Chủ đề:
+        </span>
+        @foreach (var tagsView in Model.m_ArticlesViewDetail.mArticlesView.lTagsView)
+        {
+            <a href="@tagsView.TagName.TagsNameGetUrl(tagsView.TagId)" title="@tagsView" class="tag-item">@tagsView.TagName.Trim()</a>
+        }
+    </div>
+}
+@if (Model.m_ArticlesViewDetail.lArticlesRelate.HasValue())
+{
+    <section class="box-section">
+        <div class="title2">
+            <h2 class="title-cat2 vien">Tin pháp luật liên quan</h2>
+        </div>
+        <div class="cat-box-content">
+            @for (int i = 0; i < Model.m_ArticlesViewDetail.lArticlesRelate.Count; i++)
+            {
+                var articleView = Model.m_ArticlesViewDetail.lArticlesRelate[i];
+                <div class="other-news" @(i == 0 ? "style=padding-top: 0;" : string.Empty)>
+                    <h3 class="post-title-bold">
+                        <a href="@articleView.GetArticleUrl()"><i class="fa-dot2"></i>@articleView.Title</a>
+                    </h3>
+                </div>
+            }
+        </div>
+    </section>
+}
+@if (Model.m_ArticlesViewDetail.lArticlesOther.HasValue())
+{
+    <div class="sl-section" style="border-top: none;">
+        <div class="title2">
+            <h2 class="title-cat2 vien">Tin pháp luật khác</h2>
+        </div>
+        <div class="cat-box-content">
+            <div id="owl-demo-c2" class="owl-carousel">
+                @foreach (var articleView in Model.m_ArticlesViewDetail.lArticlesOther)
+                {
+                    <div class="item-carousel">
+                        <div class="post-thumbfull">
+                            <a href="@articleView.GetArticleUrl()" class="thumbfull">
+                                <img src="@articleView.GetImageUrl_Mobile()" />
+                            </a>
+                        </div>
+                        <h3 class="post-title-bold">
+                            <a href="@articleView.GetArticleUrl()">@articleView.Title</a>
+                        </h3>
+                        <div class="post-time">@articleView.PublishTime.toString("dd/MM/yyyy HH:mm")</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+<section class="box-section">
+    @Html.Partial("~/Views/Shared/Mobile/PartialContentViewedMobile.cshtml")
+</section>
+@section FooterSection
+{
+    <script type="text/javascript">
+        lawsVn.logs.articleLogs(@Model.m_ArticlesViewDetail.mArticlesView.ArticleId,@Model.m_ArticlesViewDetail.mArticlesView.CategoryId);
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.m_ArticlesViewDetail.mArticlesView.ArticleId'
+                , name: '@Model.m_ArticlesViewDetail.mArticlesView.TruncateTitle(30)'
+                , title: '@Model.m_ArticlesViewDetail.mArticlesView.Title'
+                , summary: ''
+                , datetime: '@Model.m_ArticlesViewDetail.mArticlesView.PublishTime.toString()'
+                , url: '@Model.m_ArticlesViewDetail.mArticlesView.GetArticleUrl()'
+                , image: '@Model.m_ArticlesViewDetail.mArticlesView.GetImageUrl_Mobile()'
+            }
+        });
+    </script>
+} 

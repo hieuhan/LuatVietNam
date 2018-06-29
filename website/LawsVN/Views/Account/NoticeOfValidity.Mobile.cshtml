@@ -1,0 +1,141 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model LawsVN.Models.Account.NoticeOfValidityModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader)</h1>
+}
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage  </a> »
+        <span class="breadcrumb-item color1">Thông báo hiệu lực</span>
+    </div>
+    <div class="box-section">
+        <div class="box-thongbao">
+            <img style="float: left; margin-right: 5px;margin-top: 3px;" src="@Url.Content("~/assets/mobile/images/ic_notifications_active_24px.png")"><em>Danh sách văn bản đăng ký nhận Thông báo hiệu lực. Thành viên sẽ nhận được thông báo qua email, tin nhắn hệ thống LuatVietnam.vn hoặc sms về tình trạng hiệu lực văn bản, khi có bất kỳ sự thay đổi hiệu lực nào liên quan đến văn bản.</em>
+        </div>
+        <div class="title">
+            <h2 class="title-cat"> @Resource.NoticeOfValidity</h2>
+            <div class="btn-more">
+                <ul class="usernav">
+                    <li class="button-dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/mobile/images/more-nv.png")"></a>
+                        <ul class="dropdown-menu" style="right: 0px; width: 180px; margin-top: 3px; display: none;">
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="item-more-2 boder"> @Resource.AccountInformation</a>
+                            </li>
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html" class="item-more-2 boder">@Resource.TransactionHistory</a>
+                            </li>
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html" class="item-more-2 boder">@Resource.MyDocuments </a>
+                            </li>
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" class="item-more-2 boder">@Resource.Messages</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+@if (Model.mDocsViewSearch.lDocsView.HasValue())
+{
+     <div class="box-seclect">
+@using (Ajax.BeginForm(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName,
+                new
+                {
+                    updateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                    , insertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                    , controllerName = Model.mPartialPaginationAjax.ControllerName
+                    , actionName = Model.mPartialPaginationAjax.ActionName
+                    , pageSize = Model.mPartialPaginationAjax.PageSize
+                    , linkLimit = Model.mPartialPaginationAjax.LinkLimit
+                    , docGroupId = Model.mPartialPaginationAjax.DocGroupId
+                    , registTypeId = Model.mPartialPaginationAjax.RegistTypeId
+                    , languageId = Model.mPartialPaginationAjax.LanguageId
+                },
+                new AjaxOptions
+                {
+                    HttpMethod = "Get"
+                    , UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                    , InsertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                    , OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                    , OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                }))
+            {
+            <div class="col2-seclect">
+                <select class="select-option select-onchange" tabindex="1" name="fieldId">
+                    <option>@Resource.AllFields</option>
+                    @foreach (var item in Model.ListFields)
+                        {
+                            <option value="@item.FieldId">@item.FieldDesc</option>
+                        }
+                </select>
+            </div>
+            <div class="col2-seclect" style="margin-right: 0">
+                <select class="select-option select-onchange" name="year" tabindex="2">
+                    <option value="0">Từ trước đến nay</option>
+                    <option value="1">Năm qua </option>
+                    <option value="2">Tháng qua </option>
+                    <option value="3">Tuần qua </option>
+                </select>
+            </div>
+            }
+        </div>
+    <div id="NoticeOfValidityBox">
+        <div class="title2">
+            <div class="title-cat2 vien">
+                <span style="float: left; color: #bf0000">Số văn bản đăng ký (@(Model.RowCount > 0 ? Model.RowCount.ToString("#00") : "0")) </span>
+            </div>
+        </div>
+        <div class="cat-box-content">
+            @if (Model.ListMyDocuments.IsAny())
+            {
+                for (int index = 1; index <= Model.ListMyDocuments.Count(); index++)
+                {
+                    var docView = Model.ListMyDocuments.ElementAt(index - 1);
+                    <div class="first-news @(index == Model.ListMyDocuments.Count() ? "last" : "dashed") ">
+                        <h3 class="post-title">
+                            <a href="@docView.DocsView.GetDocUrl()" title="@docView.DocsView.DocName.StripTags()">
+                                <span class="stt">(@index.ToString("#00"))</span>
+                                @docView.DocsView.DocName
+                            </a>
+                        </h3>
+                        <div class="post-time">
+                            @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView.DocsView, EffectStatusName = docView.EffectStatusName } }); }
+                            <a href="javascript:lawsVn.myDocuments.deleteCustomerDocs(@Model.mPartialPaginationAjax.DocGroupId,@docView.DocsView.DocId,2);" class="fa-delete x2"></a>
+                        </div>
+                    </div>
+                }
+
+            }
+            @{
+            Model.mPartialPaginationAjax.IsMobile = true;
+            Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax });
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="cat-box-content">
+                <div class="padding-left">
+                    <div class="rows item1">
+                        <em>
+                            Quý khách chưa đăng ký Thông báo hiệu lực cho văn bản! <br />
+                            Hãy bấm vào mục Thông báo hiệu lực (<img alt="img-tthl" src="@Url.Content("~/assets/images/thong-bao2.png")" />) trong box tiện ích khi xem chi tiết nội dung văn bản để đăng ký tính năng này!
+                        </em>
+                    </div>
+                </div>
+        </div>
+} 
+    </div>
+

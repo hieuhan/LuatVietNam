@@ -1,0 +1,40 @@
+﻿@model VanBanLuat.Models.AccountModel.GuiYeuCauVB
+<div class="widget">
+    <div class="ads">
+        @*<button class="yeucauvanbanbtn" data-js="open">
+            <img class="imgycvb" src="@Url.Content("~/assets/images/icon-yeucauvanban.png")" /> Yêu cầu văn bản
+        </button>*@
+        <button class="yeucauvanbanbtn gopy" data-action="gop-y-van-ban.html" data-name="Gửi yêu cầu văn bản">
+            <img class="imgycvb" src="@Url.Content("~/assets/images/icon-yeucauvanban.png")" /> Yêu cầu văn bản
+        </button>
+        @using (Ajax.BeginForm("GuiYeuCauVB", "Ajax", null, new AjaxOptions()
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.OnSuccess"
+    }, new { id = "FormGopY" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="popup">
+                <button name="close" class="dong-the"><img src="@Url.Content("~/assets/images/close.png")"></button>
+                <div class="content-up">
+                    <div class="form-up">
+                        @Html.HiddenFor(m => m.Title)
+                        @*@Html.HiddenFor(m => m.Title, new { @class = "input-text ms1", @value = @VbLuatUser.CustomerMail })*@
+                    </div>
+
+                    <div class="form-up">
+                        <p style="text-align: left; color: #666666;">Viết nội dung yêu cầu *:</p>
+                        @Html.TextAreaFor(m => m.Content, new { @Styles = "height: 80px;border: none; font-style: italic; line-height: 22px;", @class = "input-text ms1" })
+                        @Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger" })
+                    </div>
+                    <center class="form-center">
+                        <button class="btn-default guingay  btn-reset" style="margin-right: 20px;">Gửi ngay</button>
+                        <button class="btn-default guingay" style="color: #666666;">Hủy</button>
+                    </center>
+                </div>
+            </div>
+        }
+    </div>
+</div>

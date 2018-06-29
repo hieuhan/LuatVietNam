@@ -1,0 +1,81 @@
+﻿@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.PartialPaginationAjax
+<div class="pagination @(Model.IsMyMessage ? "mail" : string.Empty)">
+    @using (Ajax.BeginForm(Model.ActionName, Model.ControllerName,
+    new
+    {
+        languageid = Model.LanguageId,
+        usingDisplayTable = Model.UsingDisplayTable,
+        paginationType = Model.PaginationType,
+        postTimeRight = Model.PostTimeRight,
+        keyword = Model.KeyWord,
+        SignerName = Model.SignerName,
+        fieldId = Model.FieldId,
+        effectStatusName = Model.EffectStatusName,
+        effectStatusId = Model.EffectStatusId,
+        organId = Model.OrganId,
+        docTypeId = Model.DocTypeId,
+        updateTargetId = Model.LawsAjaxOptions.UpdateTargetId,
+        insertionMode = Model.LawsAjaxOptions.InsertionMode,
+        controllerName = Model.ControllerName,
+        actionName = Model.ActionName,
+        pageSize = Model.PageSize,
+        linkLimit = Model.LinkLimit,
+        docid = Model.DocId,
+        docGroupId = Model.DocGroupId,
+        registTypeId = Model.RegistTypeId,
+        relatetypeid = Model.RelateTypeId,
+        provinceid = Model.ProvinceId,
+        DateFrom = Model.DateFrom,
+        DateTo = Model.DateTo,
+        year = Model.Year,
+        LawTerminGroupId = Model.LawTerminGroupId,
+        TerName = Model.TerName,
+        messageTypeId = Model.MessageTypeId,
+        isMyMessage = Model.IsMyMessage,
+        categoryId = Model.CategoryId,
+        tagId = Model.TagId,
+        searchOptions = Model.SearchOptions,
+        searchExact = Model.SearchExact,
+        signerId = Model.SignerId,
+        DisplayTypeId = Model.DisplayTypeId,
+        fileTypeId = Model.FileTypeId
+    },
+    new AjaxOptions
+    {
+        HttpMethod = "Get",
+        UpdateTargetId = Model.LawsAjaxOptions.UpdateTargetId,
+        InsertionMode = Model.LawsAjaxOptions.InsertionMode,
+        OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.LawsAjaxOptions.UpdateTargetId),
+        OnComplete = string.Format("lawsVn.ajaxEvents.OnCompleteV2('{0}')", Model.LawsAjaxOptions.UpdateTargetId),
+        OnSuccess = Model.LawsAjaxOptions.OnSuccess.TrimmedOrDefault(string.Empty)
+    }))
+    {
+        
+        <div class="pagination-left">
+            <span class="text-pagination">@Resource.Display:</span>
+            <div class="select-pagination">
+                <select id="dllNumberOfResults" tabindex="1" name="showNumberOfResults" class="dropdown select-onchange">
+                    @for (int index = 1; index <= 5; index++)
+                    {
+                        <option value="@(index*5)" @(index * 5 == Model.ShowNumberOfResults ? "selected" : string.Empty)>@(index * 5) @Resource.Result</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="pagination-right">
+            @Resource.Page<input class="input-page-item" id="txtChangePage" name="page" value="@(Model.PageLoad ? (Model.PageIndex <= 0 ? 1 : Model.PageIndex) : Model.PageIndex + 1)">@Resource.Of.ToLower() @Model.pageCount
+            <div class="load-more">
+                @if (Model.PageIndex > 0)
+                {
+                    <a href="#" id="prevPage" title="Trang trước" class="load-more-item x1"></a>
+                }
+                @if (Model.PageIndex < (Model.PageLoad ? Model.pageCount : Model.pageCount - 1))
+                {
+                    <a href="#" id="nextPage" title="Trang sau" class="load-more-item x2"></a>
+                }
+            </div>
+        </div>
+    }
+</div>

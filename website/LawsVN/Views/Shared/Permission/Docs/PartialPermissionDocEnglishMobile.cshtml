@@ -1,0 +1,53 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@model LawsVN.Models.Docs.DocsViewDetailModel
+@if (Model.NotDocEng)
+{
+    <div class="thong-bao-2">
+        <div class="thongbao-item2">
+            <em>Nội dung văn bản tiếng Anh đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+        </div>
+    </div>
+}
+else
+{
+    if (!string.IsNullOrEmpty(Model.DocContentEng))
+    {
+    <div class="boxboder">
+        <div class="content-entry">
+            @Html.Raw(Model.DocContentEng)
+        </div>
+    </div>
+    }
+    else if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == LawsVnLanguages.AvailableLanguages[1].LanguageId) > 0)
+    {
+        var docFileEng = Model.mDocsViewDetail.lDocFiles.FirstOrDefault(m => m.FilePath.ToLower().EndsWith(".pdf"));
+        if (docFileEng != null && !string.IsNullOrEmpty(docFileEng.FilePath))
+        {
+            if (!LawsUser.IsInRole(Constants.RolesFullEng) && docFileEng.FileTypeId != Constants.FileTypeIdVbThamKhao)
+            {
+                <div class="thong-bao-2">
+                    <div class="thongbao-item2">
+                        <em>Quý khách hãy bấm vào đây để <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Đăng ký dịch vụ"><strong style="color: #a67942">đăng ký</strong></a> sử dụng <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Đăng ký dịch vụ"><strong style="color: #a67942">Dịch vụ Tra cứu văn bản</strong></a> của Luật Việt Nam.</em>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="thong-bao-2">
+                    <div class="thongbao-item2">
+                        <em>Văn bản đã có file download, <a class="color2" href="@string.Concat(Constants.MEDIA_DOWNLOADPATH , docFileEng.FilePath)">click vào đây</a> để tải file</em>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="thong-bao-2">
+                <div class="thongbao-item2">
+                    <em>Nội dung văn bản tiếng Anh đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+                </div>
+            </div>
+        }
+    }
+}

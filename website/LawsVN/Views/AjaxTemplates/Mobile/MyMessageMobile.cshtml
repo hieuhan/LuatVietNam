@@ -1,0 +1,96 @@
+﻿@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using ICSoft.CMSLib
+@model LawsVN.Models.Account.MyMessagesModel
+@if (Model.RowCount > 0)
+{
+    <div class="boxmail">
+        <div class="col3-de">
+            <div class="pure-checkbox">
+                <input id="checkbox_All" name="checkbox_All" type="checkbox">
+                <label for="checkbox_All" title="Chọn tất cả">Tất cả</label>
+            </div>
+        </div>
+        
+        @if (Request.RawUrl.Contains("/Ajax/SavedMessages_GetPage"))
+        {
+            <div class="col3-de">
+                <a href="#" class="item-x unsave-messages" data-actiontypeid="2"><img class="iconx" src="@Url.Content("~/assets/mobile/images/iconluu.png")" /> Bỏ lưu email </a>
+            </div>
+            <div class="col3-de">
+                <a href="#" class="item-x delete-messages" data-actiontypeid="2"> <img class="iconx" src="@Url.Content("~/assets/mobile/images/iconluux.png")" />Xóa</a>
+        </div>
+        }else
+        {
+            <div class="col3-de">
+                <a href="#" class="item-x save-messages" data-actiontypeid="1"><img class="iconx" src="@Url.Content("~/assets/mobile/images/iconluu.png")" /> Lưu </a>
+            </div>
+            <div class="col3-de">
+            <a href="#" class="item-x delete-messages" data-actiontypeid="1"> <img class="iconx" src="@Url.Content("~/assets/mobile/images/iconluux.png")" />Xóa</a>
+        </div>
+        }
+        
+        
+        
+    </div>
+}
+@if (Model.ListMessages.HasValue())
+{
+    <div class="bang-thongke">
+        <table class=" table-bordered boder0">
+            <tbody>
+                @for (int index = 0; index < Model.ListMessages.Count; index++)
+                {
+                    var message = Model.ListMessages[index];
+                    <tr>
+                        <td class="pure1 checkbox-mail">
+                            <div class="pure-checkbox">
+                                <input id="checkbox_@index" name="chkMessages" value="@message.MessageId" type="checkbox">
+                                <label for="checkbox_@index"></label>
+                            </div>
+                        </td>
+                        <td class="pure1">
+                        @if (Request.RawUrl.Contains("/Ajax/SavedMessages_GetPage"))
+                        {
+                            if (message.HasStar == 1)
+                            {
+                                <a href="javascript:lawsVn.myMesssages.unStart(@message.MessageId,2);"><img src="@Url.Content("~/assets/mobile/images/ic_star_24px.png")" /></a>
+                            }
+                            else
+                            {
+                                <a href="javascript:lawsVn.myMesssages.setStart(@message.MessageId,2);"><img src="@Url.Content("~/assets/mobile/images/ic_star_border_24px.png")" /></a>
+                            }
+                        }
+                        else
+                        {
+                            if (message.HasStar == 1)
+                            {
+                                <a href="javascript:lawsVn.myMesssages.unStart(@message.MessageId,1);"><img src="@Url.Content("~/assets/mobile/images/ic_star_24px.png")" /></a>
+                            }
+                            else
+                            {
+                                <a href="javascript:lawsVn.myMesssages.setStart(@message.MessageId,1);"><img src="@Url.Content("~/assets/mobile/images/ic_star_border_24px.png")" /></a>
+                            }
+                        }
+                        </td>
+                        <td class="@(message.HasRead == 1 ? string.Empty : "fontb")"><a href="@string.Format("{0}user/chi-tiet-tin-nhan-{1}.html",CmsConstants.ROOT_PATH,message.MessageId)" title="Chi tiết tin nhắn">@message.Subject.Truncatevalue(56) </a></td>
+                        <td class="@(message.HasRead == 1 ? string.Empty : "fontb") time2 " id="message-time-@message.MessageId">@message.CrDateTime.ToString("HH:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+                {
+                    Model.mPartialPaginationAjax.IsMobile = true;
+                    Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax });
+                }
+}
+else
+{
+    <div class="box-thongbao">
+        <img style="float: left; margin-right: 5px;margin-top: 3px;" src="@Url.Content("~/assets/mobile/images/ic_notifications_active_24px.png")" /><em>Bạn chưa có tin nhắn nào từ LuatVietnam</em>
+    </div>
+}

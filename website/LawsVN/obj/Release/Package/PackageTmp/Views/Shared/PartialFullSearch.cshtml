@@ -1,0 +1,124 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Docs.PartialDocSearchModel
+@using (Html.BeginForm("DocSearch", "Home", FormMethod.Get, new {id="SearchForm"}))
+{
+    <div class="tab-nav-edit">
+        <a class="tab-docgroupid tab-nav-item-edit@(Model.DocGroupId == 0 && Model.LanguageId < 2 ? " active" : string.Empty)" href="#" data-id="0">Tất cả</a>
+        <a class="tab-docgroupid tab-nav-item-edit@((Model.DocGroupId == Constants.DocGroupIdVbpq || Model.DocGroupId == Constants.DocGroupIdVbhn) && Model.LanguageId < 2 ? " active" : string.Empty)" href="#" data-id="1">Văn bản pháp luật</a>
+        <a class="tab-docgroupid tab-nav-item-edit@(Model.DocGroupId == Constants.DocGroupIdCongVan ? " active" : string.Empty)" href="#" data-id="6">Công văn</a>
+        <a class="tab-docgroupid tab-nav-item-edit@(Model.DocGroupId== Constants.DocGroupIdUbnd ? " active" : string.Empty)" href="#" data-id="2">UBND</a>
+        <a class="tab-docgroupid tab-nav-item-edit@(Model.LanguageId == 2 ? " active" : string.Empty)" href="#" data-id="3">Văn bản tiếng Anh</a>
+        <a class="tab-docgroupid tab-nav-item-edit@(Model.DocGroupId == Constants.DocGroupIdTcvn ? " active" : string.Empty)" href="#" data-id="5">Tiêu chuẩn Việt Nam</a>
+
+        @Html.HiddenFor(m => m.DocGroupId)
+    </div>
+    <div class="search-block">
+        <div class="padding20">
+           @* <div class="row-tim-kiem">
+                <h1><span class="post-title blog">@Resource.SearchForDocumentsOnVietnameseLaw</span>
+                </h1>
+            </div>*@
+            <div class="row-tim-kiem tk2">
+                <div class="from-tim-kiem-item-1 edit">
+                    @Html.TextBoxFor(s => s.Keywords, new {@class = "exampleinputsearch", placeholder = Resource.EnterWhatToFind})
+                    @Html.ValidationMessageFor(m => m.Keywords, "", new {@class = "text-danger"})
+                </div>
+                <div class="from-tim-kiem-item-3 edit">
+                    <button class="btn btn-default search">Tìm kiếm</button>
+                </div>
+            </div>
+            <div class="row-tim-kiem padding-0">
+                <span id="advancedSearch" class="dropbtn tk2" style="float: left; font-size: 14px; font-weight: bold; margin-right: 64px;">
+                    <img alt="tim nang cao" class="img-tk" src="@Url.Content("~/assets/images/tim-kiem-nang-cao.png")"/>
+                    @Resource.AdvancedSearch <img alt="tim nang cao" src="@Url.Content("~/assets/images/mt.png")"/>
+                </span>
+                @*<div class="tim-kiem-nang-cao-right tk2">*@
+                    <div class="item-checkbox">
+                        <div class="radio">
+                            @Html.RadioButtonFor(m => m.SearchOptions, 1, new {id = "AllOption"})
+                            <label for="AllOption" class="radio-label"> @Resource.All </label>
+                        </div>
+                    </div>
+                    <div class="item-checkbox">
+                        <div class="radio">
+                            @Html.RadioButtonFor(m => m.SearchOptions, 2, new {id = "TitleOption"})
+                            <label for="TitleOption" class="radio-label"> @Resource.Title</label>
+                        </div>
+                    </div>
+                    <div class="item-checkbox">
+                        <div class="radio">
+                            @Html.RadioButtonFor(m => m.SearchOptions, 3, new {id = "DocNumberOption"})
+                            <label for="DocNumberOption" class="radio-label"> @Resource.DocNumber </label>
+                        </div>
+                    </div>
+                    <div class="item-checkbox">
+                        <div class="pure-checkbox">
+                            <input type="checkbox" id="SearchExact" name="SearchExact" value="1" @(Model.SearchExact == 1 ? "checked" : string.Empty)/>
+                            <label for="SearchExact">@Resource.ExactPhrase</label>
+                        </div>
+                    </div>
+                @*</div>*@
+            </div>
+
+            <div class="dropdown-search">
+                <div class="dropdown-content" id="advancedSearchPannel" @(Model.ShowAdvancedSearchPannel ? "style=display:block;" : string.Empty)>
+                    <div class="box-tk-nang-cao">
+                        <div class="select-nang-cao">
+                            @Html.TextBoxFor(m => m.DateFrom, new {@class = "inputtext datepicker" , placeholder = "Từ ngày (Ng/Th/Năm)"})
+                        </div>
+                        <div class="select-nang-cao">
+                            @Html.TextBoxFor(m => m.DateTo, new {@class = "inputtext datepicker", placeholder = "Đến ngày (Ng/Th/Năm)"})
+                        </div>
+                        <div class="select-nang-cao">
+                            <select name="DocTypeId" tabindex="0"  class="dropdown bodernone">
+                                <option value="0">@Resource.DocTypes</option>
+                                @foreach (var item in Model.ListDocTypes)
+                                {
+                                    <option title="@item.DocTypeDesc" value="@item.DocTypeId" @(item.DocTypeId == Model.DocTypeId ? "selected" : "")>@item.DocTypeDesc</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="select-nang-cao">
+                            <select name="OrganId" tabindex="1" class="dropdown bodernone">
+                                <option value="0" title="@Resource.Organs">@Resource.Organs</option>
+                                @foreach (var item in Model.ListOrgans)
+                                {
+                                    <option value="@item.OrganId" title="@item.OrganDesc" @(item.OrganId == Model.OrganId ? "selected" : "")>@item.OrganDesc</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="select-nang-cao">
+                            @Html.DropdownListPermission("EffectStatusId","EffectStatusId", "dropdown bodernone", new SelectList(Model.ListEffectStatus, "EffectStatusId", "EffectStatusDesc", Model.EffectStatusId))
+                            @Html.ValidationMessageFor(m => m.DateFrom, "", new {@class = "text-danger"})
+                        </div>
+                        <div class="select-nang-cao">
+                            <select name="FieldId" tabindex="3" class="dropdown bodernone">
+                                <option value="0" data-title="@Resource.FieldWork">@Resource.FieldWork</option>
+                                @foreach (var item in Model.ListFields)
+                                {
+                                    <option value="@item.FieldId" title="@item.FieldDesc" @(item.FieldId == Model.FieldId ? "selected" : "")>@item.FieldDesc</option>
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(m => m.DateTo, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="select-nang-cao">
+                            <select name="LanguageId" tabindex="4" class="dropdown bodernone">
+                                <option value="0" data-title="@Resource.Language">@Resource.Language</option>
+                                @foreach (var item in Model.ListLanguages)
+                                {
+                                    <option value="@item.LanguageId" title="@item.LanguageDesc" @(item.LanguageId == Model.LanguageId ? "selected" : "")>@item.LanguageDesc</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="select-nang-cao">
+                            @Html.TextBoxFor(m => m.SignerName, new {@class = "inputtext2 input-1", placeholder = Resource.Signers})
+                            @Html.HiddenFor(m => m.SignerId)
+                            <span id="signer-message"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

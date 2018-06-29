@@ -1,0 +1,44 @@
+﻿@using ICSoft.ViewLibV3
+@using VanBanLuat.Librarys
+@using Constants = VanBanLuat.Librarys.Constants
+@model VanBanLuatVN.Models.PaginationModel
+
+@if (Model.CategoryArticles.lArticle.HasValue())
+{
+    <div id="contentsWrapper" class="cat-box-content">
+        <div class="pcontent">
+            @foreach (Articles mArticles in Model.CategoryArticles.lArticle)
+            {
+                <div class="new-list-other">
+                    <div class="post-thumbnail-270">
+                        <a href="@mArticles.GetArticleUrl()" class="thumb-full-mobi" title="@mArticles.Title"><img class="thumb-full boder5" src="@mArticles.GetImageUrl_Thumb()" alt="@mArticles.Title" /><span class="post-time">@mArticles.PublishTime.ToString("dd/MM")</span></a>
+                    </div>
+                    <h3 class="post-title fixmobi font24"><a href="@mArticles.GetArticleUrl()" title="@mArticles.Title">@mArticles.Title</a></h3>
+                    <div class="sapo font15">
+                        <p>@Html.Raw(mArticles.Summary)</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    if(Model.CategoryArticles.lArticle.Count == Constants.RowAmount20)
+    {
+        Html.RenderAction("PartialPagination", "Shared", new
+        {
+            model = new VanBanLuatVN.Models.PaginationModel
+            {
+                Page= Model.Page,
+                TotalPage = Model.CategoryArticles.RowCount,
+                AjaxUrl = "/Ajax/ArticlesGetPage",
+                QueryString = string.Format("page={0}", Model.Page + 1)
+            }
+        });
+    }
+}
+else
+{
+    <div class="new-list-other">
+        <p class="post-title vbl bold">Nội dung đang được cập nhật.</p>
+    </div>
+}
+

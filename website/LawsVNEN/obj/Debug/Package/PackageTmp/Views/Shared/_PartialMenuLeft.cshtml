@@ -1,0 +1,90 @@
+﻿@using LawsVNEN.Library
+@using LawsVNEN.Models
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@model MenuLeftModel
+<div class="widget">
+    <div class="nav-en">
+        @if (Model.LMenuItemsLeftTop.HasValue())
+        {
+            foreach (var menuItemView in Model.LMenuItemsLeftTop)
+            {
+                <div class="row-navwidget">
+                    <a href="@menuItemView.GetUrl()" title="@menuItemView.ItemName" class="item-navwidget">@menuItemView.ItemName</a>
+                </div>
+            }
+        }
+        <div class="row-navwidget">
+            <span  class="item-navwidget">@Resource.SearchByCategory</span>
+            <div class="subnavwidget">
+                @if (Model.ListFieldDisplays.HasValue())
+                {
+                    foreach (var item in Model.ListFieldDisplays)
+                    {
+                        <div class="item-navwidget-sub"><a href="@item.GetUrl()">@item.FieldName</a></div>
+                    }
+                }
+                <div class="item-navwidget-sub">
+                    <a class="menu" href="#" data-hasqtip="0">@Resource.OtherField<img alt="other-icon" class="other-icon" src="@Url.Content("~/assets/images/moretext.png")" /> </a>
+                    <div class="tooltiptext">
+                        <span class="icon-tooltip"></span>
+                        <div class="tooltip-item">
+                            <div class="content-scroll-1" style="height:200px; ">
+                                <div class="padding20">
+                                    @foreach (ICSoft.LawDocsLib.Fields field in Model.ListFieldsOther)
+                                    {
+                                        if (field.FieldId > 0 && !string.IsNullOrEmpty(field.FieldDesc))
+                                        {
+                                            <div class="item-checkbox-list">
+                                                <div class="radio">
+                                                    <input id="radio-@field.FieldId" name="radio" type="radio" onclick="javascript:window.location.href = '@field.GetUrl(Model.DocGroupId)';return false;"/>
+                                                    <label for="radio-@field.FieldId" class="radio-label" title="@field.FieldDesc"> @field.FieldDesc</label>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (Model.LMenuItemsLeftBottomParent.HasValue())
+        {
+            foreach (var menuItemView in Model.LMenuItemsLeftBottomParent)
+            {
+                var list = Model.LMenuItemsLeftBottom.FindAll(x => x.ParentItemId == menuItemView.MenuItemId);
+                <div class="row-navwidget">
+                    <a href="@menuItemView.GetUrl()" title="@menuItemView.ItemName" class="item-navwidget">@menuItemView.ItemName</a>
+                    <div class="subnavwidget">
+                        @if (list.HasValue())
+                        {
+                            foreach (var item in list)
+                            {
+                                if (item.Url.IndexOf("subscriber", StringComparison.Ordinal) >= 0)
+                                {
+                                    if (!Extensions.IsAuthenticated)
+                                    {
+                                        <div class="item-navwidget-sub"><a href="@item.GetUrl()">@item.ItemName</a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="item-navwidget-sub"><a href="#" data-id="@Constants.ServiceIdTraCuuTiengAnh" class="dang-ky-dv">@item.ItemName</a>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="item-navwidget-sub"><a href="@item.GetUrl()">@item.ItemName</a>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>   
+            }
+        }
+    </div>
+</div>

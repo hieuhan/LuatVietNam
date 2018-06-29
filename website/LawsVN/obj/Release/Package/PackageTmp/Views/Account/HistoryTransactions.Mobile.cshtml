@@ -1,0 +1,167 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Account
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model HistoryTransactionsModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader)</h1>
+}
+<div class="breadcrumb">
+    <a href="@(CmsConstants.ROOT_PATH)" class="breadcrumb-item">Trang chủ </a> »
+    <span class="breadcrumb-item color1">Lịch sử giao dịch</span>
+</div>
+<div class="box-section">
+    @if (Model.ListPaymentTransactions.IsAny())
+    { 
+
+    <div class="title">
+        <h2 class="title-cat"> Lịch sử giao dịch</h2>
+        <div class="btn-more">
+            <ul class="usernav">
+                <li class="button-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/images/more-nv.png")"></a>
+                    <ul class="dropdown-menu" style="right: 0px; width: 160px; margin-top: 3px; display: none;">
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="item-more-2 boder"> Thông tin tài khoản</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html" class="item-more-2 boder"> Văn bản của tôi</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/thong-bao-hieu-luc.html" class="item-more-2 boder"> Thông báo hiệu lực</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" class="item-more-2 boder"> Tin nhắn</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="box-thongbao">
+        <p>Lịch sử giao dịch của tài khoản: <strong class="color1">@LawsUser.CustomerName</strong></p>
+        <p>Số lần: <strong class="color1">@(Model.RowCount > 0 ? Model.RowCount.ToString("#00") : "0") lần</strong> - Tổng tiền: <strong class="color1">@(Model.TotalMoney > 0 ? string.Concat(Model.TotalMoney.ToString("#,###"), CmsConstants.CURRENCY_VND) : "0")</strong></p>
+    </div>
+        using (Ajax.BeginForm(Model.PartialPaginationAjax.ActionName, Model.PartialPaginationAjax.ControllerName,
+        new
+        {
+            updateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+            , insertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+            , controllerName = Model.PartialPaginationAjax.ControllerName
+            , actionName = Model.PartialPaginationAjax.ActionName
+            , pageSize = Model.PartialPaginationAjax.PageSize
+            , linkLimit = Model.PartialPaginationAjax.LinkLimit
+        },
+        new AjaxOptions
+        {
+            HttpMethod = "Get"
+            , UpdateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+            , InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+            , OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+            , OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+        }))
+        {
+    <div class="box-seclect">
+        <div class="col3-seclect1" style="margin-right: 0">
+            <select name="year" class="select-option select-onchange">
+                <option value="0">Từ trước đến nay</option>
+                <option value="1">Năm qua </option>
+                <option value="2">Tháng qua </option>
+                <option value="3">Tuần qua </option>
+            </select>
+        </div>
+    </div>
+        }
+    <div class="cat-box-content">
+        <style type="text/css">
+            .first-lsu {
+                padding-bottom: 10px;
+            }
+        </style>
+        <div class="lsu" id="HistoryTransactionsBox">
+            @foreach (var paymentTransaction in Model.ListPaymentTransactions)
+            {
+                <div class="first-lsu">
+                    <strong>#@paymentTransaction.PaymentTransactionId. </strong>
+                    <a href="#">
+                        Ngày GD: @paymentTransaction.PaymentDate |
+                        @if (paymentTransaction.ServiceId > 0 && !string.IsNullOrEmpty(paymentTransaction.ServicePackageDesc))
+                        {
+                                <strong style="color: #90622a;"><a href="@paymentTransaction.ServiceId.GetLinkServiceById()" title="@paymentTransaction.ServiceDesc" style="color: #90622a;">@paymentTransaction.ServiceDesc</a> - </strong> @Resource.package <strong style="color: #90622a;">@paymentTransaction.ServicePackageDesc</strong><span> | </span>
+                        }
+                        @paymentTransaction.TransactionDesc | 
+                        Số tiền @paymentTransaction.Amount
+                    </a>
+                </div>
+            }
+            @{
+            Model.PartialPaginationAjax.IsMobile = true;
+            Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.PartialPaginationAjax });
+            }
+        </div>
+        <div class="box-tbdv">
+            @if (Model.DtCustomerServices.ServiceId > 0)
+            {
+                <p style="text-transform: uppercase; color: #cb0000;"><strong>Thông báo dịch vụ</strong></p>
+                if (Model.MonthRemain > 0 && Model.DayRemain > 0)
+                {
+                    <p style="color: #505050;">
+                        Tài khoản của Quý khách còn <span style="color: #d81d22;">@string.Format("{0} tháng {1} ngày", Model.MonthRemain, Model.DayRemain) sử dụng</span> dịch vụ <a href="@Model.DtCustomerServices.ServiceId.GetLinkServiceById()" title="@Model.DtCustomerServices.ServiceName" style="color: #a67942; font-weight: bold;">@Model.DtCustomerServices.ServiceName</a>. Để tiếp tục sử dụng dịch vụ tra cứu văn bản, Quý khách có thể <a href="#" class="dang-ky-dv" data-id="@Model.DtCustomerServices.ServiceId" title="" style="color: #a67942; text-decoration: underline;">Đăng ký dịch vụ </a>hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ.
+                    </p>
+                }
+                else
+                {
+                    if (Model.MonthRemain > 0)
+                    {
+                        <p style="color: #505050;">
+                            Tài khoản của Quý khách còn <span style="color: #d81d22;">@string.Format("{0} tháng", Model.MonthRemain) sử dụng</span> dịch vụ <span style="color: #a67942; font-weight: bold;">@Model.DtCustomerServices.ServiceName</span>. Để tiếp tục sử dụng dịch vụ tra cứu văn bản, Quý khách có thể <a href="#" class="dang-ky-dv" data-id="@Model.DtCustomerServices.ServiceId" title="" style="color: #a67942; text-decoration: underline;">Đăng ký dịch vụ </a>hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ.
+                        </p>
+                    }
+                    else
+                    {
+                        if (Model.DayRemain > 0)
+                        {
+                            if (Model.DayRemain <= Constants.RowAmount5)
+                            {
+                                <p style="color: #505050;">
+                                    Tài khoản của Quý khách chỉ còn <span style="color: #d81d22;">@Model.DayRemain ngày sử dụng</span> dịch vụ <span style="color: #a67942; font-weight: bold;">@Model.DtCustomerServices.ServiceName</span>. Để tiếp tục sử dụng dịch vụ tra cứu văn bản, Quý khách có thể <a href="#" class="dang-ky-dv" data-id="@Model.DtCustomerServices.ServiceId" title="" style="color: #a67942; text-decoration: underline;">Đăng ký dịch vụ </a>hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ.
+                                </p>
+                            }
+                            else
+                            {
+                                <p style="color: #505050;">
+                                    Tài khoản của Quý khách còn <span style="color: #d81d22;">@string.Format("{0} ngày", Model.DayRemain) sử dụng</span> dịch vụ <span style="color: #a67942; font-weight: bold;">@Model.DtCustomerServices.ServiceName</span>. Để tiếp tục sử dụng dịch vụ tra cứu văn bản, Quý khách có thể <a href="#" class="dang-ky-dv" data-id="@Model.DtCustomerServices.ServiceId" title="" style="color: #a67942; text-decoration: underline;">Đăng ký dịch vụ </a>hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ.
+                                </p>
+                            }
+                        }
+                        else
+                        {
+                            <p style="color: #505050;">
+                                Tài khoản của Quý khách hết thời gian sử dụng dịch vụ <span style="color: #a67942; font-weight: bold;">@Model.DtCustomerServices.ServiceName</span>. Để tiếp tục sử dụng dịch vụ tra cứu văn bản, Quý khách có thể <a href="#" class="dang-ky-dv" data-id="@Model.DtCustomerServices.ServiceId" title="" style="color: #a67942; text-decoration: underline;">Đăng ký dịch vụ </a>hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ.
+                            </p>
+                        }
+                    }
+                }
+
+                <p>Cản ơn Quý khách đã tin dùng dịch vụ của LuatVietnam.vn!</p>
+                <p>Mọi chi tiết xin liên hệ:</p>
+                <p style="text-transform: uppercase; "><strong>Trung tâm luật việt nam - công ty CP truyền thông quốc tế INCOM</strong></p>
+                <p>Tại Hà Nội: Tầng 3, Tòa nhà IC, 82 phố Duy Tân, Cầu Giấy, Hà Nội - Tel: (024) 37833688 - Fax: (024) 37833699 </p>
+                <p>Tại TPHCM: Tầng 4, toà nhà Hà Phan, Số 456 Phan Xích Long - Phường 2, Q. Phú Nhuận - Tel: 08.399 50 724 - Fax: 08.399 50 727</p>
+                <p>Email: lawdata@luatvietnam.vn</p>
+            }
+        </div>
+    </div>
+    } else
+    {   
+    <div class="box-thongbao">
+        <img style="float: left; margin-right: 5px;margin-top: 3px;" src="@Url.Content("~/assets/mobile/images/ic_notifications_active_24px.png")" /><em>Bạn chưa thực hiện giao dịch nào! Bấm <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Danh sách dịch vụ" class="color1"><strong>vào đây</strong></a> để đăng ký dịch vụ</em>
+    </div>
+    }
+</div>
+

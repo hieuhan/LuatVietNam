@@ -1,0 +1,19 @@
+﻿@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@model SharedViewModel.DocumentsByGetByDisplayType
+@if (Model.DocList.lDocs.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h3 class="widget-title wg2">@Model.SeoHeader</h3>
+        </div>
+        <div class="widget-container bodertop">
+            @foreach (var doc in Model.DocList.lDocs)
+            {
+                <div class="list-new-wget">
+                    <a class="post-title-wget" href="@doc.GetDocUrl()" title="@doc.DocName"><i class="iconvb"></i>@doc.DocName </a>
+                </div>
+            }
+        </div>
+    </div>
+}

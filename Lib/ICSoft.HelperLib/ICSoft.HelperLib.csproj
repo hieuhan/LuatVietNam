@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6D65E2E2-EA1F-4E85-8164-759E63A0F5D3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICSoft.HelperLib</RootNamespace>
+    <AssemblyName>ICSoft.HelperLib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\DLL\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\Dll\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.CMSLib, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\admin\Desktop\p\LawsVN\LawsVN\DLL\ICSoft.CMSLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.CMSViewLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\admin\Desktop\p\LawsVN\LawsVN\DLL\ICSoft.CMSViewLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.LawDocsLib">
+      <HintPath>..\..\Dll\ICSoft.LawDocsLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LibCommon">
+      <HintPath>..\..\Dll\LibCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LibDatabase">
+      <HintPath>..\..\Dll\LibDatabase.dll</HintPath>
+    </Reference>
+    <Reference Include="LibSecurity">
+      <HintPath>..\..\Dll\LibSecurity.dll</HintPath>
+    </Reference>
+    <Reference Include="LibUtils">
+      <HintPath>..\..\Dll\LibUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Laws\SendMethodHelpers.cs" />
+    <Compile Include="Laws\SendStatusHelpers.cs" />
+    <Compile Include="Laws\DataTypeHelpers.cs" />
+    <Compile Include="Laws\TransactionStatusHelpers.cs" />
+    <Compile Include="Others\InternalLinkHelper.cs" />
+    <Compile Include="Others\MailHelpers.cs" />
+    <Compile Include="security\CustomerRoleHelpers.cs" />
+    <Compile Include="security\CustomerGroupHelpers.cs" />
+    <Compile Include="Laws\OrganTypeHelpers.cs" />
+    <Compile Include="Laws\FieldHelpers.cs" />
+    <Compile Include="Laws\DocTypeHelpers.cs" />
+    <Compile Include="Laws\FileTypeHelpers.cs" />
+    <Compile Include="security\CustomerHelpers.cs" />
+    <Compile Include="Laws\UseStatusHelpers.cs" />
+    <Compile Include="Laws\EffectStatusHelpers.cs" />
+    <Compile Include="Laws\FaqTypeHelpers.cs" />
+    <Compile Include="Laws\FaqGroupHelpers.cs" />
+    <Compile Include="Laws\NewsletterMemberStatusHelpers.cs" />
+    <Compile Include="Laws\NewsletterGroupHelpers.cs" />
+    <Compile Include="Others\ApplicationTypeHelpers.cs" />
+    <Compile Include="Others\BasePages.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Others\CacheHelpers.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Others\CheckBoxListHelpers.cs" />
+    <Compile Include="Others\CookieHelpers.cs" />
+    <Compile Include="Others\BasePageDetails.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Others\BaseServices.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Others\AdvertContentTypeHelpers.cs" />
+    <Compile Include="Others\AdvertDisplayTypeHelpers.cs" />
+    <Compile Include="Others\ActionTypeHelpers.cs" />
+    <Compile Include="Others\DisplayTypeHelpers.cs" />
+    <Compile Include="Others\StatusHelpers.cs" />
+    <Compile Include="Others\SysMessageTypeHelpers.cs" />
+    <Compile Include="Others\VoteTypeHelpers.cs" />
+    <Compile Include="Others\DeviceHelpers.cs" />
+    <Compile Include="Others\DateTimeHelpers.cs" />
+    <Compile Include="Others\FileUploadHelpers.cs" />
+    <Compile Include="Others\ListBoxListHelpers.cs" />
+    <Compile Include="Others\PageTypeHelpers.cs" />
+    <Compile Include="Others\FeedbackGroupHelpers.cs" />
+    <Compile Include="Others\RadioButtonListHelpers.cs" />
+    <Compile Include="Others\ServiceRegistStatusHelpers.cs" />
+    <Compile Include="Others\ServiceTypeHelpers.cs" />
+    <Compile Include="Others\LinkHelpers.cs" />
+    <Compile Include="Others\MasterPageHelpers.cs" />
+    <Compile Include="Others\JSAlertHelpers.cs" />
+    <Compile Include="Others\ReviewStatusHelpers.cs" />
+    <Compile Include="Others\DropDownListHelpers.cs" />
+    <Compile Include="Others\LanguageHelpers.cs" />
+    <Compile Include="Others\SessionHelpers.cs" />
+    <Compile Include="Others\UserAgentHelpers.cs" />
+    <Compile Include="Others\ValidationHelpers.cs" />
+    <Compile Include="security\Members.cs" />
+    <Compile Include="security\Roles.cs" />
+    <Compile Include="Thems\LoadSerializedXmlFile.cs" />
+    <Compile Include="Thems\Themes.cs" />
+    <Compile Include="Thems\ThemeResources.cs" />
+    <Compile Include="Others\ConstantHelpers.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="security\Hosts.cs" />
+    <Compile Include="security\Users.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

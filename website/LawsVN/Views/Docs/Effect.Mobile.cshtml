@@ -1,0 +1,79 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using LawsVN.Models.Docs
+@model DocsViewDetailModel
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>
+    @if (Model.mDocsViewDetail.lFieldDisplays.HasValue())
+    {
+        <span> »</span>
+        for (int index = 0; index < Model.mDocsViewDetail.lFieldDisplays.Count; index++)
+        {
+            FieldDisplays mFieldDisplays = Model.mDocsViewDetail.lFieldDisplays[index];
+            if (index == 0)
+            {
+                <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item color1">@mFieldDisplays.FieldName</a>
+            }
+            else
+            {
+                <span>, </span>
+                <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item color1">@mFieldDisplays.FieldName</a>
+            }
+        }
+    }
+</div>
+
+<article class="post-single">
+    <h1 class="post-title-single">@Model.mDocsViewDetail.mDocsView.DocName</h1>
+    <div class="tab-page">
+        <a href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()" class="tab-page-item ">@Resource.Summary</a>
+        <a href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("noidung")" class="tab-page-item ">@Resource.Content</a>
+        <a href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("lienquan")" class="tab-page-item">@Resource.Relate</a>
+        <a href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("hieuluc")" class="tab-page-item active">@Resource.Effect</a>
+        <a href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("luocdo")" class="tab-page-item ">@Resource.Diagram</a>
+        <a href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("tienganh")" class="tab-page-item">@Resource.English</a>
+        <a href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("taive")" class="tab-page-item">@Resource.DownLoad</a>
+    </div>
+    <div class="box-hieuluc">
+        <div class="title2">
+            <h2 class="title-cat2 none vien"> Hiệu lực</h2>
+        </div>
+        <div class="cat-box-content">
+            <div class="first-news">
+                <h3 class="post-title"><a href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()">@Model.mDocsViewDetail.mDocsView.DocName</a></h3>
+                <div class="post-time">
+                    @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.mDocsViewDetail.mDocsView, EffectStatusName = Model.mDocsViewDetail.mDocsView.EffectStatusName } });}
+                </div>
+            </div>
+        </div>
+    </div>
+    @{ Html.RenderAction("PartialPermissionDocEffect", "Shared", new { docModel = Model, languageId = Model.mDocsViewDetail.mDocsView.LanguageId }); }
+    
+</article>
+
+@{Html.RenderAction("PartialDocOthersMobile", "Shared", new { model = new DocOthersModel { ListDocsView = Model.mDocsViewDetail.lDocOthers } });}
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+@section FooterSection
+{
+    <script type="text/javascript">
+    $('#boxContentViewed').lawsVnContentViewed({
+        doc: {
+            id: '@Model.mDocsViewDetail.mDocsView.DocId',
+            name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+            effect: '@Model.mDocsViewDetail.mDocsView.EffectStatusName',
+            title: '@Model.mDocsViewDetail.mDocsView.DocName',
+            summary: '',
+            datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+            url: '@Model.mDocsViewDetail.mDocsView.DocUrl',
+            image: '@Constants.NoImageUrl'
+        }
+    });
+    </script>
+}

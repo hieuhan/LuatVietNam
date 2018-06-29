@@ -1,0 +1,53 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@model LawsVN.Models.HeaderModel
+<header id="theme-header" class="bgmyluat">
+    <div class="container">
+        <div class="hearder-left">
+            <div class="logo" style="height: 65px;"><a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan.html"><img alt="@Html.Raw(sms.utils.StringUtil.RemoveSign4VietnameseString(Model.WebsiteTitle.ToString()))"
+     src="@Url.Content("~/assets/images/logo-myluatvietnam.png")" /></a></div>
+        </div>
+        <div class="hearder-right">
+            <div class="top-nav">
+               @* <a href="http://luatvietnam.vn" title="LuatVietNam.vn" target="_blank" style="float: left; margin-top: -7px;"><img alt="trở về phiên bản cũ" src="@Url.Content("~/assets/images/old-version.png")"/></a>*@
+                @if (Request.IsAuthenticated)
+                {
+                    {
+                        Html.RenderAction("PartialWidgetUserHeader", "Shared", true);
+                    }
+                    {
+                        Html.RenderAction("PartialCustomerNotifyMessages", "Shared", true);
+                    }
+                    <a href="@CmsConstants.ROOT_PATH" title="Trang chủ" class="homepage" style="float: right !important; position: relative; margin-top: -6px;"><img alt="giao diện cá nhân" src="@Url.Content("~/assets/images/MyLuatHome.png")"/></a>
+                }
+                else
+                {
+                    <a href="@(CmsConstants.ROOT_PATH)user/dang-ky-tai-khoan.html" class="img-dk icon2">Đăng ký</a>
+                    <a href="@(CmsConstants.ROOT_PATH)user/dang-nhap-tai-khoan.html" class="img-dk icon3">Đăng nhập</a>
+                }
+                @{Html.RenderAction("PartialCustomerProvince", "Shared", true);}
+            </div>
+
+            <div class="myluat-nav">
+                @if (Model.ListMenuItemsView.HasValue())
+                {
+                    <ul id="menu-main" class="nav-myluat">
+                        @foreach (var menuItem in Model.ListMenuItemsView)
+                        {
+                            <li class="myluat-nav2">
+                                @if (Extensions.IsAuthenticated && !string.IsNullOrWhiteSpace(Model.SessionId) && Model.SessionId.Equals(Session["_LuatVietNamSessionId"]) && menuItem.Url.IndexOf("english", StringComparison.Ordinal) >= 0)
+                                {
+                                    <a href="@string.Format("{0}?sessionId={1}", string.Concat("https://english.luatvietnam.vn/", "account/loginsessionid"), Model.SessionId)" rel="nofollow" title="@menuItem.ItemName">@menuItem.ItemName</a>
+                                }
+                                else
+                                {
+                                    <a href="@menuItem.GetUrl()" title="@menuItem.ItemName" class="myluat-item @(HttpContext.Current.Request.RawUrl.Contains(menuItem.Url) ? "active" : "")">@menuItem.ItemName</a>
+                                }
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</header>

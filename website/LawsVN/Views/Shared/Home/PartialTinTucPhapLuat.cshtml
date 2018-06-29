@@ -1,0 +1,34 @@
+﻿@using LawsVN.Library
+@model ICSoft.CMSViewLib.CategoriesView
+<div class="col-xs-2">
+    <div class="cat-title">
+        <a href="@Model.GetCategoryUrl()" title="@Model.CategoryName">
+            <h3><span class="cat-box-title vien">@Model.CategoryName</span></h3>
+        </a>
+    </div>
+    <div class="cat-box-content">
+        @if (Model.lArticlesView.HasValue())
+        {
+            for (var index = 0; index < Model.lArticlesView.Count && index < Constants.RowAmount3; index++)
+            {
+                var articleView = Model.lArticlesView[index];
+                <div class="other-news">
+                    <div class="post-thumbnail">
+                        <a href="@articleView.GetArticleUrl()" title="@articleView.Title" class="thumb90">
+                            <img alt="@articleView.Title" src="@articleView.GetImageUrl_Thumb()"/>
+                        </a>
+                    </div>
+                    <a href="@articleView.GetArticleUrl()" title="@articleView.Title" class="post-title">
+                        @articleView.Title
+                        @*<br />
+                        <span class="tie-date">(@articleView.PublishTime.ToString("dd/MM/yyyy"))</span>*@
+                    </a>
+                </div>
+            }
+            <div class="more">
+                <a href="@Model.GetCategoryUrl()" title="Xem tiếp" class="more-link">
+                    Xem tiếp <img alt="alt" src="@Url.Content("~/assets/images/more-link-fa.png")"></a>
+            </div>
+        }
+    </div>
+</div>

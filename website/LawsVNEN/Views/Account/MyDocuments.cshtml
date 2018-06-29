@@ -1,0 +1,81 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using ICSoft.HelperLib
+@using ICSoft.LawDocsLib
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.AppCode
+@using LawsVNEN.Library
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model LawsVNEN.Models.Account.MyDocuments
+
+<div class="content-center-pages searchblog">
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.Home</a>  »
+        <span class="breadcrumb-item colorrumb">@Resource.InterestedDocuments</span>
+    </div>
+
+    <section class="cat-box">
+        <div class="tie-doc"><img class="documents1" src="@Url.Content("~/assets/images/save.png")">@Resource.InterestedDocuments</div>
+        <div class="sort-by">
+            <div class="left-doc-btn">
+                <a href="javascript:lawsVn.myDocuments.deleteCustomerDocs()" class="btn-doc"><img class="documents2" src="@Url.Content("~/assets/images/icon-from2.png")">@Resource.Remove</a>
+                <a href="javascript:lawsVn.myDocuments.deleteCustomerDocsAll()" class="btn-doc"><img class="documents2" src="@Url.Content("~/assets/images/icon-from2.png")">@Resource.RemoveAll</a>
+            </div>
+            <div class="sortright">
+                <div class="select-item">
+                    <div class="text-item">@Resource.Sort:</div>
+                    <div class="text-item x2">
+                        <select class="select2" id="dllOrderby" onchange="lawsVn.InterestedDocumentsOrder();">
+                            <option value="DESC">@Resource.Descending</option>
+                            <option value="">@Resource.Ascending</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="select-item">
+                    <div class="text-item">@Resource.By:</div>
+                    <div class="text-item x2">
+                        <select class="select2" id="dllOrderbyName" onchange="lawsVn.InterestedDocumentsOrder();">
+                            <option value="IssueDate">@Resource.PublicDate</option>
+                            <option value="DocName">@Resource.Description</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cat-box-content" id="MyDocumentsBox">
+            @if (Model.ListMyDocuments.IsAny())
+            {
+            <table class="table table-bordered">
+                <tbody>
+                    @for (int index = 1; index <= Model.ListMyDocuments.Count(); index++)
+                    {
+                        var docView = Model.ListMyDocuments.ElementAt(index - 1);
+                        <tr class="row-first-news @(index % 2 != 0 ? "" : "bgcolor")">
+                            <th class="count-123 page" scope="row">
+                                <div class="pure-checkbox">
+                                    <input id="@docView.DocsView.DocId" name="checkboxDocument" value="@docView.DocsView.DocId" type="checkbox">
+                                    <label for="@docView.DocsView.DocId"></label>
+                                </div>
+                            </th>
+                            <th class="count-123 page" scope="row">@index.ToString("#00")</th>
+                            <td class="news-left-post">
+                                <h2><a href="@docView.DocsView.GetDocUrl()" class="post-title lvn">@docView.DocsView.DocName</a></h2>
+                                <div class="item-meta">
+                                    @{ Html.RenderAction("_PartialLinkDocumentAttribute", "Shared", new { model = new LawsVNEN.Models.PartialLinkDocumentAttributeModel { mDocsView = docView.DocsView } });}
+                                </div>
+                            </td>
+                            <td class="post-time-right page">
+                                @{ Html.RenderAction("_PartialLinkDocumentAttributeRight", "Shared", new { model = new LawsVNEN.Models.PartialLinkDocumentAttributeModel { mDocsView = docView.DocsView, EffectStatusName = docView.EffectStatusName } });}
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            { Html.RenderAction("PartialPaginationAjaxPageNumber", "Shared", new { model = Model.mPartialPaginationAjax }); }
+            }
+        </div>
+    </section>
+</div>

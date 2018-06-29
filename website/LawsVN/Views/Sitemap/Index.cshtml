@@ -1,0 +1,34 @@
+﻿@using ICSoft.CMSLib
+@model LawsVN.Models.Sitemap.SitemapModel
+@{
+    Layout = null;
+    Response.ContentType = "text/xml";
+    Response.Write("<?xml version='1.0' encoding='UTF-8' ?>");
+}
+<sitemapindex xmlns="http://www.google.com/schemas/sitemap/0.84">
+ <sitemap>
+    <loc>@(CmsConstants.WEBSITE_DOMAIN)sitemap_home.xml</loc>
+    <lastmod>@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")</lastmod>
+ </sitemap> 
+@for (int index = 0; index < Model.RowCountDocs; index++)
+{
+    <sitemap>
+        <loc>@(CmsConstants.WEBSITE_DOMAIN)sitemap_document@(index+1).xml</loc>
+        <lastmod>@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")</lastmod>
+    </sitemap>
+}
+@for (int index = 0; index < Model.RowCountArticles; index++)
+{
+    <sitemap>
+        <loc>@(CmsConstants.WEBSITE_DOMAIN)sitemap_news@(index+1).xml</loc>
+        <lastmod>@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")</lastmod>
+    </sitemap>
+}
+@for (int index = 0; index < Model.RowCountTags; index++)
+{
+    <sitemap>
+        <loc>@(CmsConstants.WEBSITE_DOMAIN)sitemap_tags@(index+1).xml</loc>
+        <lastmod>@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz")</lastmod>
+    </sitemap>
+}
+</sitemapindex>

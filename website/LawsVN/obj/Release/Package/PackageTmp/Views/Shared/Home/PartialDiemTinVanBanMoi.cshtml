@@ -1,0 +1,45 @@
+﻿@using LawsVN.Library
+@model ICSoft.CMSViewLib.CategoriesView
+<div class="col-xs-2">
+    <div class="cat-title">
+        <a href="@Model.GetCategoryUrl()" title="@Model.CategoryName">
+            <h3><span class="cat-box-title vien" style="font-size: 16px;">@Model.CategoryName</span></h3>
+        </a>
+    </div>
+    <div class="cat-box-content">
+        @if (Model.lArticlesView.HasValue())
+        {
+            for (int index = 0; index < Model.lArticlesView.Count && index < Constants.RowAmount3; index++)
+            {
+                if (index == 0)
+                {
+                    <div class="first-news pkg">
+                        <div class="post-thumbnail">
+                            <a href="@Model.lArticlesView[index].GetArticleUrl()" title="@Model.lArticlesView[index].Title" class="thumb200">
+                                <img alt="@Model.lArticlesView[index].Title" src="@Model.lArticlesView[index].GetImageUrl_Mobile()" /></a>
+                        </div>
+                        <a href="@Model.lArticlesView[index].GetArticleUrl()" title="@Model.lArticlesView[index].Title" class="post-title">@Model.lArticlesView[index].Title</a>
+                        <div class="sapo">
+                            <p>@Html.Raw(Model.lArticlesView[index].Summary)</p>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="other-news pkg @(index == Model.lArticlesView.Count - 1 ? "ms3" : string.Empty)">
+                        <span class="icon-new"></span>
+                        <div class="post-conten news">
+                            <a href="@Model.lArticlesView[index].GetArticleUrl()" title="@Model.lArticlesView[index].Title" class="post-title">@Model.lArticlesView[index].Title
+                            @*<br />
+                                <span class="tie-date">(@Model.lArticlesView[index].PublishTime.toString())</span>*@</a>
+                        </div>
+                    </div>
+                }
+            }
+            <div class="more">
+                <a href="@Model.GetCategoryUrl()" title="Xem tiếp" class="more-link">
+                    Xem tiếp <img alt="alt" src="@Url.Content("~/assets/images/more-link-fa.png")"></a>
+            </div>
+        }
+    </div>
+</div>

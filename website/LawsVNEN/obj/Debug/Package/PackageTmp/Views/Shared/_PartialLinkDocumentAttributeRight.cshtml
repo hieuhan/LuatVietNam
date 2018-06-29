@@ -1,0 +1,41 @@
+﻿@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.AppCode
+@model LawsVNEN.Models.PartialLinkDocumentAttributeModel
+@if (Model.mDocsView != null)
+{
+    <p class="post-time">@Resource.IssuingDate: <span class="color2">@Model.mDocsView.IssueDate.toString()</span></p>
+    <p class="post-time"> @Resource.EffectiveDate:
+        @if (Model.mDocsView.EffectDate != DateTime.MinValue)
+        {
+            if (Extensions.IsAuthenticated)
+            {
+                <span class="color2">@Model.mDocsView.EffectDate.toString()</span>
+            }
+            else
+            {
+                <span class="color2 no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+            }
+        }
+        else
+        {
+            <span class="color2">@Resource.Updating</span>
+        }
+    </p>
+    <p class="post-time bottom0"> @Resource.Effect: 
+        @if (!string.IsNullOrEmpty(Model.mDocsView.EffectStatusName) || !string.IsNullOrEmpty(Model.EffectStatusName))
+        {
+            if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+            {
+                <span class="color2">@Model.mDocsView.EffectStatusName.TrimmedOrDefault(Model.EffectStatusName.TrimmedOrDefault(string.Empty))</span>
+            }
+            else
+            {
+                <span class="color2 no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+            }
+        }
+        else
+        {
+            <span class="color2">@Resource.Updating</span>
+        }
+    </p>
+}

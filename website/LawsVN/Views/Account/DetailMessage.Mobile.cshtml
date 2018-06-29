@@ -1,0 +1,90 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Account
+@model MyMessagesModel
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a> »
+    <span class="breadcrumb-item color1">Tin nhắn</span>
+</div>
+<div class="box-section">
+    <div class="title">
+        <h2 class="title-cat"> Tin nhắn</h2>
+        <div class="btn-more">
+            <ul class="usernav">
+                <li class="button-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/images/more-nv.png")"></a>
+                    <ul class="dropdown-menu" style="right: 0px; width: 160px; margin-top: 3px; display: none;">
+                        
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="item-more-2 boder"> Thông tin tài khoản</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html" class="item-more-2 boder"> Lịch sử giao dịch</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html" class="item-more-2 boder"> Văn bản của tôi</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/thong-bao-hieu-luc.html" class="item-more-2 boder"> Thông báo hiệu lực</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="docPrint" class="cat-box-content">
+        <div class="tie-tinnhan">
+            @Model.mMessages.Subject
+        </div>
+        <div class="rows-tinnhan">
+            <div class="col2-bottom" style="line-height: 20px;">
+                <p style="font-weight: bold;">@Model.mMessages.FromUser</p>
+                <p style="color: #666"> tới tôi (@Model.mMessages.ToUser)</p>
+            </div>
+            <div class="col2-bottom" style="text-align: right; line-height: 22px;">
+                <p style="color: #666; font-style: italic;">@Model.mMessages.CrDateTime.ToString("HH:mm") ngày @Model.mMessages.CrDateTime.ToString("dd/MM/yyyy")</p>
+                <p>
+                    @if (Model.mMessages.HasSave == 1)
+                    {
+                        <a class="tag-tn unsave-message" data-id="@Model.mMessages.MessageId" title="Bỏ lưu email" href="#"> Bỏ Lưu</a>
+                    }
+                    else
+                    {
+                        <a class="tag-tn save-message" data-id="@Model.mMessages.MessageId" title="Lưu email" href="#"> Lưu</a>
+                    }
+                <a class="tag-tn delete-message" data-id="@Model.mMessages.MessageId" title="Xóa email" href="#"> Xóa</a>
+                <a class="tag-tn docPrint" data-id="@Model.mMessages.MessageId" title="In nội dung email" href="#"> In</a></p>
+            </div>
+        </div>
+        <div class="rows-tinnhan">
+            @Html.Raw(Model.mMessages.MsgContent)
+        </div>
+    </div>
+
+</div>
+<style type="text/css">
+    .tag-tn {
+        margin-left: 24px;
+    }
+
+    .tie-tinnhan {
+        font-weight: bold;
+        padding-bottom: 10px;
+        border-bottom: solid 1px #ddd;
+        float: left;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .rows-tinnhan {
+        padding-bottom: 5px;
+        line-height: 22px;
+        float: left;
+        width: 100%;
+    }
+</style>

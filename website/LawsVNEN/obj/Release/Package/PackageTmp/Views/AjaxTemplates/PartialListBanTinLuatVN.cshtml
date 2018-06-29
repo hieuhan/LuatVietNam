@@ -1,0 +1,50 @@
+﻿@using LawsVNEN.Library
+@using LawsVNEN.Models
+@using LawsVNEN.Models
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@model ArticleViewModel
+@using (Html.BeginForm("BanTinLuatVN", "News", FormMethod.Get))
+{
+    <div class="rows">
+        <div class="sortright">
+            <div class="select-item">
+                <div class="text-item">@Resource.ChooseYear: </div>
+                <div class="text-item" style="width: 90px">
+                    <select class="select2 select-onchange" name="keyword">
+                        <option value=""> @Resource.ChooseYear </option>
+                        @for (int i = DateTime.Now.Year; i > DateTime.Now.Year - 50; i--)
+                        {
+                            <option value="@i" @(Model.mPartialPaginationAjax.KeyWord == i.ToString() ? "selected" : "")>@i</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="cat-box">
+    @if (Model.ListArticlesView.HasValue())
+    {
+        for (int i = 0; i < Model.ListArticlesView.Count; i++)
+        {
+            <div class="news-item">
+                <div class="post-thumbnail">
+                    <a href="@Model.ListArticlesView[i].GetArticleUrl()" title="@Model.ListArticlesView[i].Title" class="thumb220"> <img alt="alt" src="@(Model.ListArticlesView[i].GetImageUrl_Mobile() == "" ? Constants.NoImageUrl_Article : Model.ListArticlesView[i].GetImageUrl_Mobile())"></a>
+                </div>
+                <h3><a href="@Model.ListArticlesView[i].GetArticleUrl()" title="@Model.ListArticlesView[i].Title" class="post-title font16">@Model.ListArticlesView[i].Title</a></h3>
+                <div class="sapo new">
+                    @Html.Raw(Model.ListArticlesView[i].Summary)
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>@Resource.ContentIsBeingUpdated</p>
+    }
+</div>
+@if (Model.mPartialPaginationAjax.TotalPage > 0)
+{
+    { Html.RenderAction("PartialPaginationAjaxPageNumber", "Shared", new { model = Model.mPartialPaginationAjax }); }
+}

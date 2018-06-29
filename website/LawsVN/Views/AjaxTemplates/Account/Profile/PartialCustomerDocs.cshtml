@@ -1,0 +1,26 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model List<ICSoft.CMSViewLib.DocsView>
+@if (Model.HasValue())
+{
+    for(int index = 0; index < Model.Count && index < Constants.RowAmount3; index++)
+    {
+        <div class="row-tab" @(index==0 ? "style=border-top: 0;" : string.Empty)>
+            <a href="@Model[index].GetDocUrl()" title="@Model[index].DocName.StripTags()" class="title-tab">@Model[index].DocName
+            <br />
+            <span class="tie-date"> @Model[index].IssueDate.toString()</span></a>
+        </div>
+    }
+    <div class="more-gdcn">
+        <a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan.html" title="Xem tiếp" class="more-link-gdcn">
+            <img alt="Xem tiếp" src="@Url.Content("~/assets/images/xem-tiep.png")"/>
+            Xem tiếp </a>
+    </div>
+}
+else
+{
+    <div class="row-tab" style="border-top: 0;">
+        <p class="title-tab">@Resource.NoDocumentsYet</p>
+    </div>
+}

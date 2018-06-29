@@ -1,0 +1,58 @@
+﻿@using ICSoft.LawDocsLib
+@using LawsVN.Library
+@model LawsVN.Models.Docs.DocOthersModel
+<div class="page-content bgf8f8f8" style="margin-top: 20px; margin-bottom: 0;">
+    @if (Model.ListDocsView.HasValue())
+    {
+        <div class="padding-vbxt">
+            <div class="cat-title" style="padding-bottom: 15px;">
+                <div class="cat-box-title vien">VĂN BẢN LIÊN QUAN MỚI</div>
+            </div>
+            <div class="cat-box-content">
+                @for (int index = 0; index < Model.ListDocsView.Count; index++)
+                {
+                    int count = 1;
+                    var docView = Model.ListDocsView[index];
+                    var listFields = docView.FieldsText.GetListFieldsDocOthers(Model.ListFields);
+                    if (index % 2 == 0)
+                    {
+                        @:<div class="rows item7">
+                        }
+
+                        <div class="col-x2">
+                            <div class="post-thumbnail vbanlq">
+                                <a href="@docView.DocUrl" title="@docView.DocName" class="thumbvb48x62">
+                                    <img alt="thumbvb48x62" src="@Url.Content("~/assets/images/van-ban-lien-quan.png")">
+                                </a>
+                            </div>
+                            <div class="post-content-vblq">
+                                <a href="@docView.GetDocUrl()" title="@docView.DocName" class="post-title lvn">@docView.DocName</a>
+                                @if (listFields != null && listFields.Any())
+                                {
+                                    <div class="tag-vb">
+                                        <span class="icontag"></span>
+                                        @foreach (Fields field in listFields)
+                                        {
+                                            string fieldUrl = field.GetUrl(docView.DocGroupId);
+                                            if (!fieldUrl.StartsWith("/")) { fieldUrl = "/" + fieldUrl; }
+                                            <a href="@fieldUrl" title="@string.Concat("Lĩnh vực: ", field.FieldName)" class="tag-vb-item">@field.FieldName</a>
+                                            @(count == listFields.Count() ? string.Empty : ", ")
+                                            count++;
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        if (index % 2 != 0)
+                        {
+                            @:</div>
+                    }
+                }
+                @if (Model.ListDocsView.Count % 2 == 1 && Model.ListDocsView.Count > 0)
+                {
+                    @:</div>
+            }
+            </div>
+        </div>
+    }
+    </div>

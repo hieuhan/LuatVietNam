@@ -1,0 +1,247 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutDoc.cshtml";
+}
+@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Docs
+@model DocsViewDetailModel
+<div class="cat-box content-wrap">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>
+            @if (Model.mDocsViewDetail.lFieldDisplays.HasValue())
+            {
+                <span> »</span>
+                for (int index = 0; index < Model.mDocsViewDetail.lFieldDisplays.Count; index++)
+                {
+                    FieldDisplays mFieldDisplays = Model.mDocsViewDetail.lFieldDisplays[index];
+                    if (index == 0)
+                    {
+                         <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item">@mFieldDisplays.FieldName</a>
+                    }
+                    else
+                    {
+                         <span>, </span>
+                         <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item">@mFieldDisplays.FieldName</a>
+                    }
+                }
+            }        
+        </div>
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title vblq">@Model.mDocsViewDetail.mDocsView.DocName</h1>
+                <p class="info-page">@Html.Raw(Model.mDocsViewDetail.mDocsView.MetaDesc)</p>
+            </div>
+        </div>
+        <div class="cat-box-content page">
+            <div class="tab-nav" id="tabPannel">
+                <a class="tab-nav-item-ad active" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()" title="@Resource.Properties">@Resource.Properties</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("noidung")" title="@Resource.Content">@Resource.Content</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("luocdo")" title="@Resource.Diagram">@Resource.Diagram</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("hieuluc")" title="@Resource.Effect">@Resource.Effect</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("lienquan")" title="@Resource.Relate">@Resource.Relate2</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("taive")" title="@Resource.DownLoad">@Resource.DownLoad</a>
+            </div>
+            <div id="docPrint" class="box-content box-shadow">
+                <div class="padding20">
+                    <div class="box-content2">
+                        <div class="cat-title">
+                            <div class="cat-box-title vien">Thuộc tính văn bản</div>
+                        </div>
+                        <div class="info-2">@Model.mDocsViewDetail.mDocsView.DocName</div>
+
+                        <div class="content-giao-dich">
+                            <table class="table table-bordered">
+                                <tbody>
+
+                                    <tr class="row-tr">
+                                        <td class="rows-td col4 bgf9f9f9">Cơ quan ban hành: </td>
+                                        <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.OrgansText</td>
+                                        <td class="rows-td col4 bgf9f9f9">Số công báo:</td>
+                                        <td class="rows-td col4">
+                                            @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.GazetteNumber))
+                                            {
+                                                if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFullVi))
+                                                {
+                                                    @Model.mDocsViewDetail.mDocsView.GazetteNumber
+                                                }
+                                                else
+                                                {
+                                                    <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span>@Resource.Updating</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr class="row-tr">
+                                        <td class="rows-td col4 bgf9f9f9">Số hiệu: </td>
+                                        <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.DocIdentity </td>
+                                        <td class="rows-td col4 bgf9f9f9">Ngày đăng công báo:</td>
+                                        <td class="rows-td col4">
+                                            @if (Model.mDocsViewDetail.mDocsView.GazetteDate != DateTime.MinValue)
+                                            {
+                                                if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFullVi))
+                                                {
+                                                    @Model.mDocsViewDetail.mDocsView.GazetteDate.toString()
+                                                }
+                                                else
+                                                {
+                                                    <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span>@Resource.Updating</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr class="row-tr">
+                                        <td class="rows-td col4 bgf9f9f9">Loại văn bản: </td>
+                                        <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.DocTypesText</td>
+                                        <td class="rows-td col4 bgf9f9f9">Người ký: </td>
+                                        <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.SignersText</td>
+                                    </tr>
+                                    <tr class="row-tr">
+                                        <td class="rows-td col4 bgf9f9f9">Ngày ban hành: </td>
+                                        <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.IssueDate.toString()</td>
+                                        <td class="rows-td col4 bgf9f9f9">Ngày hết hiệu lực: </td>
+                                        <td class="rows-td col4">
+                                            @if (Model.mDocsViewDetail.mDocsView.ExpireDate != DateTime.MinValue)
+                                            {
+                                                if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFullVi))
+                                                {
+                                                    @Model.mDocsViewDetail.mDocsView.ExpireDate.toString()
+                                                }
+                                                else
+                                                {
+                                                    <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span>@Resource.Updating</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr class="row-tr">
+                                        <td class="rows-td col4 bgf9f9f9">Áp dụng: </td>
+                                        <td class="rows-td col4">
+                                            @if (Model.mDocsViewDetail.mDocsView.EffectDate != DateTime.MinValue)
+                                            {
+                                                if (Extensions.IsAuthenticated)
+                                                {
+                                                    @Model.mDocsViewDetail.mDocsView.EffectDate.toString()
+                                                }
+                                                else
+                                                {
+                                                    <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span>@Resource.Updating</span>
+                                            }
+                                        </td>
+                                        <td class="rows-td col4 bgf9f9f9">Tình trạng hiệu lực: </td>
+                                        <td class="rows-td col4">
+                                            @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.EffectStatusName))
+                                            {
+                                                if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFullVi))
+                                                {
+                                                    @Model.mDocsViewDetail.mDocsView.EffectStatusName
+                                                }
+                                                else
+                                                {
+                                                    <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span>@Resource.Updating</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr class="row-tr">
+                                        <td class="rows-td col4 bgf9f9f9">Lĩnh vực: </td>
+                                        <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.FieldsText</td>
+                                        <td class="rows-td col4 bgf9f9f9"></td>
+                                        <td class="rows-td col4"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId) > 0)
+                        {
+                            <div class="box-content2">
+                                <div class="cat-title">
+                                    <div class="cat-box-title vien">Tải văn bản</div>
+                                </div>
+                                @foreach (var docFile in Model.mDocsViewDetail.lDocFiles)
+                                {
+                                    if (docFile.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId)
+                                    {
+                                        string filePath = docFile.FilePath.ToLower();
+                                        if (filePath.EndsWith(".doc") || filePath.EndsWith(".docx"))
+                                        {
+                                            <div class="rows item7">
+                                                <a href="@string.Concat(Constants.MEDIA_DOWNLOADPATH , filePath)" title="Tải văn bản tiếng Việt (.doc)" class="down-vb" style="font-size: 14px; font-weight: bold; line-height: 34px;">
+                                                    <img alt="doc" src="@Url.Content("~/assets/images/doc-summary.png")" style="float: left; margin-right: 5px;">Tải văn bản tiếng Việt (.doc)
+                                                </a>
+                                            </div>
+                                        }
+                                        else if (filePath.EndsWith(".pdf"))
+                                        {
+                                            <div class="rows item7">
+                                                <a href="@string.Concat(Constants.MEDIA_DOWNLOADPATH , filePath)" title="Tải văn bản tiếng Việt (.pdf)" class="down-vb" style="font-size: 14px;font-weight: bold;line-height: 34px;">
+                                                    <img alt="pdf" src="@Url.Content("~/assets/images/pdf-summary.png")" style="float: left;margin-right: 5px;">Tải văn bản tiếng Việt (.pdf)
+                                                </a>
+                                            </div>
+                                        }
+                                        else if (filePath.EndsWith(".zip"))
+                                        {
+                                            <div class="rows item7">
+                                                <a href="@string.Concat(Constants.MEDIA_DOWNLOADPATH , filePath)" title="Tải văn bản tiếng Việt (.zip)" class="down-vb" style="font-size: 14px;font-weight: bold;line-height: 34px;">
+                                                    <img alt="zip" src="@Url.Content("~/assets/images/doc4.png")" style="float: left;margin-right: 5px;">Tải văn bản tiếng Việt (.zip)
+                                                </a>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialFullSearchDetail", "Shared", new { model = new PartialFullSearchDetailModel { SearchOptions = 1, DocGroupId = Constants.DocGroupIdUbnd, FieldId = Model.FieldId } });}
+            @Html.Partial("PartialDocUtility", Model)            
+        </aside>
+    </div>
+</div>
+@{Html.RenderAction("PartialDocOthers", "Shared", new { model = new DocOthersModel { ListDocsView = Model.mDocsViewDetail.lDocOthers } });}
+@Html.Partial("PartialContentViewed")
+
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.mDocsViewDetail.mDocsView.DocId',
+                name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+                title: '@Model.mDocsViewDetail.mDocsView.DocName',
+                summary: '',
+                datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+                url: '@Model.mDocsViewDetail.mDocsView.GetDocUrl()',
+                image: '@Constants.NoImageUrl'
+            }
+        });
+    </script>
+}

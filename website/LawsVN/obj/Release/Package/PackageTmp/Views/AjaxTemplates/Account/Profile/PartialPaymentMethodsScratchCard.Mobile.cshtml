@@ -1,0 +1,64 @@
+﻿@model LawsVN.Models.Account.PaymentServiceUsingScratchCardModel
+@using (Ajax.BeginForm("PaymentServiceUsingScratchCard", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    ,OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccess"
+},new { id= "PaymentMethodsScratchCardForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="cat-box-content">
+        <div class="rows item6" style="text-transform: uppercase; font-weight: bold; font-size: 14px; text-align: center; margin-bottom: 10px; padding-top: 0 !important;">
+            Nạp thẻ dịch vụ luật việt nam
+        </div>
+        <div class="tabcontent-dv">
+
+            <div class="padding">
+
+                <div class="form-group napthe">
+                    <label class="col-sm-1 napthe">Mã thẻ cào:</label>
+                    <div class="col-sm-2 napthe">
+                        @Html.TextBoxFor(m => m.ScratchCardCode, new {@class = "form-control-input"})
+                        @Html.ValidationMessageFor(m => m.ScratchCardCode, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group napthe">
+                    <label class="col-sm-1 napthe">Mã xác nhận:</label>
+                    <div class="col-sm-2 napthe">
+                        <div class="row" style="float: left;width: 100%;">
+                            @Html.TextBoxFor(m => m.PaymentServiceUsingScratchCardCode, new { @class = "form-control-input napthe" })
+
+                            <span class="ma-code2">
+                                <img class="captcha" alt="captcha" id="PaymentService" style="height: 28px;" src="@Url.Action("CaptchaImage", "Home", new {id = Guid.NewGuid(), prefix = "PaymentService"})">
+                            </span>
+                            <a class="ma-code2 getcaptcha" data-id="PaymentService" href="#" title="Nhận mã bảo mật mới" data-prefix="PaymentService">
+                                <img class="imgrset" alt="" src="@Url.Content("~/assets/images/rset.png")" />
+                            </a>
+                        </div>
+
+                        @Html.ValidationMessageFor(m => m.ScratchCardCode, "", new { @class = "text-danger error-napthe" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="rows item8">
+        <div class="pure-checkbox">
+            @Html.CheckBoxFor(m => m.TermsAndConditionsScratchCard)
+            <label for="TermsAndConditionsScratchCard" style="float: left; width: 100%;">Tôi đồng ý với các <a href="#" class="quy-dinh-thanh-toan2" style="color: #a67942; font-weight: bold;">Quy định thanh toán</a> của LuatVietnam.vn</label>
+            <br />@Html.ValidationMessageFor(m => m.TermsAndConditionsScratchCard, "", new { @class = "text-danger" })
+            @Html.HiddenFor(m=>m.ServiceId)
+            @Html.HiddenFor(m=>m.ServicePackageId)
+        </div>
+    </div>
+
+    <center class="rows btn" style="margin: 10px 0;">
+        <button class="btn1 btn-xacnhan">Thanh toán</button>
+        <button class="btn2 btn-close">Hủy</button>
+    </center>
+}
+<script type="text/javascript">
+    lawsValidate.termsAndConditions();
+</script>

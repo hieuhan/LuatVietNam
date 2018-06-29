@@ -1,0 +1,376 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Library
+@using LawsVNEN.Models.Account
+@model SubscriberModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-center-pages searchblog">
+    <div class="breadcrumb"><a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.Home</a> » <span class="breadcrumb-item colorrumb">@Resource.Subscriber</span> </div>
+    <section class="cat-box">
+        @*<div class="step-content">
+            <div class="page-header">
+                <h1 style="color: #a67942; font-size: 15px; font-weight: bold; padding-bottom: 5px;">@Resource.LuatVietnamEnglishDatabaseFree</h1>
+                <div class="metahder">
+                    <p><strong>@Resource.Benefits:</strong> @Resource.SeachingByLuatVn</p>
+                    <p><strong>@Resource.Objective:</strong> @Resource.ObjectiveForEn</p>
+                </div>
+            </div>
+        </div>*@
+        
+    @if (Model.ServiceId > 0 && Model.ListServicePackagesParent.HasValue() && Model.ListServicePackages.Count > 1)
+    {
+        <div class="cat-box dv">
+            <div class="content-dv">
+                <div class="padding-left20">
+                    <div class="cat-box-title dv  text-normal font14">
+                        <img class="img-dv" alt="img-dv" src="@Url.Content("~/assets/images/gia-han-dv1.png")"/>
+                        @Resource.TheServicePackInformationIsInUse:
+                    </div>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr class="row-tr">
+                        <th class="col6-title">@Resource.ServiceName</th>
+                        <th class="col6-title">@Resource.TermOfSubscription</th>
+                        <th class="col6-title">@Resource.NumberOfUsers </th>
+                        <th class="col6-title">@Resource.Total </th>
+                        <th class="col6-title">@Resource.TimeOfPayment </th>
+                        <th class="col6-title">@Resource.ExpirationDate</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="row-tr">
+                        <td class="col6"><a href="#" style="font-weight: bold;">@Model.ServiceName</a></td>
+                        <td class="col6">@Model.ServicePackageTime </td>
+                        <td class="col6">@(Model.CurrentLogin > 0 ? string.Concat(Model.CurrentLogin, Resource.People) : string.Empty) </td>
+                        <td class="col6">@(Model.Price > 0 ? (LawsVnLanguages.GetCurrentLanguageId() == LawsVnLanguages.AvailableLanguages[1].LanguageId ?  string.Format("{0:##,###} VNĐ", Model.Price) : string.Format("VND {0:##,###}", Model.Price) ) : "0")</td>
+                        <td class="col6">@(Model.BeginTime.toString()) </td>
+                        <td class="col6">@Model.EndTime.toString()</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="cat-box dv">
+            <div class="padding-left20">
+                <div class="cat-box-title dv  text-normal font14">
+                    <img class="img-dv" alt="img-dv" src="@Url.Content("~/assets/images/gia-han-dv2.png")"/>
+                    @Resource.AccountInformationOfCustomers:
+                </div>
+            </div>
+            <div class="content-box pd20 bgcolorf9f9f9">
+                <div class="rows">
+                    <div class="col-xs-2" style="margin-right: 15px;">
+                        <div class="box-thongtin">
+                            <div class="rows item6">
+                                @Html.Raw(string.Format(Resource.AccountInfomation,LawsUser.CustomerName,Model.ServiceTimeRemain,Model.ServiceName))
+                            </div>
+                            <div class="rows item6 td">@Resource.SubscriberInformation:</div>
+                            <div id="nang-cap-dich-vu-thong-tin-ca-nhan">
+                                <div class="rows item6">
+                                    <span class="hten">@Resource.FullName:</span> <strong>@LawsUser.CustomerFullName</strong>
+                                </div>
+                                <div class="rows item6">
+                                    <span class="hten">Email:</span> <strong>@LawsUser.CustomerMail</strong>
+                                </div>
+                                <div class="rows item6">
+                                    <span class="hten">@Resource.Phone: </span><strong>@LawsUser.CustomerMobile </strong>
+                                </div>
+                                @Ajax.ActionLink(Resource.EditInformation, string.Empty, string.Empty, null, new AjaxOptions
+                                {
+                                    HttpMethod = "Post",
+                                    Url = Url.Action("RenewalOfServiceAccountProfileSwitchMode", "Ajax",new
+                                    {
+                                        mode = "edit"
+                                    })
+                                    , UpdateTargetId = "nang-cap-dich-vu-thong-tin-ca-nhan"
+                                    , InsertionMode = InsertionMode.Replace
+                                    , OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                                    , OnComplete = "lawsVn.ajaxEvents.OnComplete"
+                                    , OnSuccess = "lawsVn.ajaxEvents.OnSuccessValid('RenewalOfServiceEditAccountProfileForm')"
+                                }, new {@class = "edit-thong-tin"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2" style="width: 50%;">
+                        @if (!string.IsNullOrEmpty(Model.MsgChangeService))
+                        {
+                            <div class="box-info">
+                                <p class="quydinh-cddv" style="font-weight: bold;">@Resource.RegulationOfServiceConversion</p>
+                                @Html.Raw(Model.MsgChangeService)
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cat-box-content">
+
+            <div class="navstep">
+                <div class="steps"><a href="#" class="nav-step" data-id="1" title="1. @Resource.SelectTheServicePackage"><span class="itemstep active boder0">1. @Resource.SelectTheServicePackage</span></a>
+                </div>
+                <div class="steps"><a href="#" class="nav-step" data-id="2" title="2. @Resource.RegisterService"><span class="itemstep undone">2. @Resource.RegisterService
+                </span></a></div>
+                <div class="steps"><a href="#" class="nav-step" data-id="3" title="3. @Resource.OrderConfirmation"><span class="itemstep undone">3. @Resource.OrderConfirmation</span></a>
+                </div>
+                <div class="steps"><a href="#" class="nav-step" data-id="4" title="4. @Resource.SelectBankPayment"><span class="itemstep undone">4. @Resource.SelectBankPayment</span></a>
+                </div>
+                <div class="steps"><span class="itemstep undone no"></span>
+                </div>
+            </div>
+            <div class="law-wizard">
+                <div class="step law-steps">
+                    <div class="tie-step"><span class="tie-step-cat">@Resource.Step 1: @Resource.ChoosingService</span></div>
+                    <div class="step-content">
+                        <div class="step-auto">
+                            <div class="step-col2">
+                                <a href="@(CmsConstants.ROOT_PATH)user/service-renewal.html" title="@Resource.RenewalOfService">
+                                    <img src="@Url.Content("~/assets/images/giahan.png")"/>
+                                </a>
+                                <div class="radio ghdv">
+                                    <input id="radio-211" name="radio1" type="radio" checked onclick="javascript:window.location.href = '@string.Concat(CmsConstants.ROOT_PATH, "user/service-renewal.html")';return false;">
+                                    <label for="radio-211" class="radio-label ">@Resource.RenewalOfService </label>
+                                </div>
+                            </div>
+                            @if (Model.ListServicesIdUpgradeAllowed.HasValue())
+                            {
+                                <div class="step-col2">
+                                    <a href="@(CmsConstants.ROOT_PATH)user/service-conversion.html" title="@Resource.ServiceConversion">
+                                        <img src="@Url.Content("~/assets/images/chuyendoi.png")"/>
+                                    </a>
+                                    <div class="radio ghdv2">
+                                        <input id="radio-222" name="radio1" type="radio" onclick="javascript:window.location.href = '@string.Concat(CmsConstants.ROOT_PATH, "user/service-conversion.html")    ';return false;">
+                                        <label for="radio-222" class="radio-label ">@Resource.ServiceConversion </label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="rows"><a href="#" class="btn-pay center next-step" title="@Resource.Continue">@Resource.Continue</a></div>
+                </div>
+                <div class="step law-steps">
+                    <div class="tie-step"><span class="tie-step-cat">@Resource.Step 2: @Resource.RegisterService</span>
+                    </div>
+                    <div class="step-content">
+
+                        <table class="table table-bordered">
+                            <tbody>
+                            @if (Model.ServicePackageSingle != null)
+                            {
+                                <tr style="background: #f3efde; padding: 0; text-align: center; font-weight: bold; border-bottom: solid 1px #ddd;">
+                                    <th colspan="2" style="padding: 3px 10px; text-align: left;">@Resource.OptionA</th>
+                                    <td style="padding: 3px 10px; text-align: center; font-weight: bold;">@Resource.PriceMonth</td>
+                                </tr>
+                                <tr class="row-first-news">
+                                    <th class="post-left">
+                                        <div class="radio right">
+                                            <input id="@string.Format("ServicePackageId_{0}", Model.ServicePackageSingle.ServicePackageId)" @(Model.ServicePackageSingle.ServicePackageId == Model.ServicePackageParentId ? "checked" : string.Empty) name="ServicePackageParentId" value="@Model.ServicePackageSingle.ServicePackageId" type="radio">
+                                            <label for="@string.Format("ServicePackageId_{0}", Model.ServicePackageSingle.ServicePackageId)" class="radio-label"></label>
+                                        </div>
+                                    </th>
+                                    <td class="center-post">
+                                        <p>
+                                            <strong>@(LawsVnLanguages.GetCurrentLanguageId() == LawsVnLanguages.AvailableLanguages[1].LanguageId ? Model.ServicePackageSingle.ServicePackageDesc : Model.ServicePackageSingle.ServicePackageName)</strong>
+                                        </p>
+                                        <p>(@string.Format(Resource.ForUsersWithinSameOrganization, Model.ServicePackageSingle.ConcurrentLogin))</p>
+                                    </td>
+                                    <td class="post-right"><strong>@(LawsVnLanguages.GetCurrentLanguageId() == LawsVnLanguages.AvailableLanguages[1].LanguageId ? string.Format("{0:#,###} VNĐ", Model.ServicePackageSingle.Price) : string.Format("VND {0:#,###}", Model.ServicePackageSingle.Price))</strong></td>
+                                </tr>
+                            }
+                            <tr style="background: #f3efde; padding: 0; text-align: center; font-weight: bold; border-bottom: solid 1px #ddd;">
+                                <th colspan="3" style="padding: 3px 10px; text-align: left;">@(Model.ServicePackageSingle != null ? "OPTION B" : "OPTION A"): @Resource.MultiUser</th>
+                            </tr>
+                            @foreach (var servicePackage in Model.ListServicePackagesParent)
+                            {
+                                <tr class="row-first-news">
+                                    <th class="post-left">
+                                        <div class="radio right">
+                                            <input id="@string.Format("ServicePackageId_{0}", servicePackage.ServicePackageId)" @(servicePackage.ServicePackageId == Model.ServicePackageParentId ? "checked" : string.Empty) name="ServicePackageParentId" value="@servicePackage.ServicePackageId" type="radio">
+                                            <label for="@string.Format("ServicePackageId_{0}", servicePackage.ServicePackageId)" class="radio-label"></label>
+                                        </div>
+                                    </th>
+                                    <td class="center-post">
+                                        <p>
+                                            <strong>@(LawsVnLanguages.GetCurrentLanguageId() == LawsVnLanguages.AvailableLanguages[1].LanguageId ? servicePackage.ServicePackageDesc : servicePackage.ServicePackageName)</strong>
+                                        </p>
+                                        <p>(@string.Format(Resource.ForUsersWithinSameOrganization, servicePackage.ConcurrentLogin))</p>
+                                    </td>
+                                    <td class="post-right"><strong>@(LawsVnLanguages.GetCurrentLanguageId() == LawsVnLanguages.AvailableLanguages[1].LanguageId ? string.Format("{0:#,###} VNĐ", servicePackage.Price) : string.Format("VND {0:#,###}", servicePackage.Price))</strong></td>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+
+                        <div class="rows-step">
+                            <div class="col2-step" style="width: 45%;">
+                                <p style="color: #96022a; font-style: italic; line-height: 20px; padding-left: 15px;">* @Resource.VAT</p>
+                                <p style="color: #96022a; font-style: italic; line-height: 20px; padding-left: 15px;">* @Resource.DisCountForPaying12Month</p>
+                            </div>
+                            <div class="col2-step" style="width: 55%;">
+                                <span class="tiechooising">@Resource.ChoosingTheTermOfSubscription:<strong style="color: #96022a; font-size: 18px;">*</strong> </span>
+                                @Html.DropDownListFor(model => model.ServicePackageId, LawsVnLanguages.GetCurrentLanguageId() == LawsVnLanguages.AvailableLanguages[1].LanguageId ? new SelectList(Model.ListServicePackages, "ServicePackageId", "ServicePackageDesc") : new SelectList(Model.ListServicePackages, "ServicePackageId", "ServicePackageName"), new {@class = "selectchoosing sp select-onchange"})
+                            </div>
+                        </div>
+
+                        <div class="infostep">
+                            <p>
+                                @Resource.SubjectTo <a href="#" class="TermsConditionsView" style="color: #0e5ec1">@Resource.TermsConditions</a>
+                            </p>
+                            <p>
+                                @Resource.PleaseComplete <a href="@(CmsConstants.ROOT_PATH)user/register.html" style="color: #0e5ec1">@Resource.NewRegisterForm</a>
+                            </p>
+                            <p>
+                                @Resource.Organizationmultiuser, <a href="@(CmsConstants.ROOT_PATH)contact/contact-548-12135-article.html" style="color: #0e5ec1">@Resource.Contact</a> @Resource.ContactToUs
+                            </p>
+                        </div>
+                        <div class="rows">
+                            <a href="#" class="btn-pay next-step" title="@Resource.ContinuteToPay">@Resource.ContinuteToPay</a>
+                            <a href="#" class="btn-pay back-step" style="margin-right: 20px; background: #dddddd; color: #222;">@Resource.Back</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="step law-steps">
+                    <div class="step-wg">
+                        <div class="tie-step"><span class="tie-step-cat">@Resource.Step 3 @Resource.OrderConfirmation</span>
+                        </div>
+                        <div class="step-content">
+                            <div class="rows item6">
+                                <div class="p-rows">
+                                    <span class="left-col">@Resource.package:</span>
+                                    <span id="step2-serviceName" class="right-col">@Model.ServiceName</span>
+                                </div>
+                                <div class="p-rows">
+                                    <span class="left-col">@Resource.TermOfSubscription:</span>
+                                    <span id="step2-ServicePackageName" class="right-col">@(LawsVnLanguages.GetCurrentLanguageId() == LawsVnLanguages.AvailableLanguages[1].LanguageId ? Model.ServicePackage.ServicePackageDesc : Model.ServicePackage.ServicePackageName)</span>
+                                </div>
+                                <div class="p-rows">
+                                    <span class="left-col">@Resource.NumberOfUsers:</span>
+                                    <span id="step2-ConcurrentLogin" class="right-col">@Model.ServicePackage.ConcurrentLogin persons using at the same time</span>
+                                </div>
+                                <div class="p-rows">
+                                    <span class="left-col">@Resource.ExpiryDate: </span>
+                                    <span id="step2-Expirydate" class="right-col">@DateTime.Now.AddMonths(Model.ServicePackage.NumMonthUse).AddDays(Model.ServicePackage.NumDayUse).toString()</span>
+                                </div>
+                            </div>
+
+                            <div class="rows" style="margin-bottom: 5px;">
+                                <strong>@Resource.ServiceCharge:</strong>
+                            </div>
+
+                            <div class="rows item6">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr style="background: #a67942;">
+                                        <th class="step2col3" style="color: #fff; font-size: 14px;">@Resource.Price </th>
+                                        <th class="step2col3" style="color: #fff; font-size: 14px;">@Resource.VATTax </th>
+                                        <th class="step2col3" style="color: #fff; font-size: 14px;">@Resource.TotalMoney</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th id="step2-price" class="step2col3">@(LawsVnLanguages.GetCurrentLanguageId() == LawsVnLanguages.AvailableLanguages[1].LanguageId ? string.Format("{0:#,###} VNĐ", Model.ServicePackage.Price) : string.Format("VND {0:#,###}", Model.ServicePackage.Price))</th>
+                                        <th id="step2-priceVat" class="step2col3">@(LawsVnLanguages.GetCurrentLanguageId() == LawsVnLanguages.AvailableLanguages[1].LanguageId ? string.Format("{0:#,###} VNĐ", Model.PriceVAT) : string.Format("VND {0:#,###}", Model.PriceVAT)) </th>
+                                        <th id="step2-total" class="step2col3" style="color: #ac0909;">@(LawsVnLanguages.GetCurrentLanguageId() == LawsVnLanguages.AvailableLanguages[1].LanguageId ? string.Format("{0:#,###} VNĐ", Model.Total) : string.Format("VND {0:#,###}", Model.Total))</th>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="rows-step">
+                                <div class="col2-step" style="float: left; width: auto;">
+                                    <p style="color: #444444; font-style: italic; line-height: 20px; padding-left: 15px;">* @Resource.EmailDetailWhenConfirmOrder</p>
+                                </div>
+                                <div class="col2-step" style="float: right; width: auto;">
+                                    <a href="#" class="btn-pay next-step" style="background: #49c5c7">@Resource.OrderConfirmation </a>
+                                    <a href="#" class="btn-pay back-step" style="margin-right: 20px; background: #dddddd; color: #222;">@Resource.Back</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step law-steps">
+                    <div class="step-wg">
+                        <div class="tie-step"><span class="tie-step-cat">@Resource.Step 4 @Resource.SelectBankPayment</span></div>
+                        <div class="thong-bao-3">
+                            <div class="thongbao-item4">
+                                <em><b>Announcement:</b> Internet Banking payment shall be formally activated on the date of launching LuatVietnam.vn v4.0</em> <br />
+                                <em>The estimated time: March, 2018.  Best regards – LuatVietnam.vn</em>
+                            </div>
+                        </div>
+                        @{ Html.RenderAction("PartialBankPayment", "Shared", new {model = new BankPaymentModel {ServiceId = Model.ServiceId, ServicePackageId = Model.ServicePackage.ServicePackageId, ServicePackageName = Model.ServicePackage.ServicePackageName, Price = Model.ServicePackage.Price, Total = Model.Total, TransactionTypeId = Constants.TransactionTypeIdGiaHan}}); }
+                    </div>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-content">
+                    <table class="table-bordered boder">
+                        <thead>
+                        <p style="background: #f3efde; padding: 5px 0; border: solid 1px #ddd; border-bottom: 0;">
+                            <strong style="color: #222; padding: 0 10px;">@Model.Instructionforpayment.mArticlesView.Title</strong>
+                        </p>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="item-srb2">
+                                <div class="entry-en">
+                                    @Html.Raw(Model.Instructionforpayment.mArticlesView.ArticleContent)
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else if (Model.ServiceId > 0)
+    {
+        <div class="cat-box dv">
+            <div class="content-box pd20 bgcolorf9f9f9">
+                <div class="rows">
+                    <div class="box-thongtin">
+                        <div class="rows item6">
+                            @Resource.PackageListNotFound
+                        </div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="cat-box dv">
+            <div class="content-box pd20 bgcolorf9f9f9">
+                <div class="rows">
+                    <div class="box-thongtin">
+                        <div class="rows item6">
+                            @Resource.YouAreNotCurrentlyRegistered <a href="@(CmsConstants.ROOT_PATH)user/subscriber.html" title="@Resource.SignUpForTheTextSearchService" style="font-weight: bold;">@Resource.SignUpForTheTextSearchService</a>
+                        </div>
+                    </div>
+                    <div class="col-xs-2"></div>
+                </div>
+            </div>
+        </div>
+    }
+    </section>
+</div>
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('.law-wizard').lawServicesWizard({stepValidate: 2});
+        $.validator.setDefaults({
+            ignore: ''
+        });
+        lawsValidate.termsAndConditions();
+    </script>
+}

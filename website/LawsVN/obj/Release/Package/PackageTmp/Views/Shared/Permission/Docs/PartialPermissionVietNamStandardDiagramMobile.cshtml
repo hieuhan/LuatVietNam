@@ -1,0 +1,68 @@
+﻿@using LawsVN.Library
+@using LawsVN.Models.Docs
+@model DocsViewDetailModel
+<div class="boxluocdo">
+    <div class="vb-dang-xem">
+        <div class="tie-luocdo">Văn bản đang xem</div>
+        <div class="conten-luocdo">
+            <p><strong>Cơ quan ban hành:</strong> @Model.mDocsViewDetail.mDocsView.OrgansText</p>
+            <p><strong>Số hiệu:</strong> @Model.mDocsViewDetail.mDocsView.DocIdentity</p>
+            <p><strong>@string.Format("{0} ban hành",Model.mDocsViewDetail.mDocsView.IssueDate != DateTime.MinValue ? "Ngày" : "Năm") </strong> @Model.mDocsViewDetail.mDocsView.IssueDate.toString(Model.mDocsViewDetail.mDocsView.IssueYear.ToString())</p>
+            <p><strong>Hiệu lực:</strong> @Model.mDocsViewDetail.mDocsView.EffectDate.toString()</p>
+            <p><strong>Người ký:</strong> @Model.mDocsViewDetail.mDocsView.SignersText</p>
+            <p><strong>Ngày hết hiệu lực:</strong>@Model.mDocsViewDetail.mDocsView.ExpireDate.toString()</p>
+            <p><strong>Tình trạng hiệu lực:</strong> @Model.mDocsViewDetail.mDocsView.EffectStatusName</p>
+            <p><strong>Loại văn bản:</strong> @Model.mDocsViewDetail.mDocsView.DocTypesText</p>
+            <p><strong>Lĩnh vực:</strong> @Model.mDocsViewDetail.mDocsView.FieldsText</p>
+        </div>
+    </div>
+</div>
+@if (Model.mDocsViewDetail.lRelateTypes.HasValue())
+{
+    foreach (var item in Model.mDocsViewDetail.lRelateTypes)
+    {
+        var listDocsRelates = Model.mDocsViewDetail.lDocRelates.GetDocsRelatesByRelateType(item.RelateTypeId, item.DisplayPosition);
+        bool isScroll = listDocsRelates.HasValue() && listDocsRelates.Count >= 4;
+        <div class="drop-luocdo">
+            <div id="dropbox">
+                <div class="dropcontent">
+                    <div class="tieloto">
+                        <div class="tie-drop luocdo">
+                            @item.RelateTypeName <span class="color1">(@(listDocsRelates.HasValue() ? listDocsRelates.Count : 0))</span>
+                            <span class="moredrop"></span>
+                        </div>
+                        @if (listDocsRelates.HasValue())
+                        {
+                            <div class="dropsub @(isScroll ? "luocdo-scroll" : string.Empty)" style="display: block;">
+                                @foreach (var docRelatesLeft in listDocsRelates)
+                                {
+                                    <div class="rows-luocdo">
+                                        <a href="@(docRelatesLeft.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : docRelatesLeft.DocUrl)" @(docRelatesLeft.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "class=vb-khong-co-nd" : string.Empty)>@docRelatesLeft.DocName</a>
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+@if (Model.ListRelateTypesByGroupId.HasValue())
+{
+    foreach (var item in Model.ListRelateTypesByGroupId)
+    {
+        <div class="drop-luocdo">
+            <div id="dropbox">
+                <div class="dropcontent">
+                    <div class="tieloto">
+                        <div class="tie-drop luocdo">
+                            @item.RelateTypeName <span class="color1">(0)</span>
+                            <span class="moredrop"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

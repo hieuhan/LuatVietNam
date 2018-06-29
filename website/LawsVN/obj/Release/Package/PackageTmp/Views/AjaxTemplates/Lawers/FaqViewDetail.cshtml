@@ -1,0 +1,28 @@
+﻿@model LawsVN.Models.LawerQuestionModel
+<div class="from-thong-bao-4">
+    <div class="content-thongbao" style="width: 96%;">
+        <div class="rows-thongbao center" style=" font-size: 16px;font-weight: bold; text-transform: uppercase;">
+            Nội dung câu trả lời của luật sư
+        </div>
+        <div class="cat-box-content">
+            <div class="form-group user">
+                <div class="col-sm-1 user" style="width: 100px!important;">Câu hỏi:</div>
+                <div class="col-sm-2 linh-vuc fontb" style="width: 85%;">
+                    @Model.mFaqs.Question
+                </div>
+            </div>
+            <div class="col-sm-1 user">Nội dung trả lời:   </div>
+            <div class="cat-box-content">
+                <div class="example-entry">
+                    <div class="content-scroll-1" style="height: 500px;">
+                        <div class="padding">
+                            <div class="entry-en">
+                                @Html.Raw(Model.mFaqs.Answer)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+</div>

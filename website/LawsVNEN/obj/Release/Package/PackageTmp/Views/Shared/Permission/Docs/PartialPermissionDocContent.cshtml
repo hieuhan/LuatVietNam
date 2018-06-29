@@ -1,0 +1,38 @@
+﻿@using ICSoft.LawDocsLib
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Library
+@model LawsVNEN.Models.DocsViewDetailModel
+@if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocContent))
+{
+    <div class="content-entry content-fixed boxcontent">
+        @Html.Raw(Model.mDocsViewDetail.mDocsView.DocContent)
+    </div>
+}
+else
+{
+    DocFiles mDocFiles = Model.mDocsViewDetail.lDocFiles.FirstOrDefault(i => i.FilePath.ToLower().Contains(".pdf") && i.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId);
+    if (mDocFiles == null || string.IsNullOrEmpty(mDocFiles.FilePath))
+    {
+        <div class="thong-bao-2">
+            <div class="thongbao-item2">
+                <em>@Resource.ContentIsBeingUpdated</em>
+            </div>
+        </div>
+    }
+    else
+    {
+        if (!LawsUser.IsInRole(Constants.RolesFullEng) && mDocFiles.FileTypeId != Constants.FileTypeIdVbThamKhao)
+        {
+            <div class="thong-bao-2">
+                <div class="thongbao-item2">
+                    <em>@Html.Raw(Resource.NotAuthorize)</em>
+                </div>
+            </div>
+        }
+        else
+        {
+            <embed class="content-fixed" src="@string.Concat(Constants.MEDIA_VIEWPATH , mDocFiles.FilePath)" width="100%" height="1000" type='application/pdf'>
+        }
+    }
+}

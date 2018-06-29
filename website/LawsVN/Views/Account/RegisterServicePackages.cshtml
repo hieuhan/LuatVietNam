@@ -1,0 +1,289 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Account
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model RegisterServicePackagesModel
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>» 
+            <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Dịch vụ" class="breadcrumb-item">Dịch vụ</a> »
+            <span class="breadcrumb-item colorrumb">Đăng ký gói dịch vụ</span>
+        </div>
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title" style="padding-bottom: 0; font-size: 15px;">Đăng ký gói dịch vụ tra cứu văn bản</h1>
+                <div class="rows" style="margin-bottom: 15px;"><span class="vien-title nav-fd daxem"></span></div>
+                <p class="info-page">Xin chào <span style="color: #a67942; font-weight: bold;">@LawsUser.CustomerFullName.TrimmedOrDefault(LawsUser.CustomerName)</span>, Quý khách đang chọn mua gói dịch vụ <a style="color: #a67942; font-weight: bold; text-decoration: underline;" href="#">@(Model.mServices.ServiceId > 0 ? Model.mServices.ServiceName : "Tra cứu Tiêu chuẩn")</a> của LuatVietnam.vn</p>
+            </div>
+        </div>
+
+        <div class="cat-box-content">
+            <div id="RegisterServicePackage" class="content-box pd20 ">
+                <div class="content-dv">
+                    <div class="cat-title">
+                        <div class="cat-box-title" style="text-transform: none;">B1. Đăng ký dịch vụ</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="title-item4 normal">Chọn gói dịch vụ: <span class="redcolor">*</span></label>
+                        <div class="col-sm-item4">
+                            @using (Ajax.BeginForm("PartialRegisterServicePackages", Model.PartialPaginationAjax.ControllerName, new
+                            {
+                                servicePackageId = 0
+                                ,typeChange = 2
+                            }, new AjaxOptions
+                            {
+                                HttpMethod = "Post"
+                                ,UpdateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                                ,InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                                ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                                ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+                                ,OnSuccess = "lawsVn.ajaxEvents.OnSuccessValid('ValidPaymentMethodsBankAccountForm')"
+                            }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="col item4">
+                                    <div class="radio">
+                                        <input type="radio" id="rbGoiTieuChuan" name="ServiceId" class="rbServices" value="@Constants.ServiceIdTraCuuTieuChuan" @(Model.ServiceId == Constants.ServiceIdTraCuuTieuChuan ? "checked" : string.Empty) />
+                                        <label for="rbGoiTieuChuan" class="radio-label">Tra cứu tiêu chuẩn</label>
+                                    </div>
+                                </div>
+                                <div class="col item4 ">
+                                    <div class="radio">
+                                        <input type="radio" id="rbGoiTiengAnh" name="ServiceId" class="rbServices" value="@Constants.ServiceIdTraCuuTiengAnh" @(Model.ServiceId == Constants.ServiceIdTraCuuTiengAnh ? "checked" : string.Empty) />
+                                        <label for="rbGoiTiengAnh" class="radio-label">Tra cứu tiếng Anh</label>
+                                    </div>
+                                </div>
+                                <div class="col item4">
+                                    <div class="radio">
+                                        <input type="radio" id="rbGoiNangCao" name="ServiceId" class="rbServices" value="@Constants.ServiceIdTraCuuNangCao" @(Model.ServiceId == Constants.ServiceIdTraCuuNangCao ? "checked" : string.Empty) />
+                                        <label for="rbGoiNangCao" class="radio-label">Tra cứu nâng cao</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    @using (Ajax.BeginForm(Model.PartialPaginationAjax.ActionName, Model.PartialPaginationAjax.ControllerName, new
+                    {
+                        serviceId = Model.mServices.ServiceId
+                    }, new AjaxOptions
+                    {
+                        HttpMethod = "Post"
+                        ,UpdateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                        ,InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                        ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                        ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+                        ,OnSuccess = "lawsVn.ajaxEvents.OnSuccessValid('ValidPaymentMethodsBankAccountForm')"
+                    }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <label class="col-sm-item normal">Gói dịch vụ: <span class="redcolor">*</span></label>
+                            <div class="col-sm-2">
+                                @Html.DropDownListFor(model => model.ServicePackageParentId, new SelectList(Model.ListServicePackagesParent, "ServicePackageId", "ServicePackageDesc"), new { @class = "dropdown3 select-onchange" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-item normal">Thời hạn thuê bao: <span class="redcolor">*</span></label>
+                            <div class="col-sm-2">
+                                @Html.DropDownListFor(model => model.ServicePackageId, new SelectList(Model.ListServicePackages, "ServicePackageId", "ServicePackageDesc"), new { @class = "dropdown3 select-service-packages-onchange" })
+                                @Html.ValidationMessageFor(m => m.ServicePackageId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <input type="hidden" name="typeChange" value="0"/>
+                    }
+                    <div class="form-group">
+                        @{ Html.RenderAction("PartialPromotionCodeCheck", "Shared", new { model = new PromotionCodeCheckModel { Price = Model.mServicePackages.Price, PriceVAT = Model.PriceVAT } }); }
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="cat-title">
+                        <div class="cat-box-title" style="text-transform: none;">B2. Thông tin dịch vụ</div>
+                        @*<span class="vien-title nav-fd daxem"></span>*@
+                    </div>
+                    <div class="form-group">
+                        <div class="rows">
+                            <span class="text-item1">Gói đăng ký:</span>
+                            <span class="text-item2">@Model.mServices.ServiceName</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="rows">
+                            <span class="text-item1">Thời hạn thuê bao:</span>
+                            <span class="text-item2">@Model.mServicePackages.ServicePackageDesc</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="rows">
+                            <span class="text-item1">Số người sử dụng:</span>
+                            <span class="text-item2">@Model.mServicePackages.ConcurrentLogin</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="rows">
+                            <span class="text-item1">Thời hạn sử dụng:  </span>
+                            <strong>@DateTime.Now.AddMonths(Model.mServicePackages.NumMonthUse).AddDays(Model.mServicePackages.NumDayUse).ToString("dd/MM/yyyy")</strong>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="rows ">
+                            <span class="text-item1">Chi phí dịch vụ:  </span>
+                            <div class="col-sm-item4">
+                                <div class="rows item7">
+                                    <div class="vndong">Đơn vị tính: <strong>VNĐ</strong></div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr class="row-tr" style="background: #a67942; line-height: 35px; color: #fff; font-size: 14px;">
+                                                <th class="coltable">Giá dịch vụ </th>
+                                                <th class="coltable">Thuế VAT (10%) </th>
+                                                <th class="coltable promotion-th">Khuyến mại </th>
+                                                <th class="coltable">Tổng tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="row-tr">
+                                                <td class="coltable">@Model.mServicePackages.Price.ToString("#,###")</td>
+                                                <td class="coltable">@Model.PriceVAT.ToString("#,###")</td>
+                                                <td class="coltable promotion-td">0</td>
+                                                <td id="tdTotal" class="coltable">@Model.Total.ToString("#,###")</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <div class="cat-title">
+                        <div class="cat-box-title" style="text-transform: none;">B3. Thanh toán đơn hàng</div>
+                        @*<span class="vien-title nav-fd daxem"></span>*@
+                    </div>
+                    <div class="form-group">
+                        <div class="rows ">
+                            <span class="text-item1" style="line-height: 24px;">Chọn phương thức
+                                <br />
+                                thanh toán:</span>
+                            <div class="col-sm-item4">
+                                <div class="tab-conten">
+                                    <div class="tab-nav">
+                                        @Ajax.ActionLink(@"Ngân hàng", "PartialPaymentMethodsBankAccount", "Ajax",
+                                        new
+                                        {
+                                            serviceId = Model.mServices.ServiceId
+                                            ,serviceName = Model.mServices.ServiceName
+                                            ,servicePackageId = Model.mServicePackages.ServicePackageId
+                                            ,servicePackageName = Model.mServicePackages.ServicePackageName
+                                            ,total = Model.Total
+                                            ,price = Model.mServicePackages.Price
+                                            ,transactionTypeId = Constants.TransactionTypeIdDangKy
+                                        },
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "Get"
+                                            ,UpdateTargetId = "tabPaymentMethods"
+                                            ,InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                                            ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                                            ,OnComplete = "lawsVn.ajaxEvents.OnSuccessValid('ValidPaymentMethodsBankAccountForm')"
+                                        }, new { @class = "tab-nav-item1 active" })
+                                        @*<h3>
+                                            @Ajax.ActionLink(@"Thẻ cào LuatVietnam", "PartialPaymentMethodsScratchCard", "Ajax",
+                                            new
+                                            {
+                                                serviceId = Model.mServices.ServiceId
+                                                ,serviceName = Model.mServices.ServiceName
+                                                ,servicePackageId = Model.mServicePackages.ServicePackageId
+                                                ,servicePackageName = Model.mServicePackages.ServicePackageName
+                                                ,total = Model.Total
+                                                ,price = Model.mServicePackages.Price
+                                                ,transactionTypeId = Constants.TransactionTypeIdDangKy
+                                            },
+                                            new AjaxOptions
+                                            {
+                                                HttpMethod = "Get"
+                                                ,UpdateTargetId = "tabPaymentMethods"
+                                                ,InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                                                ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                                                ,OnComplete = "lawsVn.ajaxEvents.OnSuccessValid('PaymentMethodsScratchCardForm');lawsVn.promotionCodeCheckForm(2);"
+                                            }, new { @class = "tab-nav-item1 active" })
+                                        </h3>*@
+                                        @Ajax.ActionLink(@"Văn phòng LuatVietnam", "PartialPaymentMethodsOnline", "Ajax", new
+                                        {
+                                            serviceId = Model.mServices.ServiceId
+                                            ,serviceName = Model.mServices.ServiceName
+                                            ,servicePackageId = Model.mServicePackages.ServicePackageId
+                                            ,servicePackageName = Model.mServicePackages.ServicePackageName
+                                            ,total = Model.Total
+                                            ,price = Model.mServicePackages.Price
+                                            ,transactionTypeId = Constants.TransactionTypeIdDangKy
+                                        },
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "Get"
+                                            ,UpdateTargetId = "tabPaymentMethods"
+                                            ,InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                                            ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                                            ,OnComplete = "lawsVn.ajaxEvents.OnComplete()"
+                                        }, new { @class = "tab-nav-item1" })
+                                    </div>
+
+                                    <div id="tabPaymentMethods">
+                                        @{Html.RenderAction("PartialPaymentServiceUsingBankAccount", "Shared", new
+                                          {
+                                              model = new PaymentServiceUsingBankAccountModel
+                                              {
+                                                  ServiceId = Model.mServices.ServiceId
+                                                  ,ServiceName = Model.mServices.ServiceName
+                                                  ,ServicePackageId = Model.mServicePackages.ServicePackageId
+                                                  ,ServicePackageName = Model.mServicePackages.ServicePackageName
+                                                  ,Total = Model.Total
+                                                  ,Price = Model.mServicePackages.Price
+                                                  ,TransactionTypeId = Constants.TransactionTypeIdDangKy
+                                              }
+                                          });}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialWidgetUser", "Shared", true);}
+            @Html.Partial("PartialManualInstruction")
+            <div class="widget bottom0">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>
+@section FooterSection
+{
+    <script type="text/javascript">
+        lawsValidate.termsAndConditions();
+    </script>
+}

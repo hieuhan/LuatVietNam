@@ -1,0 +1,81 @@
+﻿@using LawsVNEN.App_GlobalResources
+@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVNEN.Models
+@using LawsVNEN.AppCode
+@{
+    Layout = "~/Views/Shared/_LayoutContent.cshtml";
+}
+@model ArticleViewModel
+    <div class="content-left">
+        <div id="ArticlesByCateBoxTab" class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>
+            »<span class="breadcrumb-item colorrumb">@Model.m_CategoriesView.CategoryName</span>
+        </div>
+
+        <div class="page-head" style="margin-bottom: 15px;">
+            <div class="padding-left20">
+                <h1 class="page-title">@Model.m_CategoriesView.CategoryName</h1>
+                <p class="info-page"> @(string.IsNullOrEmpty(Model.m_CategoriesView.MetaDesc) ? Model.m_CategoriesView.CategoryDesc : Model.m_CategoriesView.MetaDesc)</p>
+            </div>
+        </div>
+
+        <div class="content-news-page" id="ArticlesByCateBox">
+            @using (Html.BeginForm("BanTinLuatVN", "News", FormMethod.Get))
+            {
+                <div class="rows">
+                    <div class="sortright">
+                        @*<div class="select-item">
+                            <div class="text-item">Loại bản tin:</div>
+                            <div class="text-item" style="width: 150px">
+                                <select class="select2 select-onchange" name="CategoryId" @(Request.Url.AbsoluteUri.Contains("ban-tin-hieu-luc-c") ? "disabled" : "")>
+                                    <option value="531" @(Model.mPartialPaginationAjax.CategoryId == 531 ? "selected" : "")>Tất cả</option>
+                                    <option value="532" @(Model.mPartialPaginationAjax.CategoryId == 532 ? "selected" : "")>Bản tin hiệu lực</option>
+                                    <option value="221" @(Model.mPartialPaginationAjax.CategoryId == 221 ? "selected" : "")>Điểm tin văn bản mới</option>
+                                    <option value="219" @(Model.mPartialPaginationAjax.CategoryId == 219 ? "selected" : "")>Văn bản cập nhật hàng tuần</option>
+                                </select>
+                            </div>
+                        </div>*@
+                        <div class="select-item">
+                            <div class="text-item">@Resource.ChooseYear:</div>
+                            <div class="text-item" style="width: 90px">
+                                <select class="select2 select-onchange" name="keyword">
+                                    <option value=""> @Resource.ChooseYear </option>
+                                    @for (int i = DateTime.Now.Year; i > DateTime.Now.Year - 50; i--)
+                                    {
+                                        <option value="@i" @(Model.mPartialPaginationAjax.KeyWord == i.ToString() ? "selected" : "")>@i</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="cat-box">
+                @if (Model.ListArticlesView.HasValue())
+                {
+                    for (int i = 0; i < Model.ListArticlesView.Count; i++)
+                    {
+                        <div class="news-item">
+                            <div class="post-thumbnail">
+                                <a href="@Model.ListArticlesView[i].GetArticleUrl()" title="@Model.ListArticlesView[i].Title" class="thumb220"> <img alt="alt" src="@(Model.ListArticlesView[i].GetImageUrl_Mobile() == "" ? Constants.NoImageUrl_Article : Model.ListArticlesView[i].GetImageUrl_Mobile())"></a>
+                            </div>
+                            <h3><a href="@Model.ListArticlesView[i].GetArticleUrl()" title="@Model.ListArticlesView[i].Title" class="post-title font16">@Model.ListArticlesView[i].Title</a></h3>
+                            <div class="sapo new">
+                                @Html.Raw(Model.ListArticlesView[i].Summary.StripTags())
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <p>@Resource.ContentIsBeingUpdated</p>
+                }
+            </div>
+            @if (Model.mPartialPaginationAjax.TotalPage > 0)
+            {
+                { Html.RenderAction("PartialPaginationAjaxPageNumber", "Shared", new { model = Model.mPartialPaginationAjax }); }
+            }
+        </div>
+
+    </div>

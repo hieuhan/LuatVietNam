@@ -1,0 +1,135 @@
+﻿@using VanBanLuat.Models
+@using Constants = VanBanLuat.Librarys.Constants
+@using ICSoft.ViewLibV3
+@using VanBanLuat.Librarys
+@model NewViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+}
+<div class="breadcrumb">
+    <a class="breadcrumb-item" href="@Constants.ROOT_PATH">Trang chủ</a> /
+    <span class="breadcrumb-item xanh">Biểu mẫu mới cập nhật</span>
+</div>
+
+<div class="content-left">
+
+    <div class="banner-phaply">
+        <img class="thumb-full" src="@Url.Content("~/assets/images/bannerphaply.png")" />
+    </div>
+
+    @if (Model.categoryArticlesBieuMau.lArticle.HasValue())
+    {
+        int rows = Model.categoryArticlesBieuMau.lArticle.Count % 2 == 0 ? Model.categoryArticlesBieuMau.lArticle.Count / 2 : Model.categoryArticlesBieuMau.lArticle.Count / 2 + 1;
+        <section class="cat-box-section">
+            <div class="title">
+                <h2 class="td-phaply">@Model.categoryArticlesBieuMau.mCategory.CategoryDesc</h2>
+            </div>
+            <div class="cat-box-content">
+                <div class="item-col2">
+                    @for (int i = 0; i < rows; i++)
+                    {
+                        <div class="list-new">
+                            <img class="thumb-bieumau" alt="@Model.categoryArticlesBieuMau.lArticle[i].Title" src="@Url.Content("~/assets/images/icon-bieumau.png")" style="width:36px; height:40px;" />
+                            <div class="pdbieumau">
+                                <a class="post-title new" title="@Model.categoryArticlesBieuMau.lArticle[i].Title" href="@Model.categoryArticlesBieuMau.lArticle[i].GetArticleUrl()">@Model.categoryArticlesBieuMau.lArticle[i].Title</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="item-col2">
+                    @for (int i = rows; i < Model.categoryArticlesBieuMau.lArticle.Count; i++)
+                    {
+                        <div class="list-new">
+                            <img class="thumb-bieumau" alt="@Model.categoryArticlesBieuMau.lArticle[i].Title" src="@Url.Content("~/assets/images/icon-bieumau.png")" style="width:36px; height:40px;" />
+                            <div class="pdbieumau">
+                                <a class="post-title new" title="@Model.categoryArticlesBieuMau.lArticle[i].Title" href="@Model.categoryArticlesBieuMau.lArticle[i].GetArticleUrl()">@Model.categoryArticlesBieuMau.lArticle[i].Title</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+    }
+    <section class="cat-box-section vien">
+        @if (Model.lCategories.HasValue())
+        {
+            <div class="title">
+                <h2 class="td-phaply">Biểu mẫu cần biết</h2>
+                <div class="rightbieumau">
+                    @using (Ajax.BeginForm("BieuMauGetByCategoryId", "Ajax", null, new AjaxOptions
+                    {
+                        HttpMethod = "post",
+                        UpdateTargetId = "Danhsachbieumau",
+                        InsertionMode = InsertionMode.Replace,
+                        OnBegin = "vbluat.ajaxEvents.OnBegin('')",
+                        OnComplete = "vbluat.ajaxEvents.OnComplete",
+                        OnFailure = "vbluat.ajaxEvents.OnFailure(xhr, status, error)"
+                    }))
+                    {
+                        <select class="text-s2 ply select-onchange" name="categoryId">
+                            <option value="0" selected>Loại hình doanh nghiệp</option>
+                            @foreach (Categories mCategories in Model.lCategories)
+                            {
+                                <option style="line-height: 60px !important;" value="@mCategories.CategoryId">@mCategories.CategoryDesc</option>
+                            }
+                        </select>
+                    }
+                </div>
+            </div>
+            <div class="cat-box-content" id="Danhsachbieumau">
+                @if (Model.mCategoryArticles.lArticle.HasValue())
+                {
+                    int rows = Model.mCategoryArticles.lArticle.Count % 2 == 0 ? Model.mCategoryArticles.lArticle.Count / 2 : Model.mCategoryArticles.lArticle.Count / 2 + 1;
+
+                    <div class="item-col2">
+                        @for (int i = 0; i < rows; i++)
+                        {
+                            <div class="list-new">
+                                <img class="thumb-bieumau" alt="@Model.mCategoryArticles.lArticle[i].Title" src="@Url.Content("~/assets/images/icon-bieumau.png")" style="width:36px; height:40px;" />
+                                <div class="pdbieumau">
+                                    <a class="post-title new" title="@Model.mCategoryArticles.lArticle[i].Title" href="@Model.mCategoryArticles.lArticle[i].GetArticleUrl()">@Model.mCategoryArticles.lArticle[i].Title</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="item-col2">
+                        @for (int i = rows; i < Model.mCategoryArticles.lArticle.Count; i++)
+                        {
+                            <div class="list-new">
+                                <img class="thumb-bieumau" alt="@Model.mCategoryArticles.lArticle[i].Title" src="@Url.Content("~/assets/images/icon-bieumau.png")" style="width:36px; height:40px;" />
+                                <div class="pdbieumau">
+                                    <a class="post-title new" title="@Model.mCategoryArticles.lArticle[i].Title" href="@Model.mCategoryArticles.lArticle[i].GetArticleUrl()">@Model.mCategoryArticles.lArticle[i].Title</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="new-list-other">
+                        <p class="post-title vbl bold">Nội dung đang được cập nhật.</p>
+                    </div>
+                }
+            </div>
+        }
+    </section>
+
+</div>
+
+<aside class="sidebar-270">
+    @{ Html.RenderAction("PartialGetListCateIdByParentId", "Shared", new { ParentId = Constants.CateId_LoaiHinhDoanhNghiep, viewName = "PartialLoaiDoanhNghiep" });}
+    <div class="widget">
+        <div class="ads2">
+            <img class="imgycvb2" src="@Url.Content("~/assets/images/group-dn.png")" />
+            <button class="yeucauvanbanbtn" title="Gửi yêu cầu văn bản" data-action="yeu-cau-van-ban.html">
+                Yêu cầu văn bản
+            </button>
+        </div>
+    </div>
+
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = Constants.CateId_ThongBaoVBMoi, rowAmount = Constants.RowAmount5, viewName = "PartialChinhSachMoi" });}
+
+    @{ Html.RenderAction("PartialDocumentsByGetByDisplayTypeId", "Shared", new { displayTypeId = Constants.DisplayTypeId_LuatDNXemNhieu, boxTitle = "Luật doanh nghiệp xem nhiều", rowAmount = Constants.RowAmount5, viewName = "PartialDocumentsOfInterest" });}
+
+</aside>
+

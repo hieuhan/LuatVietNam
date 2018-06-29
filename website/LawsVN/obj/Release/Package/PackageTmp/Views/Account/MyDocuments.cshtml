@@ -1,0 +1,237 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using ICSoft.HelperLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model LawsVN.Models.Account.MyDocuments
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader)</h1>
+}
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>» 
+    <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="breadcrumb-item">@Resource.AccountInformation</a> »
+    <span class="breadcrumb-item colorrumb">Văn bản của tôi </span>
+        </div>
+        <div id="MyDocumentsBoxTab" class="tab-nav">
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html">@Resource.AccountInformation</a>
+            <a class="tab-nav-item-ad " href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html">@Resource.TransactionHistory <span class="countPaymentTransactionSuccess" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad active" href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html">@Resource.MyDocuments <span class="countMyDocuments" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/thong-bao-hieu-luc.html">@Resource.NoticeOfValidity <span class="countNoticeOfValidity" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html">@Resource.Messages <span class="countMyMessages" style="color: #a67942;">()</span></a>
+        </div>
+
+        <div class="cat-box-content">
+            <div class="sub-menu2">
+                <a href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html?docGroupId=1" class="sub-menu2-item @(Model.mPartialPaginationAjax.DocGroupId == 1 ? "active" : "")">Văn bản pháp luật</a>
+                <a href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html?docGroupId=@Constants.DocGroupIdTcvn" class="sub-menu2-item @(Model.mPartialPaginationAjax.DocGroupId == Constants.DocGroupIdTcvn ? "active" : "")">Tiêu chuẩn Việt Nam</a>
+                <a href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html?docGroupId=@Constants.DocGroupIdVbhn" class="sub-menu2-item @(Model.mPartialPaginationAjax.DocGroupId == Constants.DocGroupIdVbhn ? "active" : "")">Văn bản hợp nhất</a>
+            </div>
+
+            <div class="lockq">
+                <div class="item-loctheo">
+                    <span class="icon-loc-kq"></span>@Resource.FilterBy:
+                </div>
+                @using (Ajax.BeginForm(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName,
+                    new
+                    {
+                        updateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                        ,insertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                        ,controllerName = Model.mPartialPaginationAjax.ControllerName
+                        ,actionName = Model.mPartialPaginationAjax.ActionName
+                        ,pageSize = Model.mPartialPaginationAjax.PageSize
+                        ,linkLimit = Model.mPartialPaginationAjax.LinkLimit
+                        ,docGroupId = Model.mPartialPaginationAjax.DocGroupId
+                        ,registTypeId = Model.mPartialPaginationAjax.RegistTypeId
+                        ,languageId = Model.mPartialPaginationAjax.LanguageId
+                    },
+                    new AjaxOptions
+                    {
+                        HttpMethod = "Get"
+                        ,UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                        ,InsertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                        ,OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                        ,OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                    }))
+                {
+                    <div class="item-lockq">
+                        <select tabindex="1" name="fieldId" class="dropdown2 select-onchange">
+                            <option value="0">@Resource.AllFields</option>
+                            @foreach (var item in Model.ListFields)
+                            {
+                                <option value="@item.FieldId">@item.FieldDesc</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="item-lockq">
+                        <select tabindex="1" name="organId" class="dropdown2 select-onchange">
+                            <option value="0">@Resource.Organs</option>
+                            @foreach (var item in Model.ListOrgans)
+                            {
+                                <option value="@item.OrganId">@item.OrganDesc</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="item-lockq">
+                        @Html.DropdownListPermission("","EffectStatusId", "dropdown select-onchange", new SelectList(Model.ListEffectStatus, "EffectStatusId", "EffectStatusDesc"))
+                    </div>
+                    <div class="item-lockq">
+                        <select tabindex="1" name="docTypeId" class="dropdown2 select-onchange">
+                            <option value="0">@Resource.DocTypes</option>
+                            @foreach (var item in Model.ListDocTypes)
+                            {
+                                <option value="@item.DocTypeId">@item.DocTypeDesc</option>
+                            }
+                        </select>
+                    </div>
+                }
+            </div>
+
+            <div id="MyDocumentsBox" class="content-giao-dich">
+                @if (Model.ListMyDocuments.IsAny())
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                        @for (int index = 1; index <= Model.ListMyDocuments.Count(); index++)
+                        {
+                            var docView = Model.ListMyDocuments.ElementAt(index - 1);
+                            <tr class="row-tr" style="vertical-align: top;">
+                                <td class="rows-td fontbold">@index.ToString("#00")</td>
+                                <td class="rows-td" style="text-align: left;">
+                                    <h2><a href="@docView.DocsView.GetDocUrl()" title="@docView.DocsView.DocName.StripTags()" class="post-title lvn">@docView.DocsView.DocName
+                                        </a>
+                                    </h2>
+                                    <div class="item-meta">
+                                        @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView.DocsView, ClassName = "tag-item", EnableSaveDoc = false } });}
+                                    </div>
+                                </td>
+                                <td class="rows-td wighttime">
+                                    @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView.DocsView, EffectStatusName = docView.EffectStatusName} });}
+                                </td>
+                                @*<td class="rows-td">@docView.FieldsText</td>*@
+                                <td class="rows-td"><a href="javascript:lawsVn.myDocuments.deleteCustomerDocs(@Model.mPartialPaginationAjax.DocGroupId,@docView.DocsView.DocId,1);">
+                                    <img alt="img-tthl" src="@Url.Content("~/assets/images/xoa.png")"></a></td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                    {Html.RenderAction("PartialPaginationAjax2", "Shared", new {model = Model.mPartialPaginationAjax});}
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr class="row-first-news">
+                            <th class="count-123" scope="row"></th>
+                            <td class="news-center-post">
+                                <h3>
+                                    <span class="post-title lvn">@Resource.UpdatingData</span>
+                                </h3>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+       </div>
+    </div>
+
+<div class="content-right">
+    <aside class="sidebar">
+        @{Html.RenderAction("PartialWidgetUser", "Shared", true);}
+
+        @if (Model.mDocsViewSearch.lFields.HasValue())
+        {
+            <div class="widget">
+                <div class="widget-top">
+                    <h3><span class="title-widget">Lĩnh vực văn bản quan tâm</span>
+                    </h3>
+                </div>
+                <div class="widget-container">
+                    @foreach (Fields t in Model.ListFields)
+                    {
+                        foreach (var field in Model.mDocsViewSearch.lFields)
+                        {
+                            if (t.FieldId == field.FieldId)
+                            {
+                                <div class="rows vbquantam">
+                                    <a href="@string.Concat(CmsConstants.ROOT_PATH, field.GetUrl(Model.mPartialPaginationAjax.DocGroupId))" class="vbquantam-item">@field.FieldDesc (@field.SoLuong)</a>
+                                </div>
+                            }
+                        }
+                    }
+
+                </div>
+            </div>
+        }
+        @if (Model.mDocsViewSearch.lEffectStatus.HasValue())
+        {
+            <div class="widget">
+                <div class="widget-top">
+                    <h3><span class="title-widget">Tình trạng văn bản</span>
+                    </h3>
+                </div>
+                <div class="widget-container">
+                    @foreach (var item in Model.mDocsViewSearch.lEffectStatus)
+                    {
+                        <div class="rows vbquantam">
+                            <a href="@string.Format("{0}tim-van-ban.html?SearchOptions=1&SearchExact=1&EffectStatusId={1}",CmsConstants.ROOT_PATH, item.EffectStatusId)" class="hieuluc-item">@item.EffectStatusDesc (@item.SoLuong)</a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        <div class="widget ">
+            <div class="banner">
+                @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+            </div>
+        </div>
+
+        <div class="widget bottom0">
+            <div class="widget-top">
+                <h3><span class="title-widget">Phần mềm hỗ trợ</span></h3>
+            </div>
+            <div class="widget-container">
+                <div class="rows vbquantam">
+                    <a href="https://get.adobe.com/reader/" target="_blank" class="icon-pdf">Phần mềm đọc file PDF Adobe Reader</a>
+                </div>
+                <div class="rows vbquantam">
+                    <a href="https://www.foxitsoftware.com/pdf-reader/" target="_blank" class="icon-pdf2">Phần mềm đọc file PDF Foxit Reader</a>
+                </div>
+                <div class="rows vbquantam">
+                    <a href="http://www.unikey.org/" target="_blank" class="icon-uniky">Phần mềm Unikey 4.0</a>
+                </div>
+                <div class="rows vbquantam">
+                    <span class="icon-lvn">Trình duyệt tốt nhất cho LuatVietnam:</span>
+                </div>
+                <div class="rows">
+                    <a href="https://www.mozilla.org/vi/firefox/new/" target="_blank" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="@Url.Content("~/assets/images/firefox.png")"> Firefox </a>
+                    <a href="https://www.google.com/intl/vi_vn/chrome/browser/index.html" target="_blank" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="@Url.Content("~/assets/images/chrome.png")"> chrome </a>
+                    <a href="https://www.apple.com/safari/" target="_blank" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="@Url.Content("~/assets/images/safari.png")"> Safari </a>
+                </div>
+
+            </div>
+        </div>
+
+    </aside>
+</div>
+</div>
+@Html.Partial("PartialContentViewed")
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,535 @@
+﻿@{
+    ViewBag.Title = "CustomerReportEffectStatus";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.Library
+@using ICSoft.LawDocsLib
+@model CustomerDocsViewModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+        <!--Bengin page-content-->
+<div class="page-content">
+    <!--Bengin content-left -->
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="#" class="breadcrumb-item"><span class="icon-home"></span>Trang chủ </a> »
+            <a href="#" class="breadcrumb-item">Thông tin cá nhân</a> »
+            <span class="breadcrumb-item colorrumb">Thông tin tài khoản</span>
+        </div>
+        <div class="tab-nav">
+            <a class="tab-nav-item-ad " href="#">Thông tin tài khoản</a>
+            <a class="tab-nav-item-ad " href="#">Lịch sử giao dịch</a>
+            <a class="tab-nav-item-ad" href="#">Văn bản của tôi</a>
+            <a class="tab-nav-item-ad active" href="#">Thông báo hiệu lực<span style="color: #fff;"> (3)</span></a>
+            <a class="tab-nav-item-ad" href="#">Tin nhắn <span style="color: #a67942;">(3)</span></a>
+        </div>
+
+        <!-- Bengin-cat-box-content-->
+        <div class="cat-box-content">
+            <div class="padding-left">
+                <div class="rows item1">
+                    <p><img alt="img-tthl" src="images/thong-bao.png">Danh sách văn bản đăng ký nhận Thông báo hiệu lực. Thành viên sẽ nhận được thông báo qua email, tin nhắn hệ thống LuatVietnam.vn hoặc sms về tình trạng hiệu lực của văn bản, khi có bất kỳ sự thay đổi hiệu lực nào liên quan đến văn bản.</p>
+                </div>
+
+                <div class="rows item2 ">
+                    <div class="giao-dich1">
+                        <div class="text-pagination"><strong>Số văn bản đăng ký:<span style="color: #a67942;  font-size: 14px;"> 05</span></strong></div>
+                    </div>
+
+                    <div class="giao-dich2">
+                        <div class="select-item">
+                            <div class="text-item"> Lọc theo lĩnh vực:</div>
+                            <div class="text-item md1">
+                                <select tabindex="1" class="dropdown4">
+                                    <option value="0">Cán bộ - Công chức - Viên chức </option>
+                                    <option value="1">Cán bộ - Công chức - Viên chức </option>
+                                    <option value="2">Cán bộ - Công chức - Viên chức </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="select-item">
+                            <div class="text-item">Thời gian:</div>
+                            <div class="text-item md2">
+                                <select tabindex="1" class="dropdown4">
+                                    <option value="0">Từ trước đến nay</option>
+                                    <option value="1">Từ trước đến nay </option>
+                                    <option value="2">Từ trước đến nay </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bengin-content-giao-dich-->
+            <div class="content-giao-dich">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="row-tr">
+                            <th class="row-th fontnolmar">Stt</th>
+                            <th class="row-th fontnolmar">Tên Văn bản</th>
+                            <th class="row-th fontnolmar">Lĩnh vực</th>
+                            <th class="row-th fontnolmar">Ngày ban hành</th>
+                            <th class="row-th fontnolmar">Tình trạng hiệu lực</th>
+                            <th class="row-th fontnolmar">Hủy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(Model.lMyDocs.Count>0){
+                            int index = 0;
+                            foreach (DocsView mDocsView in Model.lMyDocs)
+                            {
+                                index++;
+                                string FieldName = "";
+                                DocFields mDocFields = new DocFields();
+                                string linhvuc = string.IsNullOrEmpty(mDocsView.FieldsText) ? mDocFields.DocFields_GetFieldName(1, mDocsView.DocId, ref FieldName) : mDocsView.FieldsText;
+                        <tr class="row-tr" style="vertical-align:top;">
+                            <td class="rows-td fontbold">@index.ToString("#00")</td>
+                            <td class="rows-td" style="text-align: left;">
+                                <h2>
+                                    <a href="@mDocsView.DocUrl" title="@mDocsView.DocName" class="post-title lvn">
+                                        @mDocsView.DocName
+                                    </a>
+                                </h2>
+                                <div class="item-meta">
+                                    <a href="#" class="tag-item ">Tóm tắt</a>
+                                    <a href="#" class="tag-item ">Lược đồ</a>
+                                    <a href="#" class="tag-item ">Hiệu lực</a>
+                                    <a href="#" class="tag-item ">Liên quan</a>
+                                    <a href="#" class="tag-item ">Tiếng anh</a>
+                                    <a href="#" class="tag-item ">Tải về</a>
+                                    <a href="#" class="icon-save" title="lưu văn bản quan tâm"></a>
+                                </div>
+                            </td>
+                            <td class="rows-td wight">
+                                @linhvuc</td>
+                            <td class="rows-td wight">
+                                @mDocsView.ExpireDate.ToShortDateString()
+                            </td>
+                            <td class="rows-td wight">Sắp hết hiệu lực</td>
+                            <td class="rows-td"><a href="#"><img alt="img-tthl" src="images/xoa.png"></a></td>
+                        </tr>
+                            
+                                
+                            }
+                        }
+                        else 
+                        {
+                        <tr class="row-tr" style="vertical-align:top;">
+                            <td class="rows-td">Không có văn bản nào.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @{ Html.RenderAction("PartialPaginationAjax", "Shared", new { model = Model.PartialPaginationAjaxFirst }); }
+            <!-- End-content-giao-dich-->
+            <!--Bengin pagination -->
+            @*<div class="pagination">
+                <div class="pagination-left">
+                    <span class="text-pagination">Hiển thị:</span>
+                    <div class="select-pagination">
+                        <select tabindex="1" class="dropdown10">
+                            <option value="0">10 kết quả</option>
+                            <option value="1">10 kết quả</option>
+                            <option value="2">10 kết quả</option>
+                            <option value="3">10 kết quả</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="pagination-right">
+                    Trang<input class="input-page-item" value="4">của 192
+                    <div class="load-more">
+                        <a href="#" class="load-more-item x1"></a>
+                        <a href="#" class="load-more-item x2"></a>
+                    </div>
+                </div>
+            </div>*@
+            <!--End pagination -->
+        </div>
+        <!-- End-cat-box-content-->
+    </div>
+    <!--End content left-->
+    <!--Bengin content-right-->
+    <div class="content-right">
+        <aside class="sidebar">
+
+            <!--Bengin widget-->
+            <div class="widget">
+                <div class="widget-top">
+                    <h3><span class="title-widget">Văn bản của NguyenVanA </span></h3>
+                </div>
+
+                <div class="tab-widget">
+                    <a class="tab-nav-widget1 col1 active" href="javascript:void(0)" onclick="openCity('tab-widget1', 'click-widget1')">VB mới</a>
+                    <a class="tab-nav-widget1 col2" href="javascript:void(0)" onclick="openCity('tab-widget2', 'click-widget1')">Sắp có hiệu lực</a>
+                    <a class="tab-nav-widget1 col2" href="javascript:void(0)" onclick="openCity('tab-widget3', 'click-widget1')">Hết hiệu lực</a>
+                </div>
+
+                <!-- Bengin-widget-tab-->
+                <div class="widget-tab">
+                    <!-- Bengin-tab-widget1-->
+                    <div id="tab-widget1" class="click-widget1">
+                        <div class="row-tab" style="border-top: 0;">
+                            <a href="#" class="title-tab">Luật lao động 2009<span class="tie-date"> (25/06/2017  09:20)</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab">Luật lao động năm 2010 sửa đổi <span class="tie-date"> (25/06/2017...</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab">Bảo hiểm xã hội và sửa đổi năm 2015<span class="tie-date"> (...</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab"> Luật lao động 2009 <span class="tie-date"> (25/06/2017  09:20)</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab">Luật doanh nghiệp 2016<span class="tie-date"> (25/06/2017  09:20)</span></a>
+                        </div>
+                    </div>
+                    <!-- End-tab-widget1-->
+                    <!-- Bengin-tab-widget2-->
+                    <div id="tab-widget2" class="click-widget1" style="display: none;">
+                        <div class="row-tab" style="border-top: 0;">
+                            <a href="#" class="title-tab">Luật lao động năm 2010 sửa đổi<span class="tie-date"> (25/...</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab">Luật lao động 2009 <span class="tie-date"> (25/06/2017...</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab">Bảo hiểm xã hội và sửa đổi năm 2015<span class="tie-date"> (...</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab"> Luật lao động 2009 <span class="tie-date"> (25/06/2017  09:20)</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab">Luật doanh nghiệp 2016<span class="tie-date"> (25/06/2017  09:20)</span></a>
+                        </div>
+                    </div>
+                    <!-- End-tab-widget2-->
+                    <!-- Bengin-tab-widget3-->
+                    <div id="tab-widget3" class="click-widget1" style="display: none;">
+                        <div class="row-tab" style="border-top: 0;">
+                            <a href="#" class="title-tab">Luật2009 lao động 2009<span class="tie-date"> (25/06/2017  09:20)</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab">Luật lao động năm 2010 sửa đổi <span class="tie-date"> (25/06/2017...</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab">Bảo hiểm xã hội và sửa đổi năm 2015<span class="tie-date"> (...</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab"> Luật lao động 2009 <span class="tie-date"> (25/06/2017  09:20)</span></a>
+                        </div>
+                        <div class="row-tab">
+                            <a href="#" class="title-tab">Luật doanh nghiệp 2016<span class="tie-date"> (25/06/2017  09:20)</span></a>
+                        </div>
+                    </div>
+                    <!-- End-tab-widget3-->
+
+                </div>
+                <!-- End-widget-tab-->
+            </div>
+            <!--End widget-->
+            <!--Bengin widget-->
+            <div class="widget">
+                <div class="widget-top">
+                    <h3><span class="title-widget">Hướng dẫn sử dụng</span></h3>
+                </div>
+                <div class="widget-rows">
+                    <a href="#" class="widget-rows-item dk1">Đăng ký tài khoản</a>
+                </div>
+                <div class="widget-rows">
+                    <a href="#" class="widget-rows-item dk2">Đăng ký thuê bao</a>
+                </div>
+                <div class="widget-rows">
+                    <a href="#" class="widget-rows-item dk3">Thanh toán</a>
+                </div>
+                <div class="widget-rows">
+                    <a href="#" class="widget-rows-item dk4">Tra cứu văn bản</a>
+                </div>
+            </div>
+            <!--End widget-->
+            <!--Bengin widget ads-->
+            <div class="widget bottom0">
+                <div class="banner">
+                    @{Html.RenderPartial("PartialAdvertise", null, new ViewDataDictionary { { "LocationId", 234 } });}
+                </div>
+            </div>
+            <!--End widget ads-->
+
+        </aside>
+    </div>
+    <!--End content-right-->
+
+</div>
+<!--End page-content-->
+<!--Bengin cat-box content-wrap-->
+<div class="cat-box content-recent">
+    <section class="view-post-content">
+        <div class="padding-view">
+            <div class="cat-title">
+                <h4><span class="cat-box-title">Nội dung đã xem</span></h4>
+                <span class="vien-title nav-fd daxem"></span>
+            </div>
+            <!--Begin carousel-->
+            <div id="owl-demo-c3" class="owl-carousel">
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/no-images.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="customNavigation">
+                <a class="btn prev33 btn1"></a>
+                <a class="btn next33 btn2"></a>
+            </div>
+            <!--End carousel-->
+
+        </div>
+    </section>
+</div>
+<!--Bengin cat-box content-wrap-->
+<!--Bengin cat-box content-wrap-->
+<div class="cat-box partner">
+
+    <div class="cat-box-content">
+        <!--Bengin col-xs-2-->
+        <div class="col-xs-2 md2">
+            <div class="col-mb-4">
+                <span class="img-partner1"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner2"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner3"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner4"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner5"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner6"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner7"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner8"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner9"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner10"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner11"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner12"></span>
+            </div>
+        </div>
+        <!--End col-xs-2-->
+        <!--Bengin col-xs-2-->
+        <div class="col-xs-2 md2">
+            <!--Begin carousel-->
+            <div class="recentcomments">
+                <div id="owl-demo-c2" class="owl-carousel">
+                    <div class="item-recentcomments">
+                        <div class="thumbnail-recentcomments">
+                            <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png" /></div>
+                        </div>
+                        <div class="info-recentcomments">
+                            <span class="i-phay"><img alt="i-phay" src="images/phay1.png" /></span>
+                            <p>
+                                Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn
+                                đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng,
+                                bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng
+                                rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…
+                            </p>
+                            <span class="i-phay2"><img alt="i-phay" src="images/phay2.png" /></span>
+                        </div>
+                        <div class="info-recentcomments chuky">
+                            <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                        </div>
+                    </div>
+                    <div class="item-recentcomments">
+                        <div class="thumbnail-recentcomments">
+                            <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png" /></div>
+                        </div>
+                        <div class="info-recentcomments">
+                            <span class="i-phay"><img alt="i-phay" src="images/phay1.png" /></span>
+                            <p>
+                                Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn
+                                đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng,
+                                bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng
+                                rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…
+                            </p>
+                            <span class="i-phay2"><img alt="i-phay" src="images/phay2.png" /></span>
+                        </div>
+                        <div class="info-recentcomments chuky">
+                            <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                        </div>
+                    </div>
+                    <div class="item-recentcomments">
+                        <div class="thumbnail-recentcomments">
+                            <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png" /></div>
+                        </div>
+                        <div class="info-recentcomments">
+                            <span class="i-phay"><img alt="i-phay" src="images/phay1.png" /></span>
+                            <p>
+                                Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn
+                                đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng,
+                                bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng
+                                rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…
+                            </p>
+                            <span class="i-phay2"><img alt="i-phay" src="images/phay2.png" /></span>
+                        </div>
+                        <div class="info-recentcomments chuky">
+                            <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                        </div>
+                    </div>
+                    <div class="item-recentcomments">
+                        <div class="thumbnail-recentcomments">
+                            <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png" /></div>
+                        </div>
+                        <div class="info-recentcomments">
+                            <span class="i-phay"><img alt="i-phay" src="images/phay1.png" /></span>
+                            <p>
+                                Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn
+                                đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng,
+                                bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng
+                                rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…
+                            </p>
+                            <span class="i-phay2"><img alt="i-phay" src="images/phay2.png" /></span>
+                        </div>
+                        <div class="info-recentcomments chuky">
+                            <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                        </div>
+                    </div>
+                    <div class="item-recentcomments">
+                        <div class="thumbnail-recentcomments">
+                            <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png" /></div>
+                        </div>
+                        <div class="info-recentcomments">
+                            <span class="i-phay"><img alt="i-phay" src="images/phay1.png" /></span>
+                            <p>
+                                Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn
+                                đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng,
+                                bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng
+                                rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…
+                            </p>
+                            <span class="i-phay2"><img alt="i-phay" src="images/phay2.png" /></span>
+                        </div>
+                        <div class="info-recentcomments chuky">
+                            <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="customNavigation">
+                    <a class="btn prev22 btn1"></a>
+                    <a class="btn next22 btn2"></a>
+                </div>
+            </div>
+            <!--End carousel-->
+        </div>
+        <!--End col-xs-2-->
+    </div>
+</div>
+<!--End cat-box content-wrap-->
+

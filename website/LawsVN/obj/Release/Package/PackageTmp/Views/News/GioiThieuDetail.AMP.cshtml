@@ -1,0 +1,53 @@
+﻿@using LawsVN.Models
+@using LawsVN.Library
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@model NewsViewModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item">Trang chủ </a> »
+    <span class="breadcrumb-item">Giới thiệu</span>
+</div>
+<!-- article-->
+<article class="post-single">
+    <div class="boxboder">
+        <div class="box-entry">
+            <div class="post-title-single" >
+                <amp-img src="@Url.Content("~/assets/mobile/images/gioi-thieu1.png")" width="17" height="16"></amp-img>
+            Giới thiệu Luật Việt Nam</div>
+            <div class="entry">
+                @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent.StripTags())
+            </div>
+        </div>
+    </div>
+</article>
+<!-- end-->
+
+<div class="box-lich-su" id="lichsuphattrien">
+    <div class="tie-lsu">
+        <amp-img src="@Url.Content("~/assets/mobile/images/lichsuphattrien.png")" height="26" width="690" class="img_gt1"></amp-img>
+    </div>
+    <div class="cat-box-content">
+        <div class="noidung-lspt">
+            <div class="box-lich-su">
+                <i class="icon-lsdot">
+                    <amp-img src="@Url.Content("~/assets/mobile/images/lspt-moc.png")" width="20" height="17"></amp-img>
+                </i>
+            </div>
+            @for (int i = 0; i < Model.ListArticlesView.Count - 1; i++)
+            {
+                <div class="box-lich-su gd@(i)">
+                    <i class="icon-lsdot @(i == 0 ? "icon1" : "")">
+                        <amp-img src="@Url.Content("~/assets/mobile/images/cham-ls.png")" width="20" height="19"></amp-img></i>
+                    <div class="lich-su-info @(i == 0 ? "icon1" : "")" >
+                        <p class="lich-su-infor1">@Model.ListArticlesView[i].Title</p>
+                        <p><span class="lich-su-infor2">@Html.Raw(GoogleAmp.Convert(Model.ListArticlesView[i].MetaDesc))</span></p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,109 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.Library
+@model NewsViewModel
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.mPartialPaginationAjax.PageIndex, totalPage = Model.mPartialPaginationAjax.TotalPage, pageSize = Model.mPartialPaginationAjax.PageSize });}
+}
+<div class="page-content">
+    <div class="content-left">
+        <div id="ArticlesByCateBoxTab" class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a> »  <span class="breadcrumb-item colorrumb">@Model.mTags.TagName</span>
+        </div>
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title">@Html.Raw(Model.SeoHeader.ToString())</h1>
+            </div>
+        </div>
+
+        <div class="content-wrap">
+            <div class="tab-conten">
+                <div class="cat-box-content">
+                    <div id="ArticlesByCateBox" class="click-1">
+                        <div class="post-listing">
+                            @if (Model.ListArticlesView.HasValue())
+                            {
+                                for (int i = 0; i < Model.ListArticlesView.Count; i++)
+                                {
+                                    <article class="item-list @(i == Model.ListArticlesView.Count - 1 ? "item-10" : "")">
+                                        <div class="post-thumbnail">
+                                            <a href="@Model.ListArticlesView[i].GetArticleUrl()" title="@Model.ListArticlesView[i].Title" class="thumb240"><img alt="thumb240" src="@Model.ListArticlesView[i].GetImageUrl_Mobile()"></a>
+                                        </div>
+                                        <div class="post-content-page fix">
+                                            <div class="post-meta">
+                                                @*@if (Model.ListArticlesView[i].ProvinceId > 0)
+                                                {
+                                                    <a href="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html?provinceId=@Model.ListArticlesView[i].ProvinceId" class="post-tag"> @Provinces.Static_Get(short.Parse(Model.ListArticlesView[i].ProvinceId.ToString())).ProvinceDesc</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html" class="post-tag">Cả nước</a>
+                                                }*@
+                                                <div class="post-time-page-c" style="float:none;">
+                                                    <span class="icon-time"></span>@Model.ListArticlesView[i].PublishTime.toString()
+                                                </div>
+                                            </div>
+                                            <h2><a href="@Model.ListArticlesView[i].GetArticleUrl()" title="@Model.ListArticlesView[i].Title" class="post-title news">@Model.ListArticlesView[i].Title</a></h2>
+                                            <div class="sapo">
+                                                <p>@Html.Raw(Model.ListArticlesView[i].Summary)</p>
+                                            </div>
+                                            <div class="more-news"><a href="@Model.ListArticlesView[i].GetArticleUrl()" class="more-link" title="Xem tiếp"> <img alt="alt" src="@Url.Content("~/assets/images/xem-tiep.png")"> Xem tiếp </a></div>
+                                        </div>
+                                    </article>
+                                }
+                            }
+                            else
+                            {
+                                <p>@Resource.UpdatingData</p>
+                            }
+                        </div>
+
+                        @if(Model.mPartialPaginationAjax.TotalPage > 0)
+                        {
+                            { Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.mPartialPaginationAjax }); }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialTaisaochonLuatVietNam", "Shared");}
+            @{Html.RenderAction("PartialTinVan", "Shared", new { model = Model.mArticlesViewMaster.lCategoriesMain1.HasValue() && Model.mArticlesViewMaster.lCategoriesMain1.Count > 2 ? Model.mArticlesViewMaster.lCategoriesMain1[2] : null });}
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+                </div>
+            </div>
+            @if (Model.mArticlesViewCateMostView != null && Model.mArticlesViewCateMostView.lArticlesNewest.HasValue())
+            {
+                <div class="widget">
+                    <div class="widget-top">
+                        <h3><span class="title-widget">Tin xem nhiều</span></h3>
+                    </div>
+                    <div class="widget-container">
+                        @foreach (ArticlesView mArticlesView in Model.mArticlesViewCateMostView.lArticlesNewest)
+                        {
+                            <div class="recent-post">
+                                <span class="icon-new-22"></span>
+                                <div class="post-conten news">
+                                    <a href="@mArticlesView.GetArticleUrl()" class="post-title-widget" title="@mArticlesView.Title">@mArticlesView.Title</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            @{Html.RenderAction("PartialTieuDiem", "Shared", new { model = Model.mArticlesViewMaster.lCategoriesRight4.HasValue() && Model.mArticlesViewMaster.lCategoriesRight4.Count > 0 ? Model.mArticlesViewMaster.lCategoriesRight4[0] : null });}
+            @{Html.RenderPartial("PartialLinksNeedToKnow");}
+        </aside>
+    </div>
+
+</div>
+@Html.Partial("PartialContentViewed")

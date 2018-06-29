@@ -1,0 +1,387 @@
+﻿@using System.Text.RegularExpressions
+@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Docs
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model DocsViewDetailModel
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item">@Resource.HomePage </a>
+    @if (Model.mDocsViewDetail.lFieldDisplays.HasValue())
+    {
+        <span>» </span>
+        for (int index = 0; index < Model.mDocsViewDetail.lFieldDisplays.Count; index++)
+        {
+            FieldDisplays mFieldDisplays = Model.mDocsViewDetail.lFieldDisplays[index];
+            if (index == 0)
+            {
+                <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item color1">@mFieldDisplays.FieldName</a>
+            }
+            else
+            {
+                <span>, </span>
+                <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item color1">@mFieldDisplays.FieldName</a>
+            }
+        }
+    }
+
+</div>
+<article class="post-single">
+    <h1 class="post-title-single">@Html.Raw(Model.mDocsViewDetail.mDocsView.H1Tag.TrimmedOrDefault(Model.mDocsViewDetail.mDocsView.DocName).ToString())</h1>
+    <div class="tab-page">
+        @if (Model.mDocsViewDetail.lDocIndexes.HasValue())
+        {
+            <div class="mucluc">
+                <button data-toggle-target="#DocIndexes" class="btn-nav-mucluc"><img src="@Url.Content("~/assets/mobile/images/ic_list_24px-black.png")"></button>
+                @{Html.RenderPartial("~/Views/Shared/Mobile/PartialDocIndexes.cshtml", Model.mDocsViewDetail);}
+            </div>
+        }
+        <a class="tab-page-item" onclick="showTab('tomtat')" href="javascript:void(0)" data-href="#tomtat" title="@Resource.Properties">@Resource.Properties</a>
+        <a class="tab-page-item" onclick="showTab('noidung')" href="javascript:void(0)" data-href="#noidung" title="@Resource.Content">@Resource.Content</a>
+        <a class="tab-page-item" onclick="showTab('lienquan')" href="javascript:void(0)" data-href="#lienquan" title="@Resource.Relate2">@Resource.Relate2</a>
+        <a class="tab-page-item" onclick="showTab('luocdo')" href="javascript:void(0)" data-href="#luocdo" title="@Resource.Diagram">@Resource.Diagram</a>
+        <a class="tab-page-item" onclick="showTab('taive')" href="javascript:void(0)" data-href="#taive" title="@Resource.DownLoad">@Resource.DownLoad</a>
+        @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocContent))
+        {
+            <div class="fontsize">
+                <a href="javascript:lawsVn.FontZoom(-1)" class="fontsize-item1"></a>
+                <a href="javascript:lawsVn.FontZoom(1)" class="fontsize-item2"></a>
+            </div>
+        }
+    </div>
+    <div id="tomtatp" class="tabcontent" style="display:block">
+        <div class="boxboder">
+            <div class="box-entry">
+                <div class="title2">
+                    <h2 class="title-cat2 none vien"> Thuộc tính văn bản</h2>
+                </div>
+                <div class="thuoctinh">
+                    <table class="table-bordered">
+                        <tbody>
+                            @*<tr>
+                                    <td><strong>Cơ quan ban hành:</strong> @Model.mDocsViewDetail.mDocsView.OrgansText</td>
+                                </tr>*@
+                            <tr>
+                                <td><strong>Số hiệu: </strong> @Model.mDocsViewDetail.mDocsView.DocIdentity </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Loại văn bản:</strong> @Model.mDocsViewDetail.mDocsView.DocTypesText</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Ngày đăng công báo:</strong>
+                                    @if (Model.mDocsViewDetail.mDocsView.GazetteDate != DateTime.MinValue)
+                                    {
+                                        if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFullVi))
+                                        {
+                                            @Model.mDocsViewDetail.mDocsView.GazetteDate.toString()
+                                        }
+                                        else
+                                        {
+                                            <span class="no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span><i class="colorgrey">@Resource.Updating</i></span>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Số công báo:</strong>
+                                    @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.GazetteNumber))
+                                    {
+                                        if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFullVi))
+                                        {
+                                            @Model.mDocsViewDetail.mDocsView.GazetteNumber
+                                        }
+                                        else
+                                        {
+                                            <span class="no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span><i class="colorgrey">@Resource.Updating</i></span>
+                                    }
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ngày ký xác thực: </strong>	@Model.mDocsViewDetail.mDocsView.IssueDate.toString()</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Cơ quan hợp nhất:</strong> @Model.mDocsViewDetail.mDocsView.OrgansText</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Người ký:</strong> @Model.mDocsViewDetail.mDocsView.SignersText</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>Ngày hết hiệu lực:</strong>
+                                    @if (Model.mDocsViewDetail.mDocsView.ExpireDate != DateTime.MinValue)
+                                    {
+                                        if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFullVi))
+                                        {
+                                            @Model.mDocsViewDetail.mDocsView.ExpireDate.toString()
+                                        }
+                                        else
+                                        {
+                                            <span class="no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span><i class="colorgrey">@Resource.Updating</i></span>
+                                    }
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="box-entry">
+                <div class="title2">
+                    <h2 class="title-cat2 none vien"> Tóm tắt văn bản</h2>
+                </div>
+                @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocSummary))
+                {
+                    <div class="entry">
+                        <p><strong>@Model.mDocsViewDetail.mDocsView.Result.TrimmedOrDefault(string.Empty)</strong></p>
+                        @Html.Raw(Model.mDocsViewDetail.mDocsView.DocSummary)
+                    </div>
+                }
+                else
+                {
+                    <div class="thongbao-item2">
+                        <em>Nội dung tóm tắt đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+                    </div>
+                }
+            </div>
+            @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId) > 0)
+            {
+                <div class="box-entry">
+                    <div class="title2">
+                        <h2 class="title-cat2 none vien"> Tải văn bản</h2>
+                    </div>
+                    @foreach (var docFile in Model.mDocsViewDetail.lDocFiles)
+                    {
+                        string filePath = docFile.FilePath;
+                        string fileUrl = ICSoft.CMSViewLib.DocsView.Static_GetDownloadUrl(CmsConstants.WEBSITE_IMAGEDOMAIN, Model.mDocsViewDetail.mDocsView.DocUrl, docFile.FilePath);
+                        if (docFile.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId)
+                        {
+                            if (filePath.EndsWith(".doc") || filePath.EndsWith(".docx"))
+                            {
+                                <div class="rows item7">
+                                    <a href="@fileUrl" title="Tải văn bản tiếng Việt (.doc)" class="down-vb" style="font-size: 14px; font-weight: bold; line-height: 34px;">
+                                        <img alt="doc" src="@Url.Content("~/assets/images/doc-summary.png")" class="img-download">Tải văn bản tiếng Việt (.doc)
+                                    </a>
+                                </div>
+                            }
+                            else if (filePath.EndsWith(".pdf"))
+                            {
+                                <div class="rows item7">
+                                    <a href="@fileUrl" title="Tải văn bản tiếng Việt (.pdf)" class="down-vb" style="font-size: 14px;font-weight: bold;line-height: 34px;">
+                                        <img alt="pdf" src="@Url.Content("~/assets/images/pdf-summary.png")" class="img-download">Tải văn bản tiếng Việt (.pdf)
+                                    </a>
+                                </div>
+                            }
+                            else if (filePath.EndsWith(".zip"))
+                            {
+                                <div class="rows item7">
+                                    <a href="@fileUrl" title="Tải văn bản tiếng Việt (.zip)" class="down-vb" style="font-size: 14px;font-weight: bold;line-height: 34px;">
+                                        <img alt="zip" src="@Url.Content("~/assets/images/doc4.png")" class="img-download">Tải văn bản tiếng Việt (.zip)
+                                    </a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            }
+        </div>
+    </div>
+    <div id="noidungp" class="tabcontent" style="@(!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocContent) ? "display:block" : "display:none")">
+        @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocContent))
+        {
+            <div class="boxboder">
+                <div class="entry doc-content" id="docPrint">
+                    @Html.Raw(Model.mDocsViewDetail.mDocsView.DocContent)
+                </div>
+            </div>
+        }
+        else
+        {
+            DocFiles mDocFiles = Model.mDocsViewDetail.lDocFiles.FirstOrDefault(i => i.FilePath.ToLower().Contains(".pdf") && i.LanguageId == 1);
+            if (mDocFiles == null || mDocFiles.FilePath == "")
+            {
+                <div class="thong-bao-22">
+                    <div class="thongbao-item2">
+                        <em>Nội dung văn bản đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="thong-bao-22">
+                    <div class="thongbao-item2">
+                        <em>Văn bản đã có file download, <a class="color2" href="@ICSoft.CMSViewLib.DocsView.Static_GetDownloadUrl(CmsConstants.WEBSITE_IMAGEDOMAIN, Model.mDocsViewDetail.mDocsView.DocUrl, mDocFiles.FilePath)">click vào đây</a> để tải file</em>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div id="lienquanp" class="tabcontent" style="display:none">
+        @{ Html.RenderAction("PartialPermissionDocRelateMobile", "Shared", new { docModel = Model, languageId = Model.mDocsViewDetail.mDocsView.LanguageId }); }
+    </div>
+    <div id="hieulucp" class="tabcontent" style="display:none">
+        <div class="box-hieuluc">
+            <div class="title2">
+                <h2 class="title-cat2 none vien"> Hiệu lực</h2>
+            </div>
+            <div class="cat-box-content">
+                <div class="first-news">
+                    <h3 class="post-title"><a href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()">@Model.mDocsViewDetail.mDocsView.DocName</a></h3>
+                    <div class="post-time">
+                        @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.mDocsViewDetail.mDocsView, EffectStatusName = Model.mDocsViewDetail.mDocsView.EffectStatusName } });}
+                    </div>
+                </div>
+            </div>
+        </div>
+        @{ Html.RenderAction("PartialPermissionDocEffect", "Shared", new { docModel = Model, languageId = Model.mDocsViewDetail.mDocsView.LanguageId }); }
+    </div>
+    <div id="luocdop" class="tabcontent" style="display:none">
+        @{ Html.RenderAction("PartialPermissionDocsConsolidationDiagramMobile", "Shared", new { docModel = Model, languageId = Model.mDocsViewDetail.mDocsView.LanguageId }); }
+    </div>
+    <div id="taivep" class="tabcontent" style="display:none">
+        <div class="boxboder2">
+            <div class="tab-page">
+                <div class="title2">
+                    <h2 class="title-cat2 vien"> Tiếng việt</h2>
+                </div>
+                <div class="taivelvn">
+                    @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == 1) > 0)
+                    {
+                        foreach (DocFiles mDocFiles in Model.mDocsViewDetail.lDocFiles)
+                        {
+                            string filePath = mDocFiles.FilePath.ToLower();
+                            string fileUrl = ICSoft.CMSViewLib.DocsView.Static_GetDownloadUrl(CmsConstants.WEBSITE_IMAGEDOMAIN, Model.mDocsViewDetail.mDocsView.DocUrl, mDocFiles.FilePath);
+                            if (mDocFiles.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId)
+                            {
+                                if (filePath.EndsWith(".doc") || filePath.EndsWith(".docx"))
+                                {
+                                    <div class="rows-vbitem-md2">
+                                        <a href="@fileUrl">
+                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/mobile/images/doc1.png")"> File (.doc)
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    if (filePath.EndsWith(".zip"))
+                                    {
+                                        <div class="rows-vbitem-md2">
+                                            <a href="@fileUrl">
+                                                <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/mobile/images/doc4.png")"> File (.zip)
+                                            </a>
+                                        </div>
+                                    }
+                                    else if (filePath.EndsWith(".pdf"))
+                                    {
+                                        <div class="rows-vbitem-md2">
+                                            <a href="@fileUrl">
+                                                <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/mobile/images/doc2.png")"> File (.pdf)
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <div class="thong-bao-2">
+                            <div class="thongbao-item2">
+                                <em>File văn bản tiếng Việt đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</article>
+@*@{Html.RenderAction("PartialDocOthersNewsetMobile", "Shared", new { model = new DocOthersModel { ListDocsView = Model.mDocsViewDetail.lDocOthersNewest } });}*@
+@{Html.RenderAction("PartialDocOthersMobile", "Shared", new { model = new DocOthersModel { ListDocsView = Model.mDocsViewDetail.lDocOthersNewest } });}
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+
+@section FooterSection
+{
+    <script type="text/javascript">
+        var urlCurent = window.location.href;
+        var l_activeTab = urlCurent.split("#");
+        var activeTab = $('#noidungp').is(':visible') ? 'noidung' : 'tomtat';
+        if (l_activeTab.length > 1) {
+            activeTab = l_activeTab[1];
+            if (activeTab.indexOf("demuc") >= 0)
+                activeTab = 'noidung';
+        }
+        lawsVn.logs.docViewLogs(@Model.mDocsViewDetail.mDocsView.DocId,@Model.mDocsViewDetail.mDocsView.DocGroupId, activeTab);
+        $('div.tabcontent').hide();
+        $('#' + activeTab + 'p').show();
+        $('#docPrint').removeAttr('id');
+        $('.box' + activeTab).attr('id', 'docPrint');
+        $('a[data-href$="#' + activeTab + '"]').addClass("active");
+        if (activeTab == 'noidung') {
+            $('.mucluc').show();
+        }
+        else {
+            $('.mucluc').hide();
+        }
+        if (activeTab == 'noidung' || activeTab == 'tienganh') {
+            $('div.fontsize').show();
+        }
+        else {
+            $('div.fontsize').hide();
+        }
+        function showTab(tabid) {
+            $('.tabcontent').hide();
+            $('.tab-page-item').removeClass("active");
+            $('a[data-href$="#' + tabid + '"]').addClass("active");
+            $('#' + tabid + 'p').show();
+            $('#docPrint').removeAttr('id');
+            $('.box' + tabid).attr('id', 'docPrint');
+            if (tabid == 'noidung') {
+                $('.mucluc').show();
+            }
+            else {
+                $('.mucluc').hide();
+            }
+            if (tabid == 'noidung' || tabid == 'tienganh') {
+                $('div.fontsize').show();
+            }
+            else {
+                $('div.fontsize').hide();
+            }
+            lawsVn.logs.docViewLogs(@Model.mDocsViewDetail.mDocsView.DocId,@Model.mDocsViewDetail.mDocsView.DocGroupId, tabid);
+        }
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.mDocsViewDetail.mDocsView.DocId',
+                name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+                title: '@Regex.Replace(Model.mDocsViewDetail.mDocsView.DocName, @"\r\n?|\n", string.Empty)',
+                summary: '',
+                datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+                url: '@Model.mDocsViewDetail.mDocsView.DocUrl',
+                effect: '@Model.mDocsViewDetail.mDocsView.EffectStatusName',
+                image: '@Constants.NoImageUrl'
+            }
+        });
+    </script>
+}

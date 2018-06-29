@@ -1,0 +1,58 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.AppCode
+@using LawsVN.Library
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using sms.utils
+@model ArticleViewDetailModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.Title.ToString())</h1>
+}
+<div class="page-content">
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a> »
+        <a href="@Model.m_ArticlesViewDetail.mCategoriesView.GetCategoryUrl()" class="breadcrumb-item">@Model.m_ArticlesViewDetail.mCategoriesView.CategoryDesc</a> »
+        <span class="breadcrumb-item colorrumb">@Model.m_ArticlesViewDetail.mArticlesView.Title</span>
+    </div>
+    <div class="content-left">
+        @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent)
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialTaisaochonLuatVietNam", "Shared");}
+            @{Html.RenderAction("PartialDiemTinVanBanMoi", "Shared", new { model = Model.mArticlesViewMaster.lCategoriesTop1.HasValue() ? Model.mArticlesViewMaster.lCategoriesTop1[0] : null });}
+
+            <div class="widget ">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+
+        </aside>
+    </div>
+</div>
+@Html.Partial("PartialContentViewed")
+
+@section FooterSection
+{
+    <script type="text/javascript">
+        lawsVn.logs.articleLogs(@Model.m_ArticlesViewDetail.mArticlesView.ArticleId,@Model.m_ArticlesViewDetail.mArticlesView.CategoryId);
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.m_ArticlesViewDetail.mArticlesView.ArticleId'
+                , name: '@Model.m_ArticlesViewDetail.mArticlesView.TruncateTitle(45)'
+                , title: '@Model.m_ArticlesViewDetail.mArticlesView.Title'
+                , summary: ''
+                , datetime: '@Model.m_ArticlesViewDetail.mArticlesView.PublishTime.toString()'
+                , url: '@Model.m_ArticlesViewDetail.mArticlesView.GetArticleUrl()'
+                , image: '@Model.m_ArticlesViewDetail.mArticlesView.GetImageUrl_Mobile()'
+            }
+        });
+    </script>
+}   

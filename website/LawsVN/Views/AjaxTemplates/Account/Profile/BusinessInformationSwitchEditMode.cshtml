@@ -1,0 +1,75 @@
+﻿@using LawsVN.App_GlobalResources
+@model LawsVN.Models.Account.BusinessInformation
+@using (Ajax.BeginForm("EditBusinessInformation", "Account", null
+    , new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccessful"
+    }
+    ))
+{
+    @Html.AntiForgeryToken()
+    <div class="cat-title">
+        <div class="cat-box-title vien">@Resource.BusinessInformation</div>
+        <div class="huy-capnhat" style="margin-top: -24px;">
+            <div class="btn-huy">@Ajax.ActionLink(Resource.Cancel, string.Empty, string.Empty
+                , null
+                , new AjaxOptions
+                {
+                    HttpMethod = "Post"
+                    ,Url = Url.Action("BusinessInformationSwitchMode", "Ajax",new
+                    {
+                        mode = "view"
+                    })
+                    , UpdateTargetId = "thongtindoanhnghiep"
+                    , InsertionMode = InsertionMode.Replace
+                    , OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                    , OnComplete = "lawsVn.ajaxEvents.OnComplete"
+                }, new {@class = "icon-huy"})</div>
+            <div class="btn-huy"><a href="#" class="icon-capnhat submit-link"> @Resource.Update</a></div>
+        </div>
+    </div>
+    <div class="cat-box-content-user">
+        <div class="form-group user">
+            <div class="col-sm-1 user">@Resource.UnitName: </div>
+            <div class="col-sm-2 thong-tin-doanh-nghiep fontb">
+                @Html.TextBoxFor(m => m.OrganName, new {@class = "form-control-input"})
+            </div>
+        </div>
+        @*<div class="form-group user">
+            <div class="col-sm-1 user">Lĩnh vực hoạt động: </div>
+            <div class="col-sm-2 linh-vuc fontb">
+                Truyền thông
+            </div>
+        </div>*@
+        <div class="form-group user">
+            <div class="col-sm-1 user">@Resource.AccountNumber: </div>
+            <div class="col-sm-2 thong-tin-doanh-nghiep fontb">
+                @Html.TextBoxFor(m => m.AccountNumber, new {@class = "form-control-input"})
+            </div>
+        </div>
+
+        <div class="form-group user">
+            <div class="col-sm-1 user">@Resource.Address: </div>
+            <div class="col-sm-2 thong-tin-doanh-nghiep fontb">
+                @Html.TextBoxFor(m => m.OrganAddress, new {@class = "form-control-input"})
+            </div>
+        </div>
+
+        <div class="form-group user">
+            <div class="col-sm-1 user">@Resource.Phone: </div>
+            <div class="col-sm-2 thong-tin-doanh-nghiep fontb">
+                @Html.TextBoxFor(m => m.OrganPhone, new {@class = "form-control-input"})
+            </div>
+        </div>
+
+        <div class="form-group user">
+            <div class="col-sm-1 user">@Resource.TaxCode: </div>
+            <div class="col-sm-2 thong-tin-doanh-nghiep fontb">
+                @Html.TextBoxFor(m => m.OrganTaxCode, new {@class = "form-control-input"})
+            </div>
+        </div>
+    </div>
+}

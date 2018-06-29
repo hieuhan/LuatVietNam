@@ -1,0 +1,32 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.NewsViewModel
+@if (Model.mArticlesViewCate.lArticlesNewest.HasValue())
+{
+    <div class="post-listing" data-page="@(Model.mPartialPaginationAjax.PageIndex+2)">
+        @foreach (ArticlesView articleView in Model.mArticlesViewCate.lArticlesNewest)
+        {
+            <div class="first-news page">
+                <div class="post-thumb">
+                    <a href="@articleView.GetArticleUrl()" class="thumb125x70">
+                        <img src="@articleView.GetImageUrl_Mobile()" />
+                    </a>
+                </div>
+                <div class="pks">
+                    <div class="rows-time">
+                        <span class="item-time">@articleView.PublishTime.toString()</span>
+                    </div>
+                    <h3 class="post-title-bold">
+                        <a href="@articleView.GetArticleUrl()">@articleView.Title</a>
+                    </h3>
+                </div>
+            </div>
+        }
+    </div>
+    { Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax }); }
+}
+else
+{
+    <p>@Resource.UpdatingData</p>
+}

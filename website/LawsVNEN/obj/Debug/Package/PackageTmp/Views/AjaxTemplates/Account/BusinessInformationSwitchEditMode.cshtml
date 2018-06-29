@@ -1,0 +1,71 @@
+﻿@using LawsVNEN.App_GlobalResources
+@using ICSoft.CMSLib
+@using LawsVNEN.AppCode
+@model LawsVNEN.Models.Account.BusinessInformation
+@using (Ajax.BeginForm("EditBusinessInformation", "Account", null
+    , new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccessful"
+    }
+    ))
+{
+    @Html.AntiForgeryToken()
+    <div class="cat-title">
+        <div class="cat-box-title en">@Resource.Others</div>
+        <div class="huy-capnhat" style="margin-top: -28px;">
+            <div class="btn-huy">@Ajax.ActionLink(Resource.Cancel, "BusinessInformationSwitchMode", "Ajax"
+                , new
+                {
+                    mode = "view"
+                }
+                , new AjaxOptions
+                {
+                    HttpMethod = "Post"
+                    , UpdateTargetId = "thongtindoanhnghiep"
+                    , InsertionMode = InsertionMode.Replace
+                    , OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                    , OnComplete = "lawsVn.ajaxEvents.OnComplete"
+                }, new {@class = "icon-huy"})</div>
+            <div class="btn-huy"><a href="#" class="icon-capnhat submit-link"> @Resource.Update</a></div>
+        </div>
+    </div>
+   <div class="cat-box-content ">
+        <div class="col-xs-2">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label class="col-sm-1">@Resource.Company:</label>
+                    <div class="col-sm-2">
+                        @Html.TextBoxFor(m => m.OrganName, new { @class = "form-control-input" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1">@Resource.AccountNumber: </label>
+                    <div class="col-sm-2">
+                       @Html.TextBoxFor(m => m.AccountNumber, new { @class = "form-control-input" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1">@Resource.Address:  </label>
+                    <div class="col-sm-2">
+                        @Html.TextBoxFor(m => m.OrganAddress, new { @class = "form-control-input" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1">@Resource.PhoneNumber: </label>
+                    <div class="col-sm-2">
+                        @Html.TextBoxFor(m => m.OrganPhone, new { @class = "form-control-input" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1">Fax:</label>
+                    <div class="col-sm-2">
+                        @Html.TextBoxFor(m => m.OrganFax, new { @class = "form-control-input" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+}

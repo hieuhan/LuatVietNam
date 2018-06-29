@@ -1,0 +1,98 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.Library
+@model LawerViewModel
+<div class="rows item3">
+    <div class="right-view">
+        @if (Model.PartialPaginationAjax.TotalPage > 0)
+        {
+            <span>Hiển thị <strong>@Model.PartialPaginationAjax.PageSize kết quả</strong> trong <strong>@Model.PartialPaginationAjax.TotalPage </strong>Luật sư</span>
+        }
+    </div>
+</div>
+@if (Model.mLawersView.lLawers.HasValue())
+{
+    <div class="cat-box">
+        <table class="table table-bordered trang42">
+            <tbody>
+                @for (int index = 0; index < Model.mLawersView.lLawers.Count; index += 2)
+                {
+                    var lawerLeft = Model.mLawersView.lLawers[index == Model.mLawersView.lLawers.Count ? Model.mLawersView.lLawers.Count - 1 : index];
+                    <tr>
+                        <td class="col-50">
+                            <div class="box-gioithieuluatsu">
+                                <a class="thumb120" href="@LawersView.GetLawerUrl(lawerLeft.LawerID, lawerLeft.FullName)" title="Luật sư: @lawerLeft.FullName">
+                                    <img alt="thumb30" src="@lawerLeft.GetImageUrl_Mobile()">
+                                </a>
+                                <div class="info-thumb120">
+                                    <div class="rows item3">
+                                        <p class="font16"><a href="@LawersView.GetLawerUrl(lawerLeft.LawerID, lawerLeft.FullName)" title="Luật sư: @lawerLeft.FullName">Luật sư: @lawerLeft.FullName</a></p>
+                                        <span class="vien1px"></span>
+                                    </div>
+                                    <p>
+                                        <strong>Lĩnh vực hoạt động:</strong> Doanh nghiệp - Hợp đồng - Lao động - Đất đai, Nhà cửa - Hôn nhân, Thừa kế.
+                                    </p>
+                                    <p>
+                                        <strong>Nơi công tác:</strong> @lawerLeft.LawOfficeName
+                                    </p>
+                                    <p>
+                                        <strong>Thông tin liên hệ:</strong>
+                                    </p>
+                                    <p>• Địa chỉ: @lawerLeft.Address</p>
+                                    <p>• Điện thoại: @lawerLeft.PhoneNumber • Di động: @lawerLeft.Mobile</p>
+                                    <p>• Email: @lawerLeft.Email</p>
+                                </div>
+                            </div>
+                        </td>
+                        @if (index + 1 < Model.mLawersView.lLawers.Count)
+                        {
+                            var lawerRight = Model.mLawersView.lLawers[index + 1];
+                            <td class="col-50">
+                                <div class="box-gioithieuluatsu">
+                                    <a class="thumb120" href="@LawersView.GetLawerUrl(lawerRight.LawerID, lawerRight.FullName)" title="Luật sư: @lawerRight.FullName">
+                                        <img alt="thumb30" src="@lawerRight.GetImageUrl_Mobile()">
+                                    </a>
+                                    <div class="info-thumb120">
+                                        <div class="rows item3">
+                                            <p class="font16"><a href="@LawersView.GetLawerUrl(lawerRight.LawerID, lawerRight.FullName)" title="Luật sư: @lawerRight.FullName">Luật sư: @lawerRight.FullName</a></p>
+                                            <span class="vien1px"></span>
+                                        </div>
+                                        <p>
+                                            <strong>Lĩnh vực hoạt động:</strong> Doanh nghiệp - Hợp đồng - Lao động - Đất đai, Nhà cửa - Hôn nhân, Thừa kế.
+                                        </p>
+                                        <p>
+                                            <strong>Nơi công tác:</strong> @lawerRight.LawOfficeName
+                                        </p>
+                                        <p>
+                                            <strong>Thông tin liên hệ:</strong>
+                                        </p>
+                                        <p>• Địa chỉ: @lawerRight.Address</p>
+                                        <p>• Điện thoại: @lawerRight.PhoneNumber • Di động: @lawerRight.Mobile</p>
+                                        <p>• Email: @lawerRight.Email</p>
+                                    </div>
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @{ Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.PartialPaginationAjax }); }
+    </div>
+}
+else
+{
+    <div class="cat-box">
+        <table class="table table-bordered trang42">
+            <tbody>
+                <tr>
+                    <td class="col-50">
+                        <div class="box-gioithieuluatsu">Không tìm thấy luật sư phù hợp.</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+

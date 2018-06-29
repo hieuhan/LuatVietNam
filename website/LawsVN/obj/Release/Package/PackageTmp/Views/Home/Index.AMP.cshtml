@@ -1,0 +1,261 @@
+﻿@using System.Text.RegularExpressions
+@using ICSoft.CMSLib
+@using LawsVN.Library
+@using LawsVN.Models
+@model HomeViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-van-ban.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="Keywords" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+@if (Model.mArticlesViewMaster.lCategoriesRight1.HasValue())
+{
+    var cateViewTinVan = Model.mArticlesViewMaster.lCategoriesRight1[0];
+    if (cateViewTinVan.lArticlesView.HasValue())
+    {
+    <div class="box-tinvan">
+        <p>
+            <i class="imgtvan"></i><strong>@cateViewTinVan.CategoryDesc: </strong>@(Html.Raw(cateViewTinVan.lArticlesView[0].ArticleContent.Replace("<p>", "").Replace("</p>", ""))) (@cateViewTinVan.lArticlesView[0].PublishTime.ToString("dd/MM/yyyy HH:mm"))
+        </p>
+    </div>
+    }
+}
+@if (Model.mArticlesViewMaster.lCategoriesTop2.HasValue())
+{
+    var cateViewTinTucPhapLuat = Model.mArticlesViewMaster.lCategoriesTop2[0];
+    if (cateViewTinTucPhapLuat.lArticlesView.HasValue())
+    {
+    <section class="content-section">
+        <div class="title">
+            <a href="@cateViewTinTucPhapLuat.GetCategoryUrl()">
+                <h2 class="title-cat">Tin pháp luật</h2>
+            </a>
+        </div>
+        <div class="cat-box-content">
+            @for (int index = 0; index < cateViewTinTucPhapLuat.lArticlesView.Count && index < Constants.RowAmount3; index++)
+            {
+                var articleTinTucPhapLuat = cateViewTinTucPhapLuat.lArticlesView[index];
+                if (index == 0)
+                {
+                <div class="first-news">
+                    <h3><a class="post-title first" href="@articleTinTucPhapLuat.GetArticleUrl()">@articleTinTucPhapLuat.Title</a>
+                    </h3>
+                    <div class="post-thumbnail">
+                        <a href="@articleTinTucPhapLuat.GetArticleUrl()">
+                            <amp-img src="@articleTinTucPhapLuat.GetImageUrl_Mobile2()" width="300" height="200" layout="responsive"
+                                         class="-amp-element -amp-layout-responsive -amp-layout-size-defined -amp-layout" id="amp-1">
+                            </amp-img>
+                        </a>
+                    </div>
+                    <div class="sapo">
+                        <p>@Html.Raw(Regex.Replace(articleTinTucPhapLuat.Summary,"style=\"[^\"]*\"",string.Empty))</p>
+                    </div>
+                </div>
+                }
+                else
+                {
+                <div class="other-news">
+                    <h3><a class="post-title other" href="@articleTinTucPhapLuat.GetArticleUrl()"><i class="fa-m"></i>@articleTinTucPhapLuat.Title </a>
+                    </h3>
+                </div>
+                }
+            }
+        </div>
+
+    </section>
+    }
+}
+
+@if (Model.mArticlesViewMaster.lCategoriesTop1.HasValue())
+{
+    var cateViewDiemTinVbMoi = Model.mArticlesViewMaster.lCategoriesTop1[0];
+    if (cateViewDiemTinVbMoi.lArticlesView.HasValue())
+    {
+    <section class="content-section">
+        <div class="title">
+            <a href="@cateViewDiemTinVbMoi.GetCategoryUrl()">
+                <h2 class="title-cat">@cateViewDiemTinVbMoi.CategoryName</h2>
+            </a>
+        </div>
+        <div class="cat-box-content">
+            @for (int index = 0; index < cateViewDiemTinVbMoi.lArticlesView.Count; index++)
+            {
+                var articleDiemTinVbMoi = cateViewDiemTinVbMoi.lArticlesView[index];
+                if (index == 0)
+                {
+                <div class="first-news">
+                    <h3><a class="post-title first" href="@articleDiemTinVbMoi.GetArticleUrl()">@articleDiemTinVbMoi.Title</a>
+                    </h3>
+                    <div class="post-thumbnail">
+                        <a href="@articleDiemTinVbMoi.GetArticleUrl()">
+                            <amp-img src="@articleDiemTinVbMoi.GetImageUrl_Mobile2()" width="300" height="200" layout="responsive" class="-amp-element -amp-layout-responsive -amp-layout-size-defined -amp-layout" id="amp-1">
+                                    </amp-img>
+                        </a>
+                    </div>
+                    <div class="sapo">
+                        <p>@Html.Raw(Regex.Replace(articleDiemTinVbMoi.Summary,"style=\"[^\"]*\"",string.Empty))</p>
+                    </div>
+                </div>
+                }
+                else
+                {
+                <div class="other-news">
+                    <h3><a class="post-title other" href="@articleDiemTinVbMoi.GetArticleUrl()"><i class="fa-m"></i>@articleDiemTinVbMoi.Title </a>
+                    </h3>
+                </div>
+                }
+            }
+        </div>
+    </section>
+    }
+}
+
+@if (Model.ListDocsViewFirst.HasValue())
+{
+    <section class="content-section">
+        <div class="title">
+            <a href="@(CmsConstants.ROOT_PATH)van-ban-moi.html">
+                <h2 class="title-cat">Mới cập nhật</h2>
+            </a>
+            @*<div class="right-btn">
+                <select class="select-btn">
+                    <option class="id0" value="0"></option>
+                    <option>Công văn mới</option>
+                    <option>Tiếng Anh</option>
+                    <option>UBND các tỉnh</option>
+                </select>
+            </div>*@
+        </div>
+        <div class="cat-box-content">
+            @for (int index = 0; index < Model.ListDocsViewFirst.Count; index++)
+            {
+                var docViewFirst = Model.ListDocsViewFirst[index];
+                <div class="other-news @(index > 0 ? "dashed" : string.Empty)">
+                    <h3><a class="post-title other" href="@docViewFirst.GetDocUrl()">@docViewFirst.DocName
+                    </a>
+                    </h3>
+                    @{ Html.RenderAction("PartialLinkDocumentAttributeAMP", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docViewFirst } });}
+                </div>
+            }
+        </div>
+    </section>
+}
+@if (Model.ListDocsViewSecond.HasValue())
+{
+    <section class="content-section">
+        <div class="title">
+            <a href="@(CmsConstants.ROOT_PATH)van-ban-sap-co-hieu-luc.html"><h2 class="title-cat">Sắp có hiệu lực</h2></a>
+            @*<div class="right-btn">
+                <select class="select-btn">
+                    <option class="id0" value="0"></option>
+                    <option>Sắp có hiệu lực</option>
+                    <option>Sắp sữa đổi</option>
+                    <option>Sắp hết hiệu lực</option>
+                    <option>Hết hiệu lực</option>
+                </select>
+            </div>*@
+        </div>
+        <div class="cat-box-content">
+            @for (int index = 0; index < Model.ListDocsViewSecond.Count; index++)
+            {
+                var docViewSecond = Model.ListDocsViewSecond[index];
+                <div class="other-news @(index > 0 ? "dashed" : string.Empty)">
+                    <h3><a class="post-title other" href="@docViewSecond.GetDocUrl()">@docViewSecond.DocName
+                    </a>
+                    </h3>
+                    @{ Html.RenderAction("PartialLinkDocumentAttributeAMP", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docViewSecond } });}
+                </div>
+            }
+        </div>
+    </section>
+}
+@if (Model.mArticlesViewMaster.lCategoriesRight2.HasValue())
+{
+    var cateViewBanTinLuatVn = Model.mArticlesViewMaster.lCategoriesRight2[0];
+    if (cateViewBanTinLuatVn.lArticlesView.HasValue())
+    {
+    <section class="content-section">
+        <div class="title">
+            <a href="@cateViewBanTinLuatVn.GetCategoryUrl()">
+                <h2 class="title-cat">@cateViewBanTinLuatVn.CategoryName</h2>
+            </a>
+        </div>
+        <div class="cat-box-content">
+            @for (int index = 0; index < cateViewBanTinLuatVn.lArticlesView.Count; index++)
+            {
+                var articleBanTinLuatVn = cateViewBanTinLuatVn.lArticlesView[index];
+                <div class="other-news p5">
+                    @if (index == 0)
+                    {
+                        <div class="post-thumbnail">
+                            <a href="@articleBanTinLuatVn.GetArticleUrl()">
+                                <amp-img src="@articleBanTinLuatVn.GetImageUrl_Mobile2()" width="300" height="200" layout="responsive" class="-amp-element -amp-layout-responsive -amp-layout-size-defined -amp-layout" id="amp-1">
+                                </amp-img>
+                            </a>
+                        </div>
+                    }
+                    <h3 class="post-title bold"><a href="@articleBanTinLuatVn.GetArticleUrl()">@articleBanTinLuatVn.Title</a>
+                    </h3>
+                </div>
+            }
+        </div>
+    </section>
+    }
+}
+@if (Model.mArticlesViewMaster.lCategoriesRight3.HasValue())
+{
+    var cateViewVbCapNhatHangTuan = Model.mArticlesViewMaster.lCategoriesRight3[0];
+    if (cateViewVbCapNhatHangTuan.lArticlesView.HasValue())
+    {
+    <section class="content-section">
+        <div class="title">
+            <a href="@cateViewVbCapNhatHangTuan.GetCategoryUrl()">
+                <h2 class="title-cat">@cateViewVbCapNhatHangTuan.CategoryName</h2>
+            </a>
+        </div>
+        <div class="cat-box-content">
+            @foreach (var item in cateViewVbCapNhatHangTuan.lArticlesView)
+            {
+                <div class="other-news p5">
+                    <h3 class="post-title bold"><a href="@item.GetArticleUrl()">@item.Title</a>
+                    </h3>
+                </div>
+            }
+        </div>
+    </section>
+    }
+}
+
+@if (Model.ListDocsViewThird.HasValue())
+{
+    <section class="content-section">
+        <div class="title">
+            <a href="@(CmsConstants.ROOT_PATH)tieu-chuan-viet-nam.html"><h2 class="title-cat">Tiêu chuẩn việt nam</h2></a>
+            @*<div class="right-btn">
+                <select class="select-btn">
+                    <option class="id0" value="0"></option>
+                    <option>Tiêu chuẩn việt nam</option>
+                    <option>Văn bản hợp nhất</option>
+                </select>
+            </div>*@
+        </div>
+        <div class="cat-box-content">
+            @for (int index = 0; index < Model.ListDocsViewThird.Count; index++)
+            {
+                var docViewThird = Model.ListDocsViewSecond[index];
+                <div class="other-news @(index > 0 ? "dashed" : string.Empty)">
+                    <h3><a class="post-title other" href="@docViewThird.GetDocUrl()">@docViewThird.DocName
+                        </a>
+                    </h3>
+                    @{ Html.RenderAction("PartialLinkDocumentAttributeAMP", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docViewThird } });}
+                </div>
+            }
+        </div>
+    </section>
+}

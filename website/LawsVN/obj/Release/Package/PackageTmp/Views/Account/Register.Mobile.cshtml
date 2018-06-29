@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model LawsVN.Models.Account.RegisterModel
+<div class="box-section">
+    <div class="login-content">
+        <div class="tie-login" style="font-size: 15px;">Đăng ký thành viên</div>
+        <div class="form-login">
+            @using (Ajax.BeginForm("Register", "Account", null, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                OnBegin = "lawsVn.ajaxEvents.OnBegin",
+                OnComplete = "lawsVn.ajaxEvents.OnComplete",
+                OnSuccess = "lawsVn.ajaxEvents.RedirectOnSuccess"
+            }, new { id = "RegisterForm" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.CustomerName, new { @class = "input-text", id="CustomerNameRegister", placeholder = "Tên đăng nhập *", autocomplete = "off", autocapitalize="off", autocorrect="off" })
+                    @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                </div>
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.Password, new { @class = "input-text", id= "PasswordRegister", type = "password", placeholder = "Mật khẩu *", autocomplete = "off", autocapitalize="off", autocorrect="off" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "input-text", id="ConfirmPasswordRegister", type = "password", placeholder = "Nhập lại mật khẩu *", autocomplete = "off", autocapitalize="off", autocorrect="off" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "input-text", id="EmailRegister", placeholder = "Email *", autocomplete = "off", autocapitalize="off", autocorrect="off" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.Phone, new { @class = "input-text", id="PhoneRegister", placeholder = "Số điện thoại" })
+                    @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                    <input type="hidden" name="IsMobile" value="true" />
+                </div>
+                <div class="item-login">
+                    <div class="pure-checkbox">
+                        @Html.CheckBoxFor(m => m.TermsAndConditions)
+                        <label for="TermsAndConditions" class="check-left">Tôi đồng ý với <a href="#" data-toggle-target="#QuyUocSuDung" class="color1">Quy ước sử dụng</a> của LuatVietnam.vn</label><br />
+                        <br />@Html.ValidationMessageFor(m => m.TermsAndConditions, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="item-center">
+                    <a href="#" class="btn1 btn-xacnhan">ĐĂNG KÝ</a>
+                    <button onclick="javascript:lawsVn.ResetForm();" class="btn2 ">NHẬP LẠI</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<div class="popup full target-hidden" id="QuyUocSuDung">
+    <div class="wrapper">
+        <div class="content-popup full">
+            <div class="content-popup-post">
+                <div class="tiequyuoc">
+                    <p>QUY ƯỚC CHUNG SỬ DỤNG WEBSITE LUẬT VIỆT NAM</p>
+                </div>
+                <div class="entry">
+                    @Html.Raw(Model.QuyUocBaoMat.mArticlesView.ArticleContent)
+                </div>
+            </div>
+        </div>
+        <button name="close" class="dong-close full" data-toggle-target="#QuyUocSuDung">
+            <img src="@Url.Content("~/assets/mobile/images/close.png")" />
+        </button>
+    </div>
+</div>
+@section FooterSection{
+    <script type="text/javascript">
+        lawsVn.RegisterAccount();
+    </script>
+}

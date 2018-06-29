@@ -1,0 +1,16 @@
+﻿@model string
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Trang đã chuyển sang url khác</title>
+</head>
+<body>
+    <div>
+       Trang @Request.RawUrl đã được chuyển sang url khác: <a href="@Model">@Model</a>
+    </div>
+</body>
+</html>

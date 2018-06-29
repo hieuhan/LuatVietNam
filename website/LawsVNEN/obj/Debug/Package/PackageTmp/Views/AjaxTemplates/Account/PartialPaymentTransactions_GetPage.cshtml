@@ -1,0 +1,48 @@
+﻿@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.Account.HistoryTransactionsModel
+<div class="content-giao-dich">
+    <table class="table table-bordered">
+        <thead>
+        <tr class="row-tr">
+            <th class="row-th" style="width: 5%;">@Resource.TradingCode</th>
+            <th class="row-th" style="width: 5%;">@Resource.DayTrading</th>
+            <th class="row-th">@Resource.TransactionDetails</th>
+            <th class="row-th" style="width: 13%;">@Resource.TotalMoney</th>
+            <th class="row-th" style="width: 12%;">@Resource.TransactionType</th>
+            <th class="row-th" style="width: 12%;">@Resource.PaymentChannel</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (Model.ListPaymentTransactions.IsAny())
+        {
+             foreach (var paymentTransaction in Model.ListPaymentTransactions)
+             {
+                 <tr class="row-tr">
+                     <td class="rows-td">@paymentTransaction.PaymentTransactionId</td>
+                     <td class="rows-td">@paymentTransaction.PaymentDate </td>
+                     <td class="rows-td" style="text-align: left;">
+                         @if (paymentTransaction.ServiceId > 0 && !string.IsNullOrEmpty(paymentTransaction.ServicePackageDesc))
+                         {
+                             <p>@Resource.DichVu<strong style="color: #90622a;"><a href="@paymentTransaction.ServiceId.GetLinkServiceById()" title="@paymentTransaction.ServiceDesc" style="color: #90622a;">@paymentTransaction.ServiceDesc</a> - </strong> @Resource.GoiDichVu <strong style="color: #90622a;">@paymentTransaction.ServicePackageDesc</strong>
+                             </p>
+                         }
+                         <p>@paymentTransaction.TransactionDesc </p>
+                         @*<p>Trạng thái: <span style="color:@(paymentTransaction.TransactionStatusId == 1 ? "blue" : "red");">@paymentTransaction.TransactionStatusDesc</span></p>*@
+                     </td>
+                     <td class="rows-td">@paymentTransaction.Amount</td>
+                     <td class="rows-td">@paymentTransaction.TransactionTypesDesc</td>
+                     <td class="rows-td">@paymentTransaction.PaymentTypeDesc</td>
+                 </tr>
+             }
+        }
+        else
+        {
+            <tr class="row-tr">
+                <td class="rows-td" colspan="6">Danh sách giao dịch trống</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+@{Html.RenderAction("PartialPaginationAjaxPageNumber", "Shared", new { model = Model.PartialPaginationAjax });}

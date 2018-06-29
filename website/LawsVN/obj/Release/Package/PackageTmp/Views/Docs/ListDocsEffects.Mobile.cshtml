@@ -1,0 +1,134 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using LawsVN.Library
+@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.Models.Docs
+@model DocsModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.PartialPaginationAjax.PageIndex, totalPage = Model.PartialPaginationAjax.TotalPage, pageSize = Model.PartialPaginationAjax.PageSize });}
+}
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>»
+    <span class="breadcrumb-item color1">@Model.EffectStatusName</span>
+</div>
+
+<section class="box-section">
+    <div class="title" style="margin-bottom: 0px;">
+        <h2 class="title-cat"> @Model.EffectStatusName</h2>
+        <div class="btn-more">
+            <ul class="usernav">
+                <li class="button-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/Assets/Mobile/images/more-nv.png")" /></a>
+                    @if (Model.EffectStatusName.Equals("Văn bản sắp có hiệu lực"))
+                    {
+                        <ul class="dropdown-menu" style="right: 0;  width: 140px;margin-top: 3px;">
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)van-ban-sap-sua-doi.html" title="Sắp sửa đổi" class="item-more-2">Sắp sửa đổi</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)van-ban-sap-het-hieu-luc.html" title="Sắp hết hiệu lực" class="item-more-2">Sắp hết hiệu lực</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)van-ban-het-hieu-luc.html" title="Hết hiệu lực" class="item-more-2">Hết hiệu lực</a>
+                        </li>
+                    </ul>
+                    }
+                    else if (Model.EffectStatusName.Equals("Văn bản sắp sửa đổi"))
+                    {
+                        <ul class="dropdown-menu" style="right: 0;  width: 140px;margin-top: 3px;">
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)van-ban-sap-co-hieu-luc.html" title="Sắp có hiệu lực" class="item-more-2">Sắp có hiệu lực</a>
+                            </li>
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)van-ban-sap-het-hieu-luc.html" title="Sắp hết hiệu lực" class="item-more-2">Sắp hết hiệu lực</a>
+                            </li>
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)van-ban-het-hieu-luc.html" title="Hết hiệu lực" class="item-more-2">Hết hiệu lực</a>
+                            </li>
+                        </ul>
+                    }
+                    else if (Model.EffectStatusName == "Văn bản sắp hết hiệu lực")
+                    {
+                        <ul class="dropdown-menu" style="right: 0;  width: 140px;margin-top: 3px;">
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)van-ban-sap-sua-doi.html" title="Sắp sửa đổi" class="item-more-2">Sắp sửa đổi</a>
+                            </li>
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)van-ban-sap-co-hieu-luc.html" title="Sắp có hiệu lực" class="item-more-2">Sắp có hiệu lực</a>
+                            </li>
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)van-ban-het-hieu-luc.html" title="Hết hiệu lực" class="item-more-2">Hết hiệu lực</a>
+                            </li>
+                        </ul>
+                    }
+                    else 
+                    {
+                        <ul class="dropdown-menu" style="right: 0;  width: 140px;margin-top: 3px;">
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)van-ban-sap-sua-doi.html" title="Sắp sửa đổi" class="item-more-2">Sắp sửa đổi</a>
+                            </li>
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)van-ban-sap-het-hieu-luc.html" title="Sắp hết hiệu lực" class="item-more-2">Sắp hết hiệu lực</a>
+                            </li>
+                            <li class="item-more">
+                                <a href="@(CmsConstants.ROOT_PATH)van-ban-sap-co-hieu-luc.html" title="Sắp có hiệu lực" class="item-more-2">Sắp có hiệu lực</a>
+                            </li>
+                        </ul>
+                    }
+                    
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="cat-box-content" id="ListByFieldTab">
+        <div id="ListByField" class="click-1">
+            @if (Model.ListDocsView.HasValue())
+            {
+                for (int index = 0; index < Model.ListDocsView.Count; index++)
+                {
+                    DocsView mDocsView = Model.ListDocsView[index];
+                    var number = index + (Model.PartialPaginationAjax.PageIndex > 0 ? Model.PartialPaginationAjax.PageIndex - 1 : Model.PartialPaginationAjax.PageIndex) * Model.PartialPaginationAjax.PageSize + 1;
+                    <div class="@(index == Model.ListDocsView.Count ? "first-news last" : "first-news dashed")">
+                        <h3 class="post-title">
+                            <a href="@mDocsView.GetDocUrl()" title="@mDocsView.DocName.StripTags()">
+                                <span class="stt">(@(number.ToString("#00")))</span>
+                                @mDocsView.DocName
+                            </a>
+                        </h3>
+                        <div class="post-time">
+                            @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView } });}
+                        </div>
+                    </div>
+                }
+                {
+                    Model.PartialPaginationAjax.IsMobile = true;
+                    Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.PartialPaginationAjax }); }
+            }
+            else
+            {
+                <div class="first-news dashed">
+                    <span>@Resource.NoMatchingDocumentFound</span>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: { id: 0 }
+        });
+    </script>
+}

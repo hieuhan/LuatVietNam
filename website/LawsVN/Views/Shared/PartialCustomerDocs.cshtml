@@ -1,0 +1,79 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model List<ICSoft.CMSViewLib.DocsView>
+@if (Extensions.IsAuthenticated)
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h3><span class="title-widget"><a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan.html" title="Lĩnh vực văn bản quan tâm">Lĩnh vực văn bản quan tâm</a> </span>
+            </h3>
+        </div>
+
+        <div class="tab-widget">
+            @Ajax.ActionLink(Resource.NewDocuments,string.Empty,string.Empty,null,new AjaxOptions
+            {
+                HttpMethod = "Get"
+                ,Url = Url.Action("CustomerDocs_GetViewEffect","Ajax", new
+                {
+                    effectStatus = string.Empty
+                })
+                ,UpdateTargetId = "customerDocsView"
+                ,InsertionMode = InsertionMode.Replace
+                ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+            },new {@class="tab-nav-widget1 col1 active"})
+            @Ajax.ActionLink(Resource.ComingIntoEffect,string.Empty,string.Empty,null,new AjaxOptions
+            {
+                Url = Url.Action("CustomerDocs_GetViewEffect","Ajax", new
+                {
+                    effectStatus = "SapCoHieuLuc"
+                })
+                ,HttpMethod = "Get"
+                ,UpdateTargetId = "customerDocsView"
+                ,InsertionMode = InsertionMode.Replace
+                ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+            },new {@class="tab-nav-widget1 col2"})
+            @Ajax.ActionLink(Resource.Expire,string.Empty,string.Empty,null,new AjaxOptions
+            {
+                HttpMethod = "Get"
+                ,Url = Url.Action("CustomerDocs_GetViewEffect","Ajax", new
+                {
+                    effectStatus = "HetHieuLuc"
+                })
+                ,UpdateTargetId = "customerDocsView"
+                ,InsertionMode = InsertionMode.Replace
+                ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+            },new {@class="tab-nav-widget1 col2"})
+        </div>
+
+        <div class="widget-tab">
+            <div id="customerDocsView">
+                @if (Model.HasValue())
+                {
+                    for(int index = 0; index < Model.Count && index < Constants.RowAmount3; index++)
+                    {
+                        <div class="row-tab" @(index==0 ? "style=border-top: 0;" : string.Empty)>
+                            <a href="@Model[index].GetDocUrl()" title="@Model[index].DocName.StripTags()" class="title-tab">@Model[index].DocName
+                            <br />
+                            <span class="tie-date"> @Model[index].IssueDate.toString()</span></a>
+                        </div>
+                    }
+                    <div class="more-gdcn">
+                        <a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan.html" title="Xem tiếp" class="more-link-gdcn">
+                            <img alt="Xem tiếp" src="@Url.Content("~/assets/images/xem-tiep.png")"/>
+                            Xem tiếp </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="row-tab" style="border-top: 0;">
+                        <p class="title-tab">@Resource.NoDocumentsYet</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

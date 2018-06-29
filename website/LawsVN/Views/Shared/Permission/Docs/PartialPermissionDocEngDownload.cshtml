@@ -1,0 +1,47 @@
+﻿@using ICSoft.LawDocsLib
+@using LawsVN.Library
+@model LawsVN.Models.Docs.DocsViewDetailModel
+<div class="col-vbitem-3" style="margin-right: 0;">
+    <div class="cat-title">
+        <div class="cat-box-title vien">Văn bản tiếng Anh</div>
+    </div>
+    @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == 2) > 0)
+    {
+        foreach (DocFiles mDocFiles in Model.mDocsViewDetail.lDocFiles)
+        {
+            if (mDocFiles.LanguageId == 2 && (mDocFiles.FilePath.EndsWith(".doc") || mDocFiles.FilePath.EndsWith(".docx")))
+            {
+                <div class="rows-vbitem-md2">
+                    <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                        <img class="docthumb30x38" alt="doc" src="~/Assets/images/doc1.png">
+                        Bản Word (.doc)</a>
+                </div>
+            }
+            else
+            {
+                if (mDocFiles.LanguageId == 2 && (mDocFiles.FilePath.ToLower().EndsWith(".zip")))
+                {
+                    <div class="rows-vbitem-md2">
+                        <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                            <img class="docthumb30x38" alt="doc" src="~/Assets/images/doc4.png">
+                            Bản Word Nén (.zip)</a>
+                    </div>
+                }
+                else if (mDocFiles.LanguageId == 2 && mDocFiles.FilePath.EndsWith(".pdf"))
+                {
+                    <div class="rows-vbitem-md2">
+                        <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                            <img class="docthumb30x38" alt="doc" src="~/Assets/images/doc2.png">
+                            Bản PDF (.pdf)</a>
+                    </div>
+                }
+            }
+        }
+    }
+    else
+    {
+        <div class="thongbao-item2">
+            <em>File văn bản tiếng Anh đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+        </div>
+    }
+</div>

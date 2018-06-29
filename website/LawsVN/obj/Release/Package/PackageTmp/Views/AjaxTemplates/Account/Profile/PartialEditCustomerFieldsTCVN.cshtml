@@ -1,0 +1,43 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.LawsCustomerFields
+@using (Ajax.BeginForm("EditCustomerFieldsTCVN", "Account", null, new AjaxOptions()
+{
+    HttpMethod = "Post",
+    OnBegin = "lawsVn.ajaxEvents.OnBegin",
+    OnComplete = "lawsVn.ajaxEvents.OnComplete",
+    OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccessful"
+}))
+{
+    @Html.AntiForgeryToken()
+    <div class="padding20">
+        <div style="margin: 15px 0">
+        <span style="color: #333; font-size: 15px; padding: 20px 0;"><strong>@Resource.FieldOfInterestDocument: </strong><span class="redcolor">*</span>
+        </span>
+        </div>
+        <div class="example-checkbox">
+            <div class="content-scroll-1" style="height: 320px;">
+                <div class="form-inline-checkbox">
+                    @if (Model.ListFields.HasValue())
+                    {
+                        for (int index = 0; index < Model.ListFields.Count; index++)
+                        {
+                            <div class="checkbox-col">
+                                <div class="pure-checkbox">
+                                    <input id="chkFieldId_@(index)" name="FieldId" type="checkbox" @(Model.ListCustomerFields.CustomerFieldsIsChecked(Model.ListFields[index].FieldId,3) ? "checked" : string.Empty) value="@Model.ListFields[index].FieldId">
+                                    <label for="chkFieldId_@(index)">@Model.ListFields[index].FieldName</label>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="huy-capnhat bottom">
+            <div class="btn-huy"><a href="#" class="icon-huy closeDialog" title="@Resource.Cancel"> @Resource.Cancel</a></div>
+            <div class="btn-huy"><a href="#" class="icon-capnhat submit-link" title="@Resource.Update"> @Resource.Update</a></div>
+        </div>
+        @Html.HiddenFor(m => m.FieldId)
+        @Html.ValidationMessageFor(m => m.FieldId, "", new {@class = "text-danger"})
+    </div>
+}

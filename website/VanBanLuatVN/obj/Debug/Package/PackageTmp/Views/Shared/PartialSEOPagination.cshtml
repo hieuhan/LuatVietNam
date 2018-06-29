@@ -1,0 +1,17 @@
+﻿@using System.Collections.Specialized
+@using VanBanLuat.Librarys
+@model VanBanLuatVN.Models.PaginationModel
+@if (Model.Page > 1)
+{
+    <link rel="prev" href="@Request.Url.AbsoluteUri.BuildQueryStringUrl(new NameValueCollection
+                           {
+                               {"page", (Model.Page-1).ToString() }
+                           })" />
+    if (Model.Page < Model.PageCount)
+    {
+        <link rel="next" href="@Request.Url.AbsoluteUri.BuildQueryStringUrl(new NameValueCollection
+                               {
+                                   {"page", (Model.Page+1).ToString() }
+                               })" />
+    }
+}

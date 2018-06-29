@@ -1,0 +1,25 @@
+﻿@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.DocsViewDetailModel
+<div class="box-content2">
+    <div class="cat-title">
+        <div class="cat-box-title vien">@Resource.Summary</div>
+    </div>
+    @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocSummary))
+    {
+        <div class="content-info">
+            @if(!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.Result)){<p style="color: #a67942; font-weight: bold;">@Model.mDocsViewDetail.mDocsView.Result</p>}
+            @Html.Raw(Model.mDocsViewDetail.mDocsView.DocSummary)
+            <p><i>@Resource.SeeDetails @Model.mDocsViewDetail.mDocsView.DocTypesText @Model.mDocsViewDetail.mDocsView.DocIdentityClear, <a href="javascript:void(0)" onclick="showTab('content',true)" data-href="#content" title="@Resource.Content">@Resource.here</a></i></p>
+        </div>
+    }
+    else
+    {
+        <div class="thong-bao-2">
+            <div class="rows item5"></div>
+            <div class="thongbao-item2">
+                <em>@Resource.TheSummaryIsBeingUpdated</em>
+            </div>
+        </div>
+    }
+</div>
+

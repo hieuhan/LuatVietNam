@@ -1,0 +1,10 @@
+2018-05-09 11:17:17.1057 ERROR Path '/Views/DocsConsolidation/Index.cshtml' was not found.
+2018-05-09 11:19:01.5726 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-09 14:34:32.5416 ERROR Path '/Views/DocsConsolidation/Index.cshtml' was not found.
+2018-05-09 14:36:19.7490 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-09 16:18:03.1734 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-09 16:46:10.6721 ERROR Path '/Views/DocsUBND/Index.cshtml' was not found.
+2018-05-09 16:47:33.2308 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-09 17:43:55.9817 ERROR Path '/Views/Docs/ListByField.cshtml' was not found.
+2018-05-09 17:44:24.0742 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-09 18:17:34.7165 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.

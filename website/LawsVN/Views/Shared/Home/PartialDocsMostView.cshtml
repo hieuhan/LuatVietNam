@@ -1,0 +1,21 @@
+﻿@using LawsVN.Library
+@model List<ICSoft.CMSViewLib.DocsView>
+@if (Model.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h4><span class="title-widget">Văn bản xem nhiều</span></h4>
+        </div>
+        <div class="widget-container">
+            @foreach (var docView in Model)
+            {
+                <div class="recent-post">
+                    <span class="icon-new-2"></span>
+                    <div class="post-conten news">
+                        <a href="@docView.GetDocUrl()" title="@docView.H1Tag.TrimmedOrDefault(docView.DocName)" class="post-title-widget" style="line-height: 20px;">@docView.H1Tag.TrimmedOrDefault(docView.DocName)</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

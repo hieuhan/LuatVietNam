@@ -1,0 +1,41 @@
+﻿@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.Account.BankPaymentModel
+@using (Ajax.BeginForm("PaymentServiceUsingBankAccountZalo", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    ,OnSuccess = "lawsVn.ajaxEvents.PaymentServiceUsingBankAccountOnSuccess"
+}, new { id = "BankPaymentForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ServiceId)
+    @Html.HiddenFor(m => m.ServiceName)
+    @Html.HiddenFor(m => m.ServicePackageId)
+    @Html.HiddenFor(m => m.ServicePackageName)
+    @Html.HiddenFor(m => m.Total)
+    @Html.HiddenFor(m => m.Price)
+    @Html.HiddenFor(m => m.TransactionTypeId)
+    @Html.HiddenFor(m => m.CompanyName)
+    @Html.HiddenFor(m => m.CompanyAddress)
+    @Html.HiddenFor(m => m.CompanyTaxCode)
+    @Html.HiddenFor(m => m.InternalContent)
+    <div class="step-content">
+        <div class="rows item8">
+            <div class="pure-checkbox">
+                @Html.CheckBoxFor(m => m.TermsAndConditions)
+                <label for="TermsAndConditions">@Resource.IAgree <a href="#" class="TermsConditionsView" style="color: #a67942; font-weight: bold;">@Resource.TermsConditions</a></label>
+                <br />@Html.ValidationMessageFor(m => m.TermsAndConditions, "", new { @class = "text-danger" })
+                <div class="rows item8">
+                    @Html.CheckBoxFor(m => m.TaxInvoice)
+                    <label for="TaxInvoice">@Resource.VAT</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="rows btn">
+            <a href="#" class="btn-pay btn-xacnhan"  style="background: #a67942">@Resource.Pay </a>
+            <a href="#" class="btn-pay back-step" style="margin-right: 20px; background: #dddddd; color: #222;">@Resource.Back</a>
+        </div>
+    </div>
+}

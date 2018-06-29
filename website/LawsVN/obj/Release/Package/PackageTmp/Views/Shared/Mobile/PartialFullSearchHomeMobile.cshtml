@@ -1,0 +1,13 @@
+﻿@using LawsVN.App_GlobalResources
+@model LawsVN.Models.Docs.PartialDocSearchModel
+<div class="box-search">
+    <div class="search-input">
+        @using (Html.BeginForm("DocSearch", "Home", FormMethod.Get))
+        {
+            @Html.TextBoxFor(s => s.Keywords, new {@class = "search-q", placeholder = Resource.EnterWhatToFind, autocomplete = "off"})
+            @Html.ValidationMessageFor(m => m.Keywords, "", new {@class = "text-danger"})
+            @Html.HiddenFor(m => m.LanguageId)
+            <button class="btn-isearch"></button>
+        }
+    </div>
+</div>

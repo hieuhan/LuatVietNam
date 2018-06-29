@@ -1,0 +1,137 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.AccountProfileModel
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a> »
+    <span class="breadcrumb-item color1">@Resource.AccountInformation</span>
+</div>
+<div class="box-section">
+    <div class="title">
+        <h2 class="title-cat">@Resource.AccountInformation</h2>
+        @*<div class="btn-more">
+        <ul class="usernav">
+            <li class="button-dropdown">
+                <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/mobile/images/more-nv.png")"></a>
+                <ul class="dropdown-menu" style="right: 0px; width: 160px; margin-top: 3px; display: none;">
+                    <li class="item-more">
+                        <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="item-more-2 boder"> Thông tin tài khoản</a>
+                    </li>
+                    <li class="item-more">
+                        <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Lịch sử giao dịch</a>
+                    </li>
+                    <li class="item-more">
+                        <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Văn bản của tôi</a>
+                    </li>
+                    <li class="item-more">
+                        <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Thông báo hiệu lực</a>
+                    </li>
+                    <li class="item-more">
+                        <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Tin nhắn</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>*@
+    </div>
+    <div class="cat-box-content">
+
+        <div class="boxthongtintk">
+            <div class="title2">
+                <div class="title-cat-account vien">
+                    <span style="float: left;">@Resource.PersonalInformation</span>
+                    <a href="@(CmsConstants.ROOT_PATH)user/chinh-sua-thong-tin-tai-khoan.html" class="edit-user2"><img src="@Url.Content("~/assets/mobile/images/cap-nhat.png")" /> Chỉnh sửa</a>
+                </div>
+            </div>
+            <div class="content-thongtintk">
+                <div class="rows1 ava">
+                    <div class="text-avata-left">
+                        <p><strong>@Resource.FirstAndLastName: </strong>@Model.mCustomersViewDetail.mCustomers.CustomerFullName.TrimmedOrDefault(string.Empty)</p>
+                        <p><strong>@Resource.AccountName: </strong>@Model.mCustomersViewDetail.mCustomers.CustomerName</p>
+                        <p><strong>@Resource.DateOfBirth: </strong>@Model.mCustomersViewDetail.mCustomers.DateOfBirth.toString()</p>
+                        <p><strong>@Resource.Sex: </strong>@(Model.mCustomersViewDetail.mCustomers.GenderId == 1 ? Resource.Male : (Model.mCustomersViewDetail.mCustomers.GenderId == 2 ? Resource.Female : "Chưa chọn"))</p>
+                        
+                    </div>
+                    <div class="avata-mobi">
+                        <a href="#" class="thumb-3x4"><img alt="Hình đại diện" src="@LawsUser.GetAvatarMobile()" /></a>
+                    </div>
+                </div>
+                <div class="rows1 ava">
+                    <p><strong>@Resource.Address: </strong> @Model.mCustomersViewDetail.mCustomers.Address.TrimmedOrDefault(string.Empty)</p>
+                    <p><strong>@Resource.PhoneNumber: </strong>@Model.mCustomersViewDetail.mCustomers.CustomerMobile.TrimmedOrDefault(string.Empty)</p>
+                    <p><strong>Email: </strong>@Model.mCustomersViewDetail.mCustomers.CustomerMail</p>
+                    <p><strong>@Resource.ProvinceCity: </strong>@Model.ProvinceDesc.TrimmedOrDefault(string.Empty)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="boxthongtintk">
+            <div class="title2">
+                <div class="title-cat-account" style="font-size: 13px; text-transform: none;">
+                    @Resource.FieldOfInterestDocument <span style="color: #BD0306; font-weight: normal">(*)</span>
+                    <a href="#" class="edit-user2" data-toggle-target="#UpdateCustomerFields"><img src="@Url.Content("~/assets/images/cap-nhat.png")" /> Chỉnh sửa</a>
+                </div>
+            </div>
+            <div class="content-thongtintk">
+                <div class="scrol-box">
+                    <ul>
+                        @foreach (var item in Model.mCustomersViewDetail.ListCustomerFieldsView)
+                        {
+                            <li class="item-other"><i class="fa-delete xoa-linh-vuc" data-id="@item.CustomerFieldId"></i>@item.FieldDesc</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="boxthongtintk">
+            <div class="title2">
+                <div class="title-cat-account vien">
+                    <span style="float: left;">@Resource.BusinessInformation</span>
+                    <a href="@(CmsConstants.ROOT_PATH)user/cap-nhat-thong-tin-doanh-nghiep.html" class="edit-user2"><img src="@Url.Content("~/assets/mobile/images/cap-nhat.png")" /> Chỉnh sửa</a>
+                </div>
+            </div>
+            <div class="content-thongtintk">
+                <div class="thongtin-doanhnghiep">
+                    <p><strong>Tên đơn vị: </strong>@Model.mCustomersViewDetail.mCustomers.OrganName.TrimmedOrDefault(string.Empty)</p>
+                    <p><strong>@Resource.AccountNumber: </strong>@Model.mCustomersViewDetail.mCustomers.AccountNumber.TrimmedOrDefault(string.Empty)</p>
+                    <p><strong>@Resource.Address: </strong>@Model.mCustomersViewDetail.mCustomers.OrganAddress.TrimmedOrDefault(string.Empty)</p>
+                    <p><strong>@Resource.Phone: </strong>@Model.mCustomersViewDetail.mCustomers.OrganPhone.TrimmedOrDefault(string.Empty)</p>
+                    <p><strong>@Resource.TaxCode: </strong>@Model.mCustomersViewDetail.mCustomers.OrganTaxCode.TrimmedOrDefault(string.Empty)</p>
+                </div>
+            </div>
+        </div>
+        <div class="boxthongtintk">
+            <div class="title2">
+                <div class="title-cat-account vien">
+                    Thống kê hoạt động
+                </div>
+            </div>
+            <div class="content-thongtintk">
+                <div class="thongtin-doanhnghiep">
+                    <p> <strong>Thành viên: </strong>@Model.mCustomersViewDetail.mCustomers.CustomerName</p>
+                    <p> <strong>@Resource.UsingTheService: </strong>
+                    @if (Model.mCustomersViewDetail.mCustomerServicesView.ServiceId > 0)
+                    {
+                        @Model.mCustomersViewDetail.mCustomerServicesView.ServiceDesc
+                        <span>@string.Format("(HSD: {0})", Model.EndTime.toString())</span>
+                    }
+                    else
+                    {
+                        <span>Quý khách chưa đăng ký sử dụng dịch vụ.</span>
+                    }</p>
+                    <p> Văn bản quan tâm: <strong class="color1">(@(Model.CountVbpl + Model.CountVbhn + Model.CountTcvn))</strong></p>
+                    <p> Văn bản luật <strong class="color1">(@Model.CountVbpl)</strong></p>
+                    <p> Văn bản hợp nhất <strong class="color1">(@Model.CountVbhn)</strong> </p>
+                    <p> Tiêu chuẩn việt nam <strong class="color1">(@Model.CountTcvn)</strong> </p>
+                    <p><strong>Ngày tham gia: </strong>@Model.mCustomersViewDetail.mCustomers.CrDateTime.toString()</p>
+                    <p><strong>Lần đăng nhập gần nhất: </strong>@Model.mCustomersViewDetail.mCustomerAccessLogs.CrDateTime.ToString("HH:mm dd/MM/yyyy")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{Html.RenderAction("PartialUpdateCustomerField", "Shared");}

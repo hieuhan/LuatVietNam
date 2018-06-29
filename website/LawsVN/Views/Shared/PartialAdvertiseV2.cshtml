@@ -1,0 +1,25 @@
+﻿@model int
+@{
+    List<string> l_Adv = LawsVN.Library.Extensions.AdvDataLoadFromFileToList(1);
+    for (int index = 0; index < l_Adv.Count; index++)
+    {
+        string m_AdvData = l_Adv[index];
+        if (m_AdvData.Contains("advsite_" + Model.ToString()))
+        {
+            if (m_AdvData.Contains("'"))
+            {
+                m_AdvData = m_AdvData.Substring(m_AdvData.IndexOf("'") + 1);
+            }
+            if (m_AdvData.Contains("'"))
+            {
+                m_AdvData = m_AdvData.Substring(0, m_AdvData.LastIndexOf("'"));
+            }
+            <script type="text/javascript">
+                document.write('@m_AdvData');
+            </script>
+            break;
+        }
+    }
+}
+
+

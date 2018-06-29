@@ -1,0 +1,113 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Docs
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model DocsViewDetailModel
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item">@Resource.HomePage </a>
+    @if (Model.mDocsViewDetail.lFieldDisplays.HasValue())
+    {
+        <span>» </span>
+        for (int index = 0; index < Model.mDocsViewDetail.lFieldDisplays.Count; index++)
+        {
+            FieldDisplays mFieldDisplays = Model.mDocsViewDetail.lFieldDisplays[index];
+            if (index == 0)
+            {
+                <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item color1">@mFieldDisplays.FieldName</a>
+            }
+            else
+            {
+                <span>, </span>
+                <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item color1">@mFieldDisplays.FieldName</a>
+            }
+        }
+    }
+
+</div>
+<article class="post-single">
+    <h1 class="post-title-single">@Model.mDocsViewDetail.mDocsView.DocName</h1>
+    <div class="tab-page">
+        @if (Model.mDocsViewDetail.lDocIndexes.HasValue())
+        {
+            <div class="mucluc">
+                <button data-toggle-target="#DocIndexes" class="btn-nav-mucluc">
+                    <img src="@Url.Content("~/assets/mobile/images/ic_list_24px-black.png")"></button>
+                @{Html.RenderPartial("~/Views/Shared/Mobile/PartialDocIndexes.cshtml", Model.mDocsViewDetail);}
+            </div>
+        }
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()" title="@Resource.Properties">@Resource.Properties</a>
+        <a class="tab-page-item active" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("noidung")" title="@Resource.Content">@Resource.Content</a>
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("lienquan")" title="@Resource.Relate">@Resource.Relate</a>
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("hieuluc")" title="@Resource.Effect">@Resource.Effect</a>
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("luocdo")" title="@Resource.Diagram">@Resource.Diagram</a>
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("taive")" title="@Resource.DownLoad">@Resource.DownLoad</a>
+        @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocContent))
+        {
+            <div class="fontsize">
+                <a href="javascript:lawsVn.FontZoom(-1)">
+                    <img src="@Url.Content("~/assets/mobile/images/A-.png")"/></a>
+                <a href="javascript:lawsVn.FontZoom(1)">
+                    <img src="@Url.Content("~/assets/mobile/images/A.png")"/></a>
+            </div>
+        }
+    </div>
+    @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocContent))
+    {
+        <div class="boxboder">
+            @*<div class="left-zom vb">
+                <a href="javascript:lawsVn.FontZoom(-1)"><img src="@Url.Content("~/assets/mobile/images/A-.png")"></a>
+                <a href="javascript:lawsVn.FontZoom(1)"> <img src="@Url.Content("~/assets/mobile/images/A.png")"></a>
+            </div>*@
+            <div class="entry doc-content" id="docPrint">
+                @Html.Raw(Model.mDocsViewDetail.mDocsView.DocContent)
+            </div>
+        </div>
+    }
+    else
+    {
+        DocFiles mDocFiles = Model.mDocsViewDetail.lDocFiles.FirstOrDefault(i => i.FilePath.Contains(".pdf") && i.LanguageId == 1);
+        if (mDocFiles == null || mDocFiles.FilePath == "")
+        {
+        <div class="thong-bao-22">
+            <div class="thongbao-item2">
+                <em>Nội dung văn bản đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+            </div>
+        </div>
+        }
+        else
+        {                   
+        <div class="thong-bao-22">
+            <div class="thongbao-item2">
+                <em>Văn bản đã có file download, <a class="color2" href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">click vào đây</a> để tải file</em>
+            </div>
+        </div>
+        }
+    }
+
+</article>
+
+@{Html.RenderAction("PartialDocOthersMobile", "Shared", new { model = new DocOthersModel { ListDocsView = Model.mDocsViewDetail.lDocOthers } });}
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.mDocsViewDetail.mDocsView.DocId',
+                name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+                title: '@Model.mDocsViewDetail.mDocsView.DocName',
+                summary: '',
+                datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+                url: '@Model.mDocsViewDetail.mDocsView.DocUrl',
+                effect: '@Model.mDocsViewDetail.mDocsView.EffectStatusName',
+                image: '@Constants.NoImageUrl'
+            }
+        });
+    </script>
+}

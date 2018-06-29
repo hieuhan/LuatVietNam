@@ -1,0 +1,11 @@
+2018-04-24 14:44:05.6495 ERROR Path '/Views/News/ArticlesCategory.cshtml' was not found.
+2018-04-24 14:50:31.3782 ERROR Path '/Views/Shared/PartialPaginationAjax2.cshtml' was not found.
+2018-04-24 15:18:54.2715 ERROR Path '/Views/Shared/PartialPaginationAjax4.cshtml' was not found.
+2018-04-24 15:45:20.4017 ERROR Path '/Views/Shared/PartialPaginationAjax2.cshtml' was not found.
+2018-04-24 15:57:35.3552 ERROR Path '/Views/Docs/ListDocs.cshtml' was not found.
+2018-04-24 17:27:02.1264 ERROR Path '/Views/Docs/ListByField.Mobile.cshtml' was not found.
+2018-04-24 17:32:56.8755 ERROR Path '/Views/DocsCongVan/Index.Mobile.cshtml' was not found.
+2018-04-24 17:36:28.0917 ERROR Path '/Views/DocsUBND/Index.Mobile.cshtml' was not found.
+2018-04-24 17:44:35.8492 ERROR Path '/Views/TCVN/Index.Mobile.cshtml' was not found.
+2018-04-24 17:47:38.3324 ERROR Path '/Views/Docs/ListDocsEffects.Mobile.cshtml' was not found.
+2018-04-24 21:55:40.1059 ERROR Path '/Views/Shared/PartialPaginationAjax4.cshtml' was not found.

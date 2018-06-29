@@ -1,0 +1,49 @@
+﻿@using LawsVN.Library
+@using ICSoft.CMSViewLib
+@using LawsVN.App_GlobalResources
+@model LawsVN.Models.Docs.CongVanModel
+@if(Model!=null)
+{
+    if(Model.ListCongVanThueMoi.HasValue())
+    {
+        <div class="widget">
+            <div class="widget-top">
+                <h4><span class="title-widget">Công văn thuế mới</span></h4>
+            </div>
+            <div class="widget-container">
+                @foreach (DocsView mDocsView in Model.ListCongVanThueMoi)
+                {
+                    <div class="recent-post-linhvuc">
+                        <span class="icon-new-2"></span>
+                        <div class="post-conten news">
+                            <a href="@mDocsView.GetDocUrl()" title="@mDocsView.DocName" class="post-title-widget">
+                                @mDocsView.H1Tag.TrimmedOrDefault(mDocsView.DocName)
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    if (Model.ListCongVanHaiQuanMoi.HasValue())
+    {
+        <div class="widget">
+            <div class="widget-top">
+                <h4><span class="title-widget">Công văn hải quan mới</span></h4>
+            </div>
+            <div class="widget-container">
+                @foreach (DocsView mDocsView in Model.ListCongVanHaiQuanMoi)
+                {
+                    <div class="recent-post-linhvuc">
+                        <span class="icon-new-2"></span>
+                        <div class="post-conten news">
+                            <a href="@mDocsView.GetDocUrl()" title="@mDocsView.DocName" class="post-title-widget">
+                                @mDocsView.H1Tag.TrimmedOrDefault(mDocsView.DocName)
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+}

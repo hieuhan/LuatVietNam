@@ -1,0 +1,21 @@
+﻿@using LawsVN.Library
+@using ICSoft.CMSViewLib
+@model List<DocsView>
+@if (Model.HasValue())
+{
+<div class="sl-section fixborder">
+    <div class="title2">
+        <h2 class="title-cat2 vien">Văn bản mới</h2>
+    </div>
+    <div class="cat-box-content">
+        @foreach (var docView in Model)
+        {
+            <div class="first-news dashed fixmarginbottom">
+                <div class="sapo">
+                    <h3 class="post-title"><a href="@docView.GetDocUrl()" title="@docView.DocName.StripTags()">@docView.H1Tag.TrimmedOrDefault(docView.DocName)</a></h3>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+}

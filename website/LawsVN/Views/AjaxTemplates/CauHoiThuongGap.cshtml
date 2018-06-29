@@ -1,0 +1,32 @@
+﻿@using ICSoft.CMSViewLib
+@using ICSoft.CMSLib
+@using LawsVN.Models
+@using LawsVN.Library
+@model NewsViewModel
+
+@for (int i = 0; i < Model.ListArticlesView.Count; i++)
+{
+    ArticlesView mArticlesView = Model.ListArticlesView[i];
+    string imgUrl = string.IsNullOrEmpty(mArticlesView.GetImageUrl_Mobile()) ? Constants.NoImageUrl : mArticlesView.GetImageUrl_Mobile();
+     <div class="tab-conten-hd1">
+                        <div id="cssmenu">
+                            <ul>
+                                <li class="has-sub">
+                                    <a href="javascript:void(0)" id="article@(i+1)" class="title-blt">
+                                        @(i + 1). @mArticlesView.Title
+                                        <span class="xem_them_loto"></span>
+                                    </a>
+                                    <ul style="display: @(i == 0 ? "block" : "none");">
+                                        <div class="content-huong-dan">
+                                            @Html.Raw(mArticlesView.ArticleContent)
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                                                          
+}
+ <!--Bengin pagination -->
+@{Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.mPartialPaginationAjax });}
+<!--End pagination -->

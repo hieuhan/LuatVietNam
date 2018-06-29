@@ -1,0 +1,23 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@model LawsVN.Models.Templates.DocsNewest
+@if (Model.ListDocsView.HasValue())
+{
+    for (int index = 0; index < Model.ListDocsView.Count; index++)
+    {
+        DocsView mDocsView = Model.ListDocsView[index];
+        <div class="first-news @(index == Model.ListDocsView.Count -1 ? "last" : "dashed")">
+            <h3 class=" post-title">
+            <a href="@(mDocsView.LanguageId == LawsVnLanguages.AvailableLanguages[1].LanguageId ? mDocsView.GetDocUrl("tienganh") : mDocsView.GetDocUrl())">@mDocsView.DocName</a></h3>
+            @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView } });}
+        </div>
+    }
+}
+else
+{
+    <div class="first-news dashed">
+        <h3 class="post-title">@Resource.UpdatingData</h3>
+    </div>
+}

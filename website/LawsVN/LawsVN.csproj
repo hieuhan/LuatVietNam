@@ -1,0 +1,1879 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{493D3BF8-F3A4-46C4-9D94-65E192E81613}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LawsVN</RootNamespace>
+    <AssemblyName>LawsVN</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>
+    </IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>D:\Solution\2017\LuatVietNamV2\Dll\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.CMSLib">
+      <HintPath>DLL\ICSoft.CMSLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSoft.CMSLibEstate, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\ICSoft.CMSLibEstate.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.CMSViewLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\ICSoft.CMSViewLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.HelperLib">
+      <HintPath>DLL\ICSoft.HelperLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.LawDocsLib, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Solution\2017\LuatVietNamV2\DLL\ICSoft.LawDocsLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.PartnerLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\LawsVNEN\DLL\ICSoft.PartnerLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LibDatabase">
+      <HintPath>DLL\LibDatabase.dll</HintPath>
+    </Reference>
+    <Reference Include="LibUtils">
+      <HintPath>DLL\LibUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.11\lib\net40\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.0.3.12153\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppCode\AjaxResult.cs" />
+    <Compile Include="AppCode\Attribute\FileTypeAttribute.cs" />
+    <Compile Include="AppCode\Attribute\IsDateTimeFormatValidation.cs" />
+    <Compile Include="AppCode\Attribute\LawsVnAuthorize.cs" />
+    <Compile Include="AppCode\Attribute\MaxFileSizeAttribute.cs" />
+    <Compile Include="AppCode\Attribute\MultiCheckBoxRequiredAttribute.cs" />
+    <Compile Include="AppCode\Attribute\MustBeTrueAttribute.cs" />
+    <Compile Include="AppCode\Attribute\SEOAction.cs" />
+    <Compile Include="AppCode\Attribute\ValidateAgeAttribute.cs" />
+    <Compile Include="AppCode\CacheHelpers.cs" />
+    <Compile Include="AppCode\Constants.cs" />
+    <Compile Include="AppCode\Attribute\LawsVnHandleErrorAttribute.cs" />
+    <Compile Include="AppCode\DropDownListHelpers.cs" />
+    <Compile Include="AppCode\Extensions.cs" />
+    <Compile Include="AppCode\LawsVnLanguages.cs" />
+    <Compile Include="AppCode\Pagination.cs" />
+    <Compile Include="AppCode\Sercurity\LawsVnUserViewPage.cs" />
+    <Compile Include="AppCode\Sercurity\LawsVnPrincipal.cs" />
+    <Compile Include="App_GlobalResources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_GlobalResources\Resource.en.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.en.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\DocsConsolidationController.cs" />
+    <Compile Include="Controllers\DocsCongVanController.cs" />
+    <Compile Include="Controllers\DocsController.cs" />
+    <Compile Include="Controllers\DocsUBNDController.cs" />
+    <Compile Include="Controllers\Redirect.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FeedbacksController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LawersController.cs" />
+    <Compile Include="Controllers\NewsController.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controllers\PayController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Controllers\SitemapController.cs" />
+    <Compile Include="Controllers\TCVNController.cs" />
+    <Compile Include="Controllers\TNPLController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Account\AccountProfileModel.cs" />
+    <Compile Include="Models\Account\HistoryTransactionsModel.cs" />
+    <Compile Include="Models\Account\LoginModel.cs" />
+    <Compile Include="Models\Account\MyDocuments.cs" />
+    <Compile Include="Models\Account\MyMessagesModel.cs" />
+    <Compile Include="Models\Account\NoticeOfValidityModel.cs" />
+    <Compile Include="Models\Account\RegisterModel.cs" />
+    <Compile Include="Models\Account\TaxInvoiceModel.cs" />
+    <Compile Include="Models\Account\WidgetUserModel.cs" />
+    <Compile Include="Models\ArticleViewDetailModel.cs" />
+    <Compile Include="Models\CusomersInterfaceModel.cs" />
+    <Compile Include="Models\CustomerDetailViewModel.cs" />
+    <Compile Include="Models\CustomerDocsViewModel.cs" />
+    <Compile Include="Models\CustomerInterFaceFieldsModel.cs" />
+    <Compile Include="Models\DocsConsolidationViewGetRelatesModel.cs" />
+    <Compile Include="Models\DocsUBNDViewModel.cs" />
+    <Compile Include="Models\Docs\CongVanModel.cs" />
+    <Compile Include="Models\Docs\DocFieldModel.cs" />
+    <Compile Include="Models\DocsConsolidationViewModel.cs" />
+    <Compile Include="Models\Docs\DocOthersModel.cs" />
+    <Compile Include="Models\Docs\DocPropertiesModel.cs" />
+    <Compile Include="Models\Docs\DocSearchModel.cs" />
+    <Compile Include="Models\Docs\DocsModel.cs" />
+    <Compile Include="Models\DocsSearchModel.cs" />
+    <Compile Include="Models\Docs\DocsViewDetailModel.cs" />
+    <Compile Include="Models\Docs\PartialDocSearchModel.cs" />
+    <Compile Include="Models\Docs\PartialFullSearchDetailModel.cs" />
+    <Compile Include="Models\Docs\TCVNDocDetailModel.cs" />
+    <Compile Include="Models\DocUBNDEfecStatus.cs" />
+    <Compile Include="Models\FeedbacksViewModel.cs" />
+    <Compile Include="Models\FooterModel.cs" />
+    <Compile Include="Models\HeaderMobileModel.cs" />
+    <Compile Include="Models\HeaderModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\LawerQuestionModel.cs" />
+    <Compile Include="Models\LawerViewDetailModel.cs" />
+    <Compile Include="Models\LawerViewModel.cs" />
+    <Compile Include="Models\NewsletterEmailsModel.cs" />
+    <Compile Include="Models\NewsViewModel.cs" />
+    <Compile Include="Models\PartialLinkDocumentAttributeModel.cs" />
+    <Compile Include="Models\PartialModel.cs" />
+    <Compile Include="Models\PartialPagination.cs" />
+    <Compile Include="Models\PaymentTransactionsViewModel.cs" />
+    <Compile Include="Models\RenewalServicesModel.cs" />
+    <Compile Include="Models\SearchModel.cs" />
+    <Compile Include="Models\ServiceModel.cs" />
+    <Compile Include="Models\ServicesViewModel.cs" />
+    <Compile Include="Models\Shared\PartialFieldOfSearchModel.cs" />
+    <Compile Include="Models\Sitemap\SitemapModel.cs" />
+    <Compile Include="Models\TCVNViewModel.cs" />
+    <Compile Include="Models\Templates\DocsNewest.cs" />
+    <Compile Include="Models\TNPLViewModel.cs" />
+    <Compile Include="Models\UBNDDocsDetailModel.cs" />
+    <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\FileUploadService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Css\jquery-ui.css" />
+    <Content Include="Assets\Css\stylesAll.min.css" />
+    <Content Include="Assets\Images\07_03.png" />
+    <Content Include="Assets\Images\07_05.png" />
+    <Content Include="Assets\Images\404.png" />
+    <Content Include="Assets\Images\AMP\300x250.jpg" />
+    <Content Include="Assets\Images\AMP\backtop.png" />
+    <Content Include="Assets\Images\AMP\chon-ngay.png" />
+    <Content Include="Assets\Images\AMP\close.png" />
+    <Content Include="Assets\Images\AMP\demo.jpg" />
+    <Content Include="Assets\Images\AMP\fa-search1.png" />
+    <Content Include="Assets\Images\AMP\famail-1.png" />
+    <Content Include="Assets\Images\AMP\favicon.ico" />
+    <Content Include="Assets\Images\AMP\Group-12.png" />
+    <Content Include="Assets\Images\AMP\Group-4.png" />
+    <Content Include="Assets\Images\AMP\Group-5.png" />
+    <Content Include="Assets\Images\AMP\Group-6.png" />
+    <Content Include="Assets\Images\AMP\Group-7.png" />
+    <Content Include="Assets\Images\AMP\icon-sms.png" />
+    <Content Include="Assets\Images\AMP\ic_find_in_page_24px.png" />
+    <Content Include="Assets\Images\AMP\ic_help_24px.png" />
+    <Content Include="Assets\Images\AMP\ic_home_24px.png" />
+    <Content Include="Assets\Images\AMP\ic_library_books_24px.png" />
+    <Content Include="Assets\Images\AMP\ic_local_phone_24px.png" />
+    <Content Include="Assets\Images\AMP\ic_perm_phone_msg_24px.png" />
+    <Content Include="Assets\Images\AMP\ic_phone_android_24px.png" />
+    <Content Include="Assets\Images\AMP\logo.png" />
+    <Content Include="Assets\Images\AMP\more-nv.png" />
+    <Content Include="Assets\Images\AMP\mo_rong.png" />
+    <Content Include="Assets\Images\AMP\mt.png" />
+    <Content Include="Assets\Images\AMP\mtdp.png" />
+    <Content Include="Assets\Images\AMP\pen.png" />
+    <Content Include="Assets\Images\AMP\quangcao2.png" />
+    <Content Include="Assets\Images\AMP\search.png" />
+    <Content Include="Assets\Images\AMP\xem-tiep2.png" />
+    <Content Include="Assets\Images\arrow.png" />
+    <Content Include="Assets\Images\bantin1.png" />
+    <Content Include="Assets\Images\bantin2.png" />
+    <Content Include="Assets\Images\bantin3.png" />
+    <Content Include="Assets\Images\bantin4.png" />
+    <Content Include="Assets\Images\btn-dang-ky-slider.png" />
+    <Content Include="Assets\Images\btn-vao-giao-dien-cn.png" />
+    <Content Include="Assets\Images\ca-nhan.png" />
+    <Content Include="Assets\Images\chuyendoi.png" />
+    <Content Include="Assets\Images\dich-vu-ct2.png" />
+    <Content Include="Assets\Images\dichvu-ct1.png" />
+    <Content Include="Assets\Images\doc-summary.png" />
+    <Content Include="Assets\Images\fa-about2.png" />
+    <Content Include="Assets\Images\fa-about3.png" />
+    <Content Include="Assets\Images\giahan.png" />
+    <Content Include="Assets\Images\giao-dien-ca-nhan2.png" />
+    <Content Include="Assets\Images\gop-y-g.png" />
+    <Content Include="Assets\Images\Go_up_1.png" />
+    <Content Include="Assets\Images\Go_up_2.png" />
+    <Content Include="Assets\Images\home.png" />
+    <Content Include="Assets\Images\homepage.png" />
+    <Content Include="Assets\Images\icon-down.png" />
+    <Content Include="Assets\Images\icon-luat.png" />
+    <Content Include="Assets\Images\icon-nop-phi.png" />
+    <Content Include="Assets\Images\icon-sider-1.png" />
+    <Content Include="Assets\Images\icon-sider-2.png" />
+    <Content Include="Assets\Images\icon-tieu-diem-hover.png" />
+    <Content Include="Assets\Images\icon-tieu-diem.png" />
+    <Content Include="Assets\Images\icon-tin-lien-quan.png" />
+    <Content Include="Assets\Images\icondown.png" />
+    <Content Include="Assets\Images\ic_list_24px-black.png" />
+    <Content Include="Assets\Images\ic_more_vert_24px.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\Images\lockq.png" />
+    <Content Include="Assets\Images\logo-myluatvietnam-old.png" />
+    <Content Include="Assets\Images\logo1.png" />
+    <Content Include="Assets\Images\more-link-fa.png" />
+    <Content Include="Assets\Images\more-nv.png" />
+    <Content Include="Assets\Images\mtdp3.png" />
+    <Content Include="Assets\Images\MyLuatChuyenDoi.png" />
+    <Content Include="Assets\Images\MyLuatHome.png" />
+    <Content Include="Assets\Images\old-version.png" />
+    <Content Include="Assets\Images\pdf-summary.png" />
+    <Content Include="Assets\Images\print.png" />
+    <Content Include="Assets\Images\tai-sao-chon-luatvn-xuan2018.png" />
+    <Content Include="Assets\Images\van-ban-lien-quan.png" />
+    <Content Include="Assets\Mobile\Css\Custom.css" />
+    <Content Include="Assets\Mobile\Css\jquery-ui.css" />
+    <Content Include="Assets\Mobile\Css\style.css" />
+    <Content Include="Assets\Mobile\Images\.DOC.png" />
+    <Content Include="Assets\Mobile\Images\.PDF.png" />
+    <Content Include="Assets\Mobile\Images\1.png" />
+    <Content Include="Assets\Mobile\Images\150x180.png" />
+    <Content Include="Assets\Mobile\Images\2.png" />
+    <Content Include="Assets\Mobile\Images\3.png" />
+    <Content Include="Assets\Mobile\Images\404.png" />
+    <Content Include="Assets\Mobile\Images\4042.png" />
+    <Content Include="Assets\Mobile\Images\61-User-guide_download.png" />
+    <Content Include="Assets\Mobile\Images\A+.png" />
+    <Content Include="Assets\Mobile\Images\A-.png" />
+    <Content Include="Assets\Mobile\Images\A.png" />
+    <Content Include="Assets\Mobile\Images\a1.png" />
+    <Content Include="Assets\Mobile\Images\a11.png" />
+    <Content Include="Assets\Mobile\Images\a2.png" />
+    <Content Include="Assets\Mobile\Images\a22.png" />
+    <Content Include="Assets\Mobile\Images\abc.png" />
+    <Content Include="Assets\Mobile\Images\alo.png" />
+    <Content Include="Assets\Mobile\Images\an-dmuc.png" />
+    <Content Include="Assets\Mobile\Images\avata-ad1.png" />
+    <Content Include="Assets\Mobile\Images\avata-ad2.png" />
+    <Content Include="Assets\Mobile\Images\avata-luatsu.png" />
+    <Content Include="Assets\Mobile\Images\avata.png" />
+    <Content Include="Assets\Mobile\Images\b1.png" />
+    <Content Include="Assets\Mobile\Images\b2.png" />
+    <Content Include="Assets\Mobile\Images\backtotop.png" />
+    <Content Include="Assets\Mobile\Images\backtotop2.png" />
+    <Content Include="Assets\Mobile\Images\ban-tin.png" />
+    <Content Include="Assets\Mobile\Images\bando.png" />
+    <Content Include="Assets\Mobile\Images\banner-hoi-dap.png" />
+    <Content Include="Assets\Mobile\Images\banner-hoi-dap2.png" />
+    <Content Include="Assets\Mobile\Images\banner-huongdan.png" />
+    <Content Include="Assets\Mobile\Images\banner-luat.png" />
+    <Content Include="Assets\Mobile\Images\banner-qc.png" />
+    <Content Include="Assets\Mobile\Images\banner-tk.png" />
+    <Content Include="Assets\Mobile\Images\banner-vb2.png" />
+    <Content Include="Assets\Mobile\Images\banner-vb3.png" />
+    <Content Include="Assets\Mobile\Images\banner1.png" />
+    <Content Include="Assets\Mobile\Images\banner2.png" />
+    <Content Include="Assets\Mobile\Images\bb.png" />
+    <Content Include="Assets\Mobile\Images\bg-about.jpg" />
+    <Content Include="Assets\Mobile\Images\bg-dmo2.jpg" />
+    <Content Include="Assets\Mobile\Images\bg-myluat.png" />
+    <Content Include="Assets\Mobile\Images\bg-noi-bat.png" />
+    <Content Include="Assets\Mobile\Images\bg-pm.png" />
+    <Content Include="Assets\Mobile\Images\bg-tien-ich.jpg" />
+    <Content Include="Assets\Mobile\Images\bg-tinnhan-en.png" />
+    <Content Include="Assets\Mobile\Images\bg-user.png" />
+    <Content Include="Assets\Mobile\Images\bg-viti.jpg" />
+    <Content Include="Assets\Mobile\Images\bgct.png" />
+    <Content Include="Assets\Mobile\Images\bghopnhat.png" />
+    <Content Include="Assets\Mobile\Images\bgvs.png" />
+    <Content Include="Assets\Mobile\Images\bong-tim-kiem.png" />
+    <Content Include="Assets\Mobile\Images\call.png" />
+    <Content Include="Assets\Mobile\Images\camera-loader.gif" />
+    <Content Include="Assets\Mobile\Images\camera_skins.png" />
+    <Content Include="Assets\Mobile\Images\cap-nhat.png" />
+    <Content Include="Assets\Mobile\Images\cauhoi.png" />
+    <Content Include="Assets\Mobile\Images\cham-ls.png" />
+    <Content Include="Assets\Mobile\Images\Chia sẻ.png" />
+    <Content Include="Assets\Mobile\Images\chia-se2.png" />
+    <Content Include="Assets\Mobile\Images\chinh-sach-vb.png" />
+    <Content Include="Assets\Mobile\Images\chrome.png" />
+    <Content Include="Assets\Mobile\Images\chuthich1.png" />
+    <Content Include="Assets\Mobile\Images\chuthich2.png" />
+    <Content Include="Assets\Mobile\Images\chuthich3.png" />
+    <Content Include="Assets\Mobile\Images\chuthich4.png" />
+    <Content Include="Assets\Mobile\Images\chuyendoi.png" />
+    <Content Include="Assets\Mobile\Images\close.png" />
+    <Content Include="Assets\Mobile\Images\congthuong-en.png" />
+    <Content Include="Assets\Mobile\Images\contac-en.png" />
+    <Content Include="Assets\Mobile\Images\dang-ky-tai-khoan.png" />
+    <Content Include="Assets\Mobile\Images\dang-ky-tai-khoan2.png" />
+    <Content Include="Assets\Mobile\Images\dang-ky-thue-bao.png" />
+    <Content Include="Assets\Mobile\Images\dang-ky-thue-bao2.png" />
+    <Content Include="Assets\Mobile\Images\dang-ky.png" />
+    <Content Include="Assets\Mobile\Images\dang-ky2.png" />
+    <Content Include="Assets\Mobile\Images\dang-nhap.png" />
+    <Content Include="Assets\Mobile\Images\dang-nhap2.png" />
+    <Content Include="Assets\Mobile\Images\dang-xem.png" />
+    <Content Include="Assets\Mobile\Images\dangky-dv.png" />
+    <Content Include="Assets\Mobile\Images\dangky-dv2.png" />
+    <Content Include="Assets\Mobile\Images\dc1.png" />
+    <Content Include="Assets\Mobile\Images\dc2.png" />
+    <Content Include="Assets\Mobile\Images\dc3.png" />
+    <Content Include="Assets\Mobile\Images\demo-huong-dan.png" />
+    <Content Include="Assets\Mobile\Images\demo.jpg" />
+    <Content Include="Assets\Mobile\Images\dk-gdcn.png" />
+    <Content Include="Assets\Mobile\Images\dma.png" />
+    <Content Include="Assets\Mobile\Images\doc.png" />
+    <Content Include="Assets\Mobile\Images\doc1.png" />
+    <Content Include="Assets\Mobile\Images\doc2.png" />
+    <Content Include="Assets\Mobile\Images\doc3.png" />
+    <Content Include="Assets\Mobile\Images\doc4.png" />
+    <Content Include="Assets\Mobile\Images\doi-tac1-hover.png" />
+    <Content Include="Assets\Mobile\Images\doi-tac1.png" />
+    <Content Include="Assets\Mobile\Images\dowload_03.png" />
+    <Content Include="Assets\Mobile\Images\dowload_031.png" />
+    <Content Include="Assets\Mobile\Images\dowload_04.png" />
+    <Content Include="Assets\Mobile\Images\dowload_07.png" />
+    <Content Include="Assets\Mobile\Images\dowload_11.png" />
+    <Content Include="Assets\Mobile\Images\dowload_111.png" />
+    <Content Include="Assets\Mobile\Images\download.png" />
+    <Content Include="Assets\Mobile\Images\dropdown_slice.png" />
+    <Content Include="Assets\Mobile\Images\edit2.png" />
+    <Content Include="Assets\Mobile\Images\Email.png" />
+    <Content Include="Assets\Mobile\Images\email2.png" />
+    <Content Include="Assets\Mobile\Images\emailnew.png" />
+    <Content Include="Assets\Mobile\Images\en.png" />
+    <Content Include="Assets\Mobile\Images\expired.png" />
+    <Content Include="Assets\Mobile\Images\fa-search.png" />
+    <Content Include="Assets\Mobile\Images\fa-search1.png" />
+    <Content Include="Assets\Mobile\Images\fa-vban.png" />
+    <Content Include="Assets\Mobile\Images\face-en.png" />
+    <Content Include="Assets\Mobile\Images\facenew.png" />
+    <Content Include="Assets\Mobile\Images\famail-1.png" />
+    <Content Include="Assets\Mobile\Images\fb.png" />
+    <Content Include="Assets\Mobile\Images\fb1.png" />
+    <Content Include="Assets\Mobile\Images\fb2.png" />
+    <Content Include="Assets\Mobile\Images\firefox.png" />
+    <Content Include="Assets\Mobile\Images\font1.png" />
+    <Content Include="Assets\Mobile\Images\font2.png" />
+    <Content Include="Assets\Mobile\Images\Forget-password_03.png" />
+    <Content Include="Assets\Mobile\Images\G+.png" />
+    <Content Include="Assets\Mobile\Images\gach-chan.png" />
+    <Content Include="Assets\Mobile\Images\gg.png" />
+    <Content Include="Assets\Mobile\Images\gia-han-dv1.png" />
+    <Content Include="Assets\Mobile\Images\gia-han-dv2.png" />
+    <Content Include="Assets\Mobile\Images\gia-han-dv3.png" />
+    <Content Include="Assets\Mobile\Images\gia-han-dv4.png" />
+    <Content Include="Assets\Mobile\Images\gia-han.png" />
+    <Content Include="Assets\Mobile\Images\giahan.png" />
+    <Content Include="Assets\Mobile\Images\gioi-thieu1.png" />
+    <Content Include="Assets\Mobile\Images\gioi-thieu_03-02.png" />
+    <Content Include="Assets\Mobile\Images\gioi-thieu_03-03.png" />
+    <Content Include="Assets\Mobile\Images\gioi-thieu_03.png" />
+    <Content Include="Assets\Mobile\Images\gioi-thieu_13.png" />
+    <Content Include="Assets\Mobile\Images\gioi-thieu_17.png" />
+    <Content Include="Assets\Mobile\Images\gioi-thieu_21.jpg" />
+    <Content Include="Assets\Mobile\Images\gioi-thieu_24.png" />
+    <Content Include="Assets\Mobile\Images\gioi-thieu_27.png" />
+    <Content Include="Assets\Mobile\Images\gioi-thieu_29.png" />
+    <Content Include="Assets\Mobile\Images\gioi-thieu_33.png" />
+    <Content Include="Assets\Mobile\Images\gioithieu2.png" />
+    <Content Include="Assets\Mobile\Images\goi1.png" />
+    <Content Include="Assets\Mobile\Images\goi2.png" />
+    <Content Include="Assets\Mobile\Images\goi3.png" />
+    <Content Include="Assets\Mobile\Images\goi4.png" />
+    <Content Include="Assets\Mobile\Images\google-en.png" />
+    <Content Include="Assets\Mobile\Images\google1.png" />
+    <Content Include="Assets\Mobile\Images\google2.png" />
+    <Content Include="Assets\Mobile\Images\googlenew.png" />
+    <Content Include="Assets\Mobile\Images\gop-y.png" />
+    <Content Include="Assets\Mobile\Images\gopy.png" />
+    <Content Include="Assets\Mobile\Images\Group 12.png" />
+    <Content Include="Assets\Mobile\Images\Group 15.png" />
+    <Content Include="Assets\Mobile\Images\Group 16.png" />
+    <Content Include="Assets\Mobile\Images\Group 3.png" />
+    <Content Include="Assets\Mobile\Images\Group 35.png" />
+    <Content Include="Assets\Mobile\Images\Group 4.png" />
+    <Content Include="Assets\Mobile\Images\Group 46.png" />
+    <Content Include="Assets\Mobile\Images\Group 5.png" />
+    <Content Include="Assets\Mobile\Images\Group 6.png" />
+    <Content Include="Assets\Mobile\Images\Group 7.png" />
+    <Content Include="Assets\Mobile\Images\Group-12.png" />
+    <Content Include="Assets\Mobile\Images\Group-35.png" />
+    <Content Include="Assets\Mobile\Images\Group-4.png" />
+    <Content Include="Assets\Mobile\Images\Group-5.png" />
+    <Content Include="Assets\Mobile\Images\Group-6.png" />
+    <Content Include="Assets\Mobile\Images\Group-7.png" />
+    <Content Include="Assets\Mobile\Images\gui-cau-hoi.png" />
+    <Content Include="Assets\Mobile\Images\góp ý.png" />
+    <Content Include="Assets\Mobile\Images\hieuluc1.png" />
+    <Content Include="Assets\Mobile\Images\hieuluc2.png" />
+    <Content Include="Assets\Mobile\Images\ho-tro-online.png" />
+    <Content Include="Assets\Mobile\Images\ho-tro.png" />
+    <Content Include="Assets\Mobile\Images\ho-tro2.png" />
+    <Content Include="Assets\Mobile\Images\hoavan.png" />
+    <Content Include="Assets\Mobile\Images\holine.png" />
+    <Content Include="Assets\Mobile\Images\home-10-4_03.png" />
+    <Content Include="Assets\Mobile\Images\hompage.png" />
+    <Content Include="Assets\Mobile\Images\hop-tin-nhan-hover.png" />
+    <Content Include="Assets\Mobile\Images\hop-tin-nhan.png" />
+    <Content Include="Assets\Mobile\Images\hot-new.png" />
+    <Content Include="Assets\Mobile\Images\hot.png" />
+    <Content Include="Assets\Mobile\Images\hoten.png" />
+    <Content Include="Assets\Mobile\Images\hotline.png" />
+    <Content Include="Assets\Mobile\Images\hotline1.png" />
+    <Content Include="Assets\Mobile\Images\huong-dan-tra-cuu-1.png" />
+    <Content Include="Assets\Mobile\Images\huong-dan-tra-cuu-2.png" />
+    <Content Include="Assets\Mobile\Images\Icon chuyển đổi.png" />
+    <Content Include="Assets\Mobile\Images\Icon danh mục.png" />
+    <Content Include="Assets\Mobile\Images\Icon gia hạn.png" />
+    <Content Include="Assets\Mobile\Images\Icon lĩnh vực quan tâm.png" />
+    <Content Include="Assets\Mobile\Images\Icon lĩnh vực quan tâm_1.png" />
+    <Content Include="Assets\Mobile\Images\Icon tiện ích.png" />
+    <Content Include="Assets\Mobile\Images\Icon VB địa phương của bạn.png" />
+    <Content Include="Assets\Mobile\Images\icon-add1.png" />
+    <Content Include="Assets\Mobile\Images\icon-add2.png" />
+    <Content Include="Assets\Mobile\Images\icon-danh-muc.png" />
+    <Content Include="Assets\Mobile\Images\icon-dt.png" />
+    <Content Include="Assets\Mobile\Images\icon-facebook.png" />
+    <Content Include="Assets\Mobile\Images\icon-from1.png" />
+    <Content Include="Assets\Mobile\Images\icon-from2.png" />
+    <Content Include="Assets\Mobile\Images\icon-gg.png" />
+    <Content Include="Assets\Mobile\Images\icon-gioi-thieu-ls.png" />
+    <Content Include="Assets\Mobile\Images\icon-home.png" />
+    <Content Include="Assets\Mobile\Images\icon-mail.png" />
+    <Content Include="Assets\Mobile\Images\icon-new-2.png" />
+    <Content Include="Assets\Mobile\Images\icon-pass9.png" />
+    <Content Include="Assets\Mobile\Images\icon-print.png" />
+    <Content Include="Assets\Mobile\Images\icon-quan-tam.png" />
+    <Content Include="Assets\Mobile\Images\icon-search.png" />
+    <Content Include="Assets\Mobile\Images\icon-sms.png" />
+    <Content Include="Assets\Mobile\Images\icon-tag.png" />
+    <Content Include="Assets\Mobile\Images\icon-tb.png" />
+    <Content Include="Assets\Mobile\Images\icon-themls.png" />
+    <Content Include="Assets\Mobile\Images\icon-tick.png" />
+    <Content Include="Assets\Mobile\Images\icon-tieu-diem-hover.png" />
+    <Content Include="Assets\Mobile\Images\icon-tieu-diem.png" />
+    <Content Include="Assets\Mobile\Images\icon-time.png" />
+    <Content Include="Assets\Mobile\Images\icon-tk9.png" />
+    <Content Include="Assets\Mobile\Images\icon-tooltip.png" />
+    <Content Include="Assets\Mobile\Images\icon-ttp.png" />
+    <Content Include="Assets\Mobile\Images\icon-twr.png" />
+    <Content Include="Assets\Mobile\Images\iconluat.png" />
+    <Content Include="Assets\Mobile\Images\iconluu.png" />
+    <Content Include="Assets\Mobile\Images\iconluux.png" />
+    <Content Include="Assets\Mobile\Images\iconsendmail.png" />
+    <Content Include="Assets\Mobile\Images\icon_dot_red.png" />
+    <Content Include="Assets\Mobile\Images\icon_dot_red2.png" />
+    <Content Include="Assets\Mobile\Images\icon_slder.png" />
+    <Content Include="Assets\Mobile\Images\icon_slder2.png" />
+    <Content Include="Assets\Mobile\Images\ic_arrow_drop_dow_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_arrow_drop_up_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_border_color_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_cancel_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_clear_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_delete_sweep_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_edit_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_email_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_find_in_page_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_grade_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_help_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_home_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_indeterminate_check_box_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_input_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_library_books_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_list_24px-black.png" />
+    <Content Include="Assets\Mobile\Images\ic_list_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_local_offer_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_local_phone_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_more_vert_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_notifications_active_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_perm_phone_msg_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_person_pin_circle_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_phone_android_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_power_settings_new_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_rotate_right_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_save_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_star_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_star_border_24px.png" />
+    <Content Include="Assets\Mobile\Images\ic_wb_incandescent_24px.png" />
+    <Content Include="Assets\Mobile\Images\ihoidap.png" />
+    <Content Include="Assets\Mobile\Images\ihoidap0.png" />
+    <Content Include="Assets\Mobile\Images\image.png" />
+    <Content Include="Assets\Mobile\Images\image1.png" />
+    <Content Include="Assets\Mobile\Images\imenu.png" />
+    <Content Include="Assets\Mobile\Images\img-about.png" />
+    <Content Include="Assets\Mobile\Images\img-scrol.png" />
+    <Content Include="Assets\Mobile\Images\in-en.png" />
+    <Content Include="Assets\Mobile\Images\in2.png" />
+    <Content Include="Assets\Mobile\Images\iproced.png" />
+    <Content Include="Assets\Mobile\Images\ke-r.png" />
+    <Content Include="Assets\Mobile\Images\ke.png" />
+    <Content Include="Assets\Mobile\Images\keo-xem-them.png" />
+    <Content Include="Assets\Mobile\Images\khuyencao.png" />
+    <Content Include="Assets\Mobile\Images\kland.png" />
+    <Content Include="Assets\Mobile\Images\la-cay.png" />
+    <Content Include="Assets\Mobile\Images\Layer 689.png" />
+    <Content Include="Assets\Mobile\Images\lichsu.png" />
+    <Content Include="Assets\Mobile\Images\lichsuphattrien.png" />
+    <Content Include="Assets\Mobile\Images\lien-he_03.png" />
+    <Content Include="Assets\Mobile\Images\lien-he_05.png" />
+    <Content Include="Assets\Mobile\Images\lien-he_07.png" />
+    <Content Include="Assets\Mobile\Images\lien-he_13.png" />
+    <Content Include="Assets\Mobile\Images\lien-he_17.png" />
+    <Content Include="Assets\Mobile\Images\lien-he_20.png" />
+    <Content Include="Assets\Mobile\Images\lien-he_25.png" />
+    <Content Include="Assets\Mobile\Images\link1.png" />
+    <Content Include="Assets\Mobile\Images\link2.png" />
+    <Content Include="Assets\Mobile\Images\loc-kq.png" />
+    <Content Include="Assets\Mobile\Images\Logo Myluatvietnam.png" />
+    <Content Include="Assets\Mobile\Images\logo-mobi.png" />
+    <Content Include="Assets\Mobile\Images\logo-myluatvietnam.png" />
+    <Content Include="Assets\Mobile\Images\logo.png" />
+    <Content Include="Assets\Mobile\Images\logout.png" />
+    <Content Include="Assets\Mobile\Images\lspt-moc.png" />
+    <Content Include="Assets\Mobile\Images\lspt.png" />
+    <Content Include="Assets\Mobile\Images\luu-email.png" />
+    <Content Include="Assets\Mobile\Images\luu2.png" />
+    <Content Include="Assets\Mobile\Images\ma-oan-toan.png" />
+    <Content Include="Assets\Mobile\Images\Mask Group 1.png" />
+    <Content Include="Assets\Mobile\Images\Mask Group 10.png" />
+    <Content Include="Assets\Mobile\Images\Mask-Group-1.png" />
+    <Content Include="Assets\Mobile\Images\mat-bang.jpg" />
+    <Content Include="Assets\Mobile\Images\may-tinh.jpg" />
+    <Content Include="Assets\Mobile\Images\mbch.jpg" />
+    <Content Include="Assets\Mobile\Images\mcode.png" />
+    <Content Include="Assets\Mobile\Images\mCSB_buttons.png" />
+    <Content Include="Assets\Mobile\Images\mda-en.png" />
+    <Content Include="Assets\Mobile\Images\minhkhai.jpg" />
+    <Content Include="Assets\Mobile\Images\mlh.png" />
+    <Content Include="Assets\Mobile\Images\mobi2.png" />
+    <Content Include="Assets\Mobile\Images\more-nv.png" />
+    <Content Include="Assets\Mobile\Images\more.png" />
+    <Content Include="Assets\Mobile\Images\moretext.png" />
+    <Content Include="Assets\Mobile\Images\mt.png" />
+    <Content Include="Assets\Mobile\Images\mt2.png" />
+    <Content Include="Assets\Mobile\Images\mt22.png" />
+    <Content Include="Assets\Mobile\Images\mtdp.png" />
+    <Content Include="Assets\Mobile\Images\my-edit.png" />
+    <Content Include="Assets\Mobile\Images\n1-hover.png" />
+    <Content Include="Assets\Mobile\Images\n1.png" />
+    <Content Include="Assets\Mobile\Images\n2-hover.png" />
+    <Content Include="Assets\Mobile\Images\n2.png" />
+    <Content Include="Assets\Mobile\Images\nam-sinh.png" />
+    <Content Include="Assets\Mobile\Images\nex_view.png" />
+    <Content Include="Assets\Mobile\Images\ngay-thang.png" />
+    <Content Include="Assets\Mobile\Images\no-images.jpg" />
+    <Content Include="Assets\Mobile\Images\no-images.png" />
+    <Content Include="Assets\Mobile\Images\no-images2.jpg" />
+    <Content Include="Assets\Mobile\Images\ns1.png" />
+    <Content Include="Assets\Mobile\Images\ns2.png" />
+    <Content Include="Assets\Mobile\Images\nx1-hover.png" />
+    <Content Include="Assets\Mobile\Images\nx1.png" />
+    <Content Include="Assets\Mobile\Images\nx2-hover.png" />
+    <Content Include="Assets\Mobile\Images\nx2.png" />
+    <Content Include="Assets\Mobile\Images\pass.png" />
+    <Content Include="Assets\Mobile\Images\Path 33.png" />
+    <Content Include="Assets\Mobile\Images\Path-33.png" />
+    <Content Include="Assets\Mobile\Images\pdf1.png" />
+    <Content Include="Assets\Mobile\Images\pdf2.png" />
+    <Content Include="Assets\Mobile\Images\pdff.png" />
+    <Content Include="Assets\Mobile\Images\pdfw.png" />
+    <Content Include="Assets\Mobile\Images\pen.png" />
+    <Content Include="Assets\Mobile\Images\phan-mem-ho-tro-1.png" />
+    <Content Include="Assets\Mobile\Images\phan-mem-ho-tro-2.png" />
+    <Content Include="Assets\Mobile\Images\phay1.png" />
+    <Content Include="Assets\Mobile\Images\phay2.png" />
+    <Content Include="Assets\Mobile\Images\pr.png" />
+    <Content Include="Assets\Mobile\Images\Print.png" />
+    <Content Include="Assets\Mobile\Images\printnew.png" />
+    <Content Include="Assets\Mobile\Images\r1.png" />
+    <Content Include="Assets\Mobile\Images\r2.png" />
+    <Content Include="Assets\Mobile\Images\r3.png" />
+    <Content Include="Assets\Mobile\Images\r4.png" />
+    <Content Include="Assets\Mobile\Images\r5.png" />
+    <Content Include="Assets\Mobile\Images\rs.png" />
+    <Content Include="Assets\Mobile\Images\rset.png" />
+    <Content Include="Assets\Mobile\Images\rss-en.png" />
+    <Content Include="Assets\Mobile\Images\Rss.png" />
+    <Content Include="Assets\Mobile\Images\safari.png" />
+    <Content Include="Assets\Mobile\Images\san-pham-chi-tiet_03.jpg" />
+    <Content Include="Assets\Mobile\Images\sao-tim-kiem.png" />
+    <Content Include="Assets\Mobile\Images\save-2.png" />
+    <Content Include="Assets\Mobile\Images\save.png" />
+    <Content Include="Assets\Mobile\Images\search-mail.png" />
+    <Content Include="Assets\Mobile\Images\select_slice.png" />
+    <Content Include="Assets\Mobile\Images\Send.png" />
+    <Content Include="Assets\Mobile\Images\site-loading.gif" />
+    <Content Include="Assets\Mobile\Images\sl1.jpg" />
+    <Content Include="Assets\Mobile\Images\slider-1.png" />
+    <Content Include="Assets\Mobile\Images\slider-2.png" />
+    <Content Include="Assets\Mobile\Images\slider-3.png" />
+    <Content Include="Assets\Mobile\Images\slive01.png" />
+    <Content Include="Assets\Mobile\Images\slive02.png" />
+    <Content Include="Assets\Mobile\Images\slive03.png" />
+    <Content Include="Assets\Mobile\Images\sosanh.png" />
+    <Content Include="Assets\Mobile\Images\star-1.png" />
+    <Content Include="Assets\Mobile\Images\star-2.png" />
+    <Content Include="Assets\Mobile\Images\tai-khoan-1.png" />
+    <Content Include="Assets\Mobile\Images\tai-khoan-2.png" />
+    <Content Include="Assets\Mobile\Images\tai-sao-1.png" />
+    <Content Include="Assets\Mobile\Images\tai-sao-2.png" />
+    <Content Include="Assets\Mobile\Images\tai-sao-3.png" />
+    <Content Include="Assets\Mobile\Images\tai-sao-4.png" />
+    <Content Include="Assets\Mobile\Images\tai-sao-5.png" />
+    <Content Include="Assets\Mobile\Images\tailen-ok.png" />
+    <Content Include="Assets\Mobile\Images\taivb.png" />
+    <Content Include="Assets\Mobile\Images\td1.png" />
+    <Content Include="Assets\Mobile\Images\td10.png" />
+    <Content Include="Assets\Mobile\Images\td11.png" />
+    <Content Include="Assets\Mobile\Images\td12.png" />
+    <Content Include="Assets\Mobile\Images\td13.png" />
+    <Content Include="Assets\Mobile\Images\td14.png" />
+    <Content Include="Assets\Mobile\Images\td15.png" />
+    <Content Include="Assets\Mobile\Images\td16.png" />
+    <Content Include="Assets\Mobile\Images\td17.png" />
+    <Content Include="Assets\Mobile\Images\td18.png" />
+    <Content Include="Assets\Mobile\Images\td19.png" />
+    <Content Include="Assets\Mobile\Images\td2.png" />
+    <Content Include="Assets\Mobile\Images\td20.png" />
+    <Content Include="Assets\Mobile\Images\td3.png" />
+    <Content Include="Assets\Mobile\Images\td4.png" />
+    <Content Include="Assets\Mobile\Images\td5.png" />
+    <Content Include="Assets\Mobile\Images\td6.png" />
+    <Content Include="Assets\Mobile\Images\td7.png" />
+    <Content Include="Assets\Mobile\Images\td8.png" />
+    <Content Include="Assets\Mobile\Images\td9.png" />
+    <Content Include="Assets\Mobile\Images\thang1.png" />
+    <Content Include="Assets\Mobile\Images\thang12010.png" />
+    <Content Include="Assets\Mobile\Images\thang5.png" />
+    <Content Include="Assets\Mobile\Images\thang7.png" />
+    <Content Include="Assets\Mobile\Images\thang72006.png" />
+    <Content Include="Assets\Mobile\Images\thang72010.png" />
+    <Content Include="Assets\Mobile\Images\thang8.png" />
+    <Content Include="Assets\Mobile\Images\thang8210.png" />
+    <Content Include="Assets\Mobile\Images\thang9.png" />
+    <Content Include="Assets\Mobile\Images\thanh-toan-truc-tuyen-1.png" />
+    <Content Include="Assets\Mobile\Images\thanh-toan-truc-tuyen-2.png" />
+    <Content Include="Assets\Mobile\Images\thanh-toan.png" />
+    <Content Include="Assets\Mobile\Images\thanh-toan2.png" />
+    <Content Include="Assets\Mobile\Images\thaydoi-linhvuc.png" />
+    <Content Include="Assets\Mobile\Images\thelvn.png" />
+    <Content Include="Assets\Mobile\Images\thong-bao-dich-vu.png" />
+    <Content Include="Assets\Mobile\Images\thong-bao.png" />
+    <Content Include="Assets\Mobile\Images\thong-bao2.png" />
+    <Content Include="Assets\Mobile\Images\thong-bao3.png" />
+    <Content Include="Assets\Mobile\Images\thongtincn.png" />
+    <Content Include="Assets\Mobile\Images\thu-gon-tk.png" />
+    <Content Include="Assets\Mobile\Images\thumb220.png" />
+    <Content Include="Assets\Mobile\Images\thung-rac.png" />
+    <Content Include="Assets\Mobile\Images\Thông báo.png" />
+    <Content Include="Assets\Mobile\Images\tick-v.png" />
+    <Content Include="Assets\Mobile\Images\tick.png" />
+    <Content Include="Assets\Mobile\Images\tick1.png" />
+    <Content Include="Assets\Mobile\Images\tickright.png" />
+    <Content Include="Assets\Mobile\Images\tien-ich.png" />
+    <Content Include="Assets\Mobile\Images\tim-kiem-nang-cao.png" />
+    <Content Include="Assets\Mobile\Images\tinh-nang_03.jpg" />
+    <Content Include="Assets\Mobile\Images\tinnhan.png" />
+    <Content Include="Assets\Mobile\Images\tocall.png" />
+    <Content Include="Assets\Mobile\Images\tra-cuu-van-ban.png" />
+    <Content Include="Assets\Mobile\Images\tra-cuu-van-ban2.png" />
+    <Content Include="Assets\Mobile\Images\trinhduyetlvn.png" />
+    <Content Include="Assets\Mobile\Images\trinhduyetlvn2.png" />
+    <Content Include="Assets\Mobile\Images\tt1.png" />
+    <Content Include="Assets\Mobile\Images\tt2.png" />
+    <Content Include="Assets\Mobile\Images\tt3.png" />
+    <Content Include="Assets\Mobile\Images\tt4.png" />
+    <Content Include="Assets\Mobile\Images\tw-en.png" />
+    <Content Include="Assets\Mobile\Images\Tw.png" />
+    <Content Include="Assets\Mobile\Images\tw1.png" />
+    <Content Include="Assets\Mobile\Images\tw2.png" />
+    <Content Include="Assets\Mobile\Images\twiternew.png" />
+    <Content Include="Assets\Mobile\Images\twr.png" />
+    <Content Include="Assets\Mobile\Images\unikey1.png" />
+    <Content Include="Assets\Mobile\Images\unikey2.png" />
+    <Content Include="Assets\Mobile\Images\Unknown File.png" />
+    <Content Include="Assets\Mobile\Images\User có thông báo.png" />
+    <Content Include="Assets\Mobile\Images\user-2.png" />
+    <Content Include="Assets\Mobile\Images\User.png" />
+    <Content Include="Assets\Mobile\Images\v.png" />
+    <Content Include="Assets\Mobile\Images\v1.png" />
+    <Content Include="Assets\Mobile\Images\v2.png" />
+    <Content Include="Assets\Mobile\Images\vanban.png" />
+    <Content Include="Assets\Mobile\Images\vb-1.png" />
+    <Content Include="Assets\Mobile\Images\vb-2.png" />
+    <Content Include="Assets\Mobile\Images\vb-moi-cap-nhat.png" />
+    <Content Include="Assets\Mobile\Images\vbxemnhieu.png" />
+    <Content Include="Assets\Mobile\Images\Vector Smart Object.png" />
+    <Content Include="Assets\Mobile\Images\vietinbank.png" />
+    <Content Include="Assets\Mobile\Images\vitri-bg.jpg" />
+    <Content Include="Assets\Mobile\Images\vn.png" />
+    <Content Include="Assets\Mobile\Images\xem-tiep.png" />
+    <Content Include="Assets\Mobile\Images\xem-tiep2.png" />
+    <Content Include="Assets\Mobile\Images\xemloto.png" />
+    <Content Include="Assets\Mobile\Images\xoa-bloc.png" />
+    <Content Include="Assets\Mobile\Images\xoa-tiemkiem.png" />
+    <Content Include="Assets\Mobile\Images\xoa.png" />
+    <Content Include="Assets\Mobile\Images\xoa2.png" />
+    <Content Include="Assets\Mobile\Images\xoa22.png" />
+    <Content Include="Assets\Mobile\Scripts\accordion.js" />
+    <Content Include="Assets\Mobile\Scripts\alawsvn.js" />
+    <Content Include="Assets\Mobile\Scripts\carousel-2.js" />
+    <Content Include="Assets\Mobile\Scripts\dropdown2.js" />
+    <Content Include="Assets\Mobile\Scripts\ie10-viewport-bug-workaround.js" />
+    <Content Include="Assets\Mobile\Scripts\nav-bar.js" />
+    <Content Include="Assets\Mobile\Scripts\nav-drop.js" />
+    <Content Include="Assets\Mobile\Scripts\popup.js" />
+    <Content Include="Assets\Mobile\Scripts\sl4.js" />
+    <Content Include="Assets\print.css" />
+    <Content Include="Assets\Css\style.css" />
+    <Content Include="Assets\Images\150x180.png" />
+    <Content Include="Assets\Images\a1.png" />
+    <Content Include="Assets\Images\a11.png" />
+    <Content Include="Assets\Images\a2.png" />
+    <Content Include="Assets\Images\a22.png" />
+    <Content Include="Assets\Images\abbank.png" />
+    <Content Include="Assets\Images\abc.png" />
+    <Content Include="Assets\Images\Acb_logo.png" />
+    <Content Include="Assets\Images\agribank.png" />
+    <Content Include="Assets\Images\ajax-loader.gif" />
+    <Content Include="Assets\Images\an-dmuc.png" />
+    <Content Include="Assets\Images\avata-ad1.png" />
+    <Content Include="Assets\Images\avata-ad2.png" />
+    <Content Include="Assets\Images\avata-luatsu.png" />
+    <Content Include="Assets\Images\avata.png" />
+    <Content Include="Assets\Images\b1.png" />
+    <Content Include="Assets\Images\b2.png" />
+    <Content Include="Assets\Images\bacabank.png" />
+    <Content Include="Assets\Images\backtotop.png" />
+    <Content Include="Assets\Images\backtotop2.png" />
+    <Content Include="Assets\Images\ban-tin.png" />
+    <Content Include="Assets\Images\bando.png" />
+    <Content Include="Assets\Images\banner-dv.png" />
+    <Content Include="Assets\Images\banner-hoi-dap.png" />
+    <Content Include="Assets\Images\banner-hoi-dap2.png" />
+    <Content Include="Assets\Images\banner-huongdan.png" />
+    <Content Include="Assets\Images\banner-luat.png" />
+    <Content Include="Assets\Images\banner-tk.png" />
+    <Content Include="Assets\Images\banner-vb2.png" />
+    <Content Include="Assets\Images\banner-vb3.png" />
+    <Content Include="Assets\Images\banner1.png" />
+    <Content Include="Assets\Images\banner2.png" />
+    <Content Include="Assets\Images\Baovietbank.png" />
+    <Content Include="Assets\Images\bb.png" />
+    <Content Include="Assets\Images\bg-about.jpg" />
+    <Content Include="Assets\Images\bg-myluat.png" />
+    <Content Include="Assets\Images\bg-noi-bat.png" />
+    <Content Include="Assets\Images\bg-tinnhan-en.png" />
+    <Content Include="Assets\Images\bidvbank.png" />
+    <Content Include="Assets\Images\bong-tim-kiem.png" />
+    <Content Include="Assets\Images\camera_skins.png" />
+    <Content Include="Assets\Images\cap-nhat.png" />
+    <Content Include="Assets\Images\cauhoi.png" />
+    <Content Include="Assets\Images\chia-se2.png" />
+    <Content Include="Assets\Images\chinh-sach-vb.png" />
+    <Content Include="Assets\Images\chrome.png" />
+    <Content Include="Assets\Images\chuthich1.png" />
+    <Content Include="Assets\Images\chuthich2.png" />
+    <Content Include="Assets\Images\chuthich3.png" />
+    <Content Include="Assets\Images\chuthich4.png" />
+    <Content Include="Assets\Images\close2.png" />
+    <Content Include="Assets\Images\dang-ky-tai-khoan.png" />
+    <Content Include="Assets\Images\dang-ky-tai-khoan2.png" />
+    <Content Include="Assets\Images\dang-ky-thue-bao.png" />
+    <Content Include="Assets\Images\dang-ky-thue-bao2.png" />
+    <Content Include="Assets\Images\dang-ky.png" />
+    <Content Include="Assets\Images\dang-ky2.png" />
+    <Content Include="Assets\Images\dang-nhap.png" />
+    <Content Include="Assets\Images\dang-nhap2.png" />
+    <Content Include="Assets\Images\dang-xem.png" />
+    <Content Include="Assets\Images\dangky-dv.png" />
+    <Content Include="Assets\Images\dangky-dv2.png" />
+    <Content Include="Assets\Images\demo-huong-dan.png" />
+    <Content Include="Assets\Images\demo.jpg" />
+    <Content Include="Assets\Images\dk-gdcn.png" />
+    <Content Include="Assets\Images\dma.png" />
+    <Content Include="Assets\Images\doc.png" />
+    <Content Include="Assets\Images\doc1.png" />
+    <Content Include="Assets\Images\doc2.png" />
+    <Content Include="Assets\Images\doc3.png" />
+    <Content Include="Assets\Images\doc4.png" />
+    <Content Include="Assets\Images\doi-tac1-hover.png" />
+    <Content Include="Assets\Images\doi-tac1.png" />
+    <Content Include="Assets\Images\dongabank.png" />
+    <Content Include="Assets\Images\edit2.png" />
+    <Content Include="Assets\Images\email2.png" />
+    <Content Include="Assets\Images\en.png" />
+    <Content Include="Assets\Images\eximbank.png" />
+    <Content Include="Assets\Images\favicon.ico" />
+    <Content Include="Assets\Images\fb.png" />
+    <Content Include="Assets\Images\fb1.png" />
+    <Content Include="Assets\Images\fb2.png" />
+    <Content Include="Assets\Images\firefox.png" />
+    <Content Include="Assets\Images\font1.png" />
+    <Content Include="Assets\Images\font2.png" />
+    <Content Include="Assets\Images\gbbank.png" />
+    <Content Include="Assets\Images\gg.png" />
+    <Content Include="Assets\Images\gia-han-dv1.png" />
+    <Content Include="Assets\Images\gia-han-dv2.png" />
+    <Content Include="Assets\Images\gia-han-dv3.png" />
+    <Content Include="Assets\Images\gia-han-dv4.png" />
+    <Content Include="Assets\Images\gia-han.png" />
+    <Content Include="Assets\Images\giao-dien-ca-nhan.png" />
+    <Content Include="Assets\Images\gioi-thieu1.png" />
+    <Content Include="Assets\Images\gioithieu2.png" />
+    <Content Include="Assets\Images\goi1.png" />
+    <Content Include="Assets\Images\goi2.png" />
+    <Content Include="Assets\Images\goi3.png" />
+    <Content Include="Assets\Images\goi4.png" />
+    <Content Include="Assets\Images\google1.png" />
+    <Content Include="Assets\Images\google2.png" />
+    <Content Include="Assets\Images\gop-y.png" />
+    <Content Include="Assets\Images\gopy.png" />
+    <Content Include="Assets\Images\gui-cau-hoi.png" />
+    <Content Include="Assets\Images\HDBanklogo.png" />
+    <Content Include="Assets\Images\hieuluc1.png" />
+    <Content Include="Assets\Images\hieuluc2.png" />
+    <Content Include="Assets\Images\ho-tro-online.png" />
+    <Content Include="Assets\Images\ho-tro.png" />
+    <Content Include="Assets\Images\ho-tro2.png" />
+    <Content Include="Assets\Images\hoavan.png" />
+    <Content Include="Assets\Images\hoi-dap.png" />
+    <Content Include="Assets\Images\hompage.png" />
+    <Content Include="Assets\Images\hop-tin-nhan-hover.png" />
+    <Content Include="Assets\Images\hop-tin-nhan.png" />
+    <Content Include="Assets\Images\hoten.png" />
+    <Content Include="Assets\Images\hotline.png" />
+    <Content Include="Assets\Images\huong-dan-tra-cuu-1.png" />
+    <Content Include="Assets\Images\huong-dan-tra-cuu-2.png" />
+    <Content Include="Assets\Images\icon-add1.png" />
+    <Content Include="Assets\Images\icon-add2.png" />
+    <Content Include="Assets\Images\icon-danh-muc.png" />
+    <Content Include="Assets\Images\icon-facebook.png" />
+    <Content Include="Assets\Images\icon-from1.png" />
+    <Content Include="Assets\Images\icon-from2.png" />
+    <Content Include="Assets\Images\icon-gg.png" />
+    <Content Include="Assets\Images\icon-gioi-thieu-ls.png" />
+    <Content Include="Assets\Images\icon-home.png" />
+    <Content Include="Assets\Images\icon-mail.png" />
+    <Content Include="Assets\Images\icon-new-2.png" />
+    <Content Include="Assets\Images\icon-pass9.png" />
+    <Content Include="Assets\Images\icon-print.png" />
+    <Content Include="Assets\Images\icon-quan-tam.png" />
+    <Content Include="Assets\Images\icon-search.png" />
+    <Content Include="Assets\Images\icon-tag.png" />
+    <Content Include="Assets\Images\icon-tb.png" />
+    <Content Include="Assets\Images\icon-themls.png" />
+    <Content Include="Assets\Images\icon-time.png" />
+    <Content Include="Assets\Images\icon-tk9.png" />
+    <Content Include="Assets\Images\icon-tooltip.png" />
+    <Content Include="Assets\Images\icon-ttp.png" />
+    <Content Include="Assets\Images\icon-twr.png" />
+    <Content Include="Assets\Images\icon_dot_red.png" />
+    <Content Include="Assets\Images\icon_dot_red2.png" />
+    <Content Include="Assets\Images\icon_slder.png" />
+    <Content Include="Assets\Images\img-about.png" />
+    <Content Include="Assets\Images\img-scrol.png" />
+    <Content Include="Assets\Images\in2.png" />
+    <Content Include="Assets\Images\Jcb.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_222222_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_444444_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_454545_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_555555_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_777777_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_888888_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Assets\Images\keo-xem-them.png" />
+    <Content Include="Assets\Images\khuyencao.png" />
+    <Content Include="Assets\Images\lichsu.png" />
+    <Content Include="Assets\Images\lichsuphattrien.png" />
+    <Content Include="Assets\Images\Lienvietbank.png" />
+    <Content Include="Assets\Images\link1.png" />
+    <Content Include="Assets\Images\link2.png" />
+    <Content Include="Assets\Images\loc-kq.png" />
+    <Content Include="Assets\Images\logo-myluatvietnam.png" />
+    <Content Include="Assets\Images\logo.png" />
+    <Content Include="Assets\Images\logout.png" />
+    <Content Include="Assets\Images\luu-email.png" />
+    <Content Include="Assets\Images\luu2.png" />
+    <Content Include="Assets\Images\ma-oan-toan.png" />
+    <Content Include="Assets\Images\maritimebank.png" />
+    <Content Include="Assets\Images\master.png" />
+    <Content Include="Assets\Images\MBbank.png" />
+    <Content Include="Assets\Images\mcode.png" />
+    <Content Include="Assets\Images\mCSB_buttons.png" />
+    <Content Include="Assets\Images\mlh.png" />
+    <Content Include="Assets\Images\more.png" />
+    <Content Include="Assets\Images\moretext.png" />
+    <Content Include="Assets\Images\mt.png" />
+    <Content Include="Assets\Images\mt2.png" />
+    <Content Include="Assets\Images\mtdp.png" />
+    <Content Include="Assets\Images\my-edit.png" />
+    <Content Include="Assets\Images\n1-hover.png" />
+    <Content Include="Assets\Images\n1.png" />
+    <Content Include="Assets\Images\n2-hover.png" />
+    <Content Include="Assets\Images\n2.png" />
+    <Content Include="Assets\Images\nam-sinh.png" />
+    <Content Include="Assets\Images\namabank.png" />
+    <Content Include="Assets\Images\nap-the-luatvn.png" />
+    <Content Include="Assets\Images\ncbbank.png" />
+    <Content Include="Assets\Images\ngay-thang.png" />
+    <Content Include="Assets\Images\no-images.jpg" />
+    <Content Include="Assets\Images\no-images.png" />
+    <Content Include="Assets\Images\no-images2.jpg" />
+    <Content Include="Assets\Images\ns1.png" />
+    <Content Include="Assets\Images\ns2.png" />
+    <Content Include="Assets\Images\nx1-hover.png" />
+    <Content Include="Assets\Images\nx1.png" />
+    <Content Include="Assets\Images\nx2-hover.png" />
+    <Content Include="Assets\Images\nx2.png" />
+    <Content Include="Assets\Images\OCBbank.png" />
+    <Content Include="Assets\Images\OceanBanklogo.png" />
+    <Content Include="Assets\Images\pass.png" />
+    <Content Include="Assets\Images\pdf1.png" />
+    <Content Include="Assets\Images\pdf2.png" />
+    <Content Include="Assets\Images\pdff.png" />
+    <Content Include="Assets\Images\pdfw.png" />
+    <Content Include="Assets\Images\pgbank.png" />
+    <Content Include="Assets\Images\phan-mem-ho-tro-1.png" />
+    <Content Include="Assets\Images\phan-mem-ho-tro-2.png" />
+    <Content Include="Assets\Images\phay1.png" />
+    <Content Include="Assets\Images\phay2.png" />
+    <Content Include="Assets\Images\print-footer.png" />
+    <Content Include="Assets\Images\rs.png" />
+    <Content Include="Assets\Images\rset.png" />
+    <Content Include="Assets\Images\sacombank.png" />
+    <Content Include="Assets\Images\safari.png" />
+    <Content Include="Assets\Images\sao-tim-kiem.png" />
+    <Content Include="Assets\Images\save-2.png" />
+    <Content Include="Assets\Images\save.png" />
+    <Content Include="Assets\Images\Seabank.png" />
+    <Content Include="Assets\Images\search-mail.png" />
+    <Content Include="Assets\Images\sgbank.png" />
+    <Content Include="Assets\Images\SHBbank.png" />
+    <Content Include="Assets\Images\site-loading.gif" />
+    <Content Include="Assets\Images\sl1.jpg" />
+    <Content Include="Assets\Images\slider-1.png" />
+    <Content Include="Assets\Images\slider-2.png" />
+    <Content Include="Assets\Images\slider-3.png" />
+    <Content Include="Assets\Images\sosanh.png" />
+    <Content Include="Assets\Images\star-1.png" />
+    <Content Include="Assets\Images\star-2.png" />
+    <Content Include="Assets\Images\tai-khoan-1.png" />
+    <Content Include="Assets\Images\tai-khoan-2.png" />
+    <Content Include="Assets\Images\tai-sao-1.png" />
+    <Content Include="Assets\Images\tai-sao-2.png" />
+    <Content Include="Assets\Images\tai-sao-3.png" />
+    <Content Include="Assets\Images\tai-sao-4.png" />
+    <Content Include="Assets\Images\tai-sao-5.png" />
+    <Content Include="Assets\Images\taivb.png" />
+    <Content Include="Assets\Images\techbank.png" />
+    <Content Include="Assets\Images\thang1.png" />
+    <Content Include="Assets\Images\thang12010.png" />
+    <Content Include="Assets\Images\thang5.png" />
+    <Content Include="Assets\Images\thang7.png" />
+    <Content Include="Assets\Images\thang72006.png" />
+    <Content Include="Assets\Images\thang72010.png" />
+    <Content Include="Assets\Images\thang8.png" />
+    <Content Include="Assets\Images\thang8210.png" />
+    <Content Include="Assets\Images\thang9.png" />
+    <Content Include="Assets\Images\thanh-toan-truc-tuyen-1.png" />
+    <Content Include="Assets\Images\thanh-toan-truc-tuyen-2.png" />
+    <Content Include="Assets\Images\thanh-toan.png" />
+    <Content Include="Assets\Images\thanh-toan2.png" />
+    <Content Include="Assets\Images\thelvn.png" />
+    <Content Include="Assets\Images\thong-bao-dich-vu.png" />
+    <Content Include="Assets\Images\thong-bao.png" />
+    <Content Include="Assets\Images\thong-bao2.png" />
+    <Content Include="Assets\Images\thong-bao3.png" />
+    <Content Include="Assets\Images\thongtincn.png" />
+    <Content Include="Assets\Images\thu-gon-tk.png" />
+    <Content Include="Assets\Images\thung-rac.png" />
+    <Content Include="Assets\Images\tick-v.png" />
+    <Content Include="Assets\Images\tick.png" />
+    <Content Include="Assets\Images\tick1.png" />
+    <Content Include="Assets\Images\tien-ich.png" />
+    <Content Include="Assets\Images\tim-kiem-nang-cao.png" />
+    <Content Include="Assets\Images\tin-tuc-no-image.png" />
+    <Content Include="Assets\Images\tin-tuc.png" />
+    <Content Include="Assets\Images\tinnhan.png" />
+    <Content Include="Assets\Images\TP.png" />
+    <Content Include="Assets\Images\tra-cuu-van-ban.png" />
+    <Content Include="Assets\Images\tra-cuu-van-ban2.png" />
+    <Content Include="Assets\Images\trinhduyetlvn.png" />
+    <Content Include="Assets\Images\trinhduyetlvn2.png" />
+    <Content Include="Assets\Images\tw.png" />
+    <Content Include="Assets\Images\tw1.png" />
+    <Content Include="Assets\Images\tw2.png" />
+    <Content Include="Assets\Images\unikey1.png" />
+    <Content Include="Assets\Images\unikey2.png" />
+    <Content Include="Assets\Images\Unknown-file.png" />
+    <Content Include="Assets\Images\v1.png" />
+    <Content Include="Assets\Images\v2.png" />
+    <Content Include="Assets\Images\van-ban.png" />
+    <Content Include="Assets\Images\vanban.png" />
+    <Content Include="Assets\Images\vb-1.png" />
+    <Content Include="Assets\Images\vb-2.png" />
+    <Content Include="Assets\Images\vb-moi-cap-nhat.png" />
+    <Content Include="Assets\Images\vbbank.png" />
+    <Content Include="Assets\Images\vbxemnhieu.png" />
+    <Content Include="Assets\Images\vibbank.png" />
+    <Content Include="Assets\Images\Vietabank.png" />
+    <Content Include="Assets\Images\vietcombank.png" />
+    <Content Include="Assets\Images\vietinbank.png" />
+    <Content Include="Assets\Images\visa.png" />
+    <Content Include="Assets\Images\vn.png" />
+    <Content Include="Assets\Images\xem-tiep.png" />
+    <Content Include="Assets\Images\xoa-tiemkiem.png" />
+    <Content Include="Assets\Images\xoa.png" />
+    <Content Include="Assets\Images\xoa2.png" />
+    <Content Include="Assets\Scripts\backLinks.js" />
+    <Content Include="Assets\Scripts\Libs\jquery-ui-1.12.1.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.autofix_anything.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.cookie.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.mousewheel.min.js" />
+    <Content Include="Assets\Scripts\Libs\platform.js" />
+    <Content Include="Assets\Scripts\ui\alawsvn.js" />
+    <Content Include="Assets\Scripts\ui\jquery.mCustomScrollbar.js" />
+    <Content Include="Assets\Scripts\ui\slider-carousel.js" />
+    <Content Include="Assets\Scripts\ui\slider-effect.js" />
+    <Content Include="Assets\Scripts\ui\slider-jquery.js" />
+    <Content Include="Assets\Scripts\ui\tooltip.js" />
+    <Content Include="Data\advs\advs_site_1.js" />
+    <Content Include="DLL\Antlr3.Runtime.dll" />
+    <Content Include="DLL\DevTrends.MvcDonutCaching.dll" />
+    <Content Include="DLL\DotNetOpenAuth.AspNet.dll" />
+    <Content Include="DLL\DotNetOpenAuth.AspNet.xml" />
+    <Content Include="DLL\DotNetOpenAuth.Core.dll" />
+    <Content Include="DLL\DotNetOpenAuth.Core.xml" />
+    <Content Include="DLL\DotNetOpenAuth.OAuth.Consumer.dll" />
+    <Content Include="DLL\DotNetOpenAuth.OAuth.Consumer.xml" />
+    <Content Include="DLL\DotNetOpenAuth.OAuth.dll" />
+    <Content Include="DLL\DotNetOpenAuth.OAuth.xml" />
+    <Content Include="DLL\DotNetOpenAuth.OpenId.dll" />
+    <Content Include="DLL\DotNetOpenAuth.OpenId.RelyingParty.dll" />
+    <Content Include="DLL\DotNetOpenAuth.OpenId.RelyingParty.xml" />
+    <Content Include="DLL\DotNetOpenAuth.OpenId.xml" />
+    <Content Include="DLL\EntityFramework.dll" />
+    <Content Include="DLL\EntityFramework.xml" />
+    <Content Include="DLL\HtmlAgilityPack.dll" />
+    <Content Include="DLL\ICSoft.CMSLib.dll" />
+    <Content Include="DLL\ICSoft.CMSLibEstate.dll" />
+    <Content Include="DLL\ICSoft.CMSViewLib.dll" />
+    <Content Include="DLL\ICSoft.HelperLib.dll" />
+    <Content Include="DLL\ICSoft.LawDocsLib.dll" />
+    <Content Include="DLL\ICSoft.PartnerLib.dll" />
+    <Content Include="DLL\LawsVN.dll" />
+    <Content Include="DLL\LawsVN.pdb" />
+    <Content Include="DLL\LibCommon.dll" />
+    <Content Include="DLL\LibDatabase.dll" />
+    <Content Include="DLL\LibUtils.dll" />
+    <Content Include="DLL\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="DLL\Microsoft.Web.WebPages.OAuth.dll" />
+    <Content Include="DLL\Microsoft.Web.WebPages.OAuth.xml" />
+    <Content Include="DLL\Newtonsoft.Json.dll" />
+    <Content Include="DLL\Newtonsoft.Json.xml" />
+    <Content Include="DLL\NLog.dll" />
+    <Content Include="DLL\NLog.xml" />
+    <Content Include="DLL\System.Net.Http.dll" />
+    <Content Include="DLL\System.Net.Http.Formatting.dll" />
+    <Content Include="DLL\System.Net.Http.Formatting.xml" />
+    <Content Include="DLL\System.Net.Http.WebRequest.dll" />
+    <Content Include="DLL\System.Net.Http.WebRequest.xml" />
+    <Content Include="DLL\System.Net.Http.xml" />
+    <Content Include="DLL\System.Web.Helpers.dll" />
+    <Content Include="DLL\System.Web.Helpers.xml" />
+    <Content Include="DLL\System.Web.Http.dll" />
+    <Content Include="DLL\System.Web.Http.WebHost.dll" />
+    <Content Include="DLL\System.Web.Http.WebHost.xml" />
+    <Content Include="DLL\System.Web.Http.xml" />
+    <Content Include="DLL\System.Web.Mvc.dll" />
+    <Content Include="DLL\System.Web.Mvc.xml" />
+    <Content Include="DLL\System.Web.Optimization.dll" />
+    <Content Include="DLL\System.Web.Razor.dll" />
+    <Content Include="DLL\System.Web.Razor.xml" />
+    <Content Include="DLL\System.Web.WebPages.Deployment.dll" />
+    <Content Include="DLL\System.Web.WebPages.Deployment.xml" />
+    <Content Include="DLL\System.Web.WebPages.dll" />
+    <Content Include="DLL\System.Web.WebPages.Razor.dll" />
+    <Content Include="DLL\System.Web.WebPages.Razor.xml" />
+    <Content Include="DLL\System.Web.WebPages.xml" />
+    <Content Include="DLL\WebGrease.dll" />
+    <Content Include="DLL\WebMatrix.Data.dll" />
+    <Content Include="DLL\WebMatrix.Data.xml" />
+    <Content Include="DLL\WebMatrix.WebData.dll" />
+    <Content Include="DLL\WebMatrix.WebData.xml" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="DLL\NLog.config" />
+    <Content Include="Assets\Images\icon_slder.png1" />
+    <Content Include="Assets\Mobile\Images\icon_slder.png1" />
+    <None Include="Assets\Scripts\Libs\jquery-1.7.1.intellisense.js" />
+    <Content Include="Assets\Scripts\Libs\jquery-1.7.1.js" />
+    <Content Include="Assets\Scripts\Libs\jquery-1.7.1.min.js" />
+    <None Include="Assets\Scripts\Libs\jquery.validate-vsdoc.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.unobtrusive-ajax.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.validate.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.validate.min.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.validate.unobtrusive.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Assets\Scripts\Libs\knockout-2.1.0.debug.js" />
+    <Content Include="Assets\Scripts\Libs\knockout-2.1.0.js" />
+    <Content Include="Assets\Scripts\Libs\modernizr-2.5.3.js" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Service References\FileUploadService\FileUploader.disco" />
+    <None Include="Service References\FileUploadService\configuration91.svcinfo" />
+    <None Include="Service References\FileUploadService\configuration.svcinfo" />
+    <None Include="Service References\FileUploadService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Test.html" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\07\Hydrangeas_0709161354.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\07\Hydrangeas_0709235133.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\07\Hydrangeas_0709235356.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\07\Hydrangeas_0709235920.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\07\unnamed_0709160732.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\07\unnamed_0709160802.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\07\unnamed_0709160819.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\07\unnamed_0709160940.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\30_0809094258.gif" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Desert_0809124707.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809000735.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809000759.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809000816.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809084535.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809084723.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809085121.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809085213.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809085243.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809085307.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809085316.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809093924.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809094237.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809124858.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809131054.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809131412.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809131622.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809132430.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809133154.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809133656.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Hydrangeas_0809134122.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Jellyfish_0809084752.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Jellyfish_0809085143.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Jellyfish_0809085321.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Jellyfish_0809085435.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Koala_0809094022.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Lighthouse_0809085344.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Tulips_0809084547.jpg" />
+    <Content Include="Uploaded\Users\Images\Original\2017\09\08\Tulips_0809084720.jpg" />
+    <Content Include="Views\DocsCongVan\Index.Mobile.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Assets\Scripts\Libs\_references.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\Error500.cshtml" />
+    <Content Include="Views\Error\Error403.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Shared\PartialFooter.cshtml" />
+    <Content Include="Views\Shared\PartialHeader.cshtml" />
+    <Content Include="Views\AjaxTemplates\DocsNewest.cshtml" />
+    <Content Include="Views\Shared\PartialPaginationAjax.cshtml" />
+    <Content Include="Views\Shared\PartialPagination.cshtml" />
+    <Content Include="Views\Shared\PartialFullSearch.cshtml" />
+    <Content Include="Views\Shared\PartialTinVan.cshtml" />
+    <Content Include="Views\Shared\PartialNews.cshtml" />
+    <Content Include="Views\Shared\PartialNewsWithPhotoDescription.cshtml" />
+    <Content Include="Views\Customers\CustomerDetailView.cshtml" />
+    <Content Include="Views\Customers\PaymentTransactionsManagement.cshtml" />
+    <Content Include="Views\News\ArticleDetail.cshtml" />
+    <Content Include="Views\News\ArticlesCategory.cshtml" />
+    <Content Include="Views\Shared\Home\PartialBanTinLuatVietNam.cshtml" />
+    <Content Include="Views\Shared\Home\PartialDiemTinVanBanMoi.cshtml" />
+    <Content Include="Views\Shared\Home\PartialDocsMostView.cshtml" />
+    <Content Include="Views\Shared\Home\PartialTinTucPhapLuat.cshtml" />
+    <Content Include="Views\Shared\PartialFieldOfSearch.cshtml" />
+    <Content Include="Views\Shared\PartialPaginationArticlesAjax.cshtml" />
+    <Content Include="Views\Shared\Home\PartialVanBanCapNhatHangTuan.cshtml" />
+    <Content Include="Views\Shared\PartialNewsLetterEmail.cshtml" />
+    <Content Include="Views\Docs\ListByField.cshtml" />
+    <Content Include="Views\Shared\PartialPaginationAjax2.cshtml" />
+    <Content Include="Views\AjaxTemplates\DocsList.cshtml" />
+    <Content Include="Views\Shared\PartialTaisaochonLuatVietNam.cshtml" />
+    <Content Include="Views\Shared\PartialSharedCorner.cshtml" />
+    <Content Include="Views\Shared\PartialMenuLeft.cshtml" />
+    <Content Include="Views\AjaxTemplates\Customers_Docs.cshtml" />
+    <Content Include="Views\AjaxTemplates\TCVNNewest.cshtml" />
+    <Content Include="Views\AjaxTemplates\TCVN\TCVNProperties.cshtml" />
+    <Content Include="Views\Customers\CustomerMyDocs.cshtml" />
+    <Content Include="Views\Customers\CustomerRenewalServices.cshtml" />
+    <Content Include="Views\TCVN\Index.cshtml" />
+    <Content Include="Views\Shared\PartialContentViewed.cshtml" />
+    <Content Include="Views\Shared\PartialFeedBackAndPartner.cshtml" />
+    <Content Include="Views\News\HuongDan.cshtml" />
+    <Content Include="Views\Feedbacks\Feedbacks.cshtml" />
+    <Content Include="Views\AjaxTemplates\DocsConsolidation.cshtml" />
+    <Content Include="Views\Customers\CustomerReportEffectStatus.cshtml" />
+    <Content Include="Views\DocsConsolidation\Index.cshtml" />
+    <Content Include="Views\News\GioiThieuDetail.cshtml" />
+    <Content Include="Views\Shared\_Layout_01.cshtml" />
+    <Content Include="Views\Shared\PartialTieuDiem.cshtml" />
+    <Content Include="Views\AjaxTemplates\TCVN\TCVNContent.cshtml" />
+    <Content Include="Views\AjaxTemplates\TCVN\TCVNDiagram.cshtml" />
+    <Content Include="Views\AjaxTemplates\TCVN\TCVNDownLoad.cshtml" />
+    <Content Include="Views\AjaxTemplates\TCVN\TCVNRelated.cshtml" />
+    <Content Include="Views\DocsUBND\Index.cshtml" />
+    <Content Include="Views\AjaxTemplates\DocsUBND.cshtml" />
+    <Content Include="Views\Docs\Detail.cshtml" />
+    <Content Include="Views\Docs\Diagram.cshtml" />
+    <Content Include="Views\Docs\Relate.cshtml" />
+    <Content Include="Views\Docs\Effect.cshtml" />
+    <Content Include="Views\Docs\English.cshtml" />
+    <Content Include="Views\Docs\Download.cshtml" />
+    <Content Include="Views\Shared\PartialDocIndexes.cshtml" />
+    <Content Include="Views\Shared\PartialDocUtility.cshtml" />
+    <Content Include="Views\Shared\PartialDocOthers.cshtml" />
+    <Content Include="Views\DocsConsolidation\Detail.cshtml" />
+    <Content Include="Views\DocsConsolidation\Properties.cshtml" />
+    <Content Include="Views\Shared\PartialFullSearchHome.cshtml" />
+    <Content Include="Views\DocsConsolidation\Diagram.cshtml" />
+    <Content Include="Views\Shared\_LayoutDoc.cshtml" />
+    <Content Include="Views\Shared\PartialFullSearchDetail.cshtml" />
+    <Content Include="Views\Shared\PartialPartnerLink.cshtml" />
+    <Content Include="Views\DocsConsolidation\Download.cshtml" />
+    <Content Include="Views\AjaxTemplates\DocsConsolidation_GetDocRelateType.cshtml" />
+    <Content Include="Views\DocsConsolidation\Relate.cshtml" />
+    <Content Include="Views\Shared\PartialDocUtilityMini.cshtml" />
+    <Content Include="Views\Shared\PartialFieldOfSearchVBHN.cshtml" />
+    <Content Include="Views\Docs\Summary.cshtml" />
+    <Content Include="Views\AjaxTemplates\Docs_GetRelate.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\PartialAdvertise.cshtml" />
+    <Content Include="Views\TCVN\Detail.cshtml" />
+    <Content Include="Views\TCVN\Diagram.cshtml" />
+    <Content Include="Views\TCVN\Download.cshtml" />
+    <Content Include="Views\TCVN\Properties.cshtml" />
+    <Content Include="Views\TCVN\Relate.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\PartialCustomerNotifyMessages.cshtml" />
+    <Content Include="Views\DocsCongVan\Detail.cshtml" />
+    <Content Include="Views\DocsCongVan\Properties.cshtml" />
+    <Content Include="Views\DocsCongVan\Effect.cshtml" />
+    <Content Include="Views\DocsCongVan\Relate.cshtml" />
+    <Content Include="Views\DocsCongVan\ListByField.cshtml" />
+    <Content Include="Views\DocsCongVan\Diagram.cshtml" />
+    <Content Include="Views\DocsCongVan\Download.cshtml" />
+    <Content Include="Views\DocsCongVan\Index.cshtml" />
+    <Content Include="Views\AjaxTemplates\DocDetailListRelated.cshtml" />
+    <Content Include="Views\AjaxTemplates\SearchDocsList.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Account\AccountProfile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\BusinessInformationSwitchEditMode.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\BusinessInformationSwitchViewMode.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialAccountProfileSwitchEditMode.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialAccountProfileSwitchViewMode.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialEditCustomerFields.cshtml" />
+    <Content Include="Views\AjaxTemplates\TNPL_GetViewSearch.cshtml" />
+    <Content Include="Views\Account\MyDocuments.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialMyDocuments.cshtml" />
+    <Content Include="Views\DocsUBND\Detail.cshtml" />
+    <Content Include="Views\DocsUBND\Properties.cshtml" />
+    <Content Include="Views\DocsUBND\Effect.cshtml" />
+    <Content Include="Views\DocsUBND\Relate.cshtml" />
+    <Content Include="Views\DocsUBND\ListByField.cshtml" />
+    <Content Include="Views\DocsUBND\Download.cshtml" />
+    <Content Include="Views\Account\HistoryTransactions.cshtml" />
+    <Content Include="Views\Account\MyMessage.cshtml" />
+    <Content Include="Views\Account\NoticeOfValidity.cshtml" />
+    <Content Include="Views\Account\SavedMessages.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialMessageContent.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialMyMessages.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialNoticeOfValidity.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialPaymentTransactions_GetPage.cshtml" />
+    <Content Include="Views\Lawers\Index.cshtml" />
+    <Content Include="Views\Lawers\LawersDetail.cshtml" />
+    <Content Include="Views\Lawers\Search.cshtml" />
+    <Content Include="Views\TNPL\Index.cshtml" />
+    <Content Include="Views\Shared\PartialWidgetUser.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialChangePassword.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialLogin.cshtml" />
+    <Content Include="Views\Customers\CustomerInterFace.cshtml" />
+    <Content Include="Views\Customers\CustomerInterFaceLocation.cshtml" />
+    <Content Include="Views\Customers\CustomerInterFaceTCVN.cshtml" />
+    <Content Include="Views\Shared\PartialDocIndexesOther.cshtml" />
+    <Content Include="Views\Shared\PartialHeaderMyLuatVN.cshtml" />
+    <Content Include="Views\Shared\_LayoutMyLuatVN.cshtml" />
+    <Content Include="Views\AjaxTemplates\Customers_Interface.cshtml" />
+    <Content Include="Views\AjaxTemplates\Lawer_GetView.cshtml" />
+    <Content Include="Views\AjaxTemplates\Lawer_GetViewSearch.cshtml" />
+    <Content Include="Views\AjaxTemplates\CauHoiThuongGap.cshtml" />
+    <Content Include="Views\News\CauHoiThuongGap.cshtml" />
+    <Content Include="Views\Shared\PartialCustomerDocs.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialCustomerDocs.cshtml" />
+    <Content Include="Views\Shared\PartialManualInstruction.cshtml" />
+    <Content Include="Views\Shared\PartialWidgetUserHeader.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\Search.cshtml" />
+    <Content Include="Views\News\ArticleTags.cshtml" />
+    <Content Include="Views\Shared\PartialMessageSearch.cshtml" />
+    <Content Include="Views\Home\Service.cshtml" />
+    <Content Include="Views\AjaxTemplates\News\PartialListArticlesView.cshtml" />
+    <Content Include="Views\AjaxTemplates\News\PartialListArticlesViewSearch.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialSaveMessages.cshtml" />
+    <Content Include="Views\AjaxTemplates\News\PartialListArticlesViewByTag.cshtml" />
+    <Content Include="Views\Home\DocSearch.cshtml" />
+    <Content Include="Views\AjaxTemplates\PartialGetDistrictsByProvinceId.cshtml" />
+    <Content Include="Views\AjaxTemplates\PartialGetWardsByDistrictId.cshtml" />
+    <Content Include="Views\Shared\PartialLinkDocumentAttribute.cshtml" />
+    <Content Include="Views\Shared\PartialLinkDocumentAttribute2.cshtml" />
+    <Content Include="Views\Lawers\Insert.cshtml" />
+    <Content Include="Views\Account\RegisterPersonalInterface.cshtml" />
+    <None Include="Service References\FileUploadService\FileUploader.wsdl" />
+    <Content Include="Views\Account\RegisterServicePackages.cshtml" />
+    <Content Include="Views\AjaxTemplates\Lawers\FaqViewDetail.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialRegisterServicePackages.cshtml" />
+    <Content Include="Views\Shared\PartialPromotionCodeCheck.cshtml" />
+    <Content Include="Views\Account\RenewalOfService.cshtml" />
+    <Content Include="Views\Account\ServiceConversion.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialPaymentMethodsBankAccount.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialPaymentMethodsOnline.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialPaymentMethodsScratchCard.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialRenewalOfService.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialRenewalOfServiceAccountProfileSwitchEditMode.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialRenewalOfServiceAccountProfileSwitchViewMode.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialServiceConversion.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialTaxInvoice.cshtml" />
+    <Content Include="Views\Shared\PartialCustomerNameCheck.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\PartialCustomerProvince.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialEditCustomerProvinces.cshtml" />
+    <Content Include="Views\Shared\PartialPaymentServiceUsingBankAccount.cshtml" />
+    <Content Include="Views\Shared\PartialPaymentServiceUsingScratchCard.cshtml" />
+    <Content Include="Views\AjaxTemplates\Lawers\PartialLawerQuestion.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialConfirmPaymentServiceUsingBankAccount.cshtml" />
+    <Content Include="Views\Customers\CustomerListDocsByField.cshtml" />
+    <Content Include="Views\Docs\ListDocs.cshtml" />
+    <Content Include="Views\Shared\PartialPaginationAjax3.cshtml" />
+    <Content Include="Views\AjaxTemplates\DocsNewest2.cshtml" />
+    <Content Include="Views\Docs\ListDocsEffects.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialForgotPassword.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialSendQuestions.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocDiagram.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocEffect.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocRelate.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocEnglish.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocEngDownload.cshtml" />
+    <Content Include="Views\DocsUBND\Diagram.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionVietNamStandardDiagram.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionVietNamStandardRelate.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocsConsolidationDiagram.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocsConsolidationRelate.cshtml" />
+    <Content Include="Views\Error\NotAuth.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocSummary.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialGopY.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialDocSendMail.cshtml" />
+    <Content Include="Views\Pay\_123PayRequest.cshtml" />
+    <Content Include="Views\News\TinVBMoi.cshtml" />
+    <Content Include="Views\News\BanTinHL.cshtml" />
+    <Content Include="Views\News\VB_CNHT.cshtml" />
+    <Content Include="Views\News\BanTinLuatVn.cshtml" />
+    <Content Include="Views\AjaxTemplates\News\PartialListBanTinLuatVN.cshtml" />
+    <Content Include="Views\AjaxTemplates\Customers_InterfaceByField.cshtml" />
+    <Content Include="Views\Account\RegisterService.cshtml" />
+    <Content Include="Views\Shared\PartialBankPayment.cshtml" />
+    <Content Include="Views\Shared\PartialOnlinePayment.cshtml" />
+    <Content Include="Views\Account\NewUserActive.cshtml" />
+    <Content Include="Views\AjaxTemplates\DocPropertiesTooltip.cshtml" />
+    <Content Include="Views\Shared\_LayoutMobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialHeaderMobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialFooterMobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialMenuFooterMobile.cshtml" />
+    <Content Include="Views\Home\Index.Mobile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Shared\Mobile\PartialFullSearchMenuMobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialWidgetUserHeaderMobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialNewsLetterEmailMobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialContentViewedMobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialFullSearchHomeMobile.cshtml" />
+    <Content Include="Views\Shared\PartialLinksNeedToKnow.cshtml" />
+    <Content Include="Views\Shared\PartialPaginationAjax4.cshtml" />
+    <Content Include="Views\DocsUBND\Index.Mobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialLinkDocumentAttribute2Mobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialLogin.cshtml" />
+    <Content Include="Views\News\ArticlesCategory.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\News\PartialListArticlesView.Mobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialLinkDocumentAttributeMobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Mobile\DocsNewestHomeMobile.cshtml" />
+    <Content Include="Views\News\ArticleDetail.Mobile.cshtml" />
+    <Content Include="Views\News\Index.Mobile.cshtml" />
+    <Content Include="Views\Account\Register.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Mobile\DocsListMobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Mobile\DocsNewest.Mobile.cshtml" />
+    <Content Include="Views\Redirect\OldUrl.cshtml" />
+    <Content Include="Views\Redirect\OldUrlDinamic.cshtml" />
+    <Content Include="Views\Feedbacks\Feedbacks.Mobile.cshtml" />
+    <Content Include="Views\DocsUBND\Properties.Mobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialDocOthersMobile.cshtml" />
+    <Content Include="Views\DocsUBND\Download.Mobile.cshtml" />
+    <Content Include="Views\DocsUBND\Diagram.Mobile.cshtml" />
+    <Content Include="Views\DocsUBND\Relate.Mobile.cshtml" />
+    <Content Include="Views\DocsUBND\Detail.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Mobile\DocsListSearchMobile.cshtml" />
+    <Content Include="Views\DocsCongVan\Download.Mobile.cshtml" />
+    <Content Include="Views\DocsCongVan\Effect.Mobile.cshtml" />
+    <Content Include="Views\DocsUBND\Effect.Mobile.cshtml" />
+    <Content Include="Views\Docs\Download.Mobile.cshtml" />
+    <Content Include="Views\Docs\Effect.Mobile.cshtml" />
+    <Content Include="Views\Docs\ListDocs.Mobile.cshtml" />
+    <Content Include="Views\Docs\ListDocsEffects.Mobile.cshtml" />
+    <Content Include="Views\Docs\Summary.Mobile.cshtml" />
+    <Content Include="Views\Home\DocSearch.Mobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialDocIndexes.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialPermissionDocEffectMobile.cshtml" />
+    <Content Include="Views\News\GioiThieuDetail.Mobile.cshtml" />
+    <Content Include="Views\Docs\English.Mobile.cshtml" />
+    <Content Include="Views\Docs\Relate.Mobile.cshtml" />
+    <Content Include="Views\DocsCongVan\Properties.Mobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialDocOthers.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialPermissionDocEnglishMobile.cshtml" />
+    <Content Include="Views\DocsCongVan\Detail.Mobile.cshtml" />
+    <Content Include="Views\News\ArticleTags.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\News\PartialListArticlesViewByTag.Mobile.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocDiagramMobile.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocRelateMobile.cshtml" />
+    <Content Include="Views\Docs\Detail.Mobile.cshtml" />
+    <Content Include="Views\Docs\Diagram.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Mobile\Docs_GetRelateMobile.cshtml" />
+    <Content Include="Views\News\Search.Mobile.cshtml" />
+    <Content Include="Views\Error\Error404.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\News\PartialListArticlesViewSearch.Mobile.cshtml" />
+    <Content Include="Views\DocsCongVan\Diagram.Mobile.cshtml" />
+    <Content Include="Views\DocsCongVan\Relate.Mobile.cshtml" />
+    <Content Include="Views\Docs\ListByField.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialSendQuestionsMobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Mobile\CauHoiThuongGapMobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Mobile\PartialListBanTinLuatVNMobile.cshtml" />
+    <Content Include="Views\News\BanTinLuatVn.Mobile.cshtml" />
+    <Content Include="Views\News\CauHoiThuongGap.Mobile.cshtml" />
+    <Content Include="Views\News\HuongDan.Mobile.cshtml" />
+    <Content Include="Views\TCVN\Index.Mobile.cshtml" />
+    <Content Include="Views\TCVN\Detail.Mobile.cshtml" />
+    <Content Include="Views\TCVN\Diagram.Mobile.cshtml" />
+    <Content Include="Views\TCVN\Download.Mobile.cshtml" />
+    <Content Include="Views\TCVN\Properties.Mobile.cshtml" />
+    <Content Include="Views\TCVN\Relate.Mobile.cshtml" />
+    <Content Include="Views\DocsConsolidation\Detail.Mobile.cshtml" />
+    <Content Include="Views\DocsConsolidation\Diagram.Mobile.cshtml" />
+    <Content Include="Views\DocsConsolidation\Download.Mobile.cshtml" />
+    <Content Include="Views\DocsConsolidation\Index.Mobile.cshtml" />
+    <Content Include="Views\DocsConsolidation\Properties.Mobile.cshtml" />
+    <Content Include="Views\DocsConsolidation\Relate.Mobile.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocsConsolidationDiagramMobile.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionVietNamStandardDiagramMobile.cshtml" />
+    <Content Include="Views\DocsCongVan\ListByField.Mobile.cshtml" />
+    <Content Include="Views\DocsUBND\ListByField.Mobile.cshtml" />
+    <Content Include="Views\News\BanTinHL.Mobile.cshtml" />
+    <Content Include="Views\Shared\Permission\Docs\PartialPermissionDocEnglishMobile.cshtml" />
+    <Content Include="Views\Account\ChangePassword.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\PartialRegisterMail.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialForgotPasswordMobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\PartialTermsConditionsView.cshtml" />
+    <Content Include="Views\Account\AccountEditBusinessInfoMobile.cshtml" />
+    <Content Include="Views\Account\AccountEditProfileMobile.cshtml" />
+    <Content Include="Views\Account\AccountProfile.Mobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialUpdateCustomerField.cshtml" />
+    <Content Include="Views\Shared\PartialFieldOfSearchHome.cshtml" />
+    <Content Include="Views\News\TinVBMoi.Mobile.cshtml" />
+    <Content Include="Views\News\VB_CNHT.Mobile.cshtml" />
+    <Content Include="Views\News\ServiceDetail.cshtml" />
+    <Content Include="Views\News\ServiceDetail.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialEditCustomerFieldsTCVN.cshtml" />
+    <Content Include="Views\Account\Login.Mobile.cshtml" />
+    <Content Include="Views\News\ArticleGoiDichVu.cshtml" />
+    <Content Include="Views\Docs\DetailFull.cshtml" />
+    <Content Include="Views\Docs\DetailFull.Mobile.cshtml" />
+    <Content Include="Views\DocsCongVan\DetailFull.cshtml" />
+    <Content Include="Views\DocsCongVan\DetailFull.Mobile.cshtml" />
+    <Content Include="Views\DocsUBND\DetailFull.cshtml" />
+    <Content Include="Views\DocsUBND\DetailFull.Mobile.cshtml" />
+    <Content Include="Views\DocsConsolidation\DetailFull.cshtml" />
+    <Content Include="Views\DocsConsolidation\DetailFull.Mobile.cshtml" />
+    <Content Include="Views\TCVN\DetailFull.cshtml" />
+    <Content Include="Views\TCVN\DetailFull.Mobile.cshtml" />
+    <Content Include="Views\Shared\PartialAdvertiseV2.cshtml" />
+    <Content Include="Views\Account\DetailMessage.cshtml" />
+    <Content Include="Views\Account\Unsubscribe.cshtml" />
+    <Content Include="Views\Shared\Home\PartialNewsMostView.cshtml" />
+    <Content Include="Views\Sitemap\Index.cshtml" />
+    <Content Include="Views\Sitemap\SitemapHome.cshtml" />
+    <Content Include="Views\Sitemap\SiteMapTags.cshtml" />
+    <Content Include="Views\Sitemap\SitemapNews.cshtml" />
+    <Content Include="Views\Sitemap\SitemapDocument.cshtml" />
+    <Content Include="Views\AjaxTemplates\PartialDocsConsolidationNewest.cshtml" />
+    <Content Include="Views\Shared\PartialMenuDocDetail.cshtml" />
+    <Content Include="Views\Shared\_LayoutAMP.cshtml" />
+    <Content Include="Views\Shared\AMP\PartialHeader.cshtml" />
+    <Content Include="Views\Home\Index.AMP.cshtml" />
+    <Content Include="Views\Shared\AMP\PartialFooter.cshtml" />
+    <Content Include="Views\Shared\AMP\PartialMenuFooter.cshtml" />
+    <Content Include="Views\Shared\AMP\PartialLinkDocumentAttributeAMP.cshtml" />
+    <Content Include="Views\DocsUBND\Index.AMP.cshtml" />
+    <Content Include="Views\News\ArticlesCategory.AMP.cshtml" />
+    <Content Include="Views\News\ArticleDetail.AMP.cshtml" />
+    <Content Include="Views\News\Index.AMP.cshtml" />
+    <Content Include="Views\Shared\PartialDocsNewestByField.cshtml" />
+    <Content Include="Views\Shared\PartialCongVanHaiQuanThue.cshtml" />
+    <Content Include="Views\Shared\PartialDocsConsolidationNewest.cshtml" />
+    <Content Include="Views\Shared\PartialDocsNewestTCVN.cshtml" />
+    <Content Include="Views\Docs\ListByField.AMP.cshtml" />
+    <Content Include="Views\Shared\_LayoutV2.cshtml" />
+    <Content Include="Views\Shared\PartialHeaderV2.cshtml" />
+    <Content Include="Views\Shared\PartialFullSearchHomeV2.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialEditCustomerFieldsV2.cshtml" />
+    <Content Include="Views\Shared\PartialCustomerInterFaceFields.cshtml" />
+    <Content Include="Views\Account\MyDocuments.Mobile.cshtml" />
+    <Content Include="Views\Account\NoticeOfValidity.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Mobile\MyDocumentsMobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Mobile\PartialNoticeOfValidityMobile.cshtml" />
+    <Content Include="Views\Account\RegisterService.Mobile.cshtml" />
+    <Content Include="Views\Account\RenewalOfService.Mobile.cshtml" />
+    <Content Include="Views\Account\ServiceConversion.Mobile.cshtml" />
+    <Content Include="Views\Shared\PartialBankPaymentMobile.cshtml" />
+    <Content Include="Views\Shared\PartialOnlinePaymentMobile.cshtml" />
+    <Content Include="Views\Shared\PartialPromotionCodeCheckMobile.cshtml" />
+    <Content Include="Views\Account\MyMessage.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Mobile\MyMessageMobile.cshtml" />
+    <Content Include="Views\Account\SavedMessages.Mobile.cshtml" />
+    <Content Include="Views\Customers\CustomerInterFace.Mobile.cshtml" />
+    <Content Include="Views\Shared\_LayoutMyLuatVNMobile.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialHeaderMobileMyLuat.cshtml" />
+    <Content Include="Views\Home\Service.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialPaymentMethodsScratchCard.Mobile.cshtml" />
+    <Content Include="Views\Account\HistoryTransactions.Mobile.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialPaymentTransactions_GetPage.Mobile.cshtml" />
+    <Content Include="Views\Account\RegisterSuccessful.cshtml" />
+    <Content Include="Views\Account\RegisterSuccessful.Mobile.cshtml" />
+    <Content Include="Views\Customers\CustomerInterFaceLocation.Mobile.cshtml" />
+    <Content Include="Views\Account\DetailMessage.Mobile.cshtml" />
+    <Content Include="Views\Customers\CustomerInterFaceTCVN.Mobile.cshtml" />
+    <Content Include="Views\News\ArticleGoiDichVu.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialEditCustomerProvinces.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\Profile\PartialEditCustomerFieldsV2.Mobile.cshtml" />
+    <Content Include="Views\Shared\PartialBankPaymentZalo.cshtml" />
+    <Content Include="Views\Shared\PartialDocsHotViewByDisplayType.cshtml" />
+    <Content Include="Views\Docs\DetailFull.AMP.cshtml" />
+    <Content Include="Views\DocsConsolidation\DetailFull.AMP.cshtml" />
+    <Content Include="Views\DocsCongVan\DetailFull.AMP.cshtml" />
+    <Content Include="Views\DocsUBND\DetailFull.AMP.cshtml" />
+    <Content Include="Views\TCVN\DetailFull.AMP.cshtml" />
+    <Content Include="Views\Shared\PartialDocOthersNewset.cshtml" />
+    <Content Include="Views\Shared\Mobile\PartialDocOthersNewsetMobile.cshtml" />
+    <Content Include="Views\Shared\PartialBankPaymentZaloMobile.cshtml" />
+    <Content Include="Views\DocsCongVan\Index.AMP.cshtml" />
+    <Content Include="Views\Docs\ListDocs.AMP.cshtml" />
+    <Content Include="Views\News\BanTinLuatVn.AMP.cshtml" />
+    <Content Include="Views\TCVN\Index.AMP.cshtml" />
+    <Content Include="Views\Docs\ListDocsEffects.AMP.cshtml" />
+    <Content Include="Views\DocsConsolidation\Index.AMP.cshtml" />
+    <Content Include="Views\News\GioiThieuDetail.AMP.cshtml" />
+    <Content Include="Views\Shared\PartialSEOPagination.cshtml" />
+    <Content Include="Views\TNPL\Index.AMP.cshtml" />
+    <Content Include="Views\News\VB_CNHT.AMP.cshtml" />
+    <Content Include="Views\TNPL\Index.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\TNPL_GetViewSearchMobile.cshtml" />
+    <Content Include="Views\News\HuongDan.AMP.cshtml" />
+    <Content Include="Views\Shared\PartialBoxTieuDiem.cshtml" />
+    <Content Include="Views\Shared\PartialBoxTieuDiemMobile.cshtml" />
+    <Content Include="Views\News\TinVBMoi.AMP.cshtml" />
+    <Content Include="Views\News\BanTinHL.AMP.cshtml" />
+    <Content Include="Views\Shared\_LayoutBTHLAMP.cshtml" />
+    <Content Include="Views\Shared\PartialPaginationAjax5.cshtml" />
+    <Content Include="Views\AjaxTemplates\News\PartialListArticlesViewV2.cshtml" />
+    <Content Include="Views\DocsUBND\ListDocsByProvince.cshtml" />
+    <Content Include="Views\DocsUBND\ListDocsByProvince.Mobile.cshtml" />
+    <Content Include="Views\DocsUBND\ListDocsByProvince.AMP.cshtml" />
+    <Content Include="Views\Shared\PartialBoxNewDocuments.cshtml" />
+    <Content Include="Views\Shared\PartialBoxNewDocumentsMobile.cshtml" />
+    <Content Include="Views\Shared\PartialBoxTieuDiemAMP.cshtml" />
+    <Content Include="Views\Account\RegisterFreeService.cshtml" />
+    <Content Include="Views\Account\ServiceNotice.cshtml" />
+    <Content Include="Views\Account\RegisterFreeService.Mobile.cshtml" />
+    <Content Include="Views\Account\ServiceNotice.Mobile.cshtml" />
+    <Content Include="Views\Account\ServiceFreeNotice.cshtml" />
+    <Content Include="Views\Account\ServiceFreeNotice.Mobile.cshtml" />
+    <Content Include="Views\AjaxTemplates\News\PartialListBanTinLuatVN_V2.cshtml" />
+    <Content Include="Views\Shared\PartialPaginationAjax6.cshtml" />
+    <Content Include="Views\Shared\PartialPaginationAjax7.cshtml" />
+    <Content Include="Views\AjaxTemplates\News\PartialListArticlesViewMobileV2.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Assets\Fonts\" />
+    <Folder Include="Uploaded\Users\Images\Mobile\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="App_GlobalResources\Resource.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.en.designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\FileUploadService\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>29630</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1918/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:29639/" workingDir="" />
+          </servers>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

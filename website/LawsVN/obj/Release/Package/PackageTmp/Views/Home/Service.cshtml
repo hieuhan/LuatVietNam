@@ -1,0 +1,377 @@
+﻿@using LawsVN.Models
+@using ICSoft.CMSLib
+@using LawsVN.Library
+@model ServiceModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.TrimmedOrDefault("Dịch vụ Luật Việt Nam").ToString())</h1>
+}
+<div class="page-content">
+<div class="breadcrumb" style="margin-bottom: 8px;">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>Trang chủ </a>»
+    <span class="breadcrumb-item colorrumb">Dịch vụ</span>
+</div>
+<div class="banner-dv">
+    <img src="@Url.Content("~/assets/images/banner-dv.png")"/>
+</div>
+<div id="servicePackageView" class="cat-box-content">
+<div class="rows tracuu">
+<div class="col4-dv">
+    <div class="widget-top dvu" style="background: #8a8a8a;">
+        <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-mien-phi.html" title="Gói tra cứu miễn phí" class="title-widget cfff">Gói tra cứu miễn phí</a>
+    </div>
+    <div class="cten-container hight">
+        <p>• Tra cứu toàn bộ văn bản luật ban hành từ 1945 đến nay (tiếng Việt)</p>
+        <p>• Xem toàn nội dung văn bản</p>
+        <p>• Xem Thuộc tính văn bản</p>
+        <p>• Xem Tóm tắt văn bản</p>
+        <p>• Tải file văn bản tiếng Việt (.doc, .pdf)</p>
+        <p>• Tra cứu dữ liệu văn bản theo Lĩnh vực</p>
+        <p>• Tra cứu dữ liệu văn bản theo Bộ, Ngành, Địa phương</p>
+        <p>• Xem Tin văn bản mới</p>
+        <p>• Xem Tin tức pháp luật mới</p>
+        <p>• Tra cứu Thuật ngữ pháp lý</p>
+        <p>• Tra cứu dữ liệu văn bản hợp nhất</p>
+        <p>• Nhận bản tin văn bản qua email</p>
+        <p>• Xem tin vắn chính sách mới</p>
+        <p>• Tra cứu Danh mục luật sư</p>
+        <p>• Tra cứu Thuật ngữ pháp lý</p>
+        <p>• Được hỗ trợ tra cứu trực tuyến</p>
+    </div>
+    <div class="rowsxemthem"></div>
+    <div class="rows-dvs">
+        @*<a data-id="@Constants.ServiceIdTraCuuMienPhi" href="#" class="btn-dv2 dang-ky-dv">Đăng ký</a>*@
+        <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-mien-phi.html" title="Gói tra cứu miễn phí" class="btn-dv2">Đăng ký</a>
+    </div>
+</div>
+<div class="col4-dv lawsvn-dv-tieuchuan">
+    <div class="front-tieuchuan">
+        <div class="widget-top dvu" style="background: #a67942;">
+            <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieu-chuan.html" title="Gói tra cứu tiêu chuẩn" class="title-widget cfff">Gói tra cứu tiêu chuẩn</a>
+        </div>
+        <div class="lawsvn-dv-tieuchuan-xemthem">
+            <div class="front-tieuchuan-xemthem">
+                <div class="cten-container hight">
+                    <p>
+                        <strong>Ngoài các quyền lợi của gói: <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-mien-phi.html" title="Tra cứu Miễn phí" style="color: #a67942">Tra cứu Miễn phí</a>, gói<a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieu-chuan.html" title="Tra cứu Tiêu chuẩn" style="color: #a67942"> Tra cứu Tiêu chuẩn</a> còn có thêm:</strong>
+                    </p>
+                    <p>• Tình trạng Hiệu lực (Còn hiệu lực, Hết hiệu lực, Đã sửa đổi, Chưa xác định…)</p>
+                    <p>• Thông báo khi văn bản sửa đổi, hết hiệu lực</p>
+                    <p>• Xem lược đồ văn bản để biết vị trí văn bản trong mối quan hệ với các văn bản liên quan</p>
+                    <p>• Xem văn bản liên quan nội dung</p>
+                    <p>• Biết được Thời điểm áp dụng</p>
+                    <p>• Các văn bản thay thế, sửa đổi, bổ sung</p>
+                    <p>• Nhận bản tin theo lĩnh vực văn bản quan tâm / bản tin tổng hợp / bản tin hiệu lực</p>
+                </div>
+                <div class="rowsxemthem" style="line-height: 15px; height: auto; position: relative;z-index: 99;margin-bottom: 3px;">
+                    <a href="#" style="color: #a9a8a8;" class="btn-front-tieuchuan-xemthem" title="Xem thêm"><i>Xem thêm</i></a>
+                </div>
+                <div class="rows-dvs">
+                    <a href="#" class="btn-dv1 btn-front-tieuchuan" title="Bảng giá">Bảng giá</a>
+                    @*<a href="#" data-id="@Constants.ServiceIdTraCuuTieuChuan" class="btn-dv2 dang-ky-dv" title="Đăng ký">Đăng ký</a>*@
+                    <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieu-chuan.html" title="Gói tra cứu tiêu chuẩn" class="btn-dv2">Đăng ký</a>
+                </div>
+            </div>
+            <div class="back-tieuchuan-xemthem">
+                <div class="cten-container hight" style="padding: 10px !important; height: 303px; margin-top: 48px;">
+                    <p>• Tra cứu Tiêu chuẩn Việt Nam</p>
+                    <p>• Giao diện cá nhân: Tính năng tạo giao diện cá nhân cho mỗi tài khoản sẽ giúp người dùng dễ dàng hệ thống và quản lý văn bản theo nhu cầu riêng, hỗ trợ cập nhật văn bản quan tâm, tình trạng hiệu lực, TCVN, Văn bản địa phương kịp thời, hiệu quả</p>
+                </div>
+                <div class="rowsxemthem" style="line-height: 15px; height: auto; position: relative;z-index: 99;margin-bottom: 3px;">
+                    <a href="#" style="color: #a9a8a8;" class="btn-back-tieuchuan-xemthem" title="Quay lại"><i>Quay lại</i></a>
+                </div>
+                <div class="rows-dvs">
+                    <a href="#" class="btn-dv1 btn-front-tieuchuan" title="Bảng giá">Bảng giá</a>
+                    @*<a href="#" data-id="@Constants.ServiceIdTraCuuTieuChuan" class="btn-dv2 dang-ky-dv" title="Đăng ký">Đăng ký</a>*@
+                    <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieu-chuan.html" title="Gói tra cứu tiêu chuẩn" class="btn-dv2">Đăng ký</a>
+                </div>
+            </div>
+        </div>
+                    
+    </div>
+    <div class="back-tieuchuan">
+        <div class="widget-top dvu" style="background: #a67942;">
+            <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieu-chuan.html" title="Gói tra cứu tiêu chuẩn" class="title-widget cfff">Gói tra cứu tiêu chuẩn</a>
+        </div>
+        <div class="cten-container hight" style="padding: 5px !important; height: 325px">
+            <table class="table table-bordered boder0">
+                <tbody>
+                <tr class="dvbgf9f9f9" style="line-height: 18px; font-size: 12px">
+                    <td class="col3dv w66"><strong>Gói tra cứu</strong></td>
+                    <td class="col3dv"><strong>Số người dùng cùng thời điểm</strong></td>
+                    <td class="col3dv right"><strong>Giá / Tháng</strong></td>
+                </tr>
+                <tr>
+                    <td class="col3dv ">Tiêu chuẩn cá nhân</td>
+                    <td class="col3dv">1-3 người</td>
+                    <td class="col3dv right">60.000</td>
+                </tr>
+                <tr class="dvbgf9f9f9">
+                    <td class="col3dv ">Tiêu chuẩn 5</td>
+                    <td class="col3dv">5 người</td>
+                    <td class="col3dv right">250.000</td>
+                </tr>
+                <tr>
+                    <td class="col3dv ">Tiêu chuẩn 10</td>
+                    <td class="col3dv">10 người</td>
+                    <td class="col3dv right">500.000</td>
+                </tr>
+                <tr class="dvbgf9f9f9">
+                    <td class="col3dv ">Tiêu chuẩn 20</td>
+                    <td class="col3dv">20 người</td>
+                    <td class="col3dv right">800.000</td>
+                </tr>
+                <tr>
+                    <td class="col3dv">Tiêu chuẩn 50</td>
+                    <td class="col3dv">50 người</td>
+                    <td class="col3dv ">1.500.000</td>
+                </tr>
+                </tbody>
+            </table>
+            <p style="color: #a67942; font-style: italic; line-height: 24px; font-size: 12px; margin-top: 15px;">
+                * Các gói thời hạn thuê bao: 06 tháng, 12 tháng, 24 tháng, 36 tháng, 48 tháng, 60 tháng
+                <br>
+                * Giá trên chưa bao gồm VAT
+            </p>
+        </div>
+        <div class="rowsxemthem"></div>
+        <div class="rows-dvs">
+            <a href="#" id="bang-gia-nangcao" class="btn-dv1 btn-back-tieuchuan" title="Quyền lợi">Quyền lợi</a>
+            @*<a href="#" data-id="@Constants.ServiceIdTraCuuTieuChuan" class="btn-dv2 dang-ky-dv" title="Đăng ký">Đăng ký</a>*@
+            <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieu-chuan.html" title="Gói tra cứu tiêu chuẩn" class="btn-dv2">Đăng ký</a>
+        </div>
+    </div>
+</div>
+
+<div class="col4-dv lawsvn-dv-tienganh">
+    <div class="front-tienganh">
+        <div class="widget-top dvu" style="background: #e89b14;">
+            <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieng-anh.html" title="Gói tra cứu tiếng anh" class="title-widget cfff">Gói tra cứu tiếng anh</a>
+        </div>
+        <div class="cten-container hight">
+            <p><strong>Có quyền sử dụng gói <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-mien-phi.html" title="Tra cứu miễn phí" style="color: #a67942;">Tra cứu miễn phí </a> và mọi quyền sử dụng gói<a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieng-anh.html" title="Tra cứu tiếng Anh" style="color: #a67942;"> Tra cứu tiếng Anh</a></strong>, bao gồm:</p>
+            <p>• Tra cứu toàn bộ bản dịch văn bản tiếng Anh tham khảo</p>
+            <p>• Tải bản dịch tiếng Anh tham khảo (.doc, .pdf)</p>
+            <p>• Tra cứu toàn bộ bản dịch văn bản Công báo tiếng Anh.</p>
+            <p>• Tải bản dịch Công báo tiếng Anh (.pdf)</p>
+            <p>• Nhận bản tin văn bản tiếng Anh</p>
+        </div>
+        <div class="rowsxemthem"></div>
+        <div class="rows-dvs">
+            <a href="#" class="btn-dv1 btn-front-tienganh" title="Bảng giá">Bảng giá</a>
+            @*<a href="#" data-id="@Constants.ServiceIdTraCuuTiengAnh" class="btn-dv2 dang-ky-dv" title="Đăng ký">Đăng ký</a>*@
+            <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieng-anh.html" class="btn-dv2" title="Gói tra cứu tiếng anh">Đăng ký</a>
+        </div>
+    </div>
+    <div class="back-tienganh">
+        <div class="widget-top dvu" style="background: #e89b14;">
+            <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieng-anh.html" title="Gói tra cứu tiếng Anh" class="title-widget cfff">Gói tra cứu tiếng anh</a>
+        </div>
+        <div class="cten-container hight" style="padding: 5px !important; height: 325px">
+            <table class="table table-bordered boder0">
+                <tbody>
+                <tr class="dvbgf9f9f9" style="line-height: 18px;font-size: 12px">
+                    <td class="col3dv "><strong>Gói tra cứu</strong></td>
+                    <td class="col35dv"><strong>Số người dùng cùng thời điểm</strong></td>
+                    <td class="col3dv right"><strong>Giá / Tháng</strong></td>
+                </tr>
+                <tr>
+                    <td class="col3dv ">Single</td>
+                    <td class="col3dv right">1 user</td>
+                    <td class="col3dv right">180.000</td>
+                </tr>
+                <tr class="dvbgf9f9f9">
+                    <td class="col3dv">Multi-user 3</td>
+                    <td class="col3dv right">3 users</td>
+                    <td class="col3dv right">450.000</td>
+                </tr>
+                <tr>
+                    <td class="col3dv ">Multi-user 5</td>
+                    <td class="col3dv right">5 users</td>
+                    <td class="col3dv right">800.000</td>
+                </tr>
+                <tr class="dvbgf9f9f9">
+                    <td class="col3dv ">Multi-user 10</td>
+                    <td class="col3dv right">10 users</td>
+                    <td class="col3dv right">1.500.000</td>
+                </tr>
+                <tr>
+                    <td class="col3dv">Multi-user 20</td>
+                    <td class="col3dv right">20 users</td>
+                    <td class="col3dv right">2.000.000</td>
+                </tr>
+                <tr>
+                    <td class="col3dv">Multi-user 50</td>
+                    <td class="col3dv right">50 users</td>
+                    <td class="col3dv right">3.000.000</td>
+                </tr>
+                </tbody>
+            </table>
+            <p style="color: #a67942; font-style: italic; line-height: 24px; font-size: 12px;margin-top: 15px;">
+                * Các gói thời hạn thuê bao: 06 tháng, 12 tháng, 24 tháng, 36 tháng, 48 tháng, 60 tháng
+                <br>
+                * Giá trên chưa bao gồm VAT
+            </p>
+        </div>
+        <div class="rowsxemthem"></div>
+        <div class="rows-dvs">
+            <a href="#" id="bang-gia-nangcao" class="btn-dv1 btn-back-tienganh" title="Quyền lợi">Quyền lợi</a>
+            @*<a href="#" data-id="@Constants.ServiceIdTraCuuTiengAnh" class="btn-dv2 dang-ky-dv" title="Đăng ký">Đăng ký</a>*@
+            <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieng-anh.html" class="btn-dv2" title="Gói tra cứu tiếng anh">Đăng ký</a>
+        </div>
+    </div>
+</div>
+
+    <div class="col4-dv lawsvn-dv-nangcao">
+    <div class="front-nangcao">
+        <div class="widget-top dvu" style="background: #e87314;">
+            <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-nang-cao.html" title="Gói tra cứu nâng cao" class="title-widget cfff">Gói tra cứu nâng cao</a>
+        </div>
+        <div class="cten-container hight">
+            <p><strong>Bao gồm mọi quyền lợi, tiện ích của 2 gói</strong>:</p>
+            <p>• Gói <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieu-chuan.html" title="Tra cứu Tiêu chuẩn" style="color: #a67942; font-weight: bold;">Tra cứu Tiêu chuẩn</a> </p>
+            <p>• Gói <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-tieng-anh.html" title="Tra cứu Tiếng Anh" style="color: #a67942; font-weight: bold;">Tra cứu Tiếng Anh</a> </p>
+            <p>Ngoài ra, gói <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-nang-cao.html" title="Tra cứu Nâng Cao" style="color: #a67942; font-weight: bold;">Tra cứu Nâng cao</a> còn có thêm các quyền lợi sau:</p>
+            <p>• Hỗ trợ tìm kiếm văn bản theo yêu cầu</p>
+            <p>• Được hưởng chính sách giá ưu đãi hơn</p>
+            
+        </div>
+        <div class="rowsxemthem"></div>
+        <div class="rows-dvs">
+            <a href="#" class="btn-dv1 btn-front-nangcao" title="Bảng giá">Bảng giá</a>
+            @*<a href="#" data-id="@Constants.ServiceIdTraCuuNangCao" class="btn-dv2 dang-ky-dv" title="Đăng ký">Đăng ký</a>*@
+            <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-nang-cao.html" class="btn-dv2" title="Gói tra cứu nâng cao">Đăng ký</a>
+        </div>
+    </div>
+    <div class="back-nangcao">
+        <div class="widget-top dvu" style="background: #e87314;">
+            <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-nang-cao.html" title="Gói tra cứu nâng cao" class="title-widget cfff">Gói tra cứu nâng cao</a>
+        </div>
+        <div class="cten-container hight" style="padding: 5px !important; height: 325px">
+            <table class="table table-bordered boder0">
+                <tbody>
+                <tr class="dvbgf9f9f9" style="line-height: 18px;font-size: 12px">
+                    <td class="col3dv "><strong>Gói tra cứu</strong></td>
+                    <td class="col35dv"><strong>Số người dùng cùng thời điểm</strong></td>
+                    <td class="col3dv right"><strong>Giá / Tháng</strong></td>
+                </tr>
+                <tr>
+                    <td class="col3dv ">Nâng cao</td>
+                    <td class="col3dv right">1-3 người</td>
+                    <td class="col3dv right">330.000</td>
+                </tr>
+                <tr class="dvbgf9f9f9">
+                    <td class="col3dv ">Nâng cao 5</td>
+                    <td class="col3dv right">5 người</td>
+                    <td class="col3dv right">1.000.000</td>
+                </tr>
+                <tr>
+                    <td class="col3dv ">Nâng cao 10</td>
+                    <td class="col3dv right">10 người</td>
+                    <td class="col3dv right">1.800.000</td>
+                </tr>
+                <tr class="dvbgf9f9f9">
+                    <td class="col3dv ">Nâng cao 20</td>
+                    <td class="col3dv right">20 người</td>
+                    <td class="col3dv right">2.500.000</td>
+                </tr>
+                <tr>
+                    <td class="col3dv">Nâng cao 50</td>
+                    <td class="col3dv right">50 người</td>
+                    <td class="col3dv right">4.000.000</td>
+                </tr>
+                </tbody>
+            </table>
+            <p style="color: #a67942; font-style: italic; line-height: 24px; font-size: 12px;margin-top: 15px;">
+                * Các gói thời hạn thuê bao: 06 tháng, 12 tháng, 24 tháng, 36 tháng, 48 tháng, 60 tháng
+                <br>
+                * Giá trên chưa bao gồm VAT
+            </p>
+        </div>
+        <div class="rowsxemthem"></div>
+        <div class="rows-dvs">
+            <a href="#" id="bang-gia-nangcao" class="btn-dv1 btn-back-nangcao" title="Quyền lợi">Quyền lợi</a>
+            @*<a href="#" data-id="@Constants.ServiceIdTraCuuNangCao" class="btn-dv2 dang-ky-dv" title="Đăng ký">Đăng ký</a>*@
+            <a href="@(CmsConstants.ROOT_PATH)goi-dich-vu/goi-tra-cuu-nang-cao.html" class="btn-dv2" title="Gói tra cứu nâng cao">Đăng ký</a>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div class="page-head" style="margin-top: 30px;">
+    <div class="cat-box-title vien" style="font-size: 17px; text-transform: none;">So sánh quyền lợi, tiện ích tra cứu văn bản giữa các gói dịch vụ của LuatVietnam.vn</div>
+</div>
+
+<div class="content-left">
+    <div class="cat-box-content">
+        @Html.Raw(Model.mArticlesViewDetailCompare.mArticlesView.ArticleContent)
+    </div>
+</div>
+
+<div class="content-right">
+    <aside class="sidebar">
+        <div class="napthe-banner">
+            <img class="img-napthe" src="@Url.Content("~/assets/images/nap-the-luatvn.png")"/>
+            <a href="#" class="btn-nap-the-luatvn">Nạp thẻ</a>
+        </div>
+        @Html.Partial("PartialTaisaochonLuatVietNam")
+        @{Html.RenderAction("PartialWidgetUser", "Shared", true);}
+        @Html.Partial("PartialManualInstruction")
+        <div class="widget ">
+            <div class="banner">
+                @{Html.RenderAction("PartialAdvertise", "Shared", new {advertPositionId = 234});}
+            </div>
+        </div>
+    </aside>
+</div>
+</div>
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>
+
+@section FooterSection{
+    <script type="text/javascript">
+        $('.lawsvn-dv-nangcao').lawsVnFlip({
+            btnFront: '.btn-front-nangcao',
+            divFront: '.front-nangcao',
+            btnBack: '.btn-back-nangcao',
+            divBack: '.back-nangcao',
+            duration: 150
+        });
+        $('.lawsvn-dv-tienganh').lawsVnFlip({
+            btnFront: '.btn-front-tienganh',
+            divFront: '.front-tienganh',
+            btnBack: '.btn-back-tienganh',
+            divBack: '.back-tienganh',
+            duration: 150
+        });
+        $('.lawsvn-dv-tieuchuan').lawsVnFlip({
+            btnFront: '.btn-front-tieuchuan',
+            divFront: '.front-tieuchuan',
+            btnBack: '.btn-back-tieuchuan',
+            divBack: '.back-tieuchuan',
+            duration: 150
+        });
+        $('.lawsvn-dv-tieuchuan-xemthem').lawsVnFlip({
+            btnFront: '.btn-front-tieuchuan-xemthem',
+            divFront: '.front-tieuchuan-xemthem',
+            btnBack: '.btn-back-tieuchuan-xemthem',
+            divBack: '.back-tieuchuan-xemthem',
+            duration: 150
+        });
+        $('#servicePackageView').LawScrollTo();
+    </script>
+}
+

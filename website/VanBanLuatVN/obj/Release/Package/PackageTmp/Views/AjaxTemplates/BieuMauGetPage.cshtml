@@ -1,0 +1,36 @@
+﻿@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@model NewViewModel
+
+ @if (Model.mCategoryArticles.lArticle.Count > 0)
+ {
+     int rows = Model.mCategoryArticles.lArticle.Count % 2 == 0 ? Model.mCategoryArticles.lArticle.Count / 2 : Model.mCategoryArticles.lArticle.Count / 2 + 1;
+    <div class="item-col2">
+        @for (int i = 0; i < rows; i++)
+        {
+        <div class="list-new">
+            <img class="thumb-bieumau" alt="@Model.mCategoryArticles.lArticle[i].Title" src="@Model.mCategoryArticles.lArticle[i].GetImageUrl_Icon()" style="width:36px; height:40px;" />
+            <div class="pdbieumau">
+                <a class="post-title new" title="@Model.mCategoryArticles.lArticle[i].Title" href="@Model.mCategoryArticles.lArticle[i].GetArticleUrl()">@Model.mCategoryArticles.lArticle[i].Title</a>
+            </div>
+        </div>
+        }
+    </div>
+    <div class="item-col2">
+        @for (int i = rows; i < Model.mCategoryArticles.lArticle.Count; i++)
+        {
+        <div class="list-new">
+            <img class="thumb-bieumau" alt="@Model.mCategoryArticles.lArticle[i].Title" src="@Model.mCategoryArticles.lArticle[i].GetImageUrl_Icon()" style="width:36px; height:40px;" />
+            <div class="pdbieumau">
+                <a class="post-title new" title="@Model.mCategoryArticles.lArticle[i].Title" href="@Model.mCategoryArticles.lArticle[i].GetArticleUrl()">@Model.mCategoryArticles.lArticle[i].Title</a>
+            </div>
+        </div>
+        }
+    </div>
+}
+else
+{
+    <div class="new-list-other">
+      	<p class="post-title vbl bold">Nội dung đang được cập nhật.</p>
+    </div>
+}

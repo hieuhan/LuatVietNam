@@ -1,0 +1,113 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using ICSoft.HelperLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model LawsVN.Models.Account.MyDocuments
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader)</h1>
+}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a> »
+    <span class="breadcrumb-item color1">@Resource.MyDocuments</span>
+</div>
+<div class="box-section">
+
+    <div class="title">
+        <h2 class="title-cat"> @Resource.MyDocuments</h2>
+        <div class="btn-more">
+            <ul class="usernav">
+                <li class="button-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/mobile/images/more-nv.png")"></a>
+                    <ul class="dropdown-menu" style="right: 0px; width: 180px; margin-top: 3px; display: none;">
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="item-more-2 boder"> @Resource.AccountInformation</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html" class="item-more-2 boder">@Resource.TransactionHistory</a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/thong-bao-hieu-luc.html" class="item-more-2 boder">@Resource.NoticeOfValidity </a>
+                        </li>
+                        <li class="item-more">
+                            <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" class="item-more-2 boder">@Resource.Messages</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+@if (Model.mDocsViewSearch.lDocsView.HasValue())
+{ 
+    using (Html.BeginForm("MyDocuments", "Account", FormMethod.Get))
+    {
+        <div class="box-seclect select-onchange">
+            <div class="col1-seclect">
+                <select class="select-option" name="docGroupId" >
+                    <option value="1" @(Model.mPartialPaginationAjax.DocGroupId == 1 ? "selected" : "")>Văn bản pháp luật</option>
+                    <option value="3" @(Model.mPartialPaginationAjax.DocGroupId == 3 ? "selected" : "")>Tiêu chuẩn việt nam</option>
+                    <option value="5" @(Model.mPartialPaginationAjax.DocGroupId == 5 ? "selected" : "")>Văn bản hợp nhất</option>
+                </select>
+            </div>
+        </div>
+    }
+        <div class="title2">
+            <div class="title-cat2 vien">
+                <span style="float: left; color: #bf0000">Văn bản của tôi (@Model.RowCount) </span>
+            </div>
+        </div>
+    <div id="MyDocumentsBox">
+        <div class="cat-box-content">
+            @if (Model.ListMyDocuments.IsAny())
+            {
+                for (int index = 1; index <= Model.ListMyDocuments.Count(); index++)
+                {
+                    var docView = Model.ListMyDocuments.ElementAt(index - 1);
+                    <div class="first-news @(index == Model.ListMyDocuments.Count() ? "last" : "dashed") ">
+                        <h3 class="post-title">
+                            <a href="@docView.DocsView.GetDocUrl()" title="@docView.DocsView.DocName.StripTags()">
+                                <span class="stt">(@index.ToString("#00"))</span>
+                                @docView.DocsView.DocName
+                            </a>
+                        </h3>
+                        <div class="post-time">
+                            @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView.DocsView, EffectStatusName = docView.EffectStatusName } }); }
+                            <a href="javascript:lawsVn.myDocuments.deleteCustomerDocs(@Model.mPartialPaginationAjax.DocGroupId,@docView.DocsView.DocId,1);" class="fa-delete x2"></a>
+                        </div>
+                    </div>
+                }
+            }
+            @{
+            Model.mPartialPaginationAjax.IsMobile = true;
+            Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax });
+            }
+        </div>
+    </div>
+    }
+else
+{
+    using (Html.BeginForm("MyDocuments", "Account", FormMethod.Get))
+    {
+        <div class="box-seclect select-onchange">
+            <div class="col1-seclect">
+                <select class="select-option" name="docGroupId" >
+                    <option value="1" @(Model.mPartialPaginationAjax.DocGroupId == 1 ? "selected" : "")>Văn bản pháp luật</option>
+                    <option value="3" @(Model.mPartialPaginationAjax.DocGroupId == 3 ? "selected" : "")>Tiêu chuẩn việt nam</option>
+                    <option value="5" @(Model.mPartialPaginationAjax.DocGroupId == 5 ? "selected" : "")>Văn bản hợp nhất</option>
+                </select>
+            </div>
+        </div>
+    }
+    <div class="box-thongbao">
+        <img style="float: left; margin-right: 5px;margin-top: 3px;" src="@Url.Content("~/assets/mobile/images/ic_notifications_active_24px.png")" /><em>Bạn chưa có văn bản của tôi.</em>
+    </div>
+}
+</div>
+

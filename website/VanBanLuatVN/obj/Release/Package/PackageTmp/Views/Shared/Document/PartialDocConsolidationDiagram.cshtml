@@ -1,0 +1,27 @@
+﻿@using VanBanLuat.Librarys
+@model VanBanLuatVN.Models.DocViewModel.DocDetailModel
+<article id="luocdo" class="detailfull cat-box-section none">
+    <div class="boxcontent p20 bgffffff">
+        <div class="rows-tievb">
+            <a href="#" class="inlucdo"><img style="float: left; margin-right: 5px;" src="@Url.Content("~/assets/images/icon-in2.png")">In lược đồ</a>
+        </div>
+        <div id="DocDiagramPrint" class="rows-tievb">
+            @for (int index = 0; index < Model.AllDocRelateLists.lDocRelates.Count; index++)
+            {
+                <div class="rowld">
+                    <div class="bg-cten">
+                        <p class="tdvbl">Văn bản @(index + 1)</p>
+                        <p>@Model.AllDocRelateLists.lDocRelates[index].DocName</p>
+                    </div>
+                </div>
+                <div class="rowld" style="text-align: center; height: 31px;"><img src="@Url.Content("~/assets/images/arrow.png")" /></div>
+            }
+            <div class="rowld">
+                <div class="bg-cten" style="background: #0282c4;">
+                    <p class="tdvbl" style="color: #fff; text-transform: uppercase;">Văn bản hợp nhất</p>
+                    <p style="color: #fff;">@Model.Docs.DocName</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

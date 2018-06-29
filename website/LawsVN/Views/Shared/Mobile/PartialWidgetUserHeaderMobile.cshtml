@@ -1,0 +1,43 @@
+﻿@model LawsVN.Models.Account.WidgetUserModel
+@using ICSoft.CMSLib
+<div class="w3-sidebar w3-bar-block w3-card w3-animate-right target-hidden" style="right:0;" id="UserHeader">
+    <button class="closeright" data-toggle-target="#UserHeader"><img src="@Url.Content("~/assets/Mobile/Images/close.png")" /></button>
+    <div class="user-right">
+        <ul>
+            <li class="user-item" style="background: #f5f5f5;">
+                <a href="#" class="thumbavata"> <img src="@LawsUser.GetAvatarMobile()" /></a>
+                <p class="text-user"><strong>@LawsUser.CustomerFullName</strong></p>
+                <p class="text-user" style="font-size: 12px; padding-top: 6px;">@LawsUser.CustomerName</p>
+                @*<a href="#" class="edit-user"><img src="@Url.Content("~/assets/Mobile/Images/ic_edit_24px.png")" /> Sửa</a>*@
+            </li>
+            <li class="user-item">
+                <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="user-item-2"> Thông tin cá nhân</a>
+            </li>
+            <li class="user-item">
+                <a href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html" class="user-item-2"> Văn bản của tôi</a>
+            </li>
+            <li class="user-item">
+            <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" class="user-item-2"> Tin nhắn của tôi</a>
+            </li>
+            <li class="user-item">
+                <a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan.html" class="user-item-2"> Giao diện cá nhân</a>
+            </li>
+           @* <li class="user-item">
+        <a href="#" class="user-item-2"> Đăng ký/ Gia hạn dịch vụ</a>
+    </li>*@
+    <li class="user-item">
+        <a href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html" class="user-item-2"> Lịch sử giao dịch</a>
+    </li>
+            <li class="user-item">
+                <a href="@(CmsConstants.ROOT_PATH)user/doi-mat-khau.html" class="user-item-2"> Đổi mật khẩu</a>
+            </li>
+            @*<li class="user-item">
+                <a href="#" class="user-item-2">Trở lại LuatVietNam/MyLuatVietNam</a>
+            </li>*@
+            <li class="user-item">
+                <a href="#" class="user-out lawsVnLogOut"><img class="iconout" src="@Url.Content("~/assets/Mobile/Images/ic_power_settings_new_24px.png")" /> Đăng xuất</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<button class="btn-right" data-toggle-target="#UserHeader"><img src="@Url.Content("~/assets/Mobile/Images/hoten.png")" /></button>

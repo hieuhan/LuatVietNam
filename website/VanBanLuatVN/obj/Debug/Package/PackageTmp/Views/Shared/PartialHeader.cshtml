@@ -1,0 +1,181 @@
+﻿@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@model SharedViewModel.HeaderModel
+<header class="header-content">
+    <div class="main-content">
+        <div class="menu-icon-sammo">
+            <button class="btn-nav" data-toggle-target="#leftMenu"><img src="@Url.Content("~/assets/images/imenu.png")" /></button>
+            <div class="w3-sidebar sidebar-overlay target-hidden" id="leftMenu">
+                <button data-toggle-target="#leftMenu" class="closeleft"><img class="h32" src="@Url.Content("~/assets/images/close.png")" /></button>
+                <nav class="nav-mobi sidebar-nav">
+                    <label class="m-search">
+                        @using (Html.BeginForm("DocSearch", "Home", FormMethod.Get))
+                        {
+                            <button class="btn-search-top"><img src="@Url.Content("~/assets/images/fa-search.png")" /></button>
+                            <input class="input-search-top" name="Keywords" placeholder="Tìm văn bản...">
+                        }
+                    </label>
+                    <ul>
+                        @if (Model.ListMenuItemsMobile.HasValue())
+                        {
+                            foreach (var item in Model.ListMenuItemsMobile)
+                            {
+                                <li class="item-wg bold">
+                                    <a href="@item.Url" title="@item.ItemName" class="nav-wg-item">
+                                        @item.ItemName
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                    <!-- Bengin danhmuc-->
+                    <div class="danhmuc-cat">
+                        <div class="widget-top">
+                            <div class="widget-title cat"><img style="float: left;margin-top: 4px;margin-right: 5px;" src="@Url.Content("~/assets/images/danhmuc.png")" />Tra cứu văn bản</div>
+                        </div>
+                        <div class="widget-container">
+                            <div class="content-scroll-1" style="height: 300px;">
+                                <div class="nav-p15">
+                                    <ul>
+                                        @if (Model.ListFields.HasValue())
+                                        {
+                                            foreach (var item in Model.ListFields)
+                                            {
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="@item.GetUrl(Model.DocGroupId)" class="nav-wg-item2">@item.FieldDesc</a></li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                                <div class="linh-vuc-khac"><button id="load-btn" class="lvk-mobi">Lĩnh vực khác<img style="margin-top: 5px; float: right;" src="@Url.Content("~/assets/images/icondown.png")" /></button></div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End danhmuc-->
+                </nav>
+            </div>
+        </div>
+        <a class="logo" href="@Constants.ROOT_PATH"> <img src="@Url.Content("~/assets/images/logo.png")" style="margin-top: 7px;" /></a>
+        <div class="top-right">
+            <!--Bengin nav-->
+            <nav class="nav-main mobi">
+                <ul>
+                    @if (Model.ListMenuItems.HasValue())
+                    {
+                        foreach (var item in Model.ListMenuItems)
+                        {
+                            <li class="nav-item"><a href="@item.Url" title="@item.ItemName">@item.ItemName</a></li>
+                        }
+                    }
+                </ul>
+            </nav>
+            <!--End-->
+            <div class="header-right">
+                <!--Bengin search-->
+                <div class="top-search mobi">
+                    <div class="button-dropdown">
+                        <button href="#" class="dropdown-toggle"><img style="float: left;margin-top: 2px;margin-right: 3px;" src="@Url.Content("~/assets/images/fa-search.png")" /></button>
+                        <div class="dropdown-menu fixmobi" style="width: 655px; right: 0;">
+                            @using (Html.BeginForm("DocSearch", "Home", FormMethod.Get))
+                            {
+                                <input class="tex-search" type="text" name="Keywords" placeholder="Nhập nội dung văn bản cần tìm...">
+                                <button class="btn-default tkiem"><img style="float: left; margin-right: 3px;" src="@Url.Content("~/assets/images/fa-search2.png")" />Tìm văn bản</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- End-->
+                <!--Bengin top-dk-->
+                <div class="top-dk">
+                    @if (!Extensions.IsAuthenticated)
+                    {
+                        <!--Bengin like-->
+                        <div class="top-like mobi">
+                            <a href="#" rel="nofollow" class="facebook-login icon-like"><img style="height: 18px" src="@Url.Content("~/assets/images/fb.png")" /></a>
+                            <a href="#" rel="nofollow" class="google-login icon-like"><img style="height: 18px" src="@Url.Content("~/assets/images/gcong.png")" /></a>
+                        </div>
+                        <!-- End-->
+                        <div class="usernav">
+                            <div class="button-dropdown">
+                                <a href="#tab-item-1" rel="nofollow" class="dropdown-toggle select-tab">Đăng nhập</a>
+                                @*<a href="#tab-item-2" rel="nofollow" class="dropdown-toggle select-tab mobi">Đăng ký</a>*@
+                                <div class="dropdown-menu fixmobi" style="width: 300px;right: 0;">
+                                    <!-- tab-conten-->
+                                    <div class="tab-conten">
+                                        <!-- Bengin-->
+                                        <div class="tab-title">
+                                            <a class="tab-item-tab-2 select-tab active" href="#tab-item-1">Đăng nhập</a>
+                                            <a class="tab-item-tab-2 select-tab" href="#tab-item-2">Đăng ký</a>
+                                        </div>
+                                        <!-- End-->
+                                        <!-- Bengin-->
+                                        <div class="cat-box-content">
+                                            <div id="tab-item-1" class="tab-item">
+                                                @{Html.RenderAction("PartialLogin", "Shared");}
+                                            </div>
+                                            <div id="tab-item-2" class="tab-item" style="display:none">
+                                                @{Html.RenderAction("PartialRegister", "Shared");}
+                                            </div>
+                                        </div>
+                                        <!-- End-->
+                                    </div>
+                                    <!-- tab-conten-->
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="usernav">
+                            <div class="button-dropdown">
+                                <span class="xinchao">Hi,</span>
+                                <a href="@(Constants.ROOT_PATH)user/thong-tin-tai-khoan.html" title="@VbLuatUser.CustomerName" class="dropdown-toggle" style="color: #f8c444; font-weight: bold;"><img class="img-user" src="@Url.Content("~/assets/images/icon-user.png")" alt=""/> <span class="text-user">@VbLuatUser.CustomerName.TruncateValue(9)</span></a>
+                                <span style="color: #fff; padding:0 5px; float: left;"></span>
+                                <div class="dropdown-menu fix2" style="width: 300px;right: 0;">
+                                    <ul>
+                                        <li class="list-taikhoan icontk1"><a href="@(Constants.ROOT_PATH)user/thong-tin-tai-khoan.html" title="Thông tin tài khoản" class="itemtk">Thông tin tài khoản</a></li>
+                                        <li class="list-taikhoan icontk2"><a href="@(Constants.ROOT_PATH)user/van-ban-cua-toi.html" title="Văn bản của tôi" class="itemtk">Văn bản của tôi</a></li>
+                                        @*<li class="list-taikhoan icontk3"><a href="#" title="Thông báo hiệu lực" class="itemtk">Thông báo hiệu lực</a></li>*@
+                                        <li class="list-taikhoan icontk4"><a href="@(Constants.ROOT_PATH)user/dang-xuat.html" title="Đăng xuất" class="itemtk">Đăng xuất</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End-->
+
+                        <!-- Bengin Dang ky-->
+                        @*<div class="usernav">
+                                <div class="button-dropdown">
+                                    <a href="#" class="dropdown-toggle"><img style="margin-top: 8px;" src="@Url.Content("~/assets/images/thongbao-icon.png")" /></a>
+                                    <div class="dropdown-menu fix2" style="width: 300px;right: 0px; margin-top: -2px;">
+                                        <div class="content-scroll-1" style="height:300px; background: #f2fafd;">
+                                            <ul>
+                                                <li class="list-thongbao">
+                                                    <a href="#" class="item-tbao">Thay đổi hiệu lực văn bản: Quyết định 78/2002/QĐ - BNN-KL của Bộ Nông nghiệp và Phát triển nông thôn về việc ban hành...</a>
+                                                    <p class="date-tb">16/12/2017</p>
+                                                </li>
+                                                <li class="list-thongbao">
+                                                    <a href="#" class="item-tbao">Thay đổi hiệu lực văn bản: Quyết định 78/2002/QĐ - BNN-KL của Bộ Nông nghiệp và Phát triển nông thôn về việc ban hành...</a>
+                                                    <p class="date-tb">16/12/2017</p>
+                                                </li>
+                                                <li class="list-thongbao">
+                                                    <a href="#" class="item-tbao">Thay đổi hiệu lực văn bản: Quyết định 78/2002/QĐ - BNN-KL của Bộ Nông nghiệp và Phát triển nông thôn về việc ban hành...</a>
+                                                    <p class="date-tb">16/12/2017</p>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="xemtb"><a href="@(Constants.ROOT_PATH)user/tin-nhan.html" title="Xem tất cả thông báo">Xem tất cả thông báo</a></div>
+                                    </div>
+                                </div>
+                            </div>*@
+                    }
+                    <!-- End-->
+                </div>
+                <!--End-->
+                @if (!Model.IsHomePage) { { Html.RenderAction("PartialFieldOfSearchHeader", "Shared"); } }
+            </div>
+        </div>
+    </div>
+</header>

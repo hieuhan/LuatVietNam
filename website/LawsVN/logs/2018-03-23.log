@@ -1,0 +1,7 @@
+2018-03-23 11:31:12.8280 ERROR A public action method 'PartialDocIndexesOther' was not found on controller 'LawsVN.Controllers.SharedController'.
+2018-03-23 11:34:43.6911 ERROR A potentially dangerous Request.Path value was detected from the client (&).
+2018-03-23 11:34:49.3236 ERROR A potentially dangerous Request.Path value was detected from the client (&).
+2018-03-23 11:36:25.7051 ERROR A potentially dangerous Request.Path value was detected from the client (&).
+2018-03-23 11:38:01.3384 ERROR A potentially dangerous Request.Path value was detected from the client (&).
+2018-03-23 11:38:03.5400 ERROR A potentially dangerous Request.Path value was detected from the client (&).
+2018-03-23 11:38:04.3661 ERROR A potentially dangerous Request.Path value was detected from the client (&).

@@ -1,0 +1,145 @@
+﻿@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Docs.DocsViewDetailModel
+<div id="docPrint" class="page-content box-shadow">
+@if (Model.mDocsViewDetail.lDocRelates.HasValue())
+{
+    <div class="box-vblienquan">
+        <aside class="sidebar-nav page">
+            <div class="widget widget_categories">
+                <div class="widget-top">
+                    <span class="title-widget">Danh mục nội dung liên quan</span>
+                </div>
+                @if (Model.mDocsViewDetail.lRelateTypes.HasValue())
+                {
+                    <div class="widget-nav">
+                    <div class="categories-sub">
+                        <div class="nav-item-page">
+                            <a href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("lienquan")" class="fontpage @(Model.mPartialPaginationAjax.RelateTypeId == 0 ? "active" : string.Empty)">Tất cả <span class="colora67942">
+                                (@Model.mDocsViewDetail.lDocRelates.Count)</span></a>
+                        </div>
+                        @foreach (RelateTypes relateType in Model.mDocsViewDetail.lRelateTypes)
+                        {
+                            <div class="nav-item-page">
+                                <a href="@string.Format("{0}&relateTypeId={1}",Model.mDocsViewDetail.mDocsView.GetDocUrl("lienquan"),relateType.RelateTypeId)" class="fontpage @(Model.mPartialPaginationAjax.RelateTypeId == relateType.RelateTypeId)">
+                                    @relateType.RelateTypeName
+                                    <span class="colora67942">(@relateType.RowCount)</span></a>
+                            </div>
+                        }
+                    </div>
+                </div>
+                }
+                else
+                {
+                   <div class="widget-nav">
+                       <span>Nội dung đang cập nhật</span>
+                   </div>
+                }
+            </div>
+        </aside>
+
+        <div class="content-page-right">
+            @if (Model.mPartialPaginationAjax.RelateTypeId == 0)
+            {
+                <div class="lef-vb1">
+                    <span style="color: #a67942; text-transform: uppercase;">Danh mục đang xem: </span>
+                    <span style="font-weight: bold;">
+                        <img class="icondangxem" alt="icondangxem" src="@Url.Content("~/assets/Images/dang-xem.png")">Tất cả (@Model.mDocsViewDetail.lDocRelates.Count)
+                    </span>
+                </div>
+                <div class="right-vb1">
+                    <span style="font-weight: bold;">Loại liên kết văn bản</span>
+                </div>
+            }
+            else if (Model.mDocsViewDetail.lRelateTypes.HasValue())
+            {
+                RelateTypes mRelateTypes = Model.mDocsViewDetail.lRelateTypes.First(i => i.RelateTypeId == Model.mPartialPaginationAjax.RelateTypeId);
+                if (mRelateTypes != null && !string.IsNullOrEmpty(mRelateTypes.RelateTypeName))
+                {
+                    <div class="lef-vb1">
+                        <span style="color: #a67942; text-transform: uppercase;">Danh mục đang xem: </span>
+                        <span style="font-weight: bold;">
+                            <img class="icondangxem" alt="icondangxem" src="@Url.Content("~/assets/Images/dang-xem.png")">@mRelateTypes.RelateTypeName (@mRelateTypes.RowCount)
+                        </span>
+                    </div>
+                }
+            }
+            <div class="cat-box-content" id="ListByField">
+                @if (Model.mDocsViewDetail.lDocRelates.HasValue())
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                        @for (int i = 0; i < Model.mDocsViewDetail.lDocRelates.Count; i++)
+                        {
+                            string effectStatusName = EffectStatus.Static_Get(Model.mDocsViewDetail.lDocRelates[i].EffectStatusId).EffectStatusDesc.TrimmedOrDefault(Resource.Updating);
+                            <tr class="row-first-news @(i % 2 == 0 ? "" : "bgcolor")">
+                                <th class="count-123" scope="row">@((i + 1).ToString("#00"))</th>
+                                <td class="post-col1">
+                                    <h2>
+                                        <a href="@Model.mDocsViewDetail.lDocRelates[i].DocUrl" title="@Model.mDocsViewDetail.lDocRelates[i].DocName" class="post-title lvn">
+                                            @Model.mDocsViewDetail.lDocRelates[i].DocName
+                                        </a>
+                                    </h2>
+                                    <div class="item-meta">
+                                        <a href="@Model.mDocsViewDetail.lDocRelates[i].DocUrl" title="@Resource.Properties" class="tag-item page">@Resource.Properties</a>
+                                        <a href="@DocsView.Static_GetDocUrl(Model.mDocsViewDetail.lDocRelates[i].DocUrl, "noidung")" title="@Resource.Content" class="tag-item page">@Resource.Content</a>
+                                        <a href="@DocsView.Static_GetDocUrl(Model.mDocsViewDetail.lDocRelates[i].DocUrl, "lienquan")" title="@Resource.TheDocumentIsMerged" class="tag-item page">@Resource.TheDocumentIsMerged</a>
+                                        <a href="@DocsView.Static_GetDocUrl(Model.mDocsViewDetail.lDocRelates[i].DocUrl, "luocdo")" title="@Resource.Diagram" class="tag-item page">@Resource.Diagram</a>
+                                        <a href="@DocsView.Static_GetDocUrl(Model.mDocsViewDetail.lDocRelates[i].DocUrl, "taive")" title="@Resource.DownLoad" class="tag-item page">@Resource.DownLoad</a>
+                                        <a href="#" data-id="@Model.mDocsViewDetail.mDocsView.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+                                    </div>
+                                </td>
+                                <td class="post-col2">
+                                    <p class="post-time"> Ban hành: <span class="color2">@(Model.mDocsViewDetail.lDocRelates[i].IssueDate != DateTime.MinValue ? Model.mDocsViewDetail.lDocRelates[i].IssueDate.ToString("dd/MM/yyyy") : Resource.Updating)</span>
+                                    </p>
+                                    <p class="post-time"> Áp dụng: <span class="color2">@(Model.mDocsViewDetail.lDocRelates[i].EffectDate != DateTime.MinValue ? Model.mDocsViewDetail.lDocRelates[i].EffectDate.ToString("dd/MM/yyyy") : Resource.Updating)</span>
+                                    </p>
+                                    <p class="post-time bottom0"> Hiệu lực: <span class="color2">@effectStatusName</span>
+                                    </p>
+                                </td>
+                                @if (Model.mPartialPaginationAjax.RelateTypeId == 0)
+                                {
+                                    <td class="post-col2">
+                                        @Model.mDocsViewDetail.lDocRelates[i].RelateTypeName
+                                    </td>
+                                }
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                    {
+                        Html.RenderAction("PartialPaginationAjax2", "Shared", new {model = Model.mPartialPaginationAjax});
+                    }
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr class="row-first-news">
+                            <th class="count-123" scope="row"></th>
+                            <td class="news-center-post">
+                                <h3>
+                                    <span class="post-title lvn">Chưa có văn bản liên quan</span>
+                                </h3>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+    }
+    else
+    {
+    <div class="cat-box-content">
+        <div class="thong-bao-2">
+            <div class="thongbao-item2">
+                <em>Danh sách văn bản liên quan đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+            </div>
+        </div>
+    </div>
+    }
+</div>

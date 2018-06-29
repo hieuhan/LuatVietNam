@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{26E2BBF8-47FE-4EC1-8374-CCCE50BB5E61}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICSoft.CMSLib</RootNamespace>
+    <AssemblyName>ICSoft.CMSLib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\DLL\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=4.1.51116.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\AjaxControlToolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\Dll\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.LawDocsLib, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\ICSoft.LawDocsLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LibCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\LibCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LibDatabase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\LibDatabase.dll</HintPath>
+    </Reference>
+    <Reference Include="LibSecurity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\LibSecurity.dll</HintPath>
+    </Reference>
+    <Reference Include="LibUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\LibUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountTypes.cs" />
+    <Compile Include="AdvertContentTypes.cs" />
+    <Compile Include="AdvertDisplayTypes.cs" />
+    <Compile Include="AdvertPositionAdverts.cs" />
+    <Compile Include="AdvertPositions.cs" />
+    <Compile Include="Adverts.cs" />
+    <Compile Include="AdvertStatus.cs" />
+    <Compile Include="AdvertViewLogs.cs" />
+    <Compile Include="ArticleCrawlers.cs" />
+    <Compile Include="ArticleFields.cs" />
+    <Compile Include="ArticleLocation.cs" />
+    <Compile Include="ArticlesReport.cs" />
+    <Compile Include="ArticleTypes.cs" />
+    <Compile Include="Categories.cs" />
+    <Compile Include="ArticleCategories.cs" />
+    <Compile Include="ArticleDisplays.cs" />
+    <Compile Include="ArticleRelates.cs" />
+    <Compile Include="Articles.cs" />
+    <Compile Include="ArticleMedias.cs" />
+    <Compile Include="ArticleFeatures.cs" />
+    <Compile Include="ArticleEventStreams.cs" />
+    <Compile Include="ArticleComments.cs" />
+    <Compile Include="ArticleTags.cs" />
+    <Compile Include="ArticleViewLogs.cs" />
+    <Compile Include="ActionTypes.cs" />
+    <Compile Include="ApplicationTypes.cs" />
+    <Compile Include="Awards.cs" />
+    <Compile Include="ArticleRateDetails.cs" />
+    <Compile Include="CategoryCrawlers.cs" />
+    <Compile Include="CategoryDisplays.cs" />
+    <Compile Include="CmsConstants.cs" />
+    <Compile Include="Authors.cs" />
+    <Compile Include="Albums.cs" />
+    <Compile Include="CustomerAccounts.cs" />
+    <Compile Include="CustomerCare.cs" />
+    <Compile Include="CustomerRBTDeletes.cs" />
+    <Compile Include="DiplomaTypes.cs" />
+    <Compile Include="InternalLinkGroups.cs" />
+    <Compile Include="InternalLinks.cs" />
+    <Compile Include="MessageSendRequests.cs" />
+    <Compile Include="OrganOccupations.cs" />
+    <Compile Include="Partner123PayResponseCodes.cs" />
+    <Compile Include="Partner123PayTrans.cs" />
+    <Compile Include="Redirects.cs" />
+    <Compile Include="RequestStatus.cs" />
+    <Compile Include="RequestTypes.cs" />
+    <Compile Include="Seos.cs" />
+    <Compile Include="SongSingerAlbumRBTs.cs" />
+    <Compile Include="CPs.cs" />
+    <Compile Include="SongSearchLogs.cs" />
+    <Compile Include="SongSingerRBTCategories.cs" />
+    <Compile Include="Countries.cs" />
+    <Compile Include="CrawlerContentTypes.cs" />
+    <Compile Include="CrawlerRules.cs" />
+    <Compile Include="Currencies.cs" />
+    <Compile Include="CustomerDataRelates.cs" />
+    <Compile Include="DataDictionaries.cs" />
+    <Compile Include="DataDictionaryTypes.cs" />
+    <Compile Include="DeliveryStatus.cs" />
+    <Compile Include="Districts.cs" />
+    <Compile Include="FeatureGroups.cs" />
+    <Compile Include="Genders.cs" />
+    <Compile Include="IconStatus.cs" />
+    <Compile Include="InfoChannels.cs" />
+    <Compile Include="InputTypes.cs" />
+    <Compile Include="InventoryStatus.cs" />
+    <Compile Include="MemberDevices.cs" />
+    <Compile Include="MeetingGroupStatus.cs" />
+    <Compile Include="MemberResetPasswords.cs" />
+    <Compile Include="DataSources.cs" />
+    <Compile Include="DataTypes.cs" />
+    <Compile Include="FeedBackGroups.cs" />
+    <Compile Include="FeedBacks.cs" />
+    <Compile Include="Medias.cs" />
+    <Compile Include="MediaGroups.cs" />
+    <Compile Include="MediaTypes.cs" />
+    <Compile Include="Languages.cs" />
+    <Compile Include="MeetingGroups.cs" />
+    <Compile Include="Meetings.cs" />
+    <Compile Include="Occupations.cs" />
+    <Compile Include="OrderByClauses.cs" />
+    <Compile Include="OrderDetails.cs" />
+    <Compile Include="Orders.cs" />
+    <Compile Include="OrderStatus.cs" />
+    <Compile Include="PageDatas.cs" />
+    <Compile Include="PositionDisplayRows.cs" />
+    <Compile Include="Provinces.cs" />
+    <Compile Include="Sites.cs" />
+    <Compile Include="SongAlbumImports.cs" />
+    <Compile Include="SongAuthors.cs" />
+    <Compile Include="SongFileTypes.cs" />
+    <Compile Include="SongImports.cs" />
+    <Compile Include="SongMusicTypes.cs" />
+    <Compile Include="Songs.cs" />
+    <Compile Include="SongSingerAlbums.cs" />
+    <Compile Include="SongSingerCategories.cs" />
+    <Compile Include="SongSingerFiles.cs" />
+    <Compile Include="SongSingerLogs.cs" />
+    <Compile Include="SongSingerRBTPromotions.cs" />
+    <Compile Include="SongSingerRBTs.cs" />
+    <Compile Include="SongSingers.cs" />
+    <Compile Include="SongSingerSeos.cs" />
+    <Compile Include="SongSingerSingers.cs" />
+    <Compile Include="Songs_FunringFiles.cs" />
+    <Compile Include="Sponsors.cs" />
+    <Compile Include="Status.cs" />
+    <Compile Include="TelcoCpRbtCodes.cs" />
+    <Compile Include="Telcos.cs" />
+    <Compile Include="UserCategories.cs" />
+    <Compile Include="UserLogs.cs" />
+    <Compile Include="UserSites.cs" />
+    <Compile Include="VoteContents.cs" />
+    <Compile Include="VoteLogs.cs" />
+    <Compile Include="Votes.cs" />
+    <Compile Include="VoteTypes.cs" />
+    <Compile Include="SponsorStatus.cs" />
+    <Compile Include="ReviewStatus.cs" />
+    <Compile Include="Partners.cs" />
+    <Compile Include="RateTypes.cs" />
+    <Compile Include="Tags.cs" />
+    <Compile Include="EventStreams.cs" />
+    <Compile Include="Features.cs" />
+    <Compile Include="DisplayTypes.cs" />
+    <Compile Include="MeetingSponsors.cs" />
+    <Compile Include="MeetingStatus.cs" />
+    <Compile Include="MemberAwards.cs" />
+    <Compile Include="MemberLocations.cs" />
+    <Compile Include="MemberMeetings.cs" />
+    <Compile Include="MemberProfiles.cs" />
+    <Compile Include="Members.cs" />
+    <Compile Include="MemberStatus.cs" />
+    <Compile Include="MenuItems.cs" />
+    <Compile Include="MenuPages.cs" />
+    <Compile Include="Menus.cs" />
+    <Compile Include="PageMeetingGroups.cs" />
+    <Compile Include="PageCategories.cs" />
+    <Compile Include="Pages.cs" />
+    <Compile Include="PageTypes.cs" />
+    <Compile Include="ServicePakageGroups.cs" />
+    <Compile Include="ServicePakages.cs" />
+    <Compile Include="ServicePakageServiceRegists.cs" />
+    <Compile Include="ServicePakageStatus.cs" />
+    <Compile Include="ServiceRegists.cs" />
+    <Compile Include="ServiceRegistStatus.cs" />
+    <Compile Include="ServiceTypes.cs" />
+    <Compile Include="Wards.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ICSoft.CMSViewLib\ICSoft.CMSViewLib.csproj">
+      <Project>{AC1C1DC9-0F70-42D8-BA52-75B36ADFCD45}</Project>
+      <Name>ICSoft.CMSViewLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

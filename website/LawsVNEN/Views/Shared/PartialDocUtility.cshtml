@@ -1,0 +1,49 @@
+﻿@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.DocsViewDetailModel
+<div class="widget">
+    <div class="widget-user" style="padding-bottom: 10px;">
+        <div class="padding">
+            <div class="item-tien-ich">
+                <a href="#" data-id="@Model.mDocsViewDetail.mDocsView.DocId" class="save-doc-of-interest">
+                    <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/save-2.png")">
+                    @Resource.Save</a>
+            </div>
+            <div class="item-tien-ich">
+                <a href="#" class="gop-y" data-name="@Model.mDocsViewDetail.mDocsView.DocName"><img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/gopy.png")" /> @Resource.Feedback</a>
+            </div>
+            <div class="item-tien-ich">
+                <a href="#" class="doc-send-mail" data-url="@Model.mDocsViewDetail.mDocsView.DocUrl"><img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/email2.png")" /> Email</a>
+            </div>
+            <div class="item-tien-ich">
+                <a href="#" class="docPrint"><img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/in2.png")" />  @Resource.Print</a>
+            </div>
+            <div class="thong-bao-hieu-luc" style="margin-right: 0; font-weight: bold;">
+            @if (Extensions.IsAuthenticated && LawsUser.IsInRole("TC,TA,NC"))
+            {
+                <a href="javascript:lawsVn.myDocuments.subscriptionNoticeOfValidity(@Model.mDocsViewDetail.mDocsView.DocId);"><img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/thong-bao2.png")"/> @Resource.EffectNotify <img class="iconhd" alt="icon-user" src="@Url.Content("~/assets/images/thong-bao3.png")" title=""></a>
+                <div class="notification-content" style="width: 170px;">
+                    <div class="from-thong-bao-2">
+                        <div class="rows-thongbao2" style="padding: 5px;">
+                            @Html.Raw(Resource.ToolTipEffectUtility)
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <a href="#" title="@Html.Raw(Resource.NoPermission)" class="no-permission-view">
+                    <img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/thong-bao2.png")">
+                    @Resource.EffectNotify<img class="iconhd" alt="icon-user" src="@Url.Content("~/assets/images/thong-bao3.png")" title="@Resource.EffectNotify"></a>
+            }
+            </div>
+            <div class="rows">
+                <span class="mxh-like" style="font-weight:bold;"><img class="icon-tienich" alt="icon-user" src="@Url.Content("~/assets/images/chia-se2.png")" /> @Resource.Share:</span>
+                    <a href="#" id="fbShare" class="fb2"></a>
+                    <a href="#" class="gg2"></a>
+                    <a href="#" class="tw2"></a>
+            </div>
+        </div>
+    </div>
+</div>
+

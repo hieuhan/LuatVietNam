@@ -1,0 +1,26 @@
+﻿@using LawsVN.Library
+@model ICSoft.CMSViewLib.CategoriesView
+@if (Model != null && Model.lArticlesView.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h4><span class="title-widget">Văn bản cập nhật hàng tuần</span></h4>
+        </div>
+        <div class="widget-container">
+            @foreach (var articleView in Model.lArticlesView)
+            {
+                <div class="recent-post">
+                    <span class="icon-new-3"></span>
+                    <div class="post-conten news">
+                        <a href="@articleView.GetArticleUrl()" title="@articleView.Title" class="post-title-widget">@articleView.Title</a>
+                    </div>
+                </div>
+            }
+            <div class="more">
+                <a href="@Model.GetCategoryUrl()" title="Xem tiếp" class="more-link" style="margin: 5px 10px;">
+                    @*<img alt="Xem tiếp" src="@Url.Content("~/assets/images/xem-tiep.png")"/>*@
+                    Xem tiếp <img alt="alt" src="@Url.Content("~/assets/images/more-link-fa.png")"></a>
+            </div>
+        </div>
+    </div>
+}

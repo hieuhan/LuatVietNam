@@ -1,0 +1,31 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVN.Library
+@model CategoriesView
+@if (Model != null && Model.lArticlesView.HasValue())
+{
+    <div class="widget ">
+        <div class="widget-top">
+                <h4><span class="title-widget" style="text-indent: 15px; text-align: left;">@Model.CategoryDesc</span></h4>
+        </div>
+        <div class="widget-container">
+            <div class="flexslider box-widget">
+                <div id="slider1_container" style="display: none; position: relative; float:left; width: 299px; height: 105px;">
+                    <!-- Slides Container -->
+                    <div u="slides" style="position: absolute; float:left; width: 299px; height: 100px; overflow: hidden;">
+                        @foreach (var article in Model.lArticlesView)
+                        {
+                            <div class="info-news-3">
+                                <img alt="iconinfo" title="@Html.Raw(article.Title.StripTags())" class="icon-info" src="@Url.Content("~/assets/images/chinh-sach-vb.png")" />@Html.Raw(article.ArticleContent)
+                            </div>
+                        }
+                    </div>
+                    <!-- Bengin bullet -->
+                    <div u="navigator" class="jssorb05" style="top: -30px; right: 0px;">
+                        <div u="prototype"></div>
+                    </div>
+                    <!-- End bullet  -->
+                </div>
+            </div>
+        </div>
+    </div>
+}

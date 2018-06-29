@@ -1,0 +1,99 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model NewsViewModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>Trang chủ </a> »
+            <span class="breadcrumb-item colorrumb">Câu hỏi thường gặp</span>
+        </div>
+        <div class="cat-box-content" id="ListByField">
+            @if (Model.ListArticlesView.HasValue())
+            {
+                for (int i = 0; i < Model.ListArticlesView.Count; i++)
+                {
+                    ArticlesView mArticlesView = Model.ListArticlesView[i];
+                    <div class="tab-conten-hd1">
+                        <div id="cssmenu">
+                            <ul>
+                                <li class="has-sub">
+                                    <a href="javascript:void(0)" id="article@(i+1)" class="title-blt">
+                                        @(i + 1). @mArticlesView.Title
+                                        <span class="xem_them_loto"></span>
+                                    </a>
+                                    <ul style="display: @(i == 0 ? "block" : "none");">
+                                        <div class="content-huong-dan">
+                                            @Html.Raw(mArticlesView.ArticleContent)
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            }
+            @{ Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.mPartialPaginationAjax }); }
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 235 });}
+                </div>
+            </div>
+            <div class="widget">
+                <div class="widget">
+                    <div class="box-cauhoi">
+                        <div class="tiecauhoi"><img class="ihdap" src="@Url.Content("~/assets/images/hoi-dap.png")" /> <span style="line-height: 50px;">Hỏi Đáp</span></div>
+                        <div class="rows cauhoiwig">Gửi câu hỏi đến Trung tâm dịch vụ KH</div>
+                        <div class="rows cauhoiwig" style=" margin-bottom: 0;">
+                            <a href="#" class="btn-ch2 send-question" title="Soạn câu hỏi"><img class="ich2" src="@Url.Content("~/assets/images/edit2.png")"/> Soạn câu hỏi </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.mArticlesViewMaster.lCategoriesTop1.HasValue())
+            {
+
+                <div class="widget">
+                    <div class="widget-top">
+                        <h4><span class="title-widget">Điểm tin văn bản mới</span></h4>
+                    </div>
+                    <div class="widget-container">
+                        @foreach (ArticlesView mArticlesView in Model.mArticlesViewMaster.lCategoriesTop1[0].lArticlesView)
+                        {
+                            <div class="recent-post">
+                                <div class="post-thumbnail">
+                                    <a href="@mArticlesView.GetArticleUrl()" title="@mArticlesView.Title" class="thumb70"><img alt="@mArticlesView.Title" src="@mArticlesView.GetImageUrl_Mobile()" /></a>
+                                </div> 
+                                <div class="post-conten">
+                                    <a href="@mArticlesView.GetArticleUrl()" title="@mArticlesView.Title" class="post-title-widget">@mArticlesView.Title</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+
+        </aside>
+    </div>
+</div>
+

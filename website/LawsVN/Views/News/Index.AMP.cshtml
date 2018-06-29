@@ -1,0 +1,57 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.NewsViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="keyword" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage</a> »
+    <span class="breadcrumb-item">@Model.mCategoriesView.CategoryName</span>
+</div>
+<section class="content-section">
+    @if (Model.mArticlesViewMaster.lCategoriesMain2.HasValue())
+    {
+        foreach (var cateView in Model.mArticlesViewMaster.lCategoriesMain2)
+        {
+            if (cateView.lArticlesView.HasValue())
+            {
+                var mArticlesView = cateView.lArticlesView[0];
+                cateView.lArticlesView.Remove(mArticlesView);
+        <div class="title">
+            <h2 class="title-cat">@cateView.CategoryName</h2>
+            <a href="@cateView.GetCategoryUrl()" class="more-new">Xem tiếp</a>
+        </div>
+        <div class="cat-box-content">
+            <div class="first-news">
+                <h3><a class="post-title first" href="@mArticlesView.GetArticleUrl()">@mArticlesView.Title</a></h3>
+                <div class="post-thumbnail">
+                    <a href="@mArticlesView.GetArticleUrl()">
+                        <amp-img src="@mArticlesView.GetImageUrl_Mobile2()" width="300" height="200" layout="responsive"
+                                         class="-amp-element -amp-layout-responsive -amp-layout-size-defined -amp-layout" id="amp-1">
+                                </amp-img>
+                    </a>
+                </div>
+                <div class="sapo">
+                    <p>@Html.Raw(mArticlesView.Summary.StripTags().Truncate(800))</p>
+                </div>
+            </div>
+            @for (int i = 0; i < cateView.lArticlesView.Count && i < 4; i++)
+            {
+                <div class="other-news">
+                    <h3><a class="post-title other" href="@cateView.lArticlesView[i].GetArticleUrl()"><i class="fa-m"></i>@cateView.lArticlesView[i].Title </a></h3>
+                </div>
+            }
+        </div>
+            }
+        }
+    }
+</section>

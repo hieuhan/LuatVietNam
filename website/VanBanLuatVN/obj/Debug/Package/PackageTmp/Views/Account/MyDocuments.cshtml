@@ -1,0 +1,176 @@
+﻿@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@{
+    ViewBag.Title = "MyDocuments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model DocByFieldViewModel
+<div class="breadcrumb" style="margin-bottom: 20px;">
+    <a class="breadcrumb-item" href="@Constants.ROOT_PATH">Trang chủ</a> /
+    <span class="breadcrumb-item xanh">Thông tin cá nhân</span>
+</div>
+<!-- Bengin ttcn-nav-->
+<div class="ttcn-nav">
+    <div class="item-user1 font13">
+        <p>Tên tài khoản</p>
+        <p style="color: #0089d0; font-weight: bold;">@Extensions.GetCurrentCustomerName()</p>
+    </div>
+    <div class="item-user2">
+        <ul>
+            <li class="list-taikhoan icontk1"><a href="@(Constants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="itemtk">Thông tin tài khoản</a></li>
+            <li class="list-taikhoan icontk2"><a href="@(Constants.ROOT_PATH)user/van-ban-cua-toi.html" class="itemtk">Văn bản của tôi</a></li>
+            <li class="list-taikhoan icontk6"><a href="@(Constants.ROOT_PATH)user/doi-mat-khau.html" class="itemtk">Đổi mật khẩu</a></li>
+        </ul>
+    </div>
+</div>
+<!-- End ttcn-nav-->
+<!-- Bengin ttcn-content-->
+<div class="ttcn-content">
+    <div class="title-ttcn">
+        <h1 class="title-ttcn-post"><img class="m-hiden" src="@Url.Content("~/assets/images/vban9.png")" />Văn bản của tôi</h1>
+    </div>
+    <div class="content-dk">
+        <div class="p20px">
+            <div class="r-ttcn">
+                <div class="item-col4-fix">
+                    <select class="text-s14" id="dllDocType" onchange='vbluat.myDocuments.dllMyDocumentChange()'>
+                        <option value="0">Loại văn bản</option>
+                        @foreach (ICSoft.ViewLibV3.DocTypes mDocTypes in Model.DocList.lCountByDocType)
+                        {
+                            <option value="@mDocTypes.DocTypeId">@mDocTypes.DocTypeDesc</option>
+                        }
+                    </select>
+                </div>
+                <div class="item-col4-fix">
+                    <select class="text-s14" id="dllField" onchange='vbluat.myDocuments.dllMyDocumentChange()'>
+                        <option value="0">Tất cả lĩnh vực</option>
+                        @foreach (ICSoft.ViewLibV3.Fields mFields in Model.DocList.lCountByField)
+                        {
+                            <option value="@mFields.FieldId">@mFields.FieldDesc</option>
+                        }
+                    </select>
+                </div>
+                <div class="item-col4-fix">
+                    <select class="text-s14" id="dllOrgan" onchange='vbluat.myDocuments.dllMyDocumentChange()'>
+                        <option value="0">Cơ quan ban hành</option>
+                        @foreach (ICSoft.ViewLibV3.Organs mOrgans in Model.DocList.lCountByOrgan)
+                        {
+                            <option value="@mOrgans.OrganId">@mOrgans.OrganDesc</option>
+                        }
+                    </select>
+                </div>
+                <div class="item-col4-fix">
+                    <select class="text-s14" id="dllEffectStatus" onchange='vbluat.myDocuments.dllMyDocumentChange()'>
+                        <option value="0">Tình trạng hiệu lực</option>
+                        @foreach (ICSoft.ViewLibV3.EffectStatus mEffectStatus in Model.DocList.lCountByEffectStatus)
+                        {
+                            <option value="@mEffectStatus.EffectStatusId">@mEffectStatus.EffectStatusDesc</option>
+                        }
+                    </select>
+                </div>
+                
+            </div>
+            <div class="box-ttcn" id="Content">
+                @if (Model.DocList.lDocs.HasValue())
+                {
+                    <table class="tablecontent">
+                        <body>
+                            @for (int index = 0; index < Model.DocList.lDocs.Count; index++)
+                            {
+                                ICSoft.ViewLibV3.Docs mDocs = Model.DocList.lDocs[index];
+                                if (string.IsNullOrEmpty(mDocs.DocUrl)) { mDocs.DocUrl = string.Empty; }
+                                <tr class="rows-vb">
+                                    <td class="number bold">@string.Format("{0:#00}", index + 1)</td>
+                                    <td>
+                                        <a class="post-title vbl bold" href="@mDocs.GetDocUrl()">@Html.Raw(mDocs.DocName)</a>
+                                        <div class="post-tag">
+                                            @if (mDocs.DocGroupId == Constants.DocGroupIdTcvn)
+                                            {
+                                                <div class="tag-item">Ban hành: <span class="tag-time">@mDocs.IssueDate.toString(mDocs.IssueYear.ToString()) </span></div>
+                                            }
+                                            else if (mDocs.DocGroupId == Constants.DocGroupIdVbhn)
+                                            {
+                                                <div class="tag-item">Xác thực: <span class="tag-time">@mDocs.IssueDate.toString() </span></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="tag-item">Ban hành: <span class="tag-time">@mDocs.IssueDate.toString() </span></div>
+                                            }
+                                            @if (mDocs.DocGroupId != Constants.DocGroupIdTcvn && mDocs.DocGroupId != Constants.DocGroupIdVbhn)
+                                            {
+                                                <div class="tag-item">
+                                                    Hiệu lực:
+                                                    @if (mDocs.EffectDate != DateTime.MinValue)
+                                                    {
+                                                        <span class="tag-time">@mDocs.EffectDate.toString()</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="tag-time">Đang cập nhật</span>
+                                                    }
+                                                </div>
+                                            }
+                                            <div class="tag-item">
+                                                Tình trạng:
+                                                @if (!string.IsNullOrEmpty(mDocs.EffectStatusName))
+                                                {
+                                                    <span class="tag-time">@mDocs.EffectStatusName</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="tag-time">Đang cập nhật </span>
+                                                }
+                                            </div>
+                                            <div class="tag-item"><a href="@mDocs.GetDocUrl("taive")" class="download"></a></div>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left: 20px;">
+                                        <a href="javascript:vbluat.myDocuments.deleteCustomerDocs(@Model.DocList.lDocs[index].DocGroupId,@Model.DocList.lDocs[index].DocId,1);" class="xoavb">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </body>
+                    </table>
+                    if (Model.DocList.lDocs.Count()== Constants.RowAmount20)
+                    {
+                        Html.RenderAction("PartialPagination", "Shared", new
+                        {
+                            model = new VanBanLuatVN.Models.PaginationModel
+                            {
+                                Page = Model.Page,
+                                AjaxUrl = "/Ajax/ListDocsGetPageV2",
+                                QueryString = string.Concat("page=", Model.Page + 1)
+                            }
+                        });
+                    }
+                }
+                else
+                {
+                    <table class="tablecontent full">
+                        <body>
+                            <tr class="rows-vb">
+                                <td>
+                                    <p class="post-title vbl bold">Không tìm thấy dữ liệu phù hợp.</p>
+                                </td>
+                            </tr>
+                        </body>
+                    </table>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End ttcn-content-->
+@section FooterSection
+{
+    <script type="text/javascript">
+        jQuery(function () {
+            $('#contentsWrapper').vbluatInfiteScroll({
+                contentsWrapperSelector: '#contentsWrapper',
+                contentSelector: '.pcontent',
+                nextSelector: '#pnext'
+            });
+        });
+    </script>
+}

@@ -1,0 +1,32 @@
+﻿@using LawsVN.App_GlobalResources
+@model LawsVN.Models.Docs.PartialFullSearchDetailModel
+<div class="widget" style="margin-bottom: 6px;">
+    <div class="box-search-widget">
+    @using (Html.BeginForm("DocSearch", "Home", null, FormMethod.Get))
+    {
+        <div class="rows">
+            @Html.TextBoxFor(s => s.Keywords, new { @class = "exampleinputsearch-wg", placeholder = Resource.EnterWhatToFind })
+            @Html.ValidationMessageFor(m => m.Keywords, "", new { @class = "text-danger-field3" })
+            @Html.HiddenFor(m=>m.DocGroupId)
+            @Html.HiddenFor(m=>m.SearchOptions)
+            <input type="hidden" name="SearchExact" value="0" />
+        </div>
+        <div class="rows">
+            <div class="wg-l1">
+                <div class="dropdown3">
+                    <select name="FieldId" tabindex="1" class="dropdown">
+                        <option value="0">@Resource.FieldWork</option>
+                        @foreach (var item in Model.ListFields)
+                        {
+                            <option value="@item.FieldId" title="@item.FieldDesc" @(item.FieldId == Model.FieldId ? "selected" : "")>@item.FieldDesc</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="wg-2">
+                <button class="btn btn-default wg2">Tìm kiếm</button>
+            </div>
+        </div>
+    }
+    </div>
+</div>

@@ -1,0 +1,199 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using ICSoft.CMSViewLib
+@using ICSoft.CMSLib
+@using LawsVN.Models
+@using LawsVN.Models.Docs
+@model CongVanModel
+@{    
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@{string strTitle = "Công văn " + (Model.mPartialPaginationAjax.FieldId == 4 ? "thuế" : (Model.mPartialPaginationAjax.FieldId == 21 ? "hải quan" : string.Empty));}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.TrimmedOrDefault(strTitle).ToString())</h1>
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.mPartialPaginationAjax.PageIndex, totalPage = Model.mPartialPaginationAjax.TotalPage, pageSize = Model.mPartialPaginationAjax.PageSize });}
+}
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>»
+    <span class="breadcrumb-item color1">@strTitle</span>
+</div>
+<div class="khuyencao">
+    <p>
+        <img style="float: left;margin-right: 5px;" src="@Url.Content("~/Assets/Mobile/images/khuyencao.png")" /> <strong style=" line-height: 24px; font-size: 14px;">Khuyến cáo</strong><br />
+        Các văn bản dạng hành chính được đưa trong mục CÔNG VĂN hoàn toàn chỉ có tính chất tham khảo. Quy định tại các văn bản này không có giá trị áp dụng chung cho mọi trường hợp. Với từng 
+        trường hợp của đơn vị, cá nhân, Quý vị cần gửi công văn tới các cơ quan chức năng để nhận được hướng dẫn cụ thể và chính xác nhất.
+    </p>
+</div>
+
+<section class="box-section">
+    <div id="ListByFieldTab">
+        <div class="title">
+            <h2 class="title-cat">@Html.Raw(strTitle.ToString())</h2>
+            <div class="btn-more">
+                <ul class="usernav">
+                    <li class="button-dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/Assets/Mobile/images/more-nv.png")"></a>
+                        <ul class="dropdown-menu" style="right: 0px; width: 160px; margin-top: 3px; display: none;">
+                            @if (Model.mPartialPaginationAjax.FieldId == 0)
+                            {
+                                <li class="item-more">
+                                    <a href="@(CmsConstants.ROOT_PATH)cong-van-thue.html" class="item-more-2 boder"> Công văn thuế</a>
+                                </li>
+                                <li class="item-more">
+                                    <a href="@(CmsConstants.ROOT_PATH)cong-van-hai-quan.html" class="item-more-2 boder"> Công văn hải quan</a>
+                                </li>
+                            }
+                            else if (Model.mPartialPaginationAjax.FieldId == Constants.FieldThue)
+                            {
+                                <li class="item-more">
+                                    <a href="@(CmsConstants.ROOT_PATH)cong-van.html" class="item-more-2 boder">Công văn</a>
+                                </li>
+                                <li class="item-more">
+                                    <a href="@(CmsConstants.ROOT_PATH)cong-van-hai-quan.html" class="item-more-2 boder"> Công văn hải quan</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="item-more">
+                                    <a href="@(CmsConstants.ROOT_PATH)cong-van.html" class="item-more-2 boder">Công văn</a>
+                                </li>
+                                <li class="item-more">
+                                    <a href="@(CmsConstants.ROOT_PATH)cong-van-thue.html" class="item-more-2 boder"> Công văn thuế</a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+                <!-- box-seclect-->
+                <div class="box-seclect">
+                    @using (Ajax.BeginForm(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName, new
+        {
+            docGroupId = Model.mPartialPaginationAjax.DocGroupId
+            ,
+            docTypeId = Model.mPartialPaginationAjax.DocTypeId
+            ,
+            languageId = Model.mPartialPaginationAjax.LanguageId
+            ,
+            updateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+            ,
+            insertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+            ,
+            controllerName = Model.mPartialPaginationAjax.ControllerName
+            ,
+            actionName = Model.mPartialPaginationAjax.ActionName
+            ,
+            pageSize = Model.mPartialPaginationAjax.PageSize
+            ,
+            linkLimit = Model.mPartialPaginationAjax.LinkLimit
+            ,
+            isMobile = true
+        }, new AjaxOptions
+        {
+            HttpMethod = "Get"
+            ,
+            UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+            ,
+            InsertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+            ,
+            OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+            ,
+            OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+        }))
+                    {
+                        <div class="col3-seclect1">
+                            <select class="select-option select-onchange" id="ddlFieldId" name="FieldId" tabindex="1">
+                                <option value="0">@Resource.AllFields</option>
+                                @foreach (var item in Model.ListFields)
+                                {
+                                    <option value="@item.FieldId" title="@item.FieldName">@item.FieldName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col3-seclect1 " style="margin-right: 0; margin-bottom: 15px;">
+                            @Html.DropdownListPermission("ddlEffectStatusId","EffectStatusId", "select-option select-onchange", new SelectList(Model.ListEffectStatus, "EffectStatusId", "EffectStatusDesc", Model.mPartialPaginationAjax.EffectStatusId))
+                            @*<select class="select-option select-onchange" id="ddlEffectStatusId" name="EffectStatusId" tabindex="2">
+                                <option value="0">@Resource.EffectStatus</option>
+                                @foreach (var item in Model.ListEffectStatus)
+                                {
+                                    <option value="@item.EffectStatusId" title="@item.EffectStatusDesc">@item.EffectStatusDesc</option>
+                                }
+                            </select>*@
+                        </div>
+                    }
+
+                </div>
+                <!-- End-->
+                <!-- content-->
+                <div class="cat-box-content">
+                    <div id="ListByField" class="click-1">
+                        @if (Model.ListDocsView.HasValue())
+                        {
+                            for (int index = 0; index < Model.ListDocsView.Count; index++)
+                            {
+                                var mDocsView = Model.ListDocsView[index];
+                                var number = index + (Model.mPartialPaginationAjax.PageIndex > 0 ? Model.mPartialPaginationAjax.PageIndex - 1 : Model.mPartialPaginationAjax.PageIndex) * Model.mPartialPaginationAjax.PageSize + 1;
+                                <div class="@(index == Model.ListDocsView.Count-1 ? "first-news last" : "first-news dashed") ">
+                                    <h3 class="post-title">
+                                        <a href="@mDocsView.GetDocUrl()" title="@mDocsView.DocName">
+                                            <span class="stt">(@(number.ToString("#00")))</span>@mDocsView.DocName
+                                        </a>
+                                    </h3>
+                                    <div class="post-time">
+                                        @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView } });}
+                                    </div>
+                                </div>
+                            }
+                            {
+                                Model.mPartialPaginationAjax.IsMobile = true;
+                                Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax });
+                            }
+                        }
+                        else
+                        {
+                            <div class="first-news dashed">
+                                <span>@Resource.NoMatchingDocumentFound</span>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            <!-- End-->
+</section>
+@if(Model.ListCongVanMoi.HasValue())
+    {
+        <section class="box-section">
+            <div class="title" style="margin-bottom: 0;">
+                <h2 class="title-cat"> Công văn mới</h2>
+            </div>
+            <div class="cat-box-content">
+                @for (int index = 0; index < Model.ListCongVanMoi.Count; index++)
+                {
+                    var mDocsView = Model.ListDocsView[index];
+                    <div class="@((index + 1) == Model.ListCongVanMoi.Count - 1 ? "first-news last" : "first-news dashed")">
+                        <h3 class="post-title"><a href="@mDocsView.GetDocUrl()" title="@mDocsView.DocName">
+                            @mDocsView.DocName</a></h3>
+                        <div class="post-time">
+                            @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView } });}
+                        </div>
+                    </div>
+                }
+            </div>
+        </section>
+    }
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: { id: 0 }
+        });
+    </script>
+}

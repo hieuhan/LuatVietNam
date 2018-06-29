@@ -1,0 +1,54 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.AppCode
+@using LawsVN.Library
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@model NewsViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class=" breadcrumb-item">@Resource.HomePage </a>»
+    <span class="breadcrumb-item color1">Giới thiệu</span>
+</div>
+<!-- article-->
+<article class="post-single">
+    <div class="boxboder">
+        <div class="box-entry">
+            <div class="post-title-single" style="text-align: center; font-size: 16px; padding: 10px 0;"><img style="height: 16px" src="@Url.Content("~/assets/mobile/images/gioi-thieu1.png")" />Giới thiệu Luật Việt Nam</div>
+            <div class="entry">
+                @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent.StripTags())
+            </div>
+        </div>
+    </div>
+</article>
+<!-- end-->
+
+<div class="box-lich-su" id="lichsuphattrien">
+    <div class="tie-lsu">
+        <img style="max-width: 100%;" src="@Url.Content("~/assets/mobile/images/lichsuphattrien.png")" />
+    </div>
+    <div class="cat-box-content">
+        <div class="noidung-lspt">
+            <div class="box-lich-su">
+                <i class="icon-lsdot"><img src="@Url.Content("~/assets/mobile/images/lspt-moc.png")" /></i>
+            </div>
+            @for (int i = 0; i < Model.ListArticlesView.Count - 1; i++)
+            { 
+                <div class="box-lich-su gd@(i)" >
+                    <i class="icon-lsdot" style="@(i == 0 ? "padding-top: 20px;" : "")"><img src="@Url.Content("~/assets/mobile/images/cham-ls.png")" /></i>
+                    <div class="lich-su-info" style="@(i == 0 ? "padding-top: 20px;" : "")">
+                        <p style="font-size: 15px; color: #a67942; font-weight: bold; padding-bottom: 6px;">@Model.ListArticlesView[i].Title</p>
+                        <p><span style="color: rgb(34, 34, 34); font-family: Arial, Helvetica, sans-serif; text-align: right;">@Html.Raw(Model.ListArticlesView[i].MetaDesc)</span></p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

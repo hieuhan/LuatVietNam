@@ -1,0 +1,58 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Models.Docs
+@using LawsVN.Library
+@model DocsViewDetailModel
+@{
+    Layout = "~/Views/Shared/_LayoutDoc.cshtml";
+}
+<div class="cat-box">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a> »
+            <a href="@(CmsConstants.ROOT_PATH)van-ban-hop-nhat.html" title="Văn bản hợp nhất" class="breadcrumb-item">Văn bản hợp nhất</a>
+        </div>
+
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title vblq">@Html.Raw(Model.mDocsViewDetail.mDocsView.DocName.ToString())</h1>
+                <p class="info-page">@Html.Raw(Model.mDocsViewDetail.mDocsView.MetaDesc.ToString())</p>
+            </div>
+        </div>
+
+        <div class="tab-nav na2">
+            <a class="tab-nav-item-ad" title="@Resource.Properties" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()">@Resource.Properties</a>
+            <a class="tab-nav-item-ad" title="@Resource.Content" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("noidung")">@Resource.Content</a>
+            <a class="tab-nav-item-ad" title="@Resource.Diagram" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("luocdo")">@Resource.Diagram</a>
+            <a class="tab-nav-item-ad active" title="@Resource.Relate" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("lienquan")">@Resource.Relate2</a>
+            <a class="tab-nav-item-ad" title="@Resource.DownLoad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("taive")">@Resource.DownLoad</a>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialFullSearchDetail", "Shared", new { model = new PartialFullSearchDetailModel { SearchOptions = 1, DocGroupId = Constants.DocGroupIdVbhn, FieldId = Model.FieldId } });}
+            @Html.Partial("PartialDocUtilityMini", Model)
+        </aside>
+    </div>
+</div>
+@{ Html.RenderAction("PartialPermissionDocRelate", "Shared", new { docModel = Model, languageId = Model.mDocsViewDetail.mDocsView.LanguageId }); }
+@{Html.RenderAction("PartialDocOthers", "Shared", new { model = new DocOthersModel { ListDocsView = Model.mDocsViewDetail.lDocOthers } });}
+@Html.Partial("PartialContentViewed")
+
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.mDocsViewDetail.mDocsView.DocId',
+                name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+                title: '@Model.mDocsViewDetail.mDocsView.DocName',
+                summary: '',
+                datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+                url: '@Model.mDocsViewDetail.mDocsView.GetDocUrl()',
+                image: '@Constants.NoImageUrl'
+            }
+        });
+    </script>
+}

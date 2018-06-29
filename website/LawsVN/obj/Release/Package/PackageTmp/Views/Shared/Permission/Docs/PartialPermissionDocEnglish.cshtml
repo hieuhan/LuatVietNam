@@ -1,0 +1,49 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@model LawsVN.Models.Docs.DocsViewDetailModel
+<div class="box-content box-shadow">
+    @if (Model.NotDocEng)
+    {
+        <div class="thong-bao-2">
+            <div class="thongbao-item2">
+                <em>Nội dung văn bản tiếng Anh đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+            </div>
+        </div>
+    }
+    else
+    {
+        if (!string.IsNullOrEmpty(Model.DocContentEng) && Model.DocContentEng.Trim().Length > 10)
+        {
+        <div class="content-entry boxtienganh">
+            @Html.Raw(Model.DocContentEng)
+        </div>
+        }
+        else if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == LawsVnLanguages.AvailableLanguages[1].LanguageId) > 0)
+        {
+            var docFileEng = Model.mDocsViewDetail.lDocFiles.FirstOrDefault(m => m.FilePath.ToLower().EndsWith(".pdf"));
+            if (docFileEng != null && !string.IsNullOrEmpty(docFileEng.FilePath))
+            {
+                if (!LawsUser.IsInRole(Constants.RolesFullEng) && docFileEng.FileTypeId != Constants.FileTypeIdVbThamKhao)
+                {
+        <div class="thong-bao-2">
+            <div class="thongbao-item2">
+                <em>Quý khách hãy bấm vào đây để <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Đăng ký dịch vụ"><strong style="color: #a67942">đăng ký</strong></a> sử dụng <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Đăng ký dịch vụ"><strong style="color: #a67942">Dịch vụ Tra cứu văn bản</strong></a> của Luật Việt Nam.</em>
+            </div>
+        </div>
+                }
+                else
+                {
+        <embed id="pdfPannel" src="@string.Concat(Constants.MEDIA_VIEWPATH, docFileEng.FilePath)" width="100%" height="1000" type='application/pdf'>
+                }
+            }
+            else
+            {
+        <div class="thong-bao-2">
+            <div class="thongbao-item2">
+                <em>Nội dung văn bản tiếng Anh đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+            </div>
+        </div>
+            }
+        }
+    }
+</div>

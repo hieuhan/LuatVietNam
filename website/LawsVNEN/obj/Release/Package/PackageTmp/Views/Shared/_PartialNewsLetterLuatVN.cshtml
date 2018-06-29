@@ -1,0 +1,39 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVNEN.Library
+@using LawsVNEN.AppCode
+@model CategoriesView
+@if (Model!= null && Model.lArticlesView.HasValue())
+{<div class="widget">
+    <div class="widget-top">
+        <a href="@Model.GetCategoryUrl()" title="@Model.CategoryName"><h4><span class="title-widget">@Model.CategoryName</span></h4></a>
+    </div>
+    <div class="widget-container">
+        @for (int index = 0; index < Model.lArticlesView.Count; index++)
+        {
+            if (index == 0)
+            {
+                <div class="recent-post">
+                    <div class="post-thumbnail">
+                        <a href="@Model.lArticlesView[index].GetArticleUrl()" title="@Model.lArticlesView[index].Title" class="thumb100">
+                            <img alt="@Model.lArticlesView[index].Title" src="@Model.lArticlesView[index].GetImageUrl_Mobile()" />
+                        </a>
+                    </div>
+                    <a href="@Model.lArticlesView[index].GetArticleUrl()" title="@Model.lArticlesView[index].Title" class="post-title">@Model.lArticlesView[index].Title</a>
+                    <div class="sapo">
+                        <p>@Html.Raw(Model.lArticlesView[index].Summary.StripTags())</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="recent-post">
+                    <span class="icon-new"></span>
+                    <div class="post-conten news">
+                        <a href="@Model.lArticlesView[index].GetArticleUrl()" title="@Model.lArticlesView[index].Title" class="post-title-widget">@Model.lArticlesView[index].Title</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+}

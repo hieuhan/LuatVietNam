@@ -1,0 +1,35 @@
+﻿@using LawsVNEN.Library
+@using ICSoft.CMSViewLib
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@model List<MenuItemsView>
+<!--Bengin footer -->
+<footer class="theme-footer">
+        @if (Model.HasValue())
+        {
+            <nav class="navbottom">
+                @foreach (MenuItemsView menuItem in Model)
+                {
+                    <a href="@menuItem.GetUrl()" class="navbottom-item">@menuItem.ItemName</a>
+                }
+            </nav>
+        }
+        <div class="container">
+            <div class="copyright">
+                <p><img alt="luat viet nam" src="@Url.Content("~/assets/images/logo.png")" /></p>
+                @Html.Raw(Resource.Copyright)
+            </div>
+            <div class="social">
+                <div class="social-center">
+                    <strong class="social-item" style="color:#231f20; font-size: 15px;"> @Resource.SocialNetwork:</strong>
+                    <a rel="nofollow" href="https://www.facebook.com/Luatvietnam.vn/" target="_blank" class="social-item"><img src="@Url.Content("~/assets/images/face-en.png")" /></a>
+                    <a rel="nofollow" href="https://plus.google.com/u/1/communities/113796949546534964680" target="_blank" class="social-item"><img src="@Url.Content("~/assets/images/google-en.png")" /></a>
+                    <a rel="nofollow" href="https://twitter.com/LuatVietNam_VN" target="_blank" class="social-item"><img src="@Url.Content("~/assets/images/tw-en.png")" /></a>
+                    <a href="#" class="social-item"><img src="@Url.Content("~/assets/images/in-en.png")" /></a>
+                    <a href="#" class="social-item"><img style="margin-top: -4px;" src="@Url.Content("~/assets/images/congthuong-en.png")" /></a>
+                    <a href="#" class="social-item"><img src="@Url.Content("~/assets/images/mda-en.png")" /></a>
+                </div>
+            </div>
+        </div>
+</footer>
+<!--End footer -->

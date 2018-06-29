@@ -1,0 +1,195 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using ICSoft.CMSLib
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.AppCode
+@model LawsVNEN.Models.Account.AccountProfileModel
+<div class="content-center-pages searchblog">
+    <div class="breadcrumb"> 
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage</a> »
+     <span class="breadcrumb-item colorrumb">@Resource.AccountInformation</span> </div>
+
+    <div class="register-from">
+        <div id="dangkinhanbantin">
+            <div class="cat-title">
+                <div class="cat-box-title en">@Resource.GeneralInformation</div>
+                @Ajax.ActionLink(Resource.EditInformation, string.Empty, string.Empty
+                , null
+                , new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    Url = Url.Action("SubscribeToNewsletters", "Ajax", new
+                    {
+                        mode = "edit"
+                    }),
+                    UpdateTargetId = "dangkinhanbantin",
+                    InsertionMode = InsertionMode.Replace,
+                    OnBegin = "lawsVn.ajaxEvents.OnBegin",
+                    OnComplete = "lawsVn.ajaxEvents.OnComplete"
+                }, new { @class = "edit-tt icon-edit", title = Resource.EditInformation })
+            </div>
+            <div class="cat-box-content form">
+                <div class="rows" style="margin-top: -10px; margin-bottom: 5px;">
+                    <div class="dk-item1">
+                        <p style="line-height: 36px;"><strong>@Resource.SubscribeToReceiveWeeklyFreeNewsletters ?: </strong></p>
+                    </div>
+                    <div class="col-sm-222" style="padding-top: 10px;">
+                        @(Model.mCustomersViewDetail.mCustomers.RegisterNewsletter == 1 ? Resource.Yes : Resource.No)
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Account information-->
+        <div id="thongtincanhan">
+            <div class="cat-title">
+                <div class="cat-box-title en">@Resource.AccountInformation</div>
+                @Ajax.ActionLink(Resource.EditInformation, string.Empty, string.Empty
+                , null
+                , new AjaxOptions
+                {
+                    HttpMethod = "Post"
+                    ,Url = Url.Action("AccountProfileSwitchMode", "Ajax", new
+                    {
+                        mode = "edit"
+                    })
+                    ,UpdateTargetId = "thongtincanhan"
+                    ,InsertionMode = InsertionMode.Replace
+                    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+                    ,OnSuccess = "lawsVn.ajaxEvents.OnSuccessValid('EditAccountProfileForm')"
+                }, new { @class = "edit-tt icon-edit", title = Resource.EditInformation })
+            </div>
+            <div class="cat-box-content form">
+                <div class="col-xs-2">
+                    <div class="form-inline">
+                        <div class="form-group1">
+                            <label class="col-sm-1">@Resource.FirstAndLastName: </label>
+                            <div class="col-sm-222">
+                                @Model.mCustomersViewDetail.mCustomers.CustomerFullName
+                            </div>
+                        </div>
+                        <div class="form-group1">
+                            <label class="col-sm-1">@Resource.UserName: </label>
+                            <div class="col-sm-222">
+                                @Model.mCustomersViewDetail.mCustomers.CustomerName
+                            </div>
+                        </div>
+                        <div class="form-group1">
+                            <label class="col-sm-1">@Resource.DateOfBirth: </label>
+                            <div class="col-sm-222">
+                                @Model.mCustomersViewDetail.mCustomers.DateOfBirth.toString()
+                            </div>
+                        </div>
+                        <div class="form-group1">
+                            <label class="col-sm-1">@Resource.Sex: </label>
+                            <div class="col-sm-222">
+                                @(Model.mCustomersViewDetail.mCustomers.GenderId == 1 ? Resource.Male : (Model.mCustomersViewDetail.mCustomers.GenderId == 2 ? Resource.Female : "Chưa chọn"))
+                            </div>
+                        </div>
+                        <div class="form-group1">
+                            <label class="col-sm-1">@Resource.Address: </label>
+                            <div class="col-sm-222">
+                                @Model.mCustomersViewDetail.mCustomers.Address
+                            </div>
+                        </div>
+                        <div class="form-group1">
+                            <label class="col-sm-1">@Resource.PhoneNumber: </label>
+                            <div class="col-sm-222">
+                                @Model.mCustomersViewDetail.mCustomers.CustomerMobile
+                            </div>
+                        </div>
+                        <div class="form-group1">
+                            <label class="col-sm-1">Email: </label>
+                            <div class="col-sm-222">
+                                @Model.mCustomersViewDetail.mCustomers.CustomerMail
+                            </div>
+                        </div>
+                        @if (Model.mCustomersViewDetail.mCustomers.ProvinceId > 0)
+                        {
+                            var provinces = Model.ListProvinces.FirstOrDefault(m => m.ProvinceId == Model.mCustomersViewDetail.mCustomers.ProvinceId) ?? new Provinces { ProvinceDesc = string.Empty };
+                            <div class="form-group1">
+                                <label class="col-sm-1">@Resource.ProvinceCity: </label>
+                                <div class="col-sm-222">
+                                    @provinces.ProvinceName
+                                </div>
+                            </div>
+                        }
+                        @if (Model.mCustomersViewDetail.mCustomers.OccupationId > 0)
+                            {
+                                var Occupations = Model.ListOccupations.FirstOrDefault(m => m.OccupationId == Model.mCustomersViewDetail.mCustomers.OccupationId) ?? new Occupations { OccupationName = string.Empty };
+                                <div class="form-group1">
+                                    <label class="col-sm-1">@Resource.Job: </label>
+                                    <div class="col-sm-222">
+                                        @Occupations.OccupationName
+                                    </div>
+                                </div>
+                            }
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!--End cat-box-content-->
+            <!--Bengin cat-box-content orther-->
+        <div id="thongtindoanhnghiep">
+            <div class="cat-title">
+                <div class="cat-box-title en">@Resource.OtherInformations</div>
+              @Ajax.ActionLink(Resource.EditInformation, string.Empty, string.Empty
+                , null
+                , new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    Url = Url.Action("BusinessInformationSwitchMode", "Ajax", new
+                    {
+                        mode = "edit"
+                    }),
+                    UpdateTargetId = "thongtindoanhnghiep",
+                    InsertionMode = InsertionMode.Replace,
+                    OnBegin = "lawsVn.ajaxEvents.OnBegin",
+                    OnComplete = "lawsVn.ajaxEvents.OnComplete"
+                }, new { @class = "edit-tt icon-edit", title = Resource.EditInformation })
+            </div>
+            <div class="cat-box-content ">
+                <div class="col-xs-2">
+                    <div class="form-inline">
+                        <div class="form-group1">
+                            <label class="col-sm-1">@Resource.Company: </label>
+                            <div class="col-sm-222">
+                                @Model.mCustomersViewDetail.mCustomers.OrganName
+                            </div>
+                        </div>
+                        <div class="form-group1">
+                            <label class="col-sm-1">@Resource.AccountNumber:</label>
+                            <div class="col-sm-222">
+                                @Model.mCustomersViewDetail.mCustomers.AccountNumber
+                            </div>
+                        </div>
+                        <div class="form-group1">
+                            <label class="col-sm-1">@Resource.Address:</label>
+                            <div class="col-sm-222">
+                                @Model.mCustomersViewDetail.mCustomers.OrganAddress
+                            </div>
+                        </div>
+                        <div class="form-group1">
+                            <label class="col-sm-1">@Resource.PhoneNumber:</label>
+                            <div class="col-sm-222">
+                                @Model.mCustomersViewDetail.mCustomers.OrganPhone
+                            </div>
+                        </div>
+                        <div class="form-group1">
+                            <label class="col-sm-1">Fax:</label>
+                            <div class="col-sm-222">
+                                @Model.mCustomersViewDetail.mCustomers.OrganFax
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End cat-box-content-->
+        </div>
+        </div>
+    <!--End register-from -->
+
+</div>
+

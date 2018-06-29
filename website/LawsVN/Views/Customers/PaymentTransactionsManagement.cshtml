@@ -1,0 +1,404 @@
+﻿@using ICSoft.LawDocsLib;
+@using LawsVN.Models;
+@using ICSoft.CMSLib
+@model  PaymentTransactionsViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+@try
+{
+    <!--Bengin container-->
+    <div class="container">
+    <div class="main-content">
+        <!--Bengin page-content-->
+        <div class="page-content">
+        <!--Bengin content-left -->
+        <div class="content-left">
+              <div class="breadcrumb">
+                      <a href="/" class="breadcrumb-item"><span class="icon-home"></span>Trang chủ </a> »
+                      <a href="#" class="breadcrumb-item">Thông tin cá nhân</a> »
+                      <span class="breadcrumb-item colorrumb">Lịch sử giao dịch</span>
+                </div>
+                 <div class="tab-nav">
+                        <a class="tab-nav-item-ad " href="#">Thông tin tài khoản</a>
+                        <a class="tab-nav-item-ad active" href="#">Lịch sử giao dịch</a>
+                        <a class="tab-nav-item-ad" href="#">Văn bản của tôi</a>
+                        <a class="tab-nav-item-ad" href="#">Thông báo hiệu lực<span style="color: #90622a;"> (3)</span></a>
+                        <a class="tab-nav-item-ad" href="#">Tin nhắn <span style="color: #a67942;">(3)</span></a>
+                   </div>
+
+                   <!-- Bengin-cat-box-content-->
+                   <div class="cat-box-content">
+                      <div class="content page dichvu">
+                          <div class="from-page giao-dich">
+
+                              <!-- Bengin-box-dich-vu-->
+                                <div class="box-dich-vu">
+                                  <div class="hearder-giao-dich">
+                                       <div class="rows top">
+                                       Lịch sử giao dich của tài khoản: <span style="color: #90622a; font-weight: bold;">@Model.lPaymentTransactions[0].mCustomer.CustomerName</span>
+                                       </div>
+                                      <div class="rows">
+                                          <div class="giao-dich1">
+                                          Số lần giao dịch: <span style="color: #90622a; font-weight: bold;">@Model.lCustomer[0].PaymentCount</span> lần  |  Tổng tiền giao dịch: <span style="color: #90622a; font-weight: bold;">@(String.Format("{0:C}", Model.lCustomer[0].TotalPaymentMoney).Replace(",00 ₫", "")) VND</span>
+                                          </div>
+                                          <div class="giao-dich2">
+                                                    <span class="text-pagination"> Thời gian:</span>
+                                                         <div class="select-pagination">
+                                                                <select tabindex="1" class="dropdown3">
+                                                                     <option value="0">Từ trước tới nay </option>
+                                                                      <option value="1">Năm qua </option>
+                                                                      <option value="2">Tháng qua </option>
+                                                                      <option value="3">Tùy chọn </option>
+                                                                </select>
+                                                      </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <!-- Bengin-content-giao-dich-->
+                                  <div class="content-giao-dich">
+                                      <table class="table table-bordered">
+                                          <thead>
+                                            <tr class="row-tr">
+                                              <th class="row-th">STT</th>
+                                              <th class="row-th">mã giao dịch </th>
+                                              <th class="row-th">Ngày giao dịch</th>
+                                              <th class="row-th">Chi tiết giao dịch </th>
+                                              <th class="row-th"> Số tiền</th>
+                                              <th class="row-th"> Kênh thanh toán</th>
+                                            </tr>
+                                          </thead>
+                                            @if(Model.lPaymentTransactions.Count()>0)
+                                              {
+                                          <tbody>
+                                              @for(int i=0; i< Model.lPaymentTransactions.Count(); i++)
+                                              {
+                                            <tr class="row-tr">
+                                              <td class="rows-td">@(i+1)</td>
+                                              <td class="rows-td">#@Model.lPaymentTransactions[i].PaymentTransactionId</td>
+                                              <td class="rows-td">@Model.lPaymentTransactions[i].PaymentDate.ToString("dd/MM/yyyy") </td>
+                                              <td class="rows-td" style="text-align: left;">
+                                                  <p>@(ServicePackages.Static_Get(Model.lPaymentTransactions[i].ServicePackageId).NumMonthUse) tháng - <span style="color: #90622a; font-weight: bold;">@Model.lPaymentTransactions[i].mServicePackage.ServicePackageDesc</span></p>
+                                                  <p>@Model.lPaymentTransactions[i].TransactionDesc</p>
+                                              </td>
+                                              <td class="rows-td">@(String.Format("{0:C}", Model.lPaymentTransactions[i].Amount).Replace(",00 ₫", " VND"))</td>
+                                              <td class="rows-td">@{
+                                                  PaymentTypes mPaymentTypes = new PaymentTypes();
+                                                  string kieuthanhtoan = mPaymentTypes.Get(Model.lPaymentTransactions[i].PaymentTypeId).PaymentTypeDesc;
+                                              }
+                                                @kieuthanhtoan
+                                                </td>
+                                            </tr>
+                                              }
+                                          </tbody>
+                                                }
+                                              else
+                                              {
+                                                  <span> Hiện tại bạn chưa có giao dịch nào</span>
+                                              }
+                                        </table>
+                                  </div>
+                                   <!-- End-content-giao-dich-->
+
+                                      <!--Bengin pagination -->
+                                                             <div class="pagination">
+                                                                <div class="pagination-left">
+                                                                    <span class="text-pagination">Hiển thị:</span>
+                                                                    <div class="select-pagination">
+                                                                        <select tabindex="1" class="dropdown10">
+                                                                            <option value="0">10 kết quả</option>
+                                                                            <option value="1">20 kết quả</option>
+                                                                            <option value="2">50 kết quả</option>
+                                                                            <option value="3">Tất cả</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="pagination-right">
+                                                                  Trang<input class="input-page-item" value="4">của 192
+                                                                  <div class="load-more">
+                                                                      <a href="#" class="load-more-item x1"></a>
+                                                                      <a href="#" class="load-more-item x2"></a>
+                                                                  </div>
+                                                                </div>
+                                                             </div>
+                                       <!--End pagination -->
+                                </div>
+                                 <!-- End-box-dich-vu-->                            
+                          </div>
+                      </div>
+
+                       <!--Bengin box-dich-vu -->
+                      @if(Model.lCustomer[0].ServiceEndTime.AddDays(-5)> DateTime.Now)
+                      { 
+                                <div class="box-dich-thong-bao">
+                                      <div class="padding dv">
+                                        <p style="color: #d81c22; font-weight: bold; font-size: 16px; text-transform: uppercase; line-height: 40px;">Thông báo dịch vụ:
+                                        <span class="icon-gim"><img alt="icon-gim" src="images/thong-bao-dich-vu.png"></span>
+                                        </p>
+                                          <p style="color: #505050;">Tài khoản của Quý khách chỉ còn <span style="color: #d81d22;">@((Model.lCustomer[0].ServiceEndTime.Subtract(DateTime.Now).Days.ToString())) ngày sử dụng</span> dịch vụ <span style="color: #a67942; font-weight: bold;">
+                                              Tra cứu Tiêu chuẩn
+                                              </span>. Để tiếp tục sử dụng dịch vụ tra cứu văn bản, Quý khách có thể <a href="#" style="color: #a67942;  text-decoration: underline;">Gia hạn dịch vụ </a> hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ.</p>
+                                          <p style="color: #505050;">Cảm ơn Quý khách đã tin dùng dịch vụ của LuatVietnam.vn!</p>
+
+                                          <p style="margin-top: 15px; color: #231f20;">Mọi chi tiết xin liên hệ:</p>
+                                          <p style="color: #231f20;"><strong>TRUNG TÂM LUẬT VIỆT NAM - CÔNG TY CP TRUYỀN THÔNG QUỐC TẾ INCOM</strong></p>
+                                          <p style="color: #505050;">Tại Hà Nội: Tầng 3, Tòa nhà IC, 82 phố Duy Tân, Cầu Giấy, Hà Nội - Tel: 024.37833688 - Fax: 024.37833699</p>
+                                          <p style="color: #505050;">Tại TP.HCM: Tòa nhà Hà Phan, số 456 Phan Xích Long, P.2, Q.Phú Nhuận, Tp. HCM - Tel: 08. 39950724</p>
+                                         <p style="color: #505050;">Email: <a href="#" style="color: #a67942; ">lawdata@luatvietnam.vn </a></p>
+                                      </div>
+                                </div>
+                                 <!-- End-box-dich-vu-->
+                      }
+                 </div>
+                 <!-- End-cat-box-content-->
+        </div>
+        <!--End content left-->
+    
+        <!--Bengin content-right-->
+        <div class="content-right">
+            <aside class="sidebar">
+
+                <!--Bengin widget-->
+                    <div class="widget">
+                        <div class="widget-user">
+                          <div class="padding">
+                            <div class="widget-left">
+                                <div class="item-tt"> 
+                                   <a href="#" style="font-weight: bold;"><img class="icon-user" alt="icon-user" src="images/hoten.png"> NguyenVanA</a>
+                                   <span class="tvv">VIP</span>
+                                </div>
+                                <div class="item-tt"> 
+                                   <a href="#"><img class="icon-user" alt="icon-user" src="images/thongtincn.png"> Thông tin cá nhân</a>
+                                </div>
+                                <div class="item-tt"> 
+                                   <a href="#"><img class="icon-user" alt="icon-user" src="images/tinnhan.png"> Tin nhắn của tôi <span style="color: #b28247; font-weight: bold;">( 29 )</span></a>
+                                </div>
+                                <div class="item-tt"> 
+                                   <a href="#"><img class="icon-user" alt="icon-user" src="images/vanban.png">Văn bản của tôi <span style="color: #b28247; font-weight: bold;">( 92 )</span></a>
+                                </div>
+                                <div class="item-tt"> 
+                                   <a href="#"><img class="icon-user" alt="icon-user" src="images/gia-han.png"> Gia hạn dịch vụ</a>
+                                </div>
+                                <div class="item-tt"> 
+                                   <a href="#"><img class="icon-user" alt="icon-user" src="images/lichsu.png"> Lịch sử giao dịch</a>
+                                </div>
+                                <div class="item-tt"> 
+                                   <a href="#"><img class="icon-user" alt="icon-user" src="images/hoten.png"> Đổi mật khẩu</a>
+                                </div>
+                                <div class="item-tt"> 
+                                   <a href="#"><img class="icon-user" alt="icon-user" src="images/logout.png"> Đăng xuất</a>
+                                </div>
+                            </div>
+                            <div class="widget-right">
+                                  <img class="thumbavata-canhan" alt="avata-canhan" src="images/avata-ad2.png">
+                            </div>
+                            </div>
+                            </div>
+                     </div>
+                <!--End widget-->
+
+                 <!--Bengin widget-->
+                    <div class="widget">
+                        <div class="widget-top">
+                            <h3><span class="title-widget">Hướng dẫn sử dụng</span></h3>
+                        </div>
+                        <div class="widget-rows">
+                            <a href="#" class="widget-rows-item dk1">Đăng ký tài khoản</a>
+                        </div>
+                        <div class="widget-rows">
+                            <a href="#" class="widget-rows-item dk2">Đăng ký thuê bao</a>
+                        </div>
+                        <div class="widget-rows">
+                            <a href="#" class="widget-rows-item dk3">Thanh toán</a>
+                        </div>
+                        <div class="widget-rows">
+                            <a href="#" class="widget-rows-item dk4">Tra cứu văn bản</a>
+                        </div>
+                    </div>
+                <!--End widget-->
+                 <!--Bengin widget ads-->
+                          <div class="widget bottom0">
+                              <div class="banner">
+                                  @{Html.RenderPartial("PartialAdvertise", null, new ViewDataDictionary { { "LocationId", 234 } });}
+                              </div>
+                          </div>
+                    <!--End widget ads-->
+               
+            </aside>
+            </div>
+        <!--End content-right-->
+
+        </div>
+      <!--End page-content-->
+
+     
+
+        <!--Bengin cat-box content-wrap-->
+            <div class="cat-box partner">
+               
+                <div class="cat-box-content">
+                    <!--Bengin col-xs-2-->
+                    <div class="col-xs-2 md2">
+                        <div class="col-mb-4">
+                            <span class="img-partner1"></span>
+                        </div>
+                        <div class="col-mb-4">
+                            <span class="img-partner2"></span>
+                        </div>
+                        <div class="col-mb-4">
+                            <span class="img-partner3"></span>
+                        </div>
+                        <div class="col-mb-4">
+                            <span class="img-partner4"></span>
+                        </div>
+                        <div class="col-mb-4">
+                            <span class="img-partner5"></span>
+                        </div>
+                        <div class="col-mb-4">
+                            <span class="img-partner6"></span>
+                        </div>
+                        <div class="col-mb-4">
+                            <span class="img-partner7"></span>
+                        </div>
+                        <div class="col-mb-4">
+                            <span class="img-partner8"></span>
+                        </div>
+                        <div class="col-mb-4">
+                            <span class="img-partner9"></span>
+                        </div>
+                        <div class="col-mb-4">
+                            <span class="img-partner10"></span>
+                        </div>
+                        <div class="col-mb-4">
+                            <span class="img-partner11"></span>
+                        </div>
+                        <div class="col-mb-4">
+                            <span class="img-partner12"></span>
+                        </div>
+                    </div>
+                    <!--End col-xs-2-->
+                    
+                    <!--Bengin col-xs-2-->
+                    <div class="col-xs-2 md2">
+                            <!--Begin carousel-->
+                                    <div class="recentcomments">
+                                        <div id="owl-demo-c2" class="owl-carousel">
+                                            <div class="item-recentcomments">
+                                                <div class="thumbnail-recentcomments">
+                                                    <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png"/></div>
+                                                </div>
+                                                <div class="info-recentcomments">
+                                                    <span class="i-phay"><img alt="i-phay" src="images/phay1.png"/></span>
+                                                    <p>Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn 
+                                                    đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng, 
+                                                    bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                                     có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng 
+                                                     rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                                      Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…</p>
+                                                      <span class="i-phay2"><img alt="i-phay" src="images/phay2.png"/></span>
+                                                </div>
+                                                <div class="info-recentcomments chuky">
+                                                    <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                                                </div>
+                                            </div>
+                                            <div class="item-recentcomments">
+                                                <div class="thumbnail-recentcomments">
+                                                    <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png"/></div>
+                                                </div>
+                                                <div class="info-recentcomments">
+                                                    <span class="i-phay"><img alt="i-phay" src="images/phay1.png"/></span>
+                                                    <p>Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn 
+                                                    đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng, 
+                                                    bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                                     có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng 
+                                                     rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                                      Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…</p>
+                                                      <span class="i-phay2"><img alt="i-phay" src="images/phay2.png"/></span>
+                                                </div>
+                                                 <div class="info-recentcomments chuky">
+                                                    <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                                                </div>
+                                            </div>
+                                             <div class="item-recentcomments">
+                                                <div class="thumbnail-recentcomments">
+                                                    <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png"/></div>
+                                                </div>
+                                                <div class="info-recentcomments">
+                                                    <span class="i-phay"><img alt="i-phay" src="images/phay1.png"/></span>
+                                                    <p>Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn 
+                                                    đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng, 
+                                                    bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                                     có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng 
+                                                     rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                                      Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…</p>
+                                                      <span class="i-phay2"><img alt="i-phay" src="images/phay2.png"/></span>
+                                                </div>
+                                                 <div class="info-recentcomments chuky">
+                                                    <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                                                </div>
+                                            </div>
+                                             <div class="item-recentcomments">
+                                                <div class="thumbnail-recentcomments">
+                                                    <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png"/></div>
+                                                </div>
+                                                <div class="info-recentcomments">
+                                                    <span class="i-phay"><img alt="i-phay" src="images/phay1.png"/></span>
+                                                    <p>Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn 
+                                                    đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng, 
+                                                    bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                                     có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng 
+                                                     rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                                      Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…</p>
+                                                      <span class="i-phay2"><img alt="i-phay" src="images/phay2.png"/></span>
+                                                </div>
+                                                 <div class="info-recentcomments chuky">
+                                                    <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                                                </div>
+                                            </div>
+                                             <div class="item-recentcomments">
+                                                <div class="thumbnail-recentcomments">
+                                                    <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png"/></div>
+                                                </div>
+                                                <div class="info-recentcomments">
+                                                    <span class="i-phay"><img alt="i-phay" src="images/phay1.png"/></span>
+                                                    <p>Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn 
+                                                    đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng, 
+                                                    bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                                     có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng 
+                                                     rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                                      Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…</p>
+                                                      <span class="i-phay2"><img alt="i-phay" src="images/phay2.png"/></span>
+                                                </div>
+                                                 <div class="info-recentcomments chuky">
+                                                    <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                                                </div>
+                                            </div>
+                                            
+                                      </div>
+                                      <div class="customNavigation">
+                                            <a class="btn prev22 btn1"></a>
+                                            <a class="btn next22 btn2"></a>
+                                     </div>
+                                </div>
+                             <!--End carousel-->
+                    </div>
+                    <!--End col-xs-2-->
+                </div>
+            </div>
+        <!--End cat-box content-wrap-->
+        
+    </div>
+    </div>
+    <!--End container-->
+}
+catch (Exception ex)
+{
+    throw new Exception(ex.Message);
+}
+
+

@@ -1,0 +1,218 @@
+﻿@using LawsVN.Models
+@using LawsVN.Library
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using sms.utils
+@model ArticleViewDetailModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-content">
+    <div class="content-left">
+        <article class="the-post article-fixw" style="border: 0;">
+            <div class="breadcrumb">
+                <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a> »
+                <a href="@Model.m_ArticlesViewDetail.mCategoriesView.GetCategoryUrl()" class="breadcrumb-item">@Model.m_ArticlesViewDetail.mCategoriesView.CategoryDesc</a> »
+                <span class="breadcrumb-item colorrumb">@Model.m_ArticlesViewDetail.mArticlesView.Title</span>
+            </div>
+            <div class="padding303">
+                <div class="post-rows">
+                    <div class="post-meta-lvn">
+                        @DateTimeUtil.GetLongDateTime(Model.m_ArticlesViewDetail.mArticlesView.PublishTime)
+                    </div>
+                    <div class="share-post">
+                        <div class="share-post-icon">
+                            <a href="#" class="socialShare" data-social="facebook" title="Chia sẻ bài viết">
+                                <img alt="share-post-icon" src="@Url.Content("~/assets/images/icon-facebook.png")" />
+                            </a>
+                        </div>
+                        <div class="share-post-icon">
+                            <a href="#" class="socialShare" data-social="gplus" title="Chia sẻ bài viết">
+                                <img alt="share-post-icon" src="@Url.Content("~/assets/images/icon-gg.png")" />
+                            </a>
+                        </div>
+                        <div class="share-post-icon">
+                            <a href="#" class="socialShare" data-social="twitter" title="Chia sẻ bài viết">
+                                <img alt="share-post-icon" src="@Url.Content("~/assets/images/icon-twr.png")" />
+                            </a>
+                        </div>
+                        <div class="share-post-icon">
+                            <a href="#" class="docPrint">
+                                <img alt="share-post-icon" src="@Url.Content("~/assets/images/icon-print.png")" />
+                            </a>
+                        </div>
+                        <div class="share-post-icon">
+                            <a href="#" class="doc-send-mail" data-url="@Model.m_ArticlesViewDetail.mArticlesView.GetArticleUrl()">
+                                <img alt="share-post-icon" src="@Url.Content("~/assets/images/icon-mail.png")" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post-inner" id="docPrint">
+                    <h1 class="post-title entry-title">@Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.Title)</h1>
+
+                    <div class="entry box-content-news">
+                        @*<p style="font-family: arial; font-size: 15px;"><strong>@Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.Summary)</strong></p>*@
+                        @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent)
+                    </div>
+
+                </div>
+                @if (Model.m_ArticlesViewDetail.mArticlesView.lTagsView.HasValue())
+                {
+                    <div class="tag-post">
+                        <span class="tietag">@Resource.Topic:</span>
+                        @foreach (var tagsView in Model.m_ArticlesViewDetail.mArticlesView.lTagsView)
+                        {
+                            <a href="@tagsView.TagName.TagsNameGetUrl(tagsView.TagId)" title="@tagsView" class="tag-post-entry">@tagsView.TagName.Trim()</a>
+                        }
+                    </div>
+                }
+
+            </div>
+        </article>
+        @{Html.RenderAction("PartialBoxTieuDiem", "Shared", new { model = Model.m_ArticlesViewDetail.mCategoriesView.CategoryId });}
+        @{Html.RenderAction("PartialBoxNewDocuments", "Shared");}
+        @if (Model.m_ArticlesViewDetail.lArticlesRelate.HasValue())
+        {
+            <div class="news-releated" style="margin-bottom: 20px;">
+                <div class="cat-box-title-releated">
+                    <div class="cat-box-title-releated2" style="text-transform: none; font-size: 16px; font-weight: bold; color: #a67942;">
+                        <img style="margin-right: 5px;" src="@Url.Content("~/assets/images/icon-tin-lien-quan.png")" /> Tin liên quan
+                    </div>
+                </div>
+                <ul>
+                    @for (var index = 0; index < Model.m_ArticlesViewDetail.lArticlesRelate.Count && index < Constants.RowAmount5; index++)
+                    {
+                        var articleViewRelate = Model.m_ArticlesViewDetail.lArticlesRelate[index];
+                        <li class="item-releated">
+                            <a href="@articleViewRelate.GetArticleUrl()" title="@articleViewRelate.Title" class=" post-title-normal releated">@articleViewRelate.Title </a>
+                            <span class="tie-date ">(@articleViewRelate.PublishTime.ToString("dd/MM/yyyy HH:mm"))</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+        @if (Model.m_ArticlesViewDetail.lArticlesOtherNewest.HasValue())
+        {
+            <div class="news-releated" style="margin-bottom: 20px;">
+                <div class="cat-box-title-releated">
+                    <div class="cat-box-title-releated2">
+                        Tin mới
+                    </div>
+                </div>
+                <ul>
+                    @foreach (var articleViewOther in Model.m_ArticlesViewDetail.lArticlesOtherNewest)
+                    {
+                        if (articleViewOther.ArticleId != Model.m_ArticlesViewDetail.mArticlesView.ArticleId)
+                        {
+                            <li class="item-releated">
+                                <a href="@articleViewOther.GetArticleUrl()" title="@articleViewOther.Title" class=" post-title-normal releated">@articleViewOther.Title </a>
+                                <span class="tie-date ">(@articleViewOther.PublishTime.ToString("dd/MM/yyyy HH:mm"))</span>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        }
+        @if (Model.m_ArticlesViewDetail.lArticlesOther.HasValue())
+        {
+            <div class="news-releated" style="margin-bottom: 20px;">
+                <div class="cat-box-title-releated">
+                    <div class="cat-box-title-releated2">
+                        Tin cũ hơn
+                    </div>
+                </div>
+                <ul>
+                    @for (var index = 0; index < Model.m_ArticlesViewDetail.lArticlesOther.Count && index < Constants.RowAmount5; index++)
+                    {
+                        var articleViewOther = Model.m_ArticlesViewDetail.lArticlesOther[index];
+                        <li class="item-releated">
+                            <a href="@articleViewOther.GetArticleUrl()" title="@articleViewOther.Title" class=" post-title-normal releated">@articleViewOther.Title </a>
+                            <span class="tie-date ">(@articleViewOther.PublishTime.ToString("dd/MM/yyyy HH:mm"))</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @*@{Html.RenderAction("PartialTaisaochonLuatVietNam", "Shared");}*@
+            @{Html.RenderAction("PartialTinVan", "Shared", new { model = Model.mArticlesViewMaster.lCategoriesRight1.HasValue() ? Model.mArticlesViewMaster.lCategoriesRight1[0] : null });}
+            @*<div class="widget">
+                    <div class="banner">
+                        @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+                    </div>
+                </div>*@
+            @if (Model.mArticlesMostView.lArticlesNewest.HasValue())
+            {
+                <div class="widget">
+                    <div class="widget-top">
+                        <h3>
+                            <span class="title-widget">@Resource.ArticlesMostView</span>
+                        </h3>
+                    </div>
+                    <div class="widget-container">
+                        @foreach (var articleMostView in Model.mArticlesMostView.lArticlesNewest)
+                        {
+                            <div class="recent-post">
+                                <span class="icon-new-22"></span>
+                                <div class="post-conten news">
+                                    <a href="@articleMostView.GetArticleUrl()" title="@articleMostView.Title" class="post-title-widget">@articleMostView.Title</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            @if (Model.ListTieuDiem.HasValue())
+            {
+                <div class="widget">
+                    <div class="widget-top">
+                        <h3>
+                            <span class="title-widget">@Resource.Focus</span>
+                        </h3>
+                    </div>
+                    <div class="widget-container-wg">
+                        @foreach (var articleViewFocus in Model.ListTieuDiem)
+                        {
+                            <div class="recent-post-wg">
+                                <div class="post-thumbnail">
+                                    <a href="@articleViewFocus.GetArticleUrl()" title="@articleViewFocus.Title" class="thumb80">
+                                        <img alt="@articleViewFocus.Title" src="@articleViewFocus.GetImageUrl_Thumb()">
+                                    </a>
+                                </div>
+                                <div class="post-conten-wg">
+                                    <a href="@articleViewFocus.GetArticleUrl()" title="@articleViewFocus.Title" class="post-title-widget">@articleViewFocus.Title</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            @{Html.RenderPartial("PartialLinksNeedToKnow");}
+        </aside>
+    </div>
+</div>
+@Html.Partial("PartialContentViewed")
+
+@section FooterSection
+{
+    <script type="text/javascript">
+        lawsVn.logs.articleLogs(@Model.m_ArticlesViewDetail.mArticlesView.ArticleId,@Model.m_ArticlesViewDetail.mArticlesView.CategoryId);
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.m_ArticlesViewDetail.mArticlesView.ArticleId'
+                , name: '@Model.m_ArticlesViewDetail.mArticlesView.TruncateTitle(45)'
+                , title: '@Model.m_ArticlesViewDetail.mArticlesView.Title'
+                , summary: ''
+                , datetime: '@Model.m_ArticlesViewDetail.mArticlesView.PublishTime.toString()'
+                , url: '@Model.m_ArticlesViewDetail.mArticlesView.GetArticleUrl()'
+                , image: '@Model.m_ArticlesViewDetail.mArticlesView.GetImageUrl_Mobile()'
+            }
+        });
+    </script>
+}   

@@ -1,0 +1,168 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.AppCode
+@using LawsVNEN.Library
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model LawsVNEN.Models.Account.HistoryTransactionsModel
+<div class="content-center-pages searchblog">
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>»
+        <a href="@(CmsConstants.ROOT_PATH)user/account-information.html" class="breadcrumb-item">@Resource.AccountInformation</a> »
+        <span class="breadcrumb-item colorrumb">@Resource.TransactionHistory</span>
+    </div>
+    @if (Model.ListPaymentTransactions.IsAny())
+    {
+        <div class="cat-box-content">
+            <div class="content page dichvu">
+                <div class="from-page giao-dich">
+                    <div class="box-dich-vu">
+                        <div class="hearder-giao-dich">
+                            @if (!string.IsNullOrEmpty(Model.PayMessage))
+                            {
+                                <div class="thong-bao-3">
+                                    <div class="thongbao-item3">
+                                        <b><em>@Resource.Note
+                                            <br>
+                                            <br>
+                                        </em></b>
+                                        <em>@Model.PayMessage</em>
+                                    </div>
+                                </div>
+                            }
+                            <div class="rows top">
+                                @Resource.TransactionHistoryOfAccount: <span style="color: #90622a; font-weight: bold;">@LawsUser.CustomerName</span>
+                            </div>
+                            <div class="rows">
+                                <div class="giao-dich1">
+                                    @Resource.NumberOfTransactions: <span style="color: #90622a; font-weight: bold;">@(Model.RowCount > 0 ? Model.RowCount.ToString("#00") : "0")</span> @Resource.Times | @Resource.TotalTransactionAmount: <span style="color: #90622a; font-weight: bold;">@Model.TotalMoneyText</span>
+                                </div>
+                                    @using (Ajax.BeginForm(Model.PartialPaginationAjax.ActionName, Model.PartialPaginationAjax.ControllerName,
+                                    new
+                                    {
+                                        updateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                                        ,insertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                                        ,controllerName = Model.PartialPaginationAjax.ControllerName
+                                        ,actionName = Model.PartialPaginationAjax.ActionName
+                                        ,pageSize = Model.PartialPaginationAjax.PageSize
+                                        ,linkLimit = Model.PartialPaginationAjax.LinkLimit
+                                        ,transactionStatusI = Model.PartialPaginationAjax.TransactionStatusId
+                                    },
+                                    new AjaxOptions
+                                    {
+                                        HttpMethod = "Get"
+                                        ,UpdateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                                        ,InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                                        ,OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                                        ,OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                                    }))
+                                    {
+                                        <div class="giao-dich2" style="margin-left: 22px;">
+                                            <span class="text-pagination">@Resource.Time:</span>
+                                            <div class="select-pagination" style="width: 150px;">
+                                                <select name="year" tabindex="2" class="dropdown3 select-onchange">
+                                                    <option value="0">@Resource.All</option>
+                                                    <option value="1">@Resource.LastYear </option>
+                                                    <option value="2">@Resource.LastMonth </option>
+                                                    <option value="3">@Resource.LastWeek </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    }
+                            </div>
+                        </div>
+
+                        <div id="HistoryTransactionsBox">
+                            <div class="content-giao-dich">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr class="row-tr">
+                                            <th class="row-th" style="width: 5%;">@Resource.TradingCode</th>
+                                            <th class="row-th" style="width: 5%;">@Resource.DayTrading</th>
+                                            <th class="row-th">@Resource.TransactionDetails</th>
+                                            <th class="row-th" style="width: 13%;">@Resource.TotalMoney</th>
+                                            <th class="row-th" style="width: 12%;">@Resource.TransactionType</th>
+                                            <th class="row-th" style="width: 12%;">@Resource.PaymentChannel</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var paymentTransaction in Model.ListPaymentTransactions)
+                                        {
+                                            <tr class="row-tr">
+                                                <td class="rows-td">@paymentTransaction.PaymentTransactionId</td>
+                                                <td class="rows-td">@paymentTransaction.PaymentDate </td>
+                                                <td class="rows-td" style="text-align: left;">
+                                                    @if (paymentTransaction.ServiceId > 0 && !string.IsNullOrEmpty(paymentTransaction.ServicePackageDesc))
+                                                    {
+                                                        <p>@Resource.DichVu<strong style="color: #90622a;"><a href="@paymentTransaction.ServiceId.GetLinkServiceById()" title="@paymentTransaction.ServiceDesc" style="color: #90622a;"> @paymentTransaction.ServiceDesc</a> - </strong> @Resource.GoiDichVu <strong style="color: #90622a;">@paymentTransaction.ServicePackageDesc</strong>
+                                                        </p>
+                                                    }
+                                                    <p>@paymentTransaction.TransactionDesc </p>
+                                                </td>
+                                                <td class="rows-td">@paymentTransaction.Amount</td>
+                                                <td class="rows-td">@paymentTransaction.TransactionTypesDesc</td>
+                                                <td class="rows-td">@paymentTransaction.PaymentTypeDesc</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            @{ Html.RenderAction("PartialPaginationAjaxPageNumber", "Shared", new { model = Model.PartialPaginationAjax }); }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (Model.DtCustomerServices.ServiceId > 0)
+            {
+                <div class="box-dich-thong-bao">
+                    <div class="padding dv">
+                        <p style="color: #d81c22; font-weight: bold; font-size: 16px; text-transform: uppercase; line-height: 40px;">
+                            @Resource.ServiceAnnouncement:
+                                <span class="icon-gim">
+                                    <img alt="icon-gim" src="@Url.Content("~/assets/images/thong-bao-dich-vu.png")"/></span>
+                        </p>
+                        @if (Model.MonthRemain > 0 && Model.DayRemain > 0)
+                        {
+                            @Html.Raw(string.Format(Resource.ServiceAnnouncement1,Model.MonthRemain, Model.DayRemain,Model.DtCustomerServices.ServiceName))
+                        }
+                        else
+                        {
+                            if (Model.MonthRemain > 0)
+                            {
+                                @Html.Raw(string.Format(Resource.ServiceAnnouncement2,Model.MonthRemain,Model.DtCustomerServices.ServiceName))
+                            }
+                            else
+                            {
+                                if (Model.DayRemain > 0)
+                                {
+                                    if (Model.DayRemain <= Constants.RowAmount5)
+                                    {
+                                        @Html.Raw(string.Format(Resource.ServiceAnnouncement3,Model.DayRemain,Model.DtCustomerServices.ServiceName))
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw(string.Format(Resource.ServiceAnnouncement4,Model.DayRemain,Model.DtCustomerServices.ServiceName))
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Raw(string.Format(Resource.ServiceAnnouncement5,Model.DtCustomerServices.ServiceName))
+                                }
+                            }
+                        }
+                        @Html.Raw(Resource.ServiceAnnouncement6)
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="thong-bao-3">
+            <div class="thongbao-item3">
+                <em>@Resource.YouHaveNotATransactions<a href="@(CmsConstants.ROOT_PATH)user/subscriber.html" title="@Resource.Subscriber"><strong style="color: #a67942"> @Resource.comein</strong></a> @Resource.toregister <strong style="color: #a67942">@Resource.TextSearchService.</strong></em>
+            </div>
+        </div>
+    }
+</div>

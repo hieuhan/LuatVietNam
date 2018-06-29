@@ -1,0 +1,107 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Account
+@model MyMessagesModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>»
+    <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" title="@Resource.AccountInformation" class="breadcrumb-item">@Resource.AccountInformation</a> »
+    <span class="breadcrumb-item colorrumb">Tin nhắn</span>
+        </div>
+        <div id="MyMessagesBoxTab" class="tab-nav">
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html">@Resource.AccountInformation</a>
+            <a class="tab-nav-item-ad " href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html">@Resource.TransactionHistory <span class="countPaymentTransactionSuccess" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html">@Resource.MyDocuments <span class="countMyDocuments" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/thong-bao-hieu-luc.html">@Resource.NoticeOfValidity <span class="countNoticeOfValidity" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad active" href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html">@Resource.Messages <span class="countMyMessages" style="color: #a67942;">()</span></a>
+        </div>
+
+        <div id="MyMessagesBox" class="cat-box-content">
+            <div class="mail-nav">
+                <div class="mail-nav-item">
+                    <a href="#" class="mail-nav-item-top">Hộp tin nhắn</a>
+                </div>
+                <div class="mail-nav-item">
+                    <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" title="Tin nhắn đến" class="mail-nav-item-1">Tin nhắn đến</a>
+                </div>
+                <div class="mail-nav-item" style="border-bottom: 0;">
+                    <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan-da-luu.html" title="Tin nhắn đã lưu" class="mail-nav-item-1">Tin nhắn đã lưu</a>
+                </div>
+            </div>
+            <div id="docPrint" class="mail-content">
+                <div class="rows">
+                    <p class="tie-thongbaomail">@Model.mMessages.Subject</p>
+                </div>
+
+                <div class="cat-box-content">
+                    <div class="rows item6" style="border-bottom: solid 1px #ddd;padding-bottom: 0px;">
+                        <div class="pad10" style="padding-right: 0;">
+                            <div class="col-xs-2">
+                                <img class="icon-luat" alt="iconluat" src="@Url.Content("~/assets/images/icon-luat.png")" />
+                                <p class="name-mail"><strong>@Model.mMessages.FromUser</strong></p>
+                                <p class="name-mail" style="color: #777; font-size: 12px;">tới tôi (@Model.mMessages.ToUser)</p>
+                            </div>
+                            <div class="col-xs-2">
+                                <span class="time-mail">Thời gian gửi: @Model.mMessages.CrDateTime.ToString("HH:mm") ngày @Model.mMessages.CrDateTime.ToString("dd/MM/yyyy")</span>
+                                <div class="count-mail">
+                                    <div class="mail-icon">
+                                        @if (Model.mMessages.HasSave == 1)
+                                        {
+                                            <a href="#" data-id="@Model.mMessages.MessageId" title="Bỏ lưu mail" class="mail-ad unsave-message">Bỏ lưu </a>
+                                        }
+                                        else
+                                        {
+                                            <a href="#" data-id="@Model.mMessages.MessageId" title="Lưu mail" class="mail-ad save-message">Lưu </a>
+                                        }
+                                    </div>
+                                    <div class="mail-icon">
+                                        <a href="#" data-id="@Model.mMessages.MessageId" title="Xóa" class="mail-del delete-message">Xóa </a>
+                                    </div>
+                                    <div class="mail-icon">
+                                        <a href="#" title="In nội dung" class="mail-print docPrint">In </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rows">
+                        <div class="pad10">
+                            <div class="chitiet-mail">
+                                @Html.Raw(Model.mMessages.MsgContent)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialCustomerDocs", "Shared");}
+            @Html.Partial("PartialManualInstruction")
+            <div class="widget bottom0">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>

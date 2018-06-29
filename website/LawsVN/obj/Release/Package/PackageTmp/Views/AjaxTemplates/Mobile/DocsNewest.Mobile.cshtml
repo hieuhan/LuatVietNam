@@ -1,0 +1,55 @@
+﻿@using LawsVN.Library
+@using ICSoft.CMSViewLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Models
+@using ICSoft.CMSLib
+@model LawsVN.Models.Templates.DocsNewest
+<div class="cat-box-content">
+    @if (Model.ListDocsView.Any())
+    {
+        for (int index = 1; index <= Model.ListDocsView.Count; index++)
+        {
+            int number = index + Model.PartialPaginationAjax.PageIndex * Model.PartialPaginationAjax.PageSize;
+            if (index != Model.ListDocsView.Count)
+            {
+                string effectStatusName = Model.ListDocsView[index - 1].EffectStatusName.TrimmedOrDefault(Model.ListEffectStatus.GetEffectStatusNameById(Model.ListDocsView[index - 1].EffectStatusId).TrimmedOrDefault(Resource.Updating));
+                <div class="first-news dashed">
+                    <h3 class="post-title">
+                        <a href="@Model.ListDocsView[index - 1].GetDocUrl()" title="@Model.ListDocsView[index - 1].DocName.StripTags()">
+                            <span class="stt">(@(number.ToString("#00")))</span>
+                            @Model.ListDocsView[index - 1].DocName
+                        </a>
+                    </h3>
+                    <div class="post-time">
+                        @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsView[index - 1], EffectStatusName = effectStatusName } });}
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="first-news last">
+                    <h3 class="post-title">
+                        <a href="@Model.ListDocsView[index - 1].GetDocUrl()" title="@Model.ListDocsView[index - 1].DocName.StripTags()">
+                            <span class="stt">(@(number.ToString("#00")))</span>
+                            @Model.ListDocsView[index - 1].DocName
+                        </a>
+                    </h3>
+                    <div class="post-time">
+                        <div class="post-time-item">Ban hành: <span class="color2"> @Model.ListDocsView[index - 1].IssueDate.ToString("dd/MM/yyy")</span></div>
+                        <div class="post-time-item">Hiệu lực: <span class="color2">@Model.ListDocsView[index - 1].EffectStatusName</span></div>
+                    </div>
+                </div>
+            }
+        }
+        {
+            Model.PartialPaginationAjax.IsMobile = true;
+            Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.PartialPaginationAjax }); }
+    }
+    else
+    {
+        <div class="first-news dashed">
+            <span>@Resource.UpdatingData</span>
+        </div>
+    }
+</div>
+@Scripts.Render("~/bundles/jqueryval")

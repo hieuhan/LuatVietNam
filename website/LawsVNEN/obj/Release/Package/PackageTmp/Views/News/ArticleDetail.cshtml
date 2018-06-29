@@ -1,0 +1,29 @@
+﻿@using LawsVNEN.Models
+@using ICSoft.CMSLib
+@using LawsVNEN.App_GlobalResources
+@{
+    ViewBag.Title = "ArticleDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ArticleViewModel
+<div class="content-center-pages searchblog">
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.Home</a>  »
+        <span class="breadcrumb-item colorrumb">@Model.m_ArticlesViewDetail.mArticlesView.Title</span>
+    </div>
+
+    <section class="cat-box">
+        <div class="content-huong-dan">
+            <h1 style="color: #a67942; font-size: 15px; font-weight: bold; padding-bottom: 5px; text-transform:uppercase;">
+            @if (!string.IsNullOrEmpty(Model.m_ArticlesViewDetail.mArticlesView.ImagePath))
+            {
+                <img class="contac-en" src="@Model.m_ArticlesViewDetail.mArticlesView.GetImageUrlOriginal()" />
+            }
+            @Model.m_ArticlesViewDetail.mArticlesView.Title</h1>
+            <div class="entry-en">
+                @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent)
+            </div>
+        </div>
+    </section>
+
+</div> 

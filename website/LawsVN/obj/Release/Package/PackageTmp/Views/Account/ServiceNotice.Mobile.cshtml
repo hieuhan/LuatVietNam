@@ -1,0 +1,16 @@
+﻿@using ICSoft.CMSLib
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model LawsVN.Models.Account.RegisterSuccessfulModel
+<div class="box-section">
+    <div class="login-content">
+        <div class="tie-login">Thông báo</div>
+        <div class="form-login">
+            <p class="info-page">@Html.Raw(Model.RegisterMessages)</p>
+            <div class="info-page" style="text-align: center; padding: 10px;">
+                <a href="@CmsConstants.ROOT_PATH" title="Về trang chủ" style="color:#a67942">Về trang chủ</a>
+            </div>
+        </div>
+    </div>
+</div>

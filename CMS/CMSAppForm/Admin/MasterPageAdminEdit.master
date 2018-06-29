@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPageAdminEdit.master.cs" Inherits="Admin_MasterPageAdminEdit" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>CMS Admin</title>
+    <link href="Styles/style.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/ddsmoothmenu.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/gridviewStyles.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/jquery-ui-1.8.23.custom.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/jquery.dropdown.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/msgBoxLight.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/jquery.notification.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/chosen.css" rel="stylesheet" type="text/css" />
+
+    <script src="../../Scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-ui-1.8.23.custom.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/FilterTable.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.msgBox.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.editinplace.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.cookie.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.dropdown.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.filtertable.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.notification.js" type="text/javascript"></script>
+    <script src="../../Scripts/chosen.jquery.min.js" type="text/javascript"></script>
+    <script src="../../../Integrated/ckfinder/ckfinder.js" type="text/javascript"></script>
+    <asp:ContentPlaceHolder id="m_header" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body style="background-color:White"> 	
+ <form id="frmMain" runat="server" method="post" enctype="multipart/form-data">   
+ <asp:ToolkitScriptManager ID="tsm_MasterAdmin" runat="server" EnablePageMethods="true"></asp:ToolkitScriptManager>
+<asp:ContentPlaceHolder ID="m_contentBody" runat="server">
+</asp:ContentPlaceHolder>
+</form>
+</body>
+</html>

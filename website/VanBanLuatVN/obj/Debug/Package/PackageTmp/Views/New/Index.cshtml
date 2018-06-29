@@ -1,0 +1,29 @@
+﻿@using ICSoft.ViewLibV3
+@using VanBanLuat.Models
+@{
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+}
+@model NewViewModel
+<div class="content-left">
+    <div class="breadcrumb">
+        <a class="breadcrumb-item" href="@Constants.ROOT_PATH" title="Trang chủ">Trang chủ</a> /
+        <span class="breadcrumb-item xanh">Tin tức</span>
+    </div>
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = VanBanLuat.Librarys.Constants.CateId_TinTucPhapLuat, rowAmount = VanBanLuat.Librarys.Constants.RowAmount7, viewName = "PartialLegaNews" });}
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = VanBanLuat.Librarys.Constants.CateId_ThongBaoVBMoi, rowAmount = VanBanLuat.Librarys.Constants.RowAmount7, viewName = "PartialLegaNews" });}
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = VanBanLuat.Librarys.Constants.CateId_ChinhSachMoi, rowAmount = VanBanLuat.Librarys.Constants.RowAmount7, viewName = "PartialLegaNews" });}
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = VanBanLuat.Librarys.Constants.CateId_PhapLyDoanhNghiep, rowAmount = VanBanLuat.Librarys.Constants.RowAmount3, viewName = "PartialPhapLyDoanhNghiep" });}
+</div>
+<aside class="sidebar-270">
+    <div class="widget">
+        <div class="ads">
+            @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 254 });}
+        </div>
+    </div>
+    <div class="widget">
+        <div class="ads">
+            @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 255 });}
+        </div>
+    </div>
+    @{Html.RenderAction("PartialTinXemNhieu", "Shared");}
+</aside>

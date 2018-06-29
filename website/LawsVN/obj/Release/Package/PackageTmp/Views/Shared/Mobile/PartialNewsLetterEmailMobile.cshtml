@@ -1,0 +1,15 @@
+﻿@model LawsVN.Models.NewsletterEmailsModel
+<div class="send-mail">
+    @using (Ajax.BeginForm("NewsLetterEmail", "Ajax", null, new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    }, new {@class="search-form"}))
+    {
+        @Html.AntiForgeryToken()
+        <span class="icon-search2 mail btn-xacnhan"><img class="icon-send-mail" src="@Url.Content("~/assets/mobile/images/iconsendmail.png")"></span>
+        @Html.TextBoxFor(m => m.Email, new { @class = "search-input", placeholder = "Gửi email đăng ký nhận bản tin Văn bản mới", type="search", autocomplete="off" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger-news-letter-email" })
+    }
+</div>

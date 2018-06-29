@@ -1,0 +1,67 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@using LawsVN.Models.Account
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model CustomerServicesNotice
+<div class="box-section">
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>»
+        <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" class="breadcrumb-item">Dịch vụ </a>»
+        <span class="breadcrumb-item color1">Đăng ký gói dịch vụ </span>
+    </div>
+    <div class="cat-box-content">
+        <div class="law-wizard">
+            <div class="step law-stepsss">
+                <!--Bước 1-->
+                <div class="title2">
+                    <div class="title-cat2" style="border-left: solid 3px #a67942; padding-left: 5px;">
+                        Đăng ký dịch vụ
+                    </div>
+                </div>
+                @if (Model.IsRegistService < 1 && Model.FeeType.Equals("Free"))
+                {
+                    <div class="boxthongtintk">
+                        <p style="margin-bottom: 10px;">
+                            <b>Gói dịch vụ tra cứu miễn phí:</b>
+                        </p>
+                        <div class="rows-giahan">
+                            <p>• Tra cứu toàn bộ văn bản luật ban hành từ 1945 đến nay (tiếng Việt)</p>
+                            <p>• Xem toàn nội dung văn bản</p>
+                            <p>• Xem Thuộc tính văn bản</p>
+                            <p>• Xem Tóm tắt văn bản</p>
+                            <p>• Tải file văn bản tiếng Việt (.doc, .pdf)</p>
+                            <p>• Tra cứu dữ liệu văn bản theo Lĩnh vực</p>
+                            <p>• Tra cứu dữ liệu văn bản theo Bộ, Ngành, Địa phương</p>
+                            <p>• Xem Tin văn bản mới</p>
+                            <p>• Xem Tin tức pháp luật mới</p>
+                            <p>• Tra cứu Thuật ngữ pháp lý</p>
+                            <p>• Tra cứu dữ liệu văn bản hợp nhất</p>
+                            <p>• Nhận bản tin văn bản qua email</p>
+                            <p>• Xem tin vắn chính sách mới</p>
+                            <p>• Tra cứu Danh mục luật sư</p>
+                            <p>• Tra cứu Thuật ngữ pháp lý</p>
+                            <p>• Được hỗ trợ tra cứu trực tuyến</p>
+                        </div>
+                    </div>
+
+                    <div class="rowscenter">
+                        <button data-id="@Model.ServiceId" class="btnbton dang-ky-dv-mienphi">Đăng ký</button>
+                    </div>
+                }
+                else
+                {
+                    <div class="rows-giahan">
+                        @Html.Raw(Model.Messages)
+                        @if (Model.FeeType.Equals("Free") || Model.FeeType.Equals("Trial") || string.IsNullOrEmpty(Model.ActionButton))
+                        {
+                            <br/><a href="@(CmsConstants.ROOT_PATH)user/dang-ky-goi-dich-vu.html" title="Đăng ký dịch vụ" style="color:#a67942">Đăng ký dịch vụ</a>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+</div>

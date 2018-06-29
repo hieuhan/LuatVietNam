@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="admin_pages_articles_categories" xml:space="preserve">
+    <value>Danh sách chuyên mục tin bài</value>
+  </data>
+  <data name="admin_default" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="FooterText" xml:space="preserve">
+    <value>Phát triển bởi ICSoft.</value>
+  </data>
+  <data name="HeaderText" xml:space="preserve">
+    <value>Hệ thống quản trị nội dung</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Xin chào</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Đang tải...</value>
+  </data>
+  <data name="admin_pages_articles_Tags" xml:space="preserve">
+    <value>Danh sách Tags</value>
+  </data>
+  <data name="admin_pages_articles_Sponsors" xml:space="preserve">
+    <value>Danh sách nhà tài trợ</value>
+  </data>
+  <data name="admin_pages_articles_MeetingGroups" xml:space="preserve">
+    <value>Danh sách nhóm hội thảo</value>
+  </data>
+  <data name="admin_pages_articles_Meetings" xml:space="preserve">
+    <value>Danh sách hội thảo</value>
+  </data>
+  <data name="admin_pages_articles_FeedBacks" xml:space="preserve">
+    <value>Danh sách tin phản hồi</value>
+  </data>
+  <data name="admin_pages_security_actions" xml:space="preserve">
+    <value>Danh sách chức năng</value>
+  </data>
+  <data name="admin_pages_articles_ServiceRegists" xml:space="preserve">
+    <value>Danh sách đăng ký dịch vụ</value>
+  </data>
+  <data name="admin_pages_articles_ServicePakages" xml:space="preserve">
+    <value>Danh sách gói dịch vụ</value>
+  </data>
+  <data name="admin_pages_articles_ServicePakageGroups" xml:space="preserve">
+    <value>Nhóm gói dịch vụ</value>
+  </data>
+  <data name="admin_pages_articles_Votes" xml:space="preserve">
+    <value>Danh sách bình chọn</value>
+  </data>
+  <data name="admin_pages_articles_Members" xml:space="preserve">
+    <value>Danh sách thành viên</value>
+  </data>
+  <data name="admin_pages_articles_Awards" xml:space="preserve">
+    <value>Danh sách giải thưởng</value>
+  </data>
+  <data name="admin_pages_security_roles" xml:space="preserve">
+    <value>Danh sách nhóm chức năng</value>
+  </data>
+  <data name="AdminPageTitle" xml:space="preserve">
+    <value>.:Hệ thống quản trị nội dung:.</value>
+  </data>
+  <data name="admin_pages_security_changepassword" xml:space="preserve">
+    <value>Thay đổi mật khẩu</value>
+  </data>
+  <data name="admin_pages_security_changeprofile" xml:space="preserve">
+    <value>Thay đổi thông tin người dùng</value>
+  </data>
+  <data name="admin_pages_security_users" xml:space="preserve">
+    <value>Danh sách người dùng</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Thay đổi mật khẩu</value>
+  </data>
+  <data name="ChangeProfile" xml:space="preserve">
+    <value>Thay đổi thông tin</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Thoát</value>
+  </data>
+  <data name="admin_pages_articles_DataSources" xml:space="preserve">
+    <value>Danh sách nguồn tin bài</value>
+  </data>
+  <data name="admin_pages_articles_Partners" xml:space="preserve">
+    <value>Danh sách đối tác</value>
+  </data>
+  <data name="admin_pages_articles_EventStreams" xml:space="preserve">
+    <value>Danh sách dòng sự kiện</value>
+  </data>
+  <data name="admin_pages_displays_menupages" xml:space="preserve">
+    <value>Chi tiết menu</value>
+  </data>
+  <data name="admin_pages_displays_pages" xml:space="preserve">
+    <value>Danh sách trang</value>
+  </data>
+  <data name="admin_pages_displays_pagesedit" xml:space="preserve">
+    <value>Thêm/sửa trang</value>
+  </data>
+  <data name="admin_pages_articles_articles" xml:space="preserve">
+    <value>Danh sách bài viết</value>
+  </data>
+  <data name="admin_pages_articles_articlesedit" xml:space="preserve">
+    <value>Thêm/Sửa Tin bài</value>
+  </data>
+  <data name="admin_pages_articles_advertpositions" xml:space="preserve">
+    <value>Vị trí quảng cáo</value>
+  </data>
+  <data name="admin_pages_articles_adverts" xml:space="preserve">
+    <value>Danh sách quảng cáo</value>
+  </data>
+  <data name="admin_pages_articles_MeetingsEdit" xml:space="preserve">
+    <value>Thêm/Sửa Meeting</value>
+  </data>
+  <data name="admin_pages_articles_Medias" xml:space="preserve">
+    <value>Danh sách file media</value>
+  </data>
+  <data name="admin_pages_lawsdocs_Organs" xml:space="preserve">
+    <value>Danh sách cơ quan ban hành</value>
+  </data>
+  <data name="admin_pages_lawsdocs_signers" xml:space="preserve">
+    <value>Danh sách người ký</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Fields" xml:space="preserve">
+    <value>Danh sách Lĩnh vực</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Regencies" xml:space="preserve">
+    <value>Danh sách chức vụ</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_RelateTypes" xml:space="preserve">
+    <value>Danh sách loại liên kết</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_OrganTypes" xml:space="preserve">
+    <value>Danh sách loại cơ quan ban hành</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_OfficeTypes" xml:space="preserve">
+    <value>Danh sách loại văn phòng</value>
+  </data>
+  <data name="admin_pages_lawsdocs_DocTypes" xml:space="preserve">
+    <value>Danh sách loại văn bản</value>
+  </data>
+  <data name="admin_pages_lawsdocs_Keywords" xml:space="preserve">
+    <value>Danh sách từ khóa</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_LawTermins" xml:space="preserve">
+    <value>Danh sách thuật ngữ pháp lý</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Docs" xml:space="preserve">
+    <value>Danh sách văn bản</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_NewsletterGroups" xml:space="preserve">
+    <value>Danh sách nhóm bản tin</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Newsletters" xml:space="preserve">
+    <value>Danh sách bản tin</value>
+  </data>
+  <data name="admin_pages_lawsdocs_NewsletterMembers" xml:space="preserve">
+    <value>Danh sách bản tin thành viên</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Faqs" xml:space="preserve">
+    <value>Danh sách hỏi đáp</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_MessageTemplates" xml:space="preserve">
+    <value>Danh sách mẫu tin nhắn</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_SmsMos" xml:space="preserve">
+    <value>Danh sách MO</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_SmsMts" xml:space="preserve">
+    <value>Danh sách MT</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_NewsletterReadLogs" xml:space="preserve">
+    <value>Thống kê đọc bản tin</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocViewCount" xml:space="preserve">
+    <value>Thống kê số lượt xem văn bản</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocSearchLogs" xml:space="preserve">
+    <value>Thống kê từ khóa tìm kiếm từ người dùng</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocViewLogs" xml:space="preserve">
+    <value>Danh sách xem logs văn bản</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_OrganDisplays" xml:space="preserve">
+    <value>Danh sách cơ quan ban hành theo loại hiển thị</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_FieldDisplays" xml:space="preserve">
+    <value>Danh sách lĩnh vực theo loại hiển thị</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_FaqsBTHL" xml:space="preserve">
+    <value>Danh sách bản tin hiệu lực</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_FaqsTVPL" xml:space="preserve">
+    <value>Danh sách tư vấn pháp luật</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_ArticleViewCount" xml:space="preserve">
+    <value>Thống kê lượt truy cập tin bài</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Articles_StatisticBy" xml:space="preserve">
+    <value>Thống kê số lượng bài viết</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocsEdit" xml:space="preserve">
+    <value>Thêm/Sửa văn bản</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Docs_StatisticBy" xml:space="preserve">
+    <value>Thống kê số lượng văn bản</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocRelatesReview" xml:space="preserve">
+    <value>Duyệt liên kết văn bản</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocsReview" xml:space="preserve">
+    <value>Duyệt văn bản</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocDisplays" xml:space="preserve">
+    <value>Danh sách văn bản theo loại hiển thị</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_MessageSends" xml:space="preserve">
+    <value>Danh sách mẫu tin nhắn đã gửi</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_NewsletterSends" xml:space="preserve">
+    <value>Danh sách bản tin đã gửi</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Services" xml:space="preserve">
+    <value>Danh sách dịch vụ</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_ServicePackages" xml:space="preserve">
+    <value>Danh sách gói dịch vụ</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Promotions" xml:space="preserve">
+    <value>Danh sách khuyến mại</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_PaymentTransactions" xml:space="preserve">
+    <value>Danh sách giao dịch</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Customers" xml:space="preserve">
+    <value>Danh sách khách hàng</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomersEdit" xml:space="preserve">
+    <value>Thêm/Sửa thông tin khách hàng</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_Customers_StatisticBy" xml:space="preserve">
+    <value>Thống kê số lượng khách hàng</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocRelates_StatisticBy" xml:space="preserve">
+    <value>Thống kê theo số lượng văn bản liên quan</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_PaymentTransactions_StatisticBy" xml:space="preserve">
+    <value>Thống kê số lượng các giao dịch</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomersFull" xml:space="preserve">
+    <value>Danh sách khách hàng đầy đủ</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomersEditFull" xml:space="preserve">
+    <value>Thêm/sửa thông tin khách hàng</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_SystemErrors" xml:space="preserve">
+    <value>Danh sách lỗi(SystemErrors)</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_ArticleViewLogs" xml:space="preserve">
+    <value>Danh sách xem log bài viết</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_UserLogs" xml:space="preserve">
+    <value>Danh sách log truy cập người dùng</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomerAccessLogs" xml:space="preserve">
+    <value>Danh sách Log khách hàng truy cập</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DisplayTypes" xml:space="preserve">
+    <value>Danh sách loại hiển thị</value>
+  </data>
+  <data name="admin_Pages_Articles_UserCategories" xml:space="preserve">
+    <value>Danh sách phân quyền biên tập tin bài</value>
+  </data>
+  <data name="admin_Pages_Articles_AdvertViewLogs" xml:space="preserve">
+    <value>Danh sách xem Log quảng cáo</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocTypeDisplays" xml:space="preserve">
+    <value>Danh sách loại văn bản theo loại hiển thị</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocsContentRelation" xml:space="preserve">
+    <value>Lược đồ văn bản</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocsContentRelationReview" xml:space="preserve">
+    <value>Lược đồ văn bản</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocsReviewEdit" xml:space="preserve">
+    <value>Thêm/Sửa văn bản</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_FaqViewCount" xml:space="preserve">
+    <value>Thống kê lượt xem câu hỏi(FAQ)</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_FaqViewLogs" xml:space="preserve">
+    <value>Danh sách log xem câu hỏi</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_NewsletterEmails" xml:space="preserve">
+    <value>Danh sách nhận bản tin</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocDisplaysBTHL" xml:space="preserve">
+    <value>Danh sách văn bản theo loại hiển thị dành cho Gen BTHL</value>
+  </data>
+  <data name="admin_Pages_Articles_ArticleDisplays" xml:space="preserve">
+    <value>Danh sách chọn bài viết theo loại hiển thị</value>
+  </data>
+  <data name="admin_Pages_Articles_ArticleDisplaysBTHL" xml:space="preserve">
+    <value>Danh sách bản tin theo loại hiển thị danh cho Gen BTHL</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocRelatesGenBTHL" xml:space="preserve">
+    <value>Danh sách liên kết văn bản</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomersRegisterNew" xml:space="preserve">
+    <value>Danh sách chăm sóc khách hàng mới đăng ký</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_CustomersResetPassword" xml:space="preserve">
+    <value>Đổi mật khẩu cho khách hàng</value>
+  </data>
+  <data name="admin_Pages_lawsdocs_DocRelatesEditandReview" xml:space="preserve">
+    <value>Sửa duyệt liên kết văn bản</value>
+  </data>
+  <data name="DeleteConfirm" xml:space="preserve">
+    <value>Bạn có muốn xóa mục này?</value>
+  </data>
+  <data name="AddNew" xml:space="preserve">
+    <value>Thêm mới</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Cập nhật thông tin</value>
+  </data>
+</root>

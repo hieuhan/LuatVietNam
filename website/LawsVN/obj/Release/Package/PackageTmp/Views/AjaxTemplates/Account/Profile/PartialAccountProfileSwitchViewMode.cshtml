@@ -1,0 +1,94 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.AccountProfileModel
+<div class="cat-title">
+    <div class="cat-box-title vien">Thông tin cá nhân</div>
+    @Ajax.ActionLink(Resource.EditInformation, string.Empty, string.Empty
+        , null
+        , new AjaxOptions
+        {
+            HttpMethod = "Post"
+            ,Url= Url.Action("AccountProfileSwitchMode", "Ajax",new
+            {
+                mode = "edit"
+            })
+            ,UpdateTargetId = "thongtincanhan"
+            ,InsertionMode = InsertionMode.Replace
+            ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+            ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+            ,OnSuccess = "lawsVn.ajaxEvents.OnSuccessValid('EditAccountProfileForm')"
+        }, new { @class = "edit-tt icon-edit",style="margin-top: 0!important;", title= Resource.EditInformation })
+</div>
+
+<div class="cat-box-content-user">
+    <div class="col-xs-2">
+        <div class="form-inline">
+            <div class="form-group user">
+                <div class="col-sm-1 user">@Resource.FirstAndLastName: </div>
+                <div class="col-sm-2 user">
+                    @Model.FullName.TrimmedOrDefault(string.Empty)
+                </div>
+            </div>
+            <div class="form-group user">
+                <div class="col-sm-1 user">@Resource.AccountName: </div>
+                <div class="col-sm-2 user">
+                    @Model.CustomerName
+                </div>
+            </div>
+            <div class="form-group user">
+                <div class="col-sm-1 user">@Resource.DateOfBirth: </div>
+                <div class="col-sm-2 user">
+                    @Model.DateOfBirth.TrimmedOrDefault(string.Empty)
+                </div>
+            </div>
+            <div class="form-group user">
+                <div class="col-sm-1 user">@Resource.Sex: </div>
+                <div class="col-sm-2 user">
+                    @(Model.GenderId == 1 ? Resource.Male : Resource.Female)
+                </div>
+            </div>
+            <div class="form-group user">
+                <div class="col-sm-1 user">@Resource.Address: </div>
+                <div class="col-sm-2 user">
+                    @Model.Address.TrimmedOrDefault(string.Empty)
+                </div>
+            </div>
+            <div class="form-group user">
+                <div class="col-sm-1 user">@Resource.PhoneNumber: </div>
+                <div class="col-sm-2 user">
+                    @Model.CustomerMobile.TrimmedOrDefault(string.Empty)
+                </div>
+            </div>
+            <div class="form-group user">
+                <div class="col-sm-1 user">Email: </div>
+                <div class="col-sm-2 user">
+                    @Model.Email
+                </div>
+            </div>
+            @if (Model.ProvinceId > 0)
+            {
+                var provinces = Model.ListProvinces.FirstOrDefault(m => m.ProvinceId == Model.ProvinceId) ?? new Provinces { ProvinceDesc = string.Empty };
+                <div class="form-group user">
+                    <div class="col-sm-1 user">@Resource.ProvinceCity: </div>
+                    <div class="col-sm-2 user">
+                        @provinces.ProvinceDesc
+                    </div>
+                </div>
+            }
+                @*<div class="form-group user">
+                    <div class="col-sm-1 user">Nghề nghiệp:</div>
+                    <div class="col-sm-2 user">
+                        CNTT
+                    </div>
+                </div>*@
+    </div>
+    </div>
+    <div class="col-xs-2">
+        <div class="item-avata-2">
+            <a href="#" class="thumb150x180-avata">
+                <img alt="Hình đại diện" src="@LawsUser.GetAvatarMobile()">
+            </a>
+        </div>
+    </div>
+</div>

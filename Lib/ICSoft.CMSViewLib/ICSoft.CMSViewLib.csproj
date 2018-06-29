@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AC1C1DC9-0F70-42D8-BA52-75B36ADFCD45}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICSoft.CMSViewLib</RootNamespace>
+    <AssemblyName>ICSoft.CMSViewLib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\DLL\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSoft.CMSLib, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\ICSoft.CMSLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.CMSLibEstate, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\ICSoft.CMSLibEstate.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.HelperLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\ICSoft.HelperLib.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.LawDocsLib, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\ICSoft.LawDocsLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LibCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\LibCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="LibDatabase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\LibDatabase.dll</HintPath>
+    </Reference>
+    <Reference Include="LibSecurity, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\LibSecurity.dll</HintPath>
+    </Reference>
+    <Reference Include="LibUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\LibUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>obj\Debug\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionResults.cs" />
+    <Compile Include="AdvertPositionAdvertsView.cs" />
+    <Compile Include="AdvertsView.cs" />
+    <Compile Include="ArticleCategoriesView.cs" />
+    <Compile Include="ArticleCommentsView.cs" />
+    <Compile Include="ArticlesView.cs" />
+    <Compile Include="ArticlesViewCate.cs" />
+    <Compile Include="ArticlesViewDetail.cs" />
+    <Compile Include="ArticlesViewHelpers.cs" />
+    <Compile Include="ArticlesViewHome.cs" />
+    <Compile Include="ArticlesViewJsonHelpers.cs" />
+    <Compile Include="ArticleViewCountView.cs" />
+    <Compile Include="CategoriesView.cs" />
+    <Compile Include="CategoriesViewHelpers.cs" />
+    <Compile Include="CategoriesViewHome.cs" />
+    <Compile Include="ArticlesViewMaster.cs" />
+    <Compile Include="AlbumsView.cs" />
+    <Compile Include="AlbumSingersView.cs" />
+    <Compile Include="AdvertsViewHelpers.cs" />
+    <Compile Include="CustomerFieldsView.cs" />
+    <Compile Include="CustomerServicesView.cs" />
+    <Compile Include="CustomersOnline.cs" />
+    <Compile Include="CustomersView.cs" />
+    <Compile Include="CustomersViewDetail.cs" />
+    <Compile Include="DocEffectView.cs" />
+    <Compile Include="DocGroupsView.cs" />
+    <Compile Include="DocPropertiesView.cs" />
+    <Compile Include="LawersView.cs" />
+    <Compile Include="DocsView.cs" />
+    <Compile Include="DocsViewDetail.cs" />
+    <Compile Include="DocsViewHelpers.cs" />
+    <Compile Include="DocsViewSearch.cs" />
+    <Compile Include="EstatePostsViewListByTag.cs" />
+    <Compile Include="EstateCriteriaSetsHelpers.cs" />
+    <Compile Include="EstatePostsViewListByCrUser.cs" />
+    <Compile Include="EstatePostForeignKeyDesc.cs" />
+    <Compile Include="EstatePostsViewListByEstateType.cs" />
+    <Compile Include="CustomerHelpers.cs" />
+    <Compile Include="EstatePostsHelpers.cs" />
+    <Compile Include="EstatePostsViewDetail.cs" />
+    <Compile Include="EstatePostsViewListByCate.cs" />
+    <Compile Include="LawersViewDetail.cs" />
+    <Compile Include="Messages.cs" />
+    <Compile Include="MessageTypes.cs" />
+    <Compile Include="ProfileAgenciesHelpers.cs" />
+    <Compile Include="SongsReportHelpers.cs" />
+    <Compile Include="MenuItemsView.cs" />
+    <Compile Include="MenusViewHelpers.cs" />
+    <Compile Include="SongsViewAlbumRBT.cs" />
+    <Compile Include="SongSingerRBTCategoriesView.cs" />
+    <Compile Include="KeyValuesView.cs" />
+    <Compile Include="DataCollectionView.cs" />
+    <Compile Include="SongSingerCategoriesView.cs" />
+    <Compile Include="SongsViewAlbum.cs" />
+    <Compile Include="SongsViewAuthor.cs" />
+    <Compile Include="SongsViewJsonHelpers.cs" />
+    <Compile Include="SongsViewSinger.cs" />
+    <Compile Include="SongsViewHelpers.cs" />
+    <Compile Include="SongsViewDetail.cs" />
+    <Compile Include="FeaturesView.cs" />
+    <Compile Include="InitViewHelpers.cs" />
+    <Compile Include="MediasView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SongAuthorsView.cs" />
+    <Compile Include="SongMusicTypesView.cs" />
+    <Compile Include="SongSingerAlbumsView.cs" />
+    <Compile Include="SongSingerFilesView.cs" />
+    <Compile Include="SongSingerRBTsView.cs" />
+    <Compile Include="SongSingerSingersView.cs" />
+    <Compile Include="SongsView.cs" />
+    <Compile Include="TagsView.cs" />
+    <Compile Include="YearView.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

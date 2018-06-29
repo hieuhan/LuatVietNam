@@ -1,0 +1,132 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Account
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model MyMessagesModel
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>»
+    <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" title="@Resource.AccountInformation" class="breadcrumb-item">@Resource.AccountInformation</a> »
+    <span class="breadcrumb-item colorrumb">Tin nhắn</span>
+        </div>
+        <div id="MyMessagesBoxTab" class="tab-nav">
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html">@Resource.AccountInformation</a>
+            <a class="tab-nav-item-ad " href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html">@Resource.TransactionHistory <span class="countPaymentTransactionSuccess" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html">@Resource.MyDocuments <span class="countMyDocuments" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/thong-bao-hieu-luc.html">@Resource.NoticeOfValidity <span class="countNoticeOfValidity" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad active" href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html">@Resource.Messages <span class="countMyMessages" style="color: #a67942;">()</span></a>
+
+            <div class="search-mail">
+                <div class="icon-tk">
+                    @{Html.RenderAction("PartialMessageSearch","Shared",new {model = new MessageSearch{ActionType = 1}});}
+                </div>
+            </div>
+
+        </div>
+
+        <div id="MyMessagesBox" class="cat-box-content">
+            <div class="mail-nav">
+                <div class="mail-nav-item">
+                    <a href="#" class="mail-nav-item-top">Hộp tin nhắn</a>
+                </div>
+                <div class="mail-nav-item">
+                    <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" title="Tin nhắn đến" class="mail-nav-item-1 active">Tin nhắn đến</a>
+                </div>
+                <div class="mail-nav-item" style="border-bottom: 0;">
+                    <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan-da-luu.html" title="Tin nhắn đã lưu" class="mail-nav-item-1">Tin nhắn đã lưu</a>
+                </div>
+            </div>
+            <div class="mail-content">
+            @if (Model.RowCount > 0)
+            {
+                <div class="hearder-mail">
+                    <div class="col-mail">
+                        <div class="checkbox-mail-top">
+                            <div class="pure-checkbox">
+                                <input id="checkbox_All" name="checkbox_All" type="checkbox">
+                                <label for="checkbox_All" title="Chọn tất cả">Tất cả</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-mail">
+                        <a href="#" title="Lưu mail" class="save-mail save-messages">Lưu mail </a>
+                    </div>
+                    <div class="col-mail">
+                        <a href="#" title="Xóa" class="delete-mail delete-messages">Xóa </a>
+                    </div>
+                    <div class="count-mail"><strong>@(Model.mPartialPaginationAjax.PageIndex + 1)-@Model.mPartialPaginationAjax.pageCount </strong>trong tổng số <strong>@Model.RowCount </strong>
+                    </div>
+                </div>
+            }
+                @if (Model.ListMessages.HasValue())
+                {
+                    for (int index = 0; index < Model.ListMessages.Count; index++)
+                    {
+                        var message = Model.ListMessages[index];
+                        <div class="row-mail">
+                            <div class="post-mail-title">
+                                <div class="checkbox-mail">
+                                    <div class="pure-checkbox">
+                                        <input id="checkbox_@index" name="chkMessages" value="@message.MessageId" type="checkbox">
+                                        <label for="checkbox_@index"></label>
+                                    </div>
+                                </div>
+                                @if (message.HasStar == 1)
+                                {
+                                    <a href="javascript:lawsVn.myMesssages.unStart(@message.MessageId,1);" class="icon-star"></a>
+                                }
+                                else
+                                {
+                                    <a href="javascript:lawsVn.myMesssages.setStart(@message.MessageId,1);" class="icon-star-mail"></a>
+                                }
+                                <a href="@string.Format("{0}user/chi-tiet-tin-nhan-{1}.html",CmsConstants.ROOT_PATH,message.MessageId)" title="Chi tiết tin nhắn" class="post-title mail1 @(message.HasRead == 0 ? string.Empty : "fontnomal")">@message.Subject </a>
+                            </div>
+                            <div id="message-time-@message.MessageId" class="post-mail-time fontnomal">@message.CrDateTime.ToString("HH:mm") <br /> @message.CrDateTime.ToString("dd/MM/yyyy")</div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="row-mail ">
+                        <div class="post-mail-title">
+                            <span class="post-title" style="padding: 0 15px;">Quý khách chưa có tin nhắn mới. </span>
+                        </div>
+                    </div>
+                }
+            </div>
+            @if (Model.RowCount > 0)
+            {
+                {
+                    Html.RenderAction("PartialPaginationAjax2", "Shared", new {model = Model.mPartialPaginationAjax});
+                }
+            }
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialCustomerDocs", "Shared");}
+            @Html.Partial("PartialManualInstruction")
+            <div class="widget bottom0">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>

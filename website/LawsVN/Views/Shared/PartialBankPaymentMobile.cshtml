@@ -1,0 +1,90 @@
+﻿@model LawsVN.Models.Account.BankPaymentModel
+@using (Ajax.BeginForm("PaymentServiceUsingBankAccount", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    ,OnSuccess = "lawsVn.ajaxEvents.PaymentServiceUsingBankAccountOnSuccess"
+}, new { id = "ValidPaymentMethodsBankAccountForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ServiceId)
+    @Html.HiddenFor(m => m.ServiceIdFixed)
+    @Html.HiddenFor(m => m.ServiceName)
+    @Html.HiddenFor(m => m.ServicePackageId)
+    @Html.HiddenFor(m => m.ServicePackageName)
+    @Html.HiddenFor(m => m.Total)
+    @Html.HiddenFor(m => m.Price)
+    @Html.HiddenFor(m => m.Amount)
+    @Html.HiddenFor(m => m.PercentDecrease)
+    @Html.HiddenFor(m => m.PromotionCodeBankAccount)
+    @Html.HiddenFor(m => m.CompanyName)
+    @Html.HiddenFor(m => m.CompanyAddress)
+    @Html.HiddenFor(m => m.CompanyTaxCode)
+    @Html.HiddenFor(m => m.InternalContent)
+    @Html.HiddenFor(m => m.TransactionTypeId)
+    <div class="rows-giahan">
+        <strong>Tài khoản LuatVietnam:</strong> @LawsUser.CustomerName
+        <p>@Html.ValidationMessageFor(m => m.BankCode, "", new { @class = "text-danger" })</p>
+    </div>
+    <div class="rows-giahan">
+        <select class="ListBanks">
+            <option value="0" selected="selected" data-skip="1" data-html-text="Thẻ nội địa">Thẻ nội địa:</option>
+            <option value="123PVTB" data-icon="@Url.Content("~/assets/images/vietinbank.png")" data-html-text="Ngân hàng Công Thương Việt Nam (Vietinbank)">Ngân hàng Công Thương Việt Nam (Vietinbank)</option>
+            <option value="123PVPB" data-icon="@Url.Content("~/assets/images/vbbank.png")" data-html-text="Ngân hàng Việt Nam Thịnh Vượng (VPBank)">Ngân hàng Việt Nam Thịnh Vượng (VPBank)</option>
+            <option value="123PVIB" data-icon="@Url.Content("~/assets/images/vibbank.png")" data-html-text="Ngân hàng quốc tế (VIB)">Ngân hàng quốc tế (VIB)</option>
+            <option value="123PVAB" data-icon="@Url.Content("~/assets/images/Vietabank.png")" data-html-text="Ngân hàng TMCP Việt Á">Ngân hàng TMCP Việt Á</option>
+            <option value="123PVCB" data-icon="@Url.Content("~/assets/images/vietcombank.png")" data-html-text="Ngân hàng Ngoại Thương Việt Nam (Vietcombank)">Ngân hàng Ngoại Thương Việt Nam (Vietcombank)</option>
+            <option value="123PACB" data-icon="@Url.Content("~/assets/images/Acb_logo.png")" data-html-text="Ngân hàng Á Châu (ACB)">Ngân hàng Á Châu (ACB)</option>
+            <option value="123PAGB" data-icon="@Url.Content("~/assets/images/agribank.png")" data-html-text="Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam (Agribank)">Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam (Agribank)</option>
+            <option value="123PBAB" data-icon="@Url.Content("~/assets/images/bacabank.png")" data-html-text="Ngân hàng TMCP Bắc Á">Ngân hàng TMCP Bắc Á</option>
+            <option value="123PBIDV" data-icon="@Url.Content("~/assets/images/bidvbank.png")" data-html-text="Ngân hàng đầu tư và phát triển Việt Nam (BIDV)">Ngân hàng đầu tư và phát triển Việt Nam (BIDV)</option>
+            <option value="123PDAB" data-icon="@Url.Content("~/assets/images/dongabank.png")" data-html-text="Ngân hàng Đông Á (DAB)">Ngân hàng Đông Á (DAB)</option>
+            <option value="123PEIB" data-icon="@Url.Content("~/assets/images/eximbank.png")" data-html-text="Ngân hàng Xuất Nhập Khẩu Việt Nam (Eximbank)">Ngân hàng Xuất Nhập Khẩu Việt Nam (Eximbank)</option>
+            <option value="123PGPB" data-icon="@Url.Content("~/assets/images/gbbank.png")" data-html-text="Ngân Hàng Dầu Khí Toàn Cầu (GPBank)">Ngân Hàng Dầu Khí Toàn Cầu (GPBank)</option>
+            <option value="123PHDB" data-icon="@Url.Content("~/assets/images/HDBanklogo.png")" data-html-text="Ngân Hàng Dầu Khí Toàn Cầu (GPBank)">Ngân Hàng TMCP Phát Triển TPHCM (HDBank)</option>
+            <option value="123PMRTB" data-icon="@Url.Content("~/assets/images/maritimebank.png")" data-html-text="Ngân hàng TMCP Hàng Hải (Maritime Bank)">Ngân hàng TMCP Hàng Hải (Maritime Bank)</option>
+            <option value="123PMB" data-icon="@Url.Content("~/assets/images/MBbank.png")" data-html-text="Ngân hàng quân đội (MB)">Ngân hàng quân đội (MB)</option>
+            <option value="123PNAB" data-icon="@Url.Content("~/assets/images/namabank.png")" data-html-text="Ngân hàng TMCP Nam Á (Nam A Bank)">Ngân hàng TMCP Nam Á (Nam A Bank)</option>
+            <option value="123POCB" data-icon="@Url.Content("~/assets/images/OCBbank.png")" data-html-text="Ngân hàng TMCP Phương Đông (OCB)">Ngân hàng TMCP Phương Đông (OCB)</option>
+            <option value="123POCEB" data-icon="@Url.Content("~/assets/images/OceanBanklogo.png")" data-html-text="Ngân hàng TMCP Đại Dương (OceanBank)">Ngân hàng TMCP Đại Dương (OceanBank)</option>
+            <option value="123PPGB" data-icon="@Url.Content("~/assets/images/pgbank.png")" data-html-text="Ngân hàng Dầu Khí (PG Bank)">Ngân hàng Dầu Khí (PG Bank)</option>
+            <option value="123PSCB" data-icon="@Url.Content("~/assets/images/sacombank.png")" data-html-text="Ngân hàng Sài Gòn Thương Tín (Sacombank)">Ngân hàng Sài Gòn Thương Tín (Sacombank)</option>
+            <option value="123PABB" data-icon="@Url.Content("~/assets/images/abbank.png")" data-html-text="Ngân hàng TMCP An Bình (ABBANK)">Ngân hàng TMCP An Bình (ABBANK)</option>
+            <option value="123PSEAB" data-icon="@Url.Content("~/assets/images/Seabank.png")" data-html-text="Ngân hàng Thương Mại Cổ Phần Đông Nam Á (SeABank)">Ngân hàng Thương Mại Cổ Phần Đông Nam Á (SeABank)</option>
+            <option value="123PSHB" data-icon="@Url.Content("~/assets/images/SHBbank.png")" data-html-text="Ngân hàng TMCP Sài Gòn – Hà Nội (SHB)">Ngân hàng TMCP Sài Gòn – Hà Nội (SHB)</option>
+            <option value="123PNVB" data-icon="@Url.Content("~/assets/images/ncbbank.png")" data-html-text="Ngân hàng Thương mại Cổ phần Quốc Dân">Ngân hàng Thương mại Cổ phần Quốc Dân</option>
+            <option value="123PTCB" data-icon="@Url.Content("~/assets/images/techbank.png")" data-html-text="Ngân hàng Kỹ Thương Việt Nam (Techcombank)">Ngân hàng Kỹ Thương Việt Nam (Techcombank)</option>
+            <option value="123PBVB" data-icon="@Url.Content("~/assets/images/Baovietbank.png")" data-html-text="Ngân hàng TMCP Bảo Việt (BAOVIET Bank)">Ngân hàng TMCP Bảo Việt (BAOVIET Bank)</option>
+            <option value="123PTPB" data-icon="@Url.Content("~/assets/images/TP.png")" data-html-text="Ngân hàng Tiền Phong (Tien Phong Bank)">Ngân hàng Tiền Phong (Tien Phong Bank)</option>
+            <option value="123PLPB" data-icon="@Url.Content("~/assets/images/Lienvietbank.png")" data-html-text="Ngân hàng Thương mại Cổ phần Bưu điện Liên Việt (LienVietPostBank)">Ngân hàng Thương mại Cổ phần Bưu điện Liên Việt (LienVietPostBank)</option>
+        </select>
+    </div>
+    <div class="rows-giahan">
+        <select class="VisaCard">
+            <option value="0" selected="selected" data-skip="1" data-html-text="Thẻ quốc tế">Thẻ quốc tế:</option>
+            <option value="123PCC" data-icon="@Url.Content("~/assets/images/visa.png")" data-html-text="Thẻ Visa">Thẻ Visa</option>
+            <option value="123PCC" data-icon="@Url.Content("~/assets/images/master.png")" data-html-text="Thẻ MasterCard">Thẻ MasterCard</option>
+            <option value="123PCC" data-icon="@Url.Content("~/assets/images/Jcb.png")" data-html-text="Thẻ JCB">Thẻ JCB</option>
+        </select>
+    </div>
+    <div class="rows-giahan">
+        <div class="pure-checkbox">
+            @Html.CheckBoxFor(m => m.TermsAndConditions)
+            <label for="TermsAndConditions" class="chekleft" style="float: left;">Tôi đồng ý với các <a href="#" class="quy-dinh-thanh-toan2" style="color: #a67942; font-weight: bold;">Quy định thanh toán</a> LuatVietnam.vn</label>
+            <br />@Html.ValidationMessageFor(m => m.TermsAndConditions, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="rows-giahan">
+        <div class="pure-checkbox">
+            @Html.CheckBoxFor(m => m.TaxInvoice)
+            <label for="TaxInvoice" class="chekleft">Yêu cầu xuất hóa đơn GTGT</label>
+        </div>
+    </div>
+
+    <div class="rowscenter">
+        @Html.HiddenFor(m => m.BankCode, new { id = "hdfBankCode" })
+        <a href="#" class="btn-pay-m back-step" style="margin-right: 20px; background: #dddddd; color: #222;">Quay lại</a>
+        <a href="#" class="btn-pay-m btn-xacnhan" style="background: #a67942">Thanh toán </a>
+    </div>
+}

@@ -1,0 +1,104 @@
+﻿@using VanBanLuat.Librarys
+@model VanBanLuat.Models.SharedViewModel.DocumentAttribute
+@if (Model != null && Model.Docs != null)
+{
+    <a class="post-title vbl bold" href="@Model.Docs.GetDocUrl()" title="@Html.Raw(Model.Docs.DocName)">@Html.Raw(Model.Docs.DocName)</a>
+    <div class="post-tag thuoctinh-vb">
+        @if (Model.Docs.DocGroupId == Constants.DocGroupIdTcvn)
+        {
+            <div class="tag-item">Ban hành: <span class="tag-time">@Model.Docs.IssueDate.toString(Model.Docs.IssueYear.ToString()) </span></div>
+        }
+        else if (Model.Docs.DocGroupId == Constants.DocGroupIdVbhn)
+        {
+            <div class="tag-item">Xác thực: <span class="tag-time">@Model.Docs.IssueDate.toString() </span></div>
+        }
+        else
+        {
+            <div class="tag-item">Ban hành: <span class="tag-time">@Model.Docs.IssueDate.toString() </span></div>
+        }
+        @if (Model.Docs.DocGroupId != Constants.DocGroupIdTcvn && Model.Docs.DocGroupId != Constants.DocGroupIdVbhn)
+        {
+            <div class="tag-item">
+                Hiệu lực:
+                @if (Model.Docs.EffectDate != DateTime.MinValue)
+                {
+                    <span class="tag-time">@Model.Docs.EffectDate.toString()</span>
+                }
+                else
+                {
+                    <span class="tag-time">Đang cập nhật</span>
+                }
+            </div>
+        }
+        <div class="tag-item">
+            Tình trạng:
+            @if (!string.IsNullOrEmpty(Model.Docs.EffectStatusName))
+            {
+                <span class="tag-time">@Model.Docs.EffectStatusName</span>
+            }
+            else
+            {
+                <span class="tag-time">Đang cập nhật </span>
+            }
+        </div>
+        <div class="tag-item"><a href="@Model.Docs.GetDocUrl("taive")" title="Tải về" class="download"></a></div>
+        @if (Model.EnableSaveDoc)
+        {
+            <div class="tag-item"><a href="#" rel="nofollow" data-id="@Model.Docs.DocId" title="Lưu văn bản quan tâm" class="save-document share"></a></div>
+        }
+    </div>
+}
+else if (Model != null && Model.DocRelates != null)
+{
+    <div class="vnlq1">
+        <a class="post-title vbl bold" href="@Model.DocRelates.DocUrl" title="@Model.DocRelates.DocName">@Html.Raw(Model.DocRelates.DocName)</a>
+    </div>
+    <div class="vnlq2">
+        <span class="vbccu">@Model.DocRelates.RelateTypeName.TrimmedOrDefault(string.Empty)</span>
+    </div>
+    <div class="post-tag">
+        @if (Model.DocRelates.DocGroupId == Constants.DocGroupIdTcvn)
+        {
+            <div class="tag-item">Ban hành: <span class="tag-time">@Model.DocRelates.IssueDate.toString(Model.DocRelates.IssueYear.ToString()) </span></div>
+        }
+        else if (Model.DocRelates.DocGroupId == Constants.DocGroupIdVbhn)
+        {
+            <div class="tag-item">Xác thực: <span class="tag-time">@Model.DocRelates.IssueDate.toString() </span></div>
+        }
+        else
+        {
+            <div class="tag-item">Ban hành: <span class="tag-time">@Model.DocRelates.IssueDate.toString() </span></div>
+        }
+        @if (Model.DocRelates.DocGroupId != Constants.DocGroupIdTcvn && Model.DocRelates.DocGroupId != Constants.DocGroupIdVbhn)
+        {
+            <div class="tag-item">
+                Hiệu lực:
+                @if (Model.DocRelates.EffectDate != DateTime.MinValue)
+                {
+                    <span class="tag-time">@Model.DocRelates.EffectDate.toString()</span>
+                }
+                else
+                {
+                    <span class="tag-time">Đang cập nhật</span>
+                }
+            </div>
+        }
+        <div class="tag-item">
+            Tình trạng:
+            @if (!string.IsNullOrEmpty(Model.DocRelates.EffectStatusName))
+            {
+                <span class="tag-time">@Model.DocRelates.EffectStatusName</span>
+            }
+            else
+            {
+                <span class="tag-time">Đang cập nhật </span>
+            }
+        </div>
+        <div class="tag-item"><a href="@Model.DocRelates.GetDocUrl("taive")" title="Tải về" class="download"></a></div>
+        @if (Model.EnableSaveDoc)
+        {
+            <div class="tag-item"><a href="#" rel="nofollow" data-id="@Model.DocRelates.DocId" title="Lưu văn bản quan tâm" class="save-document share"></a></div>
+        }
+    </div>
+}
+

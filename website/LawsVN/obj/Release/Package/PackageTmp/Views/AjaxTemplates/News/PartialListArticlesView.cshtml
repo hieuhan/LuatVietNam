@@ -1,0 +1,49 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.NewsViewModel
+<div class="post-listing" data-page="@Model.mPartialPaginationAjax.PageIndex">
+@if (Model.mArticlesViewCate.lArticlesNewest.HasValue())
+{
+    for (int i = 0; i < Model.mArticlesViewCate.lArticlesNewest.Count; i++)
+    {
+        ArticlesView mArticlesView = Model.mArticlesViewCate.lArticlesNewest[i]; 
+    <article class="item-list @(i == Model.mArticlesViewCate.lArticlesNewest.Count - 1 ? "item-10" : "")">
+        <div class="post-thumbnail">
+            <a href="@mArticlesView.GetArticleUrl()" title="@mArticlesView.Title" class="thumb240">
+                <img alt="thumb240" src="@mArticlesView.GetImageUrl_Mobile()"></a>
+        </div>
+        <div class="post-content-page fix">
+            <div class="post-meta">
+                @*@if (mArticlesView.ProvinceId > 0)
+                {
+                    <a href="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html?provinceId=@mArticlesView.ProvinceId" class="post-tag">@Provinces.Static_Get(short.Parse(mArticlesView.ProvinceId.ToString())).ProvinceDesc</a>
+                }
+                else
+                {
+                    <a href="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html?provinceId=0" class="post-tag">Cả nước</a>
+                }*@
+                <div class="post-time-page-c">
+                    <span class="icon-time"></span>@mArticlesView.PublishTime.toString()
+                </div>
+            </div>
+            <h2><a href="@mArticlesView.GetArticleUrl()" title="@mArticlesView.Title" class="post-title news">@mArticlesView.Title</a></h2>
+            <div class="sapo">
+                <p>@Html.Raw(mArticlesView.Summary)</p>
+            </div>
+            <div class="more-news-c">
+                <a href="@mArticlesView.GetArticleUrl()" title="Xem tiếp" class="more-link ">
+                    <img alt="Xem tiếp" src="@Url.Content("~/assets/images/xem-tiep.png")">
+                    Xem tiếp </a>
+            </div>
+        </div>
+    </article>
+    }
+    { Html.RenderAction("PartialPaginationAjax5", "Shared", new { model = Model.mPartialPaginationAjax }); }
+}
+else
+{
+    <p>@Resource.UpdatingData</p>
+}
+</div>

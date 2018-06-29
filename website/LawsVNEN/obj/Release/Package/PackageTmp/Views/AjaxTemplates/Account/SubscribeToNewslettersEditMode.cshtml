@@ -1,0 +1,65 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.AppCode
+@model LawsVNEN.Models.Account.SubscribeToNewsletters
+@using (Ajax.BeginForm("EditSubscribeToNewsletters", "Account", null
+    , new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccessful"
+    }
+    ))
+{
+    @Html.AntiForgeryToken()
+    <div class="cat-title ">
+        <div class="cat-box-title en">@Resource.GeneralInformation</div>
+        <div class="huy-capnhat" style="margin-top: -28px;">
+            <div class="btn-huy">
+                @Ajax.ActionLink(Resource.Cancel, "SubscribeToNewsletters", "Ajax"
+                , new
+                {
+                    mode = "view"
+                }
+                , new AjaxOptions
+                {
+                    HttpMethod = "Post"
+                    ,
+                    UpdateTargetId = "dangkinhanbantin"
+                    ,
+                    InsertionMode = InsertionMode.Replace
+                    ,
+                    OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                    ,
+                    OnComplete = "lawsVn.ajaxEvents.OnComplete"
+                }, new { @class = "icon-huy" })
+        </div>
+        <div class="btn-huy"><a href="#" class="icon-capnhat submit-link"> @Resource.Update</a></div>
+    </div>
+</div>
+    <div class="cat-box-content ">
+        <div class="col-xs-2">
+            <div class="form-inline">
+                <div class="rows1" style="margin-top: -10px; margin-bottom: 5px;">
+                    <div class="dk-item1">
+                        <p style="line-height: 36px;"><strong>@Resource.SubscribeToReceiveWeeklyFreeNewsletters ?: </strong></p>
+                    </div>
+                    <div class="dk-item2">
+                        <div class="radio">
+                            <input id="radio-1" name="RegisterNewsletter" @(Model.RegisterNewsletter == 1 ? "checked" : string.Empty) type="radio" value="1">
+                            <label for="radio-1" class="radio-label"> @Resource.Yes</label>
+                        </div>
+                    </div>
+                    <div class="dk-item2">
+                        <div class="radio">
+                            <input id="radio-2" name="RegisterNewsletter" @(Model.RegisterNewsletter == 0 ? "checked" : string.Empty) type="radio" value="0">
+                            <label for="radio-2" class="radio-label"> @Resource.No</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.CustomerId)
+        </div>
+    </div>
+}

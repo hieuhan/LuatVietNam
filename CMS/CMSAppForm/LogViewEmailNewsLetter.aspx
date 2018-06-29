@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="LogViewEmailNewsLetter.aspx.cs" Inherits="LogViewEmailNewsLetter" %>

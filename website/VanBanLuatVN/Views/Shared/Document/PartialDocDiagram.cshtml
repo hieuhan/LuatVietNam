@@ -1,0 +1,175 @@
+﻿@using VanBanLuat.Librarys
+@model VanBanLuatVN.Models.DocViewModel.DocDetailModel
+<div id="luocdo" class="detailfull content-luocdo none">
+    <!-- Bengin section-box-->
+    <article class="article-luocdo cat-box-article">
+        <div class="content-dk" style="padding-bottom: 20px;">
+            <div class="p20px">
+                <div class="row-vb"><a href="#" class="inlucdo"><img style="float: left; margin-right: 5px;" src="@Url.Content("~/assets/images/icon-in2.png")" />In lược đồ</a></div>
+                <div id="DocDiagramPrint" class="cat-box-content">
+                    <div class="item-col3 fixluocdo font13">
+                        @foreach (var item in Model.ListRelateTypesByGroupId.Where(x => x.DisplayPosition.Equals("Left")))
+                        {
+                            var relateType = Model.AllDocRelateLists.lCountByRelateType.FirstOrDefault(x => x.DisplayPosition.Equals("Left") && x.RelateTypeId == item.RelateTypeId);
+                            var listLeft = Model.AllDocRelateLists.lDocRelates.GetDocsRelatesByRelateTypeId_DisplayPosition(item.RelateTypeId, "Left");
+                            bool isScroll = listLeft.HasValue() && listLeft.Count >= Constants.RowAmount4;
+                            <div class="dropcontent">
+                                <div class="tieloto">
+                                    <div class="tie-drop">
+                                        @item.RelateTypeName (@(relateType != null ? relateType.DocCount : 0))   <span class="moredrop"></span>
+                                    </div>
+                                    <div class="dropsub @(isScroll ? "content-scroll-1" : string.Empty)" style="display: block;height: auto;@(isScroll ? "max-height:200px;overflow: auto;" : string.Empty)">
+                                        @if (listLeft.HasValue())
+                                        {
+                                            foreach (var item2 in listLeft)
+                                            {
+                                                <div class="rows-luocdo2">
+                                                    <a href="@(item2.DocGroupId == Constants.DocGroupIdKhongCoNoiDungDownload ? "#" : item2.DocUrl)" class="post-title">
+                                                        @item2.DocName
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="item-col3 fixluocdo font13">
+                        <!-- Bengin dropcontent -->
+                        <div class="dropcontent" style="background: #ddf3ff; border: none;">
+                            <div class="tieloto">
+                                <div class="tie-drop" style="background: #a2dcff; color: #222222; font-weight: bold; font-size: 14px;">
+                                    Văn bản đang xem  <span class="moredrop"></span>
+                                </div>
+                                <div class="dropsub" style="display: block;">
+                                    <div class="rows-luocdo2" style="border-bottom: solid 1px #b4e3ff;">
+                                        <a href="@Model.Docs.GetDocUrl()" class="post-title bold">
+                                            @Model.Docs.DocName
+                                        </a>
+                                    </div>
+                                    <div class="thongtin-ld">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="col1-table p3 "><strong>Cơ quan ban hành:</strong> @Model.Docs.OrganName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col1-table p3 "><strong>Số hiệu:</strong> @Model.Docs.DocIdentity</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col1-table p3 "><strong>Loại văn bản:</strong> @Model.Docs.DocTypeName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col1-table p3 "><strong>Ngày ban hành:</strong> @Model.Docs.IssueDate.toString()</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col1-table p3 "><strong>Hiệu lực:</strong> @Model.Docs.EffectDate.toString() </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col1-table p3 "><strong>Lĩnh vực:</strong> @Model.Docs.FieldName.TrimmedOrDefault("Đang cập nhật") </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col1-table p3 ">
+                                                        <strong>Ngày đăng công báo:</strong>
+                                                        @if (Model.Docs.GazetteDate != DateTime.MinValue)
+                                                        {
+                                                            @Model.Docs.GazetteDate.toString()
+                                                        }
+                                                        else
+                                                        {
+                                                            @:Đang cập nhật
+                                                        }
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col1-table p3 "><strong>Số công báo:</strong> @Model.Docs.GazetteNumber.TrimmedOrDefault("Đang cập nhật")  </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col1-table p3 "><strong>Người ký:</strong> @Model.Docs.SignerName </td>
+                                                    <td class="col1-table p3"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col1-table p3 ">
+                                                        <strong>Ngày hết hiệu lực:</strong>
+                                                        @if (Model.Docs.ExpireDate != DateTime.MinValue)
+                                                        {
+                                                            @Model.Docs.ExpireDate.toString()
+                                                        }
+                                                        else
+                                                        {
+                                                            @:Đang cập nhật
+                                                        }
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="col1-table p3 "><strong>Tình trạng hiệu lực:</strong> @Model.Docs.EffectStatusName.TrimmedOrDefault("Đang cập nhật")  </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End dropcontent -->
+                        @foreach (var item in Model.ListRelateTypesByGroupId.Where(x => x.DisplayPosition.Equals("Bottom")))
+                        {
+                            var relateType = Model.AllDocRelateLists.lCountByRelateType.FirstOrDefault(x => x.DisplayPosition.Equals("Bottom") && x.RelateTypeId == item.RelateTypeId);
+                            var listBottom = Model.AllDocRelateLists.lDocRelates.GetDocsRelatesByRelateTypeId_DisplayPosition(item.RelateTypeId, "Bottom");
+                            bool isScroll = listBottom.HasValue() && listBottom.Count >= 4;
+                            <div class="dropcontent">
+                                <div class="tieloto">
+                                    <div class="tie-drop">
+                                        @item.RelateTypeName (@(relateType != null ? relateType.DocCount : 0))   <span class="moredrop"></span>
+                                    </div>
+                                    <div class="dropsub @(isScroll ? "content-scroll-1" : string.Empty)" style="display: block; height: auto;@(isScroll ? "max-height:200px;overflow: auto;" : string.Empty)">
+                                        @if (listBottom.HasValue())
+                                        {
+                                            foreach (var item2 in listBottom)
+                                            {
+                                                <div class="rows-luocdo2">
+                                                    <a href="@(item2.DocGroupId == Constants.DocGroupIdKhongCoNoiDungDownload ? "#" : item2.DocUrl)" class="post-title">
+                                                        @item2.DocName
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="item-col3 fixluocdo font13">
+                        @foreach (var item in Model.ListRelateTypesByGroupId.Where(x => x.DisplayPosition.Equals("Right")))
+                        {
+                            var relateType = Model.AllDocRelateLists.lCountByRelateType.FirstOrDefault(x => x.DisplayPosition.Equals("Right") && x.RelateTypeId == item.RelateTypeId);
+                            var listRight = Model.AllDocRelateLists.lDocRelates.GetDocsRelatesByRelateTypeId_DisplayPosition(item.RelateTypeId, "Right");
+                            bool isScroll = listRight.HasValue() && listRight.Count >= 4;
+                            <div class="dropcontent">
+                                <div class="tieloto">
+                                    <div class="tie-drop">
+                                        @item.RelateTypeName (@(relateType != null ? relateType.DocCount : 0))   <span class="moredrop"></span>
+                                    </div>
+                                    <div class="dropsub @(isScroll ? "content-scroll-1" : string.Empty)" style="display: block; height: auto;@(isScroll ? "max-height:200px;overflow: auto;" : string.Empty)">
+                                        @if (listRight.HasValue())
+                                        {
+                                            foreach (var item2 in listRight)
+                                            {
+                                                <div class="rows-luocdo2">
+                                                    <a href="@(item2.DocGroupId == Constants.DocGroupIdKhongCoNoiDungDownload ? "#" : item2.DocUrl)" class="post-title">
+                                                        @item2.DocName
+                                                    </a>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <!-- End section-box-->
+</div>

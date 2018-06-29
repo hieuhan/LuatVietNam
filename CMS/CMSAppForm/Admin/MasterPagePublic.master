@@ -1,0 +1,104 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPagePublic.master.cs"
+    Inherits="ICSoft.AppForm.Admin.MasterPagePublic" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Import Namespace="ICSoft.CMSLib" %>
+<%@ Import Namespace="ICSoft.HelperLib" %>
+<%@ Import Namespace="sms.common" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title><%=GetGlobalResourceObject("AdminResource","AdminPageTitle").ToString() %></title>
+    <link href="Styles/style.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/ddsmoothmenu.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/gridviewStyles.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/jquery-ui-1.8.23.custom.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/jquery.dropdown.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/msgBoxLight.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/jquery.notification.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/chosen.css" rel="stylesheet" type="text/css" />
+
+    <script src="../../Scripts/jquery-1.8.0.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery-ui-1.8.23.custom.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/FilterTable.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.msgBox.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.editinplace.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.cookie.js" type="text/javascript"></script>   
+    <script src="../../Scripts/jquery.dropdown.js" type="text/javascript"></script>   
+    <script src="../../Scripts/jquery.filtertable.js" type="text/javascript"></script>
+    <script src="../../Scripts/jquery.notification.js" type="text/javascript"></script>    
+    <script src="../../Scripts/chosen.jquery.min.js" type="text/javascript" ></script>
+    <script src="../../../Integrated/ckfinder/ckfinder.js" type="text/javascript"></script>
+    <asp:ContentPlaceHolder id="m_header" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body> 	
+ <form id="frmMain" runat="server" method="post" enctype="multipart/form-data">   
+ <asp:ToolkitScriptManager ID="tsm_MasterAdmin" runat="server" EnablePageMethods="true"></asp:ToolkitScriptManager>
+<!--Begin bgwebbody-->
+<div class="bgwebbody" style="background-image:url(<%= CmsConstants.PRJ_ROOT %>images/bg_top2.png);">
+    <div class="wightfull">
+		<!--Begin bgtieudetop-->
+				<div class="logoconten">
+						<div class="logotop" style="text-align:center; margin-top: 3px; width:100%;">
+                               
+						    <a class="tieudehethong" href="#" style="margin-top: 20px; display: inline-block; font-size: 24px;">
+                                <asp:Label ID="lblHeader" runat="server" Text="Trung tâm Luật Việt Nam"></asp:Label>
+                                <br />
+                                <asp:Label ID="Label1" runat="server" Text="IC Community"></asp:Label>
+						    </a>
+						</div>	
+						<div class="logotopright" style="display:none;">
+						<div class="datetime"><asp:Label ID="lblTime" runat="server" Text=""></asp:Label></div>
+                        <div class="ngonngu">
+                        <a class="laco" href="#" data-dropdown="#dropdown-language" >      
+                            <img src="<%= CmsConstants.PRJ_ROOT + p_Language.IconPath %>" title="<%= p_Language.LanguageDesc %>" alt="<%= p_Language.LanguageDesc %>" />                                      
+                        </a>
+                        <div  class="dropdown dropdown-tip dropdown-anchor-right" id="dropdown-language" style="display: none;" >
+		                    <ul class="dropdown-menu">	
+                                <asp:Repeater ID="rptLanguage" runat="server">
+                                    <ItemTemplate>
+                                        <li>
+                                            <a class="laco" href="<%# Request.FilePath %>?Culture=<%# Eval("LanguageCode") %>&ReturnUrl=<%# Request.FilePath %>" title="" onclick="SetLanguage('<%# Eval("LanguageName").ToString() %>')" title="<%# Eval("LanguageDesc").ToString() %>" >
+                                                <img src="<%# CmsConstants.PRJ_ROOT + Eval("IconPath").ToString() %>" title="<%# Eval("LanguageDesc").ToString() %>" alt="<%# Eval("LanguageDesc").ToString() %>" />
+                                                <%# Eval("LanguageDesc").ToString() %>
+                                            </a>
+                                        </li>
+                                    </ItemTemplate>
+                                </asp:Repeater>    
+		                    </ul>
+	                    </div>
+                        </div>
+						</div>
+				</div>
+		<!--End bgtieudetop-->
+
+		<!--Begin menubar-->
+            <div class="menu">
+				
+               
+            </div>
+		<!--End menubar-->
+
+			<div class="clear5px"></div>	
+		<!--End menubardieuhuong-->
+
+<!--Begin noidungconten-->
+<div class="khungnoidungconten">
+	<div class="khungcontenpading">
+                <asp:ContentPlaceHolder ID="m_contentBody" runat="server">
+                </asp:ContentPlaceHolder>
+				<div class="clear5px"></div>
+    </div>		
+<!--End noidungconten-->
+</div>
+<div class="clear5px"></div>
+<div class="fooder"><asp:Label ID="lblFooter" runat="server" Text="<%$ Resources:AdminResource, FooterText %>"></asp:Label>
+</div>
+
+<div class="clear5px"></div>
+</div>
+<!--End bgwebbody-->
+</div>
+</form>
+</body>
+</html>

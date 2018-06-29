@@ -1,0 +1,34 @@
+2018-05-15 09:13:11.5468 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-15 09:43:46.9541 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-15 09:43:49.2144 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-15 09:43:49.3895 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-15 09:53:32.5723 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-15 11:03:25.1738 ERROR Path '/Views/News/ArticlesCategory.cshtml' was not found.
+2018-05-15 11:19:36.9710 ERROR Path '/Views/News/ArticlesCategory.cshtml' was not found.
+2018-05-15 14:14:14.6080 ERROR Path '/Views/Shared/Permission/Docs/PartialPermissionDocDiagram.cshtml' was not found.
+2018-05-15 14:16:11.4854 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-15 14:17:19.4973 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-15 14:27:24.9048 ERROR Path '/Views/Docs/DetailFull.cshtml' was not found.
+2018-05-15 14:59:50.0463 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-15 15:29:23.8079 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-15 17:31:29.1025 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:31:35.2052 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:31:39.2368 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:31:47.0618 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:31:50.3244 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:32:56.5269 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:33:03.9909 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:33:08.2708 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:37:14.7679 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:37:23.3206 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:37:27.2165 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:38:56.3538 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:39:00.0632 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:39:03.2159 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:39:57.1725 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:40:00.2906 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:40:03.2799 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:41:32.9314 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:41:37.9080 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 17:41:41.7801 ERROR A public action method 'GetViewByCateId_PagingV2' was not found on controller 'LawsVN.Controllers.AjaxController'.
+2018-05-15 19:31:24.9272 ERROR Path '/Views/News/ArticlesCategory.cshtml' was not found.

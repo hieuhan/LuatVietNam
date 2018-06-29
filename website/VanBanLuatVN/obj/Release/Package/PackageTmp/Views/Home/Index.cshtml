@@ -1,0 +1,115 @@
+﻿@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@model HomeViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ Html.RenderAction("PartialFieldOfSearchHome", "Shared");}
+<!-- Bengin content-->
+<div class="content">
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new {categoryId = Constants.CateId_TinTucPhapLuat, rowAmount = Constants.RowAmount3, viewName = "PartialLegaNewsHome" });}
+    <!-- Bengin section-search-->
+    <div class="cat-box-section">
+        <!-- Bengin search -->
+        <div class="search-block">
+            <div class="rows search v1">
+                @using (Html.BeginForm("DocSearch", "Home", FormMethod.Get))
+                {
+                    <input class="example-search edit" type="text" name="Keywords" placeholder="Nhập nội dung văn bản cần tìm..." autocapitalize = "off" autocorrect = "off">
+                    <button class="btn-default edit"><img class="iconsearchmobi" src="@Url.Content("~/assets/images/fa-search.png")"/><span class="hidenm">Tìm văn bản</span> </button>
+                }
+            </div>
+        </div>
+
+    </div>
+    <!-- End section-search-->
+    <!-- Bengin section-box-->
+    <section class="cat-box-section">
+        <!-- Bengin-->
+        <div class="tabtitle">
+            <div class="tab-1">
+                <a class="tab-item-1 vblAjaxHome active" href="#" rel="nofollow" title="Văn bản mới" data-ajax-url="@Url.Action("DocsGetPage", "Ajax", new {DocGroupId = Model.SearchParams.DocGroupId, PageIndex = Model.SearchParams.PageIndex, RowAmount = Model.SearchParams.RowAmount, Url="van-ban-moi.html?page=2"})" data-result="#tab-homepage" data-type="html">Văn bản mới</a>
+                <a class="tab-item-1 vblAjaxHome" href="#" rel="nofollow" title="Công văn mới" data-ajax-url="@Url.Action("DocsGetPage", "Ajax", new {DocGroupId = Constants.DocGroupIdCongVan, PageIndex = 0, RowAmount = Model.SearchParams.RowAmount, Url="cong-van.html?page=2"})" data-result="#tab-homepage" data-type="html">Công văn mới</a>
+                <a class="tab-item-1 vblAjaxHome" href="#" rel="nofollow" title="Sắp có hiệu lực" data-ajax-url="@Url.Action("DocsGetPage", "Ajax", new {DocGroupId = Model.SearchParams.DocGroupId, EffectStatusType = "SapCoHieuLuc", PageIndex = 0, RowAmount = Model.SearchParams.RowAmount, Url="van-ban-sap-co-hieu-luc.html?page=2"})" data-result="#tab-homepage" data-type="html">Sắp có hiệu lực</a>
+                <a class="tab-item-1 vblAjaxHome" href="#" rel="nofollow" title="TCVN" data-ajax-url="@Url.Action("DocsGetPage", "Ajax", new {DocGroupId = Constants.DocGroupIdTcvn, PageIndex = 0, RowAmount = Model.SearchParams.RowAmount, Url="tieu-chuan-viet-nam.html?page=2"})" data-result="#tab-homepage" data-type="html">TCVN</a>
+                <a class="iconview hide-attr" href="#" rel="nofollow" title="Ẩn thuộc tính văn bản">
+                    <span class="iconview-g"></span>
+                    <span class="iconview-g"></span>
+                    <span class="iconview-g"></span>
+                </a>
+                <a class="iconview active show-attr" href="#" rel="nofollow" title="Hiện thuộc tính văn bản">
+                    <span class="iconview-bo"></span>
+                    <span class="iconview-bo1"></span>
+                    <span class="iconview-bo"></span>
+                </a>
+            </div>
+
+        </div>
+        <!-- End-->
+        <!-- Bengin cat-box-content-->
+        <div class="cat-box-content">
+            <div id="tab-homepage">
+                @if (Model.DocList.lDocs.HasValue())
+                {
+                    <table class="tablecontent">
+                        <body>
+                        @for (int index = 0; index < Model.DocList.lDocs.Count; index++)
+                        {
+                            <tr class="rows-vb">
+                                <td class="number bold">@string.Format("{0:#00}", index + 1)</td>
+                                <td>
+                                    @{ Html.RenderAction("PartialDocumentAttribute", "Shared", new {model = new SharedViewModel.DocumentAttribute {Docs = Model.DocList.lDocs[index]}});}
+                                </td>
+                            </tr>
+                        }
+                        </body>
+                    </table>
+                    <div class="loadmore">
+                        <button class="btn-default xemthem" onclick="window.location.href='@string.Concat(Constants.ROOT_PATH,"van-ban-moi.html?page=2")';">Xem thêm</button>
+                    </div>
+                }
+                else
+                {
+                    <table class="tablecontent full">
+                        <body>
+                        <tr class="rows-vb">
+                            <td>
+                                <p class="post-title vbl bold">Nội dung đang được cập nhật.</p>
+                            </td>
+                        </tr>
+                        </body>
+                    </table>
+                }
+            </div>
+        </div>
+    </section>
+</div>
+
+<aside class="sidebar-270">
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = Constants.CateId_ThongBaoVBMoi, rowAmount = Constants.RowAmount3, viewName = "PartialNoticeNewDocument" });}
+    @{Html.RenderAction("PartialDocFilter", "Shared");}
+    <div class="widget">
+        <div class="ads">
+            @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+        </div>
+    </div>
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = Constants.CateId_ChinhSachMoi, rowAmount = Constants.RowAmount5, viewName = "PartialNewPolicy" });}
+    @{ Html.RenderAction("PartialDocumentsByGetByDisplayTypeId", "Shared", new { displayTypeId = Constants.DisplayTypeId_VBQuanTam, boxTitle = "Văn bản được quan tâm", rowAmount = Constants.RowAmount5, viewName = "PartialDocumentsOfInterest" });}
+</aside>
+@section FooterSection
+{
+    @Styles.Render("~/bundles/jqueryUICss")
+    <script type="text/javascript">
+        jQuery(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd/mm/yy',
+                yearRange: "1945:c",
+                changeMonth: true,
+                changeYear: true
+            });
+            $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+        });
+    </script>
+}

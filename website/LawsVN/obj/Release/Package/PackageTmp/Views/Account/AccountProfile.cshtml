@@ -1,0 +1,273 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.AccountProfileModel
+<div class="page-content">
+    <div class="content-left">
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>» 
+        <span class="breadcrumb-item colorrumb">@Resource.AccountInformation</span>
+    </div>
+        <div class="tab-nav">
+            <a class="tab-nav-item-ad active" href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html">@Resource.AccountInformation</a>
+            <a class="tab-nav-item-ad " href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html">@Resource.TransactionHistory <span class="countPaymentTransactionSuccess" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html">@Resource.MyDocuments <span class="countMyDocuments" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/thong-bao-hieu-luc.html">@Resource.NoticeOfValidity <span class="countNoticeOfValidity" style="color: #a67942;">()</span></a>
+            <a class="tab-nav-item-ad" href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html">@Resource.Messages <span class="countMyMessages" style="color: #a67942;">()</span></a>
+        </div>
+        <div class="cat-box-content">
+            <div class="content page">
+                <div class="from-page">
+                    <div id="thongtincanhan" class="box-user">
+                        <div class="cat-title">
+                            <div class="cat-box-title vien">@Resource.PersonalInformation</div>
+                            @Ajax.ActionLink(Resource.EditInformation, string.Empty, string.Empty
+                                , null
+                                , new AjaxOptions
+                                {
+                                    HttpMethod = "Post"
+                                    ,Url = Url.Action("AccountProfileSwitchMode", "Ajax",new
+                                    {
+                                        mode = "edit"
+                                    })
+                                    ,UpdateTargetId = "thongtincanhan"
+                                    ,InsertionMode = InsertionMode.Replace
+                                    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                                    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+                                    ,OnSuccess = "lawsVn.ajaxEvents.OnSuccessValid('EditAccountProfileForm')"
+                                }, new { @class = "edit-tt icon-edit", style = "margin-top:0px!important;", title = Resource.EditInformation })
+                        </div>
+
+                        <div class="cat-box-content-user">
+                            <div class="col-xs-2">
+                                <div class="form-inline">
+                                    <div class="form-group user">
+                                        <div class="col-sm-1 user">@Resource.FirstAndLastName: </div>
+                                        <div class="col-sm-2 user">
+                                            @Model.mCustomersViewDetail.mCustomers.CustomerFullName.TrimmedOrDefault(string.Empty)
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group user">
+                                        <div class="col-sm-1 user">@Resource.AccountName: </div>
+                                        <div class="col-sm-2 user">
+                                            @Model.mCustomersViewDetail.mCustomers.CustomerName
+                                        </div>
+                                    </div>
+                                    <div class="form-group user">
+                                        <div class="col-sm-1 user">@Resource.DateOfBirth: </div>
+                                        <div class="col-sm-2 user">
+                                            @Model.mCustomersViewDetail.mCustomers.DateOfBirth.toString()
+                                        </div>
+                                    </div>
+                                    <div class="form-group user">
+                                        <div class="col-sm-1 user">@Resource.Sex: </div>
+                                        <div class="col-sm-2 user">
+                                            @(Model.mCustomersViewDetail.mCustomers.GenderId == 1 ? Resource.Male :(Model.mCustomersViewDetail.mCustomers.GenderId == 2 ? Resource.Female : "Chưa chọn"))
+                                        </div>
+                                    </div>
+                                    <div class="form-group user">
+                                        <div class="col-sm-1 user">@Resource.Address: </div>
+                                        <div class="col-sm-2 user">
+                                            @Model.mCustomersViewDetail.mCustomers.Address.TrimmedOrDefault(string.Empty)
+                                        </div>
+                                    </div>
+                                    <div class="form-group user">
+                                        <div class="col-sm-1 user">@Resource.PhoneNumber: </div>
+                                        <div class="col-sm-2 user">
+                                            @Model.mCustomersViewDetail.mCustomers.CustomerMobile.TrimmedOrDefault(string.Empty)
+                                        </div>
+                                    </div>
+                                    <div class="form-group user">
+                                        <div class="col-sm-1 user">Email: </div>
+                                        <div class="col-sm-2 user">
+                                            @Model.mCustomersViewDetail.mCustomers.CustomerMail.TrimmedOrDefault(string.Empty)
+                                        </div>
+                                    </div>
+                                    <div class="form-group user">
+                                        <div class="col-sm-1 user">@Resource.ProvinceCity: </div>
+                                        <div class="col-sm-2 user">
+                                            @Model.ProvinceDesc.TrimmedOrDefault(string.Empty)
+                                        </div>
+                                    </div>
+                                    @*<div class="form-group user">
+                                        <div class="col-sm-1 user">Nghề nghiệp:</div>
+                                        <div class="col-sm-2 user">
+                                            CNTT
+                                        </div>
+                                    </div>*@
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="item-avata-2">
+                                    <div class="thumb150x180-avata">
+                                        <img alt="Hình đại diện" src="@LawsUser.GetAvatarMobile()" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="linhvucvanbanquantam" class="box-user">
+                        <div class="cat-box-content-user">
+                            <div class="col-sm-1 user">@Resource.FieldOfInterestDocument:</div>
+                            <div class="col-sm-2 linh-vuc">
+                                <div class="example-checkbox">
+                                    <div class="content-scroll-11">
+                                        <div class="form-inline-checkbox">
+                                            <div class="from-left">
+                                                @foreach (var item in Model.mCustomersViewDetail.ListCustomerFieldsView)
+                                                {
+                                                    <a href="#" class="linh-vuc-item xoa-linh-vuc" data-id="@item.CustomerFieldId" title="Xóa lĩnh vực">@item.FieldDesc</a>
+                                                }
+                                            </div>
+                                            <div class="from-rightcn">
+                                                <a href="#" title="Cập nhật lĩnh vực văn bản quan tâm" class="cap-nhat select-customer-fieldsV2">
+                                                    <img alt="cap-nhat" src="@Url.Content("~/assets/images/cap-nhat.png")" />Cập nhật
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="thongtindoanhnghiep" class="box-user">
+                        <div class="cat-title">
+                            <div class="cat-box-title vien">@Resource.BusinessInformation</div>
+                            @Ajax.ActionLink(Resource.EditInformation, string.Empty, string.Empty
+                                , null
+                                , new AjaxOptions
+                                {
+                                    HttpMethod = "Post"
+                                    ,Url = Url.Action("BusinessInformationSwitchMode", "Ajax",new
+                                    {
+                                        mode = "edit"
+                                    })
+                                    ,UpdateTargetId = "thongtindoanhnghiep"
+                                    ,InsertionMode = InsertionMode.Replace
+                                    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                                    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+                                }, new { @class = "edit-tt icon-edit", style = "margin-top: 5px!important;", title = Resource.EditInformation })
+                        </div>
+                        <div class="cat-box-content-user">
+                            <div class="form-group user">
+                                <div class="col-sm-1 user">Tên đơn vị: </div>
+                                <div class="col-sm-2 linh-vuc fontb">
+                                    @Model.mCustomersViewDetail.mCustomers.OrganName.TrimmedOrDefault(string.Empty)
+                                </div>
+                            </div>
+                            @*<div class="form-group user">
+                                <div class="col-sm-1 user">Lĩnh vực hoạt động: </div>
+                                <div class="col-sm-2 linh-vuc fontb">
+                                    Truyền thông
+                                </div>
+                            </div>*@
+                            <div class="form-group user">
+                                <div class="col-sm-1 user">@Resource.AccountNumber: </div>
+                                <div class="col-sm-2 linh-vuc fontb">
+                                    @Model.mCustomersViewDetail.mCustomers.AccountNumber.TrimmedOrDefault(string.Empty)
+                                </div>
+                            </div>
+                            <div class="form-group user">
+                                <div class="col-sm-1 user">@Resource.Address: </div>
+                                <div class="col-sm-2 linh-vuc fontb">
+                                    @Model.mCustomersViewDetail.mCustomers.OrganAddress.TrimmedOrDefault(string.Empty)
+                                </div>
+                            </div>
+                            <div class="form-group user">
+                                <div class="col-sm-1 user">@Resource.Phone: </div>
+                                <div class="col-sm-2 linh-vuc fontb">
+                                    @Model.mCustomersViewDetail.mCustomers.OrganPhone.TrimmedOrDefault(string.Empty)
+                                </div>
+                            </div>
+                            <div class="form-group user">
+                                <div class="col-sm-1 user">@Resource.TaxCode: </div>
+                                <div class="col-sm-2 linh-vuc fontb">
+                                    @Model.mCustomersViewDetail.mCustomers.OrganTaxCode.TrimmedOrDefault(string.Empty)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-user" style="margin-bottom: 0;">
+                        <div class="cat-title">
+                            <div class="cat-box-title vien">Thông kê hoạt động</div>
+                        </div>
+                        <div class="cat-box-content-user">
+                            <div class="form-group user">
+                                <div class="col-sm-1 user">Thành viên: </div>
+                                <div class="col-sm-2 linh-vuc fontb">
+                                    @Model.mCustomersViewDetail.mCustomers.CustomerName
+                                </div>
+                            </div>
+                                <div class="form-group user">
+                                    <div class="col-sm-1 user">@Resource.UsingTheService: </div>
+                                    <div class="col-sm-2 linh-vuc fontb">
+                                        @if (Model.mCustomersViewDetail.mCustomerServicesView.ServiceId > 0)
+                                        {
+                                            <a href="@Model.mCustomersViewDetail.mCustomerServicesView.ServiceId.GetLinkServiceById()" title="@Model.mCustomersViewDetail.mCustomerServicesView.ServiceDesc" style="color: #a67942;">@Model.mCustomersViewDetail.mCustomerServicesView.ServiceDesc</a>
+                                            <span>@string.Format("(HSD: {0})", Model.EndTime.toString())</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Quý khách chưa đăng ký sử dụng dịch vụ.</span>
+                                        }
+                                    </div>
+                                </div>
+
+                            <div class="form-group user">
+                                <div class="col-sm-1 user">Văn bản quan tâm:  </div>
+                                <div class="col-sm-2 linh-vuc fontb">
+                                    <p>Văn bản luật <span style="color: #a67942;">(@Model.CountVbpl)</span></p>
+                                    <p>Văn bản hợp nhất <span style="color: #a67942;">(@Model.CountVbhn)</span></p>
+                                    <p>Tiêu chuẩn Việt Nam <span style="color: #a67942;">(@Model.CountTcvn)</span></p>
+                                </div>
+                            </div>
+                            <div class="form-group user">
+                                <div class="col-sm-1 user">Ngày tham gia: </div>
+                                <div class="col-sm-2 linh-vuc fontb">
+                                    @Model.mCustomersViewDetail.mCustomers.CrDateTime.toString()
+                                </div>
+                            </div>
+                            <div class="form-group user" style="margin-bottom: 0;">
+                                <div class="col-sm-1 user">Lần đăng nhập gần nhất:  </div>
+                                <div class="col-sm-2 linh-vuc fontb">
+                                    @Model.mCustomersViewDetail.mCustomerAccessLogs.CrDateTime.ToString("HH:mm dd/MM/yyyy")
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialCustomerDocs", "Shared");}
+            @Html.Partial("PartialManualInstruction")
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new {advertPositionId = 234});}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>

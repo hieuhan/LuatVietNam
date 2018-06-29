@@ -1,0 +1,102 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@using LawsVN.Models
+@model DocsUbndViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-van-ban.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="Keywords" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <input type="hidden" name="DocGroupId" value="@Model.mPartialPaginationAjax.DocGroupId" />
+            <input type="hidden" name="DocGroupId" value="@Model.mPartialPaginationAjax.ProvinceId" />
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="@(CmsConstants.ROOT_PATH)" class="breadcrumb-item">Trang chủ </a>» 
+    <span class="breadcrumb-item">Văn bản UBND</span>
+</div>
+
+<section class="content-section">
+    <div class="title2">
+        <h1 class="title-cat2 vien">@Html.Raw(Model.SeoHeader.TrimmedOrDefault("Văn bản UBND").ToString())</h1>
+    </div>
+    @*<div class="rows">
+        <select class="select-locvb">
+            <option>Tất cả lĩnh vực</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+        </select>
+        <select class="select-locvb">
+            <option>Tất cả lĩnh vực</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+        </select>
+        <select class="select-locvb">
+        @foreach (var item in Model.ListDocTypes)
+        {
+            <option>Tất cả lĩnh vực</option>
+        }
+        </select>
+    </div>*@
+    <div class="cat-box-content">
+        @if (Model.mDocsViewSearch.lDocsView.HasValue())
+        {
+            for (int i = 0; i < Model.mDocsViewSearch.lDocsView.Count; i++)
+            {
+            <div class="other-news @(i == 0 ? string.Empty : "dashed")">
+                <h2><a class="post-title other" href="@Model.mDocsViewSearch.lDocsView[i].GetDocUrl()">@Model.mDocsViewSearch.lDocsView[i].DocName
+                </a>
+                </h2>
+                @{ Html.RenderAction("PartialLinkDocumentAttributeAMP", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.mDocsViewSearch.lDocsView[i] } });}
+            </div>
+            }
+        }
+    </div>
+    @*<div class="pagination">
+        <div class="pagination-right">
+            <a href="#" class="pagination-item ">1</a>
+            <a href="#" class="pagination-item active">2</a>
+            <a href="#" class="pagination-item">3</a>
+            <a href="#" class="pagination-item">»</a>
+        </div>
+    </div>*@
+</section>
+@if (Model.ListDocDisplaysVbTwLienQuan.HasValue())
+{
+    <section class="content-section">
+        <div class="title">
+            <h2 class="title-cat">Văn bản trung ương liên quan</h2>
+        </div>
+        <div class="cat-box-content">
+            @for (int i = 0; i < Model.ListDocDisplaysVbTwLienQuan.Count; i++)
+            {
+                <div class="other-news @(i == 0 ? string.Empty : "dashed")">
+                    <h3><a class="post-title other" href="@Model.ListDocDisplaysVbTwLienQuan[i].GetDocUrl()">@Model.ListDocDisplaysVbTwLienQuan[i].DocName
+                        </a>
+                    </h3>
+                    @{ Html.RenderAction("PartialLinkDocumentAttributeAMP", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocDisplaysVbTwLienQuan[i] } });}
+                </div>
+            }
+        </div>
+    </section>
+}

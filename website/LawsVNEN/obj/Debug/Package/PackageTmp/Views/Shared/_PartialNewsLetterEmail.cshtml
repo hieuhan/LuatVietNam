@@ -1,0 +1,24 @@
+﻿@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.NewsletterEmailsModel
+<div class="widget">
+    @using (Ajax.BeginForm("NewsLetterEmail", "Ajax", new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row-letters">
+            <span style=" font-size: 15px; text-transform: uppercase; color: #a67942; font-weight: bold;">@(Resource.SubscribeNewsletter)!</span>
+        </div>
+        <div class="row-letters">@Resource.SubscribeToReceiveWeeklyFreeNewsletters</div>
+        <div class="row-letters">
+            @Html.TextBoxFor(m => m.Email, new { @class = "inputnewsletters", placeholder = Resource.EnterYourEmail })
+            <button class="btn letters email">@Resource.Send</button>
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger-news-letter-email" })
+        </div>
+    }
+    
+
+</div>

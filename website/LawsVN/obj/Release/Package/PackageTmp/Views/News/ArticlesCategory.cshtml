@@ -1,0 +1,163 @@
+﻿@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.Library
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.mPartialPaginationAjax.PageIndex, totalPage = Model.mPartialPaginationAjax.TotalPage, pageSize = Model.mPartialPaginationAjax.PageSize });}
+}
+@model NewsViewModel
+<div class="page-content">
+    <div class="content-left">
+        <div id="ArticlesByCateBoxTab" class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>
+            @if (Model.mArticlesViewCate.lParentCategories.HasValue())
+            {
+                for (int i = 0; i < Model.mArticlesViewCate.lParentCategories.Count; i++)
+                {
+                    var mCategoriesView = Model.mArticlesViewCate.lParentCategories[i];
+                    if (i == Model.mArticlesViewCate.lParentCategories.Count - 1)
+                    {
+                        <span> » </span><span class="breadcrumb-item colorrumb">@mCategoriesView.CategoryName</span>
+                    }
+                    else 
+                    {
+                        if (mCategoriesView.CategoryId != 229)
+                        {
+                            <span> » </span><a href="@mCategoriesView.GetCategoryUrl()" class="breadcrumb-item">@mCategoriesView.CategoryName</a>
+                        }
+                    }
+                }
+            }
+        </div>
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title">
+                    @Html.Raw(Model.SeoHeader.ToString())
+                </h1>
+                <p class="info-page">@Html.Raw(Model.MetaDesc.ToString())</p>
+            </div>
+        </div>
+        @if (Model.mArticlesViewHome.lCategoriesMain1.HasValue() && Model.mArticlesViewHome.lCategoriesMain1.Count > 6)
+        {
+            <div class="cat-box flexslider">
+                <div class="slides">
+                    <div class="camera_wrap camera_azure_skin" id="camera_wrap_1">
+                        @foreach (ArticlesView mArticlesView in Model.mArticlesViewHome.lCategoriesMain1[6].lArticlesView)
+                        {
+                            <div data-src="@mArticlesView.GetImageUrl()">
+                                <div class="camera_caption fadeFromBottom">
+                                    <div class="slides-content">
+                                        <div class="title-slider">
+                                            @mArticlesView.Title
+                                        </div>
+                                        <div class="info-slider">
+                                            @Html.Raw(mArticlesView.Summary)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="content-wrap">
+            <div class="tab-conten">
+                <div class="cat-box-content">
+                    <div id="ArticlesByCateBox" class="click-1">
+                        <div class="post-listing" data-page="@(Model.mPartialPaginationAjax.PageIndex+1)">
+                            @if (Model.mArticlesViewCate.lArticlesNewest.HasValue())
+                            {
+                                for (int i = 0; i < Model.mArticlesViewCate.lArticlesNewest.Count; i++)
+                                {
+                                    var mArticlesView = Model.mArticlesViewCate.lArticlesNewest[i]; 
+                                    <article class="item-list @(i == Model.mArticlesViewCate.lArticlesNewest.Count - 1 ? "item-10" : "")">
+                                        <div class="post-thumbnail">
+                                            <a href="@mArticlesView.GetArticleUrl()" title="@mArticlesView.Title" class="thumb240">
+                                                <img alt="thumb240" src="@mArticlesView.GetImageUrl_Mobile2()"></a>
+                                        </div>
+                                        <div class="post-content-page fix">
+                                            <div class="post-meta">
+                                               @* @if (mArticlesView.ProvinceId > 0)
+                                                {
+                                                    <a href="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html?provinceId=@mArticlesView.ProvinceId" class="post-tag">@Provinces.Static_Get(short.Parse(mArticlesView.ProvinceId.ToString())).ProvinceDesc</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html?provinceId=0" class="post-tag">Cả nước</a>
+                                                }*@
+                                                <div class="post-time-page-c" style="float:none;">
+                                                    <span class="icon-time"></span>@mArticlesView.PublishTime.toString()
+                                                </div>
+                                            </div>
+                                            <h2><a href="@mArticlesView.GetArticleUrl()" title="@mArticlesView.Title" class="post-title news">@mArticlesView.Title</a></h2>
+                                            <div class="sapo">
+                                                <p>@Html.Raw(mArticlesView.Summary)</p>
+                                            </div>
+                                            <div class="more-news-c"><a href="@mArticlesView.GetArticleUrl()" title="Xem tiếp" class="more-link ">
+                                                <img alt="Xem tiếp" src="@Url.Content("~/assets/images/xem-tiep.png")">
+                                                Xem tiếp </a></div>
+                                        </div>
+                                    </article>
+                                }
+                            }
+                            else
+                            {
+                                <p>@Resource.UpdatingData</p>
+                            }
+                        </div>
+                        @if (Model.mPartialPaginationAjax.TotalPage > 0)
+                        {
+                            { Html.RenderAction("PartialPaginationAjax5", "Shared", new { model = Model.mPartialPaginationAjax }); }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialTaisaochonLuatVietNam", "Shared");}
+            @{Html.RenderAction("PartialTinVan", "Shared", new { model = Model.mArticlesViewHome.lCategoriesMain1.HasValue() && Model.mArticlesViewHome.lCategoriesMain1.Count > 2 ? Model.mArticlesViewHome.lCategoriesMain1[2] : null });}
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+                </div>
+            </div>
+            @if (Model.mArticlesViewCateMostView != null && Model.mArticlesViewCateMostView.lArticlesNewest.HasValue())
+            {
+                <div class="widget">
+                    <div class="widget-top">
+                        <h3><span class="title-widget">Tin xem nhiều</span></h3>
+                    </div>
+                    <div class="widget-container">
+                        @foreach (ArticlesView mArticlesView in Model.mArticlesViewCateMostView.lArticlesNewest)
+                        {
+                            <div class="recent-post">
+                                <span class="icon-new-22"></span>
+                                <div class="post-conten news">
+                                    <a href="@mArticlesView.GetArticleUrl()" class="post-title-widget" title="@mArticlesView.Title">@mArticlesView.Title</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            @{Html.RenderAction("PartialTieuDiem", "Shared", new { model = Model.mArticlesViewHome.lCategoriesMain2.HasValue() && Model.mArticlesViewHome.lCategoriesMain2.Count > 0 ? Model.mArticlesViewHome.lCategoriesMain2[0] : null });}
+            @{Html.RenderPartial("PartialLinksNeedToKnow");}
+        </aside>
+    </div>
+</div>
+
+@Html.Partial("PartialContentViewed")
+@section FooterSection
+{
+    <script type="text/javascript">
+        lawsVn.initArticlePagination();
+    </script>
+}

@@ -1,0 +1,4 @@
+2018-05-04 11:22:47.3877 ERROR Path '/Views/Shared/PartialPaginationAjax2.cshtml' was not found.
+2018-05-04 15:03:57.3016 ERROR Path '/Views/Shared/PartialBoxTieuDiemMobile.cshtml' was not found.
+2018-05-04 15:48:02.4504 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-04 17:22:52.9323 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.

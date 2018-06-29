@@ -1,0 +1,73 @@
+﻿@using LawsVNEN.AppCode
+@using LawsVNEN.Models
+@using LawsVNEN.App_GlobalResources
+@model ViewModelBase
+@if (Model != null)
+{
+    <!DOCTYPE html>
+    <html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>@Html.Raw(Model.WebsiteTitle)</title>
+        @if (Model.Page <= 1)
+        {<meta name="description" @Html.Raw(Model.WebsiteDescription) />
+            <meta name="keywords" @Html.Raw(Model.WebsiteKeywords) />}
+        <link rel="alternate" href="@Model.WebsiteCanonical" hreflang="vi-vn" />
+        <link rel="canonical" href="@Model.WebsiteCanonical" />
+        @RenderSection("SEOPagination", required: false)
+        <meta name="robots" content="@(Model.IsIndex ? (Model.Page <= 1 ? "index,follow,noodp" : "index,nofollow") : "noindex, nofollow")"/>
+        <link rel="image_src" href="@Model.WebsiteImage" />
+        <meta property="fb:app_id" content="@LawsVNEN.AppCode.Constants.FacebookAppId" />
+        <meta property="og:site_name" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="@Model.WebsiteCanonical" />
+        <meta property="og:locale" content="vi_VN" />
+        <meta property="og:title" @Html.Raw(Model.MetaTitle) />
+        <meta property="og:description" @Html.Raw(Model.WebsiteDescription) />
+        <meta property="og:image" content="@Model.WebsiteImage" />
+        <meta name="copyright" content="Copyright © 2016 by " />
+        <meta name="author" content="" />
+        <meta http-equiv="refresh" content="1200" />
+        <meta name="language" content="English" />
+        <script src="http://cms.luatvietnam.vn/js/advs/advs_site_1.js"></script>
+        <link rel="shortcut icon" href="@Url.Content("~/assets/images/favicon.ico")">
+        @Styles.Render("~/bundles/Css")
+        @RenderSection("HeaderSection", required: false)
+    </head>
+    <body>
+        <div class="wrapper full-site">
+            @{Html.RenderAction("_PartialHeader", "Shared");}
+            <div class="container">
+                <div class="main-content">
+                    <div class="page-content">
+                        @RenderBody()
+                        @{Html.RenderAction("_PartialContentRight", "Shared");}
+                    </div>
+                </div>
+            </div>
+            @{Html.RenderAction("_PartialFooter", "Shared");}
+        </div>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-10721740-7"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-10721740-7');
+        </script>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/Js")
+        @Scripts.Render("~/bundles/jqueryval")
+        @RenderSection("FooterSection", required: false)
+        <span id="loading">@Resource.Loading</span>
+        <button onclick="lawsVn.topFunction()" id="myBtn" title="Go to top"></button>
+    </body>
+</html>
+}
+else
+{
+    throw new NullReferenceException(Resource.BaseModelNull);
+}

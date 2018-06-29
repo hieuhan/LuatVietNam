@@ -1,0 +1,104 @@
+﻿@using ICSoft.LawDocsLib
+@using LawsVN.Library
+@using LawsVN.Models.Docs
+@model DocsViewDetailModel
+<section class="box-section">
+    @if (Model.mDocsViewDetail.lDocRelates.HasValue())
+    {
+        <div class="title" style="margin-bottom: 0px;">
+            <h2 class="title-cat">Văn bản nội dung liên quan</h2>
+            @if (Model.mDocsViewDetail.lRelateTypes.HasValue())
+            {
+                <div class="btn-more">
+                    <ul class="usernav">
+                        <li class="button-dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/mobile/images/more-nv.png")"></a>
+                            <ul class="dropdown-menu" style="right: 0; width: 130px; margin-top: 3px; display: none;">
+                                <li class="item-more">
+                                    @Ajax.ActionLink(string.Format("Tất cả ({0})", Model.CountByRelateTypeId), string.Empty, string.Empty, null, new AjaxOptions
+                                    {
+                                        HttpMethod = Model.mPartialPaginationAjax.LawsAjaxOptions.HttpMethod
+                                        ,
+                                        Url = Url.Action(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName, new
+                                            {
+                                                docId = Model.mDocsViewDetail.mDocsView.DocId
+                                            })
+                                        ,
+                                        UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                                        ,
+                                        InsertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                                        ,
+                                        OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                                        ,
+                                        OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                                    }, new { @class = "item-more-2 active" })
+                                </li>
+                                @foreach (RelateTypes mRelateTypes in Model.mDocsViewDetail.lRelateTypes)
+                                {
+                                    if (mRelateTypes.RowCount > 0 && !string.IsNullOrEmpty(mRelateTypes.RelateTypeName))
+                                    {
+                                        <li class="item-more">
+                                            @Ajax.ActionLink(string.Format("{0} ({1})", mRelateTypes.RelateTypeName, mRelateTypes.RowCount), string.Empty, string.Empty, null, new AjaxOptions
+                                            {
+                                                HttpMethod = Model.mPartialPaginationAjax.LawsAjaxOptions.HttpMethod
+                                                ,
+                                                Url = Url.Action(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName, new
+                                                    {
+                                                        docId = Model.mDocsViewDetail.mDocsView.DocId,
+                                                        relateTypeId = mRelateTypes.RelateTypeId,
+                                                        displayPosition = mRelateTypes.DisplayPosition
+                                                    })
+                                                ,
+                                                UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                                                ,
+                                                InsertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                                                ,
+                                                OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                                                ,
+                                                OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                                            }, new { @class = "item-more-2" })
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            }
+
+        </div>
+    <div class="cat-box-content" id="ListDocRelate">
+        @if (Model.mDocsViewDetail.lDocRelates.HasValue())
+        {
+            foreach (DocRelates mDocRelates in Model.mDocsViewDetail.lDocRelates)
+            {
+                <div class="first-news dashed">
+                    <h3 class="post-title"><a href="@(mDocRelates.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : ICSoft.CMSViewLib.DocsView.Static_GetDocUrl( mDocRelates.DocUrl,"tomtat"))" title="@mDocRelates.DocName" @(mDocRelates.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "class=vb-khong-co-nd" : string.Empty)>@mDocRelates.DocName</a></h3>
+                    <div class="post-time">
+                        <div class="post-time-item">Ban hành: <span class="color2">@mDocRelates.IssueDate.toString(mDocRelates.IssueYear.ToString())</span></div>
+                        <div class="post-time-item">Hiệu lực: <span class="color2">@mDocRelates.EffectStatusName</span></div>
+                    </div>
+                </div>
+            }
+            { Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax }); }
+        }
+        else
+        {
+            <div class="thong-bao-2">
+                <div class="thongbao-item2">
+                    <em>Chưa có văn bản liên quan</em>
+                </div>
+            </div>
+        }
+    </div>
+    }
+    else
+    {
+        <div class="thong-bao-2">
+            <div class="thongbao-item2">
+                <em>Danh sách văn bản liên quan đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+            </div>
+        </div>
+        
+    }
+</section>

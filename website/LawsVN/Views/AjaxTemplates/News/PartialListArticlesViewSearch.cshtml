@@ -1,0 +1,87 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.NewsViewModel
+@using (Html.BeginForm("Search", "News", FormMethod.Get))
+{
+    <div class="search-page singger" style="width: 70%; float: left; margin-bottom: 10px;">
+        <input class="search-page-text" name="keyword" value="@Model.mPartialPaginationAjax.Keywords" placeholder="Nhập từ khóa..." type="text">
+        <button class="btn-search" style="width: 80px; color: white;">Tìm kiếm</button>
+    </div>
+    <div class="rows-tie">
+        @if (!string.IsNullOrEmpty(Model.mPartialPaginationAjax.Keywords))
+        {
+            <span class="tieleft">Kết quả theo từ khóa: <strong>@Model.mPartialPaginationAjax.Keywords</strong></span>
+        }
+        @if (Model.mPartialPaginationAjax.pageCount > 0)
+        {
+            <span class="tieright">@Resource.Display <strong>@(Model.mPartialPaginationAjax.PageIndex + 1)-@Model.mPartialPaginationAjax.pageCount </strong>trong tổng số <strong>@Model.mPartialPaginationAjax.TotalPage </strong></span>
+        }
+    </div>
+    <div class="lockq-from2">
+        <div class="item-loctheo m1">
+            <span class="icon-loc-kq"></span>@Resource.FilterBy:
+        </div>
+        <div class="item-lockq m4">
+            <select tabindex="1" class="dropdown2 select-onchange" name="provinceId">
+                <option value="0" @(Model.ProvinceId == 0 ? "selected" : "")>Cả nước</option>
+                @foreach (var item in Model.ListProvinces)
+                {
+                    <option value="@item.ProvinceId" @(item.ProvinceId == Model.mPartialPaginationAjax.ProvinceId ? "selected" : string.Empty)>@item.ProvinceDesc</option>
+                }
+            </select>
+        </div>
+    </div>
+}
+<div class="post-listing">
+    @if (Model.ListArticlesView.HasValue())
+    {
+        for (int i = 0; i < Model.ListArticlesView.Count; i++)
+        {
+            <article class="item-list @(i == Model.ListArticlesView.Count - 1 ? "item-10" : "")">
+                <div class="post-thumbnail">
+                    <a href="@Model.ListArticlesView[i].GetArticleUrl()" title="@Model.ListArticlesView[i].Title" class="thumb210">
+                        <img alt="thumb210" src="@(Model.ListArticlesView[i].GetImageUrl_Mobile() == "" ? Constants.NoImageUrl_Article : Model.ListArticlesView[i].GetImageUrl_Mobile())">
+                    </a>
+                </div>
+                <div class="post-content-page pd225">
+                    <div class="post-meta">
+                        @if (Model.ListArticlesView[i].ProvinceId > 0)
+                        {
+                            <a href="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html?provinceId=@Model.ListArticlesView[i].ProvinceId" class="post-tag">@Provinces.Static_Get(short.Parse(Model.ListArticlesView[i].ProvinceId.ToString())).ProvinceDesc</a>
+                        }
+                        else
+                        {
+                            <a href="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html?provinceId=0" class="post-tag">Cả nước</a>
+                        }
+                        <div class="post-time-page">
+                            <span class="icon-time"></span>@Model.ListArticlesView[i].PublishTime.ToString("dd/MM/yyyy")
+                        </div>
+                    </div>
+                    <h2>
+                        <a href="@Model.ListArticlesView[i].GetArticleUrl()" title="@Model.ListArticlesView[i].Title" class="post-title news">@Model.ListArticlesView[i].Title</a>
+                    </h2>
+                    <div class="sapo">
+                        <p>@Html.Raw(Model.ListArticlesView[i].Summary)</p>
+                    </div>
+                    <div class="more-news-22">
+                        <a href="@Model.ListArticlesView[i].GetArticleUrl()" class="more-link ">
+                            <img alt="alt" src="@Url.Content("~/assets/images/xem-tiep.png")">
+                            Xem tiếp
+                        </a>
+                    </div>
+                </div>
+            </article>
+        }
+    }
+    else
+    {
+        <p>Không tìm thấy bản tin nào phù hợp!</p>
+    }
+
+</div>
+
+@if (Model.mPartialPaginationAjax.TotalPage > 0)
+{
+    { Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.mPartialPaginationAjax }); }
+}

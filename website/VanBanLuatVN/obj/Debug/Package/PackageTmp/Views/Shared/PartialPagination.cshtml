@@ -1,0 +1,4 @@
+﻿@model VanBanLuatVN.Models.PaginationModel
+<div class="loadmore">
+    <button id="pnext" data-ajax="@Model.AjaxUrl" data-query="@Model.QueryString" data-page="@(Model.Page+1)" data-prev="@Model.PrevUrl" data-next="@Model.NextUrl" class="btn-default xemthem">Xem thêm</button>
+</div>

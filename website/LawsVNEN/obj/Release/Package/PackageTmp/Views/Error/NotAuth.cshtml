@@ -1,0 +1,56 @@
+﻿@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Models
+@{
+    Layout = null;
+}
+@if (Model.NotAuthenticate)
+{
+    if (Model.MessageType == ViewModelBase.MessageTypes.NotAuth)
+    {
+        <div class="page-content box-shadow">
+            <div class="box-vblienquan">
+                <div class="cat-box-content pading">
+                    <div class="thong-bao-3">
+                        <div class="thongbao-item3">
+                            <em>@Model.ErrorMessage <br/><br/></em>
+                            <em>@Html.Raw(string.Format(Resource.NotAuthenticate))</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (Model.MessageType == ViewModelBase.MessageTypes.NotAuthDownload)
+    {
+        <div class="rows vbitem">
+            <div class="vbitem-m1">
+                 <em>@Html.Raw(string.Format(Resource.NotAuthenticateDownload))</em>
+            </div>
+        </div>
+    }
+}else if (Model.NotAuthorize)
+{
+    if (Model.MessageType == ViewModelBase.MessageTypes.NotAuth)
+    {
+        <div class="page-content box-shadow">
+            <div class="box-vblienquan">
+                <div class="cat-box-content pading">
+                    <div class="thong-bao-3">
+                        <div class="thongbao-item3">
+                            <em>@Model.ErrorMessage <br/><br/></em>
+                            <em>@Html.Raw(Resource.NotAuthorize)</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (Model.MessageType == ViewModelBase.MessageTypes.NotAuthDownload)
+    {
+        <div class="rows vbitem">
+            <div class="vbitem-m1">
+                 <em>@Html.Raw(Resource.NotAuthorizeDownload)</em>
+            </div>
+        </div>
+    }
+}

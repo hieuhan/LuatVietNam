@@ -1,0 +1,68 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/MasterPageAdminEdit.master"
+    AutoEventWireup="true" CodeFile="DistrictsEdit.aspx.cs" Inherits="Admin_Pages_articles_DistrictsEdit" %>
+
+<%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxtoolkit" %>
+<asp:Content ID="Content2" ContentPlaceHolderID="m_contentBody" runat="Server">
+    <table id="tblEdit" runat="server" cellspacing="0" cellpadding="3" width="100%" border="0">
+        <tr>
+            <td colspan="2" class="td-edit-2">
+                <asp:Label ID="lblMsg" runat="server" Text="" ForeColor="Red"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 120px">
+                <asp:Label ID="lblCountries" runat="server" Text="Countries:" meta:resourcekey="lblCountries"></asp:Label>
+            </td>
+            <td>
+                <asp:DropDownList ID="ddlCountries" runat="server" DataTextField="CountryDesc" DataValueField="CountryId"
+                    Width="355px" AutoPostBack="True" OnSelectedIndexChanged="ddlCountries_SelectedIndexChanged">
+                </asp:DropDownList>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Label ID="lblProvinces" runat="server" Text="Provinces:" meta:resourcekey="lblProvinces"></asp:Label>
+            </td>
+            <td>
+                <asp:DropDownList ID="ddlProvinces" runat="server" DataTextField="ProvinceDesc" DataValueField="ProvinceId"
+                    Width="355px">
+                </asp:DropDownList>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 120px">
+                <asp:Label ID="lblDistrictName" runat="server" Text="Tên:" meta:resourcekey="lblDistrictName"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtDistrictName" runat="server" Width="355px"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 120px">
+                <asp:Label ID="lblDistrictDesc" runat="server" Text="Mô tả:" meta:resourcekey="lblDistrictDesc"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtDistrictDesc" TextMode="MultiLine" runat="server" Width="355px"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 120px">
+                <asp:Label ID="lblDisplayOrder" runat="server" Text="Thứ Tự Hiển Thị:" meta:resourcekey="lblDisplayOrder"></asp:Label>
+            </td>
+            <td>
+                <asp:TextBox ID="txtDisplayOrder" runat="server" Width="355px"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td class="td-edit-2" colspan="2">
+                <br />
+                <div style="text-align: center">
+                    <asp:LinkButton ID="btnSave" runat="server" CssClass="savebutom" Text="Lưu thông tin"
+                        meta:resourcekey="btnSave" OnClick="btnSave_Click">
+                    </asp:LinkButton></div>
+            </td>
+        </tr>
+    </table>
+</asp:Content>

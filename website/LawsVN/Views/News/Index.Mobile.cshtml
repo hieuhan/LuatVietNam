@@ -1,0 +1,103 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model LawsVN.Models.NewsViewModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+<div class="box-search">
+    <div class="search-input">
+        @using (Html.BeginForm("Search", "News", FormMethod.Get))
+        {
+            <input class="search-q" type="text" name="keyword" placeholder="Nhập nội dung cần tìm ...">
+            <button class="btn-isearch"></button>
+        }
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>»
+			<span class="breadcrumb-item color1">@Model.SeoHeader</span>
+</div>
+@if (Model.mArticlesViewMaster.lCategoriesMain1.HasValue())
+{
+    <div class="flexslider">
+        <div id="slider1_container" style="display: none; position: relative; float: left; width: 1000px; height: 406px; overflow: hidden;">
+            <div u="slides" style="cursor: move; position: absolute; float: left; width: 1000px; height: 406px; overflow: hidden;">
+                @foreach (ArticlesView articleView in Model.mArticlesViewMaster.lCategoriesMain1[0].lArticlesView)
+                {
+                    <div>
+                        <a href="@articleView.GetArticleUrl()">
+                            <img u="image" src="@articleView.GetImageUrl_Mobile()"/></a>
+                        <span class="tie-sld">@articleView.Title</span>
+                    </div>
+                }
+            </div>
+
+            <div u="navigator" class="jssorb05" style="bottom: 16px; right: 0px;">
+                <div u="prototype"></div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.mArticlesViewMaster.lCategoriesMain2.HasValue())
+{
+    foreach (var categoryView in Model.mArticlesViewMaster.lCategoriesMain2)
+    {
+        if (categoryView.lArticlesView.HasValue())
+        {
+            var articlesView = categoryView.lArticlesView[0];
+            categoryView.lArticlesView.Remove(articlesView);
+            <section class="box-section">
+                <div class="title">
+                    <h2 class="title-cat">@categoryView.CategoryName</h2>
+                    <a href="@categoryView.GetCategoryUrl()" class="more-new">
+                        <img src="@Url.Content("~/assets/mobile/images/xem-tiep2.png")"/>
+                        Xem tiếp
+                    </a>
+                </div>
+                <div class="cat-box-content">
+                    <div class="first-news">
+                        <h3 class="post-title-bold padding-btt10">
+                            <a href="@articlesView.GetArticleUrl()">@articlesView.Title</a>
+                        </h3>
+                        <div class="post-thumb">
+                            <a href="@articlesView.GetArticleUrl()" class="thumb125x70">
+                                <img src="@articlesView.GetImageUrl_Thumb()"/>
+                            </a>
+                        </div>
+                        <div class="sapo">
+                            <p>@Html.Raw(articlesView.Summary)</p>
+                        </div>
+                    </div>
+                    @for (int i = 0; i < categoryView.lArticlesView.Count && i < 4; i++)
+                    {
+                        <div class="other-news">
+                            <h3 class="post-title-bold">
+                                <a href="@categoryView.lArticlesView[i].GetArticleUrl()">
+                                    <i class="fa-m"></i>@categoryView.lArticlesView[i].Title</a>
+                            </h3>
+                        </div>
+                    }
+                </div>
+            </section>
+        }
+    }
+}
+    <section class="box-section">
+        @Html.Partial("~/Views/Shared/Mobile/PartialContentViewedMobile.cshtml")
+    </section>
+@section FooterSection
+{
+    <script src="@Url.Content("~/assets/mobile/scripts/sl4.js")"></script>
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: { id: 0 }
+        });
+    </script>
+}

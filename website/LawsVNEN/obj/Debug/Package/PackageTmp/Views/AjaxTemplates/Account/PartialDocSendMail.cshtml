@@ -1,0 +1,24 @@
+﻿@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.Account.DocSendMailModel
+<div class="from-thong-bao-3">
+    @using (Ajax.BeginForm("DocSendMail", "Ajax", null, new AjaxOptions()
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccess(data, status, xhr);"
+    }, new { id = "DocSendMailForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="rows-thongbao">
+            <div class="inputleft">
+                @Html.TextBoxFor(m => m.Email, new {@class = "text-tbao"})
+                @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
+            </div>
+            <div class="btn-right">
+                <button class="btn-thongbao1 xn" style="height: 32px"> @Resource.Send</button>
+            </div>
+        </div>
+        @Html.HiddenFor(m=>m.DocUrl)
+    }
+</div>

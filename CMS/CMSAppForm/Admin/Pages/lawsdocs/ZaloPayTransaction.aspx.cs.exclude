@@ -1,0 +1,119 @@
+﻿/* ********************************************************************************
+'     Document    :  ZaloPayTransaction.aspx.cs
+' ********************************************************************************/
+using System;
+using System.Web.UI;
+using System.Text;
+using ICSoft.HelperLib;
+using ICSoft.LawDocsLib;
+using ICSoft.PartnerLib;
+
+public partial class admin_pages_ZaloPayTransaction : System.Web.UI.Page
+{		
+	
+    private int ActUserId = 0;
+    protected void Page_Load(object sender, EventArgs e)
+	{
+        
+		try
+        {
+            ActUserId = SessionHelpers.GetUserId();
+            
+            if (!IsPostBack)
+            {
+                if(Request.QueryString["id"] == null)
+                {
+                }
+                else
+                    bindData();
+            }
+        }
+        catch (Exception ex)
+        {
+        	sms.utils.LogFiles.LogError(((new System.Diagnostics.StackTrace()).GetFrames()[0]).GetMethod().Name + "\t" + ex.ToString());
+			JSAlertHelpers.Alert(ex.Message, this);
+        }		
+    }
+    //--------------------------------------------------------------------------------
+    protected void ddlLanguage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        bindData();
+    }
+    protected void ddlAppType_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        bindData();
+    }
+    private void bindData()
+    {
+        System.Int32 EditId;
+        if (Request.QueryString["id"] == null)
+        {
+            return;
+        }
+        else
+        {
+            EditId = System.Int32.Parse(Request.QueryString["id"].ToString());
+            
+        }
+    }
+    protected void btnSave_Click(object sender, System.EventArgs e)
+	{
+		byte SysMessageTypeId = 0;
+        int SysMessageId = 0;
+        System.Int32 EditId;
+        PromotionCodes m_PromotionCodes = new PromotionCodes(); 
+        if(Request.QueryString["id"] == null)
+        {
+            EditId = 0;
+        }
+        else
+        {
+            EditId = System.Int32.Parse(Request.QueryString["id"].ToString());
+            m_PromotionCodes.PromotionCodeId = EditId;
+            m_PromotionCodes = m_PromotionCodes.Get();
+            PromotionId = m_PromotionCodes.PromotionId;
+        }        
+        try
+		{
+            
+            
+            m_PromotionCodes.PromotionId = PromotionId;
+            
+            if(txPromotionCode.Text != "")
+				m_PromotionCodes.PromotionCode = txPromotionCode.Text;
+            
+            m_PromotionCodes.UsingCount = int.Parse(txUsingCount.Text);
+            
+            m_PromotionCodes.PromotionCodeId = EditId;
+            SysMessageTypeId = m_PromotionCodes.InsertOrUpdate(ConstantHelpers.Replicated, ActUserId, ref SysMessageId);
+            if (cblAddOther.Checked)
+            {
+                if (EditId > 0) { JSAlertHelpers.ShowNotify("15", "success", "Cập nhật thành công.", this); }
+                else { JSAlertHelpers.ShowNotify("15", "success", "Thêm mới thành công.", this); }
+                clearForm();
+                return;
+            }
+            if (EditId > 0) { JSAlertHelpers.ShowNotifyOtherPage("15", "success", "Cập nhật thành công.", this); }
+            else { JSAlertHelpers.ShowNotifyOtherPage("15", "success", "Thêm mới thành công.", this); }
+
+            StringBuilder csText = new StringBuilder();
+            Type cstype = this.GetType();
+            ClientScriptManager cs = Page.ClientScript;
+            csText.Clear();
+            csText.Append("<script type=\"text/javascript\">");
+            csText.Append("window.parent.jQuery('#divEdit').dialog('close');");            
+            csText.Append("</script>");
+            cs = Page.ClientScript;
+            cs.RegisterClientScriptBlock(this.GetType(), "system_message", csText.ToString());
+		}
+        catch (Exception ex)
+		{
+			sms.utils.LogFiles.LogError(((new System.Diagnostics.StackTrace()).GetFrames()[0]).GetMethod().Name + "\t" + ex.ToString());
+			JSAlertHelpers.Alert(ex.Message, this);
+		}
+    }
+
+    
+    
+ }
+   

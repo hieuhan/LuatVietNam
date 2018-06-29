@@ -1,0 +1,23 @@
+﻿@using LawsVN.App_GlobalResources
+@model LawsVN.Models.NewsletterEmailsModel
+<div class="cat-box-content">
+    <div class="rows-dk">Để nhận tin văn bản miễn phí hàng tuần!</div>
+    @using (Ajax.BeginForm("NewsLetterEmail", "Ajax", null, new AjaxOptions
+    {
+        HttpMethod = "Post"
+        ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+        ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    }))
+    {
+        <div class="rows-dk">
+            @Html.TextBoxFor(m=>m.Email, new {@class="textinput-dk", style= "font-style:unset;", placeholder = Resource.EnterYourEmail})
+            <button class="btn btn-default email">@Resource.Send</button>
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger-news-letter-email" })
+        </div>
+        <div class="rows-dk hot">
+            <img alt="dien thoai" class="hotline" src="@Url.Content("~/assets/images/hotline.png")"/>
+            <p style="color: #c50000;">Hotline:</p>
+            <p style="font-size: 20px;">016 9696 8989</p>
+        </div>
+    }
+</div>

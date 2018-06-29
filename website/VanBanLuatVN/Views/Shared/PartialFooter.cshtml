@@ -1,0 +1,44 @@
+﻿@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@model SharedViewModel.FooterModel
+<footer class="footer-content">
+    <div class="main-content">
+        <div class="item-col2 btom1">
+            <div class="address">
+                <p><a href="@Constants.ROOT_PATH" style="color: #fff; font-size: 24px; text-transform: uppercase; font-weight: bold"> <img src="@Url.Content("~/assets/images/logo.png")" style="width: 180px;height: 27px;" /> </a> <span class="slogan italic" style="font-size: 16px;">Pháp luật trong tầm tay!</span></p>
+                <p>Thông tin liên hệ</p>
+                <p><img src="@Url.Content("~/assets/images/email.png")" /> +84 24 3936 6668  </p>
+                <p><img src="@Url.Content("~/assets/images/iconcal.png")" /> support@vanbanluat.vn</p>
+                <p style="padding-bottom: 0;">Bản quyền © 2000-2018 bởi Vanbanluat.vn</p>
+            </div>
+        </div>
+        <div class="item-col2 btom2">
+            @if (Model.ListMenuItems.HasValue())
+            {
+                <ul class="item-col2 m0">
+                    @for (int index = 0; index < Model.ListMenuItems.Count / 2; index++)
+                    {
+                        <li class="cat-bottom"><a href="@Model.ListMenuItems[index].Url" title="@Model.ListMenuItems[index].ItemName"><i class="icon-list"></i>@Model.ListMenuItems[index].ItemName</a></li>
+                    }
+                </ul>
+                <ul class="item-col2 m0">
+                    @for (int index = Model.ListMenuItems.Count / 2; index < Model.ListMenuItems.Count; index++)
+                    {
+                        <li class="cat-bottom"><a href="@Model.ListMenuItems[index].Url"><i class="icon-list"></i>@Model.ListMenuItems[index].ItemName</a></li>
+                    }
+                </ul>
+            }
+            <div class="row-km" style=" float: left; width: 100%;">
+                <div class="item-col2 m0">
+                    @*@{Html.RenderAction("PartialNewsLetterEmail","Shared");}*@
+                </div>
+                <div class="item-col2 m0">
+                    <a class="like" href="#"><img src="@Url.Content("~/assets/images/fb.png")" /></a>
+                    <a class="like" href="#"><img src="@Url.Content("~/assets/images/gcong.png")" /></a>
+                    <a class="like" href="#"><img src="@Url.Content("~/assets/images/pr.png")" /></a>
+                    <a class="like" href="#"><img src="@Url.Content("~/assets/images/in.png")" /></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

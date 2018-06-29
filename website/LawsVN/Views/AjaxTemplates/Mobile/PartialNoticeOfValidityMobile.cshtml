@@ -1,0 +1,48 @@
+﻿@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@model LawsVN.Models.Account.NoticeOfValidityModel
+@if (Model.ListMyDocuments.IsAny())
+{
+    
+        <div class="title2">
+            <div class="title-cat2 vien">
+                <span style="float: left; color: #bf0000">Số văn bản đăng ký (@(Model.RowCount > 0 ? Model.RowCount.ToString("#00") : "0")) </span>
+            </div>
+        </div>
+        <div class="cat-box-content">
+            @if (Model.ListMyDocuments.IsAny())
+            {
+                for (int index = 1; index <= Model.ListMyDocuments.Count(); index++)
+                {
+                    var docView = Model.ListMyDocuments.ElementAt(index - 1);
+                    var number = index + Model.mPartialPaginationAjax.PageIndex * Model.mPartialPaginationAjax.PageSize ;
+                    <div class="first-news @(index == Model.ListMyDocuments.Count() ? "last" : "dashed") ">
+                        <h3 class="post-title">
+                            <a href="@docView.DocsView.GetDocUrl()" title="@docView.DocsView.DocName.StripTags()">
+                                <span class="stt">(@number.ToString("#00"))</span>
+                                @docView.DocsView.DocName
+                            </a>
+                        </h3>
+                        <div class="post-time">
+                            @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView.DocsView, EffectStatusName = docView.EffectStatusName } }); }
+                            <a href="javascript:lawsVn.myDocuments.deleteCustomerDocs(@Model.mPartialPaginationAjax.DocGroupId,@docView.DocsView.DocId,2);" class="fa-delete x2"></a>
+                        </div>
+                    </div>
+                }
+
+            }
+            @{
+            Model.mPartialPaginationAjax.IsMobile = true;
+            Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax });
+            }
+        </div>
+}
+else
+{
+    <div class="first-news dashed">
+        <h3 class="post-title">@Resource.NoMatchingDocumentFound</h3>
+    </div>
+}

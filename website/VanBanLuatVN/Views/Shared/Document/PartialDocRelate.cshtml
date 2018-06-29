@@ -1,0 +1,70 @@
+﻿@using System.Collections.Specialized
+@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@using VanBanLuatVN.Models
+@model DocViewModel.DocDetailModel
+<article id="lienquan" class="detailfull cat-box-section none">
+    <div class="boxcontent p2520 bgffffff">
+        @if (Model.DocRelateLists.lDocRelates.HasValue())
+        {
+            <div class="rows-vb pt0">
+                <div class="left-view s2">
+                    <select id="select-reateTypeId" class="text-s2">
+                        <option value="0" data-ajax-url="@Url.Action("DocsRelateGetPage", "Ajax", new {DocId = Model.Docs.DocId, Page = 1})" data-result="#contentsWrapper" data-type="html">Tất cả (@Model.CountByRelateTypeId)</option>
+                        @if (Model.DocRelateLists.lCountByRelateType.HasValue())
+                        {
+                            foreach (var item in Model.DocRelateLists.lCountByRelateType)
+                            {
+                                <option value="@item.RelateTypeId" data-ajax-url="@Url.Action("DocsRelateGetPage", "Ajax", new {DocId = Model.Docs.DocId, RelateTypeId = item.RelateTypeId, DisplayPosition = item.DisplayPosition, Page = 1 })" data-result="#contentsWrapper" data-type="html">@item.RelateTypeName (@item.DocCount.ToString("#,###"))</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="lienketvb">Loại liên kết văn bản</div>
+            </div>
+            <table id="contentsWrapper" class="tablecontent">
+                <tbody class="pcontent">
+                    @for (int index = 0; index < Model.DocRelateLists.lDocRelates.Count; index++)
+                    {
+                        var number = index + (Model.Pagination.Page > 0 ? Model.Pagination.Page - 1 : Model.Pagination.Page) * Model.Pagination.PageSize + 1;
+                        <tr class="rows-vb">
+                            <td class="number bold">@string.Format("{0:#00}", number)</td>
+                            <td>
+                                @{ Html.RenderAction("PartialDocumentAttribute", "Shared", new { model = new SharedViewModel.DocumentAttribute { DocRelates = Model.DocRelateLists.lDocRelates[index] } });}
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            if (Model.DocRelateLists.lDocRelates.Count == Constants.RowAmount20)
+            {
+                Html.RenderAction("PartialPagination", "Shared", new
+                {
+                    model = new PaginationModel
+                    {
+                        Page = 2,
+                        TotalPage = Model.DocRelateLists.RowCount,
+                        AjaxUrl = "/docrelategetpage.html",
+                        QueryString = "".BuildQueryStringUrl(new NameValueCollection
+                        {
+                            {"DocId", Model.Docs.DocId.ToString()},
+                            {"page", "2"}
+                        })
+                    }
+                });
+            }
+        }
+        else
+        {
+            <table class="tablecontent full">
+                <body>
+                    <tr class="rows-vb">
+                        <td>
+                            <p class="post-title vbl bold">Không có văn bản liên quan.</p>
+                        </td>
+                    </tr>
+                </body>
+            </table>
+        }
+    </div>
+</article>

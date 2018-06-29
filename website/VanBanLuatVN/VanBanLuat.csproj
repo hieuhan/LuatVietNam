@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BAAAF242-05BE-4020-B52C-CB750E3F6CBA}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>VanBanLuatVN</RootNamespace>
+    <AssemblyName>VanBanLuatVN</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort>44302</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSoft.ViewLibV3, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\ICSoft.ViewLibV3.dll</HintPath>
+    </Reference>
+    <Reference Include="LibUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\LibUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.0.3.12153\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppCode\AjaxResult.cs" />
+    <Compile Include="AppCode\Attributes\LawsHandleErrorAttribute.cs" />
+    <Compile Include="AppCode\Attributes\MultiCheckBoxRequiredAttribute.cs" />
+    <Compile Include="AppCode\Attributes\SEOAction.cs" />
+    <Compile Include="AppCode\Attributes\VbLuatAuthorize.cs" />
+    <Compile Include="AppCode\CacheHelpers.cs" />
+    <Compile Include="AppCode\Constants.cs" />
+    <Compile Include="AppCode\Extensions.cs" />
+    <Compile Include="AppCode\ListHelpers.cs" />
+    <Compile Include="AppCode\Sercurity\VbLuatPrincipal.cs" />
+    <Compile Include="AppCode\Sercurity\VbLuatUserViewPage.cs" />
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\DocsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FeedBacksController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewController.cs" />
+    <Compile Include="Controllers\SharedController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\ArticlesModel.cs" />
+    <Compile Include="Models\ArticleViewDetailModel.cs" />
+    <Compile Include="Models\DocByGroupViewModel.cs" />
+    <Compile Include="Models\DocByFieldViewModel.cs" />
+    <Compile Include="Models\DocViewModel.cs" />
+    <Compile Include="Models\FeedbacksViewModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\NewViewModel.cs" />
+    <Compile Include="Models\PaginationModel.cs" />
+    <Compile Include="Models\SearchParams.cs" />
+    <Compile Include="Models\SharedViewModel.cs" />
+    <Compile Include="Models\ViewModelBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Css\jquery-ui.css" />
+    <Content Include="Assets\Css\print.css" />
+    <Content Include="Assets\Css\responsive.css" />
+    <Content Include="Assets\Css\style.css" />
+    <Content Include="Assets\Images\20_10.png" />
+    <Content Include="Assets\Images\404.png" />
+    <Content Include="Assets\Images\arrow-add.png" />
+    <Content Include="Assets\Images\arrow-left.png" />
+    <Content Include="Assets\Images\arrow-remove.png" />
+    <Content Include="Assets\Images\arrow-right.png" />
+    <Content Include="Assets\Images\arrow.png" />
+    <Content Include="Assets\Images\avatamail.png" />
+    <Content Include="Assets\Images\backtotop.png" />
+    <Content Include="Assets\Images\banner.png" />
+    <Content Include="Assets\Images\banner2.png" />
+    <Content Include="Assets\Images\bannerphaply.png" />
+    <Content Include="Assets\Images\bg-tin-pldn.png" />
+    <Content Include="Assets\Images\bgtie.png" />
+    <Content Include="Assets\Images\bieumau.png" />
+    <Content Include="Assets\Images\boloc.png" />
+    <Content Include="Assets\Images\bright.gif" />
+    <Content Include="Assets\Images\btn-search2.png" />
+    <Content Include="Assets\Images\btop.gif" />
+    <Content Include="Assets\Images\calendar.png" />
+    <Content Include="Assets\Images\chuyendoi.png" />
+    <Content Include="Assets\Images\click.png" />
+    <Content Include="Assets\Images\close.png" />
+    <Content Include="Assets\Images\close1.png" />
+    <Content Include="Assets\Images\favicon.ico" />
+    <Content Include="Assets\Images\icon-tieu-diem-hover.png" />
+    <Content Include="Assets\Images\logo.png" />
+    <Content Include="Assets\Images\dangnhap-face.png" />
+    <Content Include="Assets\Images\dangnhap-google.png" />
+    <Content Include="Assets\Images\danhmuc.png" />
+    <Content Include="Assets\Images\demo.jpg" />
+    <Content Include="Assets\Images\down.png" />
+    <Content Include="Assets\Images\down2.png" />
+    <Content Include="Assets\Images\down3.png" />
+    <Content Include="Assets\Images\ds-lv.png" />
+    <Content Include="Assets\Images\email.png" />
+    <Content Include="Assets\Images\email2.png" />
+    <Content Include="Assets\Images\email22.png" />
+    <Content Include="Assets\Images\fa-search.png" />
+    <Content Include="Assets\Images\fa-search1.png" />
+    <Content Include="Assets\Images\fa-search2.png" />
+    <Content Include="Assets\Images\face1.png" />
+    <Content Include="Assets\Images\favicon.png" />
+    <Content Include="Assets\Images\fb.png" />
+    <Content Include="Assets\Images\gcong.png" />
+    <Content Include="Assets\Images\google1.png" />
+    <Content Include="Assets\Images\gopy1.png" />
+    <Content Include="Assets\Images\group-dn.png" />
+    <Content Include="Assets\Images\hotline.png" />
+    <Content Include="Assets\Images\hotline22.png" />
+    <Content Include="Assets\Images\icon-bieumau.png" />
+    <Content Include="Assets\Images\icon-dm.png" />
+    <Content Include="Assets\Images\icon-dong.png" />
+    <Content Include="Assets\Images\icon-face1.png" />
+    <Content Include="Assets\Images\icon-face2.png" />
+    <Content Include="Assets\Images\icon-gopy1.png" />
+    <Content Include="Assets\Images\icon-gopy2.png" />
+    <Content Include="Assets\Images\icon-in1.png" />
+    <Content Include="Assets\Images\icon-in2.png" />
+    <Content Include="Assets\Images\icon-list.png" />
+    <Content Include="Assets\Images\icon-mail1.png" />
+    <Content Include="Assets\Images\icon-mail2.png" />
+    <Content Include="Assets\Images\icon-tai1.png" />
+    <Content Include="Assets\Images\icon-tai2.png" />
+    <Content Include="Assets\Images\icon-thong-bao1.png" />
+    <Content Include="Assets\Images\icon-thong-bao2.png" />
+    <Content Include="Assets\Images\icon-tieu-diem.png" />
+    <Content Include="Assets\Images\icon-user.png" />
+    <Content Include="Assets\Images\icon-yeucauvanban.png" />
+    <Content Include="Assets\Images\iconcal.png" />
+    <Content Include="Assets\Images\icondash.png" />
+    <Content Include="Assets\Images\icondoi.png" />
+    <Content Include="Assets\Images\icondown.png" />
+    <Content Include="Assets\Images\icondown2.png" />
+    <Content Include="Assets\Images\iconlienquan.png" />
+    <Content Include="Assets\Images\iconlistnew.png" />
+    <Content Include="Assets\Images\icontag.png" />
+    <Content Include="Assets\Images\imenu.png" />
+    <Content Include="Assets\Images\imghome.png" />
+    <Content Include="Assets\Images\in.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_444444_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_555555_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_777620_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_777777_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_cc0000_256x240.png" />
+    <Content Include="Assets\Images\jqueryUI\ui-icons_ffffff_256x240.png" />
+    <Content Include="Assets\Images\linkvb.png" />
+    <Content Include="Assets\Images\list1.png" />
+    <Content Include="Assets\Images\list2.png" />
+    <Content Include="Assets\Images\loai-hinh-doanh-nghiep.png" />
+    <Content Include="Assets\Images\logo-mobi.png" />
+    <Content Include="Assets\Images\logo-print.png" />
+    <Content Include="Assets\Images\logo1.png" />
+    <Content Include="Assets\Images\logout-hover.png" />
+    <Content Include="Assets\Images\logout.png" />
+    <Content Include="Assets\Images\luu-no.png" />
+    <Content Include="Assets\Images\luu-ok.png" />
+    <Content Include="Assets\Images\matkhau.png" />
+    <Content Include="Assets\Images\matkhau1.png" />
+    <Content Include="Assets\Images\matkhau2.svg" />
+    <Content Include="Assets\Images\mk9.png" />
+    <Content Include="Assets\Images\mt.png" />
+    <Content Include="Assets\Images\muc-luc.png" />
+    <Content Include="Assets\Images\new.png" />
+    <Content Include="Assets\Images\pr.png" />
+    <Content Include="Assets\Images\print1.png" />
+    <Content Include="Assets\Images\s.png" />
+    <Content Include="Assets\Images\s1.png" />
+    <Content Include="Assets\Images\search-nangcao.png" />
+    <Content Include="Assets\Images\search-nangcao2.png" />
+    <Content Include="Assets\Images\share.png" />
+    <Content Include="Assets\Images\share2.png" />
+    <Content Include="Assets\Images\tb9.png" />
+    <Content Include="Assets\Images\textgopy.png" />
+    <Content Include="Assets\Images\thongbao-icon.png" />
+    <Content Include="Assets\Images\thongbao.png" />
+    <Content Include="Assets\Images\thongbaohl.png" />
+    <Content Include="Assets\Images\thongbaohl1.png" />
+    <Content Include="Assets\Images\tim.png" />
+    <Content Include="Assets\Images\tinhanct.png" />
+    <Content Include="Assets\Images\tinnhanct1.png" />
+    <Content Include="Assets\Images\tn9.png" />
+    <Content Include="Assets\Images\tttk.png" />
+    <Content Include="Assets\Images\tttk1.png" />
+    <Content Include="Assets\Images\tttkhoan.png" />
+    <Content Include="Assets\Images\vb.png" />
+    <Content Include="Assets\Images\vb2.png" />
+    <Content Include="Assets\Images\vban9.png" />
+    <Content Include="Assets\Images\vbct.png" />
+    <Content Include="Assets\Images\vbct1.png" />
+    <Content Include="Assets\Images\vbct2.png" />
+    <Content Include="Assets\Images\warning.png" />
+    <Content Include="Assets\Images\warning1.png" />
+    <Content Include="Assets\Images\xemthem.png" />
+    <Content Include="Assets\Images\ycvb.png" />
+    <None Include="Assets\Scripts\Libs\jquery-1.7.1.intellisense.js" />
+    <Content Include="Assets\Scripts\Libs\jquery-1.7.1.js" />
+    <Content Include="Assets\Scripts\Libs\jquery-1.7.1.min.js" />
+    <Content Include="Assets\Scripts\Libs\jquery-ui-1.12.1.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.unobtrusive-ajax.js" />
+    <None Include="Assets\Scripts\Libs\jquery.validate-vsdoc.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.validate.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.validate.min.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.validate.unobtrusive.js" />
+    <Content Include="Assets\Scripts\Libs\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Assets\Scripts\Libs\modernizr-2.5.3.js" />
+    <None Include="Assets\Scripts\Libs\_references.js" />
+    <Content Include="Assets\Scripts\Libs\platform.js" />
+    <Content Include="Assets\Scripts\ui\jquery.mCustomScrollbar.js" />
+    <Content Include="Assets\Scripts\ui\vanbanluat.js" />
+    <Content Include="Data\advs\advs_site_1.js" />
+    <Content Include="DLL\Antlr3.Runtime.dll" />
+    <Content Include="DLL\DotNetOpenAuth.AspNet.dll" />
+    <Content Include="DLL\DotNetOpenAuth.Core.dll" />
+    <Content Include="DLL\DotNetOpenAuth.OAuth.Consumer.dll" />
+    <Content Include="DLL\DotNetOpenAuth.OAuth.dll" />
+    <Content Include="DLL\DotNetOpenAuth.OpenId.dll" />
+    <Content Include="DLL\DotNetOpenAuth.OpenId.RelyingParty.dll" />
+    <Content Include="DLL\EntityFramework.dll" />
+    <Content Include="DLL\ICSoft.ViewLibV3.dll" />
+    <Content Include="DLL\LibUtils.dll" />
+    <Content Include="DLL\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="DLL\Microsoft.Web.WebPages.OAuth.dll" />
+    <Content Include="DLL\Newtonsoft.Json.dll" />
+    <Content Include="DLL\System.Net.Http.dll" />
+    <Content Include="DLL\System.Net.Http.Formatting.dll" />
+    <Content Include="DLL\System.Net.Http.WebRequest.dll" />
+    <Content Include="DLL\System.Web.Helpers.dll" />
+    <Content Include="DLL\System.Web.Http.dll" />
+    <Content Include="DLL\System.Web.Http.WebHost.dll" />
+    <Content Include="DLL\System.Web.Mvc.dll" />
+    <Content Include="DLL\System.Web.Optimization.dll" />
+    <Content Include="DLL\System.Web.Razor.dll" />
+    <Content Include="DLL\System.Web.WebPages.Deployment.dll" />
+    <Content Include="DLL\System.Web.WebPages.dll" />
+    <Content Include="DLL\System.Web.WebPages.Razor.dll" />
+    <Content Include="DLL\WebGrease.dll" />
+    <Content Include="DLL\WebMatrix.Data.dll" />
+    <Content Include="DLL\WebMatrix.WebData.dll" />
+    <Content Include="Global.asax" />
+    <Content Include="Views\AjaxTemplates\Account\DocFeedback.cshtml" />
+    <Content Include="Views\Docs\ListDocByField.cshtml" />
+    <Content Include="Views\New\PhapLyDoanhNghiep.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\AjaxTemplates\ArticlesGetPage.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\PartialLogin.cshtml" />
+    <Content Include="Views\Shared\PartialRegister.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Docs\ListDocByDocGroupId.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\ArticleSendLink.cshtml" />
+    <Content Include="Views\FeedBacks\Feedbacks.cshtml" />
+    <Content Include="Views\Home\DocSearch.cshtml" />
+    <Content Include="Views\Shared\PartialNewsLetterEmail.cshtml" />
+    <Content Include="Views\New\ArticleTags.cshtml" />
+    <Content Include="Views\Shared\PartialLoaiDoanhNghiep.cshtml" />
+    <Content Include="Views\Shared\PartialPhapDoanhNghiep_Top.cshtml" />
+    <Content Include="Views\Shared\PartialBieuMauCanBiet.cshtml" />
+    <Content Include="Views\Shared\PartialPhapLyDoanhNghiep_Main.cshtml" />
+    <Content Include="Views\New\LoaiHinhDoanhNghiep.cshtml" />
+    <Content Include="Views\Shared\PartialPagination.cshtml" />
+    <Content Include="Views\AjaxTemplates\DocSearchGetPage.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\MyDocumentGetPage.cshtml" />
+    <Content Include="Views\Account\AccountProfile.cshtml" />
+    <Content Include="Views\Account\MyDocuments.cshtml" />
+    <Content Include="Views\Docs\ListDocs.cshtml" />
+    <Content Include="Views\Docs\DetailFull.cshtml" />
+    <Content Include="Views\Shared\PartialFieldOfSearchDocDetail.cshtml" />
+    <Content Include="Views\Shared\Document\PartialDocDiagram.cshtml" />
+    <Content Include="Views\Shared\Document\PartialDocRelate.cshtml" />
+    <Content Include="Views\Shared\Document\PartialDocEffect.cshtml" />
+    <Content Include="Views\Shared\Document\PartialRelateFieldDoc.cshtml" />
+    <None Include="vbluat.pubxml" />
+    <Content Include="Views\New\BieuMauDetail.cshtml" />
+    <Content Include="Views\New\BieuMau.cshtml" />
+    <Content Include="Views\AjaxTemplates\BieuMauGetPage.cshtml" />
+    <Content Include="Views\AjaxTemplates\ArticlesTagGetPage .cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\DocSendMail.cshtml" />
+    <Content Include="Views\Docs\ListDocByEffectStatus.cshtml" />
+    <Content Include="Views\Docs\DocsConsolidationDetailFull.cshtml" />
+    <Content Include="Views\Docs\VietNamStandardsDetailFull.cshtml" />
+    <Content Include="Views\Shared\Document\PartialDocConsolidationDiagram.cshtml" />
+    <Content Include="Views\Shared\Document\PartialDocVietNamStandardsDiagram.cshtml" />
+    <Content Include="Views\AjaxTemplates\DocsRelateGetPage.cshtml" />
+    <Content Include="Views\Shared\PartialFieldOfSearchHeader.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\PartialGuiYeuCauVB.cshtml" />
+    <Content Include="Views\AjaxTemplates\ListDocsGetPage.cshtml" />
+    <Content Include="Views\Shared\PartialSEOPagination.cshtml" />
+    <Content Include="Views\Shared\PartialYeuCauVanBan.cshtml" />
+    <Content Include="Views\Shared\PartialLegaNews.cshtml" />
+    <Content Include="Views\Shared\PartialPhapLyDoanhNghiep.cshtml" />
+    <Content Include="Views\Account\NewUserActive.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\AjaxTemplates\CustomerDocsGetPage.cshtml" />
+    <Content Include="Views\AjaxTemplates\Account\ArticleFeedback.cshtml" />
+    <Content Include="Views\AjaxTemplates\BieuMauGetByCategoryId.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AjaxTemplates\DocsGetPage.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\New\ArticleByCate.cshtml" />
+    <Content Include="Views\New\ArticleDetail.cshtml" />
+    <Content Include="Views\New\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\PartialAdvertise.cshtml" />
+    <Content Include="Views\Shared\PartialChinhSachMoi.cshtml" />
+    <Content Include="Views\Shared\PartialDocFilter.cshtml" />
+    <Content Include="Views\Shared\PartialDocumentAttribute.cshtml" />
+    <Content Include="Views\Shared\PartialDocumentsOfInterest.cshtml" />
+    <Content Include="Views\Shared\PartialFieldOfSearchHome.cshtml" />
+    <Content Include="Views\Shared\PartialFooter.cshtml" />
+    <Content Include="Views\Shared\PartialHeader.cshtml" />
+    <Content Include="Views\Shared\PartialLegaNewsHome.cshtml" />
+    <Content Include="Views\Shared\PartialNewPolicy.cshtml" />
+    <Content Include="Views\Shared\PartialNoticeNewDocument.cshtml" />
+    <Content Include="Views\Shared\PartialTinXemNhieu.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutDocument.cshtml" />
+    <Content Include="Views\Shared\_LayoutNews.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>29630</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:29632/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

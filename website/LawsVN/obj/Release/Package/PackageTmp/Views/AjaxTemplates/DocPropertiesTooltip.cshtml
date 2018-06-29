@@ -1,0 +1,43 @@
+﻿@using LawsVN.Library
+@model LawsVN.Models.Docs.DocPropertiesModel
+@if (Model != null)
+{
+    <div style="float: left; padding: 10px;">
+        <div class="rows item6" style="font-size: 13px;">
+            @Model.DocName
+        </div>
+        <div class="rows item6 tooltip6">
+            <div class="nd-left tooltip6">@(Model.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId ? "Cơ quan ban hành:" : "Organization:")</div>
+            <div class="nd-right tooltip6">@Model.OrganName</div>
+        </div>
+        <div class="rows item6 tooltip6">
+            <div class="nd-left tooltip6">@(Model.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId ? "Lĩnh vực:" : "Issuring body:")</div>
+            <div class="nd-right tooltip6">@Model.FieldName</div>
+        </div>
+        <div class="rows item6 tooltip6">
+            <div class="nd-left tooltip6">@(Model.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId ? "Ngày ban hành:" : "Issued Date:")</div>
+            <div class="nd-right tooltip6">@Model.Fee.TrimmedOrDefault(Model.IssueDate.toString())</div>
+        </div>
+        <div class="rows item6 tooltip6">
+            <div class="nd-left tooltip6">@(Model.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId ? "Ngày hiệu lực:" : "Effective Date:")</div>
+            <div class="nd-right tooltip6">@Model.EffectDate.toString()</div>
+        </div>
+        <div class="rows item6 tooltip6">
+            <div class="nd-left tooltip6">@(Model.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId ? "Ngày hết hiệu lực:" : "	Expired date:")</div>
+            <div class="nd-right tooltip6">@Model.ExpireDate.toString()</div>
+        </div>
+        <div class="rows item6 tooltip6">
+            <div class="nd-left tooltip6">@(Model.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId ? "Loại văn bản:" : "Legislation Type:")</div>
+            <div class="nd-right tooltip6">@Model.DocTypeName</div>
+        </div>
+        <div class="rows item6 tooltip6">
+            <div class="nd-left tooltip6">@(Model.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId ? "Số hiệu:" : "Gazette number:")</div>
+            <div class="nd-right tooltip6">@Model.DocIdentity</div>
+        </div>
+        <div class="rows">
+            <div class="nd-left tooltip6">@(Model.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId ? "Người ký:" : "Signer:")</div>
+            <div class="nd-right tooltip6">@Model.SignerName</div>
+        </div>
+    </div>
+}
+

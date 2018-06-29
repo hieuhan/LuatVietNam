@@ -1,0 +1,107 @@
+﻿@using ICSoft.CMSViewLib
+@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Docs
+@{
+   Layout = "~/Views/Shared/_LayoutDoc.cshtml";
+}
+@model DocsViewDetailModel
+<div class="cat-box content-wrap">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>
+            @if (Model.mDocsViewDetail.lFieldDisplays.HasValue())
+            {
+                <span> »</span>
+                for (int index = 0; index < Model.mDocsViewDetail.lFieldDisplays.Count; index++)
+                {
+                    FieldDisplays mFieldDisplays = Model.mDocsViewDetail.lFieldDisplays[index];
+                    if (index == 0)
+                    {
+                        <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item">@mFieldDisplays.FieldName</a>
+                    }
+                    else
+                    {
+                        <span>, </span>
+                        <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item">@mFieldDisplays.FieldName</a>
+                    }
+                }
+            }
+        </div>
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title vblq">@Model.mDocsViewDetail.mDocsView.DocName</h1>
+                <p class="info-page">@Html.Raw(Model.mDocsViewDetail.mDocsView.MetaDesc)</p>
+            </div>
+        </div>
+
+        <div class="cat-box-content page" >
+            <div class="tab-nav">
+            <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()" title="@Resource.Properties">@Resource.Properties</a>
+            <a class="tab-nav-item-ad active" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("noidung")" title="@Resource.Content">@Resource.Content</a>
+            <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("luocdo")" title="@Resource.Diagram">@Resource.Diagram</a>
+            <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("hieuluc")" title="@Resource.Effect">@Resource.Effect</a>
+            <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("lienquan")" title="@Resource.Relate">@Resource.Relate2</a>
+            <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("taive")" title="@Resource.DownLoad">@Resource.DownLoad</a>
+            <div class="fontsize">
+                <a href="javascript:lawsVn.FontZoom(-1)" class="fontsize-item1"></a>
+                <a href="javascript:lawsVn.FontZoom(1)" class="fontsize-item2"></a>
+            </div>
+        </div>
+
+            @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocContent))
+            {
+                <div id="docPrint" class="content-entry content-fixed">
+                    @Html.Raw(Model.mDocsViewDetail.mDocsView.DocContent)
+                </div>
+            }
+            else
+            {
+                DocFiles mDocFiles = Model.mDocsViewDetail.lDocFiles.FirstOrDefault(i => i.FilePath.Contains(".pdf") && i.LanguageId == 1);
+                if (mDocFiles == null || mDocFiles.FilePath == "")
+                {
+                    <div class="thong-bao-2">
+                        <div class="thongbao-item2">
+                            <em>Nội dung văn bản đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <embed class="content-fixed" src="@(Constants.MEDIA_VIEWPATH + mDocFiles.FilePath)" width="100%" height="1000" type='application/pdf'>
+                }
+            }
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialFullSearchDetail", "Shared", new { model = new PartialFullSearchDetailModel { SearchOptions = 1, DocGroupId = 0, FieldId = Model.FieldId } });}
+            @Html.Partial("PartialDocUtility", Model)
+            @{Html.RenderAction("PartialDocIndexes", "Shared", new { model = Model.mDocsViewDetail.lDocIndexes });}
+        </aside>
+    </div>
+
+</div>
+
+@{Html.RenderAction("PartialDocOthers", "Shared", new { model = new DocOthersModel { ListDocsView = Model.mDocsViewDetail.lDocOthers } });}
+@Html.Partial("PartialContentViewed")
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('.sidebar').lawFixAuto();
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.mDocsViewDetail.mDocsView.DocId',
+                name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+                title: '@Model.mDocsViewDetail.mDocsView.DocName',
+                summary: '',
+                datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+                url: '@Model.mDocsViewDetail.mDocsView.DocUrl',
+                image: '@Constants.NoImageUrl'
+            }
+    });
+    </script>
+}

@@ -1,0 +1,80 @@
+﻿@model LawsVN.Models.Account.PaymentServiceUsingBankAccountModel
+<div class="padding20">
+<div class="content">
+    <div class="cat-title">
+        <div class="cat-box-title" style="text-transform: none;">Chi tiết đơn hàng</div>
+        <span class="vien-title nav-fd daxem"></span>
+    </div>
+    <div class="form-group">
+        <div class="rows">
+            <span class="text-item1">Gói đăng ký:</span>
+            <span id="ServiceNameBankAccountV" class="text-item2"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="rows">
+            <span class="text-item1">Giá:</span>
+            <span id="priceV" class="text-item2"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="rows">
+            <span class="text-item1">Tổng:</span>
+            <span id="totalV" class="text-item2"></span>
+        </div>
+    </div>
+    <div id="promotionCodeV" class="form-group"></div>
+    <div id="TaxInvoiceV" class="form-group">
+        <div class="cat-title">
+            <div class="cat-box-title" style="text-transform: none;">Thông tin hóa đơn GTGT:</div>
+            <span class="vien-title nav-fd daxem"></span>
+        </div>
+        <div class="form-group">
+            <div class="rows">
+                <span class="text-item1">Tên công ty: </span>
+                <span id="companyNameV" class="text-item2"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="rows">
+                <span class="text-item1">Địa chỉ: </span>
+                <span id="companyAddressV" class="text-item2"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="rows">
+                <span class="text-item1">Mã số thuế: </span>
+                <span id="companyTaxCodeV" class="text-item2"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="rows">
+                <span class="text-item1">Nội dung hóa đơn: </span>
+                <p id="internalContentV" class="text-item2"></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+@using (Ajax.BeginForm("ConfirmPaymentServiceUsingBankAccount", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    ,OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccess"
+}))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m=>m.ServiceId, new {id="ServiceIdBankAccount"})
+    @Html.HiddenFor(m=>m.ServiceName, new {id="ServiceNameBankAccount"})
+    @Html.HiddenFor(m=>m.ServicePackageId, new {id="ServicePackageIdBankAccount"})
+    @Html.HiddenFor(m => m.OrderId, new {id="OrderIdBankAccount"})
+    @Html.HiddenFor(m => m.PaymentTransactionId, new {id="PaymentTransactionIdBankAccount"})
+    @Html.HiddenFor(m=>m.PromotionCodeBankAccount, new {id="PromotionCodeBA"})
+    @Html.HiddenFor(m=>m.TransactionTypeId, new {id="TransactionTypeIdBankAccount"})
+    <div class="rows btn">
+        <button name="ButtonType" value="PaymentSuccess" class="btn-dang-ky dv2">Thành công</button>
+        <button name="ButtonType" value="PaymentError" class="btn-nhap-lai dv2">Lỗi</button>
+    </div>
+}
+</div>

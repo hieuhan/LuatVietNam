@@ -1,0 +1,152 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using ICSoft.CMSLib
+@model TNPLViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px; position: absolute;">@Html.Raw(Model.SeoHeader.TrimmedOrDefault("Thuật ngữ pháp lý"))</h1>
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.PartialPaginationAjax.PageIndex, totalPage = Model.PartialPaginationAjax.TotalPage, pageSize = Model.PartialPaginationAjax.PageSize });}
+}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item">@Resource.HomePage</a> »
+    <span class="breadcrumb-item color1">Thuật ngữ pháp lý</span>
+</div>
+
+<section class="box-section">
+    <div class="title2">
+        <h2 class="title-cat2 vien">@Html.Raw(Model.SeoHeader.TrimmedOrDefault("Thuật ngữ pháp lý").ToString())</h2>
+    </div>
+    <div class="box-search">
+            @using (Ajax.BeginForm("TNPL_GetViewSearch", "Ajax", null, new AjaxOptions
+            {
+                HttpMethod = "Get"
+                ,
+                UpdateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                ,
+                InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                ,
+                OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                ,
+                OnComplete = string.Format("lawsVn.ajaxEvents.OnCompleteV2('{0}');{1}", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId, "lawsVn.LawTerminTagReset()")
+                ,
+                OnSuccess = "lawsVn.ajaxEvents.LawTerminsOnSuccess"
+            }))
+            {
+                <div class="col3-seclect1">
+                    <select tabindex="1" id="dllLawTerminGroups" class="select-option12">
+                        <option value="0">Tất cả</option>
+                        @foreach (var item in Model.ListLawTerminGroups)
+                        {
+                            <option value="@item.LawTerminGroupId" title="@item.LawTerminGroupDesc" @(item.LawTerminGroupId == byte.Parse(Request["LawTerminGroupId"] == null ? "0" : Request["LawTerminGroupId"]) ? "selected" : "")>
+                                @item.LawTerminGroupDesc.Truncate(40)
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="search-input">
+                    @Html.TextBoxFor(m => m.Tername, new { @class = "search-q", placeholder = "Nhập nội dung cần tìm...", autocomplete = "off" })
+                    <span id="signer-message"></span>
+                    <input type="hidden" id="LawTerminId" value="0"/>
+                    <input type="hidden" name="ShowNumberOfResults" value="@Model.PartialPaginationAjax.ShowNumberOfResults"/>
+                <button class="btn-isearch"></button>
+               </div>
+            }
+    </div>
+    <div class="box-seclect">
+        <div class="post-abc">
+            @foreach (string alpha in new[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "all" })
+            {
+                @Ajax.ActionLink(alpha, string.Empty, string.Empty,
+                    null,
+                    new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        Url = Url.Action("TNPL_GetViewSearch", "Ajax", new
+                        {
+                            LawTerminGroupId = 0,
+                            TerName = alpha.Equals("all") ? string.Empty : alpha,
+                            languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                            updateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+                            insertionMode = InsertionMode.Replace,
+                            controllerName = "Ajax",
+                            actionName = "TNPL_GetViewSearch",
+                            pageSize = Model.PartialPaginationAjax.PageSize,
+                            linkLimit = Model.PartialPaginationAjax.LinkLimit,
+                            ShowNumberOfResults = Model.PartialPaginationAjax.ShowNumberOfResults
+                        }),
+                        UpdateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+                        InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode,
+                        OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId),
+                        OnComplete = string.Format("lawsVn.ajaxEvents.OnCompleteV2('{0}');{1}", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId, "lawsVn.LawTerminsReset()"),
+                        OnSuccess = "lawsVn.ajaxEvents.LawTerminsOnSuccess"
+                    }, new { @class = "post-tag-abc " })
+            }
+        </div>
+    </div>
+    <div id="ListLawTerminsTab" class="cat-box-content">
+        @if (Model.l_LawTermins.HasValue())
+        {
+            <table class="table table-bordered thuatngu">
+                <thead>
+                    <tr>
+                        <th class="xs1">Stt</th>
+                        <th class="xs3">Mô tả / Định nghĩa </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.l_LawTermins.Count; i++)
+                    {
+                        var number = i + (Model.PartialPaginationAjax.PageIndex > 0 ? Model.PartialPaginationAjax.PageIndex - 1 : Model.PartialPaginationAjax.PageIndex) * Model.PartialPaginationAjax.PageSize + 1;
+                        <tr>
+                            <td class="xs1">@(number.ToString("#00"))</td>
+                            <td class="xs3">
+                                <div class="rowthuatngu" style="font-size: 13px; padding-top: 5px;">
+                                    <p>Thuật ngữ:@Model.l_LawTermins[i].TermName</p>
+                                </div>
+                                <div class="rowthuatngu" style="font-weight: bold;">@Model.l_LawTermins[i].TermDesc</div>
+                                <div class="rowthuatngu" style="font-size: 13px; padding-top: 5px;">
+                                    <p>Nguồn:  @Model.l_LawTermins[i].TermSource</p>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+                    {
+                        Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.PartialPaginationAjax });
+                    }
+        }
+        else
+        {
+            <table class="table table-bordered">
+                <tbody>
+                    <tr class="row-first-news">
+                        <th class="count-123" scope="row"></th>
+                        <td class="news-center-post">
+                            <h3>
+                                <span class="post-title lvn">@Resource.UpdatingData</span>
+                            </h3>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+    </div>
+</section>
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: { id: 0 }
+        });
+    </script>
+}
+
+

@@ -1,0 +1,536 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using System.Web.Mvc.Html
+@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@model LawsVN.Models.Docs.DocSearchModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.mPartialPaginationAjax.PageIndex, totalPage = Model.mPartialPaginationAjax.TotalPage, pageSize = Model.mPartialPaginationAjax.PageSize });}
+}
+<div class="page-content">
+<div class="cat-box">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>»
+            <span class="breadcrumb-item ">Tìm kiếm Văn bản</span>
+        </div>
+        <section class="cat-box search-box">
+            @{Html.RenderAction("PartialFullSearch", "Shared", Model.mPartialDocSearchModel);}
+        </section>
+    </div>
+
+    <div class="content-right">
+        <div class="widget ">
+            <div class="banner">
+                @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 238 });}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="divcontent" class="cat-box">
+<aside class="sidebar-nav searchblog">
+
+<div class="widget resultsFilterBy">
+    <div class="widget-top" style="background: #49c5c7;">
+        <span class="title-widget tk">@Resource.TheResultsAreFilteredBy:</span>
+        <div class="more1">
+            <a class="text-delete UncheckSearchAll" href="#" title="Xóa tất cả điều kiện lọc">@Resource.DeleteAll</a>
+        </div>
+    </div>
+    <div class="categories-sub">
+        <div id="nhomvanban" class="item-kqtk-noitem" style="border: 0;"></div>
+        <div id="linhvuctracuu" class="item-kqtk-noitem"></div>
+        <div id="trangthaihieuluc" class="item-kqtk-noitem"></div>
+        <div id="loaivanban" class="item-kqtk-noitem"></div>
+        <div id="coquanbanhanh" class="item-kqtk-noitem"></div>
+        <div id="nambanhanh" class="item-kqtk-noitem"></div>
+    </div>
+</div>
+@if (Model.DocsViewSearch.lDocGroupsView.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <span class="title-widget tk">Nhóm văn bản</span>
+        </div>
+
+        <div class="widget-nav">
+            <div id="radio_DocGroupId" class="categories-sub">
+                <div class="padding20">
+                    @foreach (DocGroupsView item in Model.DocsViewSearch.lDocGroupsView)
+                    {
+                        <div class="item-checkbox-list3">
+                            <div class="radio">
+                                <input id="DocGroupId_@(item.DocGroupId)" class="DocGroupIdS" name="DocGroupId" type="radio" @(item.DocGroupId==Model.DocGroupId ? "checked" : string.Empty) value="@item.DocGroupId"/>
+                                <label for="DocGroupId_@(item.DocGroupId)" class="radio-label" title="@item.DocGroupDesc"> <span class="row-item fix">@item.DocGroupDesc</span> <span class="colorgrey">@string.Format("({0:#,###})", item.SoLuong)</span> </label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+<div class="widget">
+    <div class="widget-top">
+        <span class="title-widget tk">@Resource.FieldSearch</span>
+    </div>
+
+    <div class="widget-nav">
+        <div class="categories-sub ttp2 padding0">
+            @if (Model.DocsViewSearch.lFields.HasValue())
+            {
+                <div id="radio_FieldId" class="padding20">
+                    @for (int i = 0; i < Model.DocsViewSearch.lFields.Count && i < Constants.RowAmount10; i++)
+                    {
+                        if (Model.DocsViewSearch.lFields[i].FieldId == 0)
+                        {
+                            continue;
+                        }
+                        <div class="item-checkbox-list3">
+                            <div class="radio">
+                                <input id="FieldId_@(Model.DocsViewSearch.lFields[i].FieldId)" class="FieldIdS" name="FieldId" type="radio" @(Model.DocsViewSearch.lFields[i].FieldId == Model.FieldId ? "checked" : string.Empty) value="@Model.DocsViewSearch.lFields[i].FieldId"/>
+                                <label for="FieldId_@(Model.DocsViewSearch.lFields[i].FieldId)" class="radio-label" title="@Model.DocsViewSearch.lFields[i].FieldName"> <span class="row-item fix">@Model.DocsViewSearch.lFields[i].FieldName</span> <span class="colorgrey">@string.Format("({0:#,###})", Model.DocsViewSearch.lFields[i].SoLuong)</span> </label>
+                            </div>
+                        </div>
+                                                        
+                    }
+                </div>
+                if (Model.DocsViewSearch.lFields.Count > Constants.RowAmount10)
+                {
+                    <div class="more" style="text-indent: 32px;padding: 0 20px; width: 90%;">
+                        <a class="menu" href="#" title="Lĩnh vực khác" data-hasqtip="0" style="font-weight: bold;">Lĩnh vực khác
+                            <img alt="xem-tiep" class="icon-more" src="@Url.Content("~/assets/images/mt2.png")">
+                        </a>
+                        <div class="tooltiptext">
+                            <span class="icon-tooltip"></span>
+                            <div class="tooltip-item">
+                                <div class="content-scroll-1" style="height: 250px;">
+                                    <div id="radio_FieldId_Tooltip" class="padding20">
+                                        @for (int i = Constants.RowAmount10; i < Model.DocsViewSearch.lFields.Count; i++)
+                                        {
+                                            if (Model.DocsViewSearch.lFields[i].FieldId == 0)
+                                            {
+                                                continue;
+                                            }
+                                            <div class="item-checkbox-list">
+                                                <div class="radio">
+                                                    <input id="FieldId_@(Model.DocsViewSearch.lFields[i].FieldId)" class="FieldIdS" name="FieldId" type="radio" @(Model.DocsViewSearch.lFields[i].FieldId == Model.FieldId ? "checked" : string.Empty) value="@Model.DocsViewSearch.lFields[i].FieldId"/>
+                                                    <label for="FieldId_@(Model.DocsViewSearch.lFields[i].FieldId)" class="radio-label" title="@Model.DocsViewSearch.lFields[i].FieldName"> <span class="row-item fix">@Model.DocsViewSearch.lFields[i].FieldName</span> <span class="colorgrey">@string.Format("({0:#,###})", Model.DocsViewSearch.lFields[i].SoLuong)</span> </label>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+</div>
+
+<div class="widget">
+    <div class="widget-top">
+        <span class="title-widget tk">@Resource.EffectStatus</span>
+    </div>
+    <div class="widget-nav">
+        <div id="radio_EffectStatusId" class="categories-sub ttp2">
+            @if (Model.DocsViewSearch.lEffectStatus.HasValue())
+            {
+                <div class="padding20">
+                    @foreach (EffectStatus mEffectStatus in Model.DocsViewSearch.lEffectStatus)
+                    {
+                        if (mEffectStatus.EffectStatusId == 0 || string.IsNullOrEmpty(mEffectStatus.EffectStatusDesc))
+                        {
+                            continue;
+                        }
+                        <div class="item-checkbox-list3">
+                            <div class="radio">
+                                @if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+                                {
+                                    <input id="EffectStatusId_@(mEffectStatus.EffectStatusId)" class="EffectStatusIdS" name="EffectStatusId" type="radio" @(mEffectStatus.EffectStatusId == Model.EffectStatusId ? "checked" : string.Empty) value="@mEffectStatus.EffectStatusId"/>
+                                    <label for="EffectStatusId_@(mEffectStatus.EffectStatusId)" class="radio-label" title="@mEffectStatus.EffectStatusDesc"> <span class="row-item fix">@mEffectStatus.EffectStatusDesc</span> <span class="colorgrey">@string.Format("({0:#,###})", mEffectStatus.SoLuong)</span> </label>
+                                }
+                                else
+                                {
+                                    <input id="EffectStatusId_@(mEffectStatus.EffectStatusId)" type="radio" name="EffectStatusId"/>
+                                    <label for="EffectStatusId_@(mEffectStatus.EffectStatusId)" class="radio-label no-permission-s" title="@Resource.NoPermission"> <span class="row-item fix">@mEffectStatus.EffectStatusDesc</span> <span class="colorgrey">@string.Format("({0:#,###})", mEffectStatus.SoLuong)</span> </label>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+<div class="widget">
+    <div class="widget-top">
+        <span class="title-widget tk">@Resource.DocTypes</span>
+    </div>
+    <div class="widget-nav">
+        <div class="categories-sub ttp2">
+            @if (Model.DocsViewSearch.lDocTypes.HasValue())
+            {
+                if (Model.DocsViewSearch.lDocTypes.Count > Constants.RowAmount10)
+                {
+                    <div class="more1 xem-them-tooltip">
+                        <a class="menu moretext" href="#" title="Xem thêm" data-hasqtip="1">Xem thêm
+                            <img alt="xem-tiep" class="icon-moretext" src="@Url.Content("~/assets/Images/moretext.png")"/>
+                        </a>
+                        <div class="tooltiptext">
+                            <span class="icon-tooltip"></span>
+                            <div class="tooltip-item">
+                                <div class="content-scroll-1" style="height: 250px;">
+                                    <div id="radio_DocTypeId_Tooltip" class="padding20">
+                                        @for (int i = Constants.RowAmount10; i < Model.DocsViewSearch.lDocTypes.Count; i++)
+                                        {
+                                            if (Model.DocsViewSearch.lDocTypes[i].DocTypeId == 0)
+                                            {
+                                                continue;
+                                            }
+                                            <div class="item-checkbox-list">
+                                                <div class="radio">
+                                                    <input id="DocTypeId_@(Model.DocsViewSearch.lDocTypes[i].DocTypeId)" class="DocTypeIdS" name="DocTypeId" type="radio" @(Model.DocsViewSearch.lDocTypes[i].DocTypeId == Model.DocTypeId ? "checked" : string.Empty) value="@Model.DocsViewSearch.lDocTypes[i].DocTypeId"/>
+                                                    <label for="DocTypeId_@(Model.DocsViewSearch.lDocTypes[i].DocTypeId)" class="radio-label" title="@Model.DocsViewSearch.lDocTypes[i].DocTypeDesc"> <span class="row-item fix">@Model.DocsViewSearch.lDocTypes[i].DocTypeDesc</span> <span class="colorgrey">@string.Format("({0:#,###})", Model.DocsViewSearch.lDocTypes[i].SoLuong)</span> </label>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div id="radio_DocTypeId" class="padding20">
+                    @for (int i = 0; i < Model.DocsViewSearch.lDocTypes.Count && i < Constants.RowAmount10; i++)
+                    {
+                        if (Model.DocsViewSearch.lDocTypes[i].DocTypeId == 0)
+                        {
+                            continue;
+                        }
+                        <div class="item-checkbox-list3">
+                            <div class="radio">
+                                <input id="DocTypeId_@(Model.DocsViewSearch.lDocTypes[i].DocTypeId)" class="DocTypeIdS" name="DocTypeId" type="radio" @(Model.DocsViewSearch.lDocTypes[i].DocTypeId == Model.DocTypeId ? "checked" : string.Empty) value="@Model.DocsViewSearch.lDocTypes[i].DocTypeId"/>
+                                <label for="DocTypeId_@(Model.DocsViewSearch.lDocTypes[i].DocTypeId)" class="radio-label" title="@Model.DocsViewSearch.lDocTypes[i].DocTypeDesc"> <span class="row-item fix">@Model.DocsViewSearch.lDocTypes[i].DocTypeDesc</span> <span class="colorgrey">@string.Format("({0:#,###})", Model.DocsViewSearch.lDocTypes[i].SoLuong)</span> </label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+
+<div class="widget">
+    <div class="widget-top">
+        <span class="title-widget tk">@Resource.Organs</span>
+    </div>
+    <div class="widget-nav">
+        <div class="categories-sub ttp2">
+            @if (Model.DocsViewSearch.lOrgans.HasValue())
+            {
+                if (Model.DocsViewSearch.lOrgans.Count > Constants.RowAmount10)
+                {
+                    <div class="more1 xem-them-tooltip">
+                        <a class="menu moretext" href="#" title="Xem thêm" data-hasqtip="2">Xem thêm
+                            <img alt="xem-tiep" class="icon-moretext" src="@Url.Content("~/assets/Images/moretext.png")"/>
+                        </a>
+                        <div class="tooltiptext">
+                            <span class="icon-tooltip"></span>
+                            <div class="content-scroll-1" style="height: 250px;">
+                                <div class="tooltip-item">
+                                    <div id="radio_OrganId_Tooltip" class="padding20">
+                                        @for (int i = Constants.RowAmount10; i < Model.DocsViewSearch.lOrgans.Count; i++)
+                                        {
+                                            <div class="item-checkbox-list">
+                                                <div class="radio">
+                                                    <input id="OrganId_@(Model.DocsViewSearch.lOrgans[i].OrganId)" class="OrganIdS" name="OrganId" type="radio" @(Model.DocsViewSearch.lOrgans[i].OrganId == Model.OrganId ? "checked" : string.Empty) value="@Model.DocsViewSearch.lOrgans[i].OrganId"/>
+                                                    <label for="OrganId_@(Model.DocsViewSearch.lOrgans[i].OrganId)" class="radio-label" title="@Model.DocsViewSearch.lOrgans[i].OrganDesc"> <span class="row-item fix">@Model.DocsViewSearch.lOrgans[i].OrganDesc</span> <span class="colorgrey">@string.Format("({0:#,###})", Model.DocsViewSearch.lOrgans[i].SoLuong)</span> </label>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div id="radio_OrganId" class="padding20">
+                    @for (int i = 0; i < Model.DocsViewSearch.lOrgans.Count && i < Constants.RowAmount10; i++)
+                    {
+                        Organs mOrgans = Model.DocsViewSearch.lOrgans[i];
+                        <div class="item-checkbox-list3">
+                            <div class="radio">
+                                <input id="OrganId_@(mOrgans.OrganId)" class="OrganIdS" name="OrganId" type="radio" @(mOrgans.OrganId == Model.OrganId ? "checked" : string.Empty) value="@mOrgans.OrganId"/>
+                                <label for="OrganId_@(mOrgans.OrganId)" class="radio-label" title="@mOrgans.OrganDesc"> <span class="row-item fix">@mOrgans.OrganDesc</span> <span class="colorgrey">@string.Format("({0:#,###})", mOrgans.SoLuong)</span> </label>
+                            </div>
+                        </div>
+                    }
+                </div>
+                                
+            }
+        </div>
+    </div>
+
+</div>
+
+<div class="widget">
+    <div class="widget-top">
+        <span class="title-widget tk">@Resource.YearIssued</span>
+    </div>
+    <div class="widget-nav">
+        <div class="categories-sub ttp2">
+            @if (Model.DocsViewSearch.YearView.HasValue())
+            {
+                <div id="radio_Year" class="padding20">
+                    @foreach (YearView yearView in Model.DocsViewSearch.YearView)
+                    {
+                        if (yearView.Year == 0)
+                        {
+                            continue;
+                        }
+                        <div class="item-checkbox-list3">
+                            <div class="radio">
+                                <input id="Year_@(yearView.Year)" class="YearS" name="Year" type="radio" value="@yearView.Year"/>
+                                <label for="Year_@(yearView.Year)" class="radio-label" title="@yearView.Year"> <span class="row-item fix">@yearView.Year</span> <span class="colorgrey">@string.Format("({0:#,###})", yearView.SoLuong)</span> </label>
+                            </div>
+                        </div>
+                    }
+                </div>
+                                    
+            }
+        </div>
+    </div>
+</div>
+
+</aside>
+
+<div class="content-center-pages searchblog">
+    <section class="cat-box">
+        @using (Html.BeginForm("DocSearch", "Home", FormMethod.Get))
+        {
+            @Html.HiddenFor(m => m.Keywords)
+            @Html.HiddenFor(m => m.DocGroupId)
+            @Html.HiddenFor(m => m.SearchOptions)
+            @Html.HiddenFor(m => m.SearchExact)
+            @Html.HiddenFor(m => m.DateFrom)
+            @Html.HiddenFor(m => m.DateTo)
+            @Html.HiddenFor(m => m.OrganId)
+            @Html.HiddenFor(m => m.LanguageId)
+            @Html.HiddenFor(m => m.SignerId)
+            @Html.HiddenFor(m => m.SignerName)
+            <div class="row item5">
+                <div class="left" id="txtnumberresultfound" style="margin-bottom: 15px;">
+                    @if (Model.mPartialPaginationAjax.TotalPage > 0)
+                    {
+                        if (!string.IsNullOrEmpty(Model.mPartialPaginationAjax.Keywords))
+                        {
+                            <strong>Tìm thấy <span class="color2">@Model.mPartialPaginationAjax.TotalPage.ToString("#,###")</span> văn bản với từ khóa "<span class="color2">@Model.mPartialDocSearchModel.Keywords</span>"</strong>
+                        }
+                        else
+                        {
+                            <strong>Tìm thấy <span class="color2">@Model.mPartialPaginationAjax.TotalPage.ToString("#,###")</span> văn bản.</strong>
+                        }
+                    }
+                </div>
+            </div>
+            <div id="FilterByDropdownlist" class="lockq-from2">
+
+                <div class="item-loctheo m1">
+                    <span class="icon-loc-kq"></span>@Resource.FilterBy:
+                </div>
+
+                <div class="item-lockq m4">
+                    <select id="ddlFieldId" tabindex="2" name="FieldId" class="dropdown select-onchange">
+                        <option value="0" data-title="">@Resource.AllFields</option>
+                        @if (Model.ListFields.HasValue())
+                        {
+                            foreach (var item in Model.ListFields)
+                            {
+                                <option value="@item.FieldId" data-title="@item.FieldName" @(item.FieldId == Model.FieldId ? "selected" : string.Empty)>@item.FieldDesc</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="item-lockq m4">
+                    @Html.DropdownListPermission("EffectStatusId","EffectStatusId", "dropdown select-onchange", new SelectList(Model.ListEffectStatus, "EffectStatusId", "EffectStatusDesc", Model.EffectStatusId))
+                </div>
+
+                <div class="item-lockq m5">
+                    <select id="ddlDocTypeId" tabindex="4" name="DocTypeId" class="dropdown select-onchange">
+                        <option value="0" data-title="">@Resource.DocTypes</option>
+                        @if (Model.ListDocTypes.HasValue())
+                        {
+                            foreach (var item in Model.ListDocTypes)
+                            {
+                                <option value="@item.DocTypeId" data-title="@item.DocTypeDesc" @(item.DocTypeId == Model.DocTypeId ? "selected" : string.Empty)>@item.DocTypeDesc</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="view-post" id="txtnumberpage">
+                    @if (Model.mPartialPaginationAjax.TotalPage > 0)
+                    {
+                        <strong>Kết quả 1-@Model.mPartialPaginationAjax.PageSize trong @(Model.mPartialPaginationAjax.TotalPage.ToString("#,###")) văn bản </strong>
+                    }
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.FieldId)
+            @Html.HiddenFor(m => m.EffectStatusId)
+            @Html.HiddenFor(m => m.DocTypeId)
+        }
+        @if (Model.ListDocsViewSuggest.HasValue())
+        {
+            <table class="table-tk-boder ">
+                <tbody>
+                <tr class="row-first-news-tk-boder title ">
+                    <th class="count-123 page title" scope="row">
+                        <img class="bongtk" alt="sao-tk" src="@Url.Content("~/Assets/Images/bong-tim-kiem.png")" /></th>
+                    <td class="news-left-post-timkiem title" style="border: 0;">
+                        <strong style="font-size: 14px;">Gợi ý kết quả tìm kiếm <span style="color: #90622a;">(@Model.ListDocsViewSuggest.Count.ToString("#,###"))</span></strong>
+                    </td>
+
+                    <td class="title">
+                        <a href="#" class="thugon">Thu gọn
+                            <img class="thugon-img" alt="thugon" src="@Url.Content("~/Assets/Images/thu-gon-tk.png")"/>
+                        </a>
+                    </td>
+                </tr>
+                @foreach (DocsView mDocsViewSuggest in Model.ListDocsViewSuggest)
+                {
+                    <tr class="row-first-news-tk-boder ">
+                        <th class="count-123 page" scope="row">
+                            <img class="sao-tk" alt="sao-tk" src="@Url.Content("~/assets/images/sao-tim-kiem.png")" /></th>
+                        <td class="news-left-post-timkiem ">
+                            <a href="@mDocsViewSuggest.GetDocUrl()" class="post-title lvn">@mDocsViewSuggest.DocName</a>
+                            <div class="sapo lvn">
+                                <p>@Html.Raw(mDocsViewSuggest.DocSummary)</p>
+                            </div>
+                            <div class="item-meta">
+                                @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsViewSuggest, ClassName = Model.mPartialPaginationAjax.ClassTagItem } }); }
+                            </div>
+                        </td>
+                        <td class="post-time-right-timkiem">
+                            @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsViewSuggest } }); }
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+        <div id="ListDocsViews">
+            @if (Model.DocsViewSearch.lDocsView.HasValue())
+            {
+                <table class="table table-bordered" style="margin-top: 10px;">
+                    <tbody>
+                    @for (int index = 0; index < Model.DocsViewSearch.lDocsView.Count; index++)
+                    {
+                        var mDocsView = Model.DocsViewSearch.lDocsView[index];
+                        var number = index + (Model.mPartialPaginationAjax.PageIndex > 0 ? Model.mPartialPaginationAjax.PageIndex - 1 : Model.mPartialPaginationAjax.PageIndex) * Model.mPartialPaginationAjax.PageSize + 1;
+                        <tr class="row-first-news @(index % 2 == 1 ? "bgcolorf0f0f0" : string.Empty)">
+                            <th class="count-123 page" scope="row">@number.ToString("#00")</th>
+                            <td class="news-left-post">
+                                <a href="@mDocsView.GetDocUrl()" class="post-title lvn">@Html.Raw(mDocsView.DocName)</a>
+                                <div class="sapo lvn">
+                                    <p>@Html.Raw(mDocsView.DocSummary)</p>
+                                </div>
+                                <div class="item-meta">
+                                    @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView, ClassName = Model.mPartialPaginationAjax.ClassTagItem } }); }
+                                </div>
+                            </td>
+                            <td class="post-time-right-timkiem">
+                                @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView } }); }
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                {
+                    Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.mPartialPaginationAjax });
+                }
+            }
+            else
+            {
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr class="row-first-news">
+                        <th class="count-123" scope="row"></th>
+                        <td class="news-center-post">
+                            <h3>
+                                <span class="post-title lvn">@Resource.UpdatingData</span>
+                            </h3>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            }
+        </div>
+    </section>
+</div>
+</div>
+</div>
+@section ListByFields
+{
+    <div class="nav-onclick-menu">
+        <div class="onclick-menu">
+            <a href="#" class="overlayLink" data-action="">
+                <img alt="dma" src="@Url.Content("~/assets/images/icon-danh-muc.png")" />
+                Danh<br />
+                mục
+            </a>
+        </div>
+        <div class="overlay" style="display: none;">
+            <div class="login-wrapper">
+                <div class="login-content">
+                    <a class="close">x</a>
+                    <div class="nav_categories">
+                        <div class="widget-top"><span class="title-widget">Lĩnh vực tra cứu</span></div>
+                        @{ Html.RenderAction("PartialFieldOfSearch", "Shared", new { displayTypeId = Constants.FieldsDisplayTypeIdVbpq, docGroupId = Model.mPartialPaginationAjax.DocGroupId });}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section FooterSection
+{
+    <script type="text/javascript">
+        jQuery(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd/mm/yy',
+                yearRange: "1945:c",
+                changeMonth: true,
+                changeYear: true
+            });
+            $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+        });
+        lawsVn.logs.docSearchLogs('@Model.Keywords',
+            '@Model.DateFrom',
+            '@Model.DateTo',
+            @Model.DocTypeId,
+            @Model.OrganId,
+            @Model.SignerId,
+            @Model.FieldId);
+    </script>
+}

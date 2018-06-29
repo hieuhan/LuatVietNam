@@ -1,0 +1,61 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Models
+@model ViewModelBase
+@{
+    Layout = null;
+}
+@if (Model.NotAuthenticate)
+{
+    if (Model.MessageType == ViewModelBase.MessageTypes.NotAuth)
+    {
+        <div class="page-content box-shadow">
+            <div class="box-vblienquan">
+                <div class="cat-box-content pading">
+                    <div class="thong-bao-3">
+                        <div class="thongbao-item3">
+                            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+                            {
+                                <em>@Model.ErrorMessage <br/><br/></em>
+                            }
+                            <em>Quý khách vui lòng <a href="#" class="lawsVnLogin" style="color: #a67942" title="Đăng nhập tài khoản"><strong>Đăng nhập</strong></a> tài khoản LuatVietNam và <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Đăng ký dịch vụ"><strong style="color: #a67942">đăng ký sử dụng Dịch vụ tra cứu văn bản</strong></a>.</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (Model.MessageType == ViewModelBase.MessageTypes.NotAuthDownload)
+    {
+        <div class="rows vbitem">
+            <div class="vbitem-m1">
+                    <em>Để tải văn bản tiếng Anh, Quý khách vui lòng <a href="#" class="lawsVnLogin" title="Đăng nhập" style="color: #a67942">Đăng nhập</a> tài khoản Luật Việt Nam </em>
+                    <em>và <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Đăng ký dịch vụ"><strong style="color: #a67942">đăng ký</strong></a> sử dụng dịch vụ Tra cứu văn bản.</em>
+            </div>
+        </div>
+    }
+}else if (Model.NotAuthorize)
+{
+    if (Model.MessageType == ViewModelBase.MessageTypes.NotAuth)
+    {
+        <div class="page-content box-shadow">
+            <div class="box-vblienquan">
+                <div class="cat-box-content pading">
+                    <div class="thong-bao-3">
+                        <div class="thongbao-item3">
+                            <em>@Model.ErrorMessage <br/><br/></em>
+                            <em>Quý khách hãy bấm vào đây để <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Đăng ký dịch vụ"><strong style="color: #a67942">đăng ký</strong></a> sử dụng <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Đăng ký dịch vụ"><strong style="color: #a67942">Dịch vụ Tra cứu văn bản</strong></a> của Luật Việt Nam.</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (Model.MessageType == ViewModelBase.MessageTypes.NotAuthDownload)
+    {
+        <div class="rows vbitem">
+            <div class="vbitem-m1">
+                   <em>Để tải bản dịch tiếng Anh, Quý khách hãy bấm <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Đăng ký dịch vụ"><strong style="color: #a67942">vào đây</strong></a> để đăng ký sử dụng <span style="color: #a67942">Dịch vụ Tra cứu văn bản</span>.</em>
+            </div>
+        </div>
+    }
+}

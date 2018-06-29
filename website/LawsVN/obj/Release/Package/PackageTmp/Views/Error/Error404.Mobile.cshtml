@@ -1,0 +1,48 @@
+﻿@using LawsVN.Models
+@{
+    @model ViewModelBase
+    Layout = null;
+}
+@using ICSoft.CMSLib
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Page not found</title>
+    <meta name="keywords" content="Page not found" />
+    <meta name="description" content="Page not found" />
+    <link rel='canonical' href='http://luat.icsoft.vn/404.html' />
+
+    <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="robots" content="nofollow,noindex" />
+    @Styles.Render("~/bundles/CssMobile")
+</head>
+
+<body>
+    <!-- header-->
+    @{Html.RenderAction("PartialHeaderMobile", "Shared", new { menuItemId = Model.MenuItemId, getCountPaymentTransactionSuccess = Model.GetCountPaymentTransactionSuccess, getCountThongBaoHieuLuc = Model.GetCountThongBaoHieuLuc });}
+    <!-- End -->
+    <!-- main-->
+    <main class="main">
+        <div class="content">
+            <div class="box-section">
+                <div class="cat-box-404" style="text-align: center;">
+                    <p><img style="max-width: 100%;" src="@Url.Content("~/assets/mobile/images/404.png")"></p>
+                    <p style="margin-top: 10px; font-weight: bold;"> Không tìm thấy trang, hoặc URL không tồn tại trên hệ thống</p>
+                    <p style="color: #777;margin-top: 10px;"><em>Mọi thắc mắc xin vui lòng liên hệ <a href="http://luatm.icsoft.vn/lien-he.html" class="color2"> tại đây</a></em></p>
+                    <p style="margin: 30px;"><a href="@CmsConstants.ROOT_PATH" class="tohome" style="    background: #a67942;;    color: #fff;    padding: 10px 20px;    border-radius: 3px;    font-weight: bold;">Trang chủ</a></p>
+                </div>
+            </div>
+            @{Html.RenderAction("PartialMenuFooterMobile", "Shared");}
+        </div>
+    </main>
+    <!-- End-->
+    <!-- footer-->
+    @{Html.RenderAction("PartialFooterMobile", "Shared");}
+    <!-- End-->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/JsMobile")
+    @Scripts.Render("~/bundles/jqueryval")
+</body>
+</html>

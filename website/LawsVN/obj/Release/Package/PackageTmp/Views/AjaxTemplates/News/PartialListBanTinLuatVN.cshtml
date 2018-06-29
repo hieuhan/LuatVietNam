@@ -1,0 +1,47 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.NewsViewModel
+<form action="@Request.Url.AbsoluteUri" method="post" id="frmBanTinLVN">
+    <div class="lockq">
+        <div class="item-loctheo">
+            <span class="icon-loc-kq"></span>@Resource.FilterBy:
+        </div>
+        <div class="item-lockq" style="width: 90px">
+            <select class="select2 select-onchange" name="keyword">
+                <option value=""> Năm </option>
+                @for (int i = DateTime.Now.Year; i > DateTime.Now.Year - 50; i--)
+                {
+                    <option value="@i" @(Model.mPartialPaginationAjax.Keywords == i.ToString() ? "selected" : "")>@i</option>
+                }
+            </select>
+        </div>
+    </div>
+</form>
+
+<div class="cat-box">
+    @if (Model.ListArticlesView.HasValue())
+    {
+        for (int i = 0; i < Model.ListArticlesView.Count; i++)
+        { 
+        <div class="news-item">
+            <div class="post-thumbnail">
+                <a href="@Model.ListArticlesView[i].GetArticleUrl()" title="@Model.ListArticlesView[i].Title" class="thumb220">
+                    <img alt="alt" src="@(Model.ListArticlesView[i].GetImageUrl_Mobile() == "" ? Constants.NoImageUrl_Article : Model.ListArticlesView[i].GetImageUrl_Mobile())"></a>
+            </div>
+            <h3><a href="@Model.ListArticlesView[i].GetArticleUrl()" title="@Model.ListArticlesView[i].Title" class="post-title font16">@Model.ListArticlesView[i].Title</a></h3>
+            <div class="sapo new">
+                @Html.Raw(Model.ListArticlesView[i].Summary)
+            </div>
+        </div>
+        }
+    }
+    else
+    {
+        <p>Không tìm thấy bản tin nào phù hợp!</p>
+    }
+</div>
+@if (Model.mPartialPaginationAjax.TotalPage > 0)
+{
+    { Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.mPartialPaginationAjax }); }
+}

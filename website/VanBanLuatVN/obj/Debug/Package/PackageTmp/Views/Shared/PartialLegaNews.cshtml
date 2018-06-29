@@ -1,0 +1,39 @@
+﻿@using VanBanLuat.Librarys
+@model ICSoft.ViewLibV3.CategoryArticles
+@if (Model.lArticle.HasValue())
+{
+    <section class="cat-box-section">
+        <h1 class="title-cat-new">
+            <a class="title-page-new" href="@Model.mCategory.GetCategoryUrl()" title="@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)">@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)</a>
+        </h1>
+        <div class="cat-box-content">
+            <div class="new-left">
+                <a href="@Model.lArticle[0].GetArticleUrl()" title="@Model.lArticle[0].Title" class="thumb-full-new"><img class="thumb-full boder5" src="@Model.lArticle[0].GetImageUrl_Mobile()" /><span class="post-time">@Model.lArticle[0].PublishTime.toString("", "dd/MM")</span></a>
+                <h3 class="post-title font20"><a href="@Model.lArticle[0].GetArticleUrl()" title="@Model.lArticle[0].Title">@Model.lArticle[0].Title </a></h3>
+                <div class="sapo">
+                    <p>@Html.Raw(Model.lArticle[0].Summary)</p>
+                </div>
+            </div>
+            <div class="new-right">
+                <div class="row-fix">
+                    @for (int index = 1; index < Model.lArticle.Count && index <= Constants.RowAmount3; index++)
+                    {
+                        <div class="item-col3">
+                            <a href="@Model.lArticle[index].GetArticleUrl()" title="@Model.lArticle[index].Title" class="thumb-full-new fixmobi thumb-full-mobi"><img class="thumb-full boder5 h90" src="@Model.lArticle[index].GetImageUrl_Mobile()" /><span class="post-time">@Model.lArticle[index].PublishTime.toString("","dd/MM")</span></a>
+                            <h3 class="post-title font14"><a href="@Model.lArticle[index].GetArticleUrl()" title="@Model.lArticle[index].Title"><i class="iconlistnew fixmobi"></i>@Model.lArticle[index].Title </a></h3>
+                        </div>
+                    }
+                </div>
+                @if (Model.lArticle.Count > Constants.RowAmount3)
+                {
+                    <ul>
+                        @for (int index = Constants.RowAmount4; index < Model.lArticle.Count; index++)
+                        {
+                            <li class="list-new @(index == Model.lArticle.Count || index == Model.lArticle.Count-1 ? "hiden" : string.Empty)"><a href="@Model.lArticle[index].GetArticleUrl()" title="@Model.lArticle[index].Title" class="post-title"><i class="iconlistnew"></i>@Model.lArticle[index].Title</a></li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </section>
+}

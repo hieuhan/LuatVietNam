@@ -1,0 +1,137 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using ICSoft.CMSLib
+@model DocsUbndViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px; position: absolute;">@Html.Raw(Model.SeoHeader.TrimmedOrDefault("Văn bản Ủy Ban Nhân Dân").ToString()))</h1>
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.mPartialPaginationAjax.PageIndex, totalPage = Model.mPartialPaginationAjax.TotalPage, pageSize = Model.mPartialPaginationAjax.PageSize });}
+}
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item">@Resource.HomePage</a> »
+    <span class="breadcrumb-item color1">@Resource.DocUBND</span>
+</div>
+
+<section class="box-section">
+    <div class="title2">
+        <h2 class="title-cat2 vien">@Html.Raw(Model.SeoHeader.TrimmedOrDefault("Văn bản UBND").ToString())</h2>
+    </div>
+
+    <!-- box-seclect-->
+    <div class="box-seclect">
+        @using (Ajax.BeginForm(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName, new
+        {
+            docGroupId = Model.mPartialPaginationAjax.DocGroupId
+            ,provinceId = Model.mPartialPaginationAjax.ProvinceId
+            ,languageId = Model.mPartialPaginationAjax.LanguageId
+            ,updateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+            ,insertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+            ,controllerName = Model.mPartialPaginationAjax.ControllerName
+            ,actionName = Model.mPartialPaginationAjax.ActionName
+            ,pageSize = Model.mPartialPaginationAjax.PageSize
+            ,linkLimit = Model.mPartialPaginationAjax.LinkLimit
+            ,postTimeRight = Model.mPartialPaginationAjax.PostTimeRight
+            ,isMobile = true
+        }, new AjaxOptions
+        {
+            HttpMethod = "Get",
+            UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+            InsertionMode = InsertionMode.Replace,
+            OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId),
+            OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+        }))
+        {
+            <div class="col3-seclect1">
+                <select id="ddlFieldId" name="FieldId" class="select-option12 select-onchange" style="padding-right: 16px;">
+                    <option value="0" title="@Resource.AllFields">@Resource.AllFields</option>
+                    @foreach (var item in Model.ListFieldDisplays)
+                    {
+                        <option value="@item.FieldId" title="@item.FieldName">@item.FieldName</option>
+                    }
+                </select>
+            </div>
+            <div class="col3-seclect1">
+                @Html.DropdownListPermission("ddlEffectStatusId", "EffectStatusId", "select-option12 select-onchange", new SelectList(Model.ListEffectStatus, "EffectStatusId", "EffectStatusDesc", Model.mPartialPaginationAjax.EffectStatusId))
+            </div>
+            <div class="col3-seclect1">
+                <select id="ddlDocTypeId" name="DocTypeId" class="select-option12 select-onchange" style="padding-right: 16px;">
+                    <option value="0" title="@Resource.DocTypes">@Resource.DocTypes</option>
+                    @foreach (var item in Model.ListDocTypes)
+                    {
+                        <option value="@item.DocTypeId" title="@item.DocTypeDesc">@item.DocTypeDesc</option>
+                    }
+                </select>
+            </div>
+        }
+        <div class="col3-seclect1" style="margin-right: 0;">
+            <select id="ddlProvinceId" name="ProvinceId" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" class="select-option12" style="padding-right: 16px;">
+                @foreach (var item in Model.ListProvinces)
+                {
+                    <option value="@item.GetUrl()" title="@item.ProvinceDesc" @(item.ProvinceId==Model.mPartialPaginationAjax.ProvinceId ? "selected" : string.Empty)>@item.ProvinceDesc</option>
+                }
+            </select>
+        </div>
+    </div>
+    <!-- End-->
+    <!-- content-->
+    <div id="ListByField" class="cat-box-content">
+        @if (Model.mDocsViewSearch.lDocsView.HasValue())
+        {
+            for (int i = 0; i < Model.mDocsViewSearch.lDocsView.Count; i++)
+            {
+                var number = i + (Model.mPartialPaginationAjax.PageIndex > 0 ? Model.mPartialPaginationAjax.PageIndex - 1 : Model.mPartialPaginationAjax.PageIndex) * Model.mPartialPaginationAjax.PageSize + 1;
+            <div class="first-news @(i == Model.mDocsViewSearch.lDocsView.Count - 1 ? "last" : "dashed")">
+                <h3 class="post-title"><a href="@Model.mDocsViewSearch.lDocsView[i].GetDocUrl()" title="@Model.mDocsViewSearch.lDocsView[i].DocName"><span class="stt">(@(number.ToString("#00")))</span>@Model.mDocsViewSearch.lDocsView[i].DocName</a></h3>
+                <div class="post-time">
+                    @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.mDocsViewSearch.lDocsView[i] } });}
+                </div>
+            </div>
+            }
+            Model.mPartialPaginationAjax.IsMobile = true;
+            Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax });
+        }
+        else
+        {<div class="first-news last">
+        <span>@Resource.NoMatchingDocumentFound</span>
+    </div>
+        }
+
+    </div>
+    <!-- End-->
+</section>
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+
+@if (Model.ListDocDisplaysVbTwLienQuan.HasValue())
+{ 
+    <div class="title" style="margin-bottom: 0;">
+        <h2 class="title-cat">@Resource.DocUBNDLienQuan</h2>
+    </div>
+    <div class="cat-box-content">
+        @foreach (var docView in Model.ListDocDisplaysVbTwLienQuan)
+        {
+            <div class="first-news dashed">
+                <h3 class="post-title"><a href="@docView.GetDocUrl()" title="@docView.DocName">@docView.DocName</a>
+                </h3>
+                <div class="post-time">
+                    @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView } });}
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: { id: 0 }
+        });
+    </script>
+}

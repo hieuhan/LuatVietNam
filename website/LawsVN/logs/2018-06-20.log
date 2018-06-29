@@ -1,0 +1,2 @@
+2018-06-20 09:22:28.1957 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-06-20 16:43:59.5230 ERROR Path '/Views/AjaxTemplates/News/PartialListBanTinLuatVN_V2.cshtml' was not found.

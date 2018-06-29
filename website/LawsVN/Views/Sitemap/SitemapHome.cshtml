@@ -1,0 +1,44 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@model LawsVN.Models.Sitemap.SitemapHomeModel
+@{
+    Layout = null;
+    Response.ContentType = "text/xml";
+    Response.Write("<?xml version='1.0' encoding='UTF-8' ?>");
+}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    @if (Model.ListMenu.HasValue())
+    {
+        foreach (var item in Model.ListMenu)
+        {
+            if (string.IsNullOrEmpty(item.Url))
+            {
+                continue;
+            }
+            <url>
+                <loc>@(item.Url.StartsWith("http") ? item.Url : string.Concat(CmsConstants.WEBSITE_DOMAIN,item.Url))</loc>
+                <lastmod>@(item.CrDateTime.toString(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),"yyyy-MM-ddTHH:mm:sszzz")) </lastmod>
+                <changefreq>monthly</changefreq>
+                <priority>1.00</priority>
+            </url>
+        }
+    }
+    @if (Model.ListCategories.HasValue())
+    {
+        foreach (var item in Model.ListCategories)
+        {
+            if (string.IsNullOrEmpty(item.CategoryUrl))
+            {
+                continue;
+            }
+            <url>
+                <loc>@(item.CategoryUrl.StartsWith("http") ? item.CategoryUrl : string.Concat(CmsConstants.WEBSITE_DOMAIN,item.CategoryUrl))</loc>
+                <lastmod>@(item.CrDateTime.toString(DateTime.Now.ToString("yyyy-MM-ddTHH:mm:sszzz"),"yyyy-MM-ddTHH:mm:sszzz")) </lastmod>
+                <changefreq>monthly</changefreq>
+                <priority>1.00</priority>
+            </url>
+        }
+    }
+</urlset>

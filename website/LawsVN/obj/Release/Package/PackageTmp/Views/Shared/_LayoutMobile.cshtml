@@ -1,0 +1,117 @@
+﻿@using System.Collections.Specialized
+@using LawsVN.Library
+@using LawsVN.Models
+@using LawsVN.App_GlobalResources
+@model ViewModelBase
+@if (Model != null)
+{
+    string websiteCanonical = Model.WebsiteCanonical.TrimmedOrDefault(Model.AbsoluteUri).BuildQueryStringUrl(new NameValueCollection { { "page", string.Empty }, { "pSize", string.Empty } });
+<!DOCTYPE html>
+<html lang="vi-vn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <title>@Html.Raw(Model.WebsiteTitle)</title>
+    @if (Model.Page <= 1)
+    {
+        <meta name="description" @Html.Raw(Model.WebsiteDescription) />
+        <meta name="keywords" @Html.Raw(Model.WebsiteKeywords) />}
+    <link rel="alternate" href="@websiteCanonical" hreflang="vi-vn" />
+    <link rel="canonical" href="@websiteCanonical" />
+    @if (Model.HaveAmp && Model.Page <= 1)
+    {
+        <link rel="amphtml" href="@websiteCanonical.BuildQueryStringUrl(new NameValueCollection { { "layout", "amp" } })" />}
+    @RenderSection("SEOPagination", required: false)
+    <meta name="robots" content="@(Model.IsIndex ? (Model.Page <= 1 ? "index,follow,noodp" : "noindex,follow") : "noindex, nofollow, noarchive, noodp, noydir")" />
+    <link rel="image_src" href="@Model.WebsiteImage" />
+    <meta property="fb:app_id" content="@Constants.FacebookAppId" />
+    <meta property="og:site_name" content="luatvietnam.vn" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@websiteCanonical" />
+    <meta property="og:locale" content="vi_VN" />
+    <meta property="og:title" content="@Html.Raw(Model.WebsiteTitle)" />
+    <meta property="og:description" @Html.Raw(Model.WebsiteDescription) />
+    <meta property="og:image" content="@Model.WebsiteImage" />
+    <meta name="copyright" content="Copyright © 2000 - @DateTime.Now.Year by luatvietnam.vn" />
+    <meta name="author" content="luatvietnam.vn" />
+    <meta name="language" content="vietnamese" />
+    <meta http-equiv="REFRESH" content="1800" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-10721740-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-10721740-4');
+    </script>
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '297190890797171');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=297190890797171&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- End Facebook Pixel Code -->
+    <script src="@Url.Content("~/assets/Scripts/Libs/platform.js")" async defer></script>
+    @*@Html.Raw(Extensions.AdvDataLoadFromFile(1))*@
+    <link rel="shortcut icon" href="@Url.Content("~/assets/images/favicon.ico")">
+    @Styles.Render("~/bundles/CssMobile")
+    @RenderSection("HeaderSection", required: false)
+</head>
+<body>        
+    @RenderSection("SeoHeader", required: false)
+    @{Html.RenderAction("PartialHeaderMobile", "Shared", new { menuItemId = Model.MenuItemId, getCountPaymentTransactionSuccess = Model.GetCountPaymentTransactionSuccess, getCountThongBaoHieuLuc = Model.GetCountThongBaoHieuLuc, title = Model.WebsiteTitle });}
+    <main class="main">
+        <div class="content">
+            @RenderBody()
+            @{Html.RenderAction("PartialMenuFooterMobile", "Shared");}
+        </div>
+    </main>
+    @{Html.RenderAction("PartialFooterMobile", "Shared");}
+    @Scripts.Render("~/bundles/mobileJs")
+    <script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '@Constants.FacebookAppId',
+            status: true,
+            xfbml: true,
+            cookie: true
+        });
+    };
+    </script>
+    @RenderSection("FooterSection", required: false)
+    <span id="loading">@Resource.Loading</span>
+    <button onclick="lawsVn.topFunction()" id="myBtn" title="Go to top"></button>
+    <script>
+        var accordion = new Accordion('.accordion-container');
+    </script>
+</body>
+</html>
+}
+else
+{
+throw new NullReferenceException(Resource.BaseModelNull);
+}

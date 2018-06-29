@@ -1,0 +1,88 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutBTHLAMP.cshtml";
+}
+@using ICSoft.CMSLib
+@using LawsVN.Library
+@using sms.utils
+@model LawsVN.Models.ArticleViewDetailModel
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="keyword" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>» 
+    <a href="@Model.m_ArticlesViewDetail.mCategoriesView.GetCategoryUrl()" class="breadcrumb-item">@Model.m_ArticlesViewDetail.mCategoriesView.CategoryDesc</a> »
+	<span class="breadcrumb-item color1">@Model.m_ArticlesViewDetail.mArticlesView.Title</span>
+</div>
+
+<article class="post-single">
+    <div class="post-time-single">@DateTimeUtil.GetLongDateTime(Model.m_ArticlesViewDetail.mArticlesView.PublishTime)</div>
+    <h1 class="title-post-singer">@Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.Title.ToString())</h1>
+    <div class="entry @(Model.m_ArticlesViewDetail.mArticlesView.ArticleTypeId == 11 ? "bantinHLGen" : "bantinHL")">
+        @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent.Replace("<p>&nbsp;</p>",""))
+    </div>
+</article>
+@if (Model.m_ArticlesViewDetail.mArticlesView.lTagsView.HasValue())
+{
+    <div class="post-tag">
+        <span class="list-tag">
+            <img src="@Url.Content("~/assets/images/icon-tag.png")"/>
+            Chủ đề:</span>
+            @foreach (var tagsView in Model.m_ArticlesViewDetail.mArticlesView.lTagsView)
+            {
+                <a href="@tagsView.TagName.TagsNameGetUrl(tagsView.TagId)" title="@tagsView" class="tag-item">@tagsView.TagName.Trim()</a>
+            }
+    </div>
+}
+@if (Model.m_ArticlesViewDetail.lArticlesRelate.HasValue())
+{
+    <section class="box-section">
+        <div class="title2">
+            <h2 class="title-cat2 vien">Tin pháp luật liên quan</h2>
+        </div>
+        <div class="cat-box-content">
+            @for (int i = 0; i < Model.m_ArticlesViewDetail.lArticlesRelate.Count; i++)
+{
+    var articleView = Model.m_ArticlesViewDetail.lArticlesRelate[i];
+    <div class="other-news  @(i == 0 ? "padding-top0" : string.Empty)">
+        <h3 class="post-title">
+            <a href="@articleView.GetArticleUrl()"><i class="fa-dot2"></i>@articleView.Title</a>
+        </h3>
+    </div>
+}
+        </div>
+    </section>
+}
+@if (Model.m_ArticlesViewDetail.lArticlesOther.HasValue())
+{
+    <div class="sl-section no-border">
+        <div class="title2">
+            <h2 class="title-cat2 vien">Tin pháp luật khác</h2>
+        </div>
+        <div class="cat-box-content">
+            @foreach (var articleView in Model.m_ArticlesViewDetail.lArticlesOther)
+            {
+                <div class="other-news">
+                <div class="post-thumbnail">
+                    <a href="@articleView.GetArticleUrl()">
+                        <amp-img src="@articleView.GetImageUrl_Mobile2()" width="300" height="200" layout="responsive"
+                                 class="-amp-element -amp-layout-responsive -amp-layout-size-defined -amp-layout" id="amp-1">
+                        </amp-img>
+                    </a>
+                </div>
+                <div class="pks">
+                    <div class="rows-time">
+                        <span class="item-time">@articleView.PublishTime.toString()</span>
+                    </div>
+                    <h2 class="post-title other"><a href="@articleView.GetArticleUrl()">@articleView.Title</a>
+                    </h2>
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+}

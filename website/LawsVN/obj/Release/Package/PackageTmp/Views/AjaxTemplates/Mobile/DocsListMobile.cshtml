@@ -1,0 +1,32 @@
+﻿@using LawsVN.Library
+@using LawsVN.Models.Templates
+@using LawsVN.App_GlobalResources
+@using LawsVN.Models
+@model DocsNewest
+@if (Model.ListDocsView.HasValue())
+{
+    for (int i = 0; i < Model.ListDocsView.Count; i++)
+    {
+        string effectStatusName = Model.ListDocsView[i].EffectStatusName.TrimmedOrDefault(Model.ListEffectStatus.GetEffectStatusNameById(Model.ListDocsView[i].EffectStatusId).TrimmedOrDefault(Resource.Updating));
+        int number = i + Model.PartialPaginationAjax.PageIndex * Model.PartialPaginationAjax.PageSize + 1;
+        <div class="first-news @(i == Model.ListDocsView.Count ? "last" : "dashed")">
+            <h3 class="post-title"><a href="@Model.ListDocsView[i].GetDocUrl()" title="@Model.ListDocsView[i].DocName"><span class="stt">(@number.ToString("#00"))</span>@Model.ListDocsView[i].DocName</a></h3>
+            <div class="post-time">
+                @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsView[i], EffectStatusName = effectStatusName } });}
+            </div>
+        </div>
+    }
+    Model.PartialPaginationAjax.IsMobile = true;
+    Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.PartialPaginationAjax });
+}
+else
+{
+    <div class="first-news dashed">
+        <h3 class="post-title">@Resource.NoMatchingDocumentFound</h3>
+    </div>
+    if(Model.PartialPaginationAjax.PageIndex>0)
+    {
+        Model.PartialPaginationAjax.IsMobile = true;
+        Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.PartialPaginationAjax });
+    }
+}

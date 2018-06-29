@@ -1,0 +1,19 @@
+2017-02-20 17:05:20	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdminEdit.Page_Load(Object sender, EventArgs e) in e:\Projects\2014\LuatVietNam10\LuatVietNam\AppForm\Admin\MasterPageAdminEdit.master.cs:line 22
+2017-02-20 17:05:25	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdminEdit.Page_Load(Object sender, EventArgs e) in e:\Projects\2014\LuatVietNam10\LuatVietNam\AppForm\Admin\MasterPageAdminEdit.master.cs:line 22
+2017-02-20 17:05:31	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdmin.Page_Load(Object sender, EventArgs e) in e:\Projects\2014\LuatVietNam10\LuatVietNam\AppForm\Admin\MasterPageAdmin.master.cs:line 41
+2017-02-20 17:05:33	1	m_login_Authenticate	admin starting logged.

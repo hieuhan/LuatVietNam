@@ -1,0 +1,23 @@
+﻿@using LawsVN.Library
+@model ICSoft.CMSViewLib.ArticlesViewCate
+@if (Model.lArticlesNewest.HasValue())
+{
+    <div class="sl-section" style="border-top: none;">
+        <div class="title2">
+            <h2 class="title-cat2 vien">@Model.mCategoriesView.CategoryName.TrimmedOrDefault(string.Empty)</h2>
+        </div>
+        <div class="cat-box-content">
+            @foreach (var articleView in Model.lArticlesNewest)
+            {
+                <div class="first-news" style="margin-bottom: 5px;">
+                    <div class="post-thumb">
+                        <a href="@articleView.GetArticleUrl()" class="thumb125x70"><img src="@articleView.GetImageUrl_Mobile()" /></a>
+                    </div>
+                    <div class="sapo">
+                        <h3 class="post-title-bold"><a href="@articleView.GetArticleUrl()">@articleView.Title</a></h3>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

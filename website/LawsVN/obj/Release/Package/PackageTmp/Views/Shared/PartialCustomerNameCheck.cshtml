@@ -1,0 +1,19 @@
+﻿@model LawsVN.Models.Account.CustomerNameCheckModel
+@using (Ajax.BeginForm("CustomerNameCheck", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    , OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    , OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    ,OnSuccess = "lawsVn.ajaxEvents.CustomerNameCheckOnSuccess"
+}))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <label class="col-sm-1 tk">Tài khoản:</label>
+        <div class="col-sm-2">
+            @Html.TextBoxFor(m => m.CustomerName, new {@class = "form-control-input"})
+            @Html.ValidationMessageFor(m => m.CustomerName, "", new {@class = "text-danger"})
+        </div>
+        <button class="btn-kiemtra">Kiểm tra</button>
+    </div>
+}

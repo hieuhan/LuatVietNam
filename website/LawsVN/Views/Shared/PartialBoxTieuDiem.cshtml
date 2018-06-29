@@ -1,0 +1,38 @@
+﻿@using LawsVN.Library
+@model ICSoft.CMSViewLib.ArticlesViewCate
+@if (Model.lArticlesNewest.HasValue())
+{
+    <div class="box-tieudiem" style="margin-bottom: 20px;">
+        <div class="wg-tieudiem">
+            <div class="widget-top-td">
+                <h3 class="widget-title wgct" style="font-weight: bold;"> @Model.mCategoriesView.CategoryName.TrimmedOrDefault(string.Empty) </h3>
+            </div>
+            <div class="widget-container-td" style="padding-bottom: 0;">
+                <ul class="ultieudiem">
+                    @for (var index = 0; index < Model.lArticlesNewest.Count; index++)
+                    {
+                        var item = Model.lArticlesNewest[index];
+                        if (index == 0)
+                        {
+                            <li>
+                                <a href="@item.GetArticleUrl()" title="@item.Title"><img style="    margin-bottom: 5px;" class="thumb-fulltd" src="@item.GetImageUrl_Mobile()" alt="@item.Title"/></a>
+                                <h3 class="p10td1"><a href="@item.GetArticleUrl()" title="@item.Title" class="post-title td">@item.Title</a></h3>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="p10td">
+                                <a href="@item.GetArticleUrl()" title="@item.Title" class="post-title td">
+                                    <i class="icon-tieudiem"></i>@item.Title</a>
+                            </li>
+                        }
+                    }
+                    <div class="more">
+                        <a href="@Model.mCategoriesView.GetCategoryUrl()" title="Xem tiếp" class="more-link" style="margin: 0 10px 5px 10px;">
+                            Xem tiếp <img alt="alt" src="@Url.Content("~/assets/images/more-link-fa.png")"></a>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+}

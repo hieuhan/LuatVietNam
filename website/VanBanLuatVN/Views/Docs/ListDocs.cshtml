@@ -1,0 +1,118 @@
+﻿@using System.Collections.Specialized
+@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@{
+    Layout = "~/Views/Shared/_LayoutDocument.cshtml";
+}
+@model DocByFieldViewModel
+@{ Html.RenderAction("PartialFieldOfSearchHome", "Shared");}
+<div class="content">
+    <section class="cat-box-section">
+        <div class="breadcrumb">
+            <a class="breadcrumb-item" href="@Constants.ROOT_PATH" title="Trang chủ">Trang chủ</a> /
+            <span class="breadcrumb-item xanh">Văn bản mới</span>
+        </div>
+        <div class="title-page" style="border-bottom: solid 1px #e3e3e3; margin-bottom: 0; padding-bottom: 5px;">
+            <h1 class="title-cat-page">Văn bản Mới - Văn bản pháp luật mới ban hành</h1>
+            <div class="right-view ">
+                <a class="iconview hide-attr" href="#" rel="nofollow" title="Ẩn thuộc tính văn bản">
+                    <span class="iconview-g"></span>
+                    <span class="iconview-g"></span>
+                    <span class="iconview-g"></span>
+                </a>
+                <a class="iconview active show-attr" href="#" rel="nofollow" title="Hiện thuộc tính văn bản">
+                    <span class="iconview-bo"></span>
+                    <span class="iconview-bo1"></span>
+                    <span class="iconview-bo"></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="cat-box-content">
+            @if (Model.DocList.lDocs.HasValue())
+            {
+                <table id="contentsWrapper" class="tablecontent">
+                    <tbody class="pcontent">
+                        @for (int index = 0; index < Model.DocList.lDocs.Count; index++)
+                        {
+                            var number = index + (Model.Page > 0 ? Model.Page - 1 : Model.Page) * Model.PageSize + 1;
+                            <tr class="rows-vb">
+                                <td class="number bold">@string.Format("{0:#00}", number)</td>
+                                <td>
+                                    @{ Html.RenderAction("PartialDocumentAttribute", "Shared", new { model = new SharedViewModel.DocumentAttribute { Docs = Model.DocList.lDocs[index] } });}
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                if (Model.DocList.lDocs.Count == Constants.RowAmount20)
+                {
+                    Html.RenderAction("PartialPagination", "Shared", new
+                    {
+                        model = new VanBanLuatVN.Models.PaginationModel
+                        {
+                            Page = Model.Page,
+                            TotalPage = Model.DocList.RowCount,
+                            AjaxUrl = "/Ajax/ListDocsNewest",
+                            QueryString = "".BuildQueryStringUrl(new NameValueCollection
+                            {
+                                {"page", (Model.Page+1).ToString()}
+                            })
+                        }
+                    });
+                }
+            }
+            else
+            {
+                <table class="tablecontent full">
+                    <body>
+                        <tr class="rows-vb">
+                            <td>
+                                <p class="post-title vbl bold">Nội dung đang được cập nhật.</p>
+                            </td>
+                        </tr>
+                    </body>
+                </table>
+            }
+        </div>
+    </section>
+</div>
+
+<aside class="sidebar-270">
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = Constants.CateId_ThongBaoVBMoi, rowAmount = Constants.RowAmount3, viewName = "PartialChinhSachMoi" });}
+    @{Html.RenderAction("PartialDocFilter", "Shared");}
+    <div class="widget">
+        <div class="ads">
+            @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+        </div>
+    </div>
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = Constants.CateId_ChinhSachMoi, rowAmount = Constants.RowAmount5, viewName = "PartialChinhSachMoi" });}
+    @{ Html.RenderAction("PartialDocumentsByGetByDisplayTypeId", "Shared", new { displayTypeId = Constants.DisplayTypeId_VBQuanTam, boxTitle = "Văn bản được quan tâm", rowAmount = Constants.RowAmount5, viewName = "PartialDocumentsOfInterest" });}
+</aside>
+@section HeaderSection{
+    @Styles.Render("~/bundles/jqueryUICss")
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.Page, totalPage = Model.DocList.RowCount });}
+}
+@section FooterSection
+{
+    <script type="text/javascript">
+        jQuery(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd/mm/yy',
+                yearRange: "1945:c",
+                changeMonth: true,
+                changeYear: true
+            });
+            $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+            $('#contentsWrapper').vbluatInfiteScroll({
+                contentsWrapperSelector: '#contentsWrapper',
+                contentSelector: '.pcontent',
+                nextSelector: '#pnext'
+            });
+        });
+    </script>
+}

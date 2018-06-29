@@ -1,0 +1,25 @@
+﻿@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@model LawsVN.Models.Docs.DocOthersModel
+@if (Model.ListDocsView.HasValue())
+{
+    <section class="box-section">
+			<div class="title" style="margin-bottom: 0px;">
+				<h2 class="title-cat"> Văn bản cùng lĩnh vực</h2>
+			</div>
+			<div class="cat-box-content">
+                @for (int i = 0; i < Model.ListDocsView.Count; i++ )
+                {
+                    //string effectStatusName = Model.ListDocsView[i].EffectStatusName.TrimmedOrDefault(Model.ListEffectStatus.GetEffectStatusNameById(Model.ListDocsView[i].EffectStatusId).TrimmedOrDefault(Resource.Updating));
+				<div class="first-news @(i == Model.ListDocsView.Count - 1 ? "last" : "dashed")">
+					<h3 class="post-title"><a href="@Model.ListDocsView[i].GetDocUrl()" title="@Model.ListDocsView[i].DocName">@Model.ListDocsView[i].DocName</a></h3>
+					<div class="post-time">
+						@{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsView[i], EffectStatusName = Model.ListDocsView[i].EffectStatusName } });}
+					</div>
+				</div>
+                }
+			</div>
+		</section>
+}

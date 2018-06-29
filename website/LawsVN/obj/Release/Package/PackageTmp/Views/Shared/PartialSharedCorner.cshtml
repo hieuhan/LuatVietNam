@@ -1,0 +1,33 @@
+﻿@using LawsVN.Library
+@model ICSoft.CMSViewLib.CategoriesView
+@if (Model != null && Model.lArticlesView.HasValue())
+{
+    <div class="recentcomments">
+        <div id="owl-demo-c2" class="owl-carousel">
+            @foreach (var articleView in Model.lArticlesView)
+            {
+                <div class="item-recentcomments">
+                    <div class="info-recentcomments">
+                        <span class="i-phay">
+                            <img alt="i-phay" src="@Url.Content("~/assets/images/phay1.png")"/></span>
+                        <p>
+                            @Html.Raw(articleView.Summary.StripTags().Truncate(225))
+                        </p>
+                        <span class="i-phay2">
+                            <img alt="i-phay" src="@Url.Content("~/assets/images/phay2.png")"/></span>
+                    </div>
+                    <div class="info-recentcomments chuky">
+                        <p>                           
+                            <img class="thumb40-avata" alt="@articleView.Title" src="@articleView.GetImageUrl_Thumb()"/>
+                            @articleView.Title <span class="textcolor">@articleView.SourceUrl</span>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="customNavigation">
+            <a class="btn prev22 btn1"></a>
+            <a class="btn next22 btn2"></a>
+        </div>
+    </div>
+}

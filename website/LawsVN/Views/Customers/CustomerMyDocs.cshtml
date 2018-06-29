@@ -1,0 +1,677 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using ICSoft.LawDocsLib
+@using ICSoft.CMSLib
+@model CustomerDocsViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+<!--Bengin page-content-->
+<div class="page-content">
+    <!--Bengin content-left -->
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="/" class="breadcrumb-item"><span class="icon-home"></span>Trang chủ </a> »
+            <a href="#" class="breadcrumb-item">Thông tin cá nhân</a> »
+            <span class="breadcrumb-item colorrumb">Thông tin tài khoản</span>
+        </div>
+        <div class="tab-nav">
+            <a class="tab-nav-item-ad " href="#">Thông tin tài khoản</a>
+            <a class="tab-nav-item-ad " href="#">Lịch sử giao dịch</a>
+            <a class="tab-nav-item-ad active" href="#">Văn bản của tôi</a>
+            <a class="tab-nav-item-ad " href="#">Thông báo hiệu lực<span style="color: #a67942;"> (3)</span></a>
+            <a class="tab-nav-item-ad" href="#">Tin nhắn <span style="color: #a67942;">(3)</span></a>
+        </div>
+
+        <!-- Bengin-cat-box-content-->
+        <div class="cat-box-content">
+            <!-- Bengin-sub-menu2-->
+            <div class="sub-menu2">
+
+                @Ajax.ActionLink(Resource.CustomersVBPL, Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName,
+                new
+                {
+                    docGroupId = 0
+                    ,
+                    languageId = LawsVnLanguages.GetCurrentLanguageId()
+                    ,
+                    updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                    ,
+                    insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                    ,
+                    controllerName = Model.PartialPaginationAjaxFirst.ControllerName
+                    ,
+                    actionName = Model.PartialPaginationAjaxFirst.ActionName
+                    ,
+                    pageSize = Model.PartialPaginationAjaxFirst.PageSize
+                    ,
+                    linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+                },
+                new AjaxOptions
+                {
+                    HttpMethod = "Get"
+                    ,
+                    UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                    ,
+                    InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                    ,
+                    OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                    ,
+                    OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                }, new { @class = "sub-menu2-item" })
+
+                @Ajax.ActionLink(Resource.VietNamStandard, Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName,
+                new
+                {
+                    docGroupId = Constants.DocGroupIdTcvn
+                    ,
+                    languageId = Model.PartialPaginationAjaxFirst.LanguageId
+                    ,
+                    updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                    ,
+                    insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                    ,
+                    controllerName = Model.PartialPaginationAjaxFirst.ControllerName
+                    ,
+                    actionName = Model.PartialPaginationAjaxFirst.ActionName
+                    ,
+                    pageSize = Model.PartialPaginationAjaxFirst.PageSize
+                    ,
+                    linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+                },
+                new AjaxOptions
+                {
+                    HttpMethod = "Get"
+                    ,
+                    UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                    ,
+                    InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                    ,
+                    OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                    ,
+                    OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                }, new { @class = "sub-menu2-item active" })
+
+                @Ajax.ActionLink(Resource.UnifiedText, Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName,
+                new
+                {
+                    docGroupId = Constants.DocGroupIdVbhn,
+                    languageId = LawsVnLanguages.AvailableLanguages[1].LanguageId
+                    ,
+                    updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                    ,
+                    insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                    ,
+                    controllerName = Model.PartialPaginationAjaxFirst.ControllerName
+                    ,
+                    actionName = Model.PartialPaginationAjaxFirst.ActionName
+                    ,
+                    pageSize = Model.PartialPaginationAjaxFirst.PageSize
+                    ,
+                    linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+                },
+                new AjaxOptions
+                {
+                    HttpMethod = "Get"
+                    ,
+                    UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId
+                    ,
+                    InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode
+                    ,
+                    OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                    ,
+                    OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                }, new { @class = "sub-menu2-item" })
+            </div>
+            <!-- End-sub-menu2-->
+            <!-- Bengin-lockq-->
+            <div class="lockq">
+                <div class="item-loctheo">
+                    <span class="icon-loc-kq"></span>Lọc theo:
+                </div>
+                <div class="item-lockq">
+                    <select tabindex="1" class="dropdown">
+                        <option onchange="@string.Format("javascript:window.location.href='{0}'", string.Concat(CmsConstants.ROOT_PATH,"tat-ca-linh-vuc.html"))" data-title="">Ngành / Lĩnh vực</option>
+                       @for (int i = 0; i < Model.lCustomerFields.Count(); i++)
+                        {
+                            <option value="@string.Format("javascript:window.location.href='{0}'", ICSoft.LawDocsLib.Fields.Static_Get(Model.lCustomerFields[i].FieldId, 0).FieldDesc.GenUrl(Model.lCustomerFields[i].FieldId, "field"))" data-title="@ICSoft.LawDocsLib.Fields.Static_Get(Model.lCustomerFields[i].FieldId, 0).FieldDesc" @(Model.lCustomerFields[i].FieldId == Model.mField.FieldId ? "selected" : string.Empty)>
+                                @(ICSoft.LawDocsLib.Fields.Static_Get(Model.lCustomerFields[i].FieldId, 0).FieldDesc)
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="item-lockq">
+                    <select tabindex="1" class="dropdown">
+                        <option value="0">Cơ quan ban hành </option>
+                        @for (int i = 0; i < Model.ListOrgans.Count(); i++)
+                            {
+                                <option title="@Model.ListOrgans[i].OrganDesc" value="@Model.ListOrgans[i].OrganId">@Model.ListOrgans[i].OrganDesc </option>
+                            }
+                    </select>
+                </div>
+                <div class="item-lockq">
+                    <select tabindex="1" class="dropdown">
+                        <option value="0">Tình trạng hiệu lực</option>
+                        @for(int i=0; i< Model.ListEffectStatus.Count(); i++)
+                        {
+                            <option value="@Model.ListEffectStatus[i].EffectStatusId">@Model.ListEffectStatus[i].EffectStatusDesc</option>
+                        }
+                    </select>
+                </div>
+                <div class="item-lockq">
+                    <select tabindex="1" class="dropdown">
+                        <option value="0">Loại văn bản</option>
+                        @for(int i=0; i< Model.ListDocTypeDisplays.Count(); i++)
+                        {
+                            <option value="@Model.ListDocTypeDisplays[i].DisplayTypeId">@Model.ListDocTypeDisplays[i].DocTypeDesc</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <!-- End-lockq-->
+            <!-- Bengin-content-giao-dich-->
+            <div class="content-giao-dich">
+                <div id="FirstBox" class="click-1">
+                    @if (Model.ListDocsViewFirst.HasValue())
+                    {
+                        <table class="table table-bordered">
+                            <tbody>
+                                @for (int i = 0; i < Model.ListDocsViewFirst.Count(); i++)
+                                {
+                                    <tr class="row-tr" style="vertical-align:top;">
+                                        <td class="rows-td fontbold">@((i+1).ToString("#00"))</td>
+                                        <td class="rows-td" style="text-align: left;">
+                                            <h2>
+                                                <a href="@Model.ListDocsViewFirst[i].DocUrl" title="@Model.ListDocsViewFirst[i].DocName" class="post-title lvn">
+                                                    @Model.ListDocsViewFirst[i].DocName
+                                                </a>
+                                            </h2>
+                                            <div class="item-meta">
+                                                <a href="#" class="tag-item ">Tóm tắt</a>
+                                                <a href="#" class="tag-item ">Lược đồ</a>
+                                                <a href="#" class="tag-item ">Hiệu lực</a>
+                                                <a href="#" class="tag-item ">Liên quan</a>
+                                                <a href="#" class="tag-item ">Tiếng anh</a>
+                                                <a href="#" class="tag-item ">Tải về</a>
+                                            </div>
+                                        </td>
+                                        <td class="rows-td wighttime">
+                                            <p class="post-time"> Ban hành: <span class="color2">@Model.ListDocsViewFirst[i].IssueDate.ToString("dd/MM/yyyy")</span></p>
+                                            <p class="post-time"> Áp dụng: <span class="color2">@Model.ListDocsViewFirst[i].EffectDate.ToString("dd/MM/yyyy")</span></p>
+                                            <p class="post-time bottom0"> Hiệu lực: <span class="color2">@Model.ListDocsViewFirst[i].EffectStatusName</span> </p>
+                                        </td>
+                                        <td class="rows-td" style="width: 100px;">
+                                        @{
+                                            string FieldName="";
+                                         DocFields mDocFields = new DocFields(); 
+                                         string linhvuc= mDocFields.DocFields_GetFieldName(1,Model.ListDocsViewFirst[i].DocId, ref FieldName);
+                                        }
+                                        @linhvuc</td>
+                                        <td class="rows-td"><a href="#"><img alt="img-tthl" src="@Url.Content("~/assets/images/xoa.png")" /></a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr class="row-first-news">
+                                    <th class="count-123" scope="row"></th>
+                                    <td class="news-center-post">
+                                        <h3>
+                                            <span class="post-title lvn">Đang cập nhật dữ liệu....</span>
+                                        </h3>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+            <!-- End-content-giao-dich-->
+            <!--Bengin pagination -->
+            <div class="pagination">
+                <div class="pagination-left">
+                    <span class="text-pagination">Hiển thị:</span>
+                    <div class="select-pagination">
+                        <select tabindex="1" class="dropdown10">
+                            <option value="0">10 kết quả</option>
+                            <option value="1">10 kết quả</option>
+                            <option value="2">10 kết quả</option>
+                            <option value="3">10 kết quả</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="pagination-right">
+                    Trang<input class="input-page-item" value="4">của 192
+                    <div class="load-more">
+                        <a href="#" class="load-more-item x1"></a>
+                        <a href="#" class="load-more-item x2"></a>
+                    </div>
+                </div>
+            </div>
+            <!--End pagination -->
+        </div>
+        <!-- End-cat-box-content-->
+    </div>
+    <!--End content left-->
+    <!--Bengin content-right-->
+    <div class="content-right">
+        <aside class="sidebar">
+
+            <!--Bengin widget-->
+            <div class="widget">
+                <div class="widget-user">
+                    <div class="padding">
+                        <div class="widget-left">
+                            <div class="item-tt">
+                                <a href="#" style="font-weight: bold;"><img class="icon-user" alt="icon-user" src="images/hoten.png"> NguyenVanA</a>
+                                <span class="tvv">VIP</span>
+                            </div>
+                            <div class="item-tt">
+                                <a href="#"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/thongtincn.png")"> Thông tin cá nhân></a>
+                            </div>
+                            <div class="item-tt">
+                                <a href="#"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/tinnhan.png")"> Tin nhắn của tôi <span style="color: #b28247; font-weight: bold;">( 29 )</span></a>
+                            </div>
+                            <div class="item-tt">
+                                <a href="#"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/vanban.png")">Văn bản của tôi <span style="color: #b28247; font-weight: bold;">( 92 )</span></a>
+                            </div>
+                            <div class="item-tt">
+                                <a href="#"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/gia-han.png")"> Gia hạn dịch vụ</a>
+                            </div>
+                            <div class="item-tt">
+                                <a href="#"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/lichsu.png")"> Lịch sử giao dịch</a>
+                            </div>
+                            <div class="item-tt">
+                                <a href="#"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/hoten.png")"> Đổi mật khẩu</a>
+                            </div>
+                            <div class="item-tt">
+                                <a href="#"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/logout.png")"> Đăng xuất</a>
+                            </div>
+                        </div>
+                        <div class="widget-right">
+                            <img class="thumbavata-canhan" alt="avata-canhan" src="@Url.Content("~/assets/images/avata-ad1.png")">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End widget-->
+            <!--Bengin widget-->
+            <div class="widget">
+                <div class="widget-top">
+                    <h3><span class="title-widget">Lĩnh vực văn bản quan tâm</span></h3>
+                </div>
+                <div class="widget-container">
+                    <div class="rows" style="padding-top: 5px;">
+                        <a href="#" class="chinh-sua"><img alt="edit-tt" src="@Url.Content("~/assets/images/cap-nhat.png")"> Chỉnh sửa </a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="vbquantam-item">Doanh nghiệp (13)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="vbquantam-item">Lao động - Tiền lương (19)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="vbquantam-item">Thuế-Phí-Lệ phí (2)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="vbquantam-item">Đất đai-Nhà ở (2)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="vbquantam-item">Tài chính-Ngân hàng (24)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="vbquantam-item">Bảo hiểm (34)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="vbquantam-item">Kế toán-Kiểm toán (23)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="vbquantam-item">Đầu tư (35)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="vbquantam-item">Đấu thầu-Cạnh tranh (3)</a>
+                    </div>
+                </div>
+            </div>
+            <!--End widget-->
+            <!--Bengin widget-->
+            <div class="widget">
+                <div class="widget-top">
+                    <h3><span class="title-widget">Tình trạng văn bản</span></h3>
+                </div>
+                <div class="widget-container">
+                    <div class="rows vbquantam">
+                        <a href="#" class="hieuluc-item">Còn hiệu lực (13)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="hieuluc-item">Đã sửa đổi (19)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="hieuluc-item">Đã đính chính (2)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="hieuluc-item">Hết hiệu lực (2)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="hieuluc-item">Không xác định (24)</a>
+                    </div>
+
+                </div>
+            </div>
+            <!--End widget-->
+            <!--Bengin widget ads-->
+            <div class="widget ">
+                <div class="banner">
+                    @{Html.RenderPartial("PartialAdvertise", null, new ViewDataDictionary { { "LocationId", 234 } });}
+                </div>
+            </div>
+            <!--End widget ads-->
+            <!--Bengin widget-->
+            <div class="widget bottom0">
+                <div class="widget-top">
+                    <h3><span class="title-widget">Phần mềm hỗ trợ</span></h3>
+                </div>
+                <div class="widget-container">
+                    <div class="rows vbquantam">
+                        <a href="#" class="icon-pdf">Phần mềm đọc file PDF</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="icon-uniky">Phần mềm Unikey 4.0</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="#" class="icon-tcvn3">Tải font TCVN3 (ABC)</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <span class="icon-lvn">Trình duyệt tốt nhất cho LuatVietnam:</span>
+                    </div>
+                    <div class="rows">
+                        <a href="#" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="@Url.Content("~/assets/images/firefox.png")"> Firefox </a>
+                        <a href="#" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="@Url.Content("~/assets/images/chrome.png")"> chrome </a>
+                        <a href="#" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="@Url.Content("~/assets/images/safari.png")"> Safari </a>
+                    </div>
+
+                </div>
+            </div>
+            <!--End widget-->
+
+        </aside>
+    </div>
+    <!--End content-right-->
+
+</div>
+<!--End page-content-->
+<!--Bengin cat-box content-wrap-->
+<div class="cat-box content-recent">
+    <section class="view-post-content">
+        <div class="padding-view">
+            <div class="cat-title">
+                <h4><span class="cat-box-title">Nội dung đã xem</span></h4>
+                <span class="vien-title nav-fd daxem"></span>
+            </div>
+            <!--Begin carousel-->
+            <div id="owl-demo-c3" class="owl-carousel">
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="@Url.Content("~/assets/images/demo.jpg")"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/no-images.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+                <div class="item-recent-post">
+                    <div class="post-thumbnail wg">
+                        <a href="#" class="thumb80"><img alt="thumb90" src="images/demo.jpg"></a>
+                    </div>
+                    <div class="recent-view">
+                        <a href="#" class="post-title normal">Cách tính phí đối với khai thác khoáng sản tại Việt Nam </a>
+                        <p class="tie-date daxem"> (25/06/2017  09:20)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="customNavigation">
+                <a class="btn prev33 btn1"></a>
+                <a class="btn next33 btn2"></a>
+            </div>
+            <!--End carousel-->
+
+        </div>
+    </section>
+</div>
+<!--Bengin cat-box content-wrap-->
+<!--Bengin cat-box content-wrap-->
+<div class="cat-box partner">
+
+    <div class="cat-box-content">
+        <!--Bengin col-xs-2-->
+        <div class="col-xs-2 md2">
+            <div class="col-mb-4">
+                <span class="img-partner1"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner2"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner3"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner4"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner5"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner6"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner7"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner8"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner9"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner10"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner11"></span>
+            </div>
+            <div class="col-mb-4">
+                <span class="img-partner12"></span>
+            </div>
+        </div>
+        <!--End col-xs-2-->
+        <!--Bengin col-xs-2-->
+        <div class="col-xs-2 md2">
+            <!--Begin carousel-->
+            <div class="recentcomments">
+                <div id="owl-demo-c2" class="owl-carousel">
+                    <div class="item-recentcomments">
+                        <div class="thumbnail-recentcomments">
+                            <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png" /></div>
+                        </div>
+                        <div class="info-recentcomments">
+                            <span class="i-phay"><img alt="i-phay" src="images/phay1.png" /></span>
+                            <p>
+                                Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn
+                                đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng,
+                                bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng
+                                rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…
+                            </p>
+                            <span class="i-phay2"><img alt="i-phay" src="images/phay2.png" /></span>
+                        </div>
+                        <div class="info-recentcomments chuky">
+                            <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                        </div>
+                    </div>
+                    <div class="item-recentcomments">
+                        <div class="thumbnail-recentcomments">
+                            <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png" /></div>
+                        </div>
+                        <div class="info-recentcomments">
+                            <span class="i-phay"><img alt="i-phay" src="images/phay1.png" /></span>
+                            <p>
+                                Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn
+                                đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng,
+                                bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng
+                                rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…
+                            </p>
+                            <span class="i-phay2"><img alt="i-phay" src="images/phay2.png" /></span>
+                        </div>
+                        <div class="info-recentcomments chuky">
+                            <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                        </div>
+                    </div>
+                    <div class="item-recentcomments">
+                        <div class="thumbnail-recentcomments">
+                            <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png" /></div>
+                        </div>
+                        <div class="info-recentcomments">
+                            <span class="i-phay"><img alt="i-phay" src="images/phay1.png" /></span>
+                            <p>
+                                Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn
+                                đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng,
+                                bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng
+                                rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…
+                            </p>
+                            <span class="i-phay2"><img alt="i-phay" src="images/phay2.png" /></span>
+                        </div>
+                        <div class="info-recentcomments chuky">
+                            <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                        </div>
+                    </div>
+                    <div class="item-recentcomments">
+                        <div class="thumbnail-recentcomments">
+                            <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png" /></div>
+                        </div>
+                        <div class="info-recentcomments">
+                            <span class="i-phay"><img alt="i-phay" src="images/phay1.png" /></span>
+                            <p>
+                                Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn
+                                đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng,
+                                bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng
+                                rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…
+                            </p>
+                            <span class="i-phay2"><img alt="i-phay" src="images/phay2.png" /></span>
+                        </div>
+                        <div class="info-recentcomments chuky">
+                            <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                        </div>
+                    </div>
+                    <div class="item-recentcomments">
+                        <div class="thumbnail-recentcomments">
+                            <div class="thumb80-avata"><img alt="thumb80" src="images/avata.png" /></div>
+                        </div>
+                        <div class="info-recentcomments">
+                            <span class="i-phay"><img alt="i-phay" src="images/phay1.png" /></span>
+                            <p>
+                                Số vốn nêu trên sẽ được sử dụng để đầu tư bảo vệ rừng và bảo tồn
+                                đa dạng sinh học các hệ sinh thái rừng, đặc biệt là rừng đặc dụng,
+                                bảo tồn voi và một số loài động, thực vật hoang dã, quý hiếm,
+                                có nguy cơ tuyệt chủng; Phát triển giống cây lâm nghiệp; Trồng
+                                rừng phòng hộ, đặc dụng, sản xuất; Đầu tư xây dựng ở mỗi miền Bắc,
+                                Trung, Nam 01 khu lâm nghiệp ứng dụng công nghệ cao và tiếp thị lâm sản…
+                            </p>
+                            <span class="i-phay2"><img alt="i-phay" src="images/phay2.png" /></span>
+                        </div>
+                        <div class="info-recentcomments chuky">
+                            <p> Nguyễn Thanh lam - <span class="textcolor">CEO Hafaco hà Nội</span></p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="customNavigation">
+                    <a class="btn prev22 btn1"></a>
+                    <a class="btn next22 btn2"></a>
+                </div>
+            </div>
+            <!--End carousel-->
+        </div>
+        <!--End col-xs-2-->
+    </div>
+</div>
+<!--End cat-box content-wrap-->
+

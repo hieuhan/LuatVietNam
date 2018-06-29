@@ -1,0 +1,31 @@
+﻿@using VanBanLuat.Librarys
+@using ICSoft.ViewLibV3
+@using VanBanLuat.Models
+@model ICSoft.ViewLibV3.CategoryArticles
+@if (Model.mCategory != null && Model.mCategory.CategoryId > 0 && Model.lArticle.HasValue())
+{
+    Articles mArticles = Model.lArticle[0];
+    Model.lArticle.RemoveAt(0); 
+    <section class="cat-box-section vien">
+        <div class="title">
+            <h2 class="td-phaply"><a href="@Model.mCategory.GetCategoryUrl()" title="@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)">@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)</a></h2>
+        </div>
+        <div class="cat-box-content">
+            <div class="new-list-phaply">
+                <div class="post-thumbnail-370">
+                    <a href="@mArticles.GetArticleUrl()" title="@mArticles.Title"><img class="thumb-full h210" alt="@mArticles.Title" src="@mArticles.GetImageUrl_Mobile()"></a>
+                </div>
+                <h3 class="post-title-news"><a href="@mArticles.GetArticleUrl()" title="@mArticles.Title">@mArticles.Title</a></h3>
+                <div class="sapo font15 pdbottom20">
+                    <p>@Html.Raw(mArticles.Summary)</p>
+                </div>
+                <ul>
+                    @foreach (Articles item in Model.lArticle)
+                    {
+                        <li class="listpl"><a href="@item.GetArticleUrl()" title="@item.Title" class="post-title" style="float: none;"><i class="icondash"></i> @item.Title</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </section>
+}

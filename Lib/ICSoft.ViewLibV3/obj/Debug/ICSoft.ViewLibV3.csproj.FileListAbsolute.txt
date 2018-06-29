@@ -1,0 +1,5 @@
+E:\Solutions\2017\LuatVietNamV2\Lib\ICSoft.ViewLibV3\bin\Debug\ICSoft.ViewLibV3.dll
+E:\Solutions\2017\LuatVietNamV2\Lib\ICSoft.ViewLibV3\bin\Debug\ICSoft.ViewLibV3.pdb
+E:\Solutions\2017\LuatVietNamV2\Lib\ICSoft.ViewLibV3\obj\Debug\ICSoft.ViewLibV3.dll
+E:\Solutions\2017\LuatVietNamV2\Lib\ICSoft.ViewLibV3\obj\Debug\ICSoft.ViewLibV3.pdb
+E:\Solutions\2017\LuatVietNamV2\Lib\ICSoft.ViewLibV3\obj\Debug\ICSoft.ViewLibV3.csprojResolveAssemblyReference.cache

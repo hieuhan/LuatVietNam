@@ -1,0 +1,22 @@
+﻿@using LawsVN.Library
+@model ICSoft.CMSViewLib.DocsViewDetail
+@if (Model.lDocIndexes.HasValue())
+{
+    <div id="DocIndexes" class="popup full target-hidden">
+        <div class="wrapper">
+            <div class="content-popup full">
+                <div class="content-popup-post">
+                @foreach (var item in Model.lDocIndexes)
+                {
+                    <div class="item-article">
+                        <a href="@Model.mDocsView.GetDocUrl()#@item.Bookmark">• @item.Title </a>
+                    </div>
+                }
+                </div>
+            </div>
+            <button name="close" data-toggle-target="#DocIndexes" class="dong-close full">
+                <img src="@Url.Content("~/assets/mobile/images/close.png")"/>
+            </button>
+        </div>
+    </div>
+}

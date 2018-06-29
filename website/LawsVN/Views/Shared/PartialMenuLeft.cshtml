@@ -1,0 +1,14 @@
+﻿@using LawsVN.Library
+@model List<ICSoft.CMSViewLib.MenuItemsView>
+@if (Model.HasValue())
+{
+    foreach (var menuItemView in Model)
+    {
+        <div class="categories list">
+            <h2><a href="@menuItemView.GetUrl()" title="@menuItemView.ItemName" class="categories-item">@menuItemView.ItemName</a>
+            </h2>
+        </div>
+    }
+    <div class="margin-bottom20"></div>
+}
+

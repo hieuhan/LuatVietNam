@@ -1,0 +1,61 @@
+﻿@using LawsVN.Library
+@using LawsVN.Models
+@model LawsVN.Models.Docs.DocsViewDetailModel
+<div class="box-hieuluc">
+    <div class="box-hieuluc">
+        <div class="title2">
+            <h2 class="title-cat2 none vien"> Hiệu lực liên quan</h2>
+        </div>
+        @if (Model.ListRelateTypesRight.HasValue())
+        {
+			<!-- Bengin-drop-luocdo-->
+            <div class="drop-luocdo">
+                <div id="dropbox">
+                    <div class="dropcontent">
+                        @if (Model.ListRelateTypesRight.HasValue())
+                        {
+                            bool isHaveDoc = false;
+                            foreach (var item in Model.ListRelateTypesRight)
+                            {
+                                var listDocsRelates = Model.ListDocRelates.GetDocsRelatesByRelateType(item.RelateTypeId, "Right");
+                                if (!listDocsRelates.HasValue()) { continue; }
+                                <div class="tieloto">
+                                    <div class="tie-drop luocdo">
+                                        @item.RelateTypeName <span class="color1">(@listDocsRelates.Count)</span>
+                                        <span class="moredrop"></span>
+                                    </div>
+                                    <div class="dropsub" style="display: block">
+                                        @foreach (var docRelates in listDocsRelates)
+                                        {
+                                            <div class="rows-luocdo">
+                                                <a href="@docRelates.DocUrl">@docRelates.DocName</a>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                        isHaveDoc = true;
+                            }
+                            if (!isHaveDoc)
+                            {
+                                <div class="thong-bao-2">
+                                    <div class="thongbao-item2">
+                                        <em>Chưa có văn bản liên quan</em>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+           <!-- End-drop-luocdo-->
+        }
+        else
+        {
+            <div class="thong-bao-2">
+                <div class="thongbao-item2">
+                    <em>Chưa có văn bản liên quan</em>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿@using VanBanLuat.Librarys
+@model ICSoft.ViewLibV3.CategoryArticles
+@if (Model.mCategory != null && Model.mCategory.CategoryId > 0 && Model.lArticle.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h3 class="widget-title wg2"> <a href="@Model.mCategory.GetCategoryUrl()" title="@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)">@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)</a></h3>
+        </div>
+        <div class="widget-container bodertop">
+            @foreach (var article in Model.lArticle)
+            {
+                <div class="list-new-wget">
+                    <a href="@article.GetArticleUrl()" title="@article.Title" class="thumnal-50"><img class="thumb-full h40" src="@article.GetImageUrl_Mobile()"/></a>
+                    <div class="tie-new">
+                        <a class="post-title-wget" href="@article.GetArticleUrl()" title="@article.Title">@article.Title</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

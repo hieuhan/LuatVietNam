@@ -1,0 +1,131 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using LawsVN.Library
+@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.Models.Docs
+@model DocsModel
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-van-ban.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="Keywords" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a> »
+    <span class="breadcrumb-item"> @Model.EffectStatusName</span>
+</div>
+<!-- Bengin section -->
+<section class="content-section">
+    <div class="title2">
+        <h1 class="title-cat2 vien">@Model.EffectStatusName</h1>
+    </div>
+    @*<div class="rows">
+        <select class="select-locvb">
+            <option>Tất cả lĩnh vực</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+        </select>
+        <select class="select-locvb">
+            <option>Tất cả lĩnh vực</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+        </select>
+        <select class="select-locvb">
+            <option>Tất cả lĩnh vực</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+        </select>
+    </div>*@
+    @if (Model.ListDocsView.HasValue())
+    {
+        <div class="cat-box-content">
+            @for(int index=0; index< Model.ListDocsView.Count(); index++)
+            {
+                DocsView mDocsView= Model.ListDocsView[index];
+                <div class="other-news @(index == 0 ? "" : "dashed")">
+                    <h2>
+                        <a class="post-title other" href="@mDocsView.GetDocUrl()">
+                            @mDocsView.DocName
+                        </a>
+                    </h2>
+                    <div class="post-time">
+                        @{ Html.RenderAction("PartialLinkDocumentAttributeAMP", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsView[index] } });}
+                    </div>
+                </div>
+            }
+    </div>
+    }
+    else
+    {
+        <div class="other-news ">
+                <span>Không tìm thấy văn bản phù hợp</span>
+            </div>
+    }
+
+    
+    @*<div class="pagination">
+        <div class="pagination-right">
+            <a href="#" class="pagination-item ">1</a>
+            <a href="#" class="pagination-item active">2</a>
+            <a href="#" class="pagination-item">3</a>
+            <a href="#" class="pagination-item">»</a>
+        </div>
+    </div>*@
+</section>
+<!-- End section -->
+<!-- Bengin section -->
+@if(Model.ListDocsViewMostView.HasValue())
+{
+    <section class="content-section">
+    <div class="title">
+        <h2 class="title-cat">Văn bản xem nhiều</h2>
+    </div>
+    <div class="cat-box-content">
+        @for(int i=0; i< Model.ListDocsViewMostView.Count(); i++)
+        {
+            DocsView mDocsView= Model.ListDocsViewMostView[i];
+            <div class="other-news @(i==0?"":"dashed")">
+            <h3>
+                <a class="post-title other" href="@mDocsView.GetDocUrl()">
+                    @mDocsView.DocName
+                </a>
+            </h3>
+            <div class="post-time">
+                @{ Html.RenderAction("PartialLinkDocumentAttributeAMP", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsViewMostView[i] } });}
+            </div>
+        </div>    
+        }
+    </div>
+</section>
+}
+<!-- End section -->

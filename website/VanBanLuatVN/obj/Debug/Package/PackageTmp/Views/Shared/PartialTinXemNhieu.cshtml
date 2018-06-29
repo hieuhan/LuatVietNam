@@ -1,0 +1,23 @@
+﻿@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@using ICSoft.ViewLibV3
+@model NewViewModel
+@if (Model.mCategoryArticles.lArticle.Count > 0)
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h3 class="widget-title wg2"> Tin xem nhiều </h3>
+        </div>
+        <div class="widget-container bodertop">
+            @foreach (Articles mArticles in Model.mCategoryArticles.lArticle)
+            {
+                <div class="list-new">
+                    <a href="@mArticles.GetArticleUrl()" title="@mArticles.Title" class="thumnal-50"><img class="thumb-full h40" src="@mArticles.GetImageUrl_Thumb()" /></a>
+                    <div class="tie-new">
+                        <a class="post-title new" href="@mArticles.GetArticleUrl()" title="@mArticles.Title">@mArticles.Title</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

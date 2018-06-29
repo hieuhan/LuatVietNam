@@ -1,0 +1,23 @@
+﻿@using VanBanLuat.Librarys
+@using ICSoft.ViewLibV3
+@using VanBanLuat.Models
+@model ICSoft.ViewLibV3.CategoryArticles
+@if (Model.lArticle.HasValue())
+{
+    <div class="item-col2">
+        <div class="title">
+            <h2 class="td-phaply"><a href="@Model.mCategory.GetCategoryUrl()" title="@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)">@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)</a></h2>
+        </div>
+        <div class="cat-box-content">
+            @foreach (Articles mArticles in Model.lArticle)
+            {
+                <div class="list-phaply">
+                <a href="@mArticles.GetArticleUrl()" title="@mArticles.Title" class="post-thumbnail-130"><img class="thumb-full h80" alt="@mArticles.Title" src="@mArticles.GetImageUrl_Thumb()" /></a>
+                <h3 class="title-phaply">
+                    <a href="@mArticles.GetArticleUrl()" title="@mArticles.Title">@mArticles.Title </a>
+                </h3>
+            </div>
+            }
+        </div>
+    </div>
+}

@@ -1,0 +1,223 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@model TNPLViewModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw((string.IsNullOrEmpty(Model.SeoHeader) ? "Thuật ngữ pháp lý" : Model.SeoHeader.ToString()))</h1>
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.PartialPaginationAjax.PageIndex, totalPage = Model.PartialPaginationAjax.TotalPage, pageSize = Model.PartialPaginationAjax.PageSize });}
+}
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>
+                <span>» Thuật ngữ pháp lý</span>
+        </div>
+        <div class="page-head thuatngu">
+            <h2 class="cat-box-title vien"><img class="img-dv" alt="img-dv" src="@Url.Content("~/assets/images/abc.png")">Thuật ngữ pháp lý
+            </h2>
+        </div>
+        <div class="post-abc">
+            @foreach (string alpha in new[] {"a", "b", "c", "d", "e", "f", "g", "h", "i", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "all"})
+            {
+                @Ajax.ActionLink(alpha, string.Empty, string.Empty,
+                    null,
+                    new AjaxOptions
+                    {
+                        HttpMethod = "Get",
+                        Url = Url.Action("TNPL_GetViewSearch", "Ajax",new
+                        {
+                            LawTerminGroupId = 0,
+                            TerName = alpha.Equals("all") ? string.Empty : alpha,
+                            languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                            updateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+                            insertionMode = InsertionMode.Replace,
+                            controllerName = "Ajax",
+                            actionName = "TNPL_GetViewSearch",
+                            pageSize = Model.PartialPaginationAjax.PageSize,
+                            linkLimit = Model.PartialPaginationAjax.LinkLimit
+                        }),
+                        UpdateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+                        InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode,
+                        OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')",Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId) ,
+                        OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');lawsVn.LawTerminsReset();lawsVn.ajaxEvents.ListOnComplete('terName','{1}')",Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId, alpha.Equals("all") ? string.Empty : alpha) 
+                        ,OnSuccess = "lawsVn.ajaxEvents.LawTerminsOnSuccess"
+                    }, new {@class = "post-tag-abc "})
+            }
+        </div>
+        <div class="rows item7">
+            @using (Ajax.BeginForm("TNPL_GetViewSearch", "Ajax", null, new AjaxOptions
+            {
+                HttpMethod = "Get"
+                , UpdateTargetId = Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                , InsertionMode = Model.PartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                , OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}');lawsVn.LawTerminSubmit()", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                , OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');lawsVn.LawTerminTagReset()", Model.PartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                , OnSuccess = "lawsVn.ajaxEvents.LawTerminsOnSuccess"
+            }))
+            {
+                <div class="col-ms1">
+                    <select tabindex="1" name="LawTerminGroupId" id="ddlLawTerminGroups" class="dropdown">
+                        <option value="0">Tất cả</option>
+                        @foreach (var item in Model.ListLawTerminGroups)
+                        {
+                            <option value="@item.LawTerminGroupId" @(item.LawTerminGroupId == Model.PartialPaginationAjax.LawTerminGroupId ? "selected" : string.Empty)>
+                                @item.LawTerminGroupDesc.Truncate(40)
+                            </option>
+                        }
+                    </select>
+                </div>
+                <div class="col-ms2">
+                    @Html.TextBoxFor(m => m.Tername, new {@class = "form-control-input thuatngu", placeholder = "Nhập nội dung cần tìm..."})
+                    <span id="signer-message"></span>
+                    <input type="hidden" id="LawTerminId" value="0"/>
+                </div>
+                <div class="col-ms3">
+                    <button class="btn btn-default tnpl">Tìm kiếm</button>
+                </div>
+            }
+        </div>
+        <div class="cat-box-content">
+            <div class="rows item3">
+                <div class="view-post thuatngu" id="txtnumberresultfound">
+                    <span>Hiển thị <strong>1-@Model.PartialPaginationAjax.PageSize</strong> trong <strong>@Model.PartialPaginationAjax.TotalPage </strong>thuật ngữ</span>
+                </div>
+            </div>
+            <div id="ListLawTerminsTab">
+                @if (Model.l_LawTermins.HasValue())
+                {
+                    <table class="table table-bordered thuatngu">
+                        <thead>
+                        <tr>
+                            <th class="xs1">Stt</th>
+                            <th class="xs2"> Thuật ngữ </th>
+                            <th class="xs3"> Mô tả / Định nghĩa </th>
+                            <th class="xs2"> Nguồn</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @for (int i = 0; i < Model.l_LawTermins.Count; i++)
+                        {
+                            var number = i + (Model.PartialPaginationAjax.PageIndex > 0 ? Model.PartialPaginationAjax.PageIndex - 1 : Model.PartialPaginationAjax.PageIndex) * Model.PartialPaginationAjax.PageSize + 1;
+                            <tr>
+                                <td class="xs1">@(number.ToString("#00"))</td>
+                                <td class="xs2">@Model.l_LawTermins[i].TermName</td>
+                                <td class="xs3">
+                                    @Model.l_LawTermins[i].TermDesc
+                                </td>
+                                <td class="xs2">@Model.l_LawTermins[i].TermSource</td>
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                    {
+                        Html.RenderAction("PartialPaginationAjax2", "Shared", new {model = Model.PartialPaginationAjax});
+                    }
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr class="row-first-news">
+                            <th class="count-123" scope="row"></th>
+                            <td class="news-center-post">
+                                <h3>
+                                    <span class="post-title lvn">@Resource.UpdatingData</span>
+                                </h3>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+
+            @{Html.RenderAction("PartialTaisaochonLuatVietNam", "Shared");}
+ 
+            @if(Model.l_ArticlesNewView.HasValue())
+            { 
+            <div class="widget ">
+                <div class="widget-top">
+                    <h3><span class="title-widget">Điểm tin văn bản mới</span></h3>
+                </div>
+                <div class="widget-container">
+                    @foreach(ArticlesView mArticlesView in Model.l_ArticlesNewView)
+                    {
+                        <div class="recent-post">
+                        <div class="post-thumbnail">
+                            <a href="@mArticlesView.GetArticleUrl()" class="thumb70" >
+                                <img alt="thumb70" src="@mArticlesView.GetImageUrl_Thumb()"></a>
+                        </div>
+                        <div class="post-conten">
+                            <a href="@mArticlesView.GetArticleUrl()" title="@mArticlesView.Title" class="post-title-widget">@mArticlesView.Title.Truncate(120)</a>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+
+            <div class="widget ">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+                </div>
+            </div>
+
+            @if (Model.l_ArticlesMostView.lArticlesNewest.HasValue())
+            {
+                <div class="widget">
+                <div class="widget-top">
+                    <h4><span class="title-widget">VĂN BẢN XEM NHIỀU</span></h4>
+                </div>
+                <div class="widget-container">
+                    @foreach(ArticlesView mMostView in Model.l_ArticlesMostView.lArticlesNewest )
+                    {
+                        <div class="recent-post">
+                        <span class="icon-new-2"></span>
+                        <div class="post-conten news">
+                            <a href="@mMostView.GetArticleUrl()" title="@mMostView.Title" class="post-title-widget">
+                           @mMostView.Title.Truncate(120)</a>
+                        </div>
+                    </div>
+                    }
+
+                </div>
+            </div>
+            }
+        </aside>
+    </div>
+</div>
+@section ListByFields
+{
+    <div class="nav-onclick-menu">
+        <div class="onclick-menu">
+            <a href="#" class="overlayLink" data-action="">
+                <img alt="dma" src="@Url.Content("~/assets/images/icon-danh-muc.png")" />
+                Danh<br />
+                mục
+            </a>
+        </div>
+        <div class="overlay" style="display: none;">
+            <div class="login-wrapper">
+                <div class="login-content">
+                    <a class="close">x</a>
+                    <div class="nav_categories">
+                        <div class="widget-top"><span class="title-widget">Lĩnh vực tra cứu</span></div>
+                        @{ Html.RenderAction("PartialFieldOfSearch", "Shared", new { displayTypeId = Constants.FieldsDisplayTypeIdVbpq, docGroupId = Model.PartialPaginationAjax.DocGroupId });}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

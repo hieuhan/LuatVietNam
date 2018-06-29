@@ -1,0 +1,139 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Library
+@model LawsVNEN.Models.Account.AccountProfileModel
+@using (Ajax.BeginForm("EditAccountProfile", "Account", null
+    , new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccessful"
+    }, new { id = "EditAccountProfileForm" }
+    ))
+{
+    @Html.AntiForgeryToken()
+    <div class="cat-title">
+        <div class="cat-box-title en">@Resource.PersonalInformation</div>
+        <div class="huy-capnhat" style="margin-top: -28px;">
+        <div class="btn-huy">@Ajax.ActionLink(Resource.Cancel, "AccountProfileSwitchMode", "Ajax"
+            , new
+            {
+                mode = "view"
+            }
+            , new AjaxOptions
+            {
+                HttpMethod = "Post"
+                ,UpdateTargetId = "thongtincanhan"
+                ,InsertionMode = InsertionMode.Replace
+                ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+            }, new { @class = "icon-huy" })</div>
+            <div class="btn-huy"><a href="#" class="icon-capnhat submit-link"> @Resource.Update</a></div>
+        </div>
+    </div>
+    <div class="cat-box-content ">
+        <div class="col-xs-2">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label class="col-sm-1">@Resource.FirstAndLastName:</label>
+                    <div class="col-sm-2">
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control-input" })
+                        @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1">@Resource.AccountName:</label>
+                    <div class="col-sm-222">
+                        @Model.CustomerName
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1">@Resource.DateOfBirth:</label>
+                    <div class="col-sm-2">
+                        @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control-input  form-control-ns icon datepicker" })
+                        @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "text-danger", style = "float:left;" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-1">
+                        <p style="line-height: 36px;">@Resource.Sex:</p>
+                    </div>
+                    <div class="col-sm-2" style="margin-top: 11px;">
+                        <div class="dk-item22">
+                            <div class="radio">
+                                <input id="radio-3" name="GenderId" @(Model.GenderId == 1 ? "checked" : string.Empty) type="radio" value="1">
+                                <label for="radio-3" class="radio-label"> @Resource.Male</label>
+                            </div>
+                        </div>
+                        <div class="dk-item22">
+                            <div class="radio">
+                                <input id="radio-4" name="GenderId" @(Model.GenderId == 2 ? "checked" : string.Empty) type="radio" value="2">
+                                <label for="radio-4" class="radio-label"> @Resource.Female</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1">@Resource.Address: </label>
+                    <div class="col-sm-2">
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control-input" })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1">@Resource.PhoneNumber:</label>
+                    <div class="col-sm-2">
+                        @Html.TextBoxFor(m => m.CustomerMobile, new { @class = "form-control-input" })
+                        @Html.ValidationMessageFor(m => m.CustomerMobile, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @if(Model.Email == null||Model.Email=="" )
+                {
+                    <div class="form-group">
+                    <label class="col-sm-1">Email:</label>
+                    <div class="col-sm-2">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control-input" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                    <label class="col-sm-1">Email:</label>
+                        <div class="col-sm-222">
+                            @Model.Email
+                        </div>
+                </div>
+                }
+                @Html.HiddenFor(m=> m.Email)
+                @Html.HiddenFor(m => m.CustomerName)
+                <div class="form-group">
+                    <label class="col-sm-1">@Resource.ProvinceCity:  </label>
+                    <div class="col-sm-2 edit1">
+                        @Html.DropDownListFor(model => model.ProvinceId, new SelectList(Model.ListProvinces, "ProvinceId", "ProvinceName", Model.ProvinceId), new { @class = "select2" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-1">@Resource.Job: </label>
+                    <div class="col-sm-2">
+                    @Html.DropDownListFor(model => model.OccupationId, new SelectList(Model.ListOccupations, "OccupationId", "OccupationName", Model.OccupationId), new { @class = "select2" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $("#DateOfBirth").datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "1945:c"
+    });
+    $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+    $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+    $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+    lawsValidate.formatDate();
+</script>

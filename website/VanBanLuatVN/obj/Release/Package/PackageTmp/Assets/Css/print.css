@@ -1,0 +1,60 @@
+﻿.content-dk {
+    min-height: 300px;
+    float: left;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 30px;
+}
+.dropcontent {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    background: #ddf3ff;
+    border: none;
+}
+.cat-box-content {
+    float: left;
+    width: 100%;
+}
+.item-col3.fixluocdo {
+    width: 31.5%;
+    margin-right: 2.5%;
+}
+.dropcontent {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(227, 227, 227);
+    border-image: initial;
+}
+.tie-drop {
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #3aa7e2;
+    padding: 10px;
+}
+.moredrop {
+    float: right;
+    height: 14px;
+    width: 14px;
+    background: url(/assets/images/icondown2.png) 0px 50% no-repeat;
+}
+.rows-luocdo2 {
+    border-bottom: solid 1px #b4e3ff;
+    padding: 10px;
+    line-height: 22px;
+}
+.dropcontent {
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(227, 227, 227);
+    border-image: initial;
+}
+.mCustomScrollBox{ max-height: none;}

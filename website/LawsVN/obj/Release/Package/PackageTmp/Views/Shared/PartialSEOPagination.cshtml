@@ -1,0 +1,7 @@
+﻿@using System.Collections.Specialized
+@using LawsVN.Library
+@model LawsVN.Models.PartialPagination
+@if (Model.PageIndex > 1)
+{<link rel="prev" href="@Model.AbsoluteUri.BuildQueryStringUrl(new NameValueCollection{{"page", Model.PageIndex > 2 ? (Model.PageIndex-1).ToString() : string.Empty }})" />}
+@if (Model.PageIndex < Model.pageCount)
+{<link rel="next" href="@Model.AbsoluteUri.BuildQueryStringUrl(new NameValueCollection{{"page", (Model.PageIndex > 1 ? Model.PageIndex+1 : 2).ToString() }})" />}

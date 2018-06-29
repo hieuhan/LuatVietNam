@@ -1,0 +1,196 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMyLuatVNMobile.cshtml";
+}
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using ICSoft.CMSLib
+@model CusomersInterfaceModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw((string.IsNullOrEmpty(Model.SeoHeader) ? "Tiêu chuẩn Việt Nam" : Model.SeoHeader.ToString()))</h1>
+}
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+
+<div class="breadcrumb">
+    <a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan.html" title="@Resource.HomePage" class="breadcrumb-item">My luatVietnam</a>»
+    <span class="breadcrumb-item color1">Tiêu chuẩn Việt Nam</span>
+</div>
+
+<section class="box-section">
+    <div class="title">
+        <h2 class="title-cat" id="tabcontentDoctype" data-doctype="@Constants.DocTypesTieuChuanVn">Tiêu chuẩn Việt Nam </h2>
+        <div class="btn-more">
+            <ul class="usernav">
+                <li class="button-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/mobile/images/more-nv.png")" /></a>
+                    <ul class="dropdown-menu" style="right: 0px; width: 160px; margin-top: 3px; display: none;">
+                        <li class="item-more">
+                            @Ajax.ActionLink(Resource.VietNamStandard, string.Empty, string.Empty, null,
+                            new AjaxOptions
+                            {
+                                HttpMethod = "Get",
+                                Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName, new
+                                {
+                                    docGroupId = Model.PartialPaginationAjaxFirst.DocGroupId,
+                                    docTypeId = Constants.DocTypesTieuChuanVn,
+                                    usingDisplayTable = Model.PartialPaginationAjaxFirst.UsingDisplayTable,
+                                    languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                                    updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                    insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                    controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                                    actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                                    pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                                    linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+                                }),
+                                UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId),
+                                OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');lawsVn.TCVNResetTitle(0);lawsVn.TCVNResetField();", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                            }, new { @class = "item-more-2" })
+                        </li>
+                        <li class="item-more">
+                            @Ajax.ActionLink(Resource.VietNamRegulations, string.Empty, string.Empty, null,
+                            new AjaxOptions
+                            {
+                                HttpMethod = "Get",
+                                Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName, new
+                                {
+                                    docGroupId = Model.PartialPaginationAjaxFirst.DocGroupId,
+                                    docTypeId = Constants.DocTypesQuyChuanVn,
+                                    usingDisplayTable = Model.PartialPaginationAjaxFirst.UsingDisplayTable,
+                                    languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                                    updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                    insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                    controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                                    actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                                    pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                                    linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+                                }),
+                                UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId),
+                                OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');lawsVn.TCVNResetTitle(1);lawsVn.TCVNResetField();", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                            }, new { @class = "item-more-2" })
+                        </li>
+                        <li class="item-more">
+                            @Ajax.ActionLink(Resource.VietNamDepartment, string.Empty, string.Empty, null,
+                            new AjaxOptions
+                            {
+                                HttpMethod = "Get",
+                                Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName, new
+                                {
+                                    docGroupId = Model.PartialPaginationAjaxFirst.DocGroupId,
+                                    docTypeId = Constants.DocTypesTieuChuanNganh,
+                                    usingDisplayTable = Model.PartialPaginationAjaxFirst.UsingDisplayTable,
+                                    languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                                    updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                    insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                    controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                                    actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                                    pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                                    linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+                                }),
+                                UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId),
+                                OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');lawsVn.TCVNResetTitle(2);lawsVn.TCVNResetField();", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                            }, new { @class = "item-more-2" })
+                        </li>
+                        <li class="item-more">
+                            @Ajax.ActionLink(Resource.VietNamConstruct, string.Empty, string.Empty, null,
+                            new AjaxOptions
+                            {
+                                HttpMethod = "Get",
+                                Url = Url.Action(Model.PartialPaginationAjaxFirst.ActionName, Model.PartialPaginationAjaxFirst.ControllerName, new
+                                {
+                                    docGroupId = Model.PartialPaginationAjaxFirst.DocGroupId,
+                                    docTypeId = Constants.DocTypesTieuChuanXdvn,
+                                    usingDisplayTable = Model.PartialPaginationAjaxFirst.UsingDisplayTable,
+                                    languageId = LawsVnLanguages.GetCurrentLanguageId(),
+                                    updateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                    insertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                    controllerName = Model.PartialPaginationAjaxFirst.ControllerName,
+                                    actionName = Model.PartialPaginationAjaxFirst.ActionName,
+                                    pageSize = Model.PartialPaginationAjaxFirst.PageSize,
+                                    linkLimit = Model.PartialPaginationAjaxFirst.LinkLimit
+                                }),
+                                UpdateTargetId = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId,
+                                InsertionMode = Model.PartialPaginationAjaxFirst.LawsAjaxOptions.InsertionMode,
+                                OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId),
+                                OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');lawsVn.TCVNResetTitle(3);lawsVn.TCVNResetField();", Model.PartialPaginationAjaxFirst.LawsAjaxOptions.UpdateTargetId)
+                            }, new { @class = "item-more-2" })
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    @*<div class="title2">
+            <h2 class="title-cat2 vien"> @Model.WebsiteTitle</h2>
+        </div>*@
+     @if (Model.ListFieldsQuanTamTcvn.HasValue())
+    {
+    <div class="box-seclect" id="tab-item-1">
+        <div class="col3-seclect1">
+            <select id="ddlFieldTCVN" name="FieldId" class="select-option" style="padding-right: 16px;">
+                <option value="0" title="@Resource.AllFields">@Resource.AllFields</option>
+                @foreach (var item in Model.ListFieldsQuanTamTcvn)
+                {
+                    <option value="@item.FieldId" title="@item.FieldName">@item.FieldName</option>
+                }
+            </select>
+        </div>
+    </div>
+     }
+    <!-- End-->
+    <!-- content-->
+    <div id="Content" class="cat-box-content">
+        @if (Model.lDocsView_TCVN.HasValue())
+        {
+            for (int i = 0; i < Model.lDocsView_TCVN.Count; i++)
+            {
+                <div class="first-news @(i == Model.lDocsView_TCVN.Count - 1 ? "last" : "dashed")">
+                    <h3 class="post-title">
+                        <a href="@Model.lDocsView_TCVN[i].GetDocUrl()" title="@Model.lDocsView_TCVN[i].DocName"><span class="stt">(@((i + 1).ToString("#00")))</span>@Model.lDocsView_TCVN[i].DocName</a>
+                    </h3>
+                    <div class="post-time">
+                        @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.lDocsView_TCVN[i] } });}
+                    </div>
+                </div>
+            }
+            Model.PartialPaginationAjaxFirst.IsMobile = true;
+            Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.PartialPaginationAjaxFirst });
+        }
+        else
+        {
+            <div class="first-news last">
+                <span>@Resource.NoMatchingDocumentFound</span>
+            </div>
+        }
+    </div>
+    <!-- End-->
+</section>
+
+
+
+@if (Model.lDocsView_Newest.HasValue())
+{
+    <div class="title" style="margin-bottom: 0;">
+        <h2 class="title-cat"> Tiêu chuẩn Việt Nam mới cập nhật</h2>
+    </div>
+    <div class="cat-box-content">
+        @foreach (var docView in Model.lDocsView_Newest)
+        {
+            <div class="first-news dashed">
+                <h3 class="post-title"><a href="@docView.DocUrl" title="@docView.DocName">@docView.DocName</a></h3>
+                <div class="post-time">
+                    @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView } });}
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,49 @@
+﻿@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.DocsNewest
+<div class="box-vblienquan">
+        @if (Model.mDocsViewDetail.lDocRelates.HasValue())
+        {
+            <div class="cat-box-content">
+                <table class="table table-bordered">
+                    <tbody>
+                        @for (int index = 0; index < Model.mDocsViewDetail.lDocRelates.Count; index++)
+                        {
+                            DocRelates mDocRelates = Model.mDocsViewDetail.lDocRelates[index];
+                            <tr class="row-first-news @(index % 2 == 0 ? string.Empty : "bgcolor")">
+                                <th class="count-123" scope="row">@((index + 1).ToString("#00"))</th>
+                                <td class="post-col1">
+                                    <h2><a href="@mDocRelates.DocUrl" title="@mDocRelates.DocName" class="post-title lvn">@mDocRelates.DocName</a></h2>
+                                    <div class="item-meta">
+                                        <a href="@DocsView.Static_GetDocUrl(mDocRelates.DocUrl, "summary")" class="tag-item">@Resource.Summary</a>
+                                        <a href="@DocsView.Static_GetDocUrl(mDocRelates.DocUrl, "effect")" class="tag-item">@Resource.Effect</a>
+                                        <a href="@DocsView.Static_GetDocUrl(mDocRelates.DocUrl, "relate")" class="tag-item">@Resource.Relate</a>
+                                        <a href="@DocsView.Static_GetDocUrl(mDocRelates.DocUrl, "vietnamese")" class="tag-item">@Resource.Vietnamese</a>
+                                        <a href="@DocsView.Static_GetDocUrl(mDocRelates.DocUrl, "download")" class="tag-item">@Resource.DownLoad</a>
+                                        <a href="#" data-id="@mDocRelates.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+                                    </div>
+                                </td>
+                                <td class="post-col2">
+                                    <p class="post-time">@Resource.InForced:<span class="color2">@mDocRelates.IssueDate.toString()</span>
+                                    </p>
+                                    <p class="post-time">@Resource.Application: <span class="color2">@mDocRelates.EffectDate.toString()</span>
+                                    </p>
+                                    <p class="post-time bottom0">@Resource.Effect: <span class="color2">@mDocRelates.EffectStatusName</span>
+                                    </p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            { Html.RenderAction("PartialPaginationAjaxPageNumber", "Shared", new { model = Model.PartialPaginationAjax }); }
+        }
+        else
+        {
+            <div class="cat-box-content">
+                  <em>@Resource.TheListOfRelatedDocumentsIsBeingUpdated</em>
+            </div>
+        }
+    </div>

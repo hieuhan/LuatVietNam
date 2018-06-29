@@ -1,0 +1,143 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.AccountProfileModel
+@using (Ajax.BeginForm("EditAccountProfile", "Account", null
+    , new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccessful"
+    }, new { id = "EditAccountProfileForm" }
+    ))
+{
+    @Html.AntiForgeryToken()
+    <div class="cat-title">
+        <div class="cat-box-title vien">@Resource.PersonalInformation</div>
+        <div class="huy-capnhat" >
+        <div class="btn-huy">@Ajax.ActionLink(Resource.Cancel, string.Empty, string.Empty
+            , null
+            , new AjaxOptions
+            {
+                HttpMethod = "Post"
+                ,Url = Url.Action("AccountProfileSwitchMode", "Ajax",new
+                {
+                    mode = "view"
+                })
+                ,UpdateTargetId = "thongtincanhan"
+                ,InsertionMode = InsertionMode.Replace
+                ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+                ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+            }, new { @class = "icon-huy" })</div>
+            <div class="btn-huy"><a href="#" class="icon-capnhat submit-link"> @Resource.Update</a></div>
+        </div>
+    </div>
+    <div class="cat-box-content-user">
+        <div class="col-xs-2">
+            <div class="form-inline">
+                <div class="form-group user">
+                    <div class="col-sm-1 user">@Resource.FirstAndLastName: </div>
+                    <div class="col-sm-2 user">
+                        @Html.TextBoxFor(m => m.FullName, new { @class = "form-control-input" })
+                        @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group user">
+                    <div class="col-sm-1 user">@Resource.AccountName: </div>
+                    <div class="col-sm-2 user">
+                        @Model.CustomerName
+                    </div>
+                </div>
+
+                <div class="form-group user">
+                    <div class="col-sm-1 user">@Resource.DateOfBirth: </div>
+                    <div class="col-sm-2 user">
+                        @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control-input  form-control-ns icon datepicker" })
+                        @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "text-danger", style = "float:left;" })
+                    </div>
+                </div>
+
+                <div class="form-group user">
+                    <div class="col-sm-1 user">@Resource.Sex: </div>
+                    <div class="col-sm-2 user">
+                        <select name="GenderId" class="dropdown">
+                            <option value="0" @(Model.GenderId == 0 ? "selected" : string.Empty)>...</option>
+                            <option value="1" @(Model.GenderId == 1 ? "selected" : string.Empty)>@Resource.Male</option>
+                            <option value="2" @(Model.GenderId == 2 ? "selected" : string.Empty)>@Resource.Female</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group user">
+                    <div class="col-sm-1 user">@Resource.Address: </div>
+                    <div class="col-sm-2 user">
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control-input" })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group user">
+                    <div class="col-sm-1 user">@Resource.PhoneNumber: </div>
+                    <div class="col-sm-2 user">
+                        @Html.TextBoxFor(m => m.CustomerMobile, new { @class = "form-control-input" })
+                        @Html.ValidationMessageFor(m => m.CustomerMobile, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group user">
+                    <div class="col-sm-1 user">Email: </div>
+                    <div class="col-sm-2 user">
+                        @Model.Email
+                    </div>
+                </div>
+                <div class="form-group user">
+                    <div class="col-sm-1 user">@Resource.ProvinceCity: </div>
+                    <div class="col-sm-2 user">
+                        @Html.DropDownListFor(model => model.ProvinceId, new SelectList(Model.ListProvinces, "ProvinceId", "ProvinceDesc", Model.ProvinceId), new { @class = "dropdown" })
+                    </div>
+                </div>
+                @*<div class="form-group user">
+                    <div class="col-sm-1 user">Nghề nghiệp:</div>
+                    <div class="col-sm-2 user">
+                        CNTT
+                    </div>
+                </div>*@
+            </div>
+        </div>
+        <div class="col-xs-2">
+            <div class="item-avata-2">
+                <div class="rows-avata"><strong>@Resource.UploadARepresentativeImage:</strong></div>
+                <div class="rows-avata"><span style="color: #777777; font-style: italic;">(@Resource.ImageSizeLessThan10Mb)</span></div>
+                <div class="rows-avata uploadfile">
+                    <input type="file" id="avatarFile" />
+                    <a href="#" id="uploadAvatar" class="taiFile">@Resource.SelectAPhotoFromYourComputer</a>
+                    @Html.HiddenFor(m => m.Avatar)
+                </div>
+                <div class="rows-avata"><a href="javascript:lawsVn.clearAvatar();" class="delete-img">@Resource.DeletePhotos</a></div>
+                <div id="progress-group"></div>
+            </div>
+            <div class="item-avata-22">
+                <div class="thumb150x180-avata">
+                    <img id="AccountAvatar" alt="xem trước avatar" src="@LawsUser.GetAvatarMobile()">
+                </div>
+                <div class="container-bar">
+                    <div class="progress">
+                        <div class="progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $("#DateOfBirth").datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "1945:c"
+    });
+    $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+    $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+    $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+    lawsValidate.formatDate();
+</script>

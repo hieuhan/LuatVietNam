@@ -1,0 +1,154 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutDoc.cshtml";
+}
+@model DocsViewDetailModel
+<div class="cat-box content-wrap">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.Home </a>» 
+            @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.FieldsText))
+            {
+                <span>@Model.mDocsViewDetail.mDocsView.FieldsText</span>
+            }
+        </div>
+
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title vblq">@Model.mDocsViewDetail.mDocsView.DocName</h1>
+                <p class="info-page">@Model.mDocsViewDetail.mDocsView.MetaDesc</p>
+            </div>
+        </div>
+
+        <div class="cat-box-content page">
+            <div class="tab-nav">
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("summary")" title="@Resource.Summary">@Resource.Summary</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()" title="@Resource.Content">@Resource.Content</a>
+                <a class="tab-nav-item-ad active" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("effect")" title="@Resource.Effect">@Resource.Effect</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("relate")" title="@Resource.Relate">@Resource.RelatedDocuments</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("vietnamese")" title="@Resource.Vietnamese">@Resource.Vietnamese</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("download")" title="@Resource.DownLoad">@Resource.DownLoad</a>
+            </div>
+
+            <div class="box-content box-shadow">
+                <div class="padding20">
+                    <div class="box-content2">
+                        <div class="cat-title">
+                            <div class="cat-box-title vien">@Resource.Attribute</div>
+                        </div>
+                        <div class="info-2">@Model.mDocsViewDetail.mDocsView.DocName</div>
+
+                        <div class="content-giao-dich">
+                            <table class="table table-bordered">
+                                <tbody>
+
+                                    <tr class="row-tr">
+                                        <td class="rows-td col4 bgf9f9f9">@Resource.IssuringBody:    </td>
+                                        <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.OrgansText </td>
+                                        <td class="rows-td col4 bgf9f9f9">@Resource.EffectiveDate:   </td>
+                                        <td class="rows-td col4">
+                                            @if (Model.mDocsViewDetail.mDocsView.EffectDate != DateTime.MinValue)
+                                            {
+                                                if (Extensions.IsAuthenticated)
+                                                {
+                                                    @Model.mDocsViewDetail.mDocsView.EffectDate.toString()
+                                                }
+                                                else
+                                                {
+                                                    <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span>@Resource.Updating</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr class="row-tr">
+                                        <td class="rows-td col4 bgf9f9f9">@Resource.OfficialNumber:  </td>
+                                        <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.DocIdentity</td>
+                                        <td class="rows-td col4 bgf9f9f9">@Resource.Signer:  </td>
+                                        <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.SignersText</td>
+                                    </tr>
+                                    <tr class="row-tr">
+                                        <td class="rows-td col4 bgf9f9f9">@Resource.LegislationType: </td>
+                                        <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.DocTypesText </td>
+                                        <td class="rows-td col4 bgf9f9f9">@Resource.ExpiredDate:   </td>
+                                        <td class="rows-td col4">
+                                            @if (Model.mDocsViewDetail.mDocsView.ExpireDate != DateTime.MinValue)
+                                            {
+                                                if (Extensions.IsAuthenticated && LawsUser.IsInRole("TC,TA,NC"))
+                                                {
+                                                    @Model.mDocsViewDetail.mDocsView.ExpireDate.toString()
+                                                }
+                                                else
+                                                {
+                                                    <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span>@Resource.Updating</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr class="row-tr">
+                                        <td class="rows-td col4 bgf9f9f9">@Resource.DateIssued:   </td>
+                                        <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.IssueDate.toString()</td>
+                                        <td class="rows-td col4 bgf9f9f9">@Resource.Effect:  </td>
+                                        <td class="rows-td col4">
+                                            @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.EffectStatusName))
+                                            {
+                                                if (Extensions.IsAuthenticated && LawsUser.IsInRole("TC,TA,NC"))
+                                                {
+                                                    @Model.mDocsViewDetail.mDocsView.EffectStatusName
+                                                }
+                                                else
+                                                {
+                                                    <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                <span>@Resource.Updating</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialFullSearchDetail", "Shared", new PartialFullSearchDetailModel { SearchOptions = 1, DocGroupId = Constants.DocGroupIdVbpq, FieldId = Model.FieldId });}
+            @{Html.RenderPartial("PartialDocUtility", Model);}
+        </aside>
+    </div>
+
+</div>
+<div id="boxContentViewed"  class="cat-box content-recent"></div>
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.mDocsViewDetail.mDocsView.DocId',
+                name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+                title: '@Model.mDocsViewDetail.mDocsView.DocName',
+                summary: '',
+                datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+                url: '@Model.mDocsViewDetail.mDocsView.GetDocUrl()',
+                image: '@Constants.NoImageUrl'
+            }
+        });
+    </script>
+}

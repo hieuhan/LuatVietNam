@@ -1,0 +1,242 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Library
+@using LawsVNEN.Models
+@model DocsViewDetailModel
+@{
+    Layout = "~/Views/Shared/_LayoutDoc.cshtml";
+}
+<div class="cat-box content-wrap">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.Home </a>» 
+            @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.FieldsText))
+            {
+                <span>@Model.mDocsViewDetail.mDocsView.FieldsText</span>
+            }
+        </div>
+
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title vblq">@Model.mDocsViewDetail.mDocsView.DocName</h1>
+                <p class="info-page">@Model.mDocsViewDetail.mDocsView.MetaDesc</p>
+            </div>
+        </div>
+
+        <div class="cat-box-content page">
+            <div class="tab-nav">
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("summary")" title="@Resource.Summary">@Resource.Summary</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()" title="@Resource.Content">@Resource.Content</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("effect")" title="@Resource.Effect">@Resource.Effect</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("relate")" title="@Resource.Relate">@Resource.RelatedDocuments</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("vietnamese")" title="@Resource.Vietnamese">@Resource.Vietnamese</a>
+                <a class="tab-nav-item-ad active" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("download")" title="@Resource.DownLoad">@Resource.DownLoad</a>
+            </div>
+
+            <div class="cat-box-content">
+                <div class="download-post">
+                    <div class="rows vbitem">
+                        @*@if (!Extensions.IsAuthenticated)
+                        {
+                            @Html.Raw(Resource.NotificationDownloadDocNotAuth)
+                        }*@
+                    </div>
+                    <div class="box-tai-vb">
+                        @*@{ Html.RenderAction("PartialPermissionDocDownload", "Shared", new { docModel = Model }); }*@
+
+                            <div class="col-vbitem-3">
+                                <div class="cat-title">
+                                    <div class="cat-box-title vien">@Resource.Vietnamese</div>
+                                </div>
+                                @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == 1) > 0)
+                                {
+                                    foreach (DocFiles mDocFiles in Model.mDocsViewDetail.lDocFiles)
+                                    {
+                                        var filePath = mDocFiles.FilePath.ToLower();
+                                        if (mDocFiles.LanguageId == 1 && (filePath.EndsWith(".doc") || filePath.EndsWith(".docx")))
+                                        {
+                                    <div class="rows-vbitem-md2">
+                                        <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc1.png")">
+                                            @Resource.File Word (.doc)</a>
+                                    </div>
+                                        }
+                                        else
+                                        {
+                                            if (mDocFiles.LanguageId == 1 && filePath.EndsWith(".zip"))
+                                            {
+                                    <div class="rows-vbitem-md2">
+                                        <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc4.png")">
+                                            @Resource.File Word @Resource.Compressed (.zip)</a>
+                                    </div>
+                                            }
+                                            else if (mDocFiles.LanguageId == 1 && filePath.EndsWith(".pdf"))
+                                            {
+                                    <div class="rows-vbitem-md2">
+                                        <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc2.png")">
+                                            @Resource.File PDF (.pdf)</a>
+                                    </div>
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="thongbao-item2">
+                                        <em>@Resource.VietnameseTextFileIsBeingUpdated</em>
+                                    </div>
+                                }
+                            </div>
+                                @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == 2) > 0)
+                                {
+                            <div class="col-vbitem-3" style="margin-right: 0;">
+                                <div class="cat-title">
+                                    <div class="cat-box-title vien">@Resource.EnglishDocument</div>
+                                </div>
+                                @if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+                                {
+                                    foreach (DocFiles mDocFiles in Model.mDocsViewDetail.lDocFiles)
+                                    {
+                                        if (mDocFiles.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId)
+                                        {
+                                            var filePath = mDocFiles.FilePath.ToLower();
+                                            if (filePath.EndsWith(".doc") || filePath.EndsWith(".docx"))
+                                            {
+                                                if (!LawsUser.IsInRole(Constants.RolesFullEng) && mDocFiles.FileTypeId != Constants.FileTypeIdVbThamKhao)
+                                                {
+                                                    <div class="rows-vbitem-md2">
+                                                        <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc1.png")">
+                                                            Word (.doc)</a>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="rows-vbitem-md2">
+                                                        <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc1.png")"/>
+                                                            Word (.doc)</a>
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (filePath.EndsWith(".zip"))
+                                                {
+                                                    if (!LawsUser.IsInRole(Constants.RolesFullEng) && mDocFiles.FileTypeId != Constants.FileTypeIdVbThamKhao)
+                                                    {
+                                                        <div class="rows-vbitem-md2">
+                                                            <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                                <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc4.png")">
+                                                                ZIP (.zip)</a>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="rows-vbitem-md2">
+                                                            <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                                                <img class="docthumb30x38" alt="doc" src="~/Assets/images/doc4.png">
+                                                                ZIP (.zip)</a>
+                                                        </div>
+                                                    }
+                                                }
+                                                else if (filePath.EndsWith(".pdf"))
+                                                {
+                                                    if (!LawsUser.IsInRole(Constants.RolesFullEng) && mDocFiles.FileTypeId != Constants.FileTypeIdVbThamKhao)
+                                                    {
+                                                        <div class="rows-vbitem-md2">
+                                                            <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                                <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc2.png")">
+                                                                PDF (.pdf)</a>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="rows-vbitem-md2">
+                                                            <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                                                <img class="docthumb30x38" alt="doc" src="~/Assets/images/doc2.png">
+                                                                PDF (.pdf)</a>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (DocFiles mDocFiles in Model.mDocsViewDetail.lDocFiles)
+                                    {
+                                        if (mDocFiles.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId)
+                                        {
+                                            var filePath = mDocFiles.FilePath.ToLower();
+                                            if (filePath.EndsWith(".doc") || filePath.EndsWith(".docx"))
+                                            {
+                                                <div class="rows-vbitem-md2">
+                                                    <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                        <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc1.png")">
+                                                         Word (.doc)</a>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                if (filePath.EndsWith(".zip"))
+                                                {
+                                                    <div class="rows-vbitem-md2">
+                                                        <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc4.png")">
+                                                            ZIP (.zip)</a>
+                                                    </div>
+                                                }
+                                                else if (filePath.EndsWith(".pdf"))
+                                                {
+                                                    <div class="rows-vbitem-md2">
+                                                        <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc2.png")">
+                                                            PDF (.pdf)</a>
+                                                    </div>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            </div>
+                                }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialFullSearchDetail", "Shared", new PartialFullSearchDetailModel { SearchOptions = 1, DocGroupId = Constants.DocGroupIdVbpq, FieldId = Model.FieldId });}
+            @{Html.RenderPartial("PartialDocUtility", Model);}
+        </aside>
+    </div>
+
+</div>
+
+<div id="boxContentViewed" class="cat-box content-recent"></div>
+
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.mDocsViewDetail.mDocsView.DocId',
+                name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+                title: '@Model.mDocsViewDetail.mDocsView.DocName',
+                summary: '',
+                datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+                url: '@Model.mDocsViewDetail.mDocsView.GetDocUrl()',
+                image: '@Constants.NoImageUrl'
+            }
+        });
+    </script>
+}

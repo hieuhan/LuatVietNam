@@ -1,0 +1,27 @@
+﻿@using LawsVN.Library
+@model ICSoft.CMSViewLib.DocsViewDetail
+@if (Model.lDocIndexes.HasValue())
+{
+    <div class="widget" id="doccontentindex" style="margin-top: 100px; display:none;">
+        <div class="widget-top">
+            <h3><span class="title-widget">Mục lục</span>
+            </h3>
+        </div>
+
+        <div class="widget-container bgf9f9f9">
+            <div id="DocIndexes" class="content-scroll-1" style="max-height: 300px; background-color: #f9f9f9;">
+                @foreach (var item in Model.lDocIndexes)
+                {
+                    <div class="item-article">
+                        <a href="@Model.mDocsView.GetDocUrl()#@item.Bookmark" class="@(item.Bookmark)">• @(Html.Raw(item.Title))</a>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="hidden-article">
+            <a href="#" id="ToggleDocIndexes" title="Ẩn mục lục">
+                <img class="icon-hidden-article" alt="icon-hidden-article" src="@Url.Content("~/assets/images/an-dmuc.png")">
+                Ẩn mục lục</a>
+        </div>
+    </div>
+}

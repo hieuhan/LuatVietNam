@@ -1,0 +1,44 @@
+﻿body { font-family:Arial,Helvetica,sans-serif; margin:0; padding:0; background-color: #fff; color:#222222; font-size:13px; }
+.col-xs-2.luocdo {
+    width: 45%;
+}
+.col-xs-3 {
+    float: left;
+    margin-right: 10px;
+    width: 31.5%;
+}
+.content.luocdo {
+    float: left;
+    margin-bottom: 20px;
+    width: 100%;
+    /*text-align: center;*/
+}
+.rows.item4.luocdo > p {
+    color: #222;
+    float: left;
+    width: 100%;
+}
+.wg-info {
+     float: left;
+     width: 100px;
+     font-weight: bold;
+    text-align: left;
+ }
+.tab-conten-hd1 {
+    float: left;
+    margin-bottom: 10px;
+    width: 100%;
+}
+.title-widget {
+    color: #fff;
+    float: left;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 100%;
+}
+.hearder-logo-print { float:left;width: 100%;margin-bottom: 20px;}
+.logo-print{float:left; }
+.logo-print > img {
+    height: 35px; width: 108px;
+}

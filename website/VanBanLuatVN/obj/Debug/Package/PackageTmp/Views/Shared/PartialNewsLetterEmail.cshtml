@@ -1,0 +1,12 @@
+﻿@model VanBanLuat.Models.SharedViewModel.NewsletterEmailsModel
+@using (Ajax.BeginForm("NewsLetterEmail", "Ajax",null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,OnSuccess = "vbluat.ajaxEvents.OnSuccessAlert",
+    OnFailure = "vbluat.ajaxEvents.OnFailure"
+}))
+{
+    @Html.TextBoxFor(m=>m.NewsletterEmail, new {@class= "dky-khuyenmai", placeholder = "Đăng ký nhận văn bản mới" })
+    <button class="btn-default btnemail"><img style="margin-top: 5px;" src="@Url.Content("~/assets/images/email2.png")" /></button>
+    @Html.ValidationMessageFor(m => m.NewsletterEmail, "", new { @class = "text-danger-news-letter-email" })
+}

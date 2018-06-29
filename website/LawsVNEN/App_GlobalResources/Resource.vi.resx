@@ -1,0 +1,1626 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdvancedSearch" xml:space="preserve">
+    <value>Tìm kiếm nâng cao</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Tất cả</value>
+  </data>
+  <data name="AllContent" xml:space="preserve">
+    <value>Tất cả nội dung</value>
+    <comment>Tất cả nhóm văn bản</comment>
+  </data>
+  <data name="AllFields" xml:space="preserve">
+    <value>Tất cả lĩnh vực</value>
+    <comment>Form Search</comment>
+  </data>
+  <data name="AuthorizeAttributeCannotUseWithinChildActionCache" xml:space="preserve">
+    <value>AuthorizeAttribute không áp dụng trong Cache ChildAction</value>
+  </data>
+  <data name="BaseModelNull" xml:space="preserve">
+    <value>Model cơ sở chưa được khởi tạo</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Mật khẩu xác nhận</value>
+    <comment>RegisterModel</comment>
+  </data>
+  <data name="ConfirmPasswordNotMatch" xml:space="preserve">
+    <value>Xác nhận mật khẩu không khớp</value>
+    <comment>Error ConfirmPassword Not Match RegisterModel</comment>
+  </data>
+  <data name="DateFrom" xml:space="preserve">
+    <value>Từ ngày</value>
+  </data>
+  <data name="DateFromInvalidDataType" xml:space="preserve">
+    <value>Thời gian lọc từ ngày không đúng dạng: ngày/tháng/năm</value>
+  </data>
+  <data name="DateTo" xml:space="preserve">
+    <value>Đến ngày</value>
+  </data>
+  <data name="DateToInvalidDataType" xml:space="preserve">
+    <value>Thời gian lọc đến ngày không đúng dạng: ngày/tháng/năm</value>
+  </data>
+  <data name="DocNumber" xml:space="preserve">
+    <value>Số hiệu văn bản</value>
+  </data>
+  <data name="DocsEnglish" xml:space="preserve">
+    <value>Tiếng Anh</value>
+    <comment>Văn bản tiếng Anh</comment>
+  </data>
+  <data name="DocsNewest" xml:space="preserve">
+    <value>Mới cập nhật</value>
+    <comment>Box trang chu</comment>
+  </data>
+  <data name="DocTypes" xml:space="preserve">
+    <value>Loại văn bản</value>
+    <comment>Form Search</comment>
+  </data>
+  <data name="EffectStatus" xml:space="preserve">
+    <value>Tình trạng hiệu lực</value>
+  </data>
+  <data name="EmailRegularExpression" xml:space="preserve">
+    <value>{0} không hợp lệ.</value>
+    <comment>RegisterModel</comment>
+  </data>
+  <data name="EnterWhatToFind" xml:space="preserve">
+    <value>Nhập nội dung cần tìm...</value>
+  </data>
+  <data name="ExactPhrase" xml:space="preserve">
+    <value>Chính xác cụm từ</value>
+  </data>
+  <data name="FieldMustBeDate" xml:space="preserve">
+    <value>Định dạng: ngày/tháng/năm</value>
+  </data>
+  <data name="FieldRequired" xml:space="preserve">
+    <value>* Đăng ký để nhận được thông tin văn bản mới nhất về lĩnh vực bạn quan tâm.</value>
+    <comment>Field Required RegisterModel</comment>
+  </data>
+  <data name="FieldSearch" xml:space="preserve">
+    <value>Lĩnh vực tra cứu</value>
+  </data>
+  <data name="FieldWork" xml:space="preserve">
+    <value>Lĩnh vực hoạt động</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Ngôn ngữ</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Vui lòng đợi</value>
+  </data>
+  <data name="MaxFileSizeUpload" xml:space="preserve">
+    <value>Dung lượng ảnh vượt quá 2MB cho phép.</value>
+    <comment>RegisterModel</comment>
+  </data>
+  <data name="NewDispatch" xml:space="preserve">
+    <value>Công văn mới</value>
+  </data>
+  <data name="NewPolicyBriefs" xml:space="preserve">
+    <value>Tin vắn chính sách mới</value>
+  </data>
+  <data name="NoHttpContext" xml:space="preserve">
+    <value>No Http Context</value>
+  </data>
+  <data name="Organs" xml:space="preserve">
+    <value>Cơ quan ban hành</value>
+    <comment>Form Search</comment>
+  </data>
+  <data name="OtherField" xml:space="preserve">
+    <value>Lĩnh vực khác</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mật khẩu</value>
+    <comment>Class Register</comment>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Mật khẩu (*)</value>
+    <comment>Class Register</comment>
+  </data>
+  <data name="PeoplesCommitteesOfProvinces" xml:space="preserve">
+    <value>UBND các tỉnh</value>
+  </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
+  <data name="SearchForDocumentsOnVietnameseLaw" xml:space="preserve">
+    <value>TÌM VĂN BẢN TRÊN LUẬT VIỆT NAM</value>
+  </data>
+  <data name="SearchKeywords" xml:space="preserve">
+    <value>Nhập nội dung cần tìm </value>
+  </data>
+  <data name="SearchKeywordsRequired" xml:space="preserve">
+    <value>Quý khách vui lòng nhập từ khóa tìm kiếm</value>
+  </data>
+  <data name="Signers" xml:space="preserve">
+    <value>Người ký</value>
+    <comment>Form Search</comment>
+  </data>
+  <data name="StringLengthConfirmPassword" xml:space="preserve">
+    <value>{0} bao gồm từ {2} ký tự trở lên.</value>
+    <comment>Error StringLength ConfirmPassword RegisterModel</comment>
+  </data>
+  <data name="StringLengthPassword" xml:space="preserve">
+    <value>{0} bao gồm từ {2} ký tự trở lên.</value>
+    <comment>Error StringLength Password RegisterModel</comment>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Tiêu đề</value>
+  </data>
+  <data name="Unauthorized" xml:space="preserve">
+    <value>Rất tiếc. Quý khách không xem được nội dung này. Vui lòng đăng nhập tài khoản hoặc liên hệ với quản trị website để biết thêm chi tiết.</value>
+  </data>
+  <data name="UnifiedText" xml:space="preserve">
+    <value>Văn bản hợp nhất</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Tên đăng nhập</value>
+    <comment>Class Register</comment>
+  </data>
+  <data name="UserNameRequired" xml:space="preserve">
+    <value>Tên đăng nhập (*)</value>
+    <comment>Class Register</comment>
+  </data>
+  <data name="VietNamStandard" xml:space="preserve">
+    <value>Tiêu chuẩn Việt Nam</value>
+  </data>
+  <data name="AlmostOutOfDate" xml:space="preserve">
+    <value>Sắp hết hiệu lực</value>
+  </data>
+  <data name="Altering" xml:space="preserve">
+    <value>Sắp sửa đổi </value>
+  </data>
+  <data name="ComingIntoEffect" xml:space="preserve">
+    <value>Sắp có hiệu lực</value>
+  </data>
+  <data name="Expire" xml:space="preserve">
+    <value>Hết hiệu lực</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Vui lòng nhập email nhận tin của bạn</value>
+  </data>
+  <data name="EnterYourEmail" xml:space="preserve">
+    <value>Nhập email nhận tin của bạn</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Gửi</value>
+  </data>
+  <data name="PleaseTryAgainLater" xml:space="preserve">
+    <value>Qúy  khách vui lòng thử lại sau.</value>
+  </data>
+  <data name="YouSignupForASuccessfulNewsletter" xml:space="preserve">
+    <value>Quý khách đăng ký nhận bản tin thành công</value>
+  </data>
+  <data name="Display" xml:space="preserve">
+    <value>Hiển thị</value>
+  </data>
+  <data name="FilterBy" xml:space="preserve">
+    <value>Tìm theo</value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Tìm thấy</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Trang</value>
+  </data>
+  <data name="Result" xml:space="preserve">
+    <value>kết quả</value>
+  </data>
+  <data name="TinPhapLuat" xml:space="preserve">
+    <value>Tin pháp luật</value>
+  </data>
+  <data name="WhyChooseLuatVietnam" xml:space="preserve">
+    <value>Tại sao chọn LuatVietnam.vn?</value>
+  </data>
+  <data name="ContactHotline" xml:space="preserve">
+    <value>hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ</value>
+  </data>
+  <data name="VietNamConstruct" xml:space="preserve">
+    <value>Tiêu chuẩn XDVN</value>
+  </data>
+  <data name="VietNamDepartment" xml:space="preserve">
+    <value>Tiêu chuẩn ngành</value>
+  </data>
+  <data name="VietNamRegulations" xml:space="preserve">
+    <value>Quy chuẩn Việt Nam</value>
+  </data>
+  <data name="DiemTinVanBan" xml:space="preserve">
+    <value>Điểm tin văn bản</value>
+  </data>
+  <data name="LuatCanBiet" xml:space="preserve">
+    <value>Luật cần biết</value>
+  </data>
+  <data name="CustomersVBPL" xml:space="preserve">
+    <value>Văn bản pháp luật</value>
+  </data>
+  <data name="Content" xml:space="preserve">
+    <value>Nội dung</value>
+  </data>
+  <data name="Diagram" xml:space="preserve">
+    <value>Lược đồ</value>
+  </data>
+  <data name="DownLoad" xml:space="preserve">
+    <value>Tải về</value>
+  </data>
+  <data name="RelatedStandards" xml:space="preserve">
+    <value>Tiêu chuẩn liên quan</value>
+  </data>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>Số tài khoản</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Địa chỉ</value>
+  </data>
+  <data name="BusinessInformation" xml:space="preserve">
+    <value>Thông tin doanh nghiệp</value>
+  </data>
+  <data name="ConventionsAndPrivacy" xml:space="preserve">
+    <value>Quy ước và bảo mật</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Ngày sinh</value>
+  </data>
+  <data name="DeletePhotos" xml:space="preserve">
+    <value>Xóa ảnh</value>
+  </data>
+  <data name="EnterTheSecurityCode" xml:space="preserve">
+    <value>Nhập mã an toàn</value>
+  </data>
+  <data name="FieldOfInterestDocument" xml:space="preserve">
+    <value>Lĩnh vực văn bản quan tâm</value>
+  </data>
+  <data name="FirstAndLastName" xml:space="preserve">
+    <value>Họ và tên</value>
+  </data>
+  <data name="ImageSizeLessThan2Mb" xml:space="preserve">
+    <value>dung lượng ảnh dưới 2Mb</value>
+  </data>
+  <data name="Job" xml:space="preserve">
+    <value>Nghề nghiệp</value>
+  </data>
+  <data name="PersonalInformation" xml:space="preserve">
+    <value>Thông tin cá nhân</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Điện thoại</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Số điện thoại</value>
+  </data>
+  <data name="ProvinceCity" xml:space="preserve">
+    <value>Tỉnh/Thành phố</value>
+  </data>
+  <data name="ReceiveWeeklyNewslettersByEmail" xml:space="preserve">
+    <value>Nhận bản tin hàng tuần qua Email</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Đăng ký</value>
+  </data>
+  <data name="RegisterForTrialService" xml:space="preserve">
+    <value>Đăng ký dùng thử dịch vụ</value>
+  </data>
+  <data name="RegisterToUseTheService" xml:space="preserve">
+    <value>Đăng ký sử dụng dịch vụ</value>
+  </data>
+  <data name="Retype" xml:space="preserve">
+    <value>Nhập lại</value>
+  </data>
+  <data name="SelectAPhotoFromYourComputer" xml:space="preserve">
+    <value>Tải từ máy tính</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Giới tính</value>
+  </data>
+  <data name="SignUpForANewLetterEmail" xml:space="preserve">
+    <value>Đăng ký nhận tin văn bản mới</value>
+  </data>
+  <data name="SignUpToReceiveTheLatestDocumentInformationAboutYourAreaOfInterest" xml:space="preserve">
+    <value>Đăng ký để nhận được thông tin văn bản mới nhất về lĩnh vực bạn quan tâm</value>
+  </data>
+  <data name="TaxCode" xml:space="preserve">
+    <value>Mã số thuế</value>
+  </data>
+  <data name="UnitName" xml:space="preserve">
+    <value>Tên đơn vị</value>
+  </data>
+  <data name="UploadARepresentativeImage" xml:space="preserve">
+    <value>Tải ảnh đại diện</value>
+  </data>
+  <data name="WhatServiceAreYouInterestedIn" xml:space="preserve">
+    <value>Quý khách quan tâm đến dịch vụ nào?</value>
+  </data>
+  <data name="YourSecurityCode" xml:space="preserve">
+    <value>Mã an toàn của bạn</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Cả hai</value>
+    <comment>Cả văn bản tiếng Việt và tiếng Anh</comment>
+  </data>
+  <data name="EnglishDocument" xml:space="preserve">
+    <value>Văn bản tiếng Anh</value>
+  </data>
+  <data name="PleaseSelectTheField" xml:space="preserve">
+    <value>Vui lòng chọn lĩnh vực</value>
+  </data>
+  <data name="VietnameseDocument" xml:space="preserve">
+    <value>Văn bản tiếng Việt</value>
+  </data>
+  <data name="DocRelate" xml:space="preserve">
+    <value>VĂN BẢN LIÊN QUAN</value>
+  </data>
+  <data name="JsonRequest_GetNotAllowed" xml:space="preserve">
+    <value>Yêu cầu Get Json không được phép</value>
+  </data>
+  <data name="TheSecurityCodeIsIncorrect" xml:space="preserve">
+    <value>Mã an toàn không đúng</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Tiếng Anh</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Nữ</value>
+  </data>
+  <data name="Free" xml:space="preserve">
+    <value>Miễn phí</value>
+  </data>
+  <data name="HomePage" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="LookUpForFree" xml:space="preserve">
+    <value>Tra cứu miễn phí</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Nam</value>
+  </data>
+  <data name="NewsletterInfo" xml:space="preserve">
+    <value>Bản tin chỉ dành cho Khách hàng sử dụng gói tra cứu tiếng Anh hoặc Nâng cao</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Không</value>
+  </data>
+  <data name="Properties" xml:space="preserve">
+    <value>Thuộc tính</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Đăng ký thành viên</value>
+  </data>
+  <data name="TrySubscriptionServiceFor15Days" xml:space="preserve">
+    <value>Dùng thử dịch vụ thuê bao trong 15 ngày</value>
+  </data>
+  <data name="Vietnamese" xml:space="preserve">
+    <value>Tiếng Việt</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Có</value>
+  </data>
+  <data name="btnLogin" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="LoginAccount" xml:space="preserve">
+    <value>Đăng nhập tài khoản</value>
+  </data>
+  <data name="LoginToUseTheService" xml:space="preserve">
+    <value>Đăng nhập sử dụng dịch vụ</value>
+  </data>
+  <data name="VietnameseAndEnglish" xml:space="preserve">
+    <value>Tiếng Việt và tiếng Anh</value>
+  </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Áp dụng</value>
+  </data>
+  <data name="Effect" xml:space="preserve">
+    <value>Hiệu lực</value>
+  </data>
+  <data name="Promulgate" xml:space="preserve">
+    <value>Ban hành</value>
+  </data>
+  <data name="Relate" xml:space="preserve">
+    <value>Liên quan</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Tóm tắt</value>
+  </data>
+  <data name="UpdatingData" xml:space="preserve">
+    <value>Không tìm thấy dữ liệu phù hợp.</value>
+  </data>
+  <data name="LookingForMoreInformation" xml:space="preserve">
+    <value>Tìm hiểu thêm</value>
+  </data>
+  <data name="RegisterNow" xml:space="preserve">
+    <value>Đăng ký ngay</value>
+  </data>
+  <data name="AccountInformation" xml:space="preserve">
+    <value>Thông tin tài khoản</value>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>Tên tài khoản</value>
+  </data>
+  <data name="EditInformation" xml:space="preserve">
+    <value>Chỉnh sửa thông tin</value>
+  </data>
+  <data name="JoinDate" xml:space="preserve">
+    <value>Ngày tham gia</value>
+  </data>
+  <data name="UpgradeAndRenewService" xml:space="preserve">
+    <value>Nâng cấp và gia hạn dịch vụ</value>
+  </data>
+  <data name="UsingTheService" xml:space="preserve">
+    <value>Đang dùng dịch vụ</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Hủy</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Cập nhật</value>
+  </data>
+  <data name="UpdateSuccessfulAccountInformation" xml:space="preserve">
+    <value>Cập nhật thông tin tài khoản thành công</value>
+  </data>
+  <data name="SuccessfulBusinessInformationUpdates" xml:space="preserve">
+    <value>Cập nhật thông tin doanh nghiệp thành công</value>
+  </data>
+  <data name="TransactionHistory" xml:space="preserve">
+    <value>Lịch sử giao dịch</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Tin nhắn</value>
+  </data>
+  <data name="MyDocuments" xml:space="preserve">
+    <value>Văn bản của tôi</value>
+  </data>
+  <data name="NoticeOfValidity" xml:space="preserve">
+    <value>Thông báo hiệu lực</value>
+  </data>
+  <data name="CanNotDeleteSingleFieldOfInterest" xml:space="preserve">
+    <value>Không thể xóa lĩnh vực quan tâm duy nhất</value>
+  </data>
+  <data name="DeleteTheFieldOfSuccess" xml:space="preserve">
+    <value>Xóa lĩnh vực thành công.</value>
+  </data>
+  <data name="YouWantToDeleteThisField" xml:space="preserve">
+    <value>Bạn muốn xóa lĩnh vực này?</value>
+  </data>
+  <data name="PleaseSelectAtLeastOneField" xml:space="preserve">
+    <value>Quý khách vui lòng chọn ít nhất một lĩnh vực.</value>
+  </data>
+  <data name="UpdateTheFieldOfSuccess" xml:space="preserve">
+    <value>Cập nhật lĩnh vực thành công.</value>
+  </data>
+  <data name="Local" xml:space="preserve">
+    <value>Địa phương</value>
+  </data>
+  <data name="AddDocumentOfInterestToSuccess" xml:space="preserve">
+    <value>Lưu văn bản quan tâm thành công.</value>
+  </data>
+  <data name="SubscriptionNoticeOfValidity" xml:space="preserve">
+    <value>Đăng ký thông báo hiệu lực</value>
+  </data>
+  <data name="NewlyIssued" xml:space="preserve">
+    <value>Mới ban hành</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Quên mật khẩu</value>
+  </data>
+  <data name="Remember" xml:space="preserve">
+    <value>Ghi nhớ</value>
+  </data>
+  <data name="YouDoNotHaveAnAccount" xml:space="preserve">
+    <value>Chưa có tài khoản</value>
+  </data>
+  <data name="JavascriptClose" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="NewDocuments" xml:space="preserve">
+    <value>Văn bản mới</value>
+  </data>
+  <data name="ManualInstruction" xml:space="preserve">
+    <value>Hướng dẫn sử dụng</value>
+  </data>
+  <data name="NoDocumentsYet" xml:space="preserve">
+    <value>Chưa có văn bản</value>
+  </data>
+  <data name="JavascriptNoticeFileTypeSupport" xml:space="preserve">
+    <value>Luật Việt Nam hỗ trợ các loại file sau: jpg , jpeg , png, gif</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Mật khẩu hiện tại</value>
+  </data>
+  <data name="SetANewPassword" xml:space="preserve">
+    <value>Đặt mật khẩu mới</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Xác nhận</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Mật khẩu mới</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Đổi mật khẩu</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Đăng xuất</value>
+  </data>
+  <data name="MyMessage" xml:space="preserve">
+    <value>Tin nhắn của tôi</value>
+  </data>
+  <data name="RenewalOfService" xml:space="preserve">
+    <value>Gia hạn dịch vụ</value>
+  </data>
+  <data name="SubscriptionNoticeOfValiditySuccessful" xml:space="preserve">
+    <value>Đăng ký thông báo hiệu lực thành công.</value>
+  </data>
+  <data name="Notification" xml:space="preserve">
+    <value>Thông báo</value>
+  </data>
+  <data name="MsgContent" xml:space="preserve">
+    <value>Tìm kiếm</value>
+  </data>
+  <data name="SetstarTheMessageForSuccess" xml:space="preserve">
+    <value>Gắn sao cho tin nhắn thành công.</value>
+  </data>
+  <data name="UnstarTheMessageForSuccess" xml:space="preserve">
+    <value>Bỏ gắn sao cho tin nhắn thành công.</value>
+  </data>
+  <data name="ArticlesMostView" xml:space="preserve">
+    <value>Tin xem nhiều</value>
+  </data>
+  <data name="CustomersTalkAboutUs" xml:space="preserve">
+    <value>Khách hàng nói về chúng tôi</value>
+  </data>
+  <data name="Focus" xml:space="preserve">
+    <value>Tiêu điểm</value>
+  </data>
+  <data name="LegalNewsRelated" xml:space="preserve">
+    <value>Tin pháp luật liên quan</value>
+  </data>
+  <data name="LinkNeedToKnow" xml:space="preserve">
+    <value>Liên kết cần biết</value>
+  </data>
+  <data name="OtherLegalNews" xml:space="preserve">
+    <value>Tin pháp luật khác</value>
+  </data>
+  <data name="Topic" xml:space="preserve">
+    <value>Chủ đề</value>
+  </data>
+  <data name="TheResultsAreFilteredBy" xml:space="preserve">
+    <value>Kết quả đang lọc theo</value>
+  </data>
+  <data name="DeleteAll" xml:space="preserve">
+    <value>Xóa tất cả</value>
+  </data>
+  <data name="DocumentFomat" xml:space="preserve">
+    <value>Định dạng văn bản</value>
+  </data>
+  <data name="YearIssued" xml:space="preserve">
+    <value>Năm ban hành</value>
+  </data>
+  <data name="OriginalDocument" xml:space="preserve">
+    <value>VB gốc</value>
+  </data>
+  <data name="Updating" xml:space="preserve">
+    <value>Đang cập nhật</value>
+  </data>
+  <data name="SaveDocumentOfInterest" xml:space="preserve">
+    <value>Lưu văn bản quan tâm</value>
+  </data>
+  <data name="TheDocumentIsMerged" xml:space="preserve">
+    <value>VB được hợp nhất</value>
+  </data>
+  <data name="NoMatchingDocumentFound" xml:space="preserve">
+    <value>Không tìm thấy văn bản phù hợp</value>
+  </data>
+  <data name="RegisterAPersonalInterface" xml:space="preserve">
+    <value>Đăng ký giao diện cá nhân</value>
+  </data>
+  <data name="PleaseAelectTheFieldOfActivityOfTheLawyer" xml:space="preserve">
+    <value>Vui lòng chọn lĩnh vực hoạt động của luật sư</value>
+  </data>
+  <data name="Accuracy" xml:space="preserve">
+    <value>Xác thực</value>
+  </data>
+  <data name="ApplyEn" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="DiagramEn" xml:space="preserve">
+    <value>Diagram</value>
+  </data>
+  <data name="DownloadEn" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="EffectEn" xml:space="preserve">
+    <value>Effect</value>
+  </data>
+  <data name="PromulgateEn" xml:space="preserve">
+    <value>Promulgate</value>
+  </data>
+  <data name="RelateEn" xml:space="preserve">
+    <value>Relate</value>
+  </data>
+  <data name="SaveDocumentOfInterestEn" xml:space="preserve">
+    <value>Save document of interest</value>
+  </data>
+  <data name="SummaryEn" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="UpdatingEn" xml:space="preserve">
+    <value>Updating</value>
+  </data>
+  <data name="VietnameseEn" xml:space="preserve">
+    <value>Vietnamese</value>
+  </data>
+  <data name="PleaseSelectAtLeastOneProvices" xml:space="preserve">
+    <value>Vui lòng chọn một tỉnh quan tâm</value>
+  </data>
+  <data name="UpdateProvinceOfSuccess" xml:space="preserve">
+    <value>Cập nhật tỉnh/tp quan tâm thành công</value>
+  </data>
+  <data name="ProvinceOfInterestDocument" xml:space="preserve">
+    <value>Tỉnh/Tp quan tâm</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Đăng nhập</value>
+  </data>
+  <data name="InterestedDocuments" xml:space="preserve">
+    <value>Văn bản quan tâm</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Thông tin cá nhân</value>
+  </data>
+  <data name="SubscribeNewsletter" xml:space="preserve">
+    <value>Đăng ký nhận thông tin</value>
+  </data>
+  <data name="SearchByCategory" xml:space="preserve">
+    <value>Lĩnh vực tra cứu</value>
+  </data>
+  <data name="SubscribeToReceiveWeeklyFreeNewsletters" xml:space="preserve">
+    <value>Đăng ký để nhận bản tin miễn phí hàng tuần</value>
+  </data>
+  <data name="Keyword" xml:space="preserve">
+    <value>Nội dung cần tìm</value>
+  </data>
+  <data name="SearchForDocuments" xml:space="preserve">
+    <value>Tìm kiếm văn bản</value>
+  </data>
+  <data name="WordPhrase" xml:space="preserve">
+    <value>Từ /Cụm từ</value>
+  </data>
+  <data name="Company" xml:space="preserve">
+    <value>Tên cơ quan</value>
+  </data>
+  <data name="CreateAnAcount" xml:space="preserve">
+    <value>Đăng ký</value>
+  </data>
+  <data name="HowServiceAreYouInterestedIn" xml:space="preserve">
+    <value>Bạn biết đến dịch vụ LuatVietNam qua đâu?</value>
+  </data>
+  <data name="OtherInformations" xml:space="preserve">
+    <value>Các thông tin khác</value>
+  </data>
+  <data name="TermsConditions" xml:space="preserve">
+    <value>Quy ước sử dụng văn bản pháp luật tiếng Anh – LuatVietnam</value>
+  </data>
+  <data name="YourCompanyInformations" xml:space="preserve">
+    <value>Thông tin cơ quan bạn làm việc</value>
+  </data>
+  <data name="YourInformations" xml:space="preserve">
+    <value>Thông tin cá nhân</value>
+  </data>
+  <data name="OfficialGazette" xml:space="preserve">
+    <value>Công báo tiếng Anh</value>
+  </data>
+  <data name="Others" xml:space="preserve">
+    <value>Bản dịch tham khảo</value>
+  </data>
+  <data name="NewRegister" xml:space="preserve">
+    <value>Đăng ký mới</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Nhớ thông tin tài khoản</value>
+  </data>
+  <data name="SavePassword" xml:space="preserve">
+    <value>Lưu mật khẩu</value>
+  </data>
+  <data name="AccountNotExits" xml:space="preserve">
+    <value>Tài khoản không tồn tại</value>
+  </data>
+  <data name="AnnouncesChangePass" xml:space="preserve">
+    <value>LuatVietNam thông báo đổi mật khẩu khách hàng</value>
+  </data>
+  <data name="CheckEmailRessetPass" xml:space="preserve">
+    <value>Quý khách vui lòng kiểm tra Email để đặt lại mật khẩu.</value>
+  </data>
+  <data name="Of" xml:space="preserve">
+    <value>Của</value>
+  </data>
+  <data name="RetypeNewPassword" xml:space="preserve">
+    <value>Nhập lại mật khẩu</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Lưu</value>
+  </data>
+  <data name="ComparePass" xml:space="preserve">
+    <value>Mật khẩu cũ không được giống mật khẩu mới</value>
+  </data>
+  <data name="DataNotFound" xml:space="preserve">
+    <value>Không tìm thấy dữ liệu</value>
+  </data>
+  <data name="UserGuide" xml:space="preserve">
+    <value>Hướng dẫn</value>
+    <comment>User guide</comment>
+  </data>
+  <data name="EditProfile" xml:space="preserve">
+    <value>Chỉnh sửa thông tin</value>
+  </data>
+  <data name="GeneralInformation" xml:space="preserve">
+    <value>Thông tin chung</value>
+  </data>
+  <data name="Application" xml:space="preserve">
+    <value>Áp dụng</value>
+  </data>
+  <data name="Attribute" xml:space="preserve">
+    <value>Thuộc tính</value>
+  </data>
+  <data name="ContentIsBeingUpdated" xml:space="preserve">
+    <value>Nội dung đang được cập nhật. Quý khách vui lòng quay lại sau.</value>
+  </data>
+  <data name="DateIssued" xml:space="preserve">
+    <value>Ngày ban hành</value>
+  </data>
+  <data name="EnglishTextFileIsBeingUpdated" xml:space="preserve">
+    <value>File văn bản tiếng Anh đang được cập nhật, Quý khách vui lòng quay lại sau!</value>
+  </data>
+  <data name="ExpiredDate" xml:space="preserve">
+    <value>Ngày hết hiệu lực</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Trang chủ</value>
+  </data>
+  <data name="InForced" xml:space="preserve">
+    <value>Ban hành</value>
+  </data>
+  <data name="IssuringBody" xml:space="preserve">
+    <value>Cơ quan ban hành</value>
+  </data>
+  <data name="LegislationType" xml:space="preserve">
+    <value>Loại văn bản</value>
+  </data>
+  <data name="OfficialNumber" xml:space="preserve">
+    <value>Số hiệu</value>
+  </data>
+  <data name="Signer" xml:space="preserve">
+    <value>Người ký</value>
+  </data>
+  <data name="TheListOfRelatedDocumentsIsBeingUpdated" xml:space="preserve">
+    <value>Danh sách văn bảnliên quan đang cập nhật. Quý khách vui lòng quay lại sau.</value>
+  </data>
+  <data name="TheSummaryIsBeingUpdated" xml:space="preserve">
+    <value>Nội dung tóm tắt đang được cập nhật, quý khách vui lòng quay lại sau!</value>
+  </data>
+  <data name="VietnameseTextFileIsBeingUpdated" xml:space="preserve">
+    <value>File văn bản tiếng Việt đang được cập nhật, Quý khách vui lòng quay lại sau!</value>
+  </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Thay đổi ngôn ngữ</value>
+  </data>
+  <data name="NotPermissionDocContent" xml:space="preserve">
+    <value>Để xem nội dung văn bản</value>
+  </data>
+  <data name="NotPermissionDocDownload" xml:space="preserve">
+    <value>Để tải miễn phí văn bản, Quý khách vui lòng Đăng nhập vào hệ thống trước khi thực hiện tải</value>
+  </data>
+  <data name="NotPermissionDocRelate" xml:space="preserve">
+    <value>Để xem mục Liên quan, hiểu các mối quan hệ, các văn bản liên quan đến văn bản đang xem</value>
+  </data>
+  <data name="NotPermissionDocSummary" xml:space="preserve">
+    <value>Để xem tóm tắt thông báo</value>
+  </data>
+  <data name="NotAuthenticate" xml:space="preserve">
+    <value>Quý khách vui lòng &lt;a href="#" class="lawsVnLogin" style="color:#a67942" title="Đăng nhập tài khoản"&gt; &lt;strong&gt; Đăng nhập &lt;/ strong&gt; &lt;/a&gt; tài khoản LuatVietNam và  &lt;a href="#" class="dang-ky-dv" data-id="17" title="Đăng ký sử dụng dịch vụ"&gt; &lt;strong style = "color: # a67942"&gt; đăng ký &lt;/ strong&gt; &lt;/a&gt;  sử dụng Dịch vụ tra cứu văn bản.</value>
+  </data>
+  <data name="NotAuthorize" xml:space="preserve">
+    <value>Quý khách vui lòng Đăng nhập tài khoản LuatVietNam và đăng ký sử dụng Dịch vụ tra cứu văn bản.</value>
+  </data>
+  <data name="Benefits" xml:space="preserve">
+    <value>Lợi ích</value>
+  </data>
+  <data name="LuatVietnamEnglishDatabaseFree" xml:space="preserve">
+    <value>Cơ sở dữ liệu tiếng Anh của LuatVietnam - Miễn phí</value>
+  </data>
+  <data name="Objective" xml:space="preserve">
+    <value>Mục tiêu</value>
+  </data>
+  <data name="OrderConfirmation" xml:space="preserve">
+    <value>Xác nhận đơn hàng</value>
+  </data>
+  <data name="SelectBankPayment" xml:space="preserve">
+    <value>Chọn thanh toán qua ngân hàng</value>
+  </data>
+  <data name="SelectTheServicePackage" xml:space="preserve">
+    <value>Chọn gói dịch vụ</value>
+  </data>
+  <data name="Setp1SelectTheServicePackage" xml:space="preserve">
+    <value>Bước 1: Chọn gói dịch vụ</value>
+  </data>
+  <data name="Subscriber" xml:space="preserve">
+    <value>Đăng ký dịch vụ</value>
+  </data>
+  <data name="ForUsersWithinSameOrganization" xml:space="preserve">
+    <value>Đối với {0} người dùng trong cùng một tổ chức</value>
+  </data>
+  <data name="ChoosingTheTermOfSubscription" xml:space="preserve">
+    <value>Chọn thời gian đăng ký</value>
+  </data>
+  <data name="ContinuteToPay" xml:space="preserve">
+    <value>Tiếp tục thanh toán</value>
+  </data>
+  <data name="Known" xml:space="preserve">
+    <value>Đã biết</value>
+  </data>
+  <data name="PersonsUsingAtTheSameTime" xml:space="preserve">
+    <value>{0} người sử dụng cùng một lúc</value>
+  </data>
+  <data name="DeleteInterestDocumentSuccessful" xml:space="preserve">
+    <value>Xóa văn bản quan tâm thành công.</value>
+  </data>
+  <data name="BillContent" xml:space="preserve">
+    <value>Nội dung hóa đơn</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Đóng</value>
+  </data>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Tên công ty</value>
+  </data>
+  <data name="InformationAddedInvoiceValue" xml:space="preserve">
+    <value>Thông tin viết hóa đơn GTGT</value>
+  </data>
+  <data name="PleaseAgreeToThePaymentRegulationsOfVietnameseLaws" xml:space="preserve">
+    <value>Vui lòng chọn đồng ý với Quy định thanh toán của Luật Việt Nam</value>
+  </data>
+  <data name="LuatVietNamSendDocumentLink" xml:space="preserve">
+    <value>LuatVietNam gửi link văn bản</value>
+  </data>
+  <data name="NotAuthenticateDownload" xml:space="preserve">
+    <value>&lt;a href="#" class="lawsVnLogin" style="color: #d81c22; font-weight: bold; text-decoration: gạch dưới ;"&gt; Đăng nhập &lt;/a&gt; tài khoản của LuatVietnam để tải về miễn phí &lt;a href = "/ user / dang-ky-tai-khoan.html" style = "color: # d81c22; font-weight: bold; text-decoration: gạch dưới;"&gt; Hãy đăng ký tại đây &lt;/a&gt; nếu bạn không có bất kỳ tài khoản nào</value>
+  </data>
+  <data name="NotAuthorizeDownload" xml:space="preserve">
+    <value>Để tải bản dịch tiếng Anh, Quý khách hãy bấm &lt;a href="/user/subscriber.html" title="Đăng ký dịch vụ"&gt;&lt;strong style="color: #a67942"&gt;vào đây&lt;/strong&gt;&lt;/a&gt; để đăng ký sử dụng &lt;span style="color: #a67942"&gt;Dịch vụ Tra cứu văn bản&lt;/span&gt;</value>
+  </data>
+  <data name="SendDocumentLinkSuccessful" xml:space="preserve">
+    <value>Gửi link văn bản thành công.</value>
+  </data>
+  <data name="ThankYouForYourFeedback" xml:space="preserve">
+    <value>Cảm ơn quý khách đã gửi góp ý</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Thông báo</value>
+  </data>
+  <data name="Contact" xml:space="preserve">
+    <value>liên hệ</value>
+  </data>
+  <data name="NewRegisterForm" xml:space="preserve">
+    <value>đăng ký thành viên mới</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Tháng qua</value>
+  </data>
+  <data name="NumberOfTransactions" xml:space="preserve">
+    <value>Số lần giao dịch</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Thời gian</value>
+  </data>
+  <data name="Times" xml:space="preserve">
+    <value>lần</value>
+  </data>
+  <data name="TotalTransactionAmount" xml:space="preserve">
+    <value>Tổng tiền giao dịch</value>
+  </data>
+  <data name="TransactionHistoryOfAccount" xml:space="preserve">
+    <value>Lịch sử giao dịch của tài khoản</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>Tuần qua</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Năm qua</value>
+  </data>
+  <data name="AddressInHaNoi" xml:space="preserve">
+    <value>Tại Hà Nội: Tầng 3, Tòa nhà IC, 82 phố Duy Tân, Cầu Giấy, Hà Nội - Tel: 04.37833688 - Fax: 04.37833699</value>
+  </data>
+  <data name="AddressInHCM" xml:space="preserve">
+    <value>Tại TP.HCM: Tòa nhà Hà Phan, số 456 Phan Xích Long, P.2, Q.Phú Nhuận, Tp. HCM - Tel: 08. 39950724</value>
+  </data>
+  <data name="ContactMe" xml:space="preserve">
+    <value>Mọi chi tiết xin liên hệ:</value>
+  </data>
+  <data name="ContinueUsingService" xml:space="preserve">
+    <value>Để tiếp tục sử dụng dịch vụ tra cứu văn bản, quý khách có thể</value>
+  </data>
+  <data name="DaysToUse" xml:space="preserve">
+    <value>ngày sử dụng</value>
+  </data>
+  <data name="DayTrading" xml:space="preserve">
+    <value>Ngày giao dịch</value>
+  </data>
+  <data name="NameCompany" xml:space="preserve">
+    <value>TRUNG TÂM LUẬT VIỆT NAM - CÔNG TY CP TRUYỀN THÔNG QUỐC TẾ INCOM</value>
+  </data>
+  <data name="Package" xml:space="preserve">
+    <value>Dịch vụ</value>
+  </data>
+  <data name="PaymentChannel" xml:space="preserve">
+    <value>Kênh thanh toán</value>
+  </data>
+  <data name="service" xml:space="preserve">
+    <value>dịch vụ</value>
+  </data>
+  <data name="ServiceAnnouncement" xml:space="preserve">
+    <value>Thông báo dịch vụ</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Trạng thái</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Thành công</value>
+  </data>
+  <data name="ThankYou" xml:space="preserve">
+    <value>Cảm ơn Quý khách đã tin dùng dịch vụ của LuatVietnam.vn!</value>
+  </data>
+  <data name="TotalMoney" xml:space="preserve">
+    <value>Số tiền</value>
+  </data>
+  <data name="TradingCode" xml:space="preserve">
+    <value>Mã giao dịch</value>
+  </data>
+  <data name="TransactionDetails" xml:space="preserve">
+    <value>Chi tiết giao dịch</value>
+  </data>
+  <data name="Unsuccessful" xml:space="preserve">
+    <value>Không thành công</value>
+  </data>
+  <data name="YouHaveNotMadeTransaction" xml:space="preserve">
+    <value>Quý khách chưa thực hiện giao dịch.</value>
+  </data>
+  <data name="YourAccountHasOnly" xml:space="preserve">
+    <value>Tài khoản của quý khách</value>
+  </data>
+  <data name="comein" xml:space="preserve">
+    <value>vào đây</value>
+  </data>
+  <data name="TextSearchService" xml:space="preserve">
+    <value>Dịch vụ Tra cứu Văn bản</value>
+  </data>
+  <data name="toregister" xml:space="preserve">
+    <value>để đăng kí</value>
+  </data>
+  <data name="YouHaveNotATransactions" xml:space="preserve">
+    <value>Quý khách chưa thực hiện giao dịch nào! Bấm</value>
+  </data>
+  <data name="Choosing" xml:space="preserve">
+    <value>Lựa chọn</value>
+  </data>
+  <data name="ForFearchingByOtherWays" xml:space="preserve">
+    <value>nếu muốn tìm kiếm bằng ký hiệu văn bản.</value>
+  </data>
+  <data name="ForSeachingByDocumentContent" xml:space="preserve">
+    <value>nếu muốn tìm kiếm bằng nội dụng văn bản.</value>
+  </data>
+  <data name="ForTheSearchingByOfficialNumber" xml:space="preserve">
+    <value>nếu muốn tìm kiếm bất kỳ thông tin nào liên quan đến văn bản.</value>
+  </data>
+  <data name="Tips" xml:space="preserve">
+    <value>Hướng dẫn</value>
+  </data>
+  <data name="Ascending" xml:space="preserve">
+    <value>Tăng dần</value>
+  </data>
+  <data name="Descending" xml:space="preserve">
+    <value>Giảm dần</value>
+  </data>
+  <data name="DocName" xml:space="preserve">
+    <value>Tên văn bản</value>
+  </data>
+  <data name="PublicDate" xml:space="preserve">
+    <value>Ngày ban hành</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>Theo</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sắp xếp</value>
+  </data>
+  <data name="Hi" xml:space="preserve">
+    <value>Xin chào</value>
+  </data>
+  <data name="CheckWarning" xml:space="preserve">
+    <value>Quý khách vui lòng kiểm tra lại thông tin có cảnh báo màu đỏ</value>
+  </data>
+  <data name="OrderCodeOfCustomer" xml:space="preserve">
+    <value>Mã đơn hàng dịch vụ của Quý khách:</value>
+  </data>
+  <data name="ABBank" xml:space="preserve">
+    <value>Ngân hàng TMCP An Bình (ABBANK)</value>
+  </data>
+  <data name="ACB" xml:space="preserve">
+    <value>Ngân hàng Á Châu (ACB)</value>
+  </data>
+  <data name="AgriBank" xml:space="preserve">
+    <value>Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam (Agribank)</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Quay lại</value>
+  </data>
+  <data name="BankAcceptPayment" xml:space="preserve">
+    <value>Các ngân hàng chấp nhận thanh toán</value>
+  </data>
+  <data name="BaoViet" xml:space="preserve">
+    <value>Ngân hàng TMCP Bảo Việt (BAOVIET Bank)</value>
+  </data>
+  <data name="BIDV" xml:space="preserve">
+    <value>Ngân hàng đầu tư và phát triển Việt Nam (BIDV)</value>
+  </data>
+  <data name="ContactToUs" xml:space="preserve">
+    <value>với chúng tôi để biết chi tiết.</value>
+  </data>
+  <data name="DAB" xml:space="preserve">
+    <value>Ngân hàng Đông Á (DAB)</value>
+  </data>
+  <data name="DisCountForPaying12Month" xml:space="preserve">
+    <value>Quý khách hàng được giảm 5% tổng giá trị (trước thuế) nếu đóng phí từ 12 tháng trở lên</value>
+  </data>
+  <data name="EmailDetailWhenConfirmOrder" xml:space="preserve">
+    <value>Thông tin sẽ được gửi đến email của bạn sau khi xác nhận.</value>
+  </data>
+  <data name="EximBank" xml:space="preserve">
+    <value>Ngân hàng Xuất Nhập Khẩu Việt Nam (Eximbank)</value>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>Ngày hết hạn</value>
+  </data>
+  <data name="GPBank" xml:space="preserve">
+    <value>Ngân Hàng Dầu Khí Toàn Cầu (GPBank)</value>
+  </data>
+  <data name="HDBanK" xml:space="preserve">
+    <value>Ngân Hàng TMCP Phát Triển TPHCM (HDBank)</value>
+  </data>
+  <data name="INSTRUCTIONFORPAYMENT" xml:space="preserve">
+    <value>Hướng dẫn thanh toán</value>
+  </data>
+  <data name="InternationalCards" xml:space="preserve">
+    <value>Thẻ quốc tế</value>
+  </data>
+  <data name="LienViet" xml:space="preserve">
+    <value>Ngân hàng Thương mại Cổ phần Bưu điện Liên Việt (LienVietPostBank)</value>
+  </data>
+  <data name="MaritimeBank" xml:space="preserve">
+    <value>Ngân hàng TMCP Hàng Hải  (Maritime Bank)</value>
+  </data>
+  <data name="MB" xml:space="preserve">
+    <value>Ngân hàng quân đội (MB Bank)</value>
+  </data>
+  <data name="MultiUser" xml:space="preserve">
+    <value>GÓI NHIỀU NGƯỜI DÙNG</value>
+  </data>
+  <data name="NamABank" xml:space="preserve">
+    <value>Ngân hàng TMCP Nam Á  (Nam A Bank)</value>
+  </data>
+  <data name="NASB" xml:space="preserve">
+    <value>Ngân hàng TMCP Bắc Á (NASB)</value>
+  </data>
+  <data name="NCB" xml:space="preserve">
+    <value>Ngân hàng Thương mại Cổ phần Quốc Dân (NCB)</value>
+  </data>
+  <data name="NumberOfUsers" xml:space="preserve">
+    <value>Số người sử dụng</value>
+  </data>
+  <data name="ObjectiveForEn" xml:space="preserve">
+    <value>Khách hàng đã đăng ký Tên truy cập và đóng phí sử dụng dịch vụ tra cứu bản dịch văn bản pháp luật tiếng Anh.</value>
+  </data>
+  <data name="OCB" xml:space="preserve">
+    <value>Ngân hàng TMCP Phương Đông (OCB)</value>
+  </data>
+  <data name="OceanBank" xml:space="preserve">
+    <value>Ngân hàng TMCP Đại Dương (OceanBank)</value>
+  </data>
+  <data name="OptionA" xml:space="preserve">
+    <value>GÓI ĐƠN</value>
+  </data>
+  <data name="Organizationmultiuser" xml:space="preserve">
+    <value>Trường hợp có nhu cầu sử dụng gói dịch vụ đặc biệt</value>
+  </data>
+  <data name="Pay" xml:space="preserve">
+    <value>Trả phí</value>
+  </data>
+  <data name="PGBank" xml:space="preserve">
+    <value>Ngân hàng Dầu Khí (PG Bank)</value>
+  </data>
+  <data name="PleaseComplete" xml:space="preserve">
+    <value>Xin vui lòng</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Giá dịch vụ</value>
+  </data>
+  <data name="PriceMonth" xml:space="preserve">
+    <value>Tiền/ Tháng</value>
+  </data>
+  <data name="SacomBank" xml:space="preserve">
+    <value>Ngân hàng Sài Gòn Thương Tín (Sacombank)</value>
+  </data>
+  <data name="SeaBank" xml:space="preserve">
+    <value>Ngân hàng Thương Mại Cổ Phần Đông Nam Á (SeABank)</value>
+  </data>
+  <data name="SeachingByLuatVN" xml:space="preserve">
+    <value>Tra cứu toàn bộ các bản dịch văn bản pháp luật tiếng Anh do LuatVietnam cung cấp, bao gồm bản dịch chính thức và các bản dịch tham khảo.</value>
+  </data>
+  <data name="ServiceCharge" xml:space="preserve">
+    <value>Phí dịch vụ</value>
+  </data>
+  <data name="SHB" xml:space="preserve">
+    <value>Ngân hàng TMCP Sài Gòn – Hà Nội (SHB)</value>
+  </data>
+  <data name="Step2" xml:space="preserve">
+    <value>Xác nhận đơn hàng</value>
+  </data>
+  <data name="Step3" xml:space="preserve">
+    <value>bước 3: Chọn thanh toán ngân hàng</value>
+  </data>
+  <data name="SubjectTo" xml:space="preserve">
+    <value>Xin vui lòng tham khảo</value>
+  </data>
+  <data name="TechcomBank" xml:space="preserve">
+    <value>Ngân hàng Kỹ Thương Việt Nam (Techcombank)</value>
+  </data>
+  <data name="TienPhong" xml:space="preserve">
+    <value>Ngân hàng Tiền Phong (Tien Phong Bank)</value>
+  </data>
+  <data name="VAT" xml:space="preserve">
+    <value>Yêu cầu hóa đơn GTGT</value>
+  </data>
+  <data name="VATTax" xml:space="preserve">
+    <value>Thuế GTGT (10%)</value>
+  </data>
+  <data name="VIB" xml:space="preserve">
+    <value>Ngân hàng TMCP Quốc tế Việt Nam (VIB)</value>
+  </data>
+  <data name="VietABank" xml:space="preserve">
+    <value>Ngân hàng TMCP Việt Á (VietABank)</value>
+  </data>
+  <data name="VietComBank" xml:space="preserve">
+    <value>Ngân hàng Ngoại Thương Việt Nam (Vietcombank)</value>
+  </data>
+  <data name="VietinBank" xml:space="preserve">
+    <value>Ngân hàng Công Thương Việt Nam (Vietinbank)</value>
+  </data>
+  <data name="ViettinBank" xml:space="preserve">
+    <value>Ngân hàng TMCP Công Thương Việt Nam (ViettinBank)</value>
+  </data>
+  <data name="VpBank" xml:space="preserve">
+    <value>Ngân hàng Việt Nam Thịnh Vượng (VPBank)</value>
+  </data>
+  <data name="ChooseYear" xml:space="preserve">
+    <value>Chọn năm </value>
+  </data>
+  <data name="WatchedContents" xml:space="preserve">
+    <value>Nội dung đã xem </value>
+  </data>
+  <data name="ErrorMessageLogin" xml:space="preserve">
+    <value>{0} không bao gồm khoảng trắng, chỉ bao gồm chữ cái thường và số.</value>
+  </data>
+  <data name="BenefitsText" xml:space="preserve">
+    <value>Tìm kiếm các bản dịch khác do Luật Việt Nam cung cấp, không bao gồm bản dịch của tờ báo chính thức.</value>
+  </data>
+  <data name="IAgree" xml:space="preserve">
+    <value>Tôi đồng ý với </value>
+  </data>
+  <data name="agree" xml:space="preserve">
+    <value>Tôi đồng ý</value>
+  </data>
+  <data name="BestBrowersForLuatVietnam" xml:space="preserve">
+    <value>Trình duyệt tốt nhất</value>
+  </data>
+  <data name="Compressed" xml:space="preserve">
+    <value>Nén</value>
+  </data>
+  <data name="EffectNotify" xml:space="preserve">
+    <value>Thông báo hiệu lực</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Góp ý</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Bản</value>
+  </data>
+  <data name="Print" xml:space="preserve">
+    <value>In</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Chia sẻ</value>
+  </data>
+  <data name="SupportSoftwares" xml:space="preserve">
+    <value>Phần mềm hỗ trợ</value>
+  </data>
+  <data name="TermOfSubscription" xml:space="preserve">
+    <value>Thời hạn thuê bao</value>
+  </data>
+  <data name="ActiveNewUser" xml:space="preserve">
+    <value>Kích hoạt tài khoản</value>
+  </data>
+  <data name="PleaseSelectTheNumberOfUsers" xml:space="preserve">
+    <value>Quý khách vui lòng chọn số người sử dụng</value>
+  </data>
+  <data name="AccountInformationOfCustomers" xml:space="preserve">
+    <value>Thông tin tài khoản của quý khách hàng</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Tiếp tục</value>
+  </data>
+  <data name="Cost" xml:space="preserve">
+    <value>Chi phí</value>
+  </data>
+  <data name="ExpirationDate" xml:space="preserve">
+    <value>Ngày hết hạn</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Họ và tên</value>
+  </data>
+  <data name="PackageListNotFound" xml:space="preserve">
+    <value>Không tìm thấy danh sách gói dịch vụ.</value>
+  </data>
+  <data name="RegisterService" xml:space="preserve">
+    <value>Đăng ký dịch vụ</value>
+  </data>
+  <data name="RegistrationDate" xml:space="preserve">
+    <value>Ngày đăng ký</value>
+  </data>
+  <data name="RegulationOfServiceConversion" xml:space="preserve">
+    <value>Quy định chuyển đổi dịch vụ</value>
+  </data>
+  <data name="ServiceConversion" xml:space="preserve">
+    <value>Chuyển đổi dịch vụ</value>
+  </data>
+  <data name="ServicePackageName" xml:space="preserve">
+    <value>Tên gói dịch vụ</value>
+  </data>
+  <data name="SignUpForTheTextSearchService" xml:space="preserve">
+    <value>Đăng ký sử dụng dịch vụ tra cứu văn bản</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Bước</value>
+  </data>
+  <data name="SubscriberInformation" xml:space="preserve">
+    <value>Thông tin người đăng ký</value>
+  </data>
+  <data name="SubscriptionPeriod" xml:space="preserve">
+    <value>Thời hạn thuê bao</value>
+  </data>
+  <data name="SupportOneWayConversion" xml:space="preserve">
+    <value>Luật Việt Nam hiện tại hỗ trợ chuyển đổi 1 chiều từ: Tiêu chuẩn &gt; Tiếng Anh &gt; Nâng cao.</value>
+  </data>
+  <data name="TheServicePackInformationIsInUse" xml:space="preserve">
+    <value>Thông tin gói dịch vụ đang sử dụng</value>
+  </data>
+  <data name="YouAreNotCurrentlyRegistered" xml:space="preserve">
+    <value>Quý khách hiện chưa đăng ký sử dụng dịch vụ.</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>Ngân hàng</value>
+  </data>
+  <data name="PaymentRegulationsOfVietnameseLaw" xml:space="preserve">
+    <value>Quy định thanh toán của Luật Việt Nam</value>
+  </data>
+  <data name="PleaseSelectBankPayment" xml:space="preserve">
+    <value>Quý khách vui lòng chọn {0} thanh toán</value>
+  </data>
+  <data name="SuggestedContent" xml:space="preserve">
+    <value>Nội dung góp ý</value>
+  </data>
+  <data name="SuggestingDocument" xml:space="preserve">
+    <value>Góp ý văn bản</value>
+  </data>
+  <data name="PleaseSelectTheSubscriptionPeriod" xml:space="preserve">
+    <value>Quý khách vui lòng chọn</value>
+  </data>
+  <data name="WaitingForProgressing" xml:space="preserve">
+    <value>Chờ xử lý</value>
+  </data>
+  <data name="Ever" xml:space="preserve">
+    <value>Từ trước đến nay</value>
+  </data>
+  <data name="LastMonth" xml:space="preserve">
+    <value>Tháng qua</value>
+  </data>
+  <data name="LastWeek" xml:space="preserve">
+    <value>Tuần qua</value>
+  </data>
+  <data name="LastYear" xml:space="preserve">
+    <value>Năm qua</value>
+  </data>
+  <data name="TransactionType" xml:space="preserve">
+    <value>Loại giao dịch</value>
+  </data>
+  <data name="People" xml:space="preserve">
+    <value> người</value>
+  </data>
+  <data name="AccountInfomation" xml:space="preserve">
+    <value>Tài khoản &lt;strong style="color: #d81d22;"&gt;{0}&lt;/strong&gt; hiện còn &lt;strong style="color: #d81d22;"&gt;{1} sử dụng&lt;/strong&gt; dịch vụ &lt;span style="font-weight: bold;"&gt;{2}&lt;/span&gt;</value>
+  </data>
+  <data name="ChoosingService" xml:space="preserve">
+    <value>Chọn dịch vụ</value>
+  </data>
+  <data name="ServiceName" xml:space="preserve">
+    <value>Tên dịch vụ</value>
+  </data>
+  <data name="TimeOfPayment" xml:space="preserve">
+    <value>Thời gian thanh toán</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Chi phí</value>
+  </data>
+  <data name="ForgotPassText" xml:space="preserve">
+    <value>Nếu bạn quên mật khẩu, hãy nhập tên người dùng vào hộp và mật khẩu mới của bạn sẽ được gửi lại địa chỉ email đã đăng ký của bạn</value>
+  </data>
+  <data name="TitleForgetPass" xml:space="preserve">
+    <value>Quên mật khẩu</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>&lt;p&gt;&lt;strong style="color: #231f20; font-size: 14px;"&gt;Bản quyền © 2000 - 2018 bởi LuatVietNam– Thành viên INCOM Communications.,JSC &lt;/strong&gt;&lt;/p&gt;
+                &lt;p&gt;Giấy phép thiết lập trang Thông tin điện tử tổng hợp số: 692/GP-TTĐT cấp ngày 29/10/2010 bởi
+Sở TT-TT Hà Nội,&lt;br /&gt; thay thế giấy phép số: 322/GP - BC, ngày 26/07/2007 cấp bởi  &lt;strong style="color: #222222;"&gt;Bộ Thông tin và Truyền thông&lt;/strong&gt;&lt;/p&gt;
+                &lt;p&gt;Chứng nhận bản quyền tác giả số 280/2009/QTG ngày 16/02/2009, cấp bởi Bộ Văn hoá - Thể thao - Du lịch&lt;/p&gt;
+                &lt;p&gt;Cơ quan chủ quản: Công ty Cổ phần Truyền thông Quốc tế INCOM. Chịu trách nhiệm: Ông Vũ Mạnh Cường&lt;/p&gt;
+                &lt;p&gt;Địa chỉ: &lt;strong style="color: #222222;"&gt;Tầng 3, Tòa nhà IC, 82 phố Duy Tân, Cầu Giấy, Hà Nội.&lt;/strong&gt; Điện thoại: &lt;strong style="color: #222222;"&gt;(024) 37833688 &lt;/strong&gt;- Fax: &lt;strong style="color: #222222;"&gt;(024) 37833699&lt;/strong&gt; * Email: &lt;strong style="color: #222222;"&gt;lawdata@luatvietnam.vn &lt;/strong&gt;&lt;/p&gt;</value>
+  </data>
+  <data name="ToolTipEffectUtility" xml:space="preserve">
+    <value>&lt;p&gt;&lt;strong style="color: #d81c22"&gt;LuatVietNam.vn&lt;/strong&gt; sẽ gửi&lt;/p&gt;
+                            &lt;p&gt;thông báo cho thành viên&lt;/p&gt;
+                            &lt;p&gt;khi văn bản này có thay đổi&lt;/p&gt;
+                            &lt;p&gt;về Hiệu lực văn bản.&lt;/p&gt;</value>
+  </data>
+  <data name="Hotline" xml:space="preserve">
+    <value>Đường dây nóng</value>
+  </data>
+  <data name="packages" xml:space="preserve">
+    <value>gói</value>
+  </data>
+  <data name="SocialNetwork" xml:space="preserve">
+    <value>Mạng xã hội</value>
+  </data>
+  <data name="InvalidPhoneNumber" xml:space="preserve">
+    <value>Số điện thoại không đúng</value>
+  </data>
+  <data name="ClickIAgree" xml:space="preserve">
+    <value>Vui lòng chọn đồng ý với Quy ước sử dụng của Luật Việt Nam</value>
+  </data>
+  <data name="Incorrect" xml:space="preserve">
+    <value>Mã an toàn không hợp lệ</value>
+  </data>
+  <data name="Safetycode" xml:space="preserve">
+    <value>Mã an toàn</value>
+  </data>
+  <data name="RelatedContentCategories" xml:space="preserve">
+    <value>Danh mục nội dung liên quan</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Xóa</value>
+  </data>
+  <data name="RemoveAll" xml:space="preserve">
+    <value>Xóa tất cả</value>
+  </data>
+  <data name="ServiceAnnouncement1" xml:space="preserve">
+    <value>&lt;p style="color: #505050;"&gt;
+                                Tài khoản của Quý khách còn &lt;span style="color: #d81d22;"&gt;{0} tháng {1} ngày,  sử dụng&lt;/span&gt; dịch vụ &lt;span style="color: #a67942; font-weight: bold;"&gt;{2}&lt;/span&gt;. Để tiếp tục sử dụng dịch vụ tra cứu văn bản, Quý khách có thể &lt;a href="/user/service-renewal.html" title="Gia hạn dịch vụ" style="color: #a67942; text-decoration: underline;"&gt;Gia hạn dịch vụ &lt;/a&gt;hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ.
+                            &lt;/p&gt;</value>
+  </data>
+  <data name="ServiceAnnouncement2" xml:space="preserve">
+    <value>&lt;p style="color: #505050;"&gt;
+    Tài khoản của Quý khách còn &lt;span style="color: #d81d22;"&gt;{0} tháng sử dụng&lt;/span&gt; dịch vụ &lt;span style="color: #a67942; font-weight: bold;"&gt;{1}&lt;/span&gt;. Để tiếp tục sử dụng dịch vụ tra cứu văn bản, Quý khách có thể &lt;a href="/user/service-renewal.html" title="Gia hạn dịch vụ" style="color: #a67942; text-decoration: underline;"&gt;Gia hạn dịch vụ &lt;/a&gt;hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ.
+&lt;/p&gt;</value>
+  </data>
+  <data name="ServiceAnnouncement3" xml:space="preserve">
+    <value>&lt;p style="color: #505050;"&gt;
+    Tài khoản của Quý khách chỉ còn &lt;span style="color: #d81d22;"&gt;{0} ngày sử dụng&lt;/span&gt; dịch vụ &lt;span style="color: #a67942; font-weight: bold;"&gt;{1}&lt;/span&gt;. Để tiếp tục sử dụng dịch vụ tra cứu văn bản, Quý khách có thể &lt;a href="/user/service-renewal.html" title="Gia hạn dịch vụ" style="color: #a67942; text-decoration: underline;"&gt;Gia hạn dịch vụ &lt;/a&gt;hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ.
+&lt;/p&gt;</value>
+  </data>
+  <data name="ServiceAnnouncement4" xml:space="preserve">
+    <value>&lt;p style="color: #505050;"&gt;
+    Tài khoản của Quý khách còn &lt;span style="color: #d81d22;"&gt;{0} ngày sử dụng&lt;/span&gt; dịch vụ &lt;span style="color: #a67942; font-weight: bold;"&gt;{1}&lt;/span&gt;. Để tiếp tục sử dụng dịch vụ tra cứu văn bản, Quý khách có thể &lt;a href="/user/service-renewal.html" title="Gia hạn dịch vụ" style="color: #a67942; text-decoration: underline;"&gt;Gia hạn dịch vụ &lt;/a&gt;hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ.
+&lt;/p&gt;</value>
+  </data>
+  <data name="ServiceAnnouncement5" xml:space="preserve">
+    <value>&lt;p style="color: #505050;"&gt;
+    Tài khoản của Quý khách hết thời gian sử dụng dịch vụ &lt;span style="color: #a67942; font-weight: bold;"&gt;{0}&lt;/span&gt;. Để tiếp tục sử dụng dịch vụ tra cứu văn bản, Quý khách có thể &lt;a href="/user/service-renewal.html" title="Gia hạn dịch vụ" style="color: #a67942; text-decoration: underline;"&gt;Gia hạn dịch vụ &lt;/a&gt;hoặc liên hệ tới số hotline: 016-9696-8989 để được hỗ trợ.
+&lt;/p&gt;</value>
+  </data>
+  <data name="ServiceAnnouncement6" xml:space="preserve">
+    <value>&lt;p style="color: #505050;"&gt;Cảm ơn Quý khách đã tin dùng dịch vụ của LuatVietnam.vn!&lt;/p&gt;
+                        &lt;p style="margin-top: 15px; color: #231f20;"&gt;Mọi chi tiết xin liên hệ:&lt;/p&gt;
+                        &lt;p style="color: #231f20;"&gt;&lt;strong&gt;TRUNG TÂM LUẬT VIỆT NAM - CÔNG TY CP TRUYỀN THÔNG QUỐC TẾ INCOM&lt;/strong&gt;&lt;/p&gt;
+                        &lt;p style="color: #505050;"&gt;Tại Hà Nội: Tầng 3, Tòa nhà IC, 82 phố Duy Tân, Cầu Giấy, Hà Nội - Tel: 04.37833688 - Fax: 04.37833699&lt;/p&gt;
+                        &lt;p style="color: #505050;"&gt;Tại TP.HCM: Tòa nhà Hà Phan, số 456 Phan Xích Long, P.2, Q.Phú Nhuận, Tp. HCM - Tel: 08. 39950724&lt;/p&gt;
+                        &lt;p style="color: #505050;"&gt;Email: &lt;a href="#" style="color: #a67942;"&gt;lawdata@luatvietnam.vn &lt;/a&gt;&lt;/p&gt;</value>
+  </data>
+  <data name="SuccessfullyUpdatedTheNewsletter" xml:space="preserve">
+    <value>Cập nhật đăng ký nhận bản tin thành công</value>
+  </data>
+  <data name="DownloadDocNotAuthencation" xml:space="preserve">
+    <value>Quý khách cần có quyền Tra cứu tiếng Anh hoặc Tra cứu Nâng cao để tải văn bản về</value>
+  </data>
+  <data name="NotificationDownloadDocNotAuth" xml:space="preserve">
+    <value>&lt;div class="vbitem-m1"&gt;
+    &lt;a href="#" class="lawsVnLogin" title="Đăng nhập" style="color: #d81c22; font-weight: bold; text-decoration: underline;"&gt;Đăng nhập&lt;/a&gt; tài khoản LuatVietnam để tải văn bản miễn phí. Nếu bạn chưa có tài khoản, vui lòng đăng ký miễn phí &lt;a href="/user/register.html" title="Đăng ký tài khoản" style="color: #d81c22; font-weight: bold; text-decoration: underline;"&gt;tại đây!&lt;/a&gt;
+&lt;/div&gt;</value>
+  </data>
+  <data name="EffectiveDate" xml:space="preserve">
+    <value>Áp dụng</value>
+  </data>
+  <data name="IssuingDate" xml:space="preserve">
+    <value>Ban hành</value>
+  </data>
+  <data name="RelatedDocuments" xml:space="preserve">
+    <value>Liên quan</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Đăng ký</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Tên văn bản</value>
+  </data>
+  <data name="LegislationTypes" xml:space="preserve">
+    <value>Loại văn bản</value>
+  </data>
+  <data name="EmailAlreadynUse" xml:space="preserve">
+    <value>Email: {0} đã được sử dụng.</value>
+  </data>
+  <data name="UserNameAlreadynUse" xml:space="preserve">
+    <value>Tài khoản: {0} đã được sử dụng.</value>
+  </data>
+  <data name="NoPermission" xml:space="preserve">
+    <value>&lt;p&gt;Đây là tiện ích dành cho thành viên đăng ký dịch vụ&lt;/p&gt;&lt;em&gt;Quý khách vui lòng &lt;a href='#' class='lawsVnLogin' style='color: #a67942' title='Đăng nhập tài khoản'&gt;&lt;strong&gt;Đăng nhập&lt;/strong&gt;&lt;/a&gt; tài khoản LuatVietNam và &lt;a href='/dich-vu.html' title='Đăng ký dịch vụ'&gt;&lt;strong style='color: #a67942'&gt;đăng ký sử dụng Dịch vụ tra cứu văn bản&lt;/strong&gt;&lt;/a&gt;.&lt;/em&gt;</value>
+  </data>
+  <data name="here" xml:space="preserve">
+    <value>tại đây</value>
+  </data>
+  <data name="SeeDetails" xml:space="preserve">
+    <value>Xem chi tiết</value>
+  </data>
+  <data name="Package2" xml:space="preserve">
+    <value>gói dịch vụ</value>
+  </data>
+  <data name="Service2" xml:space="preserve">
+    <value>Dịch vụ</value>
+  </data>
+  <data name="DichVu" xml:space="preserve">
+    <value>Dịch vụ</value>
+  </data>
+  <data name="GoiDichVu" xml:space="preserve">
+    <value>gói dịch vụ</value>
+  </data>
+  <data name="AllOrgans" xml:space="preserve">
+    <value>Cơ quan ban hành</value>
+  </data>
+  <data name="AllFileType" xml:space="preserve">
+    <value>Tất cả</value>
+  </data>
+  <data name="ForUserWithinSameOrganization" xml:space="preserve">
+    <value>Đối với {0} người dùng trong cùng một tổ chức</value>
+  </data>
+  <data name="PersonUsingAtTheSameTime" xml:space="preserve">
+    <value>{0} người sử dụng cùng một lúc</value>
+  </data>
+</root>

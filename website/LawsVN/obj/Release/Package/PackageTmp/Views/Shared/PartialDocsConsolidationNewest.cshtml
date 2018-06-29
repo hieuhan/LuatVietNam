@@ -1,0 +1,22 @@
+﻿@using LawsVN.Library
+@model ICSoft.CMSViewLib.DocsViewSearch
+@if (Model.lDocsView.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h3><span class="title-widget">VB hợp nhất mới cập nhật</span></h3>
+        </div>
+        <div class="widget-container">
+            @for (int index = 0; index < Model.lDocsView.Count && index < Constants.RowAmount5; index++)
+            {
+                ICSoft.CMSViewLib.DocsView docview = Model.lDocsView[index];
+                <div class="recent-post">
+                    <span class="icon-new-2"></span>
+                    <div class="post-conten news">
+                        <a href="@docview.GetDocUrl()" title="@docview.DocName" class="post-title-widget">@docview.H1Tag.TrimmedOrDefault(docview.DocName)</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

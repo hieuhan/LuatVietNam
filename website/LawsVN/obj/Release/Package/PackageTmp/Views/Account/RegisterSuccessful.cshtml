@@ -1,0 +1,49 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model LawsVN.Models.Account.RegisterSuccessfulModel
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage</a> »
+            <span class="breadcrumb-item colorrumb">Đăng ký tài khoản thành công</span>
+        </div>
+        <div class="content page">
+            <div class="from-page">
+                <div class="page-head">
+                    <div class="cat-title">
+                        <div class="cat-box-title">Đăng ký tài khoản thành công</div>
+                    </div>
+                    <p class="info-page">@Html.Raw(Model.RegisterMessages)</p>
+                    <div class="info-page" style="text-align: center; padding: 10px;">
+                        <a href="@CmsConstants.ROOT_PATH" title="Về trang chủ" style="color:#a67942">Về trang chủ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-right">
+        <aside class="sidebar">
+            @Html.Partial("PartialTaisaochonLuatVietNam")
+            @Html.Partial("PartialManualInstruction")
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>

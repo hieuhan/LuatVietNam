@@ -1,0 +1,307 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@using ICSoft.CMSViewLib
+@using ICSoft.CMSLib
+@using LawsVN.Models.Docs
+@model TCVNViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw((string.IsNullOrEmpty(Model.SeoHeader) ? Model.TcvnTitle.ToString() : Model.SeoHeader.ToString()))</h1>
+ }
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.mPartialPaginationAjax.PageIndex, totalPage = Model.mPartialPaginationAjax.TotalPage, pageSize = Model.mPartialPaginationAjax.PageSize });}
+}
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>» <span class="breadcrumb-item colorrumb">@Model.TcvnTitle</span>
+        </div>
+        <div class="page-head">
+            <div class="padding-left20">
+                <h2 class="page-title">@Model.TcvnTitle</h2>
+                <p class="info-page">@(string.IsNullOrEmpty(Model.MetaDesc) ? "" : Model.MetaDesc)</p>
+            </div>
+        </div>
+        <section class="cat-box search-box">
+            <section class="cat-box search-box">
+                @{Html.RenderAction("PartialFullSearch", "Shared", new PartialDocSearchModel { SearchOptions = 1, DocGroupId = 0, FieldId = Model.mPartialPaginationAjax.FieldId });}
+            </section>
+        </section>
+
+        <section class="cat-box">
+            <div class="tab-conten">
+                <div id="ListByFieldTab" class="tab-nav">
+                    <h3><a class="tab-nav-item6 @(Model.mPartialPaginationAjax.DocTypeId == Constants.DocTypesTieuChuanVn?"active":"")" href="@(CmsConstants.ROOT_PATH)tieu-chuan-viet-nam.html" >@Resource.VietNamStandard</a></h3>
+                    <h3><a class="tab-nav-item6 @(Model.mPartialPaginationAjax.DocTypeId  == Constants.DocTypesQuyChuanVn?"active":"")" href="@(CmsConstants.ROOT_PATH)quy-chuan-viet-nam.html" >@Resource.VietNamRegulations</a></h3>
+                    <h3><a class="tab-nav-item6 @(Model.mPartialPaginationAjax.DocTypeId== Constants.DocTypesTieuChuanNganh?"active":"")" href="@(CmsConstants.ROOT_PATH)tieu-chuan-nganh.html">@Resource.VietNamDepartment</a></h3>
+                    <h3><a class="tab-nav-item6 @(Model.mPartialPaginationAjax.DocTypeId == Constants.DocTypesTieuChuanXdvn?"active":"")" href="@(CmsConstants.ROOT_PATH)tieu-chuan-xay-dung-viet-nam.html">@Resource.VietNamConstruct</a></h3>
+                    <div class="view-post" id="txtnumberresultfound">
+                        @if (Model.mPartialPaginationAjax.TotalPage > 0)
+                        {
+                            <span>@Resource.Find <strong>@Model.mPartialPaginationAjax.TotalPage.ToString("#,###") @Resource.Result </strong>
+                                @if (Model.mPartialPaginationAjax.pageCount >= 0)
+                                {
+                                    @(string.Format("({0}/{1:#,###} {2})", Model.mPartialPaginationAjax.PageIndex + 1, Model.mPartialPaginationAjax.pageCount, Resource.Page.ToLower()))
+                                }
+                            </span>
+                        }
+                    </div>
+                </div>
+ 
+                <div class="lockq">
+                    <div class="item-loctheo">
+                        <span class="icon-loc-kq"></span>@Resource.FilterBy:
+                    </div>
+                @using (Ajax.BeginForm(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName, new
+                {
+                    docGroupId = Model.mPartialPaginationAjax.DocGroupId,
+                    languageId = Model.mPartialPaginationAjax.LanguageId,
+                    updateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+                    insertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode,
+                    controllerName = Model.mPartialPaginationAjax.ControllerName,
+                    actionName = Model.mPartialPaginationAjax.ActionName,
+                    pageSize = Model.mPartialPaginationAjax.PageSize,
+                    linkLimit = Model.mPartialPaginationAjax.LinkLimit
+                }, new AjaxOptions
+                {
+                    HttpMethod = "Get",
+                    UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+                    InsertionMode = InsertionMode.Replace,
+                    OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId),
+                    OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId),
+                    OnSuccess = "lawsVn.ajaxEvents.ListOnSuccess"
+                }))
+                {
+                    <div class="item-lockq">
+                        <select id="ddlFieldId" name="FieldId" tabindex="1" class="dropdown select-onchangeV2">
+                            <option value="0" data-title="">@Resource.AllFields</option>
+                            @foreach (var item in Model.ListFieldDisplays)
+                            {
+                                <option value="@item.FieldId" title="@item.FieldName">@item.FieldName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="item-lockq">
+                        @Html.DropdownListPermission("ddlEffectStatusId","EffectStatusId", "dropdown select-onchangeV2", new SelectList(Model.ListEffectStatus, "EffectStatusId", "EffectStatusDesc"))
+                    </div>
+                    <div class="item-lockq">
+                        <select id="ddlOrganId" name="OrganId" tabindex="3" class="dropdown select-onchangeV2">
+                            <option value="0" data-title="">@Resource.Organs</option>
+                            @foreach (var item in Model.ListOrganDisplays)
+                            {
+                                <option value="@item.OrganId" title="@item.OrganDesc">@item.OrganDesc</option>
+                            }
+                        </select>
+                    </div>
+                    @*<div class="item-lockq">
+                        <select id="ddlDocTypeId" name="DocTypeId" tabindex="4" class="dropdown select-onchange">
+                            <option value="0" data-title="">@Resource.DocTypes</option>
+                            @foreach (var item in Model.ListDocTypeDisplays)
+                            {
+                                <option value="@item.DocTypeId" data-title="@item.DocTypeDesc" @(item.DocTypeId == Model.mPartialPaginationAjax.DocTypeId ? "selected" : string.Empty)>@item.DocTypeDesc</option>
+                            }
+                        </select>
+                    </div>*@
+                }
+                </div>
+
+                <div class="cat-box-content">
+                    <div id="ListByField" class="click-1">
+                        @if (Model.ListDocsView.HasValue())
+                        {
+                            <table class="table table-bordered">
+                                <tbody>
+                                @for (int index = 0; index < Model.ListDocsView.Count; index++)
+                                    {
+                                        var mDocsView = Model.ListDocsView[index];
+                                        var number = index + (Model.mPartialPaginationAjax.PageIndex > 0 ? Model.mPartialPaginationAjax.PageIndex - 1 : Model.mPartialPaginationAjax.PageIndex) * Model.mPartialPaginationAjax.PageSize + 1;
+                                        <tr class="row-first-news @(index%2 == 0 ? string.Empty : "bgcolor")">
+                                            <th class="count-123 page" scope="row">@string.Format("{0:#00}",number)</th>
+                                            <td class="news-left-post">
+                                                <h2>
+                                                    <a href="@mDocsView.GetDocUrl()" class="post-title lvn">@mDocsView.DocName</a>
+                                                </h2>
+                                                <div class="sapo lvn">
+                                                    <p>@mDocsView.DocSummary</p>
+                                                </div>
+                                                <div class="item-meta">
+                                                    @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView, ClassName = Model.mPartialPaginationAjax.ClassTagItem } });}
+                                                </div>
+                                            </td>
+                                            <td class="post-time-right page">
+                                                    @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView } });}
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            {Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.mPartialPaginationAjax });}
+                        }
+                        else
+                        {
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr class="row-first-news">
+                                        <th class="count-123" scope="row"></th>
+                                        <td class="news-center-post">
+                                            <h3>
+                                                <span class="post-title lvn">@Resource.UpdatingData</span>
+                                            </h3>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @if(Model.mArticlesViewCate.lArticlesNewest.HasValue())
+            {
+            <div class="widget">
+                <div class="widget-top">
+                    <h3><span class="title-widget">Tin pháp luật Hot</span></h3>
+                </div>
+                <div class="widget-container">
+                    @foreach (ArticlesView articleView in Model.mArticlesViewCate.lArticlesNewest)
+                    {
+                    <div class="recent-post">
+                        <div class="post-thumbnail">
+                            <a href="@articleView.GetArticleUrl()" class="thumb80"><img alt="thumb80" src="@articleView.GetImageUrl_Thumb()"></a>
+                        </div>
+                        <div class="post-conten-wg">
+                            <a href="@articleView.GetArticleUrl()" class="post-title-widget">@articleView.Title</a>
+                            <p><span class="tie-date"> (@articleView.PublishTime.toString("dd/MM/yyyy HH:mm"))</span></p>
+                        </div>
+                    </div>
+                    }
+                    <div class="more-wg"><a href="@Model.mArticlesViewCate.mCategoriesView.GetCategoryUrl()" title="Xem tiếp" class="more-link wg"> <img alt="alt" src="@Url.Content("~/assets/Images/xem-tiep.png")"> Xem tiếp </a></div>
+                </div>
+            </div>
+            }
+
+            @*<div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>*@
+
+            @if(Model.ListDocsNewest.HasValue())
+            {
+            <div class="widget">
+                <div class="widget-top">
+                    <h3><span class="title-widget">TCVN mới cập nhật</span></h3>
+                </div>
+                <div class="widget-container">
+                    @foreach (DocsView mDocsViewNewest in Model.ListDocsNewest)
+                    {
+                    <div class="recent-post">
+                        <span class="icon-new-2"></span>
+                        <div class="post-conten news">
+                            <a href="@mDocsViewNewest.GetDocUrl()" title="@mDocsViewNewest.DocName" class="post-title-widget">@mDocsViewNewest.DocName</a>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+
+            @{Html.RenderAction("PartialTinVan", "Shared");}
+
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+                </div>
+            </div>
+
+            @{Html.RenderAction("PartialTaisaochonLuatVietNam", "Shared");}
+
+        </aside>
+    </div>
+</div>
+@*@{Html.RenderAction("PartialContentViewed", "Shared");}*@
+@section ListByFields
+{
+    <div class="nav-onclick-menu">
+        <div class="onclick-menu">
+            <a href="#" class="overlayLink" data-action="">
+                <img alt="dma" src="@Url.Content("~/assets/images/icon-danh-muc.png")" />
+                Danh<br />
+                mục
+            </a>
+        </div>
+        <div class="overlay" style="display: none;">
+            <div class="login-wrapper">
+                <div class="login-content">
+                    <a class="close">x</a>
+                    <div class="nav_categories">
+                        <div class="widget-top"><span class="title-widget">Lĩnh vực tra cứu</span></div>
+                        @{ Html.RenderAction("PartialFieldOfSearch", "Shared", new { displayTypeId = Constants.FieldsDisplayTypeIdVbpq, docGroupId = Model.mPartialPaginationAjax.DocGroupId });}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section FooterSection
+{
+    <div class="nav-onclick-menu">
+        <div class="onclick-menu">
+            <a href="#" class="overlayLink" data-action="">
+                <img alt="dma" src="@Url.Content("~/assets/images/icon-danh-muc.png")" />
+                Danh<br />mục
+            </a>
+        </div>
+        <div class="overlay" style="display: none;">
+            <div class="login-wrapper">
+                <div class="login-content">
+                    <a class="close">x</a>
+                    <div class="nav_categories">
+                        <div class="widget-top"><span class="title-widget">Lĩnh vực tra cứu</span></div>
+                        @{ Html.RenderAction("PartialFieldOfSearch", "Shared", new { docGroupId = Model.mPartialPaginationAjax.DocGroupId });}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd/mm/yy',
+                yearRange: "1945:c",
+                changeMonth: true,
+                changeYear: true
+            });
+            $('#DateFrom').datepicker({
+                numberOfMonths: 1,
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1945:c",
+                onSelect: function (selected) {
+                    $('#DateTo').datepicker("option", "minDate", selected);
+                }
+            });
+            $('#DateTo').datepicker({
+                numberOfMonths: 1,
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "1945:c",
+                onSelect: function (selected) {
+                    $('#DateFrom').datepicker("option", "maxDate", selected);
+                }
+            });
+            $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+        });
+    </script>
+}

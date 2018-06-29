@@ -1,0 +1,130 @@
+﻿@using VanBanLuat.Models
+@using VanBanLuat.Librarys
+@using sms.utils
+@using Constants = VanBanLuat.Librarys.Constants
+@using ICSoft.ViewLibV3
+@{
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+}
+@model ArticleViewDetailModel
+@{ string path = "";}
+<div class="breadcrumb">
+    <a class="breadcrumb-item" href="@Constants.ROOT_PATH">Trang chủ</a> /
+    <a class="breadcrumb-item" href="@Model.mArticleDetail.mCategory.GetCategoryUrl()">@Model.mArticleDetail.mCategory.CategoryDesc</a> /
+    <span class="breadcrumb-item xanh">@Model.mArticleDetail.mArticle.Title</span>
+</div>
+<!-- Bengin content-->
+<div class="content-left">
+
+    <div class="singer ">
+        <div class="rows-cl">
+            <div class="post-times chitiet">@DateTimeUtil.GetLongDateTime(Model.mArticleDetail.mArticle.PublishTime) </div>
+            <div class="socal-post chitiet">
+                <a class="iconchitiet" href="#" data-social="facebook" title="Chia sẻ bài viết"><img src="@Url.Content("~/Assets/images/face1.png")" /></a>
+                <a class="iconchitiet" href="#" data-social="gplus" title="Chia sẻ bài viết"><img src="@Url.Content("~/Assets/images/google1.png" )" /></a>
+                <a class="iconchitiet docPrint" href="#" title="In bài viết"><img src="@Url.Content("~/Assets/images/print1.png")" /></a>
+                <div id="example-gopy">
+                    <a href="#" class="tooltipgopy" id="gop-y" data-name="@Model.mArticleDetail.mArticle.Title">
+                        <img class="icongopy" src="@Url.Content("~/Assets/images/gopy1.png")" />
+                        <span class="bggopy">
+                            <i class="icmuiten"></i>
+                            Góp ý
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <h1 class="title-chitiet font30">@Model.mArticleDetail.mArticle.Title</h1>
+        <div class="sapo bieumau">@Html.Raw(Model.mArticleDetail.mArticle.Summary)</div>
+        <div class="entry p20 bgffffff">
+
+            @if (Model.mArticleDetail.lMedia.HasValue())
+            {
+                Medias mMedias = Model.mArticleDetail.lMedia.FirstOrDefault(i => i.FilePath.Contains(".pdf"));
+                if (mMedias == null || mMedias.FilePath == "")
+                {
+                     <div class="content-entry content-fixed boxnoidung">
+                        @Html.Raw(Model.mArticleDetail.mArticle.ArticleContent)
+                    </div>
+                }
+                else
+                {
+                    path = mMedias.FilePath.Contains("http") ? mMedias.FilePath : Constants.MEDIA_VIEWPATH + mMedias.FilePath;
+                    <embed class="content-fixed frm-pdf" src="@path"  type='application/pdf'>
+                }
+            }
+            else
+            {
+                <div class="content-entry content-fixed boxnoidung">
+                    @Html.Raw(Model.mArticleDetail.mArticle.ArticleContent)
+                </div>
+            }
+
+        </div>
+    </div>
+
+    @if (Model.mArticleDetail.lMedia.HasValue())
+    {
+        string pathdownload = Constants.MEDIA_DOWNLOADPATH + Model.mArticleDetail.lMedia[0].FilePath;
+        <center class="taibieumau">
+            <a href="@pathdownload" title="Download" class="btn-taibm"> <img style="margin-right: 5px;" alt="Download" src="@Url.Content("~/assets/images/down3.png")">Tải biểu mẫu </a>
+        </center>
+    }
+    @if (Model.mArticleDetail.lArticleRelate.HasValue())
+    {
+    <section class="cat-box-section ">
+        <div class="title">
+            <h2 class="td-phaply" style="text-transform: none;">Biểu mẫu liên quan</h2>
+        </div>
+        <div class="cat-box-content">
+            <ul class="itemlienquan">
+                @foreach (Articles mArticles in Model.mArticleDetail.lArticleRelate)
+                {
+                    <li class="listpl"><a href="@mArticles.GetArticleUrl()" class="post-title"><i class="icondash"></i> @mArticles.Title</a></li>
+                }
+            </ul>
+        </div>
+    </section>
+    }
+    
+    @if (Model.ListTieuDiem.lArticle.HasValue())
+    {
+    <section class="cat-box-section ">
+        <div class="title">
+            <h2 class="td-phaply" style="text-transform: none;">Biểu mẫu mới cập nhật</h2>
+        </div>
+        <div class="cat-box-content">
+            <ul class="itemlienquan">
+                @foreach (Articles mArticles in Model.ListTieuDiem.lArticle)
+                {
+                    <li class="listpl"><a href="@mArticles.GetArticleUrl()" class="post-title"><i class="icondash"></i> @mArticles.Title</a></li>
+                }
+            </ul>
+        </div>
+    </section>
+    }
+</div>
+<!-- End content-->
+<!-- Bengin aside-270-->
+<aside class="sidebar-270">
+    <!-- Bengin widget-->
+    @{ Html.RenderAction("PartialGetListCateIdByParentId", "Shared", new { ParentId = Constants.CateId_LoaiHinhDoanhNghiep, viewName = "PartialLoaiDoanhNghiep" });}
+    <!-- End widget-->
+    <!-- Bengin widget-->
+    <div class="widget">
+        <div class="ads2">
+            <img class="imgycvb2" src="@Url.Content("~/assets/images/group-dn.png")" />
+            <button class="yeucauvanbanbtn" title="Gửi yêu cầu văn bản" data-action="yeu-cau-van-ban.html">
+                Yêu cầu văn bản
+            </button>
+        </div>
+    </div>
+    <!-- End widget-->
+    <!-- Bengin widget-->
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = Constants.CateId_ThongBaoVBMoi, rowAmount = Constants.RowAmount5, viewName = "PartialChinhSachMoi" });}
+    <!-- End widget-->
+    <!-- Bengin widget-->
+    @{ Html.RenderAction("PartialDocumentsByGetByDisplayTypeId", "Shared", new { displayTypeId = Constants.DisplayTypeId_LuatDNXemNhieu, boxTitle = "Luật doanh nghiệp xem nhiều", rowAmount = Constants.RowAmount5, viewName = "PartialDocumentsOfInterest" });}
+    <!-- End widget-->
+</aside>
+<!-- End aside-270--> 

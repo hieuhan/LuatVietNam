@@ -1,0 +1,79 @@
+﻿@model LawsVN.Models.Templates.DocsNewest
+@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVN.Library
+@using LawsVN.Models
+@if (Model.mDocsViewDetail!= null)
+{
+<div class="rows item3">
+@if (Model.PartialPaginationAjax.RelateTypeId == 0)
+{
+    <div class="lef-vb1">
+        <span style="color: #a67942; text-transform: uppercase;">Danh mục đang xem: </span>
+        <span style="font-weight: bold;">
+            <img class="icondangxem" alt="icondangxem" src="@Url.Content("~/assets/Images/dang-xem.png")" />Tất cả (@Model.CountByRelateTypeId)
+        </span>
+    </div>
+    <div class="right-vb1">
+        <span style="font-weight: bold;">Loại liên kết văn bản</span>
+    </div>
+}
+else if (Model.mRelateTypes != null)
+{
+    <div class="lef-vb1">
+        <span style="color: #a67942; text-transform: uppercase;">Danh mục đang xem: </span>
+        <span style="font-weight: bold;">
+            <img class="icondangxem" alt="icondangxem" src="@Url.Content("~/assets/Images/dang-xem.png")" />@Model.mRelateTypes.RelateTypeName (@Model.mRelateTypes.RowCount)
+        </span>
+    </div>
+}
+</div>
+<div class="cat-box-content">
+    <table class="table table-bordered">
+        <tbody>
+            @for (int index = 0; index < Model.mDocsViewDetail.lDocRelates.Count; index++)
+            {
+                DocRelates mDocRelates = Model.mDocsViewDetail.lDocRelates[index];
+                var number = index + Model.PartialPaginationAjax.PageIndex * Model.PartialPaginationAjax.PageSize + 1;                      
+                <tr class="row-first-news @(index%2==1?"bgcolor":"")">
+                    <th class="count-123" scope="row">@number.ToString("#00")</th>
+                    <td class="post-col1">
+                        <h2>
+                            <a href="@(ICSoft.CMSViewLib.DocsView.Static_GetDocUrl( mDocRelates.DocUrl,"tomtat"))" class="post-title lvn">@mDocRelates.DocName</a>
+                        </h2>
+                        <div class="item-meta">
+                            @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocRelates = mDocRelates, ClassName = "tag-item item7" } });}
+                        </div>
+                    </td>
+                    <td class="post-col2">
+                        @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocRelates = mDocRelates, EffectStatusName = mDocRelates.EffectStatusName} });}
+                    </td>
+                    @if (Model.PartialPaginationAjax.RelateTypeId == 0)
+                    {
+                        <td class="post-col2">
+                            @mDocRelates.RelateTypeName
+                        </td>
+                    }                   
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+    }
+    else
+    {
+    <table class="table table-bordered">
+        <tbody>
+            <tr class="row-first-news">
+                <th class="count-123" scope="row"></th>
+                <td class="news-center-post">
+                    <h3>
+                        <span class="post-title lvn">Đang cập nhật dữ liệu.</span>
+                    </h3>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+@{Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.PartialPaginationAjax });}

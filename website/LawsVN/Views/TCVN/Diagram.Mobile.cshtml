@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Docs
+@model DocsViewDetailModel
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>
+        <span> »</span>
+    <a href="@(CmsConstants.ROOT_PATH)tieu-chuan-viet-nam.html" title="Tiêu chuẩn Việt Nam" class="breadcrumb-item color1">Tiêu chuẩn Việt Nam</a>
+</div>
+
+<article class="post-single">
+    <h1 class="post-title-single">@Model.mDocsViewDetail.mDocsView.DocName</h1>
+    <div class="tab-page">
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()" title="@Resource.Summary">@Resource.Properties</a>
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("noidung")" title="@Resource.Content">@Resource.Content</a>
+        <a class="tab-page-item active" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("luocdo")" title="@Resource.Diagram">@Resource.Diagram</a>
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("lienquan")" title="@Resource.Relate">@Resource.RelatedStandards</a>
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("taive")" title="@Resource.DownLoad">@Resource.DownLoad</a>
+    </div>
+    @{ Html.RenderAction("PartialPermissionVietNamStandardDiagramMobile", "Shared", new { docModel = Model, languageId = Model.mDocsViewDetail.mDocsView.LanguageId }); }
+</article>
+@{Html.RenderAction("PartialDocOthersMobile", "Shared", new { model = new DocOthersModel { ListDocsView = Model.mDocsViewDetail.lDocOthers } });}
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+@section FooterSection
+{
+    <script type="text/javascript">
+    $('#boxContentViewed').lawsVnContentViewed({
+        doc: {
+            id: '@Model.mDocsViewDetail.mDocsView.DocId',
+            name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+            title: '@Model.mDocsViewDetail.mDocsView.DocName',
+            summary: '',
+            effect: '@Model.mDocsViewDetail.mDocsView.EffectStatusName',
+            datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString(Model.mDocsViewDetail.mDocsView.IssueYear.ToString())',
+            url: '@Model.mDocsViewDetail.mDocsView.GetDocUrl()',
+            image: '@Constants.NoImageUrl'
+        }
+    });
+    </script>
+}

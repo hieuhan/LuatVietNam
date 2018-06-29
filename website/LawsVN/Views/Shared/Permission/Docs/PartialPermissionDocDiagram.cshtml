@@ -1,0 +1,168 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVN.Library
+@model LawsVN.Models.Docs.DocsViewDetailModel
+<div class="page-content box-shadow boxluocdo">
+    <div class="box-vblienquan">
+        <div class="rows item3">
+            <div class="right-vb1">
+                <a href="#" class="docPrint" title="In lược đồ" style="font-weight: bold;">
+                    <img class="in-print" alt="in-print" src="@Url.Content("~/assets/images/in2.png")">
+                    In lược đồ</a>
+            </div>
+        </div>
+        <div class="cat-box-content">
+
+        <div class="col-xs-3">
+            @if (Model.ListRelateTypesLeft.HasValue())
+            {
+                foreach (var item in Model.ListRelateTypesLeft)
+                {
+                    var listDocsRelatesLeft = Model.mDocsViewDetail.lDocRelates.GetDocsRelatesByRelateType(item.RelateTypeId, "Left");
+                    bool isScroll = listDocsRelatesLeft.HasValue() && listDocsRelatesLeft.Count >= 5;
+                    <div class="tab-conten-hd1">
+                        <div id="cssmenu">
+                            <ul>
+                                <li class="has-sub">
+                                    <a href="#" class="title-blt">@item.RelateTypeName <span class="colora67942">(@(listDocsRelatesLeft.HasValue() ? listDocsRelatesLeft.Count : 0)) </span>
+                                        <span class="xem_them_loto"></span>
+                                    </a>
+                                    <ul style="display: block;">
+                                        <div class="content-cssmenu @(isScroll ? "content-scroll-luocdo" : string.Empty)" @(isScroll ? "style=height: 350px;" : string.Empty)>
+                                            @if (listDocsRelatesLeft.HasValue())
+                                            {
+                                                foreach (var docRelatesLeft in listDocsRelatesLeft)
+                                                {
+                                                    <div class="rows item4 luocdo">
+                                                        <a href="@(docRelatesLeft.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : docRelatesLeft.DocUrl)" title="" id="properties-1-@docRelatesLeft.DocId" class="doc-properties @(docRelatesLeft.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "vb-khong-co-nd" : string.Empty)">@docRelatesLeft.DocName</a>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+            <div class="col-xs-3">
+                <div class="tab-conten-hd1">
+                    <div class="content-cssmenu bge0f6f7">
+                        <span class="title-blt" style="color: #fff; background: #49c5c7; font-size: 14px;">Văn bản đang xem</span>
+                        <div class="rows item4 luocdo">
+                            <span class="post-title-diagram">@Model.mDocsViewDetail.mDocsView.DocName</span>
+                        </div>
+                        <div class="rows item4 luocdo">
+                            <p><span class="wg-info">Cơ quan ban hành:</span> @Model.mDocsViewDetail.mDocsView.OrgansText</p>
+                            <p><span class="wg-info">Số hiệu:</span> @Model.mDocsViewDetail.mDocsView.DocIdentity</p>
+                            <p><span class="wg-info">Loại văn bản:</span> @Model.mDocsViewDetail.mDocsView.DocTypesText</p>
+                            <p><span class="wg-info">Ngày ban hành:</span> @Model.mDocsViewDetail.mDocsView.IssueDate.toString()</p>
+                            <p><span class="wg-info">Hiệu lực:</span> @Model.mDocsViewDetail.mDocsView.EffectDate.toString()</p>
+                            <p><span class="wg-info">Lĩnh vực:</span>@Model.mDocsViewDetail.mDocsView.FieldsText</p>
+                            <p><span class="wg-info">Ngày đăng công báo:</span>@Model.mDocsViewDetail.mDocsView.GazetteDate.toString()</p>
+                            <p><span class="wg-info">Số công báo:</span> @Model.mDocsViewDetail.mDocsView.GazetteNumber</p>
+                            <p><span class="wg-info">Người ký:</span> @Model.mDocsViewDetail.mDocsView.SignersText</p>
+                            <p><span class="wg-info">Ngày hết hiệu lực:</span> @Model.mDocsViewDetail.mDocsView.ExpireDate.toString()</p>
+                            <p><span class="wg-info">Tình trạng hiệu lực:</span> @Model.mDocsViewDetail.mDocsView.EffectStatusName</p>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="tab-conten-hd1">
+                        <div id="cssmenu">
+                            <ul>
+                                <li class="has-sub">
+                                    <a href="#" class="title-blt">
+                                        Văn bản tiếng Anh <span class="colora67942">(@Model.RowCountDocEnglish) </span>
+                                        <span class="xem_them_loto"></span>
+                                    </a>
+                                    <ul @(Model.RowCountDocEnglish > 0 ? "style=display:block;" : string.Empty)>
+                                        <div class="content-cssmenu  @(Model.ListDocsOtherLanguages.HasValue() && Model.ListDocsOtherLanguages.Count >= 4 ? "content-scroll-luocdo" : string.Empty)" @(Model.ListDocsOtherLanguages.HasValue() && Model.ListDocsOtherLanguages.Count >= 4 ? "style=height: 350px;" : string.Empty)>
+                                            @if (Model.ListDocsOtherLanguages.HasValue())
+                                            {
+                                                foreach (var doc in Model.ListDocsOtherLanguages)
+                                                {
+                                                    <div class="rows item4 luocdo">
+                                                        <a href="@(doc.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : DocsView.Static_GetDocUrl(doc.DocUrl, "tienganh"))" title="" id="properties-@(doc.LanguageId)-@doc.DocId" class="doc-properties @(doc.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "vb-khong-co-nd" : string.Empty)">@doc.DocName</a>
+                                                    </div>
+                                                }
+                                            }
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>               
+                @if (Model.ListRelateTypesBottom.HasValue())
+                {
+                    foreach (var item in Model.ListRelateTypesBottom)
+                    {
+                        var listDocsRelatesBottom = Model.mDocsViewDetail.lDocRelates.GetDocsRelatesByRelateType(item.RelateTypeId, "Bottom");
+                        bool isScroll = listDocsRelatesBottom.HasValue() && listDocsRelatesBottom.Count >= 4;
+                        <div class="tab-conten-hd1">
+                            <div id="cssmenu">
+                                <ul>
+                                    <li class="has-sub">
+                                        <a href="#" class="title-blt">@item.RelateTypeName <span class="colora67942">(@(listDocsRelatesBottom.HasValue() ? listDocsRelatesBottom.Count : 0)) </span>
+                                            <span class="xem_them_loto"></span>
+                                        </a>
+                                        <ul style="display: block;">
+                                            <div class="content-cssmenu @(isScroll ? "content-scroll-luocdo" : string.Empty)" @(isScroll ? "style=height: 350px;" : string.Empty)>
+                                                @if (listDocsRelatesBottom.HasValue())
+                                                {
+                                                    foreach (var docRelates in listDocsRelatesBottom)
+                                                    {
+                                                        <div class="rows item4 luocdo">
+                                                            <a href="@(docRelates.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : docRelates.DocUrl)" title="" id="properties-1-@docRelates.DocId" class="doc-properties @(docRelates.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "vb-khong-co-nd" : string.Empty)">@docRelates.DocName</a>
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+
+            <div class="col-xs-3">
+                @if (Model.ListRelateTypesRight.HasValue())
+                {
+                    foreach (var item in Model.ListRelateTypesRight)
+                    {
+                        var listDocsRelatesRight = Model.mDocsViewDetail.lDocRelates.GetDocsRelatesByRelateType(item.RelateTypeId, "Right");
+                        bool isScroll = listDocsRelatesRight.HasValue() && listDocsRelatesRight.Count >= 4;
+                        <div class="tab-conten-hd1">
+                            <div id="cssmenu">
+                                <ul>
+                                    <li class="has-sub">
+                                        <a href="#" class="title-blt">@item.RelateTypeName <span class="colora67942">(@(listDocsRelatesRight.HasValue() ? listDocsRelatesRight.Count : 0)) </span>
+                                            <span class="xem_them_loto"></span>
+                                        </a>
+                                        <ul style="display: block;">
+                                            <div class="content-cssmenu @(isScroll ? "content-scroll-luocdo" : string.Empty)" @(isScroll ? "style=height: 350px;" : string.Empty)>
+                                                @if (listDocsRelatesRight.HasValue())
+                                                {
+                                                    foreach (var docRelatesRight in listDocsRelatesRight)
+                                                    {
+                                                        <div class="rows item4 luocdo"> 
+                                                            <a href="@(docRelatesRight.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : docRelatesRight.DocUrl)" title="" id="properties-1-@docRelatesRight.DocId" class="doc-properties @(docRelatesRight.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "vb-khong-co-nd" : string.Empty)">@docRelatesRight.DocName</a>
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

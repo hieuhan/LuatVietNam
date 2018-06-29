@@ -1,0 +1,17 @@
+﻿@using LawsVN.App_GlobalResources
+@model LawsVN.Models.Account.MessageSearch
+@using (Ajax.BeginForm(Model.ActionType == 1 ? "MyMessages_GetPage" : "SavedMessages_GetPage", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Get"
+    ,InsertionMode = InsertionMode.Replace
+    ,UpdateTargetId = Model.ActionType == 1 ? "MyMessagesBox" : "SaveMessagesBox"
+    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    ,
+    OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}')", Model.ActionType == 1 ? "MyMessagesBox" : "SaveMessagesBox")
+}, new { @class = "search" }))
+{
+    <input id="submit" value="" type="submit">
+    <label for="submit" class="submit"></label>
+    <a href="#" class="icon"></a>
+    @Html.TextBoxFor(m=>m.MsgContent,new {placeholder=Resource.MsgContent, id="search", type="search"})
+}

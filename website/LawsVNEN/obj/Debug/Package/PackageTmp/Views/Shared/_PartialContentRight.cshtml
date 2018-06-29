@@ -1,0 +1,45 @@
+﻿@using LawsVNEN.App_GlobalResources
+<!--Bengin content-right-->
+<div class="content-right">
+    <aside class="sidebar">
+        <!--Bengin widget ads-->
+        <div class="widget">
+            <div class="banner">
+                <a href="#"><img alt="banner quang cao" src="~/assets/images/banner-huongdan.png"></a>
+            </div>
+        </div>
+        <!--End widget ads-->
+        <!--Bengin widget-->        
+        @{Html.RenderAction("_PartialNewsLetterLuatVN", "Shared");}
+        <!--End widget-->
+        <!--Bengin widget-->
+        <div class="widget bottom0">
+            <div class="widget-top">
+                <h3><span class="title-widget">@Resource.SupportSoftwares</span></h3>
+            </div>
+            <div class="widget-container">
+                <div class="rows vbquantam">
+                    <a href="https://get.adobe.com/reader/" target="_blank" class="icon-pdf">PDF reader</a>
+                </div>
+                <div class="rows vbquantam">
+                    <a href="http://www.unikey.org/" target="_blank" class="icon-uniky">Unikey 4.0</a>
+                </div>
+                @*<div class="rows vbquantam">
+                    <a href="#" class="icon-tcvn3">TCVN3 (ABC) download</a>
+                </div>*@
+                <div class="rows vbquantam">
+                    <span class="icon-lvn">@Resource.BestBrowersForLuatVietnam:</span>
+                </div>
+                <div class="rows">
+                    <a href="https://www.mozilla.org/vi/firefox/new/" target="_blank" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="~/assets/images/firefox.png"> Firefox </a>
+                    <a href="https://www.google.com/intl/vi_vn/chrome/browser/index.html" target="_blank" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="~/assets/images/chrome.png"> chrome </a>
+                    <a href="https://www.apple.com/safari/" target="_blank" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="~/assets/images/safari.png"> Safari </a>
+                </div>
+
+            </div>
+        </div>
+        <!--End widget-->
+
+    </aside>
+</div>
+<!--End content-right-->

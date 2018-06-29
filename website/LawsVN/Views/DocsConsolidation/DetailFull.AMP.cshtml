@@ -1,0 +1,310 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Docs.DocsViewDetailModel
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-van-ban.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="Keywords" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>
+    @if (Model.mDocsViewDetail.lFieldDisplays.HasValue())
+    {
+        <span>» </span>
+        for (int index = 0; index < Model.mDocsViewDetail.lFieldDisplays.Count; index++)
+        {
+            FieldDisplays mFieldDisplays = Model.mDocsViewDetail.lFieldDisplays[index];
+            if (index == 0)
+            {
+                <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item">@mFieldDisplays.FieldName</a>
+            }
+            else
+            {@:,
+                <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item">@mFieldDisplays.FieldName</a>
+            }
+        }
+    }
+</div>
+<article class="the-post">
+    <div class="title2">
+        <h2 class="title-cat3">Thuộc tính văn bản</h2>
+    </div>
+    <h1 class="title-post-singer fixfont">@Html.Raw(Model.mDocsViewDetail.mDocsView.H1Tag.TrimmedOrDefault(Model.mDocsViewDetail.mDocsView.DocName).ToString())</h1>
+    <div class="tab-page">
+        <a href="#" class="tab-page-item" on="tap:thuoc-tinh.scrollTo(duration=200)">Thuộc tính</a>
+        <a href="#" class="tab-page-item" on="tap:noi-dung.scrollTo(duration=200)">Nội dung</a>
+        <a href="#" class="tab-page-item" on="tap:lien-quan.scrollTo(duration=200)">VB liên quan</a>
+        <a href="#" class="tab-page-item" on="tap:luoc-do.scrollTo(duration=200)">Lược đồ</a>
+        <a href="#" class="tab-page-item" on="tap:tai-ve.scrollTo(duration=200)">Tải về</a>
+    </div>
+
+    <div id="thuoc-tinh" class="thuoctinh">
+        <table class="table-bordered">
+            <tbody>
+                <tr>
+                    <td><strong>Số hiệu: </strong> @Model.mDocsViewDetail.mDocsView.DocIdentity </td>
+                </tr>
+                <tr>
+                    <td><strong>Loại văn bản:</strong> @Model.mDocsViewDetail.mDocsView.DocTypesText</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Ngày đăng công báo: </strong>
+                        @if (Model.mDocsViewDetail.mDocsView.GazetteDate != DateTime.MinValue)
+                        {
+                            <span>@Resource.Known</span>
+                        }
+                        else
+                        {
+                            <span><i class="colorgrey">@Resource.Updating</i></span>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Số công báo:</strong>
+                        @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.GazetteNumber))
+                        {
+                            <span>@Resource.Known</span>
+                        }
+                        else
+                        {
+                            <span><i class="colorgrey">@Resource.Updating</i></span>
+                        }
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <strong>Ngày ký xác thực:</strong> @Model.mDocsViewDetail.mDocsView.IssueDate.toString()
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Cơ quan hợp nhất:</strong> @Model.mDocsViewDetail.mDocsView.OrgansText</td>
+                </tr>
+
+                <tr>
+                    <td><strong>Người ký: </strong> @Model.mDocsViewDetail.mDocsView.SignersText</td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>Ngày hết hiệu lực: </strong>
+                        @if (Model.mDocsViewDetail.mDocsView.ExpireDate != DateTime.MinValue)
+                        {
+                            <span>@Resource.Known</span>
+                        }
+                        else
+                        {
+                            <span><i class="colorgrey">@Resource.Updating</i></span>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="title2">
+        <h2 class="title-cat3">Tóm tắt văn bản</h2>
+    </div>
+    <div class="singer content-section">
+
+        <!-- Bengin entry -->
+        <div class="entry @(!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocSummary) ? "boder" : string.Empty)">
+            @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocSummary))
+            {
+                @Html.Raw(Model.mDocsViewDetail.mDocsView.DocSummary)
+            }
+            else
+            {
+                <div class="thong-bao-3">
+                    <div class="thongbao-item3">
+                        <em>Nội dung tóm tắt đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- End entry -->
+
+    </div>
+
+    <div id="noi-dung" class="title2">
+        <h2 class="title-cat3">Nội dung văn bản</h2>
+    </div>
+    <div class="singer">
+
+        <!-- Bengin entry -->
+        <div class="entry @(!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocContent) ? "boder" : string.Empty)">
+            @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocContent))
+            {
+                @Html.Raw(Model.mDocsViewDetail.mDocsView.DocContent)
+            }
+            else
+            {
+                DocFiles mDocFiles = Model.mDocsViewDetail.lDocFiles.FirstOrDefault(i => i.FilePath.ToLower().Contains(".pdf") && i.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId);
+                if (mDocFiles == null || mDocFiles.FilePath == "")
+                {
+                    <div class="thong-bao-3">
+                        <div class="thongbao-item3">
+                            <em>Nội dung văn bản đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="thong-bao-3">
+                        <div class="thongbao-item3">
+                            <em>Văn bản đã có file download, <a class="color2" href="@ICSoft.CMSViewLib.DocsView.Static_GetDownloadUrl(CmsConstants.WEBSITE_IMAGEDOMAIN, Model.mDocsViewDetail.mDocsView.DocUrl, mDocFiles.FilePath)">click vào đây</a> để tải file</em>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        <!-- End entry -->
+
+    </div>
+</article>
+
+<section id="lien-quan" class="content-section">
+    <div class="title2">
+        <h2 class="title-cat3">Danh mục liên quan</h2>
+    </div>
+    <div class="thong-bao-3">
+        <div class="thongbao-item3">
+            <p>
+                <em>Để xem mục Liên quan, hiểu các mối quan hệ, các văn bản liên quan đến văn bản đang xem.</em>
+            </p>
+            <p>
+                <em>Quý khách vui lòng <a href="@(CmsConstants.ROOT_PATH)user/dang-nhap-tai-khoan.html" class="maus"><strong>Đăng nhập</strong></a> tài khoản LuatVietNam và <a href="@(CmsConstants.ROOT_PATH)dich-vu.html"><strong class="maus">đăng ký sử dụng Dịch vụ tra cứu văn bản</strong></a>.</em>
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="luoc-do" class="content-section">
+    <div class="title2 bgfix">
+        <h2 class="title-cat3">Lược đồ</h2>
+    </div>
+    <div class="thong-bao-3">
+        <div class="thongbao-item3">
+            <p>
+                <em>Để xem mục Lược đồ, biết vị trí văn bản trong hệ thống Luật Việt Nam.</em>
+            </p>
+            <p>
+                <em>Quý khách vui lòng <a href="@(CmsConstants.ROOT_PATH)user/dang-nhap-tai-khoan.html" class="maus"><strong>Đăng nhập</strong></a> tài khoản LuatVietNam và <a href="@(CmsConstants.ROOT_PATH)dich-vu.html"><strong class="maus">đăng ký sử dụng Dịch vụ tra cứu văn bản</strong></a>.</em>
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="tai-ve" class="content-section">
+    <div class="title2 bgfix">
+        <h2 class="title-cat3">Tải văn bản</h2>
+    </div>
+    <section class="content-section boder">
+        <div class="title4">
+            <h2 class="title-cat4">Tiếng Việt</h2>
+        </div>
+        <div class="cat-box-content pp10">
+            @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId) > 0)
+            {
+                <div class="cat-box-content ">
+                    @foreach (DocFiles mDocFiles in Model.mDocsViewDetail.lDocFiles)
+                    {
+                        string filePath = mDocFiles.FilePath.ToLower();
+                        string fileUrl = ICSoft.CMSViewLib.DocsView.Static_GetDownloadUrl(CmsConstants.WEBSITE_IMAGEDOMAIN, Model.mDocsViewDetail.mDocsView.DocUrl, mDocFiles.FilePath);
+                        if (mDocFiles.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId)
+                        {
+                            if (filePath.EndsWith(".doc") || filePath.EndsWith(".docx"))
+                            {
+                                <a href="@fileUrl" class="taifle"> File .doc</a>
+                            }
+                            else
+                            {
+                                if (filePath.EndsWith(".zip"))
+                                {
+                                    <a href="@fileUrl" class="taifle"> File .zip</a>
+                                }
+                                else if (filePath.EndsWith(".pdf"))
+                                {
+                                    <a href="@fileUrl" class="taifle"> File .pdf</a>
+                                }
+                                else
+                                {
+                                    <a href="@fileUrl" class="taifle"> Unknown File</a>
+                                }
+                            }
+
+                        }
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="thong-bao-2">
+                    <div class="thongbao-item2">
+                        <em>File văn bản tiếng Việt đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </section>
+</section>
+@if (Model.mDocsViewDetail.lDocOthersNewest.HasValue())
+{
+    <section class="content-section">
+        <div class="title">
+            <h2 class="title-cat"> Văn bản liên quan mới</h2>
+        </div>
+        <div class="cat-box-content">
+            @for (int index = 0; index < Model.mDocsViewDetail.lDocOthersNewest.Count; index++)
+            {
+                <div class="other-news @(index > 0 ? " dashed" : string.Empty)">
+                    <h3>
+                        <a class="post-title other" href="@Model.mDocsViewDetail.lDocOthersNewest[index].GetDocUrl()">
+                            @Model.mDocsViewDetail.lDocOthersNewest[index].DocName
+                        </a>
+                    </h3>
+                    <div class="post-time">
+                        <div class="post-time-item">Ban hành: <span class="color2"> @Model.mDocsViewDetail.lDocOthersNewest[index].IssueDate.toString()</span></div>
+                        <div class="post-time-item">Hiệu lực: <span class="color2"> Đã biết</span></div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </section>
+}
+@if (Model.mDocsViewDetail.lDocOthers.HasValue())
+{
+    <section class="content-section">
+        <div class="title">
+            <h2 class="title-cat"> Văn bản liên quan</h2>
+        </div>
+        <div class="cat-box-content">
+            @for (int index = 0; index < Model.mDocsViewDetail.lDocOthers.Count; index++)
+            {
+                <div class="other-news @(index > 0 ? "dashed" : string.Empty)">
+                    <h3>
+                        <a class="post-title other" href="@Model.mDocsViewDetail.lDocOthers[index].GetDocUrl()">
+                            @Model.mDocsViewDetail.lDocOthers[index].DocName
+                        </a>
+                    </h3>
+                    <div class="post-time">
+                        <div class="post-time-item">Ban hành: <span class="color2"> @Model.mDocsViewDetail.lDocOthers[index].IssueDate.toString()</span></div>
+                        <div class="post-time-item">Hiệu lực: <span class="color2"> Đã biết</span></div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </section>
+}

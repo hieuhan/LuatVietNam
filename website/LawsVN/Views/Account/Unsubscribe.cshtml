@@ -1,0 +1,89 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@model LawsVN.Models.Account.UnsubscribeModel
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage</a> » 
+            <span class="breadcrumb-item colorrumb">Hủy đăng ký nhận bản tin</span>
+        </div>
+
+        <div class="content page">
+            <div class="from-page">
+                @using (Ajax.BeginForm("Unsubscribe", "Account", null, new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    OnBegin = "lawsVn.ajaxEvents.OnBegin",
+                    OnComplete = "lawsVn.ajaxEvents.OnComplete",
+                    OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccessful"
+                }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="cat-title-login">
+                        <div class="cat-box-title vien">Hủy đăng ký nhận bản tin hàng tuần</div>
+                    </div>
+                    <div class="cat-box-content">
+                        <div class="col-xs-2">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label class="col-sm-1">Hộp thư của bạn: <span class="redcolor">*</span> </label>
+                                    <div class="col-sm-2">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control-input" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1">Nhập mã an toàn: <span class="redcolor">*</span> </label>
+                                    <div class="col-sm-2">
+                                        @Html.TextBoxFor(m => m.UnsubcribeCaptchaCode, new {@class = "form-control-input"})
+                                        <br/>@Html.ValidationMessageFor(m => m.UnsubcribeCaptchaCode, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1">Mã an toàn: <span class="redcolor">*</span> </label>
+                                    <div class="ma-code1">
+                                        <img class="captcha" alt="captcha" id="Unsubcribe" src="@Url.Action("CaptchaImage", "Home", new {id = Guid.NewGuid(), prefix = "Unsubcribe"})">
+                                    </div>
+                                    <a class="ma-code2 getcaptcha" data-id="Unsubcribe" href="#" title="Nhận mã bảo mật mới" data-prefix="Unsubcribe">
+                                        <img class="imgrset" alt="" src="@Url.Content("~/assets/images/rset.png")"/>
+                                    </a>
+                                </div>
+                                <div class="rows-thongbao center">
+                                    <button class="btn-nhap-lai dk2" style="margin-left: 0; text-transform: none;height: 30px;" onclick="javascript:window.location.href='@CmsConstants.ROOT_PATH';return false;">Về trang chủ</button>
+                                    <button class="btn-thongbao1 xn" style="float: left; margin-left: 22px;">Hủy đăng ký</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @Html.Partial("PartialTaisaochonLuatVietNam")
+            @Html.Partial("PartialManualInstruction")
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>

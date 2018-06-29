@@ -1,0 +1,76 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model NewsViewModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.mPartialPaginationAjax.PageIndex, totalPage = Model.mPartialPaginationAjax.TotalPage, pageSize = Model.mPartialPaginationAjax.PageSize });}
+}
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+<div id="ArticlesByCateBoxTab" class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>
+    <span> » </span><span class="breadcrumb-item color1">@Model.mCategoriesView.CategoryName</span>
+            
+</div>
+
+<section class="box-section">
+    <div class="title">
+        <h2 class="title-cat">@Html.Raw(Model.mCategoriesView.CategoryName.ToString())</h2>
+    </div>
+    <div id="ArticlesByCateBox" class="cat-box-content">
+        @if (Model.ListArticlesView.HasValue())
+        {
+            foreach (var articleView in Model.ListArticlesView)
+            {
+                <div class="first-news page">
+                    <div class="post-thumb">
+                        <a href="@articleView.GetArticleUrl()" class="thumb125x70">
+                            <img src="@articleView.GetImageUrl_Mobile()" />
+                        </a>
+                    </div>
+                    <div class="pks">
+                        <div class="rows-time">
+                            <span class="item-time">@articleView.PublishTime.toString()</span>
+                        </div>
+                        <h3 class="post-title-bold">
+                            <a href="@articleView.GetArticleUrl()">@articleView.Title</a>
+                        </h3>
+                    </div>
+                </div>
+            }
+            if (Model.mPartialPaginationAjax.TotalPage > 0)
+            {
+                Model.mPartialPaginationAjax.IsMobile = true;
+                { Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax }); }
+            }
+        }
+        else
+        {
+            <div class="first-news page">
+                <div class="pks">
+                    <h3 class="post-title-bold">@Resource.UpdatingData</h3>
+                </div>
+            </div>
+        }
+    </div>
+
+</section>
+<section class="box-section">
+    @Html.Partial("~/Views/Shared/Mobile/PartialContentViewedMobile.cshtml")
+</section>
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: { id: 0 }
+        });
+    </script>
+}
+

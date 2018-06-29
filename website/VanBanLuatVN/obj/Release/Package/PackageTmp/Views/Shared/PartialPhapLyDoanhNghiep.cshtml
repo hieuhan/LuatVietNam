@@ -1,0 +1,25 @@
+﻿@using VanBanLuat.Librarys
+@model ICSoft.ViewLibV3.CategoryArticles
+@if (Model.mCategory != null && Model.mCategory.CategoryId > 0 && Model.lArticle.HasValue())
+{
+<section class="cat-box-section">
+    <div class="new-phaplydoanhnghiep">
+        <h2 class="title-cat-pldn">
+            <a style="background: 0" class="title-page-new" href="@Model.mCategory.GetCategoryUrl()" title="@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)">@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)</a>
+        </h2>
+        <div class="cat-box-content">
+            <div class="p20pldn">
+            @for (int index = 0; index < Model.lArticle.Count && index <= Constants.RowAmount3; index++)
+            {
+                <div class="item-col3 doanh-nghiep">
+                    <a href="@Model.lArticle[index].GetArticleUrl()" title="@Model.lArticle[index].Title" class="thumb-full-new pldn">
+                        <img class="thumb-full heightimg boder5" src="@Model.lArticle[index].GetImageUrl_Mobile()"/><span class="post-time">@Model.lArticle[index].PublishTime.toString("", "dd/MM")</span>
+                    </a>
+                    <h3 class="post-title pldn"><a href="@Model.lArticle[index].GetArticleUrl()" title="@Model.lArticle[index].Title">@Model.lArticle[index].Title </a></h3>
+                </div>
+            }
+            </div>
+        </div>
+    </div>
+</section>
+}

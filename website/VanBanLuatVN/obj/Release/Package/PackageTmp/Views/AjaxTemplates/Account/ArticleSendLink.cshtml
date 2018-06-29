@@ -1,0 +1,20 @@
+﻿@using VanBanLuat.Librarys
+@model VanBanLuatVN.Models.ArticlesModel.ArticleSendLinkModel
+@using (Ajax.BeginForm("ArticleSendLink", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post",
+    OnBegin = "vbluat.ajaxEvents.OnBegin('Gửi ngay')",
+    OnSuccess = "vbluat.ajaxEvents.OnSuccessAlert(data, status, xhr)",
+    OnFailure = "vbluat.ajaxEvents.OnFailure"
+}, new { id = "ArticleSendLinkForm" }))
+{
+    <div class="form-up">
+        @Html.TextBoxFor(m => m.SendMail, new { @class = "input-text ms1 font14", style = "border: 0;", placeholder = "Nhập Email nhận link bài viết *" })
+        @Html.ValidationMessageFor(m => m.SendMail, "", new { @class = "text-danger" })
+        @Html.HiddenFor(m=>m.ArticleUrl)
+    </div>
+    <center class="form-center">
+        <button class="btn-form btn-default guingay" style="margin-right: 20px;">Gửi ngay</button>
+        <button class="btn-default guingay" onclick="window.location.href='@(Request.UrlReferrer != null ? Request.UrlReferrer.AbsoluteUri : Constants.ROOT_PATH)'" style="color: #888;">Hủy</button>
+    </center>
+}

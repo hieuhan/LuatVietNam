@@ -1,0 +1,46 @@
+﻿@using LawsVN.Library
+@model LawsVN.Models.Docs.DocsViewDetailModel
+@if (Model.ListDocRelates.HasValue())
+{
+    <div class="box-entry">
+						<div class="title2">
+							<h2 class="title-cat2 none vien"> Thuộc tính văn bản</h2>
+						</div>
+						<div class="cat-box-content">
+							<div class="vbangoc">
+								Văn bản được hợp nhất <br> (Văn bản gốc)
+							</div>
+							<div class="item-hopnhat">
+                                @for (int i = 0; i < Model.ListDocRelates.Count; i++)
+                                {
+                                    <div class="itemvb@(i + 1 == Model.ListDocRelates.Count?"2":"1") fixmobi">
+									<div class="pa5">
+									<h3 class="post-title"><a href="@(Model.ListDocRelates[i].DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : Model.ListDocRelates[i].DocUrl)" @(Model.ListDocRelates[i].DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "class=vb-khong-co-nd" : string.Empty)><span class="stt">(@((i + 1).ToString("#00")))</span>
+                                        @Model.ListDocRelates[i].DocName</a></h3>
+									</div>
+								</div>
+                                }
+							</div>
+							<div class="item-hopnhat" style="text-align: center;">
+								<img style="margin-top: 2px;" src="@Url.Content("~/Assets/Mobile/images/bghopnhat.png")">
+							</div>
+							<div class="vbangoc" style="background: #49c5c7; color: #fff; margin-bottom: 10px;">
+								Văn bản  hợp nhất
+							</div>
+							<div class="vbhopnhat">
+									<div class="pa5">
+									<h3 class="post-title"><a href="@(Model.mDocsViewDetail.mDocsView.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : Model.mDocsViewDetail.mDocsView.GetDocUrl())" @(Model.mDocsViewDetail.mDocsView.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "class=vb-khong-co-nd" : string.Empty)>
+                                        @Model.mDocsViewDetail.mDocsView.DocName</a></h3>
+									</div>
+								</div>
+						</div>
+				</div>
+}
+else
+{
+    <div class="thong-bao-2">
+        <div class="thongbao-item2">
+            <em>Lược đồ văn bản đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+        </div>
+    </div>
+}

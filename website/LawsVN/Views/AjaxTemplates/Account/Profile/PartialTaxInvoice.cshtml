@@ -1,0 +1,48 @@
+﻿@model LawsVN.Models.Account.TaxInvoiceModel
+@using (Ajax.BeginForm("TaxInvoice", "Ajax", null, new AjaxOptions
+    {
+        HttpMethod = "Post"
+        ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+        ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+        ,OnSuccess = "lawsVn.ajaxEvents.TaxInvoiceOnComplete"
+    }, new { id = "TaxInvoiceForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="rows-thongbao center" style="font-size: 16px; font-weight: bold; text-transform: uppercase; margin-bottom: 15px;">
+        Thông tin viết hóa đơn GTGT
+    </div>
+    <div class="form-group">
+        <label class="col-sm-1">Tên công ty: <span class="redcolor">*</span> </label>
+        <div class="col-sm-2 tax-invoice">
+            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control-input" })
+            @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-1">Địa chỉ: <span class="redcolor">*</span> </label>
+        <div class="col-sm-2 tax-invoice">
+            @Html.TextBoxFor(m => m.CompanyAddress, new { @class = "form-control-input", placeholder = "Nơi đăng ký kinh doanh" })
+            @Html.ValidationMessageFor(m => m.CompanyAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-1">Mã số thuế: <span class="redcolor">*</span> </label>
+        <div class="col-sm-2 tax-invoice2">
+            @Html.TextBoxFor(m => m.CompanyTaxCode, new { @class = "form-control-input" })
+            @Html.ValidationMessageFor(m => m.CompanyTaxCode, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-1">Nội dung hóa đơn: </label>
+        <div class="col-sm-2 tax-invoice">
+            @Html.TextAreaFor(m => m.InternalContent, new { @class = "form-control-input textarea-control internal-content" })
+            @Html.ValidationMessageFor(m => m.InternalContent, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="rows">
+        <div class="btn-right">
+            <button class="btn-thongbao-vat mau1 btn-reset" tabindex="1" style="font-size: 13px; height: 32px;">Nhập lại </button>
+            <button class="btn-thongbao-vat mau2" tabindex ="2" style="font-size: 13px; height: 32px; margin-right: 0;">Xác nhận </button>
+        </div>
+    </div>
+}

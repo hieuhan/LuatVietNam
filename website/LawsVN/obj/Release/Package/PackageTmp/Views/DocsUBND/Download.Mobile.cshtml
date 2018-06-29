@@ -1,0 +1,127 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Docs
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model DocsViewDetailModel
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>
+    @if (Model.mDocsViewDetail.lFieldDisplays.HasValue())
+    {
+        <span> »</span>
+        for (int index = 0; index < Model.mDocsViewDetail.lFieldDisplays.Count; index++)
+        {
+            FieldDisplays mFieldDisplays = Model.mDocsViewDetail.lFieldDisplays[index];
+            if (index == 0)
+            {
+                <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item color1">@mFieldDisplays.FieldName</a>
+            }
+            else
+            {
+                <span>, </span>
+                <a href="@mFieldDisplays.GetUrl(Model.mDocsViewDetail.mDocsView.DocGroupId)" title="@mFieldDisplays.FieldName" class="breadcrumb-item color1">@mFieldDisplays.FieldName</a>
+            }
+        }
+    }
+</div>
+
+<div class="post-single">
+    <h1 class="post-title-single">@Model.mDocsViewDetail.mDocsView.DocName</h1>
+    <div class="tab-page">
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()" title="@Resource.Properties">@Resource.Properties</a>
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("noidung")" title="@Resource.Content">@Resource.Content</a>
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("lienquan")" title="@Resource.Relate">@Resource.Relate2</a>
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("hieuluc")" title="@Resource.Effect">@Resource.Effect</a>
+        <a class="tab-page-item" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("luocdo")" title="@Resource.Diagram">@Resource.Diagram</a>
+        <a class="tab-page-item active" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("taive")" title="@Resource.DownLoad">@Resource.DownLoad</a>
+    </div>
+
+    <div class="cat-box-content">
+        <div class="boxboder2">
+            @*@if (!Extensions.IsAuthenticated)
+            {
+                <div class="vbitem-m1">
+                    <a href="#" class="lawsVnLogin" title="Đăng nhập" style="color: #d81c22; font-weight: bold; text-decoration: underline;">Đăng nhập</a> tài khoản LuatVietnam để tải văn bản miễn phí. Nếu bạn chưa có tài khoản, vui lòng đăng ký miễn phí <a href="@(CmsConstants.ROOT_PATH)user/dang-ky-tai-khoan.html" title="Đăng ký tài khoản" style="color: #d81c22; font-weight: bold; text-decoration: underline;">tại đây!</a>
+                </div>
+            }*@
+
+            <div class="tab-page">
+                <div class="title2">
+                    <h2 class="title-cat2 vien"> Tiếng việt</h2>
+                </div>
+                <div class="taivelvn">
+                    @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == 1) > 0)
+                    {
+                        foreach (DocFiles mDocFiles in Model.mDocsViewDetail.lDocFiles)
+                        {
+                            if (mDocFiles.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId)
+                            {
+                                string filePath = mDocFiles.FilePath.ToLower();
+                                if (filePath.EndsWith(".doc") || filePath.EndsWith(".docx"))
+                                {
+                                    <div class="rows-vbitem-md2">
+                                        <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/mobile/images/doc1.png")"> File (.doc)
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    if (filePath.EndsWith(".zip"))
+                                    {
+                                        <div class="rows-vbitem-md2">
+                                            <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                                <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/mobile/images/doc4.png")"> File (.zip)
+                                            </a>
+                                        </div>
+                                    }
+                                    else if (filePath.EndsWith(".pdf"))
+                                    {
+                                        <div class="rows-vbitem-md2">
+                                            <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                                <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/mobile/images/doc2.png")"> File (.pdf)
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <div class="thong-bao-2">
+                            <div class="thongbao-item2">
+                                <em>File văn bản tiếng Việt đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@{Html.RenderAction("PartialDocOthersMobile", "Shared", new { model = new DocOthersModel { ListDocsView = Model.mDocsViewDetail.lDocOthers } });}
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+@section FooterSection
+{
+    <script type="text/javascript">
+    $('#boxContentViewed').lawsVnContentViewed({
+        doc: {
+            id: '@Model.mDocsViewDetail.mDocsView.DocId',
+            name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+            effect: '@Model.mDocsViewDetail.mDocsView.EffectStatusName',
+            title: '@Model.mDocsViewDetail.mDocsView.DocName',
+            summary: '',
+            datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+            url: '@Model.mDocsViewDetail.mDocsView.DocUrl',
+            image: '@Constants.NoImageUrl'
+        }
+    });
+    </script>
+}

@@ -1,0 +1,468 @@
+﻿@using VanBanLuat.Librarys
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Page not found</title>
+    <meta name="keywords" content="Page not found" />
+    <meta name="description" content="Page not found" />
+    <link rel='canonical' href='https://vanbanluat.vn/404.html' />
+    <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="robots" content="nofollow,noindex" />
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    <div class="container">
+        <header class="header-content">
+            <div class="main-content">
+                <div class="menu-icon-sammo">
+                    <button class="btn-nav" data-toggle-target="#leftMenu">
+                        <img src="/assets/images/imenu.png" /></button>
+                    <div class="w3-sidebar sidebar-overlay target-hidden" id="leftMenu">
+                        <button data-toggle-target="#leftMenu" class="closeleft">
+                            <img class="h32" src="/assets/images/close.png" /></button>
+                        <nav class="nav-mobi sidebar-nav">
+                            <label class="m-search">
+                                <form action="/tim-van-ban.html" method="get">
+                                    <button class="btn-search-top">
+                                        <img src="/assets/images/fa-search.png" /></button>
+                                    <input class="input-search-top" name="Keywords" placeholder="Tìm văn bản..." autocapitalize="off" autocorrect="off">
+                                </form>
+                            </label>
+                            <ul>
+                                <li class="item-wg bold">
+                                    <a href="/van-ban-moi.html" title="Văn bản mới" class="nav-wg-item">Văn bản mới
+                                    </a>
+                                </li>
+                                <li class="item-wg bold">
+                                    <a href="/cong-van.html" title="C&#244;ng văn" class="nav-wg-item">C&#244;ng văn
+                                    </a>
+                                </li>
+                                <li class="item-wg bold">
+                                    <a href="/van-ban-uy-ban-nhan-dan.html" title="Văn bản UBND" class="nav-wg-item">Văn bản UBND
+                                    </a>
+                                </li>
+                                <li class="item-wg bold">
+                                    <a href="/tieu-chuan-viet-nam.html" title="Ti&#234;u chuẩn Việt Nam" class="nav-wg-item">Ti&#234;u chuẩn Việt Nam
+                                    </a>
+                                </li>
+                                <li class="item-wg bold">
+                                    <a href="/tin-tuc-phap-luat.html" title="Tin tức ph&#225;p luật" class="nav-wg-item">Tin tức ph&#225;p luật
+                                    </a>
+                                </li>
+                                <li class="item-wg bold">
+                                    <a href="/phap-ly-doanh-nghiep.html" title="Ph&#225;p l&#253; doanh nghiệp" class="nav-wg-item">Ph&#225;p l&#253; doanh nghiệp
+                                    </a>
+                                </li>
+                            </ul>
+                            <!-- Bengin danhmuc-->
+                            <div class="danhmuc-cat">
+                                <div class="widget-top">
+                                    <div class="widget-title cat">
+                                        <img style="float: left; margin-top: 4px; margin-right: 5px;" src="/assets/images/danhmuc.png" />Tra cứu văn bản
+                                    </div>
+                                </div>
+                                <div class="widget-container">
+                                    <div class="content-scroll-1" style="height: 300px;">
+                                        <div class="nav-p15">
+                                            <ul>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-dau-tu-1.html" class="nav-wg-item2">Đầu tư</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-tai-chinh-ngan-hang-2.html" class="nav-wg-item2">T&#224;i ch&#237;nh-Ng&#226;n h&#224;ng</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-dat-dai-nha-o-3.html" class="nav-wg-item2">Đất đai-Nh&#224; ở</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-thue-phi-le-phi-4.html" class="nav-wg-item2">Thuế-Ph&#237;-Lệ ph&#237;</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-giao-duc-dao-tao-day-nghe-5.html" class="nav-wg-item2">Gi&#225;o dục-Đ&#224;o tạo-Dạy nghề</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-xuat-nhap-khau-6.html" class="nav-wg-item2">Xuất nhập khẩu</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-lao-dong-tien-luong-7.html" class="nav-wg-item2">Lao động-Tiền lương</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-toa-an-a.html" class="nav-wg-item2">T&#242;a &#225;n</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-an-ninh-trat-tu-b.html" class="nav-wg-item2">An ninh trật tự</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-y-te-suc-khoe-c.html" class="nav-wg-item2">Y tế-Sức khỏe</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-ngoai-giao-d.html" class="nav-wg-item2">Ngoại giao</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-cong-nghiep-f.html" class="nav-wg-item2">C&#244;ng nghiệp</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-khoa-hoc-cong-nghe-12.html" class="nav-wg-item2">Khoa học-C&#244;ng nghệ</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-xay-dung-13.html" class="nav-wg-item2">X&#226;y dựng</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-hai-quan-15.html" class="nav-wg-item2">Hải quan</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-linh-vuc-khac-16.html" class="nav-wg-item2">Lĩnh vực kh&#225;c</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-co-cau-to-chuc-17.html" class="nav-wg-item2">Cơ cấu tổ chức</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-doanh-nghiep-18.html" class="nav-wg-item2">Doanh nghiệp</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-chinh-sach-19.html" class="nav-wg-item2">Ch&#237;nh s&#225;ch</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-vi-pham-hanh-chinh-1a.html" class="nav-wg-item2">Vi phạm h&#224;nh ch&#237;nh</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-hanh-chinh-1b.html" class="nav-wg-item2">H&#224;nh ch&#237;nh</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-giao-thong-1c.html" class="nav-wg-item2">Giao th&#244;ng</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-so-huu-tri-tue-1d.html" class="nav-wg-item2">Sở hữu tr&#237; tuệ</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-quoc-phong-1f.html" class="nav-wg-item2">Quốc ph&#242;ng</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-thuy-hai-san-20.html" class="nav-wg-item2">Thủy hải sản</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-hang-hai-22.html" class="nav-wg-item2">H&#224;ng hải</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-chung-khoan-23.html" class="nav-wg-item2">Chứng kho&#225;n</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-ke-toan-kiem-toan-28.html" class="nav-wg-item2">Kế to&#225;n-Kiểm to&#225;n</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-xuat-nhap-canh-2a.html" class="nav-wg-item2">Xuất nhập cảnh</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-cu-tru-ho-khau-2b.html" class="nav-wg-item2">Cư tr&#250;-Hộ khẩu</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-can-bo-cong-chuc-vien-chuc-2d.html" class="nav-wg-item2">C&#225;n bộ-C&#244;ng chức-Vi&#234;n chức</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-an-ninh-quoc-gia-2e.html" class="nav-wg-item2">An ninh quốc gia</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-tiet-kiem-phong-chong-tham-nhung-lang-phi-30.html" class="nav-wg-item2">Tiết kiệm-Ph&#242;ng, chống tham nhũng, l&#227;ng ph&#237;</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-thuc-pham-duoc-pham-31.html" class="nav-wg-item2">Thực phẩm-Dược phẩm</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-thuong-mai-quang-cao-33.html" class="nav-wg-item2">Thương mại-Quảng c&#225;o</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-co-phan-co-phan-hoa-34.html" class="nav-wg-item2">Cổ phần-Cổ phần ho&#225;</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-dia-gioi-hanh-chinh-36.html" class="nav-wg-item2">Địa giới h&#224;nh ch&#237;nh</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-thi-dua-khen-thuong-ky-luat-37.html" class="nav-wg-item2">Thi đua-Khen thưởng-Kỷ luật</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-bao-hiem-39.html" class="nav-wg-item2">Bảo hiểm</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-bao-chi-truyen-hinh-3a.html" class="nav-wg-item2">B&#225;o ch&#237;-Truyền h&#236;nh</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-khieu-nai-to-cao-3b.html" class="nav-wg-item2">Khiếu nại-Tố c&#225;o</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-dau-thau-canh-tranh-3d.html" class="nav-wg-item2">Đấu thầu-Cạnh tranh</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-dien-luc-3e.html" class="nav-wg-item2">Điện lực</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-hon-nhan-gia-dinh-40.html" class="nav-wg-item2">H&#244;n nh&#226;n gia đ&#236;nh</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-dan-su-41.html" class="nav-wg-item2">D&#226;n sự</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-hinh-su-42.html" class="nav-wg-item2">H&#236;nh sự</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-tu-phap-ho-tich-55.html" class="nav-wg-item2">Tư ph&#225;p-Hộ tịch</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-tai-nguyen-moi-truong-56.html" class="nav-wg-item2">T&#224;i nguy&#234;n-M&#244;i trường</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-nong-nghiep-lam-nghiep-57.html" class="nav-wg-item2">N&#244;ng nghiệp-L&#226;m nghiệp</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-thong-tin-truyen-thong-58.html" class="nav-wg-item2">Th&#244;ng tin-Truyền th&#244;ng</a></li>
+                                                <li class="item-wg2 vbluat-row-mobi"><a href="/van-ban-luat-van-hoa-the-thao-du-lich-59.html" class="nav-wg-item2">Văn h&#243;a-Thể thao-Du lịch</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="linh-vuc-khac">
+                                            <button id="load-btn" class="lvk-mobi">Lĩnh vực khác<img style="margin-top: 5px; float: right;" src="/assets/images/icondown.png" /></button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- End danhmuc-->
+                        </nav>
+                    </div>
+                </div>
+                <a class="logo" href="/">
+                    <img src="/assets/images/logo.png" style="width: 180px; height: 27px; margin-top: 8px;" /></a>
+                <div class="top-right">
+                    <!--Bengin nav-->
+                    <nav class="nav-main mobi">
+                        <ul>
+                            <li class="nav-item "><a href="/" title="Trang chủ">Trang chủ</a></li>
+                            <li class="nav-item "><a href="/van-ban-moi.html" title="Văn bản mới">Văn bản mới</a></li>
+                            <li class="nav-item "><a href="/cong-van.html" title="C&#244;ng văn mới">C&#244;ng văn mới</a></li>
+                            <li class="nav-item "><a href="/tin-tuc-phap-luat.html" title="Tin tức ph&#225;p luật">Tin tức ph&#225;p luật</a></li>
+                            <li class="nav-item "><a href="/phap-ly-doanh-nghiep.html" title="Ph&#225;p l&#253; doanh nghiệp">Ph&#225;p l&#253; doanh nghiệp</a></li>
+                        </ul>
+                    </nav>
+                    <!--End-->
+                    <div class="header-right">
+                        <!--Bengin search-->
+                        <div class="top-search mobi">
+                            <div class="button-dropdown">
+                                <button href="#" class="dropdown-toggle">
+                                    <img style="float: left; margin-top: 2px; margin-right: 3px;" src="/assets/images/fa-search.png" /></button>
+                                <div class="dropdown-menu fixmobi" style="width: 655px; right: 0;">
+                                    <form action="/tim-van-ban.html" method="get">
+                                        <input class="tex-search" type="text" name="Keywords" placeholder="Nhập nội dung văn bản cần tìm...">
+                                        <button class="btn-default tkiem">
+                                            <img style="float: left; margin-right: 3px;" src="/assets/images/fa-search2.png" />Tìm văn bản</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End-->
+                        <!--Bengin top-dk-->
+                        <div class="top-dk">
+                            @if (!Extensions.IsAuthenticated)
+                            {
+                                <!--Bengin like-->
+                                <div class="top-like mobi">
+                                    <a href="#" rel="nofollow" class="facebook-login icon-like">
+                                        <img style="height: 18px" src="@Url.Content("~/assets/images/fb.png")" /></a>
+                                    <a href="#" rel="nofollow" class="google-login icon-like">
+                                        <img style="height: 18px" src="@Url.Content("~/assets/images/gcong.png")" /></a>
+                                </div>
+                                <!-- End-->
+                                <div class="usernav">
+                                    <div class="button-dropdown">
+                                        <a href="#tab-item-1" rel="nofollow" class="dropdown-toggle select-tab">
+                                            <img class="img-user" src="@Url.Content("~/assets/images/icon-user.png")" alt="" /><span class="text-user">Đăng nhập</span></a>
+                                        @*<a href="#tab-item-2" rel="nofollow" class="dropdown-toggle select-tab mobi">Đăng ký</a>*@
+                                        <div class="dropdown-menu fixmobi" style="width: 300px; right: 0;">
+                                            <!-- tab-conten-->
+                                            <div class="tab-conten">
+                                                <!-- Bengin-->
+                                                <div class="tab-title">
+                                                    <a class="tab-item-tab-2 select-tab active" href="#tab-item-1">Đăng nhập</a>
+                                                    <a class="tab-item-tab-2 select-tab" href="#tab-item-2">Tạo tài khoản</a>
+                                                </div>
+                                                <!-- End-->
+                                                <!-- Bengin-->
+                                                <div class="cat-box-content">
+                                                    <div id="tab-item-1" class="tab-item">
+                                                        @{Html.RenderAction("PartialLogin", "Shared");}
+                                                    </div>
+                                                    <div id="tab-item-2" class="tab-item" style="display: none">
+                                                        @{Html.RenderAction("PartialRegister", "Shared");}
+                                                    </div>
+                                                </div>
+                                                <!-- End-->
+                                            </div>
+                                            <!-- tab-conten-->
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="usernav">
+                                    <div class="button-dropdown">
+                                        <span class="xinchao">Hi,</span>
+                                        <a href="@(Constants.ROOT_PATH)user/thong-tin-tai-khoan.html" title="@VbLuatUser.CustomerName" class="dropdown-toggle" style="color: #f8c444; font-weight: bold;">
+                                            <img class="img-user" src="@Url.Content("~/assets/images/icon-user.png")" alt=""/>
+                                            <span class="text-user">@VbLuatUser.CustomerName.TruncateValue(9)</span></a>
+                                        <span style="color: #fff; padding: 0 5px; float: left;"></span>
+                                        <div class="dropdown-menu fix2" style="width: 300px; right: 0;">
+                                            <ul>
+                                                <li class="list-taikhoan icontk1"><a href="@(Constants.ROOT_PATH)user/thong-tin-tai-khoan.html" title="Thông tin tài khoản" class="itemtk">Thông tin tài khoản</a></li>
+                                                <li class="list-taikhoan icontk2"><a href="@(Constants.ROOT_PATH)user/van-ban-cua-toi.html" title="Văn bản của tôi" class="itemtk">Văn bản của tôi</a></li>
+                                                @*<li class="list-taikhoan icontk3"><a href="#" title="Thông báo hiệu lực" class="itemtk">Thông báo hiệu lực</a></li>*@
+                                                <li class="list-taikhoan icontk4"><a href="@(Constants.ROOT_PATH)user/dang-xuat.html" title="Đăng xuất" class="itemtk">Đăng xuất</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End-->
+                            }
+                            <!-- End-->
+                        </div>
+                        <!--End-->
+                        <div class="danhmuc mobi" style="margin-top: 10px; margin-left: 10px;">
+                            <div class="button-dropdown">
+                                <a href="#" class="dropdown-toggle" style="color: #0282c4; font-weight: bold; text-transform: uppercase; height: 24px; line-height: 24px;">
+                                    <img src="/assets/images/imenu.png" /></a>
+                                <div class="dropdown-menu" style="width: 240px; right: 0; margin-top: 3px;">
+                                    <div class="widget cat" style="margin: 0;">
+                                        <div class="widget-top">
+                                            <h3 class="widget-title cat">
+                                                <img style="float: left; margin-top: 4px; margin-right: 5px;" src="/assets/images/danhmuc.png" />Tra cứu văn bản</h3>
+                                        </div>
+                                        <div class="widget-container">
+                                            <nav class="nav-leff">
+                                                <ul>
+                                                    <li class="item-wg bold"><a href="/van-ban-moi.html" title="Văn bản mới " class="nav-wg-item">Văn bản mới </a></li>
+                                                    <li class="item-wg bold"><a href="/cong-van.html" title="C&#244;ng văn" class="nav-wg-item">C&#244;ng văn</a></li>
+                                                    <li class="item-wg bold"><a href="/van-ban-uy-ban-nhan-dan.html" title="Văn bản UBND" class="nav-wg-item">Văn bản UBND</a></li>
+                                                    <li class="item-wg bold"><a href="/van-ban-hop-nhat.html" title="Văn bản hợp nhất" class="nav-wg-item">Văn bản hợp nhất</a></li>
+                                                    <li class="item-wg bold"><a href="/tieu-chuan-viet-nam.html" title="Ti&#234;u chuẩn Việt Nam" class="nav-wg-item">Ti&#234;u chuẩn Việt Nam</a></li>
+                                                </ul>
+                                            </nav>
+                                            <div class="item-wg bold"><span class="nav-wg-item">Lĩnh vực văn bản </span></div>
+                                            <div class="content-scroll-1" style="height: 360px;">
+                                                <div class="nav-p15">
+                                                    <ul id="list">
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-dau-tu-1.html" title="Đầu tư" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_1" />Đầu tư</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-tai-chinh-ngan-hang-2.html" title="T&#224;i ch&#237;nh-Ng&#226;n h&#224;ng" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_2" />T&#224;i ch&#237;nh-Ng&#226;n h&#224;ng</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-dat-dai-nha-o-3.html" title="Đất đai-Nh&#224; ở" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_3" />Đất đai-Nh&#224; ở</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-thue-phi-le-phi-4.html" title="Thuế-Ph&#237;-Lệ ph&#237;" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_4" />Thuế-Ph&#237;-Lệ ph&#237;</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-giao-duc-dao-tao-day-nghe-5.html" title="Gi&#225;o dục-Đ&#224;o tạo-Dạy nghề" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_5" />Gi&#225;o dục-Đ&#224;o tạo-Dạy nghề</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-xuat-nhap-khau-6.html" title="Xuất nhập khẩu" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_6" />Xuất nhập khẩu</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-lao-dong-tien-luong-7.html" title="Lao động-Tiền lương" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_7" />Lao động-Tiền lương</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-toa-an-a.html" title="T&#242;a &#225;n" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_10" />T&#242;a &#225;n</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-an-ninh-trat-tu-b.html" title="An ninh trật tự" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_11" />An ninh trật tự</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-y-te-suc-khoe-c.html" title="Y tế-Sức khỏe" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_12" />Y tế-Sức khỏe</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-ngoai-giao-d.html" title="Ngoại giao" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_13" />Ngoại giao</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-cong-nghiep-f.html" title="C&#244;ng nghiệp" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_15" />C&#244;ng nghiệp</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-khoa-hoc-cong-nghe-12.html" title="Khoa học-C&#244;ng nghệ" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_18" />Khoa học-C&#244;ng nghệ</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-xay-dung-13.html" title="X&#226;y dựng" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_19" />X&#226;y dựng</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-hai-quan-15.html" title="Hải quan" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_21" />Hải quan</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-linh-vuc-khac-16.html" title="Lĩnh vực kh&#225;c" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_22" />Lĩnh vực kh&#225;c</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-co-cau-to-chuc-17.html" title="Cơ cấu tổ chức" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_23" />Cơ cấu tổ chức</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-doanh-nghiep-18.html" title="Doanh nghiệp" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_24" />Doanh nghiệp</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-chinh-sach-19.html" title="Ch&#237;nh s&#225;ch" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_25" />Ch&#237;nh s&#225;ch</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-vi-pham-hanh-chinh-1a.html" title="Vi phạm h&#224;nh ch&#237;nh" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_26" />Vi phạm h&#224;nh ch&#237;nh</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-hanh-chinh-1b.html" title="H&#224;nh ch&#237;nh" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_27" />H&#224;nh ch&#237;nh</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-giao-thong-1c.html" title="Giao th&#244;ng" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_28" />Giao th&#244;ng</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-so-huu-tri-tue-1d.html" title="Sở hữu tr&#237; tuệ" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_29" />Sở hữu tr&#237; tuệ</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-quoc-phong-1f.html" title="Quốc ph&#242;ng" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_31" />Quốc ph&#242;ng</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-thuy-hai-san-20.html" title="Thủy hải sản" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_32" />Thủy hải sản</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-hang-hai-22.html" title="H&#224;ng hải" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_34" />H&#224;ng hải</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-chung-khoan-23.html" title="Chứng kho&#225;n" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_35" />Chứng kho&#225;n</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-ke-toan-kiem-toan-28.html" title="Kế to&#225;n-Kiểm to&#225;n" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_40" />Kế to&#225;n-Kiểm to&#225;n</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-xuat-nhap-canh-2a.html" title="Xuất nhập cảnh" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_42" />Xuất nhập cảnh</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-cu-tru-ho-khau-2b.html" title="Cư tr&#250;-Hộ khẩu" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_43" />Cư tr&#250;-Hộ khẩu</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-can-bo-cong-chuc-vien-chuc-2d.html" title="C&#225;n bộ-C&#244;ng chức-Vi&#234;n chức" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_45" />C&#225;n bộ-C&#244;ng chức-Vi&#234;n chức</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-an-ninh-quoc-gia-2e.html" title="An ninh quốc gia" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_46" />An ninh quốc gia</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-tiet-kiem-phong-chong-tham-nhung-lang-phi-30.html" title="Tiết kiệm-Ph&#242;ng, chống tham nhũng, l&#227;ng ph&#237;" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_48" />Tiết kiệm-Ph&#242;ng, chống tham nhũng, l&#227;ng ph&#237;</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-thuc-pham-duoc-pham-31.html" title="Thực phẩm-Dược phẩm" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_49" />Thực phẩm-Dược phẩm</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-thuong-mai-quang-cao-33.html" title="Thương mại-Quảng c&#225;o" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_51" />Thương mại-Quảng c&#225;o</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-co-phan-co-phan-hoa-34.html" title="Cổ phần-Cổ phần ho&#225;" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_52" />Cổ phần-Cổ phần ho&#225;</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-dia-gioi-hanh-chinh-36.html" title="Địa giới h&#224;nh ch&#237;nh" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_54" />Địa giới h&#224;nh ch&#237;nh</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-thi-dua-khen-thuong-ky-luat-37.html" title="Thi đua-Khen thưởng-Kỷ luật" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_55" />Thi đua-Khen thưởng-Kỷ luật</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-bao-hiem-39.html" title="Bảo hiểm" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_57" />Bảo hiểm</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-bao-chi-truyen-hinh-3a.html" title="B&#225;o ch&#237;-Truyền h&#236;nh" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_58" />B&#225;o ch&#237;-Truyền h&#236;nh</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-khieu-nai-to-cao-3b.html" title="Khiếu nại-Tố c&#225;o" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_59" />Khiếu nại-Tố c&#225;o</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-dau-thau-canh-tranh-3d.html" title="Đấu thầu-Cạnh tranh" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_61" />Đấu thầu-Cạnh tranh</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-dien-luc-3e.html" title="Điện lực" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_62" />Điện lực</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-hon-nhan-gia-dinh-40.html" title="H&#244;n nh&#226;n gia đ&#236;nh" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_64" />H&#244;n nh&#226;n gia đ&#236;nh</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-dan-su-41.html" title="D&#226;n sự" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_65" />D&#226;n sự</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-hinh-su-42.html" title="H&#236;nh sự" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_66" />H&#236;nh sự</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-tu-phap-ho-tich-55.html" title="Tư ph&#225;p-Hộ tịch" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_85" />Tư ph&#225;p-Hộ tịch</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-tai-nguyen-moi-truong-56.html" title="T&#224;i nguy&#234;n-M&#244;i trường" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_86" />T&#224;i nguy&#234;n-M&#244;i trường</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-nong-nghiep-lam-nghiep-57.html" title="N&#244;ng nghiệp-L&#226;m nghiệp" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_87" />N&#244;ng nghiệp-L&#226;m nghiệp</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-thong-tin-truyen-thong-58.html" title="Th&#244;ng tin-Truyền th&#244;ng" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_88" />Th&#244;ng tin-Truyền th&#244;ng</a></li>
+                                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="/van-ban-luat-van-hoa-the-thao-du-lich-59.html" title="Văn h&#243;a-Thể thao-Du lịch" class="nav-wg-item2 listlv">
+                                                            <img src="/assets/images/ds-lv.png" style="margin: 3px 6px 3px 3px;" alt="lv_89" />Văn h&#243;a-Thể thao-Du lịch</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="linh-vuc-khac">
+                                                    <button id="load-btn" class="lvk5">Lĩnh vực khác<img style="margin-top: 5px; float: right;" src="/assets/images/icondown.png" class="mCS_img_loaded"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+                <div class="main-content">
+<div class="content-404" style="padding-top: 80px;">
+    <div class="p20px">
+        <div class="cat-box-404" style="text-align: center;">
+            <div class="bg404"><img src="/assets/images/404.png"></div>
+            <div class="bg404">
+                <div class="search404">
+                    <div class="search404bg">
+                    @using (Html.BeginForm("DocSearch", "Home", FormMethod.Get))
+                    {
+                        <input class="inputsearch404" name="Keywords" placeholder="Nhập nội dung cần tìm..." autocapitalize = "off" autocorrect = "off" />
+                        <button class="btnsearch404"><img style="margin-top: 4px; float: left;" src="/assets/images/btn-search2.png"/></button>
+                    }
+                    </div>
+                </div>
+            </div>
+            
+            <div class="rows-dk" style=" margin-top: 20px; margin-bottom: 20px; ">
+                <p style="font-weight: bold;  color: #222;"> Lỗi 404. Xin lỗi quý khách vì sự cố này.</p>
+                <p style="margin-top: 10px; color: #222;">Không tìm thấy trang, hoặc URL không tồn tại trên hệ thống</p>
+                <p style="margin-top: 10px;  color: #222;"><em>Mọi thắc mắc xin vui lòng liên hệ <a href="https://vanbanluat.vn/lien-he.html" title="Liên hệ" style="color: #0282c4"> tại đây</a></em></p>
+            </div>  
+                <div class="rows-dk">
+                <center class="form-group">
+                    <button class="homepage404" onclick="location.href='@Constants.ROOT_PATH';"> Về Trang chủ </button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+                </div>
+            </main>
+        <footer class="footer-content">
+            <div class="main-content">
+                <div class="item-col2 btom1">
+                    <div class="address">
+                        <p>
+                            <a href="/" style="color: #fff; font-size: 24px; text-transform: uppercase; font-weight: bold">
+                                <img src="/assets/images/logo.png" style="width: 180px; height: 27px;" />
+                            </a><span class="slogan italic" style="font-size: 16px;">Pháp luật trong tầm tay!</span>
+                        </p>
+                        <p>Thông tin liên hệ</p>
+                        <p>
+                            <img src="/assets/images/email.png" />
+                            +84 24 3936 6668 
+                        </p>
+                        <p>
+                            <img src="/assets/images/iconcal.png" />
+                            support@vanbanluat.vn
+                        </p>
+                        <p style="padding-bottom: 0;">Bản quyền © 2000-2018 bởi Vanbanluat.vn</p>
+                    </div>
+                </div>
+                <div class="item-col2 btom2">
+                    <ul class="item-col2 m0">
+                        <li class="cat-bottom"><a href="/van-ban-phap-quy.html" title="Văn bản quy phạm"><i class="icon-list"></i>Văn bản quy phạm</a></li>
+                        <li class="cat-bottom"><a href="/van-ban-moi.html" title="Văn bản mới"><i class="icon-list"></i>Văn bản mới</a></li>
+                        <li class="cat-bottom"><a href="/tieu-chuan-viet-nam.html" title="Ti&#234;u chuẩn Việt Nam"><i class="icon-list"></i>Ti&#234;u chuẩn Việt Nam</a></li>
+                    </ul>
+                    <ul class="item-col2 m0">
+                        <li class="cat-bottom"><a href="/tin-tuc-phap-luat.html"><i class="icon-list"></i>Tin tức ph&#225;p luật </a></li>
+                        <li class="cat-bottom"><a href="/quy-uoc-su-dung/quy-uoc-su-dung-586-15669-article.html"><i class="icon-list"></i>Quy ước sử dụng</a></li>
+                        <li class="cat-bottom"><a href="/lien-he.html"><i class="icon-list"></i>Li&#234;n hệ </a></li>
+                    </ul>
+                    <div class="row-km" style="float: left; width: 100%;">
+                        <div class="item-col2 m0">
+                        </div>
+                        <div class="item-col2 m0">
+                            <a class="like" href="#">
+                                <img src="/assets/images/fb.png" /></a>
+                            <a class="like" href="#">
+                                <img src="/assets/images/gcong.png" /></a>
+                            <a class="like" href="#">
+                                <img src="/assets/images/pr.png" /></a>
+                            <a class="like" href="#">
+                                <img src="/assets/images/in.png" /></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <button onclick="topFunction()" id="myBtn" title="Go to top"></button>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/js")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.3&appId=@Constants.FacebookAppId";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+</body>
+</html>

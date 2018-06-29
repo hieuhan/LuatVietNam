@@ -1,0 +1,96 @@
+﻿@using System.Collections.Specialized
+@using ICSoft.ViewLibV3
+@using VanBanLuat.Models
+@using VanBanLuat.Librarys
+@{
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+}
+@model NewViewModel
+<!-- Bengin content-->
+<div class="content-left">
+    <div class="breadcrumb">
+        <a class="breadcrumb-item" href="@VanBanLuat.Librarys.Constants.ROOT_PATH">Trang chủ</a> /
+        <span class="breadcrumb-item xanh">@Model.mTagArticles.mTag.TagName</span>
+    </div>
+    <!-- Bengin section-box-->
+    <section class="cat-box-section">
+        <div class="title-cat-new">
+            <h1><span class="title-page-new">@Model.mTagArticles.mTag.TagName.ToString()</span></h1>
+        </div>
+        <div class="cat-box-content" id="contentsWrapper">
+            @if (Model.mTagArticles.lArticle.Count > 0)
+                {
+                    <div class="pcontent">
+                        @foreach (Articles mArticles in Model.mTagArticles.lArticle)
+                        {
+                        <div class="new-list-other">
+                            <div class="post-thumbnail-270">
+                                <a href="@mArticles.GetArticleUrl()" title="@mArticles.Title"><img class="thumb-full boder512" style="height:150px" src="@mArticles.GetImageUrl_Mobile()" alt="@mArticles.Title" /><span class="post-time">@mArticles.PublishTime.ToString("dd/MM")</span></a>
+                            </div>
+                            <h3 class="post-title fixmobi font24"><a href="@mArticles.GetArticleUrl()" title="@mArticles.Title">@mArticles.Title</a></h3>
+                            <div class="sapo font15">
+                                <p>@Html.Raw(mArticles.Summary)</p>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                {
+                    string url = Model.mTagArticles.mTag.TagName.TagsNameGetUrl(Model.mTagArticles.mTag.TagId);
+                    int tagid = Model.mTagArticles.mTag.TagId;
+                    Html.RenderAction("PartialPagination", "Shared", new
+                    {
+                        model = new VanBanLuatVN.Models.PaginationModel
+                        {
+                            Page = Model.Page,
+                            TotalPage = Model.mTagArticles.RowCount,
+                            AjaxUrl = "/Ajax/ArticletagGetPage",
+                            QueryString = "".BuildQueryStringUrl(new NameValueCollection
+                            {
+                                {"tagId",Model.mTagArticles.mTag.TagId.ToString()},
+                                {"page", (Model.Page+1).ToString()}
+                            })
+                        }
+                    });
+                }
+            }
+            else
+            {
+                <div class="new-list-other">
+                    <p class="post-title vbl bold">Nội dung đang được cập nhật.</p>
+                </div>
+            }
+        </div>
+    </section>
+    <!-- End section-box-->
+
+</div>
+<!-- End content-->
+<!-- Bengin aside-270-->
+<aside class="sidebar-270">
+    <!-- Bengin widget-->
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = VanBanLuat.Librarys.Constants.CateId_ChinhSachMoi, rowAmount = VanBanLuat.Librarys.Constants.RowAmount5, viewName = "PartialChinhSachMoi" });}
+    <!-- End widget-->
+    <!-- Bengin widget-->
+    <div class="widget">
+        <div class="ads">
+            @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 254 });}
+        </div>
+    </div>
+    <!-- End widget-->
+    <!-- Bengin widget-->
+    @{Html.RenderAction("PartialTinXemNhieu", "Shared");}
+    <!-- End widget-->
+</aside>
+<!-- End aside-270--> 
+@section FooterSection
+{
+    <script type="text/javascript">
+        jQuery(function () {
+            $('#contentsWrapper').vbluatInfiteScroll({
+                contentsWrapperSelector: '#contentsWrapper',
+                contentSelector: '.pcontent',
+                nextSelector: '#pnext'
+            });
+        });
+    </script>
+}

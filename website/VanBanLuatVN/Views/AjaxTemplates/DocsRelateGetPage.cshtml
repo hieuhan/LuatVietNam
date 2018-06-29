@@ -1,0 +1,39 @@
+﻿@using System.Collections.Specialized
+@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@using VanBanLuatVN.Models
+@model PaginationModel
+
+<table id="contentsWrapper" class="tablecontent">
+    <tbody class="pcontent">
+        @for (int index = 0; index < Model.DocRelateList.lDocRelates.Count; index++)
+        {
+            var number = index + (Model.Page > 0 ? Model.Page - 1 : Model.Page) * Model.PageSize + 1;
+            <tr class="rows-vb">
+                <td class="number bold">@string.Format("{0:#00}", number)</td>
+                <td>
+                    @{ Html.RenderAction("PartialDocumentAttribute", "Shared", new { model = new SharedViewModel.DocumentAttribute { DocRelates = Model.DocRelateList.lDocRelates[index] } });}
+                </td>
+            </tr>
+        }
+        @if (Model.DocRelateList.lDocRelates.Count == Constants.RowAmount20)
+        {
+            Html.RenderAction("PartialPagination", "Shared", new
+            {
+                model = new PaginationModel
+                {
+                    Page = Model.Page,
+                    TotalPage = Model.DocRelateList.RowCount,
+                    AjaxUrl = "/docrelategetpage.html",
+                    QueryString = "".BuildQueryStringUrl(new NameValueCollection
+                    {
+                        {"DocId",Model.DocId.ToString() },
+                        {"RelateTypeId",Model.RelateTypeId.ToString() },
+                        {"DisplayPosition",Model.DisplayPosition },
+                        {"page",(Model.Page+1).ToString() }
+                    })
+                }
+            });
+        }
+    </tbody>
+</table>

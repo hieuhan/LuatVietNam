@@ -1,0 +1,110 @@
+﻿@using LawsVN.Models
+@using LawsVN.Library
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@model NewsViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>» <span class="breadcrumb-item colorrumb">Giới thiệu</span>
+</div>
+<div class="gioithieu">
+    <h1 class="about-tie">
+        <img alt="thumb80" src="@Url.Content("~/assets/images/gioi-thieu1.png")">
+        @Html.Raw(Model.SeoHeader.TrimmedOrDefault("Giới thiệu Luật Việt Nam").ToString())
+    </h1>
+    <div class="about-conten">
+        @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent)
+    </div>
+    <div class="lich-su-phat-trien" id="lichsuphattrien">
+
+        <div class="tie-lichsu">
+            <img alt="thumb80" src="@Url.Content("~/assets/images/lichsuphattrien.png")">
+        </div>
+        <div class="lichsu-content">
+            <div class="lichsu-col1">
+                @{
+                    int left = 1, right = 1;
+                }
+                @for (int i = 0; i < Model.ListArticlesView.Count - 1; i++)
+                {
+                    if (i == 0)
+                    {
+                    <div class="box-lich-su gd1">
+                        <div class="lich-su-info">
+                            <p style="font-size: 25px; color: #845112; font-weight: bold; padding-bottom: 10px;">@Model.ListArticlesView[i].Title</p>
+                            <p>@Html.Raw(Model.ListArticlesView[i].MetaDesc)</p>
+                        </div>
+                    </div>
+                    }
+                    else if (i % 2 == 0)
+                    {
+                        left++;
+                    <div class="box-lich-su gd@(left)">
+                        <div class="lich-su-info">
+                            <p style="font-size: 25px; color: #845112; font-weight: bold; padding-bottom: 10px;">@Model.ListArticlesView[i].Title</p>
+                            <p>@Html.Raw(Model.ListArticlesView[i].MetaDesc)</p>
+                        </div>
+                        @if (!string.IsNullOrEmpty(Model.ListArticlesView[i].ImagePath))
+                        { 
+                            <div class="img-lich-su">
+                                <img alt="@Model.ListArticlesView[i].Title" src="@Model.ListArticlesView[i].GetImageUrlOriginal()">
+                            </div>
+                        }
+                    </div>
+                    }
+
+                }
+            </div>
+            <div class="lichsu-col2">
+                <img alt="" src="@Url.Content("~/Assets/images/gioithieu2.png")">
+            </div>
+            <div class="lichsu-col3">
+                @for (int i = 0; i < Model.ListArticlesView.Count - 1; i++)
+                {
+                    if (i == 0)
+                    {
+                        if (!string.IsNullOrEmpty(Model.ListArticlesView[i].ImagePath))
+                        { 
+                            <div class="box-lich-su rig top1">
+                                <div class="lich-su-info rig">
+                                    <img src="@Model.ListArticlesView[i].GetImageUrlOriginal()">
+                                </div>
+                            </div>
+                        }
+                    }
+                    else if (i % 2 != 0)
+                    {
+                        right++;
+                    <div class="box-lich-su rig top@(right)">
+                        <div class="lich-su-info rig">
+                            <p style="font-size: 25px; color: #845112; font-weight: bold; padding-bottom: 10px;">@Model.ListArticlesView[i].Title</p>
+                            <p>@Html.Raw(Model.ListArticlesView[i].MetaDesc)</p>
+                        </div>
+                        @if (!string.IsNullOrEmpty(Model.ListArticlesView[i].ImagePath))
+                        {
+                            <div class="img-lich-su rig">
+                                <img alt="@Model.ListArticlesView[i].Title" src="@Model.ListArticlesView[i].GetImageUrlOriginal()">
+                            </div>
+                        }
+                    </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="cat-box partner">
+    @*<div class="cat-title center">
+        <h4><span class="title-post-kh">Khách hàng nói về chúng tôi</span></h4>
+    </div>*@
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>

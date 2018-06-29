@@ -1,0 +1,10 @@
+2018-05-29 16:42:09.3674 ERROR Path '/Views/Shared/Mobile/PartialLogin.cshtml' was not found.
+2018-05-29 16:46:50.3710 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-29 17:29:12.0031 ERROR The controller for path '/images/jqueryui/ui-icons_444444_256x240.png' was not found or does not implement IController.
+2018-05-29 17:29:38.2000 ERROR The controller for path '/images/jqueryui/ui-icons_444444_256x240.png' was not found or does not implement IController.
+2018-05-29 17:32:17.3345 ERROR The controller for path '/images/jqueryui/ui-icons_444444_256x240.png' was not found or does not implement IController.
+2018-05-29 17:37:48.0308 ERROR The controller for path '/images/jqueryui/ui-icons_444444_256x240.png' was not found or does not implement IController.
+2018-05-29 17:40:27.2988 ERROR The controller for path '/images/jqueryui/ui-icons_444444_256x240.png' was not found or does not implement IController.
+2018-05-29 17:51:40.8687 ERROR Path '/Views/AjaxTemplates/Account/Profile/PartialLogin.cshtml' was not found.
+2018-05-29 17:53:07.0507 ERROR The controller for path '/assets/images/nex_view.png' was not found or does not implement IController.
+2018-05-29 17:53:28.2835 ERROR The controller for path '/images/jqueryui/ui-icons_444444_256x240.png' was not found or does not implement IController.

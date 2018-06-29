@@ -1,0 +1,71 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVN.Library
+@model LawsVN.Models.Shared.PartialFieldOfSearchModel
+<div class="categories-list1">
+    <div class="categories list sub">
+        <a href="@(CmsConstants.ROOT_PATH)van-ban-moi.html" title="Văn bản mới" class="categories-item">Văn bản mới</a>
+    </div>
+    <div class="categories-sub">
+        @if (Model.ListFieldDisplays.HasValue())
+        {
+            foreach (var item in Model.ListFieldDisplays)
+            {
+                if (string.IsNullOrEmpty(item.FieldName))
+                {
+                    continue;
+                }
+                <h2><a href="@item.GetUrl(Model.DocGroupId)" title="@item.FieldName" class="categories-sub-item">@item.FieldName</a></h2>
+            }
+        }
+        @if (Model.ListFieldsOther.HasValue())
+        {
+            <div class="categories-sub-item">
+                <a class="menu" href="#" data-hasqtip="0">Lĩnh vực khác <img alt="xem-tiep" class="icon-more" src="@Url.Content("~/assets/images/mt2.png")"> </a>
+                <div class="tooltiptext">
+                    <span class="icon-tooltip"></span>
+
+                    <div class="tooltip-item">
+                        <div  id="tooltip2" class="content-scroll-1" style="height: 250px;">
+                            <div class="padding20">
+                                @foreach (Fields field in Model.ListFieldsOther)
+                                {
+                                    if (string.IsNullOrEmpty(field.FieldName))
+                                    {
+                                        continue;
+                                    }
+                                    <div class="item-checkbox-list">
+                                        <div class="radio">
+                                            <input id="radio-@field.FieldId" name="radio" type="radio" onclick="javascript:window.location.href = '@field.GetUrl(Model.DocGroupId)    ';return false;">
+                                            <label for="radio-@field.FieldId" class="radio-label" title="@field.FieldDesc"> @field.FieldDesc</label>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            if (!Model.IsHome)
+            {
+                <style>
+                    .qtip {
+                        margin-top: -269px;
+                    }
+                    .icon-tooltip{ top: 235px;}
+                </style>
+            }
+        }
+    </div>
+</div>
+@if (Model.ListMenuItemsView.HasValue())
+{
+    foreach (var menuItemView in Model.ListMenuItemsView)
+    {
+        <div class="categories list">
+            <h2><a href="@menuItemView.GetUrl()" title="@menuItemView.ItemName" class="categories-item">@menuItemView.ItemName</a>
+            </h2>
+        </div>
+    }
+    <div class="margin-bottom20"></div>
+}

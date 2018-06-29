@@ -1,0 +1,72 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@model LawsVN.Models.Account.MyMessagesModel
+<div class="mail-nav">
+    <div class="mail-nav-item">
+        <a href="#" class="mail-nav-item-top">Hộp tin nhắn</a>
+    </div>
+    <div class="mail-nav-item">
+        <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" title="Tin nhắn đến" class="mail-nav-item-1 active">Tin nhắn đến</a>
+    </div>
+    <div class="mail-nav-item" style="border-bottom: 0;">
+        <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan-da-luu.html" title="Tin nhắn đã lưu" class="mail-nav-item-1">Tin nhắn đã lưu</a>
+    </div>
+</div>
+<div class="mail-content">
+    @if (Model.RowCount > 0)
+    {
+        <div class="hearder-mail">
+            <div class="col-mail">
+                <div class="checkbox-mail-top">
+                    <div class="pure-checkbox">
+                        <input id="checkbox_All" name="checkbox_All" type="checkbox">
+                        <label for="checkbox_All" title="Chọn tất cả">Tất cả</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-mail">
+                <a href="#" title="Lưu mail" class="save-mail save-messages">Lưu mail </a>
+            </div>
+            <div class="col-mail">
+                <a href="#" title="Xóa" class="delete-mail delete-messages">Xóa </a>
+            </div>
+            <div class="count-mail">
+                <strong>@(Model.mPartialPaginationAjax.PageIndex + 1)-@Model.mPartialPaginationAjax.pageCount </strong>trong tổng số <strong>@Model.RowCount </strong>
+            </div>
+        </div>
+    }
+    @if (Model.ListMessages.HasValue())
+    {
+        for (int index = 0; index < Model.ListMessages.Count; index++)
+        {
+            var message = Model.ListMessages[index];
+            <div class="row-mail ">
+                <div class="post-mail-title">
+                    <div class="checkbox-mail">
+                        <div class="pure-checkbox">
+                            <input id="checkbox_@index" name="chkMessages" value="@message.MessageId" type="checkbox">
+                            <label for="checkbox_@index"></label>
+                        </div>
+                    </div>
+                    <a href="#" class="icon-star@(message.HasStar == 1 ? string.Empty : "-mail")"></a>
+                    <a href="@string.Format("{0}user/chi-tiet-tin-nhan-{1}.html",CmsConstants.ROOT_PATH,message.MessageId)" title="Chi tiết tin nhắn" class="post-title mail1 @(message.HasRead == 0 ? string.Empty : "fontnomal")">@message.Subject </a>
+                </div>
+                <div id="message-time-@message.MessageId" class="post-mail-time fontnomal">@message.CrDateTime.ToString("HH:mm") <br /> @message.CrDateTime.ToString("dd/MM/yyyy")</div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row-mail ">
+            <div class="post-mail-title">
+                <span class="post-title" style="padding: 0 15px;">Không tìm thấy tin nhắn phù hợp. </span>
+            </div>
+        </div>
+    }
+</div>
+@if (Model.RowCount > 0)
+{
+    {
+        Html.RenderAction("PartialPaginationAjax2", "Shared", new {model = Model.mPartialPaginationAjax});
+    }
+}

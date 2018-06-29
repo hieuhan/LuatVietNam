@@ -1,0 +1,21 @@
+﻿@model LawsVN.Models.Docs.DocsViewDetailModel
+<div class="box-content2">
+    <div class="cat-title">
+        <div class="cat-box-title vien">Tóm tắt văn bản</div>
+    </div>
+    @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocSummary))
+    {
+        <div class="content-info">
+            @Html.Raw(Model.mDocsViewDetail.mDocsView.DocSummary)
+        </div>
+    }
+    else
+    {
+        <div class="thong-bao-2">
+            <div class="rows item5"></div>
+            <div class="thongbao-item2">
+                <em>Nội dung tóm tắt đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+            </div>
+        </div>
+    }
+</div>

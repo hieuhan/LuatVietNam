@@ -1,0 +1,98 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models.Account
+@model CustomerServicesNotice
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>» 
+            <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" title="Dịch vụ" class="breadcrumb-item">Dịch vụ</a> »
+            <span class="breadcrumb-item colorrumb">Đăng ký gói dịch vụ</span>
+        </div>
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title" style="padding-bottom: 0; font-size: 15px;">Đăng ký gói dịch vụ tra cứu văn bản miễn phí</h1>
+                <div class="rows" style="margin-bottom: 15px;"></div>
+                <p class="info-page">Xin chào <span style="color: #a67942; font-weight: bold;">@LawsUser.CustomerFullName.TrimmedOrDefault(LawsUser.CustomerName)</span>, Quý khách đang chọn đăng ký gói dịch vụ <a style="color: #a67942; font-weight: bold; text-decoration: underline;" href="@Model.ServiceId.GetLinkServiceById()">tra cứu văn bản miễn phí</a> của LuatVietnam.vn</p>
+            </div>
+        </div>
+
+        <div class="cat-box-content">
+            @if (Model.IsRegistService < 1 && Model.FeeType.Equals("Free"))
+            {
+                <div class="navstep">
+                    <div class="steps"><a href="#" class="nav-step" title="Đăng ký dịch vụ"><span class="itemstep active boder0">Đăng ký dịch vụ</span></a></div>
+                    <div class="steps"><span class="itemstep undone no" style="width: 580px;"></span></div>
+                </div>
+                <div class="step">
+                    <div class="tie-step"><span class="tie-step-cat">Đăng ký dịch vụ</span></div>
+                    <div class="step-content">
+                        <div class="form-group">
+                            <p>• Tra cứu toàn bộ văn bản luật ban hành từ 1945 đến nay (tiếng Việt)</p>
+                            <p>• Xem toàn nội dung văn bản</p>
+                            <p>• Xem Thuộc tính văn bản</p>
+                            <p>• Xem Tóm tắt văn bản</p>
+                            <p>• Tải file văn bản tiếng Việt (.doc, .pdf)</p>
+                            <p>• Tra cứu dữ liệu văn bản theo Lĩnh vực</p>
+                            <p>• Tra cứu dữ liệu văn bản theo Bộ, Ngành, Địa phương</p>
+                            <p>• Xem Tin văn bản mới</p>
+                            <p>• Xem Tin tức pháp luật mới</p>
+                            <p>• Tra cứu Thuật ngữ pháp lý</p>
+                            <p>• Tra cứu dữ liệu văn bản hợp nhất</p>
+                            <p>• Nhận bản tin văn bản qua email</p>
+                            <p>• Xem tin vắn chính sách mới</p>
+                            <p>• Tra cứu Danh mục luật sư</p>
+                            <p>• Tra cứu Thuật ngữ pháp lý</p>
+                            <p>• Được hỗ trợ tra cứu trực tuyến</p>
+                        </div>
+                    </div>
+                    <div class="rows" style="text-align: center;">
+                        <a href="#" data-id="@Model.ServiceId" class="btn-pay dang-ky-dv-mienphi" style="float: none;padding: 10px;">Đăng ký </a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="step">
+                    <div class="tie-step"><span class="tie-step-cat">Thông báo</span></div>
+                    <div class="step-content">
+                        <div class="form-group">
+                            @Html.Raw(Model.Messages)
+                            @if (Model.FeeType.Equals("Free") || Model.FeeType.Equals("Trial") || string.IsNullOrEmpty(Model.ActionButton))
+                            {
+                                <br/><a href="@(CmsConstants.ROOT_PATH)user/dang-ky-goi-dich-vu.html" title="Đăng ký dịch vụ" style="color:#a67942">Đăng ký dịch vụ</a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialWidgetUser", "Shared", true);}
+            @Html.Partial("PartialManualInstruction")
+            <div class="widget bottom0">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>

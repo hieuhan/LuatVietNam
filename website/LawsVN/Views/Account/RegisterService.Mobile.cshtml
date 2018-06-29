@@ -1,0 +1,224 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@using LawsVN.Models.Account
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model RegisterServicePackagesModel
+<div class="box-section">
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>»
+        <a href="@(CmsConstants.ROOT_PATH)dich-vu.html" class="breadcrumb-item">Dịch vụ </a>»
+        <span class="breadcrumb-item color1">Đăng ký gói dịch vụ</span>
+    </div>
+    <div class="cat-box-content">
+        <div class="boxstep">
+            <div class="vien-b1234"></div>
+            <div class="bgstep navstep">
+                <div class="b1234 steps">
+                    <a href="#" class="nav-step" data-id="1" title="1. Đăng ký dịch vụ"><span class="b1234-i active itemstep-m">B1</span></a>
+                </div>
+                <div class="b1234 steps">
+                    <a href="#" class="nav-step" data-id="2" title="2. Thông tin đơn hàng"><span class="b1234-i itemstep-m" style="margin-left: 22%">B2</span></a>
+                </div>
+                <div class="b1234 steps">
+                    <a href="#" class="nav-step" data-id="3" title="3. Thanh toán đơn hàng"><span class="b1234-i itemstep-m" style="margin-left: 46%">B3</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="law-wizard">
+            <div class="step law-steps">
+                <!--Bước 1-->
+                <div class="title2">
+                    <div class="title-cat2" style="border-left: solid 3px #a67942; padding-left: 5px;">
+                        Bước 1: Đăng ký dịch vụ
+                    </div>
+                </div>
+                <div class="boxthongtintk">
+                    <div class="rows-giahan">
+                        <div class="left-giahan">
+                            Gói dịch vụ:
+                        </div>
+                        <div class="right-giahan">
+                            <div class="radio m-service">
+                                <input id="rbGoiTieuChuan" name="ServiceId" class="rbServices" value="@Constants.ServiceIdTraCuuTieuChuan" @(Model.ServiceId == Constants.ServiceIdTraCuuTieuChuan ? "checked" : string.Empty) type="radio" />
+                                <label for="rbGoiTieuChuan" class="radio-label fontb @(Model.ServiceId == Constants.ServiceIdTraCuuTieuChuan ? "colora67942" : "color999999")"> Tra cứu tiêu chuẩn </label>
+                            </div>
+                            <div class="radio m-service">
+                                <input id="rbGoiTiengAnh" name="ServiceId" class="rbServices" value="@Constants.ServiceIdTraCuuTiengAnh" @(Model.ServiceId == Constants.ServiceIdTraCuuTiengAnh ? "checked" : string.Empty) type="radio" />
+                                <label for="rbGoiTiengAnh" class="radio-label fontb @(Model.ServiceId == Constants.ServiceIdTraCuuTiengAnh ? "colora67942" : "color999999")"> Tra cứu tiếng Anh </label>
+                            </div>
+                            <div class="radio m-service">
+                                <input id="rbGoiNangCao" name="ServiceId" class="rbServices" value="@Constants.ServiceIdTraCuuNangCao" @(Model.ServiceId == Constants.ServiceIdTraCuuNangCao ? "checked" : string.Empty) type="radio" />
+                                <label for="rbGoiNangCao" class="radio-label fontb @(Model.ServiceId == Constants.ServiceIdTraCuuNangCao ? "colora67942" : "color999999")"> Tra cứu nâng cao </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rows-giahan">
+                        <div class="left-giahan">
+                            <strong>Số người sử dụng:<span class="cld73b3b"> *</span></strong>
+                        </div>
+                        <div class="right-giahan">
+                            @Html.DropDownListFor(model => model.ServicePackageParentId, new SelectList(Model.ListServicePackagesParent, "ServicePackageId", "ServicePackageDesc"), new { @class = "select-option select-servicePackageParentId-onchange" })
+                        </div>
+                    </div>
+                    <div class="rows-giahan">
+                        <div class="left-giahan">
+                            <strong>Thời hạn thuê bao:<span class="cld73b3b"> *</span></strong>
+                        </div>
+                        <div class="right-giahan">
+                            @Html.DropDownListFor(model => model.ServicePackageId, new SelectList(Model.ListServicePackages, "ServicePackageId", "ServicePackageDesc"), new { @class = "select-option select-servicePackageId-onchange" })
+                        </div>
+                    </div>
+
+                    @{ Html.RenderAction("PartialPromotionCodeCheckMobile", "Shared"); }
+
+                </div>
+
+                <div class="rowscenter">
+                    <button class="btnbton service-reset" style="background: #eeeeee; color: #222; margin-right: 10px;">Chọn lại</button>
+                    <button class="btnbton next-step">Tiếp tục thanh toán</button>
+                </div>
+                <!--End B1-->
+            </div>
+
+            <div class="step law-steps">
+                <!--Bước 2-->
+                <div class="title2">
+                    <div class="title-cat2" style="border-left: solid 3px #a67942; padding-left: 5px;">
+                        Bước 2: Thông tin đơn hàng
+                    </div>
+                </div>
+                <div class="boxthongtintk">
+                    <div class="thongtin-doanhnghiep">
+                        <p><strong>Gói dịch vụ: </strong>@Model.mServices.ServiceDesc</p>
+                        <p><strong>Thời hạn thuê bao:</strong> <span id="termOfSubscription-span" class="right-col"></span></p>
+                        <p><strong>Số người sử dụng:</strong> <span id="numberOfUsers-span" class="right-col"></span></p>
+                        <p><strong>Thời hạn sử dụng:</strong> <span id="expiryDate-span" class="right-col"></span></p>
+                    </div>
+                    <div class="thongtin-doanhnghiep">
+                        <div class="rows2" style="margin: 5px 0;">
+                            <strong>Chi phí dịch vụ: </strong>
+                        </div>
+                        <div class="rows2">
+                            <table class=" table-bordered">
+                                <tbody>
+                                    <tr class="boder-b">
+                                        <td class="tdcol2"><strong>Giá dịch vụ</strong></td>
+                                        <td class="tdcol2 price-td">0</td>
+                                    </tr>
+                                    <tr class="boder-b">
+                                        <td class="tdcol2"><strong>Thuế VAT (10%)</strong></td>
+                                        <td class="tdcol2 priceVat-td">0</td>
+                                    </tr>
+                                    <tr class="boder-b">
+                                        <td class="tdcol2"><strong>Khuyến mại</strong></td>
+                                        <td class="tdcol2 promotionPrice-td">0</td>
+                                    </tr>
+                                    <tr class="boder-b">
+                                        <td class="tdcol2"><strong>Tổng tiền VND</strong></td>
+                                        <td class="tdcol2 total-td" style="color: red; font-weight: bold;">0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="rows2">
+                            @*<p>Mã đơn hàng của Quý khách: <strong>#45678</strong></p>*@
+                            <p style="color: #777;"><em>Đơn hàng sẽ được gửi về email Quý khách sau khi xác nhận.</em></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="rowscenter">
+                    <button class="btnbton back-step" style="background: #eeeeee; color: #222; margin-right: 10px;">Quay lại</button>
+                    <button class="btnbton next-step">Xác nhận đơn hàng</button>
+                </div>
+                <!--Kết thúc B2-->
+            </div>
+
+            <div class="step law-steps">
+                <!--Bước 3-->
+                <div class="title2">
+                    <div class="title-cat2" style="border-left: solid 3px #a67942; padding-left: 5px;">
+                        Bước 3: Thanh toán đơn hàng
+                    </div>
+                </div>
+                <div class="boxthongtintk">
+                    <div class="title2">
+                        <a href="#" class="tinnhan-item1 tab-nav-item1 active" data-id="#tab-item-1">Ngân hàng</a>
+                        <a href="#" class="tinnhan-item1 tab-nav-item1" data-id="#tab-item-2">Văn phòng LuatVietnam</a>
+                    </div>
+                    <div id="tab-item-1" class="step-wg tab-item">
+                        @{Html.RenderAction("PartialBankPaymentZaloMobile", "Shared", new
+                        {
+                            model = new BankPaymentModel
+                            {
+                                ServiceId = Model.ServiceId
+                                ,ServiceIdFixed = Model.ServiceId
+                                ,ServiceName = Model.ServiceName
+                                ,ServicePackageId = Model.ServicePackageId
+                                ,ServicePackageName = Model.ServicePackageName
+                                ,Total = Model.Total
+                                ,Price = Model.Price
+                                , BankCode="ZPG"
+                                ,TransactionTypeId = Constants.TransactionTypeIdDangKy
+                            }
+                        });}
+                    </div>
+                    <div id="tab-item-2" class="step-wg tab-item" style="display: none;">
+                        @{Html.RenderAction("PartialOnlinePaymentMobile", "Shared", new
+                          {
+                              model = new PaymentMethodsOnlineModel
+                              {
+                                  ServiceId = Model.mServices.ServiceId
+                                  , ServiceName = Model.mServices.ServiceDesc
+                                  , TransactionTypeId = Constants.TransactionTypeIdDangKy
+                              }
+                          });}
+                    </div>
+
+                </div>
+                <!--Điều khoản sử dụng-->
+                @*<div id="ArticlePaymentRegulations" class="popup full target-hidden">
+                    <div class="wrapper">
+                        <div class="content-popup full">
+                            <div class="content-popup-post">
+                                <div class="tiequyuoc">
+                                    <p>QUY ĐỊNH THANH TOÁN</p>
+                                </div>
+                                <div class="entry">
+                                    @Html.Raw(Model.ArticlePaymentRegulations.mArticlesView.ArticleContent)
+                                </div>
+                            </div>
+                        </div>
+                        <button name="close" class="dong-close full" data-toggle-target="#ArticlePaymentRegulations"><img src="@Url.Content("~/assets/mobile/images/close.png")" /> </button>
+                    </div>
+                </div>*@
+                <!--End điều khoản sử dụng-->
+                @*<div class="rowscenter">
+                    <button class="btnbton" style="background: #eeeeee; color: #222; margin-right: 10px;">Quay lại</button>
+                    <button class="btnbton">Thanh toán</button>
+                </div>*@
+                <!--Kết thúc B3-->
+            </div>
+        </div>
+    </div>
+
+</div>
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('.law-wizard').lawServicesWizard({
+            validate: true,
+            stepValidate: 1
+        });
+        $.validator.setDefaults({
+            ignore: ''
+        });
+        lawsValidate.termsAndConditions();
+        $('select.ListBanks').bankSelect();
+        $('select.VisaCard').bankSelect();
+    </script>
+}

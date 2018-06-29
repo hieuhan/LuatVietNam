@@ -1,0 +1,49 @@
+﻿@using ICSoft.LawDocsLib
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.DocsViewDetailModel
+<div class="col-vbitem-3">
+    <div class="cat-title">
+        <div class="cat-box-title vien">English</div>
+    </div>
+    @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == 2) > 0)
+    {
+        foreach (DocFiles mDocFiles in Model.mDocsViewDetail.lDocFiles)
+        {
+            var filePath = mDocFiles.FilePath.ToLower();
+            if (mDocFiles.LanguageId == 2 && (filePath.EndsWith(".doc") || filePath.EndsWith(".docx")))
+            {
+                <div class="rows-vbitem-md2">
+                    <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                        <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc1.png")">
+                        Bản Word (.doc)</a>
+                </div>
+            }
+            else
+            {
+                if (mDocFiles.LanguageId == 2 && filePath.EndsWith(".zip"))
+                {
+                    <div class="rows-vbitem-md2">
+                        <a href="@string.Concat(Constants.MEDIA_DOWNLOADPATH, mDocFiles.FilePath)">
+                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc4.png")">
+                            Bản Word Nén (.zip)</a>
+                    </div>
+                }
+                else if (mDocFiles.LanguageId == 2 && filePath.EndsWith(".pdf"))
+                {
+                    <div class="rows-vbitem-md2">
+                        <a href="@string.Concat(Constants.MEDIA_DOWNLOADPATH, mDocFiles.FilePath)">
+                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc2.png")">
+                            Bản PDF (.pdf)</a>
+                    </div>
+                }
+            }
+        }
+    }
+    else
+    {
+        <div class="thongbao-item2">
+            <em>@Resource.EnglishTextFileIsBeingUpdated</em>
+        </div>
+    }
+</div>

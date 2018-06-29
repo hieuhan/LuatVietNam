@@ -1,0 +1,126 @@
+﻿@using ICSoft.ViewLibV3
+@model VanBanLuat.Models.ArticleViewDetailModel
+@using sms.utils
+@using VanBanLuat.Librarys
+@using Constants = VanBanLuat.Librarys.Constants
+@{
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+}
+<!-- Bengin content-->
+<div class="content-left">
+    <div class="breadcrumb">
+        <a class="breadcrumb-item" href="@Constants.ROOT_PATH">Trang chủ</a> /
+        @foreach (var category in Model.mArticleDetail.lParentCategory)
+        {
+            if (category.CategoryId == Model.mArticleDetail.mCategory.CategoryId)
+            {
+                <a class="breadcrumb-item" href="@category.GetCategoryUrl()">@category.CategoryDesc</a>
+            }
+        }
+        / <span class="breadcrumb-item xanh">@Model.mArticleDetail.mArticle.Title</span>
+    </div>
+
+    <!-- Bengin singer-->
+    <div class="singer chitiet">
+        <div class="rows-cl">
+            <div class="post-times chitiet">@DateTimeUtil.GetLongDateTime(Model.mArticleDetail.mArticle.PublishTime) </div>
+            <div class="socal-post chitiet">
+                <a class="iconchitiet" href="#" data-social="facebook" title="Chia sẻ bài viết"><img src="@Url.Content("~/assets/images/face1.png")" /></a>
+                <a class="iconchitiet" href="#" data-social="gplus" title="Chia sẻ bài viết"><img src="@Url.Content("~/assets/images/google1.png" )" /></a>
+                <a class="iconchitiet docPrint" href="#" title="In bài viết"><img src="@Url.Content("~/assets/images/print1.png")" /></a>
+                <a id="gop-y" class="iconchitiet" href="#" title="Góp ý" data-name="@Model.mArticleDetail.mArticle.Title"><img src="@Url.Content("~/assets/images/gopy1.png")" /></a>
+            </div>
+        </div>
+        <div id="docPrint">
+            <h1 class="title-chitiet font30">@Model.mArticleDetail.mArticle.Title</h1>
+            <div class="entry">
+                @*<p><strong>@Html.Raw(Model.mArticleDetail.mArticle.Summary)</strong></p>*@
+                @Html.Raw(Model.mArticleDetail.mArticle.ArticleContent)
+            </div>
+        </div>
+        @if (Model.mArticleDetail.lTag.HasValue())
+        {
+            <div class="tag-chude">
+                <strong style="float: left; margin-right:5px;"><img src="@Url.Content("~/assets/images/icontag.png")" /> Chủ đề:</strong>
+                @for (int i = 0; i < Model.mArticleDetail.lTag.Count; i++)
+                {
+                    Tags mTags = Model.mArticleDetail.lTag[i];
+                    <a href="@mTags.TagName.TagsNameGetUrl(mTags.TagId)" title="@mTags.TagName" class="tag-chude-item">@mTags.TagName</a>@(i == Model.mArticleDetail.lTag.Count - 1 ? string.Empty : ",")
+                }
+            </div>
+        }
+    </div>
+    <!-- End singer-->
+    @if (Model.ListTieuDiem.lArticle.HasValue())
+    {
+        <div class="box-tieudiem">
+            <div class="wg-tieudiem">
+                <div class="widget-top">
+                    <h3 class="widget-title wgct"> Tiêu điểm </h3>
+                </div>
+                <div class="widget-container">
+                    <ul class="ultieudiem">
+                        @foreach (var item in Model.ListTieuDiem.lArticle)
+                        {
+                            <li><a href="@item.GetArticleUrl()" title="@item.Title" class="post-title"><i class="icon-tieudiem"></i>@item.Title</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model.mArticleDetail.lOtherArticle.HasValue())
+    {
+        <section class="cat-box-section" style="border-bottom: solid 1px #ddd; margin-bottom: 10px;">
+            <div class="title-cat-new">
+                <span class="title-page-new">Tin pháp luật khác</span>
+            </div>
+            <div class="cat-box-content" style="margin-bottom: 20px;">
+                @foreach (var item in Model.mArticleDetail.lOtherArticle.Take(Constants.RowAmount3))
+                {
+                        <div class="item-col3 fixmobi">
+                            <div class="post-thumbnail fixmobi khac tinkhac"> <a href="@item.GetArticleUrl()"><img class="thumb-full boder512" src="@item.GetImageUrl_Mobile()"></a> <span class="post-time">@item.PublishTime.ToString("dd/MM")</span></div>
+                            <h3 class="post-title-khac"><a href="@item.GetArticleUrl()" title="@item.Title">@item.Title </a> </h3>
+                        </div>
+                }
+            </div>
+        </section>
+        if (Model.mArticleDetail.lOtherArticle.Count > Constants.RowAmount3)
+        {
+            <section class="cat-box-section">
+                @for (int i = Constants.RowAmount3; i < Model.mArticleDetail.lOtherArticle.Count; i++)
+                {
+                    if (i == Constants.RowAmount3)
+                    {@:<div class="item-col2">
+                    }
+                    if (i == Model.mArticleDetail.lOtherArticle.Count / 2+2)
+                    {
+                        @:</div><div class="item-col2">
+                    }
+                    <div class="list-new">
+                        <a class="post-title new" href="@Model.mArticleDetail.lOtherArticle[i].GetArticleUrl()" title="@Model.mArticleDetail.lOtherArticle[i].Title"><i class="iconvb"></i>@Model.mArticleDetail.lOtherArticle[i].Title </a>
+                    </div>
+                    if (i == Model.mArticleDetail.lOtherArticle.Count-1)
+                    {
+                        @:</div>
+                    }
+                }
+            </section>
+    }
+}
+</div>
+<aside class="sidebar-270">
+    <div class="widget">
+        <div class="ads">
+            @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+        </div>
+    </div>
+    @{Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = Constants.CateId_ChinhSachMoi, rowAmount = Constants.RowAmount5, viewName = "PartialChinhSachMoi" });}
+    @{Html.RenderAction("PartialTinXemNhieu", "Shared");}
+</aside>
+@section FooterSection
+{
+    <script type="text/javascript">
+        vbluat.logs.articleLogs(@Model.mArticleDetail.mArticle.ArticleId,@Model.mArticleDetail.mCategory.CategoryId);
+    </script>
+}

@@ -1,0 +1,9 @@
+﻿@model ICSoft.CMSViewLib.DocsView
+@if (string.IsNullOrEmpty(Model.DocContent))
+{
+    <div class="content-entry">Nội dung đang cập nhật.</div>
+}
+else
+{
+<div class="content-entry">@Html.Raw( Model.DocContent)</div>
+}

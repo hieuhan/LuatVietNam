@@ -1,0 +1,996 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>E:\Projects\2017\Public\LuatVietNam_EN</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Assets/Css/jquery-ui.css">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Css/style.css">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Css/stylesAll.min.css">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/61-User-guide_download.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/a1.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/a11.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/a2.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/a22.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/abbank.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/Acb_logo.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/agribank.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/bacabank.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/backtotop.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/backtotop2.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/ban-tin.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/banner-huongdan.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/Baovietbank.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/bg-tinnhan-en.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/bg-user.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/bidvbank.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/cap-nhat.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/chia-se2.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/chrome.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/chuyendoi.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/close2.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/congthuong-en.png">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Images/dang-nhap2.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/demo.jpg">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/doc.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/doc1.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/doc2.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/doc3.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/doc4.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/dongabank.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/email2.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/en.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/eximbank.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/expired.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/face-en.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/favicon.ico">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/fb1.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/firefox.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/font1.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/Forget-password_03.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/gbbank.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/gia-han-dv1.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/gia-han-dv2.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/giahan.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/google-en.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/google1.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/gopy.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/HDBanklogo.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/hoi-dap.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/hoten.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/hotline1.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/icon-from2.png">
+      <publishTime>02/08/2018 18:07:56</publishTime>
+    </File>
+    <File Include="Assets/Images/icon-home.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/icon-pass9.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/icon-tk9.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/icon-tooltip.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/img-scrol.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/in-en.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/in2.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/Jcb.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-bg_flat_0_aaaaaa_40x100.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-bg_flat_75_ffffff_40x100.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-bg_glass_55_fbf9ee_1x400.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-bg_glass_75_dadada_1x400.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-bg_glass_75_e6e6e6_1x400.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-bg_glass_95_fef1ec_1x400.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-bg_highlight-soft_75_cccccc_1x100.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-icons_222222_256x240.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-icons_2e83ff_256x240.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-icons_444444_256x240.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-icons_454545_256x240.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-icons_555555_256x240.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-icons_777777_256x240.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-icons_888888_256x240.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/jqueryUI/ui-icons_cd0a0a_256x240.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/lichsu.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/Lienvietbank.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/logo.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/logout.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/maritimebank.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/master.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/MBbank.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/mCSB_buttons.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/mda-en.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/moretext.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/mt.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/n1-hover.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/n1.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/n2-hover.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/n2.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/namabank.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/ncbbank.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/ngay-thang.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/nx1-hover.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/nx1.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/nx2-hover.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/nx2.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/OCBbank.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/OceanBanklogo.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/pass.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/pdf1.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/pgbank.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/sacombank.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/safari.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/save-2.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/save.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/Seabank.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/sgbank.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/SHBbank.png">
+      <publishTime>02/08/2018 18:07:57</publishTime>
+    </File>
+    <File Include="Assets/Images/site-loading.gif">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/techbank.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/thong-bao-dich-vu.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/thong-bao2.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/thong-bao3.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/thongtincn.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/tim-kiem-nang-cao.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/tin-tuc.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/TP.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/trinhduyetlvn.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/tw-en.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/tw1.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/unikey1.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/van-ban.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/vanban.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/vbbank.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/vibbank.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/Vietabank.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/vietcombank.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/vietinbank.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/visa.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Images/vn.png">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/print.css">
+      <publishTime>02/08/2018 18:07:55</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/backtop.js">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/dropdown.js">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery-1.7.1.js">
+      <publishTime>02/08/2018 18:07:59</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery-1.7.1.min.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery-ui-1.12.1.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery.autofix_anything.js">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery.cookie.js">
+      <publishTime>02/08/2018 18:07:58</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery.mCustomScrollbar.js">
+      <publishTime>02/08/2018 18:07:59</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery.mousewheel.min.js">
+      <publishTime>02/08/2018 18:07:59</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery.unobtrusive-ajax.js">
+      <publishTime>02/08/2018 18:07:59</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery.validate.js">
+      <publishTime>02/08/2018 18:07:59</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery.validate.min.js">
+      <publishTime>02/08/2018 18:07:59</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery.validate.unobtrusive.js">
+      <publishTime>02/08/2018 18:07:59</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/jquery.validate.unobtrusive.min.js">
+      <publishTime>02/08/2018 18:07:59</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/knockout-2.1.0.debug.js">
+      <publishTime>02/08/2018 18:07:59</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/knockout-2.1.0.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/modernizr-2.5.3.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/platform.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/slider-effect.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/tab-content.js">
+      <publishTime>02/08/2018 18:07:59</publishTime>
+    </File>
+    <File Include="Assets/Scripts/libs/tooltip.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/ui/alawsvn.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/ui/jquery.autofix_anything.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/ui/jquery.mCustomScrollbar.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/ui/popup.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/ui/resources.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/ui/slider-carousel.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/ui/slider-effect.js">
+      <publishTime>02/08/2018 18:08:00</publishTime>
+    </File>
+    <File Include="Assets/Scripts/ui/tooltip.js">
+      <publishTime>02/08/2018 18:08:01</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>02/08/2018 18:08:03</publishTime>
+    </File>
+    <File Include="bin/DevTrends.MvcDonutCaching.dll">
+      <publishTime>02/08/2018 18:08:03</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.AspNet.dll">
+      <publishTime>02/08/2018 18:08:04</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.Core.dll">
+      <publishTime>02/08/2018 18:08:05</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.Consumer.dll">
+      <publishTime>02/08/2018 18:08:04</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.dll">
+      <publishTime>02/08/2018 18:08:04</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.dll">
+      <publishTime>02/08/2018 18:08:06</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.RelyingParty.dll">
+      <publishTime>02/08/2018 18:08:05</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>02/08/2018 18:08:08</publishTime>
+    </File>
+    <File Include="bin/ICSoft.CMSLib.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="bin/ICSoft.CMSLibEstate.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="bin/ICSoft.CMSViewLib.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="bin/ICSoft.HelperLib.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="bin/ICSoft.LawDocsLib.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="bin/ICSoft.PartnerLib.dll">
+      <publishTime>02/08/2018 18:08:08</publishTime>
+    </File>
+    <File Include="bin/LawsVNEN.dll">
+      <publishTime>04/11/2018 08:38:21</publishTime>
+    </File>
+    <File Include="bin/LawsVNEN.pdb">
+      <publishTime>04/11/2018 08:38:21</publishTime>
+    </File>
+    <File Include="bin/LibCommon.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="bin/LibDatabase.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="bin/LibUtils.dll">
+      <publishTime>02/08/2018 18:08:08</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>02/08/2018 18:08:08</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.WebPages.OAuth.dll">
+      <publishTime>02/08/2018 18:08:08</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>02/08/2018 18:08:10</publishTime>
+    </File>
+    <File Include="bin/NLog.dll">
+      <publishTime>02/08/2018 18:08:10</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.dll">
+      <publishTime>02/08/2018 18:08:11</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>02/08/2018 18:08:10</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.WebRequest.dll">
+      <publishTime>02/08/2018 18:08:09</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>02/08/2018 18:08:11</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>02/08/2018 18:08:11</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>02/08/2018 18:08:11</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>02/08/2018 18:08:13</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>02/08/2018 18:08:11</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>02/08/2018 18:08:13</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>02/08/2018 18:08:12</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>02/08/2018 18:08:13</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>02/08/2018 18:08:12</publishTime>
+    </File>
+    <File Include="bin/vi/LawsVNEN.resources.dll">
+      <publishTime>04/11/2018 08:38:21</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="bin/WebMatrix.Data.dll">
+      <publishTime>02/08/2018 18:08:12</publishTime>
+    </File>
+    <File Include="bin/WebMatrix.WebData.dll">
+      <publishTime>02/08/2018 18:08:13</publishTime>
+    </File>
+    <File Include="DLL/Antlr3.Runtime.dll">
+      <publishTime>02/08/2018 18:08:03</publishTime>
+    </File>
+    <File Include="DLL/DevTrends.MvcDonutCaching.dll">
+      <publishTime>02/08/2018 18:08:03</publishTime>
+    </File>
+    <File Include="DLL/DotNetOpenAuth.AspNet.dll">
+      <publishTime>02/08/2018 18:08:04</publishTime>
+    </File>
+    <File Include="DLL/DotNetOpenAuth.Core.dll">
+      <publishTime>02/08/2018 18:08:05</publishTime>
+    </File>
+    <File Include="DLL/DotNetOpenAuth.OAuth.Consumer.dll">
+      <publishTime>02/08/2018 18:08:04</publishTime>
+    </File>
+    <File Include="DLL/DotNetOpenAuth.OAuth.dll">
+      <publishTime>02/08/2018 18:08:04</publishTime>
+    </File>
+    <File Include="DLL/DotNetOpenAuth.OpenId.dll">
+      <publishTime>02/08/2018 18:08:06</publishTime>
+    </File>
+    <File Include="DLL/DotNetOpenAuth.OpenId.RelyingParty.dll">
+      <publishTime>02/08/2018 18:08:05</publishTime>
+    </File>
+    <File Include="DLL/EntityFramework.dll">
+      <publishTime>02/08/2018 18:08:08</publishTime>
+    </File>
+    <File Include="DLL/ICSoft.CMSLib.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="DLL/ICSoft.CMSLibEstate.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="DLL/ICSoft.CMSViewLib.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="DLL/ICSoft.HelperLib.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="DLL/ICSoft.LawDocsLib.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="DLL/ICSoft.PartnerLib.dll">
+      <publishTime>02/08/2018 18:08:08</publishTime>
+    </File>
+    <File Include="DLL/LibCommon.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="DLL/LibDatabase.dll">
+      <publishTime>02/08/2018 18:08:07</publishTime>
+    </File>
+    <File Include="DLL/LibUtils.dll">
+      <publishTime>02/08/2018 18:08:08</publishTime>
+    </File>
+    <File Include="DLL/Microsoft.Web.Infrastructure.dll">
+      <publishTime>02/08/2018 18:08:08</publishTime>
+    </File>
+    <File Include="DLL/Microsoft.Web.WebPages.OAuth.dll">
+      <publishTime>02/08/2018 18:08:08</publishTime>
+    </File>
+    <File Include="DLL/Newtonsoft.Json.dll">
+      <publishTime>02/08/2018 18:08:10</publishTime>
+    </File>
+    <File Include="DLL/NLog.config">
+      <publishTime>02/08/2018 18:08:08</publishTime>
+    </File>
+    <File Include="DLL/NLog.dll">
+      <publishTime>02/08/2018 18:08:10</publishTime>
+    </File>
+    <File Include="DLL/System.Net.Http.dll">
+      <publishTime>02/08/2018 18:08:11</publishTime>
+    </File>
+    <File Include="DLL/System.Net.Http.Formatting.dll">
+      <publishTime>02/08/2018 18:08:10</publishTime>
+    </File>
+    <File Include="DLL/System.Net.Http.WebRequest.dll">
+      <publishTime>02/08/2018 18:08:09</publishTime>
+    </File>
+    <File Include="DLL/System.Web.Helpers.dll">
+      <publishTime>02/08/2018 18:08:11</publishTime>
+    </File>
+    <File Include="DLL/System.Web.Http.dll">
+      <publishTime>02/08/2018 18:08:11</publishTime>
+    </File>
+    <File Include="DLL/System.Web.Http.WebHost.dll">
+      <publishTime>02/08/2018 18:08:11</publishTime>
+    </File>
+    <File Include="DLL/System.Web.Mvc.dll">
+      <publishTime>02/08/2018 18:08:13</publishTime>
+    </File>
+    <File Include="DLL/System.Web.Optimization.dll">
+      <publishTime>02/08/2018 18:08:11</publishTime>
+    </File>
+    <File Include="DLL/System.Web.Razor.dll">
+      <publishTime>02/08/2018 18:08:13</publishTime>
+    </File>
+    <File Include="DLL/System.Web.WebPages.Deployment.dll">
+      <publishTime>02/08/2018 18:08:12</publishTime>
+    </File>
+    <File Include="DLL/System.Web.WebPages.dll">
+      <publishTime>02/08/2018 18:08:13</publishTime>
+    </File>
+    <File Include="DLL/System.Web.WebPages.Razor.dll">
+      <publishTime>02/08/2018 18:08:12</publishTime>
+    </File>
+    <File Include="DLL/WebGrease.dll">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="DLL/WebMatrix.Data.dll">
+      <publishTime>02/08/2018 18:08:12</publishTime>
+    </File>
+    <File Include="DLL/WebMatrix.WebData.dll">
+      <publishTime>02/08/2018 18:08:13</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>02/08/2018 18:07:54</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>02/08/2018 18:07:54</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>02/08/2018 18:07:54</publishTime>
+    </File>
+    <File Include="Views/Account/AccountProfile.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/Account/ChangePassword.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/Account/ForgotPassword.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/Account/HistoryTransactions.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/Account/Login.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/Account/MyDocuments.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/Account/NewUserActive.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/Account/Register.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/Account/RenewalOfService.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/Account/ResetPassword.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/Account/ServiceConversion.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/Account/Subscriber.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/BusinessInformationSwitchEditMode.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/BusinessInformationSwitchViewMode.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/PartialAccountProfileSwitchEditMode.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/PartialAccountProfileSwitchViewMode.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/PartialDocSendMail.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/PartialGopY.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/PartialMyDocuments.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/PartialPaymentTransactions_GetPage.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/PartialRenewalOfServiceAccountProfileSwitchEditMode.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/PartialRenewalOfServiceAccountProfileSwitchViewMode.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/PartialTaxInvoice.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/SubscribeToNewslettersEditMode.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Account/SubscribeToNewslettersViewMode.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/DocsList.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/DocsNewest.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/Docs_GetRelate.cshtml">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/PartialListBanTinLuatVN.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/PartialLogin.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/AjaxTemplates/SearchDocsList.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/Docs/Content.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/Docs/DetailFull.cshtml">
+      <publishTime>03/21/2018 09:43:03</publishTime>
+    </File>
+    <File Include="Views/Docs/Download.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/Docs/Effect.cshtml">
+      <publishTime>02/08/2018 18:08:15</publishTime>
+    </File>
+    <File Include="Views/Docs/Index.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Docs/NewDocuments.cshtml">
+      <publishTime>04/09/2018 14:18:32</publishTime>
+    </File>
+    <File Include="Views/Docs/Relate.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Docs/Summary.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Docs/Vietnamese.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Error/Error403.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Error/Error404.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Error/Error500.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Error/Index.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Error/NotAuth.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Home/DocSearch.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/News/ArticleDetail.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/News/BanTin.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/News/BanTinLuatVN.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/News/UserGuide.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Redirect/OldUrl.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Redirect/OldUrlDinamic.cshtml">
+      <publishTime>02/08/2018 18:08:16</publishTime>
+    </File>
+    <File Include="Views/Shared/PartialBankPayment.cshtml">
+      <publishTime>02/08/2018 18:08:18</publishTime>
+    </File>
+    <File Include="Views/Shared/PartialDocUtility.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/PartialFullSearchDetail.cshtml">
+      <publishTime>02/08/2018 18:08:18</publishTime>
+    </File>
+    <File Include="Views/Shared/PartialFullSearchHome.cshtml">
+      <publishTime>04/09/2018 15:00:45</publishTime>
+    </File>
+    <File Include="Views/Shared/PartialPaginationAjaxPageNumber.cshtml">
+      <publishTime>04/09/2018 12:01:23</publishTime>
+    </File>
+    <File Include="Views/Shared/Permission/Docs/PartialPermissionDocContent.cshtml">
+      <publishTime>02/08/2018 18:08:18</publishTime>
+    </File>
+    <File Include="Views/Shared/Permission/Docs/PartialPermissionDocDownload.cshtml">
+      <publishTime>02/08/2018 18:08:18</publishTime>
+    </File>
+    <File Include="Views/Shared/Permission/Docs/PartialPermissionDocsRelate.cshtml">
+      <publishTime>02/08/2018 18:08:18</publishTime>
+    </File>
+    <File Include="Views/Shared/Permission/Docs/PartialPermissionDocSummary.cshtml">
+      <publishTime>03/21/2018 08:58:01</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutBanTin.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutContent.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_LayoutDoc.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialContentLeft.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialContentRight.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialFooter.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialFullSearch.cshtml">
+      <publishTime>04/03/2018 17:37:02</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialHeader.cshtml">
+      <publishTime>03/19/2018 08:42:28</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialLinkDocumentAttribute.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialLinkDocumentAttributeRight.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialMenuLeft.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialNewsLetterEmail.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialNewsLetterLuatVN.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialTermsConditionsView.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialWidgetUser.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Shared/_PartialWidgetUserHeader.cshtml">
+      <publishTime>02/08/2018 18:08:17</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>02/08/2018 18:08:14</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/03/2018 17:37:47</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

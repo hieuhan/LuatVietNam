@@ -1,0 +1,27 @@
+﻿@using VanBanLuat.Librarys
+@model VanBanLuatVN.Models.DocViewModel.DocFeedback
+@using (Ajax.BeginForm("DocFeedBack", "Account", null, new AjaxOptions
+{
+    HttpMethod = "Post",
+    OnBegin = "vbluat.ajaxEvents.OnBegin('Gửi ngay')",
+    OnSuccess = "vbluat.ajaxEvents.OnSuccessAlert(data, status, xhr)",
+    OnFailure = "vbluat.ajaxEvents.OnFailure"
+}, new { id = "DocFeedbackForm" }))
+{
+    <div class="form-up">
+        <strong>@VbLuatUser.CustomerFullName</strong> <span style="color: #888;">(@VbLuatUser.CustomerName)</span>
+        <span class="nocheck" style="margin-top: 0;"><img src="@Url.Content("~/assets/images/warning.png")"/></span>
+    </div>
+    <div class="form-up">
+        <span id="DocTitle"></span>
+        @Html.HiddenFor(m => m.DocName)
+    </div>
+    <div class="form-up">
+        @Html.TextAreaFor(m => m.FeedbackContent, new { @class = "input-text ms1 font14", style = "height: 80px; color: #000; border: none;" })
+        @Html.ValidationMessageFor(m => m.FeedbackContent, "", new { @class = "text-danger" })
+    </div>
+    <center class="form-center">
+        <button class="btn-default guingay" style="margin-right: 20px;">Gửi ngay</button>
+        <button class="btn-default guingay btn-reset" onclick="window.location.href='@(Request.UrlReferrer != null ? Request.UrlReferrer.AbsoluteUri : Constants.ROOT_PATH)'" style="color: #888;">Hủy</button>
+    </center>
+}

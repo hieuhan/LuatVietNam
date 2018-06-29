@@ -1,0 +1,291 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutDocument.cshtml";
+}
+@using ICSoft.ViewLibV3
+@using VanBanLuat.Librarys
+@using Constants = VanBanLuat.Librarys.Constants
+@model VanBanLuatVN.Models.DocViewModel.DocDetailModel
+<div class="breadcrumb">
+    <a class="breadcrumb-item" href="@Constants.ROOT_PATH" title="Trang chủ">Trang chủ</a>
+    @if (Model.Docs.lDocFields.HasValue())
+    {Model.FieldId = Model.Docs.lDocFields[0].FieldId;
+        @:/ <span class="breadcrumb-item xanh">@for (int i = 0; i < Model.Docs.lDocFields.Count; i++)
+                                               {
+                                                   @Model.Docs.lDocFields[i].FieldDesc @(i == Model.Docs.lDocFields.Count-1 ? string.Empty : ", ")
+                                               }</span>
+    }
+</div>
+<div class="row-tab">
+    <div class="tab-noidung">
+        <a href="#" class="tab-noidung-item" data-href="#tomtat">Thuộc tính</a>
+        <a href="#" class="tab-noidung-item" data-href="#noidung">Nội dung</a>
+        @*<a href="#" class="tab-noidung-item" data-href="#lienquan">Tiêu chuẩn liên quan</a>*@
+        @*<a href="#" class="tab-noidung-item" data-href="#luocdo">Lược đồ</a>*@
+        <a href="#" class="tab-noidung-item" data-href="#taive">Tải về</a>
+    </div>
+    <div class="share-noidung scrolltop-mobi">
+        @if (Model.Docs.lDocIndexes.HasValue())
+        {
+            <div class="share-items">
+                <div class="button-dropdown">
+                    <a href="#" rel="nofollow" title="Mục lục văn bản" class="share-icon mucluc dropdown-toggle"><img src="@Url.Content("~/assets/images/muc-luc.png")" style="float: left;height: 18px;" /></a>
+                    <div class="dropdown-menu fixmobi-mucluc" style="width: 300px; right: 0;">
+                        @if (Model.Docs.lDocIndexes.HasValue())
+                        {
+                            <div class="widget cat2" style="margin-bottom: 0;">
+                                <h3 class="widget-title mluc"> Mục lục văn bản</h3>
+                                <div class="widget-container">
+                                    <div class="content-scroll-1" style="max-height:350px;">
+                                        <div class="nav-p15">
+                                            <ul class="nav-mluc font13">
+                                                @foreach (var item in Model.Docs.lDocIndexes)
+                                                {
+                                                    <li class="list-mluc-mobi"><a href="@Model.Docs.GetDocUrl()#@item.Bookmark" class="@(item.Bookmark)">@(Html.Raw(item.Title))</a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="share-items">
+            <a href="#" title="Lưu văn bản quan tâm" class="save-document share-icon tai" data-id="@Model.Docs.DocId"></a>
+        </div>
+        @if (!string.IsNullOrEmpty(Model.Docs.DocContent))
+        {<div class="share-items">
+                <a href="#" title="In nội dung văn bản" class="doc-print share-icon in"></a>
+            </div>
+        }
+        <div class="share-items">
+            <a href="#" title="Gửi email link văn bản" class="doc-send-mail-form-popup share-icon mail" data-action="mail-van-ban.html"></a>
+        </div>
+        <div class="share-items">
+            <a href="#" title="Gửi góp ý văn bản" class="doc-feedback-form-popup share-icon gopy" data-action="gop-y-van-ban.html" data-name="@Model.Docs.DocName"></a>
+        </div>
+        <div class="share-items">
+            <a href="#" title="Chia sẻ qua Google" data-type="googleplus" data-url="@Model.WebsiteCanonical.TrimmedOrDefault(Model.AbsoluteUri)" data-title="@Model.WebsiteTitle" ata-description="@Model.WebsiteDescription" data-media="@Url.Content("~/assets/images/logo.png", true)" class="social-share share-icon thong-bao"></a>
+        </div>
+        <div class="share-items">
+            <a href="#" title="Chia sẻ qua Facebook" data-type="facebook" data-url="@Model.WebsiteCanonical.TrimmedOrDefault(Model.AbsoluteUri)" data-title="@Model.WebsiteTitle" ata-description="@Model.WebsiteDescription" data-media="@Url.Content("~/assets/images/logo.png", true)" class="social-share share-icon face"></a>
+        </div>
+    </div>
+</div>
+
+<!-- Bengin content-->
+<div class="half-zone content-left">
+    <h1 class="title-singer">@Html.Raw(Model.Docs.H1Tag.TrimmedOrDefault(Model.Docs.DocName).ToString())</h1>
+    <!-- tomtat-->
+    <article id="tomtat" class="detailfull cat-box-section @(string.IsNullOrEmpty(Model.Docs.DocSummary) ? "none" : string.Empty)">
+        <div class="bgchitiet">
+            <div class="thuoctinh p15 bgffffff">
+                <div class="tievb">Tiêu chuẩn Việt Nam</div>
+                <div class="cat-box-content fix-box">
+                    <div class="col-thuoctinh">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr class="row-table">
+                                    <td class="col2-table fixtd1 bold">Số hiệu: </td>
+                                    <td class="col2-table fixtd2">@Model.Docs.DocIdentity</td>
+                                </tr>
+                                <tr class="row-table">
+                                    <td class="col2-table fixtd1 bold">Cơ quan ban hành: </td>
+                                    <td class="col2-table fixtd2">@Model.Docs.OrganName </td>
+                                </tr>
+                                <tr class="row-table">
+                                    <td class="col2-table fixtd1 bold">@string.Format("{0} ban hành:", Model.Docs.IssueDate != DateTime.MinValue ? "Ngày" : "Năm") </td>
+                                    <td class="col2-table fixtd2">@Model.Docs.IssueDate.toString(Model.Docs.IssueYear.ToString()) </td>
+                                </tr>
+                                <tr class="row-table">
+                                    <td class="col2-table fixtd1 bold">Người ký: </td>
+                                    <td class="col2-table fixtd2">@Model.Docs.SignerName</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-thuoctinh">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr class="row-table">
+                                    <td class="col2-table fixtd1 bold">Loại văn bản: </td>
+                                    <td class="col2-table fixtd2">@Model.Docs.DocTypeName</td>
+                                </tr>
+                                <tr class="row-table">
+                                    <td class="col2-table fixtd1 bold">Lĩnh vực:</td>
+                                    <td class="col2-table fixtd2"> @Model.Docs.FieldName.TrimmedOrDefault("Đang cập nhật")</td>
+                                </tr>
+                                <tr class="row-table">
+                                    <td class="col2-table fixtd1 bold">Hiệu lực: </td>
+                                    <td class="col2-table fixtd2">
+                                        @if (Model.Docs.EffectDate != DateTime.MinValue)
+                                        {
+                                            @Model.Docs.EffectDate.toString()
+                                        }
+                                        else
+                                        {
+                                            @:Đang cập nhật
+                                        }
+                                    </td>
+                                </tr>
+                                <tr class="row-table">
+                                    <td class="col2-table fixtd1 bold">Trình trạng hiệu lực: </td>
+                                    <td class="col2-table fixtd2"> @Model.Docs.EffectStatusName.TrimmedOrDefault("Đang cập nhật")</td>
+                                </tr>
+                                <tr class="row-table">
+                                    <td class="col2-table fixtd1 bold"></td>
+                                    <td class="col2-table fixtd2"> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            @if (Model.ListDocFiles.HasValue())
+            {
+                <div class="entry p20 bgffffff">
+                    <div class="tievb" style="margin-top: 15px;">Tải văn bản</div>
+                    <div class="cat-box-content">
+                        @foreach (var item in Model.ListDocFiles)
+                        {
+                            Model.FilePath = item.FilePath.ToLower();
+                            Model.FileUrl = Docs.Static_GetDownloadUrl(Constants.WEBSITE_IMAGEDOMAIN, Model.Docs.DocUrl, Model.FilePath);
+                            if (Model.FilePath.EndsWith(".doc") || Model.FilePath.EndsWith(".docx"))
+                            {
+                                <a href="@Model.FileUrl" class="btn-taivb">@item.DocFileName.TrimmedOrDefault("File") (.doc) </a>
+                            }
+                            else if (Model.FilePath.EndsWith(".zip"))
+                            {
+                                <a href="@Model.FileUrl" class="btn-taivb">@item.DocFileName.TrimmedOrDefault("File") (.zip)</a>
+                            }
+                            else if (Model.FilePath.EndsWith(".pdf"))
+                            {
+                                <a href="@Model.FileUrl" class="btn-taivb">@item.DocFileName.TrimmedOrDefault("File") (.pdf)</a>
+                            }
+                            else
+                            {
+                                <a href="@Model.FileUrl" class="btn-taivb">@item.DocFileName.TrimmedOrDefault("File")</a>
+                            }
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </article>
+    <!-- End tomtat-->
+    <!-- noidung-->
+    <article id="noidung" class="detailfull cat-box-section @(string.IsNullOrEmpty(Model.Docs.DocContent) ? "none" : "print-doc-content")">
+        <div class="entry p20 bgffffff">
+            @if (!string.IsNullOrEmpty(Model.Docs.DocContent))
+            {
+                @Html.Raw(Model.Docs.DocContent)
+            }
+            else if (!string.IsNullOrEmpty(Model.FilePath))
+            {
+                <embed class="content-fixed" src="@(Docs.Static_GetViewUrl(Constants.WEBSITE_IMAGEDOMAIN, Model.Docs.DocUrl, Model.FilePath))" width="100%" height="1000" type='application/pdf'>
+            }
+            else
+            {
+                <p>Nội dung văn bản đang được cập nhật, Quý khách vui lòng quay lại sau!</p>
+            }
+        </div>
+    </article>
+    <!--End noidung-->
+    <!-- lienquan-->
+    @*@{Html.RenderAction("PartialDocRelate", "Shared", new { model = Model });}*@
+    <!-- End lienquan-->
+    <!--taive-->
+    <article id="taive" class="detailfull cat-box-section none">
+        <div class="boxcontent p20 bgffffff">
+            <div class="item-col">
+                <div class="tie-tai">Tải văn bản tiếng việt</div>
+                <div class="cat-box-content">
+                    @if (Model.ListDocFiles.HasValue())
+                    {
+                        foreach (var item in Model.ListDocFiles)
+                        {
+                            Model.FilePath = item.FilePath.ToLower();
+                            Model.FileUrl = Docs.Static_GetDownloadUrl(Constants.WEBSITE_IMAGEDOMAIN, Model.Docs.DocUrl, Model.FilePath);
+                            if (Model.FilePath.EndsWith(".doc") || Model.FilePath.EndsWith(".docx"))
+                            {
+                                <a href="@Model.FileUrl" class="btn-taivb">@item.DocFileName.TrimmedOrDefault("File") (.doc) </a>
+                            }
+                            else if (Model.FilePath.EndsWith(".zip"))
+                            {
+                                <a href="@Model.FileUrl" class="btn-taivb">@item.DocFileName.TrimmedOrDefault("File") (.zip)</a>
+                            }
+                            else if (Model.FilePath.EndsWith(".pdf"))
+                            {
+                                <a href="@Model.FileUrl" class="btn-taivb">@item.DocFileName.TrimmedOrDefault("File") (.pdf)</a>
+                            }
+                            else
+                            {
+                                <a href="@Model.FileUrl" class="btn-taivb">@item.DocFileName.TrimmedOrDefault("File")</a>
+                            }
+                        }
+                    }
+                    else
+                    {
+                        <p>File văn bản tiếng Việt đang được cập nhật, Quý khách vui lòng quay lại sau!</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </article>
+    <!--End taive-->
+    @{Html.RenderAction("PartialRelateFieldDoc", "Shared", new { issueDate = Model.Docs.IssueDate, fieldId = Model.FieldId });}
+</div>
+<!-- End content-->
+<!-- Bengin aside-270-->
+<aside class="half-zone sidebar-270">
+    <!-- Bengin widget-->
+    <div class="widget">
+        <div class="ads">
+            @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+        </div>
+    </div>
+    <!-- End widget-->
+    <!-- mucluc-->
+    @if (Model.Docs.lDocIndexes.HasValue())
+    {
+        <div id="mucluc">
+            <div class="widget cat2">
+                <h3 class="widget-title mluc"> Mục lục văn bản</h3>
+                <div class="widget-container">
+                    <div class="content-scroll-1" style="max-height:400px;">
+                        <div class="nav-p15">
+                            <ul class="nav-mluc font13">
+                                @foreach (var item in Model.Docs.lDocIndexes)
+                                {
+                                    <li class="list-mluc"><a href="@Model.Docs.GetDocUrl()#@item.Bookmark" class="@(item.Bookmark)">@(Html.Raw(item.Title))</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = Constants.CateId_ThongBaoVBMoi, rowAmount = Constants.RowAmount3, viewName = "PartialNoticeNewDocument" });}
+        </div>
+    }else{
+        { Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = Constants.CateId_ThongBaoVBMoi, rowAmount = Constants.RowAmount3, viewName = "PartialNoticeNewDocument" });}
+    }
+</aside>
+<!-- End aside-270-->
+<!--luocdo-->
+@*@{Html.RenderAction("PartialDocVietNamStandardsDiagram", "Shared", new { model = Model });}*@
+<!--End lucodo-->
+@section FooterSection{
+    <script type="text/javascript">
+        $().vbluatDetailFull();
+        $('.social-share').vbluatSocial();
+        $('#contentsWrapper').vbluatInfiteScroll({
+            contentsWrapperSelector: '#contentsWrapper',
+            contentSelector: '.pcontent',
+            nextSelector: '#pnext',
+            docDetail: true
+        }); $('.share-noidung').sharePanelFixed();
+    </script>
+}

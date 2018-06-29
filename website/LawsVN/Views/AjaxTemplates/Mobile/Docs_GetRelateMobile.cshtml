@@ -1,0 +1,27 @@
+﻿@model LawsVN.Models.Templates.DocsNewest
+@using ICSoft.CMSViewLib
+@using ICSoft.LawDocsLib
+@using LawsVN.Library
+@using LawsVN.Models
+@if (Model.mDocsViewDetail != null)
+{
+    if (Model.mDocsViewDetail.lDocRelates.HasValue())
+        {
+            for (int index = 0; index < Model.mDocsViewDetail.lDocRelates.Count; index++)
+            {
+                DocRelates mDocRelates = Model.mDocsViewDetail.lDocRelates[index];
+                <div class="first-news dashed">
+                    <h3 class="post-title"><a href="@mDocRelates.DocUrl" title="@mDocRelates.DocName">@mDocRelates.DocName</a></h3>
+                    <div class="post-time">
+                        <div class="post-time-item">Ban hành: <span class="color2">@(mDocRelates.IssueYear == 0 ? mDocRelates.IssueDate.toString("dd/MM/yyyy") : mDocRelates.IssueYear.ToString()) </span></div>
+                        <div class="post-time-item">Hiệu lực: <span class="color2">@mDocRelates.EffectStatusName</span></div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <em>Chưa có văn bản liên quan</em>
+        }
+}
+@{Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.PartialPaginationAjax });}

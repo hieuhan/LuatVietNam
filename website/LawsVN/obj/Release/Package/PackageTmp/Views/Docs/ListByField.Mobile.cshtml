@@ -1,0 +1,133 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@using System.Web.Mvc.Html
+@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@model DocFieldModel
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.mPartialPaginationAjax.PageIndex, totalPage = Model.mPartialPaginationAjax.TotalPage, pageSize = Model.mPartialPaginationAjax.PageSize });}
+}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>
+    @if (Model.mFieldDisplays != null && Model.mFieldDisplays.FieldId > 0)
+    {
+        <span> »</span><span class="breadcrumb-item color1">@Model.mFieldDisplays.FieldName </span>
+    }
+</div>
+
+<section class="box-section">
+    @if (Model.mFieldDisplays != null && Model.mFieldDisplays.FieldId > 0)
+    {
+    <div class="title2">
+        <h1 class="title-cat2 vien"> @(string.IsNullOrEmpty(Model.SeoHeader) ? Model.mFieldDisplays.FieldName.ToString() : Model.SeoHeader.ToString())</h1>
+    </div>
+    }
+    <!-- box-seclect-->
+    <div class="box-seclect1" id="ListByFieldTab">
+        @using (Ajax.BeginForm(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName, new
+        {
+            docGroupId = Model.mPartialPaginationAjax.DocGroupId,
+            //fieldId = Model.mPartialPaginationAjax.FieldId,
+            languageId = Model.mPartialPaginationAjax.LanguageId,
+            updateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+            insertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode,
+            controllerName = Model.mPartialPaginationAjax.ControllerName,
+            actionName =  Model.mPartialPaginationAjax.ActionName,
+            pageSize = Model.mPartialPaginationAjax.PageSize,
+            linkLimit = Model.mPartialPaginationAjax.LinkLimit,
+            postTimeRight = Model.mPartialPaginationAjax.PostTimeRight,
+            isMobile = true
+        }, new AjaxOptions
+        {
+            HttpMethod = "Get",
+            UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+            InsertionMode = InsertionMode.Replace,
+            OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId),
+            OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+        }))
+        {
+            if (Model.ListFieldDisplays.HasValue())
+            {
+                <div class="col3-seclect1">
+                    <select class="select-option select-onchange" name="fieldId">
+                        <option value="0" title="@Resource.AllFields">@Resource.AllFields</option>
+                        @foreach (FieldDisplays mfield in Model.ListFieldDisplays)
+                        {
+                            if (mfield.FieldId == 0)
+                            {
+                                continue;
+                            }
+                            <option value="@mfield.FieldId" title="@mfield.FieldName" @(mfield.FieldId == Model.mPartialPaginationAjax.FieldId ? "selected" : string.Empty)>@mfield.FieldName</option>
+                        }
+                    </select>
+                </div>
+            }
+            if (Model.ListEffectStatus.HasValue())
+            {
+                <div class="col3-seclect1">
+                    @Html.DropdownListPermission("EffectStatusId","EffectStatusId", "select-option select-onchange", new SelectList(Model.ListEffectStatus, "EffectStatusId", "EffectStatusDesc", Model.EffectStatusId))
+                </div>
+            }
+            if (Model.ListDocTypes.HasValue())
+            {
+                <div class="col3-seclect1" style="margin-right: 0;">
+                    <select class="select-option select-onchange" name="docTypeId">
+                        <option value="0" title="@Resource.DocTypes">@Resource.DocTypes</option>
+                        @foreach (DocTypes mDocTypes in Model.ListDocTypes)
+                        {
+                            <option value="@mDocTypes.DocTypeId" title="@mDocTypes.DocTypeDesc">@mDocTypes.DocTypeDesc</option>
+                        }
+                    </select>
+                </div>
+            }
+        }
+    </div>
+    <!-- End-->
+    <!-- content-->
+    <div class="cat-box-content" id="ListByField">
+        @if (Model.ListDocsView.HasValue())
+        {
+            for (int i = 0; i < Model.ListDocsView.Count; i++)
+            {
+                var mDocsView = Model.ListDocsView[i];
+                var number = i + (Model.mPartialPaginationAjax.PageIndex > 0 ? Model.mPartialPaginationAjax.PageIndex - 1 : Model.mPartialPaginationAjax.PageIndex) * Model.mPartialPaginationAjax.PageSize + 1;
+                <div class="first-news @(i == Model.ListDocsView.Count - 1 ? "last" : "dashed")">
+                    <h3 class="post-title"><a href="@mDocsView.GetDocUrl()" title="@mDocsView.DocName"><span class="stt">(@number.ToString("#00"))</span>@mDocsView.DocName</a></h3>
+                    <div class="sapo">
+                        <p>@Html.Raw(mDocsView.DocSummary)</p>
+                    </div>
+                    <div class="post-time">
+                        @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView } });}
+                    </div>
+                </div>
+            }
+            {
+                Model.mPartialPaginationAjax.IsMobile = true;
+                Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax });
+            }
+        }
+        else
+        {
+            <div class="first-news dashed">
+                <h3 class="post-title">@Resource.NoMatchingDocumentFound</h3>
+            </div>
+        }
+    </div>
+    <!-- End-->
+</section>
+
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: { id: 0 }
+        });
+    </script>
+}
+

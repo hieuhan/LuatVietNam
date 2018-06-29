@@ -1,0 +1,13 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@model List<Wards>
+<option value="0">Phường / xã</option>
+@if (Model.HasValue())
+{
+    foreach (var item in Model)
+    {
+        <option value="@item.WardId" title="@item.WardDesc">
+            @item.WardDesc.Truncate(Constants.Truncate20)
+        </option>
+    }
+}

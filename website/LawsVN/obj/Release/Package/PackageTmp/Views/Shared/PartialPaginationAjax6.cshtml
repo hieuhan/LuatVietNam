@@ -1,0 +1,207 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@using LawsVN.Models
+@model PartialPaginationAjax
+@{
+    int start = 1;
+    Model.LinkLimit = Constants.RowAmount3;
+    int pageCount = (int)Math.Ceiling(Model.TotalPage / (double)Model.PageSize);
+    int end = pageCount;
+    if (pageCount > Model.LinkLimit)
+    {
+        var middle = (int)Math.Ceiling(Model.LinkLimit / 2d) - 1;
+        var below = Model.PageIndex - middle;
+        var above = Model.PageIndex + middle;
+        if (below < 2)
+        {
+            above = Model.LinkLimit;
+            below = 1;
+        }
+        else if (above > (pageCount - 2))
+        {
+            above = pageCount;
+            below = pageCount - Model.LinkLimit + 1;
+        }
+        start = below;
+        end = above;
+    }
+<div class="pagination" style="margin-bottom: 50px; margin-top: 5px;">
+    <div class="pagination-left">
+        <span class="text-pagination">@Resource.Display:</span>
+        <div class="select-pagination">
+            @using (Ajax.BeginForm(Model.ActionName, Model.ControllerName,
+                new
+                {
+                    categoryId = Model.CategoryId
+                    ,Year = Model.Year
+                    , Month = Model.Month
+                },
+                new AjaxOptions
+                {
+                    HttpMethod = Model.LawsAjaxOptions.HttpMethod.TrimmedOrDefault("Get"),
+                    UpdateTargetId = Model.LawsAjaxOptions.UpdateTargetId,
+                    InsertionMode = Model.LawsAjaxOptions.InsertionMode,
+                    OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.LawsAjaxOptions.UpdateTargetId),
+                    OnComplete = string.Format("lawsVn.ajaxEvents.OnCompleteV2('{0}')", Model.LawsAjaxOptions.UpdateTargetId),
+                    OnSuccess = Model.LawsAjaxOptions.OnSuccess.TrimmedOrDefault(string.Empty)
+                }))
+            {
+                <select class="dropdown select-onchange" tabindex="1" name="pageSize">
+                    @for (int index = 1; index <= 5; index++)
+                    {
+                        <option value="@(index * 6)" @(index * 6 == Model.PageSize ? "selected" : string.Empty) data-title="@string.Format("Hiển thị {0} kết quả", index * 6)">@(index * 6) kết quả</option>
+                    }
+                </select>
+            }
+        </div>
+    </div>
+
+    <div class="pagination-right2">
+        @if (Model.PageIndex > 1)
+        {
+            @Ajax.ActionLink(@"«", string.Empty, string.Empty,
+                     null,
+                     new AjaxOptions
+                     {
+                         Url = Url.Action(Model.ActionName, Model.ControllerName, new
+                         {
+                             categoryId = Model.CategoryId
+                             ,Year = Model.Year
+                             , Month = Model.Month
+                             , pageSize = Model.PageSize
+                             ,page = Model.PageIndex - 1
+                         }),
+                         UpdateTargetId = Model.LawsAjaxOptions.UpdateTargetId,
+                         InsertionMode = Model.LawsAjaxOptions.InsertionMode,
+                         HttpMethod = "Get",
+                         OnBegin = "lawsVn.ajaxEvents.OnBegin('" + Model.LawsAjaxOptions.UpdateTargetId + "')",
+                         OnComplete = "lawsVn.ajaxEvents.OnComplete('" + Model.LawsAjaxOptions.UpdateTargetId + "')"
+                     }, new { @class = "pagination-item" })
+        }
+        @if (start > 1)
+        {
+            @Ajax.ActionLink(@"1", string.Empty, string.Empty,
+                     null,
+                     new AjaxOptions
+                     {
+                         Url = Url.Action(Model.ActionName, Model.ControllerName, new
+                         {
+                             categoryId = Model.CategoryId
+                             ,Year = Model.Year
+                             , Month = Model.Month
+                             , pageSize = Model.PageSize
+                             ,page = 1
+                         }),
+                         UpdateTargetId = Model.LawsAjaxOptions.UpdateTargetId,
+                         InsertionMode = Model.LawsAjaxOptions.InsertionMode,
+                         HttpMethod = "Get",
+                         OnBegin = "lawsVn.ajaxEvents.OnBegin('" + Model.LawsAjaxOptions.UpdateTargetId + "')",
+                         OnComplete = "lawsVn.ajaxEvents.OnComplete('" + Model.LawsAjaxOptions.UpdateTargetId + "')"
+                     }, new { @class = "pagination-item" })
+            if (start > 3)
+            {
+                @Ajax.ActionLink(@"2", string.Empty, string.Empty,
+                         null,
+                         new AjaxOptions
+                         {
+                             Url = Url.Action(Model.ActionName, Model.ControllerName, new
+                             {
+                                 categoryId = Model.CategoryId
+                                 ,Year = Model.Year
+                                 , Month = Model.Month
+                                 , pageSize = Model.PageSize
+                                 , page = 2
+                             }),
+                             UpdateTargetId = Model.LawsAjaxOptions.UpdateTargetId,
+                             InsertionMode = Model.LawsAjaxOptions.InsertionMode,
+                             HttpMethod = "Get",
+                             OnBegin = "lawsVn.ajaxEvents.OnBegin('" + Model.LawsAjaxOptions.UpdateTargetId + "')",
+                             OnComplete = "lawsVn.ajaxEvents.OnComplete('" + Model.LawsAjaxOptions.UpdateTargetId + "')"
+                         }, new { @class = "pagination-item" })
+            }
+            if (start > 2)
+            {
+                <span class="pagination-item"><span>...</span></span>
+            }
+        }
+        @for (int index = start; index <= end; index++)
+        {
+            if (index == Model.PageIndex)
+            {
+                <span class="pagination-item active"><span>@Model.PageIndex</span></span>
+            }
+            else
+            {
+                @Ajax.ActionLink(index.ToString(), string.Empty, string.Empty,
+                         null,
+                         new AjaxOptions
+                         {
+                             Url = Url.Action(Model.ActionName, Model.ControllerName, new
+                             {
+                                 categoryId = Model.CategoryId
+                                 , Year = Model.Year
+                                 , Month = Model.Month
+                                 , pageSize = Model.PageSize
+                                 , page = index
+                             }),
+                             UpdateTargetId = Model.LawsAjaxOptions.UpdateTargetId,
+                             InsertionMode = Model.LawsAjaxOptions.InsertionMode,
+                             HttpMethod = "Get",
+                             OnBegin = "lawsVn.ajaxEvents.OnBegin('" + Model.LawsAjaxOptions.UpdateTargetId + "')",
+                             OnComplete = "lawsVn.ajaxEvents.OnComplete('" + Model.LawsAjaxOptions.UpdateTargetId + "')"
+                         }, new { @class = "pagination-item" })
+            }
+        }
+        @if (end < pageCount)
+        {
+            if (end < pageCount - 1)
+            {
+                <span class="pagination-item"><span>...</span></span>
+            }
+            if (end < pageCount - 2)
+            {
+                @Ajax.ActionLink(pageCount.ToString(), string.Empty, string.Empty,
+                         null,
+                         new AjaxOptions
+                         {
+                             Url = Url.Action(Model.ActionName, Model.ControllerName, new
+                             {
+                                 categoryId = Model.CategoryId
+                                 , Year = Model.Year
+                                 , Month = Model.Month
+                                 , pageSize = Model.PageSize
+                                 , page = pageCount
+                             }),
+                             UpdateTargetId = Model.LawsAjaxOptions.UpdateTargetId,
+                             InsertionMode = Model.LawsAjaxOptions.InsertionMode,
+                             HttpMethod = "Get",
+                             OnBegin = "lawsVn.ajaxEvents.OnBegin('" + Model.LawsAjaxOptions.UpdateTargetId + "')",
+                             OnComplete = "lawsVn.ajaxEvents.OnComplete('" + Model.LawsAjaxOptions.UpdateTargetId + "')"
+                         }, new { @class = "pagination-item" })
+            }
+        }
+
+        @if (Model.PageIndex < pageCount)
+        {
+            @Ajax.ActionLink(@"»", string.Empty, string.Empty,
+                     null,
+                     new AjaxOptions
+                     {
+                         Url = Url.Action(Model.ActionName, Model.ControllerName, new
+                         {
+                             categoryId = Model.CategoryId
+                             , Year = Model.Year
+                             , Month = Model.Month
+                             , pageSize = Model.PageSize
+                             , page = Model.PageIndex + 1
+                         }),
+                         UpdateTargetId = Model.LawsAjaxOptions.UpdateTargetId,
+                         InsertionMode = Model.LawsAjaxOptions.InsertionMode,
+                         HttpMethod = "Get",
+                         OnBegin = "lawsVn.ajaxEvents.OnBegin('" + Model.LawsAjaxOptions.UpdateTargetId + "')",
+                         OnComplete = "lawsVn.ajaxEvents.OnComplete('" + Model.LawsAjaxOptions.UpdateTargetId + "')"
+                     }, new { @class = "pagination-item" })
+        }
+    </div>
+</div>
+}

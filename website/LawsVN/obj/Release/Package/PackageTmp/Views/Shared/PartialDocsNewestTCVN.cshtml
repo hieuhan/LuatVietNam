@@ -1,0 +1,23 @@
+﻿@using LawsVN.Library
+@using ICSoft.CMSViewLib
+@using LawsVN.App_GlobalResources
+@model List<ICSoft.CMSViewLib.DocsView>
+@if (Model.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <h3><span class="title-widget">TCVN mới cập nhật</span></h3>
+        </div>
+        <div class="widget-container">
+            @foreach (DocsView mDocsViewNewest in Model)
+            {
+                <div class="recent-post">
+                    <span class="icon-new-2"></span>
+                    <div class="post-conten news">
+                        <a href="@mDocsViewNewest.GetDocUrl()" title="@mDocsViewNewest.DocName" class="post-title-widget">@mDocsViewNewest.H1Tag.TrimmedOrDefault(mDocsViewNewest.DocName)</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

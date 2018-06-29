@@ -1,0 +1,52 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.HeaderModel
+<header id="theme-header" class="header-content">
+    <div class="container">
+        <div class="hearder-left">
+            <div class="logo" style="margin-top: 16px;"><a href="@CmsConstants.ROOT_PATH"><img alt="@Model.WebsiteTitle" src="@Url.Content("~/assets/images/logo.png")"/></a></div>
+        </div>
+
+        <div class="hearder-right">
+            <div class="top-nav">
+                @if (Request.IsAuthenticated)
+                {
+                    { Html.RenderAction("_PartialWidgetUserHeader", "Shared", new {returnUrl = Model.ReturnUrl}, true); }
+                }
+                <div class="itemtopnav">
+                    @Resource.Hotline:  <span style="color: #a67942; font-weight: bold">016 9696 8989</span>
+                </div>
+                <div class="itemtopnav">
+                    <img src="@Url.Content("~/assets/images/hotline1.png")" /> <span style="color: #a67942; font-weight: bold">024.37833688 ext 518</span>
+                </div>
+            </div>
+            <nav id="main-nav" class="main-menu-bar">
+                <div class="main-menu">
+                    <ul id="menu-main" class="menu">
+                        @if (Model.ListMenuItemsView.HasValue())
+                        {
+                            foreach (var menuItem in Model.ListMenuItemsView)
+                            {
+                                <li class="menu-item">
+                                    @if (Extensions.IsAuthenticated && !string.IsNullOrWhiteSpace(Model.SessionId) && menuItem.Url.IndexOf("luatvietnam", StringComparison.Ordinal) >= 0)
+                                    {
+                                        <a href="@string.Format("{0}?sessionId={1}", string.Concat("https://luatvietnam.vn/","account/loginsessionid"), Model.SessionId)" rel="nofollow" title="@menuItem.ItemName">@menuItem.ItemName</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@menuItem.GetUrl()" title="@menuItem.ItemName">@menuItem.ItemName</a>
+                                    }
+                                </li>
+                            }
+                        }
+                        <div class="vi-en">
+                            <a href="@Url.RouteUrl("vi")" title="@Resource.ChangeLanguage" class="vi-en-item"><img src="@Url.Content("~/assets/images/vn.png")"/></a>
+                            <a href="@Url.RouteUrl("en")" title="@Resource.ChangeLanguage" class="vi-en-item"><img src="@Url.Content("~/assets/images/en.png")"/></a>
+                        </div>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,35 @@
+﻿<%@ Page Language="C#" MasterPageFile="~/admin/MasterPageAdminEdit.master" AutoEventWireup="true" CodeFile="ZaloPayTransaction.aspx.cs" Inherits="admin_pages_ZaloPayTransaction" Title="" %>
+<asp:Content ID="contentAccountType" runat="server" ContentPlaceHolderID="m_contentBody">   
+    <table cellpadding="3" cellspacing="0" style="width:100%; font-weight:lighter" >
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td>
+               Mã khuyến mại
+                <span class="icon-required"></span>
+            </td>
+            <td>
+                
+            </td>
+        </tr> 
+        <tr>
+            <td>
+                &nbsp;</td>
+            <td>
+               Số lần đã dùng
+                <span class="icon-required"></span>
+            </td>
+            <td>
+                
+            </td>
+        </tr> 
+       
+    </table>
+    <div style="text-align:center; padding: 20px">
+       
+        <asp:LinkButton ID="btnSave" runat="server" CssClass="savebutom"  Text="Kiểm tra lại thông tin" 
+            onclick="btnSave_Click">
+        </asp:LinkButton>
+    </div>
+</asp:Content>
+

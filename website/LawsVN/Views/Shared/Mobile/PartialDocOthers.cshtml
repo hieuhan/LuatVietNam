@@ -1,0 +1,26 @@
+﻿@using LawsVN.Library
+@model LawsVN.Models.Docs.DocOthersModel
+@if (Model.ListDocsView.HasValue())
+{
+    <section class="box-section">
+        <div class="title" style="margin-bottom: 0px;">
+            <h2 class="title-cat">Văn bản liên quan</h2>
+        </div>
+        <div class="cat-box-content">
+            @for (int index = 0; index < Model.ListDocsView.Count; index++)
+            {
+                var docView = Model.ListDocsView[index];
+                <div class="first-news @(index == 0 ? "dashed" : "last")">
+                    <h3 class="post-title"><a href="@docView.GetDocUrl()">@docView.DocName</a>
+                    </h3>
+                    <div class="post-time">
+                        <div class="post-time-item">Ban hành: <span class="color2">@docView.IssueDate.toString()</span>
+                        </div>
+                        <div class="post-time-item">Hiệu lực: <span class="color2">@docView.EffectStatusName</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+}

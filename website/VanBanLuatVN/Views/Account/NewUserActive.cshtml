@@ -1,0 +1,22 @@
+﻿@using ICSoft.ViewLibV3
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model VanBanLuat.Models.AccountModel.NewUserActiveModel
+<div class="breadcrumb">
+    <a class="breadcrumb-item" href="@Constants.ROOT_PATH" title="Trang chủ">Trang chủ</a> / 
+    <span class="breadcrumb-item xanh">Kích hoạt tài khoản</span>
+</div>
+<div class="title-from">
+    <h1 class="title-from-cat">Kích hoạt tài khoản</h1>
+</div>
+
+<div class="content-dk">
+    <div class="p20px">
+        <div class="rows-dk">
+            <div class="title-from">
+                @Model.ActiveMessage
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@model VanBanLuatVN.Models.DocViewModel.DocsGetPageModel
+
+@if (Model.DocList.lDocs.HasValue())
+{
+    <table class="tablecontent">
+        <body>
+            @for (int index = 0; index < Model.DocList.lDocs.Count; index++)
+            {
+                <tr class="rows-vb">
+                    <td class="number bold">@string.Format("{0:#00}", index + 1)</td>
+                    <td>
+                        @{ Html.RenderAction("PartialDocumentAttribute", "Shared", new { model = new SharedViewModel.DocumentAttribute { Docs = Model.DocList.lDocs[index] } });}
+                    </td>
+                </tr>
+            }
+        </body>
+    </table>
+    <div class="loadmore">
+        <button class="btn-default xemthem" onclick="window.location.href='@string.Concat(Constants.ROOT_PATH,Model.Url)';">Xem thêm</button>
+    </div>
+}
+else
+{
+    <table class="tablecontent full">
+        <body>
+            <tr class="rows-vb">
+                <td>
+                    <p class="post-title vbl bold">Nội dung đang được cập nhật.</p>
+                </td>
+            </tr>
+        </body>
+    </table>
+}

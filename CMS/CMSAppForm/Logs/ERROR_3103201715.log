@@ -1,0 +1,28 @@
+2017-03-31 15:18:39	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdmin.Page_Load(Object sender, EventArgs e) in e:\Projects\2017\luatvietnamv2\Code\CMS\CMSAppForm\Admin\MasterPageAdmin.master.cs:line 41
+2017-03-31 15:18:41	1	m_login_Authenticate	admin starting logged.
+2017-03-31 15:25:29	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdmin.Page_Load(Object sender, EventArgs e) in e:\Projects\2017\luatvietnamv2\Code\CMS\CMSAppForm\Admin\MasterPageAdmin.master.cs:line 41
+2017-03-31 15:25:31	1	m_login_Authenticate	admin starting logged.
+2017-03-31 15:29:11	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdmin.Page_Load(Object sender, EventArgs e) in e:\Projects\2017\luatvietnamv2\Code\CMS\CMSAppForm\Admin\MasterPageAdmin.master.cs:line 41
+2017-03-31 15:29:12	1	m_login_Authenticate	admin starting logged.
+2017-03-31 15:33:25	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdmin.Page_Load(Object sender, EventArgs e) in e:\Projects\2017\luatvietnamv2\Code\CMS\CMSAppForm\Admin\MasterPageAdmin.master.cs:line 41
+2017-03-31 15:33:27	1	m_login_Authenticate	admin starting logged.

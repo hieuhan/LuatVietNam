@@ -1,0 +1,220 @@
+﻿@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.Account.BankPaymentModel
+@using (Ajax.BeginForm("BankPayment", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    ,OnSuccess = "lawsVn.ajaxEvents.PaymentServiceUsingBankAccountOnSuccess"
+}, new { id = "BankPaymentForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ServiceId)
+    @Html.HiddenFor(m => m.ServicePackageId)
+    @Html.HiddenFor(m => m.ServicePackageName)
+    @Html.HiddenFor(m => m.Total)
+    @Html.HiddenFor(m => m.Price)
+    @Html.HiddenFor(m => m.TransactionTypeId)
+    @Html.HiddenFor(m => m.CompanyName)
+    @Html.HiddenFor(m => m.CompanyAddress)
+    @Html.HiddenFor(m => m.CompanyTaxCode)
+    @Html.HiddenFor(m => m.InternalContent)
+    <div class="step-content">
+        <div class="rows item5">
+            <div class="rows item6">@Resource.BankAcceptPayment <span id="bankSelectedName" style="color: blue;"></span>
+                <p>@Html.ValidationMessageFor(m => m.BankCode, "", new { @class = "text-danger" })</p>
+            </div>
+
+            <div class="rows">
+                <div class="gallery">
+                    <ul>
+                            <li>
+                                <a onclick="lawsVn.selectBankCode('123PVTB',this)" href="javascript:void(0)" title="@Resource.ViettinBank">
+                                    <img src="@Url.Content("~/assets/images/vietinbank.png")" />
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PVPB',this)" href="javascript:void(0)" title="@Resource.VpBank">
+                                    <img src="@Url.Content("~/assets/images/vbbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PVIB',this)" href="javascript:void(0)" title="@Resource.VIB">
+                                    <img src="@Url.Content("~/assets/images/vibbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PVAB',this)" href="javascript:void(0)" title="@Resource.VietABank ">
+                                    <img src="@Url.Content("~/assets/images/Vietabank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PVCB',this)" href="javascript:void(0)" title="@Resource.VietComBank">
+                                    <img src="@Url.Content("~/assets/images/vietcombank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PACB',this)" href="javascript:void(0)" title="@Resource.ACB">
+                                    <img src="@Url.Content("~/assets/images/Acb_logo.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PAGB',this)" href="javascript:void(0)" title="@Resource.AgriBank">
+                                    <img src="@Url.Content("~/assets/images/agribank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PBAB',this)" href="javascript:void(0)" title="@Resource.NASB">
+                                    <img src="@Url.Content("~/assets/images/bacabank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript: lawsVn.selectBankCode('123PBIDV', this)" href="javascript:void(0)" title="@Resource.BIDV">
+                                    <img src="@Url.Content("~/assets/images/bidvbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PDAB',this)" href="javascript:void(0)" title="@Resource.DAB">
+                                    <img src="@Url.Content("~/assets/images/dongabank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PEIB',this)" href="javascript:void(0)" title="@Resource.EximBank">
+                                    <img src="@Url.Content("~/assets/images/eximbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PGPB',this)" href="javascript:void(0)" title="@Resource.GPBank">
+                                    <img src="@Url.Content("~/assets/images/gbbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PHDB',this)" title="@Resource.HDBank">
+                                    <img src="@Url.Content("~/assets/images/HDBanklogo.png")" href="javascript:void(0)">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PMRTB',this)" href="javascript:void(0)" title="@Resource.MaritimeBank">
+                                    <img src="@Url.Content("~/assets/images/maritimebank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PMB',this)" href="javascript:void(0)" title="@Resource.MB">
+                                    <img src="@Url.Content("~/assets/images/MBbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PNAB',this)" href="javascript:void(0)" title="@Resource.NamABank">
+                                    <img src="@Url.Content("~/assets/images/namabank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123POCB',this)" href="javascript:void(0)" title="@Resource.OCB">
+                                    <img src="@Url.Content("~/assets/images/OCBbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123POCEB',this)" href="javascript:void(0)" title="@Resource.OceanBank">
+                                    <img src="@Url.Content("~/assets/images/OceanBanklogo.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PPGB',this)" href="javascript:void(0)" title="@Resource.PGBank">
+                                    <img src="@Url.Content("~/assets/images/pgbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PSCB',this)" href="javascript:void(0)" title="@Resource.SacomBank">
+                                    <img src="@Url.Content("~/assets/images/sacombank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript:lawsVn.selectBankCode('123PABB',this)" href="javascript:void(0)" title="@Resource.ABBank">
+                                    <img src="@Url.Content("~/assets/images/abbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript: lawsVn.selectBankCode('123PSEAB', this)" href="javascript:void(0)" title="@Resource.SeaBank ">
+                                    <img src="@Url.Content("~/assets/images/Seabank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript: lawsVn.selectBankCode('123PSHB', this)" href="javascript:void(0)" title="@Resource.SHB">
+                                    <img src="@Url.Content("~/assets/images/SHBbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript: lawsVn.selectBankCode('123PNVB', this)" href="javascript:void(0)" title="@Resource.NCB">
+                                    <img src="@Url.Content("~/assets/images/ncbbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript: lawsVn.selectBankCode('123PTCB', this)" href="javascript:void(0)" title="@Resource.TechcomBank">
+                                    <img src="@Url.Content("~/assets/images/techbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript: lawsVn.selectBankCode('123PBVB', this)" href="javascript:void(0)" title="@Resource.BaoViet">
+                                    <img src="@Url.Content("~/assets/images/Baovietbank.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript: lawsVn.selectBankCode('123PTPB', this)" href="javascript:void(0)" title="@Resource.TienPhong">
+                                    <img src="@Url.Content("~/assets/images/TP.png")">
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="javascript: lawsVn.selectBankCode('123PLPB', this)" href="javascript:void(0)" title="@Resource.LienViet">
+                                    <img src="@Url.Content("~/assets/images/Lienvietbank.png")">
+                                </a>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="rows">
+            <span class="col-sm-1" style="line-height: 60px;">@Resource.InternationalCards:</span>
+            <div class="col-sm-item9">
+                <div class="gallery">
+                    <ul>
+                        <li>
+                            <a onclick="javascript: lawsVn.selectBankCode('123PCC', this)" href="javascript:void(0)" title="Master Card, Visa Card, JCB ">
+                                <img src="@Url.Content("~/assets/images/visa.png")">
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="javascript: lawsVn.selectBankCode('123PCC', this)" href="javascript:void(0)" title="Master Card, Visa Card, JCB ">
+                                <img src="@Url.Content("~/assets/images/master.png")">
+                            </a>
+                        </li>
+                        <li>
+                            <a onclick="javascript: lawsVn.selectBankCode('123PCC', this)" href="javascript:void(0)" title="Master Card, Visa Card, JCB ">
+                                <img src="@Url.Content("~/assets/images/Jcb.png")">
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="rows item8">
+            <div class="pure-checkbox">
+                @Html.CheckBoxFor(m => m.TermsAndConditions)
+                <label for="TermsAndConditions">@Resource.IAgree <a href="#" class="TermsConditionsView" style="color: #a67942; font-weight: bold;">@Resource.TermsConditions</a></label>
+                <br />@Html.ValidationMessageFor(m => m.TermsAndConditions, "", new { @class = "text-danger" })
+                <div class="rows item8">
+                    @Html.CheckBoxFor(m => m.TaxInvoice)
+                    <label for="TaxInvoice">@Resource.VAT</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="rows btn">
+            @Html.HiddenFor(m => m.BankCode, new { id = "hdfBankCode" })
+            <a href="#" class="btn-pay no-permission-view" title="<div class='thongbao-item-tooltip'><em><b>Announcement:</b> Internet Banking payment shall be formally activated on the date of launching LuatVietnam.vn v4.0</em> <br /><em>The estimated time: January, 2018.  Best regards – LuatVietnam.vn</em></div>" style="background: #a67942">@Resource.Pay </a>
+            <a href="#" class="btn-pay back-step" style="margin-right: 20px; background: #dddddd; color: #222;">@Resource.Back</a>
+        </div>
+    </div>
+}

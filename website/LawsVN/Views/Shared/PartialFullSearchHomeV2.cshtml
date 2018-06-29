@@ -1,0 +1,112 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Docs.PartialDocSearchModel
+<div class="search-block-2">
+
+    <div class="rows title">
+        <span class="post-title blog">@Resource.SearchForDocumentsOnVietnameseLaw</span>
+    </div>
+@using (Html.BeginForm("DocSearch", "Home", FormMethod.Get))
+{
+    <div class="row-tim-kiem">
+        <div class="from-tim-kiem-item-1 edit">
+            @Html.TextBoxFor(s => s.Keywords, new {@class = "exampleinputsearch", placeholder = Resource.EnterWhatToFind})
+        </div>
+
+        <div class="from-tim-kiem-item-3 edit">
+            <button class="btn btn-default">@Resource.SearchButton</button>
+        </div>
+    </div>
+    <button class="dropbtn-2">
+        <span id="searchAdvanceText">Tìm nâng cao</span> <img alt="img-tk" src="@Url.Content("~/assets/images/icondown.png")"/>
+    </button>
+    <div class="dropdown-search">
+        <div id="myDropdown" class="dropdown-content showSearchAdvance">
+            <div class="row-tim-kiem padding-0">
+                <div class="tim-kiem-nang-cao-right edit">
+                    <span style="float: left; font-size: 14px; font-weight: bold; margin-right: 64px;"><img alt="img-tk" class="img-tk" src="@Url.Content("~/assets/images/tim-kiem-nang-cao.png")"/>Tìm kiếm nâng cao</span>
+                    <div class="item-checkbox">
+                        <div class="radio">
+                            @Html.RadioButtonFor(m => m.SearchOptions, 1, new {id = "AllOption"})
+                            <label for="AllOption" class="radio-label"> @Resource.All </label>
+                        </div>
+                    </div>
+                    <div class="item-checkbox">
+                        <div class="radio">
+                            @Html.RadioButtonFor(m => m.SearchOptions, 2, new {id = "TitleOption"})
+                            <label for="TitleOption" class="radio-label"> @Resource.Title</label>
+                        </div>
+                    </div>
+                    <div class="item-checkbox">
+                        <div class="radio">
+                            @Html.RadioButtonFor(m => m.SearchOptions, 3, new {id = "DocNumberOption"})
+                            <label for="DocNumberOption" class="radio-label"> @Resource.DocNumber </label>
+                        </div>
+                    </div>
+                    <div class="item-checkbox">
+                        <div class="pure-checkbox">
+                            <input type="checkbox" id="SearchExact" name="SearchExact" value="1" />
+                            <label for="SearchExact">@Resource.ExactPhrase</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-tk-nang-cao">
+                <div class="select-nang-cao">
+                    @Html.TextBoxFor(m => m.DateFrom, "0:dd/MM/yyyy", new { @class = "inputtext input-1 datepicker", placeholder = "Từ ngày (Ng/Th/Năm)" })
+                </div>
+                <div class="select-nang-cao">
+                    @Html.TextBoxFor(m => m.DateTo, "0:dd/MM/yyyy", new { @class = "inputtext input-1 datepicker", placeholder = "Đến ngày (Ng/Th/Năm)" })
+                </div>
+                <div class="select-nang-cao">
+                    <select name="DocTypeId" tabindex="0"  class="select-text">
+                        <option value="0" >@Resource.DocTypes</option>
+                        @foreach (var item in Model.ListDocTypes)
+                        {
+                            <option value="@item.DocTypeId">@item.DocTypeDesc</option>
+                        }
+                    </select>
+                </div>
+                <div class="select-nang-cao">
+                    <select name="OrganId" tabindex="1" class="select-text">
+                        <option value="0">@Resource.Organs</option>
+                        @foreach (var item in Model.ListOrgans)
+                        {
+                            <option  value="@item.OrganId">@item.OrganDesc</option>
+                        }
+                    </select>
+                </div>
+                <div class="select-nang-cao">
+                    @Html.DropdownListPermission("EffectStatusId", "EffectStatusId", "select-text", new SelectList(Model.ListEffectStatus, "EffectStatusId", "EffectStatusDesc", Model.EffectStatusId))
+                    @Html.ValidationMessageFor(m => m.DateFrom, "", new {@class = "text-danger"})
+                </div>
+                <div class="select-nang-cao">
+                    <select name="FieldId" tabindex="3" class="select-text">
+                        <option value="0">@Resource.FieldWork</option>
+                        @foreach (var item in Model.ListFields)
+                        {
+                            <option value="@item.FieldId">@item.FieldDesc</option>
+                        }
+                    </select>
+                    @Html.ValidationMessageFor(m => m.DateTo, "", new {@class = "text-danger"})
+                </div>
+
+                <div class="select-nang-cao">
+                    <select name="LanguageId" tabindex="4" class="select-text">
+                        <option value="0">@Resource.Language</option>
+                        @foreach (var item in Model.ListLanguages)
+                        {
+                            <option value="@item.LanguageId">@item.LanguageDesc</option>
+                        }
+                    </select>
+                </div>
+                <div class="select-nang-cao">
+                    @Html.TextBoxFor(m => m.SignerName, new {@class = "inputtext2 input-1", placeholder = Resource.Signers})
+                    @Html.HiddenFor(m => m.SignerId)
+                    <span id="signer-message"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+</div>

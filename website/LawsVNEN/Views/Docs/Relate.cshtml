@@ -1,0 +1,62 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Models
+@model DocsViewDetailModel
+@{
+    Layout = "~/Views/Shared/_LayoutDoc.cshtml";
+}
+<div class="cat-box ">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.Home </a>» 
+            @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.FieldsText))
+            {
+                <span >@Model.mDocsViewDetail.mDocsView.FieldsText</span>
+            }
+        </div>
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title vblq">@Model.mDocsViewDetail.mDocsView.DocName</h1>
+                <p class="info-page">@Model.mDocsViewDetail.mDocsView.MetaDesc</p>
+            </div>
+        </div>
+
+        <div class="cat-box-content ">
+            <div class="tab-nav">
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("summary")" title="@Resource.Summary">@Resource.Summary</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl()" title="@Resource.Content">@Resource.Content</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("effect")" title="@Resource.Effect">@Resource.Effect</a>
+                <a class="tab-nav-item-ad active" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("relate")" title="@Resource.Relate">@Resource.RelatedDocuments</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("vietnamese")" title="@Resource.Vietnamese">@Resource.Vietnamese</a>
+                <a class="tab-nav-item-ad" href="@Model.mDocsViewDetail.mDocsView.GetDocUrl("download")" title="@Resource.DownLoad">@Resource.DownLoad</a>
+            </div>
+            @{ Html.RenderAction("PartialPermissionDocRelate", "Shared", new { docModel = Model }); }
+        </div>
+
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialFullSearchDetail", "Shared", new PartialFullSearchDetailModel { SearchOptions = 1, DocGroupId = Constants.DocGroupIdVbpq, FieldId = Model.FieldId });}
+            @{Html.RenderPartial("PartialDocUtility", Model);}
+        </aside>
+    </div>
+
+</div>
+@section FooterSection
+{
+    <script type="text/javascript">
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.mDocsViewDetail.mDocsView.DocId',
+                name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+                title: '@Model.mDocsViewDetail.mDocsView.DocName',
+                summary: '',
+                datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+                url: '@Model.mDocsViewDetail.mDocsView.GetDocUrl()',
+                image: '@Constants.NoImageUrl'
+            }
+        });
+    </script>
+}

@@ -1,0 +1,102 @@
+﻿@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Models
+@using LawsVNEN.AppCode
+@model DocSearchModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-center-pages searchblog" >
+    @{Html.RenderAction("_PartialFullSearch", "Shared", Model.mPartialDocSearchModel);}
+    <section class="cat-box" id="ListDocsViewsTab">
+
+        <div class="sort-by">
+            <div class="view-post" id="txtnumberresultfound">
+                <span>
+                    @Resource.Find <strong>@Model.mPartialPaginationAjax.TotalPage @Resource.Result </strong>
+                    @if (Model.mPartialPaginationAjax.pageCount >= 0)
+                    {
+                        @(string.Format("({0}/{1} {2})", Model.mPartialPaginationAjax.PageIndex + 1, Model.mPartialPaginationAjax.pageCount, Resource.Page.ToLower()))
+                    }
+                </span>
+            </div>
+
+            <div class="sortright">
+                <div class="select-item">
+                    <div class="text-item">@Resource.Sort:</div>
+                    <div class="text-item x2">
+                        <select class="select2" id="dllOrderby" onchange="lawsVn.search.start();">
+                            <option value="DESC">@Resource.Descending</option>
+                            <option value="">@Resource.Ascending</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="select-item">
+                    <div class="text-item">@Resource.By:</div>
+                    <div class="text-item x2">
+                        <select class="select2" id="dllOrderbyName" onchange="lawsVn.search.start();">
+                            <option value="IssueDate">@Resource.PublicDate</option>
+                            <option value="DocName">@Resource.Description</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cat-box-content">
+            <div id="ListDocsViews">
+                @if (Model.DocsViewSearch.lDocsView.HasValue())
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            @for (int index = 1; index <= Model.DocsViewSearch.lDocsView.Count; index++)
+                            {
+                                <tr class="row-first-news @(index % 2 != 0 ? string.Empty : "bgcolor")">
+                                    <th class="count-123" scope="row">@index.ToString("#00")</th>
+                                    <td class="news-left-post">
+                                        <h2>
+                                            <a href="@Model.DocsViewSearch.lDocsView[index - 1].GetDocUrl()" title="@Html.Raw(Model.DocsViewSearch.lDocsView[index - 1].DocName.StripTags())" class="post-title lvn">@Html.Raw(Model.DocsViewSearch.lDocsView[index - 1].DocName)</a>
+                                        </h2>
+                                        <div class="item-meta">
+                                            @{ Html.RenderAction("_PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.DocsViewSearch.lDocsView[index - 1] } });}
+                                        </div>
+                                    </td>
+                                    <td class="post-time-right page">
+                                        @{ Html.RenderAction("_PartialLinkDocumentAttributeRight", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.DocsViewSearch.lDocsView[index - 1] } });}
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                            { Html.RenderAction("PartialPaginationAjaxPageNumber", "Shared", new { model = Model.mPartialPaginationAjax }); }
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                            <tr class="row-first-news">
+                                <th class="count-123" scope="row"></th>
+                                <td class="news-center-post">
+                                    <h3>
+                                        <span class="post-title lvn">@Resource.DataNotFound</span>
+                                    </h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </section>
+</div>
+@section FooterSection
+{
+    <script type="text/javascript">
+        lawsVn.logs.docSearchLogs('@Model.Keywords',
+            '@Model.DateFrom',
+            '@Model.DateTo',
+            @Model.DocTypeId,
+            @Model.OrganId,
+            @Model.SignerId,
+            @Model.FieldId);
+    </script>
+}
+

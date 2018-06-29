@@ -1,0 +1,172 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    ViewBag.Title = "HuongDan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model NewsViewModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+@{int indexActive = 0; string classActive = "";}
+<div class="page-content">
+    <!--Bengin content-left -->
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>Trang chủ </a> »
+            <span class="breadcrumb-item colorrumb">Hướng dẫn</span>
+        </div>
+
+        <div class="rows-huong-dan">
+            @if (Model.mArticlesViewMaster.lCategoriesMain4.HasValue())
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    classActive = "";
+                    if (Request.Url.AbsoluteUri.Contains(Model.mArticlesViewMaster.lCategoriesMain4[i].CategoryUrl))
+                    { 
+                        indexActive = i;
+                        classActive = "active";
+                    }
+                    <div class="col-huong-dan">
+                        <a href="@Model.mArticlesViewMaster.lCategoriesMain4[i].GetCategoryUrl()" class="rows-huong-dan-item@(i+1) @(classActive)">@Model.mArticlesViewMaster.lCategoriesMain4[i].CategoryName</a>
+                    </div>
+                    
+                }
+            }
+        </div>
+
+        <!-- Bengin-cat-box-content-->
+        <div class="cat-box-content">
+           @if (Model.mArticlesViewMaster.lCategoriesMain4.HasValue() && Model.mArticlesViewMaster.lCategoriesMain4.Count > 3)
+        {
+               
+            <!-- Bengin-tab-conten-hd1-->
+            for (int i = 0; i < Model.mArticlesViewMaster.lCategoriesMain4[indexActive].lArticlesView.Count; i++)
+            {
+                ArticlesView mArticlesView = Model.mArticlesViewMaster.lCategoriesMain4[indexActive].lArticlesView[i];
+                <div class="tab-conten-hd1">
+                <div id="cssmenu">
+                    <ul>
+                        <li class="has-sub">
+                            <a href="javascript:void(0)" id="article@(i+1)" class="title-blt">
+                                @(i+1). @mArticlesView.Title
+                                <span class="xem_them_loto"></span>
+                            </a>
+                            <ul style="display: @(i == 0 ? "block" : "none");">
+                                <div class="content-huong-dan">
+                                    @Html.Raw(mArticlesView.ArticleContent)
+                                </div>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            }
+            <!-- End-tab-conten-hd1-->
+            }
+        </div>
+        <!-- End-cat-box-content-->
+        <!--Bengin pagination -->
+        @*<div class="pagination">
+            <div class="pagination-left">
+                <span class="text-pagination">Hiển thị:</span>
+                <div class="select-pagination">
+                    <select tabindex="1" class="dropdown10">
+                        <option value="0">10 kết quả</option>
+                        <option value="1">10 kết quả</option>
+                        <option value="2">10 kết quả</option>
+                        <option value="3">10 kết quả</option>
+                    </select>
+                </div>
+            </div>
+            <div class="pagination-right">
+                Trang<input class="input-page-item" value="4">của 192
+                <div class="load-more">
+                    <a href="#" class="load-more-item x1"></a>
+                    <a href="#" class="load-more-item x2"></a>
+                </div>
+            </div>
+        </div>*@
+        <!--End pagination -->
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 235 });}
+                </div>
+            </div>
+
+        @if (Model.mArticlesViewMaster.lCategoriesMain4.HasValue() && Model.mArticlesViewMaster.lCategoriesMain4.Count > 4)
+        {
+            
+            <div class="widget">
+                <div class="widget-top" >
+                    <h4><a href="@(CmsConstants.ROOT_PATH)nhung-cau-hoi-thuong-gap.html" title="Những câu hỏi thường gặp" style="color:white!important" class="title-widget">Những câu hỏi thường gặp</a></h4>
+                </div>
+                <div class="widget-container">
+                    @for (int i = 0; i < Model.mArticlesViewMaster.lCategoriesMain4[4].lArticlesView.Count; i++)
+                    {
+                        ArticlesView mArticlesView = Model.mArticlesViewMaster.lCategoriesMain4[4].lArticlesView[i];
+                    <div class="recent-post">
+                        <span class="so123">@(i+1).</span>
+                        <div class="post-conten cauhoi">
+                            <a href="@mArticlesView.GetArticleUrl()"  title="@mArticlesView.Title" class="post-title-widget">@mArticlesView.Title</a>
+                        </div>
+                    </div>
+                    }
+                    <div class="more">
+                        <a href="@(CmsConstants.ROOT_PATH)nhung-cau-hoi-thuong-gap.html" title="Xem tiếp" style="padding-right: 10px;" class="more-link">
+                            <img alt="Xem tiếp" src="/assets/images/xem-tiep.png">
+                            Xem tiếp
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+}
+
+            <div class="widget">
+                <div class="box-cauhoi">
+                    <div class="tiecauhoi"><img class="ihdap" src="@Url.Content("~/assets/images/hoi-dap.png")" /> <span style="line-height: 50px;">Hỏi Đáp</span></div>
+                    <div class="rows cauhoiwig">Gửi câu hỏi đến Trung tâm dịch vụ KH</div>
+                    <div class="rows cauhoiwig" style=" margin-bottom: 0;">
+                        <a href="#" class="btn-ch2 send-question" title="Soạn câu hỏi"><img class="ich2" src="@Url.Content("~/assets/images/edit2.png")"/> Soạn câu hỏi </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget bottom0">
+                <div class="widget-top">
+                    <h3><span class="title-widget">Phần mềm hỗ trợ</span></h3>
+                </div>
+                <div class="widget-container">
+                    <div class="rows vbquantam">
+                        <a href="https://get.adobe.com/reader/" target="_blank" class="icon-pdf">Phần mềm đọc file PDF Adobe Reader</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="https://www.foxitsoftware.com/pdf-reader/" target="_blank" class="icon-pdf2">Phần mềm đọc file PDF Foxit Reader</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <a href="http://www.unikey.org/" target="_blank" class="icon-uniky">Phần mềm Unikey 4.0</a>
+                    </div>
+                    <div class="rows vbquantam">
+                        <span class="icon-lvn">Trình duyệt tốt nhất cho LuatVietnam:</span>
+                    </div>
+                    <div class="rows">
+                        <a href="https://www.mozilla.org/vi/firefox/new/" target="_blank" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="@Url.Content("~/assets/images/firefox.png")"> Firefox </a>
+                        <a href="https://www.google.com/intl/vi_vn/chrome/browser/index.html" target="_blank" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="@Url.Content("~/assets/images/chrome.png")"> chrome </a>
+                        <a href="https://www.apple.com/safari/" target="_blank" class="item-tduyet"><img class="icon-trinh-duyet" alt="item-tduyet" src="@Url.Content("~/assets/images/safari.png")"> Safari </a>
+                    </div>
+
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>

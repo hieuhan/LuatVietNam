@@ -1,0 +1,92 @@
+﻿
+@using VanBanLuat.Librarys
+@model ICSoft.ViewLibV3.DocList
+<div class="widget vien">
+    <div class="widget-top">
+        <h3 class="widget-title boloc"><img style="float: left;margin-right: 5px;" src="@Url.Content("~/assets/images/boloc.png")" />Bộ lọc nhanh</h3>
+    </div>
+    <div class="widget-container">
+        @using (Html.BeginForm("DocSearch", "Home", FormMethod.Get, new { @class = "form-loc" }))
+        {
+            <!-- tab-conten-->
+            <div class="tab-conten">
+                <!-- Bengin-->
+                <div class="tab-title2">
+                    <a class="tabs-nav-search-by-date tab-item-tab-82 active" href="#" rel="nofollow" data-id="IssueDate">Ngày ban hành</a>
+                    <span class="spanvien">|</span>
+                    <a class="tabs-nav-search-by-date tab-item-tab-82" href="#" rel="nofollow" data-id="EffectDate">Ngày áp dụng</a>
+                </div>
+                <!-- End-->
+                <!-- Bengin-->
+                <div id="SearchByDateBox" class="cat-box-content">
+                    <div class="row-loc">
+                        <div class="form-group">
+                            <input class="datepicker text-s1 bgffffff calendar italic font13" name="DateFrom" placeholder="Từ ngày (dd/mm/yyyy)" type="text">
+                        </div>
+                        <div class="form-group">
+                            <input class="datepicker text-s1 bgffffff calendar italic font13" name="DateTo" placeholder="Đến ngày (dd/mm/yyyy)" type="text">
+                        </div>
+                    </div>
+                    <input type="hidden" name="SearchByDate" value="IssueDate" />
+                </div>
+                <!-- End-->
+            </div>
+            <!-- tab-conten-->
+            if (Model.lCountByDocGroup.HasValue())
+            {
+                <div class="row-loc bodertop">
+                    <div class="form-group ">
+                        <strong style="line-height: 22px;">Nhóm văn bản</strong>
+                    </div>
+                    <div class="form-checkbox ">
+                        @foreach (var item in Model.lCountByDocGroup)
+                        {
+                            <div class="radio bloc">
+                                <input class="none" id="DocGroupId_@item.DocGroupId" name="DocGroupId" value="@item.DocGroupId" type="radio">
+                                <label for="DocGroupId_@item.DocGroupId" class="radio-label">@item.DocGroupDesc (@item.DocCount)</label>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            }
+            if (Model.lCountByEffectStatus.HasValue())
+            {
+                <div class="row-loc bodertop">
+                    <div class="form-group">
+                        <strong style="line-height: 22px;">Tình trạng hiệu lực</strong>
+                    </div>
+                    <div class="form-checkbox ">
+                        @foreach (var item in Model.lCountByEffectStatus)
+                        {
+                            <div class="radio bloc">
+                                <input class="none" id="EffectStatus_@item.EffectStatusId" name="EffectStatusId" value="@item.EffectStatusId" type="radio">
+                                <label for="EffectStatus_@item.EffectStatusId" class="radio-label">@item.EffectStatusDesc (@item.DocCount)</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            if (Model.lCountByDocType.HasValue())
+            {
+                <div class="row-loc bodertop">
+                    <div class="form-group ">
+                        <strong style="line-height: 22px;">Loại văn bản</strong>
+                    </div>
+                    <div class="form-checkbox">
+                        @foreach (var item in Model.lCountByDocType)
+                        {
+                            <div class="radio bloc">
+                                <input class="none" id="DocType_@item.DocTypeId" name="DocTypeId" value="@item.DocTypeId" type="radio">
+                                <label for="DocType_@item.DocTypeId" class="radio-label">@item.DocTypeDesc (@item.DocCount)</label>
+                            </div>
+                        }
+                    </div>
+                    <center>
+                        <button class="btn-default apdung"> Áp dụng</button>
+                    </center>
+                </div>
+            }
+        }
+    </div>
+</div>

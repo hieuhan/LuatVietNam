@@ -1,0 +1,69 @@
+﻿@using VanBanLuat.Models
+@using VanBanLuat.Librarys
+@using Constants = VanBanLuat.Librarys.Constants
+@{
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+}
+@model NewViewModel
+<div class="breadcrumb">
+    <a class="breadcrumb-item" href="@Constants.ROOT_PATH">Trang chủ</a> /
+    <span class="breadcrumb-item xanh">@Model.mCategories.CategoryDesc</span>
+</div>
+<div class="content-left">
+
+    <div class="banner-phaply">
+        <img class="thumb-full" src="@Url.Content("~/assets/images/bannerphaply.png")" />
+    </div>
+    @if (Model.lCategoryArticles.Count > 0 && Model.categoryArticlesBieuMau.lArticle.HasValue())
+    {
+        foreach (var item in Model.lCategoryArticles)
+        {
+            Html.RenderAction("PartialShowViewByListArticle", "Shared", new {mCategoryArticles = item, viewName = "PartialPhapLyDoanhNghiep_Main"});
+        }
+        {
+            Html.RenderAction("PartialShowViewByListArticle", "Shared", new {mCategoryArticles = Model.categoryArticlesBieuMau, viewName = "PartialBieuMauCanBiet", categoryName = "Biểu mẫu cần biết"});
+        }
+    }
+    else
+    {
+        if (Model.lCategoryArticles.Count > 0)
+        {
+            foreach (var item in Model.lCategoryArticles)
+            {
+                Html.RenderAction("PartialShowViewByListArticle", "Shared", new {mCategoryArticles = item, viewName = "PartialPhapLyDoanhNghiep_Main"});
+            }
+        }
+        else
+        {
+            if (Model.categoryArticlesBieuMau.lArticle.HasValue())
+            {
+                {
+                    Html.RenderAction("PartialShowViewByListArticle", "Shared", new {mCategoryArticles = Model.categoryArticlesBieuMau, viewName = "PartialBieuMauCanBiet", categoryName = "Biểu mẫu cần biết"});
+                }
+            }
+            else
+            {
+                <section class="cat-box-section">
+                    <div class="cat-box-content">
+                        <div class="new-list-other">
+                            <p class="post-title vbl bold">Nội dung đang được cập nhật.</p>
+                        </div>
+                    </div>
+                </section>
+            }
+        }
+    }
+</div>
+<aside class="sidebar-270">
+    @{ Html.RenderAction("PartialGetListCateIdByParentId", "Shared", new { ParentId = Constants.CateId_LoaiHinhDoanhNghiep, CategoryId = Model.mCategories.CategoryId, viewName = "PartialLoaiDoanhNghiep" });}
+    <div class="widget">
+        <div class="ads2">
+            <img class="imgycvb2" src="@Url.Content("~/assets/images/group-dn.png")" />
+            <button class="yeucauvanbanbtn" title="Gửi yêu cầu văn bản" data-action="yeu-cau-van-ban.html">
+                Yêu cầu văn bản
+            </button>
+        </div>
+    </div>
+    @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = Constants.CateId_ThongBaoVBMoi, rowAmount = Constants.RowAmount5, viewName = "PartialChinhSachMoi" });}
+    @{ Html.RenderAction("PartialDocumentsByGetByDisplayTypeId", "Shared", new { displayTypeId = Constants.DisplayTypeId_LuatDNXemNhieu, boxTitle = "Luật doanh nghiệp xem nhiều", rowAmount = Constants.RowAmount5, viewName = "PartialDocumentsOfInterest" });}
+</aside>

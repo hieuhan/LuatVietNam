@@ -1,0 +1,38 @@
+2017-03-31 14:25:21	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdminEdit.Page_Load(Object sender, EventArgs e) in e:\Projects\2017\luatvietnamv2\Code\CMS\CMSAppForm\Admin\MasterPageAdminEdit.master.cs:line 22
+2017-03-31 14:25:27	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdminEdit.Page_Load(Object sender, EventArgs e) in e:\Projects\2017\luatvietnamv2\Code\CMS\CMSAppForm\Admin\MasterPageAdminEdit.master.cs:line 22
+2017-03-31 14:25:29	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdmin.Page_Load(Object sender, EventArgs e) in e:\Projects\2017\luatvietnamv2\Code\CMS\CMSAppForm\Admin\MasterPageAdmin.master.cs:line 41
+2017-03-31 14:25:31	1	m_login_Authenticate	admin starting logged.
+2017-03-31 14:51:32	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdminEdit.Page_Load(Object sender, EventArgs e) in e:\Projects\2017\luatvietnamv2\Code\CMS\CMSAppForm\Admin\MasterPageAdminEdit.master.cs:line 22
+2017-03-31 14:51:36	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdminEdit.Page_Load(Object sender, EventArgs e) in e:\Projects\2017\luatvietnamv2\Code\CMS\CMSAppForm\Admin\MasterPageAdminEdit.master.cs:line 22
+2017-03-31 14:51:41	1	Page_Load	System.Threading.ThreadAbortException: Thread was being aborted.
+   at System.Threading.Thread.AbortInternal()
+   at System.Threading.Thread.Abort(Object stateInfo)
+   at System.Web.HttpResponse.AbortCurrentThread()
+   at System.Web.HttpResponse.Redirect(String url, Boolean endResponse, Boolean permanent)
+   at Admin_MasterPageAdmin.Page_Load(Object sender, EventArgs e) in e:\Projects\2017\luatvietnamv2\Code\CMS\CMSAppForm\Admin\MasterPageAdmin.master.cs:line 41
+2017-03-31 14:51:43	1	m_login_Authenticate	admin starting logged.

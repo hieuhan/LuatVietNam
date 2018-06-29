@@ -1,0 +1,144 @@
+﻿@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.Library
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model NewsViewModel
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a> » <span class="breadcrumb-item colorrumb">@Model.mCategoriesView.CategoryName</span>
+        </div>
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title">@Html.Raw(Model.SeoHeader.ToString())</h1>
+                <p class="info-page"> @Html.Raw(Model.MetaDesc.ToString())</p>
+            </div>
+        </div>
+        @if (Model.mArticlesViewMaster.lCategoriesMain1.HasValue())
+        {
+            <div class="cat-box flexslider">
+                <div class="slides">
+                    <div class="camera_wrap camera_azure_skin" id="camera_wrap_1">
+                        @foreach (ArticlesView mArticlesView in Model.mArticlesViewMaster.lCategoriesMain1[0].lArticlesView)
+                        {
+                            <div data-src="@mArticlesView.GetImageUrl()">
+                                <div class="camera_caption fadeFromBottom">
+                                    <div class="slides-content">
+                                        <div class="title-slider">
+                                            <a href="@mArticlesView.GetArticleUrl()" title="@mArticlesView.Title">@mArticlesView.Title</a>
+                                        </div>
+                                        <div class="info-slider">
+                                            @Html.Raw(mArticlesView.Summary)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="content-news-page">
+            @if (Model.mArticlesViewMaster.lCategoriesMain2.HasValue())
+            {
+                for (int index = 0; index < Model.mArticlesViewMaster.lCategoriesMain2.Count; index++)
+                {
+                    var item = Model.mArticlesViewMaster.lCategoriesMain2[index];
+                    string cssclass = index < Model.mArticlesViewMaster.lCategoriesMain2.Count - 1 ? "cat-box-news1" : "cat-box";
+                    if (item.lArticlesView.HasValue())
+                    {
+                        var mArticlesView = item.lArticlesView[0];
+                        item.lArticlesView.Remove(mArticlesView);
+                    <div class="@cssclass">
+                        <div class="title-news">
+                            <span class="title-news-cat"> @item.CategoryName</span>
+                            <a href="@item.GetCategoryUrl()" class="more-link newscat" title="Xem tiếp"> <img alt="@item.CategoryName" src="@Url.Content("~/assets/images/xem-tiep.png")"> Xem tiếp </a>
+                        </div>
+                        <div class="conttnt-post-news">
+                            <div class="news-item-left">
+                                <a href="@mArticlesView.GetArticleUrl()" title="@mArticlesView.Title" class="img-full"> <img alt="@mArticlesView.Title" src="@mArticlesView.GetImageUrl_Mobile()"></a>
+                                <div class="post-meta">
+                                    @*<a href="@string.Concat(CmsConstants.ROOT_PATH , "tim-kiem-tin-tuc.html?provinceId=" , mArticlesView.ProvinceId)" class="post-tag"> @(mArticlesView.ProvinceId > 0 ? Provinces.Static_Get((short)mArticlesView.ProvinceId).ProvinceDesc : "Cả nước")</a>*@
+                                    <div class="post-time-page">
+                                        <span class="icon-time"></span>@mArticlesView.PublishTime.toString()
+                                    </div>
+                                </div>
+                                <h3><a href="@mArticlesView.GetArticleUrl()" title="@mArticlesView.Title" class="post-title font16">@mArticlesView.Title.Truncate(120)</a></h3>
+                                <div class="sapo new">
+                                    <p>@Html.Raw(mArticlesView.Summary.StripTags().Truncate(800))</p>
+                                </div>
+                            </div>
+                            <div class="news-item-right">
+                                @for (int i = 0 ; i < item.lArticlesView.Count && i < 4; i++)
+                                {
+                                    <div class="list-item1">
+                                        <a href="@item.lArticlesView[i].GetArticleUrl()" title="@item.lArticlesView[i].Title" class="img-thumb110"><img alt="@item.lArticlesView[i].Title" src="@item.lArticlesView[i].GetImageUrl_Thumb()"></a>
+                                        <div class="post-other-news">
+                                            <div class="rows">
+                                                @*<a href="@string.Concat(CmsConstants.ROOT_PATH , "tim-kiem-tin-tuc.html?provinceId=" , item.lArticlesView[i].ProvinceId)" class="post-tag"> @(item.lArticlesView[i].ProvinceId > 0 ? Provinces.Static_Get((short)item.lArticlesView[i].ProvinceId).ProvinceDesc : "Cả nước")</a>*@
+
+                                            </div>
+                                            <h3><a href="@item.lArticlesView[i].GetArticleUrl()" title="@item.lArticlesView[i].Title" class="post-title ">@item.lArticlesView[i].Title.Truncate(120) <span class="tie-date"> (@item.lArticlesView[i].PublishTime.ToShortDateString())</span></a></h3>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+            }
+                }
+            }
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @Html.Partial("PartialTaisaochonLuatVietNam")
+            @{Html.RenderAction("PartialTinVan", "Shared");}
+            @*<div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new {advertPositionId = 233});}
+                </div>
+            </div>*@
+            @if (Model.mArticlesViewCateMostView.lArticlesNewest.HasValue())
+            {
+                <div class="widget">
+                    <div class="widget-top">
+                        <h3><span class="title-widget">Tin xem nhiều</span>
+                        </h3>
+                    </div>
+                    <div class="widget-container">
+                        @foreach (ArticlesView mArticlesView in Model.mArticlesViewCateMostView.lArticlesNewest)
+                        {
+                            <div class="recent-post">
+                                <span class="icon-new-22"></span>
+                                <div class="post-conten news">
+                                    <a href="@mArticlesView.GetArticleUrl()" class="post-title-widget" title="@mArticlesView.Title">@mArticlesView.Title.Truncate(90)</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            @{Html.RenderAction("PartialTieuDiem", "Shared", new {model = Model.mArticlesViewMaster.lCategoriesRight4.HasValue() ? Model.mArticlesViewMaster.lCategoriesRight4[0] : null});}
+            @{Html.RenderPartial("PartialLinksNeedToKnow");}
+        </aside>
+    </div>
+</div>
+
+@Html.Partial("PartialContentViewed")
+@section FooterSection{
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery('#camera_wrap_1').camera({
+                height: '300px'
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,98 @@
+﻿@using LawsVN.Models
+@using LawsVN.Library
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using sms.utils
+@model NewsViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+    int indexActive = 0; string classActive = "";
+}
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-kiem-tin-tuc.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="keyword" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>»
+    <span class="breadcrumb-item">Hướng dẫn</span>
+</div>
+
+<article class="the-post">
+    <div class="tab-page">
+        @if (Model.mArticlesViewMaster.lCategoriesMain4.HasValue())
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                classActive = "";
+                if (Request.Url.AbsoluteUri.Contains(Model.mArticlesViewMaster.lCategoriesMain4[i].CategoryUrl))
+                {
+                    indexActive = i;
+                    classActive = "active";
+                }
+                <a href="@Model.mArticlesViewMaster.lCategoriesMain4[i].GetCategoryUrl()" class="tab-page-item @(classActive)">
+                    @Model.mArticlesViewMaster.lCategoriesMain4[i].CategoryName
+                </a>
+            }
+        }
+    </div>
+    <div class="box-hieuluc">
+        @if (Model.mArticlesViewMaster.lCategoriesMain4.HasValue() && Model.mArticlesViewMaster.lCategoriesMain4.Count > 3)
+        {
+            for (int i = 0; i < Model.mArticlesViewMaster.lCategoriesMain4[indexActive].lArticlesView.Count; i++)
+            {
+                ICSoft.CMSViewLib.ArticlesView mArticlesView = Model.mArticlesViewMaster.lCategoriesMain4[indexActive].lArticlesView[i];
+                    <!-- Bengin-drop-luocdo-->
+                <div class="drop-luocdo">
+                    <div id="dropbox">
+                        <div class="dropcontent">
+                            <div class="tieloto">
+                                <a href="#" title="@mArticlesView.Title" class="tie-drop luocdo accordion">
+                                    @(i + 1). @mArticlesView.Title
+                                </a>
+                                <div class="dropsub accordion-content @(i == 0 ? "" : "id0")">
+                                    <div class="content-huong-dan">
+                                        @Html.Raw(GoogleAmp.Convert(mArticlesView.ArticleContent))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <!-- End-drop-luocdo-->
+            }
+        }
+    </div>
+</article>
+@if (Model.mArticlesViewMaster.lCategoriesMain4.HasValue() && Model.mArticlesViewMaster.lCategoriesMain4.Count > 4)
+{
+    <div class="box-section">
+        <div class="title">
+            <div class="title-cat"><a href="@(CmsConstants.ROOT_PATH)nhung-cau-hoi-thuong-gap.html">Những câu hỏi thường gặp</a> </div>
+        </div>
+        <div class="cat-box-content">
+            @for (int i = 0; i < Model.mArticlesViewMaster.lCategoriesMain4[4].lArticlesView.Count; i++)
+            {
+                if (i > 1)
+                {
+                    break;
+                }
+                else
+                {
+                    ICSoft.CMSViewLib.ArticlesView mArticlesView = Model.mArticlesViewMaster.lCategoriesMain4[4].lArticlesView[i];
+                    <div class="first-news dashed">
+                        <a href="@mArticlesView.GetArticleUrl()">
+                            <strong class="stt">(@((i + 1).ToString("#00"))). </strong>
+                            @mArticlesView.TruncateTitle(150)
+                        </a>
+                    </div>
+                }
+
+            }
+        </div>
+
+    </div>
+}

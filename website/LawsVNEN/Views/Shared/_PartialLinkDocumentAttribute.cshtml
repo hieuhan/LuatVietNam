@@ -1,0 +1,21 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.PartialLinkDocumentAttributeModel
+@if (Model.mDocsView != null)
+{
+    <a href="@Model.mDocsView.GetDocUrl("summary")" class="tag-item en" title="@Resource.Summary">@(Resource.Summary)</a>
+    <a href="@Model.mDocsView.GetDocUrl("effect")" class="tag-item en" title="@Resource.Effect">@Resource.Effect</a>
+    <a href="@Model.mDocsView.GetDocUrl("relate")" class="tag-item en" title="@Resource.RelatedDocuments">@Resource.RelatedDocuments</a>
+    <a href="@Model.mDocsView.GetDocUrl("vietnamese")" class="tag-item en" title="@Resource.Vietnamese">@Resource.Vietnamese</a>
+    <a href="@Model.mDocsView.GetDocUrl("download")" class="tag-item en" title="@Resource.DownLoad">@Resource.DownLoad</a>
+    <a href="#" data-id="@Model.mDocsView.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+}
+@if (Model.mDocRelates != null)
+{
+    <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "summary")" class="tag-item en" title="@Resource.Summary">@(Resource.Summary)</a>
+    <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "effect")" class="tag-item en" title="@Resource.Effect">@Resource.Effect</a>
+    <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "relate")" class="tag-item en" title="@Resource.RelatedDocuments">@Resource.RelatedDocuments</a>
+    <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "vietnamese")" class="tag-item en" title="@Resource.Vietnamese">@Resource.Vietnamese</a>
+    <a href="@DocsView.Static_GetDocUrl(Model.mDocRelates.DocUrl, "download")" class="tag-item en" title="@Resource.DownLoad">@Resource.DownLoad</a>
+    <a href="#" data-id="@Model.mDocRelates.DocId" class="icon-save save-doc-of-interest" title="@Resource.SaveDocumentOfInterest"></a>
+}

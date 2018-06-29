@@ -1,0 +1,9 @@
+﻿@using LawsVN.App_GlobalResources
+@model LawsVN.Models.Docs.PartialDocSearchModel
+@using (Html.BeginForm("DocSearch", "Home", FormMethod.Get, new { @class = "search-form m2" }))
+{
+    <span class="icon-search-menu m2"><input type="image" src="@Url.Content("~/assets/mobile/images/fa-search.png")"></span>
+    @Html.TextBoxFor(s => s.Keywords, new { @class = "search-input m2", id="keywords-m", placeholder = string.Concat(Resource.SearchButton, "...") })
+    @Html.ValidationMessageFor(m => m.Keywords, "", new { @class = "text-danger" })
+}
+

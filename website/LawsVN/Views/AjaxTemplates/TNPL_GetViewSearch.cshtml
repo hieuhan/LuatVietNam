@@ -1,0 +1,45 @@
+﻿@using LawsVN.Library
+@model LawsVN.Models.Templates.DocsNewest
+@if (Model.l_LawTermins.HasValue())
+{
+    <table id="tblcontent" class="table table-bordered thuatngu" data-totalpage="@Model.PartialPaginationAjax.TotalPage" data-pageindex="@(Model.PartialPaginationAjax.PageIndex + 1 )" data-pagecount="@Model.PartialPaginationAjax.pageCount" data-pagesize="@Model.PartialPaginationAjax.PageSize">
+        <thead>
+            <tr>
+                <th class="xs1">Stt</th>
+                <th class="xs2"> Thuật ngữ </th>
+                <th class="xs3"> Mô tả / Định nghĩa </th>
+                <th class="xs2"> Nguồn</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int index = 0; index < Model.l_LawTermins.Count; index++)
+            {
+                var number = index + Model.PartialPaginationAjax.PageIndex  * Model.PartialPaginationAjax.PageSize + 1;
+                <tr>
+                    <td class="xs1">@number.ToString("#00")</td>
+                    <td class="xs2">@Model.l_LawTermins[index].TermName</td>
+                    <td class="xs3">
+                        @Model.l_LawTermins[index].TermDesc
+                    </td>
+                    <td class="xs2">@Model.l_LawTermins[index].TermSource</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.PartialPaginationAjax });
+}
+else
+{
+<table class="table table-bordered" data-totalpage="@Model.PartialPaginationAjax.TotalPage" data-pageindex="@Model.PartialPaginationAjax.PageIndex" data-pagecount="@Model.PartialPaginationAjax.pageCount" data-pagesize="@Model.PartialPaginationAjax.PageSize">
+    <tbody>
+        <tr class="row-first-news">
+            <th class="count-123" scope="row"></th>
+            <td class="news-center-post">
+                <h3>
+                    <span class="post-title lvn">Đang cập nhật dữ liệu.</span>
+                </h3>
+            </td>
+        </tr>
+    </tbody>
+</table>
+}

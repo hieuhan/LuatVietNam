@@ -1,0 +1,25 @@
+﻿@using VanBanLuat.Librarys
+@model VanBanLuatVN.Models.DocViewModel.GuiYeuCauVB
+@using (Ajax.BeginForm("GuiYeuCauVB", "Account", null, new AjaxOptions
+{
+    HttpMethod = "Post",
+    OnBegin = "vbluat.ajaxEvents.OnBegin('Gửi ngay')",
+    OnSuccess = "vbluat.ajaxEvents.OnSuccessAlert(data, status, xhr)",
+    OnFailure = "vbluat.ajaxEvents.OnFailure"
+}, new { id = "GuiYeuCauVBForm" }))
+{
+    <div class="form-up">
+        <strong>@VbLuatUser.CustomerFullName</strong> <span style="color: #888;">(@VbLuatUser.CustomerName)</span>
+        <span class="nocheck" style="margin-top: 0;"><img src="@Url.Content("~/assets/images/warning.png")" /></span>
+    </div>
+    <div class="form-up">
+        <span id="DocTitle" style="display:none;"></span>
+        <p style="text-align: left; color: #666666;">Viết nội dung yêu cầu *:</p>
+        @Html.TextAreaFor(m => m.FeedbackContent, new { @class = "input-text ms1 font14", style = "height: 80px; color: #000; border: none; font-style: italic", placeholder = "(Gửi thêm thông tin: tên văn bản, số hiệu văn bản nếu bạn biết. Chúng tôi sẽ hỗ trợ bạn nhanh hơn)" })
+        @Html.ValidationMessageFor(m => m.FeedbackContent, "", new { @class = "text-danger" })
+    </div>
+    <center class="form-center">
+        <button class="btn-default guingay" style="margin-right: 20px;">Gửi ngay</button>
+        <button class="btn-default guingay btn-reset" onclick="window.location.href='@(Request.UrlReferrer != null ? Request.UrlReferrer.AbsoluteUri : Constants.ROOT_PATH)'" style="color: #888;">Hủy</button>
+    </center>
+}

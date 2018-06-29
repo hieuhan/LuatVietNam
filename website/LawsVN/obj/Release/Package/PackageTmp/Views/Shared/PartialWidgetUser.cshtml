@@ -1,0 +1,63 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.WidgetUserModel
+@if (Extensions.IsAuthenticated)
+{
+    <div class="widget">
+        <div class="widget-user">
+            <div class="padding">
+                <div class="widget-left">
+                    <div class="item-tt">
+                        <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" title="@LawsUser.CustomerName" style="font-weight: bold;">
+                            <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/hoten.png")"/>
+                            <span class="customerNameSub"></span></a>
+                            <span class="tvv user-vip">VIP</span>
+                    </div>
+                    <div class="item-tt">
+                        <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" title="@Resource.PersonalInformation">
+                            <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/thongtincn.png")"/>
+                            Thông tin tài khoản</a>
+                    </div>
+                    <div class="item-tt">
+                        <a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan.html" title="Giao diện cá nhân">
+                            <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/ca-nhan.png")"/>
+                            Giao diện cá nhân</a>
+                    </div>
+                    <div class="item-tt">
+                        <a href="@(CmsConstants.ROOT_PATH)user/tin-nhan.html" title="@Resource.MyMessage">
+                            <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/tinnhan.png")"/>
+                            @Resource.MyMessage <span class="countMyMessages" style="color: #b28247; font-weight: bold;">()</span></a>
+                    </div>
+                    <div class="item-tt">
+                        <a href="@(CmsConstants.ROOT_PATH)user/van-ban-cua-toi.html" title="@Resource.MyDocuments">
+                            <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/vanban.png")"/>@Resource.MyDocuments <span class="countMyDocuments" style="color: #b28247; font-weight: bold;">()</span></a>
+                    </div>
+                    <div id="gia-han-dv" class="item-tt">
+                        <a href="#" title="@Resource.RenewalOfService">
+                            <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/gia-han.png")"/>
+                            @Resource.RenewalOfService</a>
+                    </div>
+                    <div class="item-tt">
+                        <a href="@(CmsConstants.ROOT_PATH)user/lich-su-giao-dich.html" title="@Resource.TransactionHistory">
+                            <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/lichsu.png")"/>
+                            @Resource.TransactionHistory</a>
+                    </div>
+                    <div class="item-tt">
+                        <a href="#" class="lawsVnChangePassword" title="@Resource.ChangePassword">
+                            <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/pass.png")"/>
+                            @Resource.ChangePassword</a>
+                    </div>
+                    <div class="item-tt">
+                        <a href="#" class="lawsVnLogOut" title="@Resource.LogOut">
+                            <img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/logout.png")"/>
+                            @Resource.LogOut</a>
+                    </div>
+                </div>
+                <div class="widget-right">
+                    <img class="thumbavata-canhan" alt="avata-canhan" src="@LawsUser.GetAvatarMobile()"/>
+                </div>
+            </div>
+        </div>
+    </div>
+}

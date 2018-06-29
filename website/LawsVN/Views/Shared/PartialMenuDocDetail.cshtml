@@ -1,0 +1,21 @@
+﻿@using LawsVN.Library
+@model LawsVN.Models.MenuDocDetail
+@if (Model.ListMenuItemsView.HasValue())
+{
+    <div class="widget" id="menu-doc-detail" style="margin-top: 100px; display: none;">
+        <div class="widget-top">
+            <h3><span class="title-widget">@Model.Menu.MenuDesc.TrimmedOrDefault(string.Empty)</span></h3>
+        </div>
+        <div class="widget-container">
+            @foreach (var item in Model.ListMenuItemsView)
+            {
+                <div class="recent-post">
+                    <span class="icon-new-2"></span>
+                    <div class="post-conten news">
+                        <a href="@item.GetUrl()" title="@item.ItemName" class="post-title-widget" style="line-height: 20px;">@item.ItemName</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

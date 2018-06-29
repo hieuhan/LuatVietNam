@@ -1,0 +1,133 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using LawsVN.Library
+@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.Models.Docs
+@using ICSoft.LawDocsLib
+@model DocFieldModel
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>
+    @if (Model.mFieldDisplays != null && Model.mFieldDisplays.FieldId > 0)
+    {
+        <span> »</span><span class="breadcrumb-item color1">@Model.mFieldDisplays.FieldName </span>
+    }
+</div>
+
+<section class="box-section">
+    @if (Model.mFieldDisplays != null && Model.mFieldDisplays.FieldId > 0)
+    {
+        <div class="title2">
+            <h2 class="title-cat2 vien"> @Html.Raw(Model.mFieldDisplays.FieldName.ToString())</h2>
+        </div>
+    }
+    <!-- box-seclect-->
+    <div class="box-seclect1" id="ListByFieldTab">
+        @using (Ajax.BeginForm(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName, new
+        {
+            docGroupId = Model.mPartialPaginationAjax.DocGroupId,
+            //fieldId = Model.mPartialPaginationAjax.FieldId,
+            languageId = Model.mPartialPaginationAjax.LanguageId,
+            updateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+            insertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode,
+            controllerName = Model.mPartialPaginationAjax.ControllerName,
+            actionName = Model.mPartialPaginationAjax.ActionName,
+            pageSize = Model.mPartialPaginationAjax.PageSize,
+            linkLimit = Model.mPartialPaginationAjax.LinkLimit,
+            postTimeRight = Model.mPartialPaginationAjax.PostTimeRight,
+            isMobile = true
+        }, new AjaxOptions
+        {
+            HttpMethod = "Get",
+            UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId,
+            InsertionMode = InsertionMode.Replace,
+            OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId),
+            OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+        }))
+        {
+            if (Model.ListFieldDisplays != null)
+            {
+                <div class="col3-seclect1">
+                    <select class="select-option select-onchange" name="fieldId">
+                        <option value="0" title="@Resource.AllFields">@Resource.AllFields</option>
+                        @foreach (FieldDisplays mfield in Model.ListFieldDisplays)
+                        {
+                            if (mfield.FieldId == 0)
+                            {
+                                continue;
+                            }
+                            <option value="@mfield.FieldId" title="@mfield.FieldName" @(mfield.FieldId == Model.mPartialPaginationAjax.FieldId ? "selected" : string.Empty)>@mfield.FieldName</option>
+                        }
+                    </select>
+                </div>
+            }
+            if (Model.ListEffectStatus != null)
+            {
+                <div class="col3-seclect1">
+                    <select class="select-option select-onchange" name="effectStatusId">
+                        <option value="0" title="@Resource.EffectStatus">@Resource.EffectStatus</option>
+                        @foreach (EffectStatus mEffectStatus in Model.ListEffectStatus)
+                        {
+                            if (mEffectStatus.EffectStatusId == 0)
+                            {
+                                continue;
+                            }
+                            <option value="@mEffectStatus.EffectStatusId" title="@mEffectStatus.EffectStatusDesc">@mEffectStatus.EffectStatusDesc</option>
+                        }
+                    </select>
+                </div>
+            }
+            if (Model.ListDocTypes != null)
+            {
+                <div class="col3-seclect1" style="margin-right: 0;">
+                    <select class="select-option select-onchange" name="docTypeId">
+                        <option value="0" title="@Resource.DocTypes">@Resource.DocTypes</option>
+                        @foreach (DocTypes mDocTypes in Model.ListDocTypes)
+                        {
+                            <option value="@mDocTypes.DocTypeId" title="@mDocTypes.DocTypeDesc">@mDocTypes.DocTypeDesc</option>
+                        }
+                    </select>
+                </div>
+            }
+        }
+    </div>
+    <!-- End-->
+    <!-- content-->
+    <div class="cat-box-content" id="ListByField">
+        @if (Model.ListDocsView.HasValue())
+        {
+            for (int i = 0; i < Model.ListDocsView.Count; i++)
+            {
+                var mDocsView = Model.ListDocsView[i];
+                string effectStatusName = mDocsView.EffectStatusName.TrimmedOrDefault(Model.ListEffectStatus.GetEffectStatusNameById(mDocsView.EffectStatusId).TrimmedOrDefault(Resource.Updating));
+                <div class="first-news @(i == Model.ListDocsView.Count ? "last" : "dashed")">
+                    <h3 class="post-title"><a href="@mDocsView.GetDocUrl()" title="@mDocsView.DocName"><span class="stt">(@((i + 1).ToString("#00")))</span>@Html.Raw(mDocsView.DocName)</a></h3>
+                    <div class="sapo">
+                        <p>@Html.Raw(mDocsView.DocSummary)</p>
+                    </div>
+                    <div class="post-time">
+                        @{ Html.RenderAction("PartialLinkDocumentAttribute2Mobile", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = mDocsView, EffectStatusName = effectStatusName } });}
+                    </div>
+                </div>
+            }
+            {
+                Model.mPartialPaginationAjax.IsMobile = true;
+                Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.mPartialPaginationAjax });
+            }
+        }
+        else
+        {
+            <div class="first-news dashed">
+                <h3 class="post-title">@Resource.NoMatchingDocumentFound</h3>
+            </div>
+        }
+    </div>
+    <!-- End-->
+</section>
+
+@{Html.RenderAction("PartialContentViewedMobile", "Shared");}
+

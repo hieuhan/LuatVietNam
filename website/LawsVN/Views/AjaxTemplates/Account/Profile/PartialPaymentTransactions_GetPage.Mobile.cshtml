@@ -1,0 +1,29 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.HistoryTransactionsModel
+@if (Model.ListPaymentTransactions.Count() > 0) { 
+    foreach (var paymentTransaction in Model.ListPaymentTransactions)
+    {
+        <div class="first-lsu">
+            <strong>#@paymentTransaction.PaymentTransactionId. </strong>
+            <a href="#">
+                Ngày GD: @paymentTransaction.PaymentDate |
+                @if (paymentTransaction.ServiceId > 0 && !string.IsNullOrEmpty(paymentTransaction.ServicePackageDesc))
+                            {
+                    <strong style="color: #90622a;"><a href="@paymentTransaction.ServiceId.GetLinkServiceById()" title="@paymentTransaction.ServiceDesc" style="color: #90622a;">@paymentTransaction.ServiceDesc</a> - </strong> @Resource.package <strong style="color: #90622a;">@paymentTransaction.ServicePackageDesc</strong><span> | </span>
+                            }
+                @paymentTransaction.TransactionDesc | Số tiền @paymentTransaction.Amount
+            </a>
+        </div>
+    }
+
+{
+    Model.PartialPaginationAjax.IsMobile = true;
+    Html.RenderAction("PartialPaginationAjax4", "Shared", new { model = Model.PartialPaginationAjax });
+}
+}
+else{
+     <div class="box-thongbao">
+        <img style="float: left; margin-right: 5px;margin-top: 3px;" src="@Url.Content("~/assets/mobile/images/ic_notifications_active_24px.png")" /><em>Không tìm thấy giao dịch phù hợp!</em>
+    </div>
+}

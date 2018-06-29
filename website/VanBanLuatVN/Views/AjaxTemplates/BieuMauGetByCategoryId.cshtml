@@ -1,0 +1,34 @@
+﻿@using VanBanLuat.Librarys
+@model ICSoft.ViewLibV3.CategoryArticles
+@if (Model.lArticle.HasValue())
+{
+    int rows = Model.lArticle.Count % 2 == 0 ? Model.lArticle.Count / 2 : Model.lArticle.Count / 2 + 1;
+    <div class="item-col2">
+        @for (int i = 0; i < rows; i++)
+        {
+            <div class="list-new">
+                <img class="thumb-bieumau" alt="@Model.lArticle[i].Title" src="@Url.Content("~/assets/images/icon-bieumau.png")" style="width:36px; height:40px;" />
+                <div class="pdbieumau">
+                    <a class="post-title new" title="@Model.lArticle[i].Title" href="@Model.lArticle[i].GetArticleUrl()">@Model.lArticle[i].Title</a>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="item-col2">
+        @for (int i = rows; i < Model.lArticle.Count; i++)
+        {
+            <div class="list-new">
+                <img class="thumb-bieumau" alt="@Model.lArticle[i].Title" src="@Url.Content("~/assets/images/icon-bieumau.png")" style="width:36px; height:40px;" />
+                <div class="pdbieumau">
+                    <a class="post-title new" title="@Model.lArticle[i].Title" href="@Model.lArticle[i].GetArticleUrl()">@Model.lArticle[i].Title</a>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="new-list-other">
+        <p class="post-title vbl bold">Nội dung đang được cập nhật.</p>
+    </div>
+}

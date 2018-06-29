@@ -1,0 +1,44 @@
+﻿@using LawsVN.Library
+@using ICSoft.CMSLib
+@model LawsVN.Models.CustomerInterFaceFieldsModel
+@if (Model.ListFieldsVbpq.HasValue() || Model.ListFieldsTcvb.HasValue())
+{
+    <div class="widget">
+        <div class="widget-top">
+            <span class="title-widget" style="float: left; text-align: left; padding: 0 15px;">Lĩnh vực Văn Bản quan tâm</span>
+            <a href="#" class="thaydoi-3 select-customer-fieldsV2">
+                <img src="@Url.Content("~/assets/images/my-edit.png")">
+            </a>
+        </div>
+        <div class="widget-container">
+            @if (Model.ListFieldsVbpq.HasValue())
+            {
+                <div class="row-s1">
+                    <div class="tie-s1 bold">Văn bản quy phạm</div>
+                    <ul class="wg-vban">
+                        @foreach (var field in Model.ListFieldsVbpq)
+                        {
+                            string fieldUrl = field.GetUrl();
+                            fieldUrl = string.Concat(CmsConstants.ROOT_PATH, !fieldUrl.StartsWith("/") ? "giao-dien-ca-nhan/" : "giao-dien-ca-nhan", fieldUrl);
+                            <li><a href="@fieldUrl">@field.FieldName <span class="count"> (@field.SoLuong)</span></a></li>
+                        }
+                    </ul>
+                </div>
+            }
+            @if (Model.ListFieldsTcvb.HasValue())
+            {
+                <div class="row-s1">
+                    <div class="tie-s1 bold">Tiêu chuẩn Việt Nam</div>
+                    <ul class="wg-vban">
+                        @foreach (var field in Model.ListFieldsTcvb)
+                        {
+                            string fieldUrl = field.GetUrl();
+                            fieldUrl = string.Concat(CmsConstants.ROOT_PATH, !fieldUrl.StartsWith("/") ? "giao-dien-ca-nhan/" : "giao-dien-ca-nhan", fieldUrl);
+                            <li><a href="@fieldUrl">@field.FieldName <span class="count"> (@field.SoLuong)</span></a></li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+}

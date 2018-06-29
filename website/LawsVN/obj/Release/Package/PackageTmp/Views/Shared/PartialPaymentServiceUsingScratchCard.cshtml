@@ -1,0 +1,78 @@
+﻿@model LawsVN.Models.Account.PaymentServiceUsingScratchCardModel
+@using (Ajax.BeginForm("PaymentServiceUsingScratchCard", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    , OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    , OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    , OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccess"
+}, new { id = "PaymentMethodsScratchCardForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="cat-box-content">
+        <div class="tabcontent-dv">
+            <div class="padding">
+                @*<div class="form-group">
+                    <label class="col-sm-1 tk">Số seri:</label>
+                    <div class="col-sm-2">
+                        <input class="form-control-input" name="fname" value="" type="text">
+                    </div>
+                </div>*@
+                <div class="form-group">
+                    <label class="col-sm-1 tk">Mã thẻ cào:</label>
+                    <div class="col-sm-2">
+                        @Html.TextBoxFor(m => m.ScratchCardCode, new { @class = "form-control-input" })
+                        @Html.ValidationMessageFor(m => m.ScratchCardCode, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+                @*<div class="form-group">
+                    <label class="col-sm-1 tk">Tài khoản:</label>
+                    <div class="col-sm-2">
+                        <input class="form-control-input" name="fname" value="" type="text">
+                    </div>
+                    <button class="btn-kiemtra">Kiểm tra</button>
+                </div>*@
+                <div class="rows item5">
+                    <span class="col-sm-1 tk">Mã xác nhận:</span>
+
+                    @Html.TextBoxFor(m => m.PaymentServiceUsingScratchCardCode, new { @class = "form-control-input wg" })
+                    <span class="ma-code2">
+                        <img alt="captcha" id="LawsCaptcha" style="height: 39px;" src="@Url.Action("CaptchaImage", "Home", new { id = Guid.NewGuid(), prefix = "PaymentService" })">
+                    </span>
+                    <a class="ma-code2 getcaptcha" href="#" title="Nhận mã bảo mật mới" data-prefix="PaymentService">
+                        <img class="imgrset" alt="" src="@Url.Content("~/assets/images/rset.png")"/>
+                    </a>
+                    @Html.ValidationMessageFor(m => m.PaymentServiceUsingScratchCardCode, "", new { @class = "text-danger-news-letter-email" })
+                    @Html.HiddenFor(m=>m.PromotionCodeScratchCard)
+                    @Html.HiddenFor(m=>m.ServiceId)
+                    @Html.HiddenFor(m=>m.ServiceName)
+                    @Html.HiddenFor(m=>m.ServicePackageId)
+                    @Html.HiddenFor(m=>m.ServicePackageName)
+                    @Html.HiddenFor(m=>m.Price)
+                    @Html.HiddenFor(m=>m.Total)
+                    @Html.HiddenFor(m=>m.CompanyName)
+                    @Html.HiddenFor(m=>m.CompanyAddress)
+                    @Html.HiddenFor(m=>m.CompanyTaxCode)
+                    @Html.HiddenFor(m=>m.InternalContent)
+                    @Html.HiddenFor(m=>m.TransactionTypeId)
+                </div>
+                <img class="thelvn" alt="" src="@Url.Content("~/assets/images/thelvn.png")"/>
+            </div>
+        </div>
+    </div>
+    <div class="rows item8">
+        <div class="pure-checkbox">
+            @Html.CheckBoxFor(m => m.TermsAndConditionsScratchCard)
+            <label for="TermsAndConditionsScratchCard">Tôi đồng ý với các <a href="#" style="color: #a67942; font-weight: bold;">Quy định thanh toán</a> của LuatVietnam.vn</label><br />
+            <br/>@Html.ValidationMessageFor(m => m.TermsAndConditionsScratchCard, "", new { @class = "text-danger" })
+            <div class="rows item8">
+                @Html.CheckBoxFor(m => m.TaxInvoiceScratchCard)
+                <label for="TaxInvoiceScratchCard">Yêu cầu xuất hóa đơn GTGT</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="rows btn">
+        <button class="btn-dang-ky dv2">Thanh toán</button>
+        <button class="btn-nhap-lai dv2">Hủy</button>
+    </div>
+}

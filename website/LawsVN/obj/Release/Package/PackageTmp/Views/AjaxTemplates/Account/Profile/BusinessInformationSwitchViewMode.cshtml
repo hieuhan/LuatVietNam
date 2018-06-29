@@ -1,0 +1,63 @@
+﻿@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.BusinessInformation
+<div class="cat-title">
+    <div class="cat-box-title vien">@Resource.BusinessInformation</div>
+    @Ajax.ActionLink(Resource.EditInformation, string.Empty, string.Empty
+        , null
+        , new AjaxOptions
+        {
+            HttpMethod = "Post"
+            ,Url = Url.Action("BusinessInformationSwitchMode", "Ajax",new
+            {
+                mode = "edit"
+            })
+            ,UpdateTargetId = "thongtindoanhnghiep"
+            ,InsertionMode = InsertionMode.Replace
+            ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+            ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+        }, new { @class = "edit-tt icon-edit",style="margin-top: 0!important;", title= Resource.EditInformation })
+</div>
+<div class="cat-box-content-user">
+    <div class="form-group user">
+        <div class="col-sm-1 user">@Resource.UnitName: </div>
+        <div class="col-sm-2 linh-vuc fontb">
+            @Model.OrganName.TrimmedOrDefault(string.Empty)
+        </div>
+    </div>
+    @*<div class="form-group user">
+        <div class="col-sm-1 user">Lĩnh vực hoạt động: </div>
+        <div class="col-sm-2 linh-vuc fontb">
+            Truyền thông
+        </div>
+    </div>*@
+
+    <div class="form-group user">
+        <div class="col-sm-1 user">@Resource.AccountNumber: </div>
+        <div class="col-sm-2 linh-vuc fontb">
+            @Model.AccountNumber.TrimmedOrDefault(string.Empty)
+        </div>
+    </div>
+
+    <div class="form-group user">
+        <div class="col-sm-1 user">@Resource.Address: </div>
+        <div class="col-sm-2 linh-vuc fontb">
+            @Model.OrganAddress.TrimmedOrDefault(string.Empty)
+        </div>
+    </div>
+    
+    <div class="form-group user">
+        <div class="col-sm-1 user">@Resource.Phone: </div>
+        <div class="col-sm-2 linh-vuc fontb">
+            @Model.OrganPhone.TrimmedOrDefault(string.Empty)
+        </div>
+    </div>
+
+    <div class="form-group user">
+        <div class="col-sm-1 user">@Resource.TaxCode: </div>
+        <div class="col-sm-2 linh-vuc fontb">
+            @Model.OrganTaxCode.TrimmedOrDefault(string.Empty)
+        </div>
+    </div>
+
+</div>

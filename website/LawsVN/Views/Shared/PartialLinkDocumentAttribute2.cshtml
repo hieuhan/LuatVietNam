@@ -1,0 +1,218 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.PartialLinkDocumentAttributeModel
+@if (Model.mDocsView != null)
+{
+    if (Model.mDocsView.DocGroupId == Constants.DocGroupIdTcvn)
+    {
+        <p class="post-time"> @Resource.Promulgate: <span class="color2">@Model.mDocsView.IssueDate.toString(Model.mDocsView.IssueYear.ToString())</span>
+        </p>
+    }
+    else if (Model.mDocsView.DocGroupId == Constants.DocGroupIdVbhn)
+    {
+        <p class="post-time"> @Resource.Accuracy: <span class="color2">@Model.mDocsView.IssueDate.toString()</span>
+        </p>
+    }
+    else
+    {
+        if (Model.mDocsView.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId)
+        {
+            <p class="post-time"> @Resource.Promulgate: <span class="color2">@Model.mDocsView.IssueDate.toString()</span>
+            </p>
+        }
+        else
+        {
+            <p class="post-time"> @Resource.PromulgateEn: <span class="color2">@Model.mDocsView.IssueDate.toString()</span>
+            </p>
+        }
+    }
+    if (Model.mDocsView.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId)
+    {
+        if (Model.mDocsView.DocGroupId != Constants.DocGroupIdTcvn && Model.mDocsView.DocGroupId != Constants.DocGroupIdVbhn)
+        {
+            <p class="post-time"> @Resource.Apply: 
+                @if (Model.mDocsView.EffectDate != DateTime.MinValue)
+                {
+                    if (Extensions.IsAuthenticated)
+                    {
+                        <span class="color2">@Model.mDocsView.EffectDate.toString()</span>
+                    }
+                    else
+                    {
+                        <span class="color2 no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                    }
+                }
+                else
+                {
+                    <span class="color2">@Resource.Updating</span>
+                }
+            </p>
+        }
+        <p class="post-time bottom0"> @Resource.Effect: 
+            @if (!string.IsNullOrEmpty(Model.mDocsView.EffectStatusName) || !string.IsNullOrEmpty(Model.EffectStatusName))
+            {
+                if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFullVi))
+                {
+                    <span class="color2">@Model.mDocsView.EffectStatusName.TrimmedOrDefault(Model.EffectStatusName.TrimmedOrDefault(string.Empty))</span>
+                }
+                else
+                {
+                    <span class="color2 no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                }
+            }
+            else
+            {
+                <span class="color2">@Resource.Updating</span>
+            }
+        </p>
+    }
+    else
+    {
+        if (Model.mDocsView.DocGroupId != Constants.DocGroupIdTcvn && Model.mDocsView.DocGroupId != Constants.DocGroupIdVbhn)
+        {
+            <p class="post-time"> @Resource.ApplyEn: 
+                @if (Model.mDocsView.EffectDate != DateTime.MinValue)
+                {
+                    if (Extensions.IsAuthenticated)
+                    {
+                        <span class="color2">@Model.mDocsView.EffectDate.toString()</span>
+                    }
+                    else
+                    {
+                        <span class="color2 no-permission" title="@Html.Raw(Resource.NoPermissionEn)">@Resource.KnownEn</span>
+                    }
+                }
+                else
+                {
+                    <span class="color2">@Resource.UpdatingEn</span>
+                }
+            </p>
+        }
+
+        <p class="post-time bottom0"> @Resource.EffectEn: 
+            @if (!string.IsNullOrEmpty(Model.mDocsView.EffectStatusName) || !string.IsNullOrEmpty(Model.EffectStatusName))
+            {
+                if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+                {
+                    <span class="color2">@Model.mDocsView.EffectStatusName.TrimmedOrDefault(Model.EffectStatusName.TrimmedOrDefault(string.Empty))</span>
+                }
+                else
+                {
+                    <span class="color2 no-permission" title="@Html.Raw(Resource.NoPermissionEn)">@Resource.KnownEn</span>
+                }
+            }
+            else
+            {
+                <span class="color2">@Resource.UpdatingEn</span>
+            }
+        </p>
+    }
+}
+else if (Model.mDocRelates != null)
+{
+    if (Model.mDocRelates.DocGroupId == Constants.DocGroupIdTcvn)
+    {
+        <p class="post-time"> @Resource.Promulgate: <span class="color2">@Model.mDocRelates.IssueDate.toString(Model.mDocRelates.IssueYear.ToString())</span>
+        </p>
+    }
+    else if (Model.mDocRelates.DocGroupId == Constants.DocGroupIdVbhn)
+    {
+        <p class="post-time"> @Resource.Accuracy: <span class="color2">@Model.mDocRelates.IssueDate.toString()</span>
+        </p>
+    }
+    else
+    {
+        if (Model.mDocRelates.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId)
+        {
+            <p class="post-time"> @Resource.Promulgate: <span class="color2">@Model.mDocRelates.IssueDate.toString()</span>
+            </p>
+        }
+        else
+        {
+            <p class="post-time"> @Resource.PromulgateEn: <span class="color2">@Model.mDocRelates.IssueDate.toString()</span>
+            </p>
+        }
+    }
+    if (Model.mDocRelates.LanguageId != LawsVnLanguages.AvailableLanguages[1].LanguageId)
+    {
+        if (Model.mDocRelates.DocGroupId != Constants.DocGroupIdTcvn && Model.mDocRelates.DocGroupId != Constants.DocGroupIdVbhn)
+        {
+            <p class="post-time"> @Resource.Apply: 
+                @if (Model.mDocRelates.EffectDate != DateTime.MinValue)
+                {
+                    if (Extensions.IsAuthenticated)
+                    {
+                        <span class="color2">@Model.mDocRelates.EffectDate.toString()</span>
+                    }
+                    else
+                    {
+                        <span class="color2 no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                    }
+                }
+                else
+                {
+                    <span class="color2">@Resource.Updating</span>
+                }
+            </p>
+        }
+        <p class="post-time bottom0"> @Resource.Effect: 
+            @if (!string.IsNullOrEmpty(Model.mDocRelates.EffectStatusName) || !string.IsNullOrEmpty(Model.EffectStatusName))
+            {
+                if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFullVi))
+                {
+                    <span class="color2">@Model.mDocRelates.EffectStatusName.TrimmedOrDefault(Model.EffectStatusName.TrimmedOrDefault(string.Empty))</span>
+                }
+                else
+                {
+                    <span class="color2 no-permission" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                }
+            }
+            else
+            {
+                <span class="color2">@Resource.Updating</span>
+            }
+        </p>
+    }
+    else
+    {
+        if (Model.mDocRelates.DocGroupId != Constants.DocGroupIdTcvn && Model.mDocRelates.DocGroupId != Constants.DocGroupIdVbhn)
+        {
+            <p class="post-time"> @Resource.ApplyEn: 
+                @if (Model.mDocRelates.EffectDate != DateTime.MinValue)
+                {
+                    if (Extensions.IsAuthenticated)
+                    {
+                        <span class="color2">@Model.mDocRelates.EffectDate.toString()</span>
+                    }
+                    else
+                    {
+                        <span class="color2 no-permission" title="@Html.Raw(Resource.NoPermissionEn)">@Resource.KnownEn</span>
+                    }
+                }
+                else
+                {
+                    <span class="color2">@Resource.UpdatingEn</span>
+                }
+            </p>
+        }
+
+        <p class="post-time bottom0"> @Resource.EffectEn: 
+            @if (!string.IsNullOrEmpty(Model.mDocRelates.EffectStatusName) || !string.IsNullOrEmpty(Model.EffectStatusName))
+            {
+                if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+                {
+                    <span class="color2">@Model.mDocRelates.EffectStatusName.TrimmedOrDefault(Model.EffectStatusName.TrimmedOrDefault(string.Empty))</span>
+                }
+                else
+                {
+                    <span class="color2 no-permission" title="@Html.Raw(Resource.NoPermissionEn)">@Resource.KnownEn</span>
+                }
+            }
+            else
+            {
+                <span class="color2">@Resource.UpdatingEn</span>
+            }
+        </p>
+    }
+}

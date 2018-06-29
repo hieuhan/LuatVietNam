@@ -1,0 +1,85 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@model LawsVN.Models.Account.LoginModel
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage</a> » 
+            <span class="breadcrumb-item colorrumb">@Resource.LoginAccount</span>
+        </div>
+
+        <div class="content page">
+            <div class="from-page">
+                @using (Ajax.BeginForm("DoLogin", "Account", null, new AjaxOptions()
+                {
+                    HttpMethod = "Post",
+                    OnBegin = "lawsVn.ajaxEvents.OnBegin",
+                    OnComplete = "lawsVn.ajaxEvents.OnComplete",
+                    OnSuccess = "lawsVn.ajaxEvents.AccountLoginOnSuccess"
+                }, new { id = "LoginForm" }))
+                {
+                    <div class="cat-title-login">
+                        <div class="cat-box-title vien">@Resource.LoginAccount</div>
+                    </div>
+                    <div class="cat-box-content">
+                        <div class="col-xs-2">
+                            <div class="form-inline">
+                                <div class="form-group">
+                                    <label class="col-sm-1">@Resource.UserName: <span class="redcolor">*</span> </label>
+                                    <div class="col-sm-2">
+                                        @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control-input" })
+                                        @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1">@Resource.Password: <span class="redcolor">*</span> </label>
+                                    <div class="col-sm-2">
+                                        @Html.TextBoxFor(m => m.CustomerPass, new { @class = "form-control-input", type = "password" })
+                                        @Html.ValidationMessageFor(m => m.CustomerPass, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="rows-check">
+                                    <div class="pure-checkbox">
+                                        @Html.HiddenFor(m => m.ReturnUrl)
+                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                        <label for="RememberMe">Nhớ thông tin tài khoản</label>
+                                    </div>
+                                </div>
+                                <div class="rows-thongbao center">
+                                    <button class="btn-thongbao1 btn-login xn">@Resource.btnLogin</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @Html.Partial("PartialTaisaochonLuatVietNam")
+            @Html.Partial("PartialManualInstruction")
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>

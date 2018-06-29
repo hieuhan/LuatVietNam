@@ -1,0 +1,9 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.Account.WidgetUserModel
+@if (LawsVNEN.AppCode.Extensions.IsAuthenticated)
+{ 
+<div class="itemtopnav">
+        @Resource.Hi: <a href="@(CmsConstants.ROOT_PATH)user/account-information.html"> <span style="color: #a67942; font-weight: bold">@LawsUser.CustomerName</span></a>
+    </div>
+}

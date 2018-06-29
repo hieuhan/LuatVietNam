@@ -1,0 +1,440 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model LawsVN.Models.Account.RegisterModel
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage</a> » <span class="breadcrumb-item colorrumb">@Resource.SignUp</span>
+        </div>
+        <div class="content page">
+        <div class="from-page">
+        @if (Extensions.IsAuthenticated)
+        {
+            <div class="thong-bao-3">
+                <div class="thongbao-item3">
+                    <b><em>Thông báo <br><br></em></b>
+                    <em>Quý khách đang đăng nhập với tên tài khoản: <strong style="color: #a67942;">@LawsUser.CustomerName</strong>. Vui lòng <a href="@(CmsConstants.ROOT_PATH)user/dang-xuat-tai-khoan.html" title="Đăng xuất tài khoản"><strong style="color: #a67942;">đăng xuất tài khoản</strong></a> hiện tại để đăng ký tài khoản mới.</em>
+                </div>
+            </div>
+        }
+        else
+        {
+            using (Ajax.BeginForm("Register", "Account", null, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                OnBegin = "lawsVn.ajaxEvents.OnBegin",
+                OnComplete = "lawsVn.ajaxEvents.OnComplete",
+                OnSuccess = "lawsVn.ajaxEvents.RedirectOnSuccess"
+            }, new {id = "RegisterForm"}))
+            {
+                @Html.AntiForgeryToken()
+                <div class="cat-title">
+                    <div class="cat-box-title vien">@Resource.RegisterToUseTheService</div>
+                </div>
+
+                <div class="cat-box-content">
+                    <div class="col-xs-2">
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.UserName: <span class="redcolor">*</span> </label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.CustomerName, new {@class = "form-control-input", title = ""})
+                                    @Html.ValidationMessageFor(m => m.CustomerName, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.Password: <span class="redcolor">*</span> </label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.Password, new {@class = "form-control-input", type = "password"})
+                                    @Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.ConfirmPassword: <span class="redcolor">*</span> </label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.ConfirmPassword, new {@class = "form-control-input", type = "password"})
+                                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.PhoneNumber: </label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.Phone, new {@class = "form-control-input"})
+                                    @Html.ValidationMessageFor(m => m.Phone, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1">Email: <span class="redcolor">*</span> </label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.Email, new {@class = "form-control-input"})
+                                    @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="item-avata-2">
+                            <div class="rows-avata"><strong>@Resource.UploadARepresentativeImage:</strong>
+                            </div>
+                            <div class="rows-avata"><span style="color: #777777; font-style: italic;">(@Resource.ImageSizeLessThan10Mb)</span>
+                            </div>
+                            @*<div class="rows-avata uploadfile">
+                                <input type="file" id="avatarFile"/>
+                                <a href="#" id="uploadAvatar" class="taiFile">@Resource.SelectAPhotoFromYourComputer</a>
+                                @Html.HiddenFor(m => m.Avatar)
+                            </div>
+                            <div class="rows-avata"><a href="javascript:lawsVn.clearAvatar();" class="delete-img">@Resource.DeletePhotos</a>
+                            </div>
+                            <div id="progress-group"></div>*@
+                            <div class="rows-avata uploadfile">
+                                <input type="file" id="avatarFile" />
+                                <a href="#" id="uploadAvatar" class="taiFile">@Resource.SelectAPhotoFromYourComputer</a>
+                                @Html.HiddenFor(m => m.Avatar)
+                            </div>
+                            <div class="rows-avata"><a href="javascript:lawsVn.clearAvatar();" class="delete-img">@Resource.DeletePhotos</a></div>
+                            <div id="progress-group"></div>
+                        </div>
+                        <div class="item-avata-2">
+                            <a href="#" class="thumb150x180-avata">
+                                <img id="AccountAvatar" alt="xem trước avatar" src="@Url.Content("~/assets/images/150x180.png")">
+                            </a>
+                            <div class="container-bar">
+                                <div class="progress">
+                                    <div class="progress-bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cat-box-content">
+                    <div class="dk-item1">
+                        <p><strong>@Resource.SignUpForANewLetterEmail:</strong>
+                        </p>
+                        <p style="font-style: italic; color: #777;">(@Resource.ReceiveWeeklyNewslettersByEmail)</p>
+                    </div>
+                    <div class="dk-item2">
+                        <div class="radio">
+                            @Html.RadioButtonFor(m => m.RegisterNewsletter, 1, new {id = "rbYes", @checked = true})
+                            <label for="rbYes" class="radio-label">@Resource.Yes</label>
+                        </div>
+                    </div>
+                    <div class="dk-item2">
+                        <div class="radio">
+                            @Html.RadioButtonFor(m => m.RegisterNewsletter, 0, new {id = "rbNo"})
+                            <label for="rbNo" class="radio-label">@Resource.No</label>
+                        </div>
+                    </div>
+                    <div class="dk-item3 fixdk">
+                        <div class="left-nn">@Resource.Language:</div>
+                        <div class="form-control-dk fixdk">
+                            <select name="NewsletterGroupId" class="dropdown newslettergroup-onchange">
+                                <option value="@Constants.ViNewsletterGroupId">@Resource.Vietnamese</option>
+                                <option value="@Constants.EnNewsletterGroupId">@Resource.English</option>
+                                <option value="@Constants.ViEnNewsletterGroupId">@Resource.VietnameseAndEnglish</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="dk-item3 fixdk2 newsLetterInfo">
+                        <span>@Resource.NewsletterInfo</span>
+                    </div>
+                </div>
+
+                <div class="cat-box-content form">
+                    <p style="float: left; width: 100%; color: #333; font-size: 15px; padding: 20px 0;"><strong>@Resource.FieldOfInterestDocument: </strong><span class="redcolor">*</span> @Html.ValidationMessageFor(m => m.FieldId, "", new {@class = "text-danger", style = "float:right;"})</p>
+                    <div class="example-checkbox">
+                        <div class="content-scroll-1" style="height: 320px;">
+                            <div class="form-inline-checkbox">
+                                @if (Model.ListFields.HasValue())
+                                {
+                                    for (int index = 0; index < Model.ListFields.Count; index++)
+                                    {
+                                        <div class="checkbox-col">
+                                            <div class="pure-checkbox">
+                                                <input id="chkFieldId_@index" name="FieldId" type="checkbox" value="@Model.ListFields[index].FieldId">
+                                                <label for="chkFieldId_@index">@Model.ListFields[index].FieldName</label>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    @Html.HiddenFor(m => m.FieldId)
+                    <p style="color: #d81c22;">* @Resource.SignUpToReceiveTheLatestDocumentInformationAboutYourAreaOfInterest.</p>
+                </div>
+
+                <div class="cat-box-content form">
+                    <div class="cat-title">
+                        <div class="cat-box-title vien">@Resource.WhatServiceAreYouInterestedIn</div>
+                    </div>
+                    <div class="cat-box-content">
+                        <div class="col-xs item3">
+                            <div class="radio">
+                                @Html.RadioButtonFor(m => m.ServiceOfInterest, 1, new {id = "VietnameseDocument", @checked = true})
+                                <label for="VietnameseDocument" class="radio-label"> @Resource.VietnameseDocument</label>
+                            </div>
+                        </div>
+                        <div class="col-xs item3">
+                            <div class="radio">
+                                @Html.RadioButtonFor(m => m.ServiceOfInterest, 2, new {id = "EnglishDocument"})
+                                <label for="EnglishDocument" class="radio-label"> @Resource.EnglishDocument</label>
+                            </div>
+                        </div>
+                        <div class="col-xs item3">
+                            <div class="radio">
+                                @Html.RadioButtonFor(m => m.ServiceOfInterest, 3, new {id = "Both"})
+                                <label for="Both" class="radio-label"> @Resource.Both</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cat-box-content form">
+                    <div class="cat-title">
+                        <div class="cat-box-title vien">@Resource.RegisterForTrialService</div>
+                    </div>
+                    <div class="cat-box-content">
+                        <div class="col-xs item2">
+                            <div class="radio">
+                                @Html.RadioButtonFor(m => m.ServiceId, Constants.ServiceFree, new {id = "rbLookUpForFree"})
+                                <label for="rbLookUpForFree" class="radio-label">@Resource.LookUpForFree</label>
+                            </div>
+                        </div>
+                        <div class="col-xs item2">
+                            <div class="radio">
+                                @Html.RadioButtonFor(m => m.ServiceId, Constants.ServiceIdDungThu15Ngay, new {id = "rbTrial", @checked = true})
+                                <label for="rbTrial" class="radio-label">@Resource.TrySubscriptionServiceFor15Days!</label>
+                            </div>
+                        </div>
+                        @*<div class="col-xs item0">
+                            <span class="botton-free">@Resource.Free</span>
+                        </div>*@
+                    </div>
+                </div>
+
+                <div class="cat-box-content form">
+                    <div class="cat-title">
+                        <div class="cat-box-title vien">@Resource.PersonalInformation</div>
+                    </div>
+                    <div class="cat-box-content">
+                        <div class="col-xs-2">
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.FirstAndLastName: </label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.FullName, new {@class = "form-control-input"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.Address:</label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.Address, new {@class = "form-control-input"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.Job: </label>
+                                <div class="col-sm-2 fixdk">
+                                    @if (Model.ListOccupations.HasValue())
+                                    {
+                                        <select name="OccupationId" class="dropdown">
+                                            <option value="0">@Resource.PleaseChoose</option>
+                                            @foreach (var item in Model.ListOccupations)
+                                            {
+                                                <option value="@item.OccupationId">@item.OccupationDesc</option>
+                                            }
+                                        </select>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-2">
+                            <div class="form-group">
+                                <div class="ms0">
+                                    <label class="col-sm-0">@Resource.DateOfBirth: </label>
+                                    @Html.TextBoxFor(m => m.DateOfBirth, new {@class = "form-control-input  form-control-ns fixdk icon3 datepicker"})
+                                </div>
+                                <div class="ms0">
+                                    <label class="col-sm-0">@Resource.Sex:</label>
+                                    <div class="gioi-tinh">
+                                        <select name="GenderId" class="dropdown">
+                                            <option value="0">...</option>
+                                            <option value="1">@Resource.Male</option>
+                                            <option value="2">@Resource.Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.DateOfBirth, "", new {@class = "text-danger", style = "float:left;"})
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.ProvinceCity: </label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.DropDownListFor(model => model.ProvinceId, new SelectList(Model.ListProvinces, "ProvinceId", "ProvinceDesc", Model.ProvinceId), new {@class = "dropdown"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.FieldWork: </label>
+                                <div class="col-sm-2 fixdk">
+                                    @if (Model.ListOrganOccupations.HasValue())
+                                    {
+                                        <select name="OrganOccupationId" class="dropdown">
+                                            <option value="0">@Resource.PleaseSelectTheField</option>
+                                            @foreach (var mOrganOccupations in Model.ListOrganOccupations)
+                                            {
+                                                <option value="@mOrganOccupations.OrganOccupationId">@mOrganOccupations.OrganOccupationDesc</option>
+                                            }
+                                        </select>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="cat-box-content form">
+                    <div class="cat-title">
+                        <div class="cat-box-title vien">@Resource.BusinessInformation</div>
+                    </div>
+                    <div class="cat-box-content">
+                        <div class="col-xs-2">
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.UnitName:</label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.OrganName, new {@class = "form-control-input"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.Address: </label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.OrganAddress, new {@class = "form-control-input"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.TaxCode: </label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.OrganTaxCode, new {@class = "form-control-input"})
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-2">
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.AccountNumber:</label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.AccountNumber, new {@class = "form-control-input"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1">@Resource.Phone:</label>
+                                <div class="col-sm-2 fixdk">
+                                    @Html.TextBoxFor(m => m.OrganPhone, new {@class = "form-control-input"})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cat-box-content">
+                    <div class="cat-title">
+                        <div class="cat-box-title vien">@Resource.ConventionsAndPrivacy</div>
+                    </div>
+                    <div class="cat-box-content">
+                        <div class="example-entry">
+                            <div class="content-scroll-1" style="height: 265px;">
+                                <div class="padding">
+                                    <div class="entry">
+                                        @Html.Raw(Model.QuyUocBaoMat.mArticlesView.ArticleContent)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rows-check">
+                        <div class="pure-checkbox">
+                            @Html.CheckBoxFor(m => m.TermsAndConditions)
+                            <label for="TermsAndConditions">Tôi đã đọc và đồng ý với Quy ước sử dụng của LuatVietnam.vn</label><br/>
+                            <br/>@Html.ValidationMessageFor(m => m.TermsAndConditions, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+
+                    <div class="rows-check1">
+                        <div class="col-xs-2">
+                            <div class="ma-code1">
+                                @Resource.YourSecurityCode:
+                            </div>
+                            <div class="ma-code1">
+                                <img class="captcha" alt="captcha" id="RegisterAccount" src="@Url.Action("CaptchaImage", "Home", new {id = Guid.NewGuid(), prefix = "RegisterAccount"})">
+                            </div>
+                            <a class="ma-code2 getcaptcha" data-id="RegisterAccount" href="#" title="Nhận mã bảo mật mới" data-prefix="RegisterAccount">
+                                <img class="imgrset" alt="" src="@Url.Content("~/assets/images/rset.png")"/>
+                            </a>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="ma-code1">
+                                @Resource.EnterTheSecurityCode:
+                            </div>
+                            <div class="ma-code1">
+                                @Html.TextBoxFor(m => m.RegisterCaptchaCode, new {@class = "form-control-input"})
+                                <br/>@Html.ValidationMessageFor(m => m.RegisterCaptchaCode, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rows-check-2">
+                        <div class="col-xs-2">
+                            <button onclick="javascript:lawsVn.FormReset();" class="btn-nhap-lai">@Resource.Retype</button>
+                        </div>
+                        <div class="col-xs-2">
+                            <button class="btn-dang-ky">@Resource.Register</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        </div>
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @Html.Partial("PartialTaisaochonLuatVietNam")
+            @Html.Partial("PartialManualInstruction")
+            <div class="widget">
+                <div class="banner">
+                     @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+
+<div class="cat-box partner">
+    <div class="cat-box-content">
+        <div id="partnerLink" class="col-xs-2 md2">
+            @Html.Partial("PartialPartnerLink")
+        </div>
+        <div class="col-xs-2 md2">
+            @{Html.RenderAction("PartialSharedCorner", "Shared");}
+        </div>
+    </div>
+</div>
+@section FooterSection{
+    <script type="text/javascript">
+        $(".datepicker").datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "1945:c"
+        });
+        $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+        $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+        $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+        lawsVn.RegisterAccount();
+    </script>
+}

@@ -1,0 +1,87 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.BusinessInformation
+@{
+    ViewBag.Title = "AccountEditBusinessInfoMobile";
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@using (Ajax.BeginForm("EditBusinessInformation", "Account", null
+    , new AjaxOptions
+    {
+        HttpMethod = "Post",
+        OnBegin = "lawsVn.ajaxEvents.OnBegin",
+        OnComplete = "lawsVn.ajaxEvents.OnComplete",
+        OnSuccess = "lawsVn.ajaxEvents.LoginOnSuccessful"
+    }
+    ))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="breadcrumb">
+        <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">@Resource.HomePage </a>»
+        <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="breadcrumb-item">@Resource.AccountInformation</a> »
+        <span class="breadcrumb-item color1">Chỉnh sửa</span>
+    </div>
+    <div class="box-section">
+        <div class="title">
+            <h2 class="title-cat">@Resource.AccountInformation</h2>
+            @*<div class="btn-more">
+                    <ul class="usernav">
+                        <li class="button-dropdown">
+                            <a href="javascript:void(0)" class="dropdown-toggle"><img style="margin-top: 6px;" src="@Url.Content("~/assets/mobile/images/more-nv.png")"></a>
+                            <ul class="dropdown-menu" style="right: 0px; width: 160px; margin-top: 3px; display: none;">
+                                <li class="item-more">
+                                    <a href="@(CmsConstants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="item-more-2 boder"> Thông tin tài khoản</a>
+                                </li>
+                                <li class="item-more">
+                                    <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Lịch sử giao dịch</a>
+                                </li>
+                                <li class="item-more">
+                                    <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Văn bản của tôi</a>
+                                </li>
+                                <li class="item-more">
+                                    <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Thông báo hiệu lực</a>
+                                </li>
+                                <li class="item-more">
+                                    <a href="@(CmsConstants.ROOT_PATH)" class="item-more-2 boder"> Tin nhắn</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>*@
+        </div>
+        <div class="login-content">
+            <div class="title2">
+                <div class="title-cat2 vien">@Resource.BusinessInformation</div>
+            </div>
+            <div class="form-login">
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.OrganName, new { placeholder = Resource.UnitName, @class = "input-text font2" })
+                    @Html.ValidationMessageFor(m => m.OrganName, "", new { @class = "text-danger" })
+                </div>
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.AccountNumber, new { placeholder = Resource.AccountNumber, @class = "input-text font2" })
+                    @Html.ValidationMessageFor(m => m.AccountNumber, "", new { @class = "text-danger" })
+                </div>
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.OrganAddress, new { placeholder = Resource.Address, @class = "input-text font2" })
+                    @Html.ValidationMessageFor(m => m.OrganAddress, "", new { @class = "text-danger" })
+                </div>
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.OrganPhone, new { placeholder = Resource.Phone, @class = "input-text font2" })
+                    @Html.ValidationMessageFor(m => m.OrganPhone, "", new { @class = "text-danger" })
+                </div>
+                <div class="item-login">
+                    @Html.TextBoxFor(m => m.OrganTaxCode, new { placeholder = Resource.TaxCode, @class = "input-text font2" })
+                    @Html.ValidationMessageFor(m => m.OrganTaxCode, "", new { @class = "text-danger" })
+                </div>
+                <div class="item-center">
+                    <a href="#" class="btn1 submit-link">CẬP NHẬT</a>
+                    <a href="@(Request.UrlReferrer != null ? Request.UrlReferrer.AbsoluteUri : CmsConstants.ROOT_PATH)" class="btn2">HỦY</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,49 @@
+﻿@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.Account.TaxInvoiceModel
+@using (Ajax.BeginForm("TaxInvoice", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    ,OnSuccess = "lawsVn.ajaxEvents.TaxInvoiceOnComplete"
+}, new { id = "TaxInvoiceForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="rows-thongbao center" style="font-size: 16px; font-weight: bold; text-transform: uppercase; margin-bottom: 15px;">
+        @Resource.InformationAddedInvoiceValue
+    </div>
+    <div class="form-group">
+        <label class="col-sm-1">@Resource.CompanyName: <span class="redcolor">*</span> </label>
+        <div class="col-sm-2 tax-invoice">
+            @Html.TextBoxFor(m => m.CompanyName, new {@class = "form-control-input"})
+            @Html.ValidationMessageFor(m => m.CompanyName, "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-1">@Resource.Address: <span class="redcolor">*</span> </label>
+        <div class="col-sm-2 tax-invoice">
+            @Html.TextBoxFor(m => m.CompanyAddress, new {@class = "form-control-input"})
+            @Html.ValidationMessageFor(m => m.CompanyAddress, "", new {@class = "text-danger", placeholder="Nơi đăng ký kinh doanh"})
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-1">@Resource.TaxCode: <span class="redcolor">*</span> </label>
+        <div class="col-sm-2 tax-invoice2">
+            @Html.TextBoxFor(m => m.CompanyTaxCode, new {@class = "form-control-input"})
+            @Html.ValidationMessageFor(m => m.CompanyTaxCode, "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-1">@Resource.BillContent: </label>
+        <div class="col-sm-2 tax-invoice">
+            @Html.TextAreaFor(m => m.InternalContent, new {@class = "form-control-input textarea-control internal-content"})
+            @Html.ValidationMessageFor(m => m.InternalContent, "", new {@class = "text-danger"})
+        </div>
+    </div>
+        <div class="rows">
+            <div class="btn-right">
+                <button class="btn-thongbao1 mau1 btn-reset" tabindex="1" style="font-size: 13px; height: 32px;">@Resource.Retype</button>
+                <button class="btn-thongbao1 mau2" tabindex ="2" style="font-size: 13px; height: 32px; margin-right: 0;">@Resource.Confirm </button>
+            </div>
+        </div>
+}

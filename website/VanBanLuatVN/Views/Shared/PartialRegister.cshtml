@@ -1,0 +1,36 @@
+﻿@model VanBanLuat.Models.AccountModel.RegisterHeaderModel
+@using (Ajax.BeginForm("HeaderRegister", "Account", null, new AjaxOptions
+{
+    HttpMethod = "Post",
+    OnSuccess = "vbluat.ajaxEvents.OnSuccessAlert(data, status, xhr)",
+    OnFailure = "vbluat.ajaxEvents.OnFailure"
+}, new { @class = "user-form" }))
+{
+    @Html.AntiForgeryToken()
+<div class="form-group">
+    @Html.TextBoxFor(m => m.CustomerName, new { @class = "input-text ms1 font14", id= "CustomerNameRegisterPartial", placeholder = "Tên đăng nhập *", autocapitalize = "off", autocorrect = "off" })
+    @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+</div>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.EmailRegister, new { @class = "input-text ms1 font14", id="EmailRegisterPartial", placeholder = "Email *", autocapitalize = "off", autocorrect = "off" })
+        @Html.ValidationMessageFor(m => m.EmailRegister, "", new {@class = "text-danger"})
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.Password, new { @class = "input-text ms1 font14", type = "password", id = "PasswordRegisterPartial", placeholder = "Mật khẩu *", autocapitalize = "off", autocorrect = "off" })
+        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "input-text ms1 font14", type = "password", id= "ConfirmPasswordRegisterPartial", placeholder = "Nhập lại mật khẩu *", autocapitalize = "off", autocorrect = "off" })
+        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+    </div>
+<div class="form-group dktk font13">
+    <div class="pure-checkbox dktk">
+        <input data-val="true" data-val-range="Vui lòng chọn đồng ý với Quy ước sử dụng của VanBanLuat" data-val-range-max="True" data-val-range-min="True" data-val-required="The Terms and Conditions field is required." id="TermsAndConditions" name="TermsAndConditions" type="checkbox" value="true"><input name="TermsAndConditions" type="hidden" value="false"> 
+        <label for="TermsAndConditions">Tôi đồng ý với <a style="color: #0281c4" href="#"> Quy ước sử dụng của Vanbanluat.vn</a></label>
+        <span class="field-validation-valid text-danger" data-valmsg-for="TermsAndConditions" data-valmsg-replace="true"></span>
+    </div>
+</div>
+    <center class="form-group">
+        <button class="btn-default dangnhap">Tạo tài khoản</button>
+    </center>
+}

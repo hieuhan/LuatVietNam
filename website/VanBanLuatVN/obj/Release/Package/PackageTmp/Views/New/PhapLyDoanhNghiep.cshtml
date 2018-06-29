@@ -1,0 +1,58 @@
+﻿@using VanBanLuat.Models
+@using Constants = VanBanLuat.Librarys.Constants
+@model NewViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutNews.cshtml";
+}
+<div class="breadcrumb">
+    <a class="breadcrumb-item" href="@Constants.ROOT_PATH" title="Trang chủ">Trang chủ</a> /
+    <span class="breadcrumb-item xanh">Pháp lý cho doanh nghiệp</span>
+</div>
+<div class="content-left">
+    <div class="banner-phaply">
+        <img class="thumb-full" src="@Url.Content("~/assets/images/bannerphaply.png")" />
+    </div>
+    @if (Model.lCategoryArticles.Count > 0)
+    {
+        <section class="cat-box-section">
+            @for (int i = 0; i < Model.lCategoryArticles.Count; i++)
+            {
+                if (i == 2) { break; }
+                { Html.RenderAction("PartialShowViewByListArticle", "Shared", new { mCategoryArticles = Model.lCategoryArticles[i], viewName = "PartialPhapDoanhNghiep_Top" }); }
+            }
+        </section>
+        if (Model.lCategoryArticles.Count >= 2)
+        { 
+            for (int i = 2; i < Model.lCategoryArticles.Count; i++)
+            {
+                {Html.RenderAction("PartialShowViewByListArticle", "Shared", new { mCategoryArticles = Model.lCategoryArticles[i], viewName = "PartialPhapLyDoanhNghiep_Main" });}
+            }
+            
+        }
+       { Html.RenderAction("PartialArticlesBieuMauGetByCategoryId", "Shared", new { categoryId = Constants.CateId_BieuMauCanBiet, rowAmount = Constants.RowAmount10, viewName = "PartialBieuMauCanBiet" });}
+    }
+    else
+    {
+        <section class="cat-box-section">
+            <div class="cat-box-content">
+                <div class="new-list-other">
+                    <p class="post-title vbl bold">Nội dung đang được cập nhật.</p>
+                </div>
+            </div>
+        </section>
+    }
+</div>
+<aside class="sidebar-270">
+    @{ Html.RenderAction("PartialGetListCateIdByParentId", "Shared", new { ParentId = Constants.CateId_LoaiHinhDoanhNghiep, viewName = "PartialLoaiDoanhNghiep" });}
+    <div class="widget">
+        <div class="ads2">
+            <img class="imgycvb2" src="@Url.Content("~/assets/images/group-dn.png")"/>
+            <button class="yeucauvanbanbtn" title="Gửi yêu cầu văn bản" data-action="yeu-cau-van-ban.html">
+                Yêu cầu văn bản
+            </button>
+        </div>
+    </div> 
+   @{ Html.RenderAction("PartialArticlesGetByCategoryId", "Shared", new { categoryId = Constants.CateId_ThongBaoVBMoi, rowAmount = Constants.RowAmount5, viewName = "PartialChinhSachMoi" });}
+   @{ Html.RenderAction("PartialDocumentsByGetByDisplayTypeId", "Shared", new { displayTypeId = Constants.DisplayTypeId_LuatDNXemNhieu, boxTitle = "Luật doanh nghiệp xem nhiều", rowAmount = Constants.RowAmount5, viewName = "PartialDocumentsOfInterest" });}
+</aside>
+

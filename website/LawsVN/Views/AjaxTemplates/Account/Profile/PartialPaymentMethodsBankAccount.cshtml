@@ -1,0 +1,232 @@
+﻿@model LawsVN.Models.Account.PaymentServiceUsingBankAccountModel
+@using (Ajax.BeginForm("PaymentServiceUsingBankAccount", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    ,OnSuccess = "lawsVn.ajaxEvents.PaymentServiceUsingBankAccountOnSuccess"
+}, new { id = "ValidPaymentMethodsBankAccountForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="cat-box-content">
+        <div class="tabcontent-dv">
+            <div class="padding">
+                <div class="rows item5"> 
+                    @Html.HiddenFor(m=>m.ServiceId)
+                    @Html.HiddenFor(m=>m.ServiceName)
+                    @Html.HiddenFor(m=>m.ServicePackageId)
+                    @Html.HiddenFor(m=>m.ServicePackageName)
+                    @Html.HiddenFor(m=>m.Total)
+                    @Html.HiddenFor(m=>m.Price)
+                    @Html.HiddenFor(m=>m.Amount)
+                    @Html.HiddenFor(m=>m.PercentDecrease)
+                    @Html.HiddenFor(m=>m.PromotionCodeBankAccount)
+                    @Html.HiddenFor(m=>m.PaymentTransactionIdSrc)
+                    @Html.HiddenFor(m=>m.CompanyName)
+                    @Html.HiddenFor(m=>m.CompanyAddress)
+                    @Html.HiddenFor(m=>m.CompanyTaxCode)
+                    @Html.HiddenFor(m=>m.InternalContent)
+                    @Html.HiddenFor(m=>m.TransactionTypeId)
+                </div>
+                <div class="rows item5">
+                    <div class="rows item6">Chọn ngân hàng: <span id="bankSelectedName" style="color:blue;"></span></div>
+                    <div class="rows">
+                        <div class="gallery">
+                            <ul>
+                                <li>
+                                    <a onclick="lawsVn.selectBankCode('123PVTB',this)" href="javascript:void(0)" title="Ngân hàng Công Thương Việt Nam (Vietinbank)">
+                                        <img src="@Url.Content("~/assets/images/vietinbank.png")" />
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PVPB',this)" href="javascript:void(0)" title="Ngân hàng Việt Nam Thịnh Vượng  (VPBank)">
+                                        <img src="@Url.Content("~/assets/images/vbbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PVIB',this)" href="javascript:void(0)" title="Ngân hàng quốc tế (VIB)">
+                                        <img src="@Url.Content("~/assets/images/vibbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PVAB',this)" href="javascript:void(0)" title="Ngân hàng TMCP Việt Á ">
+                                        <img src="@Url.Content("~/assets/images/Vietabank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PVCB',this)" href="javascript:void(0)" title="Ngân hàng Ngoại Thương Việt Nam (Vietcombank)">
+                                        <img src="@Url.Content("~/assets/images/vietcombank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PACB',this)" href="javascript:void(0)" title="Ngân hàng Á Châu (ACB)">
+                                        <img src="@Url.Content("~/assets/images/Acb_logo.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PAGB',this)" href="javascript:void(0)" title="Ngân hàng Nông nghiệp và Phát triển Nông thôn Việt Nam (Agribank)">
+                                        <img src="@Url.Content("~/assets/images/agribank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PBAB',this)" href="javascript:void(0)" title="Ngân hàng TMCP Bắc Á ">
+                                        <img src="@Url.Content("~/assets/images/bacabank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PVTB',this)" href="javascript:void(0)" title="Ngân hàng Công Thương Việt Nam (Vietinbank)">
+                                        <img src="@Url.Content("~/assets/images/Baovietbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript: lawsVn.selectBankCode('123PBIDV', this)" href="javascript:void(0)" title="Ngân hàng đầu tư và phát triển Việt Nam  (BIDV)">
+                                        <img src="@Url.Content("~/assets/images/bidvbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PDAB',this)" href="javascript:void(0)" title="Ngân hàng Đông Á (DAB)">
+                                        <img src="@Url.Content("~/assets/images/dongabank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PEIB',this)" href="javascript:void(0)" title="Ngân hàng Xuất Nhập Khẩu Việt Nam (Eximbank)">
+                                        <img src="@Url.Content("~/assets/images/eximbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PGPB',this)" href="javascript:void(0)" title="Ngân Hàng Dầu Khí Toàn Cầu (GPBank) ">
+                                        <img src="@Url.Content("~/assets/images/gbbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PHDB',this)" title="Ngân Hàng TMCP Phát Triển TPHCM (HDBank)">
+                                        <img src="@Url.Content("~/assets/images/HDBanklogo.png")" href="javascript:void(0)">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PMRTB',this)" href="javascript:void(0)" title="Ngân hàng TMCP Hàng Hải  (Maritime Bank)">
+                                        <img src="@Url.Content("~/assets/images/maritimebank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PMB',this)" href="javascript:void(0)" title="Ngân hàng quân đội (MB)">
+                                        <img src="@Url.Content("~/assets/images/MBbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PNAB',this)" href="javascript:void(0)" title="Ngân hàng TMCP Nam Á  (Nam A Bank)">
+                                        <img src="@Url.Content("~/assets/images/namabank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123POCB',this)" href="javascript:void(0)" title="Ngân hàng TMCP Phương Đông (OCB) ">
+                                        <img src="@Url.Content("~/assets/images/OCBbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123POCEB',this)" href="javascript:void(0)" title="Ngân hàng TMCP Đại Dương  (OceanBank)">
+                                        <img src="@Url.Content("~/assets/images/OceanBanklogo.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PPGB',this)" href="javascript:void(0)" title="Ngân hàng Dầu Khí (PG Bank)">
+                                        <img src="@Url.Content("~/assets/images/pgbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PSCB',this)" href="javascript:void(0)" title="Ngân hàng Sài Gòn Thương Tín  (Sacombank)">
+                                        <img src="@Url.Content("~/assets/images/sacombank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript:lawsVn.selectBankCode('123PABB',this)" href="javascript:void(0)" title="Ngân hàng TMCP An Bình (ABBANK)">
+                                        <img src="@Url.Content("~/assets/images/abbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript: lawsVn.selectBankCode('123PSEAB', this)" href="javascript:void(0)" title="Ngân hàng Thương Mại Cổ Phần Đông Nam Á (SeABank) ">
+                                        <img src="@Url.Content("~/assets/images/Seabank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript: lawsVn.selectBankCode('123PSHB', this)" href="javascript:void(0)" title="Ngân hàng TMCP Sài Gòn – Hà Nội (SHB)">
+                                        <img src="@Url.Content("~/assets/images/SHBbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript: lawsVn.selectBankCode('123PNVB', this)" href="javascript:void(0)" title="Ngân hàng Thương mại Cổ phần Quốc Dân">
+                                        <img src="@Url.Content("~/assets/images/ncbbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript: lawsVn.selectBankCode('123PTCB', this)" href="javascript:void(0)" title="Ngân hàng Kỹ Thương Việt Nam (Techcombank)">
+                                        <img src="@Url.Content("~/assets/images/techbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript: lawsVn.selectBankCode('123PBVB', this)" href="javascript:void(0)" title="Ngân hàng TMCP Bảo Việt (BAOVIET Bank)">
+                                        <img src="@Url.Content("~/assets/images/Baovietbank.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript: lawsVn.selectBankCode('123PTPB', this)" href="javascript:void(0)" title="Ngân hàng Tiền Phong (Tien Phong Bank)">
+                                        <img src="@Url.Content("~/assets/images/TP.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript: lawsVn.selectBankCode('123PLPB', this)" href="javascript:void(0)" title="Ngân hàng Thương mại Cổ phần Bưu điện Liên Việt   (LienVietPostBank)">
+                                        <img src="@Url.Content("~/assets/images/Lienvietbank.png")">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="col-sm-1" style="line-height: 60px;">Thẻ quốc tế:</span>
+                    <div class="col-sm-item9">
+                        <div class="gallery">
+                            <ul>
+                                <li>
+                                    <a onclick="javascript: lawsVn.selectBankCode('123PCC', this)" href="javascript:void(0)" title="Master Card, Visa Card, JCB ">
+                                        <img src="@Url.Content("~/assets/images/visa.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript: lawsVn.selectBankCode('123PCC', this)" href="javascript:void(0)" title="Master Card, Visa Card, JCB ">
+                                        <img src="@Url.Content("~/assets/images/master.png")">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a onclick="javascript: lawsVn.selectBankCode('123PCC', this)" href="javascript:void(0)" title="Master Card, Visa Card, JCB ">
+                                        <img src="@Url.Content("~/assets/images/Jcb.png")">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="rows item8">
+        <div class="pure-checkbox">
+            @Html.CheckBoxFor(m => m.TermsAndConditions)
+            <label for="TermsAndConditions">Tôi đồng ý với các <a href="javascript:lawsVn.openTerms()" style="color: #a67942; font-weight: bold;">Quy định thanh toán</a> của LuatVietnam.vn</label><br />
+            <br />@Html.ValidationMessageFor(m => m.TermsAndConditions, "", new { @class = "text-danger" })
+            <div class="rows">
+                @Html.CheckBoxFor(m => m.TaxInvoice)
+                <label for="TaxInvoice">Yêu cầu xuất hóa đơn GTGT</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="rows btn">
+        @Html.HiddenFor(m => m.BankCode, new { @id = "hdfBankCode" })     
+        <button id="btn-bank-account" class="btn-dang-ky dv2">Thanh toán</button>
+        <button class="btn-nhap-lai dv2">Hủy</button>
+    </div>
+}

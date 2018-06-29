@@ -1,0 +1,50 @@
+﻿@using ICSoft.LawDocsLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.Account.LawsCustomerProvinces
+@using (Ajax.BeginForm("EditCustomerProvinces", "Account", null, new AjaxOptions()
+{
+    HttpMethod = "Post",
+    OnBegin = "lawsVn.ajaxEvents.OnBegin",
+    OnComplete = "lawsVn.ajaxEvents.OnComplete",
+    OnSuccess = (Extensions.IsMobile() ? "lawsVn.ajaxEvents.UpdateFieldOnSuccessful" : "lawsVn.ajaxEvents.LoginOnSuccessful")//LoginOnSuccessful
+}))
+{
+    @Html.AntiForgeryToken()
+    <div class="padding20">
+        <div style="margin: 15px 0">
+            <span style="color: #333; font-size: 15px; padding: 20px 0;">
+                <strong>@Resource.ProvinceOfInterestDocument: </strong><span class="redcolor">*</span>
+            </span>
+        </div>
+        <div class="example-checkbox">
+            <div class="content-scroll-1" style="height: 320px;">
+                <div class="form-inline-checkbox">
+                    @if (Model.ListProvinces.HasValue())
+                    {
+                        for (int index = 0; index < Model.ListProvinces.Count; index++)
+                        {
+                            var province = Model.ListProvinces[index];
+                            if (province.ProvinceId == 0)
+                            {
+                                continue;
+                            }
+                            <div class="checkbox-col">
+                                <div class="pure-checkbox">
+                                    <input id="chkFieldId_@(index)" name="ProvinceId" type="checkbox" @(Model.ListCustomerProvinces.CustomerProvincesIsChecked(province.ProvinceId) ? "checked" : string.Empty) value="@province.ProvinceId">
+                                    <label for="chkFieldId_@(index)">@province.ProvinceDesc</label>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="huy-capnhat bottom">
+            <div class="btn-huy"><a href="#" class="icon-huy closeDialog" title="@Resource.Cancel"> @Resource.Cancel</a></div>
+            <div class="btn-huy"><a href="#" class="icon-capnhat submit-link" title="@Resource.Update"> @Resource.Update</a></div>
+        </div>
+        @Html.HiddenFor(m => m.provinceId)
+        @Html.ValidationMessageFor(m => m.provinceId, "", new { @class = "text-danger" })
+    </div>
+}

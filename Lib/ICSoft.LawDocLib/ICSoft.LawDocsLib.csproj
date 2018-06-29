@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B168D994-0930-4794-BC24-C2B2277411E9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ICSoft.LawDocsLib</RootNamespace>
+    <AssemblyName>ICSoft.LawDocsLib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\DLL\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Devshock.Net.SockClient, Version=0.1.151.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Dll\Devshock.Net.SockClient.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSoft.CMSLib">
+      <HintPath>..\..\Dll\ICSoft.CMSLib.dll</HintPath>
+    </Reference>
+    <Reference Include="LibDatabase">
+      <HintPath>..\..\Dll\LibDatabase.dll</HintPath>
+    </Reference>
+    <Reference Include="LibUtils">
+      <HintPath>..\..\Dll\LibUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomerFields.cs" />
+    <Compile Include="CustomerLogReport.cs" />
+    <Compile Include="CustomerLogReportHeader.cs" />
+    <Compile Include="CustomerProvinces.cs" />
+    <Compile Include="CustomerRelates.cs" />
+    <Compile Include="DocArticles.cs" />
+    <Compile Include="DocDetailReports.cs" />
+    <Compile Include="DocGroups.cs" />
+    <Compile Include="DocProvinces.cs" />
+    <Compile Include="DocsProcessAuto.cs" />
+    <Compile Include="DocsReportByDocType.cs" />
+    <Compile Include="DocsReportByField.cs" />
+    <Compile Include="DocsReportByOrgan.cs" />
+    <Compile Include="DocsReportLoaiVB_GetPage.cs" />
+    <Compile Include="DocSteps.cs" />
+    <Compile Include="DocTypeReports.cs" />
+    <Compile Include="FieldsReports.cs" />
+    <Compile Include="GrantLevels.cs" />
+    <Compile Include="LawerFields.cs" />
+    <Compile Include="LawerGroups.cs" />
+    <Compile Include="Lawers.cs" />
+    <Compile Include="LawTerminGroups.cs" />
+    <Compile Include="MessageSendLogs.cs" />
+    <Compile Include="OrganReports.cs" />
+    <Compile Include="PromotionCodes.cs" />
+    <Compile Include="RoleHelpers.cs" />
+    <Compile Include="ServicesView.cs" />
+    <Compile Include="ServicePackagesView.cs" />
+    <Compile Include="CustomersView.cs" />
+    <Compile Include="PaymentTransactionsView.cs" />
+    <Compile Include="CustomerAccessLogs.cs" />
+    <Compile Include="CustomerCount.cs" />
+    <Compile Include="CustomerDocs.cs" />
+    <Compile Include="CustomerGroups.cs" />
+    <Compile Include="Customers.cs" />
+    <Compile Include="CustomerServices.cs" />
+    <Compile Include="DataAccessCodes.cs" />
+    <Compile Include="DataAccessCodeViewLogs.cs" />
+    <Compile Include="DocIndexes.cs" />
+    <Compile Include="DocTypeWithDefaultLanguage.cs" />
+    <Compile Include="DocViewCount.cs" />
+    <Compile Include="FaqDocs.cs" />
+    <Compile Include="FaqFiles.cs" />
+    <Compile Include="FaqGroups.cs" />
+    <Compile Include="Faqs.cs" />
+    <Compile Include="FaqTypes.cs" />
+    <Compile Include="FaqViewCount.cs" />
+    <Compile Include="FaqViewLogs.cs" />
+    <Compile Include="DocSearchLogs.cs" />
+    <Compile Include="DocViewLogs.cs" />
+    <Compile Include="DocItemContents.cs" />
+    <Compile Include="DocItems.cs" />
+    <Compile Include="DocItemLevels.cs" />
+    <Compile Include="EffectStatus.cs" />
+    <Compile Include="FieldWithDefaultLanguage.cs" />
+    <Compile Include="LawOffices.cs" />
+    <Compile Include="MessageSends.cs" />
+    <Compile Include="MessageTemplates.cs" />
+    <Compile Include="NewsletterEmailGroups.cs" />
+    <Compile Include="NewsletterEmails.cs" />
+    <Compile Include="NewsletterFiles.cs" />
+    <Compile Include="NewsletterGroups.cs" />
+    <Compile Include="NewsletterMembers.cs" />
+    <Compile Include="NewsletterMemberStatus.cs" />
+    <Compile Include="NewsletterReadLogs.cs" />
+    <Compile Include="Newsletters.cs" />
+    <Compile Include="NewsletterSends.cs" />
+    <Compile Include="NewsletterStatus.cs" />
+    <Compile Include="OfficeTypes.cs" />
+    <Compile Include="DocDisplays.cs" />
+    <Compile Include="DocFields.cs" />
+    <Compile Include="DocFiles.cs" />
+    <Compile Include="DocKeywords.cs" />
+    <Compile Include="DocOrgans.cs" />
+    <Compile Include="DocRelates.cs" />
+    <Compile Include="Docs.cs" />
+    <Compile Include="DocSigners.cs" />
+    <Compile Include="DocTypeDisplays.cs" />
+    <Compile Include="DocTypes.cs" />
+    <Compile Include="FieldDisplays.cs" />
+    <Compile Include="Fields.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Keywords.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LawTermins.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrganDisplays.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Organs.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrganTypes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="OrganWithDefaultLanguage.cs" />
+    <Compile Include="PaymentTransactions.cs" />
+    <Compile Include="PaymentTypes.cs" />
+    <Compile Include="Promotions.cs" />
+    <Compile Include="RelateTypeGroups.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RelateTypes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Regencies.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="RelateTypeWithDefaultLanguage.cs" />
+    <Compile Include="Roles.cs" />
+    <Compile Include="SendMethods.cs" />
+    <Compile Include="SendStatus.cs" />
+    <Compile Include="ServicePackages.cs" />
+    <Compile Include="ServiceRoles.cs" />
+    <Compile Include="Services.cs" />
+    <Compile Include="Signers.cs" />
+    <Compile Include="DocConstants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SmsMos.cs" />
+    <Compile Include="SmsMts.cs" />
+    <Compile Include="SmsProcessStatus.cs" />
+    <Compile Include="SmsServices.cs" />
+    <Compile Include="SystemErrors.cs" />
+    <Compile Include="TransactionStatus.cs" />
+    <Compile Include="TransactionTypes.cs" />
+    <Compile Include="UseStatus.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

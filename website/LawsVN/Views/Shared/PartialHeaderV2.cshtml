@@ -1,0 +1,63 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.App_GlobalResources
+@using LawsVN.Library
+@model LawsVN.Models.HeaderModel
+<header id="theme-header">
+    <div class="container">
+        <!--Bengin hearder-left-->
+        <div class="hearder-left">
+            <div class="logo"><a href="@CmsConstants.ROOT_PATH"><img alt="@Html.Raw(sms.utils.StringUtil.RemoveSign4VietnameseString(Model.Title.ToString()))" src="@Url.Content("~/assets/images/logo.png")" /></a></div>
+        </div>
+        <!--End hearder-left-->
+        <!--Bengin hearder-right-->
+        <div class="hearder-right">
+            <div class="top-nav">
+                @if (Model.ListMenuItemsHeaderView.HasValue())
+                {
+                    foreach (var item in Model.ListMenuItemsHeaderView)
+                    {
+                        <a href="@item.GetUrl()" title="@item.ItemDesc" style="font-weight: bold;">@item.ItemDesc</a>
+                    }
+                }
+                @if (Extensions.IsAuthenticated)
+                {
+                    {
+                        Html.RenderAction("PartialWidgetUserHeader", "Shared", new { getCountPaymentTransactionSuccess = Model.GetCountPaymentTransactionSuccess, getCountThongBaoHieuLuc = Model.GetCountThongBaoHieuLuc });
+                    }
+                    {
+                        Html.RenderAction("PartialCustomerNotifyMessages", "Shared", true);
+                    }
+                    <a href="@(CmsConstants.ROOT_PATH)giao-dien-ca-nhan.html" title="Giao diện cá nhân" class="homepage" style="float: right !important; position: relative; margin-top: -3px;"><img alt="giao diện cá nhân" style="float: left; height: 18px;" src="@Url.Content("~/assets/images/ca-nhan.png")" /><strong style="float: left; margin-left: 5px; padding-top: 4px;">Trang cá nhân của tôi</strong></a>
+                }
+                else
+                {
+                    <a href="@(CmsConstants.ROOT_PATH)user/dang-ky-tai-khoan.html" title="Đăng ký" class="img-dk icon2" style="font-weight: bold;">Đăng ký</a>
+                    <a href="#" title="@Resource.btnLogin" class="img-dk icon3 lawsVnLogin" style="font-weight: bold;">@Resource.btnLogin</a>
+                }
+            </div>
+            <nav id="main-nav" class='main-menu-bar'>
+                <div class="main-menu">
+                    @if (Model.ListMenuItemsView.HasValue())
+                    {
+                        <ul id="menu-main" class="menu">
+                            @foreach (var menuItem in Model.ListMenuItemsView)
+                            {
+                                <li class="menu-item@(Model.MenuItemId == menuItem.MenuItemId ? "-active" : string.Empty)">
+                                    @if (Extensions.IsAuthenticated && !string.IsNullOrWhiteSpace(Model.SessionId) && menuItem.Url.IndexOf("english.luatvietnam.vn", StringComparison.Ordinal) >= 0)
+                                    {
+                                        <a href="@string.Format("{0}?sessionId={1}", string.Concat("https://english.luatvietnam.vn/","account/loginsessionid"), Model.SessionId)" rel="nofollow" title="@menuItem.ItemName">@menuItem.ItemName</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@menuItem.GetUrl()" title="@menuItem.ItemName">@menuItem.ItemName</a>
+                                    }
+                                </li>
+                            }
+                        </ul>
+                    }
+                </div>
+            </nav>
+        </div>
+        <!--End hearder-right-->
+    </div>
+</header>

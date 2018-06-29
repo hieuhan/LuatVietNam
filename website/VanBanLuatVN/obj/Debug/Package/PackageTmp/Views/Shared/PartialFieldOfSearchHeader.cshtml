@@ -1,0 +1,45 @@
+﻿@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@model SharedViewModel.FieldOfSearchModel
+<div class="danhmuc mobi" style="margin-top: 10px;">
+    <div class="button-dropdown">
+        <a href="#" class="dropdown-toggle" style="color: #0282c4; font-weight: bold; text-transform: uppercase; height: 24px; line-height: 24px;"><img src="@Url.Content("~/assets/images/imenu.png")" /></a>
+        <div class="dropdown-menu" style="width: 240px;right: 0;margin-top: 3px;">
+            <div class="widget cat" style="margin: 0;">
+                <div class="widget-top">
+                    <h3 class="widget-title cat"><img style="float: left;margin-top: 4px;margin-right: 5px;" src="@Url.Content("~/assets/images/danhmuc.png")" />Tra cứu văn bản</h3>
+                </div>
+                <div class="widget-container">
+                    <nav class="nav-leff">
+                        <ul>
+                            @if (Model.ListMenuItems.HasValue())
+                            {
+                                foreach (var item in Model.ListMenuItems)
+                                {
+                                    <li class="item-wg bold"><a href="@item.Url" title="@item.ItemName" class="nav-wg-item">@item.ItemName</a></li>
+                                }
+                            }
+                        </ul>
+                    </nav>
+                    <div class="item-wg bold"><span class="nav-wg-item">Lĩnh vực văn bản </span></div>
+                    <div class="content-scroll-1" style="height: 360px;">
+                        <div class="nav-p15">
+                            <ul id="list">
+                                @if (Model.ListFields.HasValue())
+                                {
+                                    foreach (var item in Model.ListFields)
+                                    {
+                                        <li class="item-wg2 row-m3 vbluat-row-detail"><a href="@item.GetUrl(Model.DocGroupId)" title="@item.FieldDesc" class="nav-wg-item2 listlv"><img src="@Url.Content("~/assets/images/ds-lv.png")" style="margin: 3px 6px 3px 3px;" alt="lv_@item.FieldId"/>@item.FieldDesc</a></li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                        <div class="linh-vuc-khac">
+                            <button id="load-btn" class="lvk5">Lĩnh vực khác<img style="margin-top: 5px; float: right;" src="@Url.Content("~/assets/images/icondown.png")" class="mCS_img_loaded"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

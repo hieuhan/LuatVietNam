@@ -1,0 +1,43 @@
+﻿@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@model VanBanLuatVN.Models.DocViewModel.DocDetailModel
+<article id="hieuluc" class="detailfull cat-box-section none">
+    <div class="boxcontent p20 bgffffff">
+        <div class="rows-tievb">
+            <div class="tievb">Văn bản hiệu lực</div>
+            @{ Html.RenderAction("PartialDocumentAttribute", "Shared", new { model = new SharedViewModel.DocumentAttribute { Docs = Model.Docs } });}
+        </div>
+        <div class="rows-tievb">
+            <div class="tievb">Hiệu lực liên quan</div>
+            @if (Model.DocRelateListsEffect != null && Model.DocRelateListsEffect.lCountByRelateType.HasValue())
+            {
+                Model.HaveDoc = false;
+                foreach (var item in Model.DocRelateListsEffect.lCountByRelateType)
+                {
+                    Model.ListDocRelates = Model.DocRelateListsEffect.lDocRelates.GetDocsRelatesByRelateTypeId_DisplayPosition(item.RelateTypeId, "Right");
+                    if (!Model.ListDocRelates.HasValue()) { continue; }
+                    Model.HaveDoc = true;
+                    <div class="row-loc">
+                        <div class="text-hieuluc">
+                            <span>@string.Format("{0} ({1:#00})", item.RelateTypeName, item.DocCount)</span>
+                        </div>
+                    </div>
+                    foreach (var item2 in Model.ListDocRelates)
+                    {
+                        <div class="rows-vb">
+                            @{ Html.RenderAction("PartialDocumentAttribute", "Shared", new { model = new SharedViewModel.DocumentAttribute { DocRelates = item2 } });}
+                        </div>
+                    }
+                }
+                if (!Model.HaveDoc)
+                {
+                    <p>Văn bản chưa có liên quan hiệu lực</p>
+                }
+            }
+            else
+            {
+                    <p>Văn bản chưa có liên quan hiệu lực</p>
+            }
+        </div>
+    </div>
+</article>

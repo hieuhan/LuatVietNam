@@ -1,0 +1,86 @@
+﻿@using ICSoft.CMSLib
+@using LawsVN.Library
+@using LawsVN.Models
+@model DocFieldModel
+@{
+    Layout = "~/Views/Shared/_LayoutAMP.cshtml";
+}
+<div class="box-search">
+    <div class="search-input">
+        <form action="@(CmsConstants.ROOT_PATH)tim-van-ban.html" method="get" target="_blank" novalidate="" class="-amp-form">
+            <input class="search-q" type="text" name="Keywords" placeholder="Nhập nội dung cần tìm ..." autocomplete="off">
+            <input type="hidden" name="FieldId" value="@Model.mPartialPaginationAjax.FieldId" />
+            <button class="btn-isearch"></button>
+        </form>
+    </div>
+</div>
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>
+    @if (Model.mFieldDisplays.FieldId > 0)
+    {
+        <span> »</span><span class="breadcrumb-item">@Model.mFieldDisplays.FieldName </span>
+    }
+</div>
+
+<section class="content-section">
+    <div class="title2">
+        <h1 class="title-cat2 vien">@Model.SeoHeader.TrimmedOrDefault(Model.SeoReplace)</h1>
+    </div>
+    @*<div class="rows">
+        <select class="select-locvb">
+            <option>Tất cả lĩnh vực</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+        </select>
+        <select class="select-locvb">
+            <option>Tất cả lĩnh vực</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+        </select>
+        <select class="select-locvb">
+            <option>Tất cả lĩnh vực</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+            <option>Doanh nghiệp</option>
+            <option>Đất đai - Nhà ở</option>
+        </select>
+    </div>*@
+    <div class="cat-box-content">
+    @if (Model.ListDocsView.HasValue())
+    {
+        for (int index = 0; index < Model.ListDocsView.Count; index++)
+        {
+            <div class="other-news @(index == 0 ? string.Empty : "dashed")">
+                <h2><a class="post-title other" href="@Model.ListDocsView[index].GetDocUrl()">@Model.ListDocsView[index].DocName
+                    </a>
+                </h2>
+                @{ Html.RenderAction("PartialLinkDocumentAttributeAMP", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = Model.ListDocsView[index] } });}
+            </div>
+        }
+    }
+    </div>
+</section>
+
+

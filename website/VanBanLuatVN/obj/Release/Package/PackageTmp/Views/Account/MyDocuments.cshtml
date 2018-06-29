@@ -1,0 +1,144 @@
+﻿@using System.Collections.Specialized
+@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@{
+    ViewBag.Title = "MyDocuments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model DocByFieldViewModel
+<div class="breadcrumb" style="margin-bottom: 20px;">
+    <a class="breadcrumb-item" href="@Constants.ROOT_PATH" title="Trang chủ">Trang chủ</a> /
+    <span class="breadcrumb-item xanh">Thông tin cá nhân</span>
+</div>
+<div class="ttcn-nav">
+    <div class="item-user1 font13">
+        <p>Tên tài khoản</p>
+        <p style="color: #0089d0; font-weight: bold;">@Extensions.GetCurrentCustomerName()</p>
+    </div>
+    <div class="item-user2">
+        <ul>
+            <li class="list-taikhoan icontk1"><a href="@(Constants.ROOT_PATH)user/thong-tin-tai-khoan.html" class="itemtk">Thông tin tài khoản</a></li>
+            <li class="list-taikhoan icontk2"><a href="@(Constants.ROOT_PATH)user/van-ban-cua-toi.html" class="itemtk">Văn bản của tôi</a></li>
+            <li class="list-taikhoan icontk6"><a href="@(Constants.ROOT_PATH)user/doi-mat-khau.html" class="itemtk">Đổi mật khẩu</a></li>
+        </ul>
+    </div>
+</div>
+<div class="ttcn-content">
+    <div class="title-ttcn">
+        <h1 class="title-ttcn-post"><img class="m-hiden" src="@Url.Content("~/assets/images/vban9.png")" />Văn bản của tôi</h1>
+    </div>
+    <div class="content-dk">
+        <div class="p20px">
+            <div class="r-ttcn">
+                @using (Html.BeginForm("MyDocuments", "Account", null, FormMethod.Get))
+                {
+                                    <div class="item-col4-fix">
+                    <select name="DocTypeId" class="text-s14 select-onchange">
+                        <option value="0">Loại văn bản</option>
+                        @foreach (var item in Model.DocList.lCountByDocType)
+                        {
+                            <option value="@item.DocTypeId" @(item.DocTypeId==Model.DocTypeId ? "selected" : string.Empty)>@item.DocTypeDesc</option>
+                        }
+                    </select>
+                </div>
+                <div class="item-col4-fix">
+                    <select name="FieldId" class="text-s14 select-onchange">
+                        <option value="0">Tất cả lĩnh vực</option>
+                        @foreach (var item in Model.DocList.lCountByField)
+                        {
+                            <option value="@item.FieldId" @(item.FieldId==Model.FieldId ? "selected" : string.Empty)>@item.FieldDesc</option>
+                        }
+                    </select>
+                </div>
+                <div class="item-col4-fix">
+                    <select name="OrganId" class="text-s14 select-onchange">
+                        <option value="0">Cơ quan ban hành</option>
+                        @foreach (var item in Model.DocList.lCountByOrgan)
+                        {
+                            <option value="@item.OrganId" @(item.OrganId==Model.OrganId ? "selected" : string.Empty)>@item.OrganDesc</option>
+                        }
+                    </select>
+                </div>
+                <div class="item-col4-fix">
+                    <select name="EffectStatusId" class="text-s14">
+                        <option value="0">Tình trạng hiệu lực</option>
+                        @foreach (var item in Model.DocList.lCountByEffectStatus)
+                        {
+                            <option value="@item.EffectStatusId" @(item.EffectStatusId==Model.EffectStatusId ? "selected" : string.Empty)>@item.EffectStatusDesc</option>
+                        }
+                    </select>
+                </div>
+                }
+            </div>
+            <div class="box-ttcn" id="Content">
+                @if (Model.DocList.lDocs.HasValue())
+                {
+                    <table id="contentsWrapper" class="tablecontent">
+                        <tbody class="pcontent">
+                            @for (int index = 0; index < Model.DocList.lDocs.Count; index++)
+                            {
+                                var number = index + (Model.Page > 0 ? Model.Page - 1 : Model.Page) * Model.PageSize + 1;
+                                <tr class="rows-vb">
+                                    <td class="number bold">@string.Format("{0:#00}", number)</td>
+                                    <td>
+                                        @{ Html.RenderAction("PartialDocumentAttribute", "Shared", new { model = new SharedViewModel.DocumentAttribute { Docs = Model.DocList.lDocs[index], EnableSaveDoc = false } });}
+                                    </td>
+                                    <td style="padding-left: 20px;">
+                                        <a href="javascript:vbluat.myDocuments.deleteCustomerDocs(@Model.DocList.lDocs[index].DocGroupId,@Model.DocList.lDocs[index].DocId,1);" class="xoavb">Xóa</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                            if (Model.DocList.lDocs.Count == Constants.RowAmount20)
+                            {
+                                Html.RenderAction("PartialPagination", "Shared", new
+                                {
+                                    model = new VanBanLuatVN.Models.PaginationModel
+                                    {
+                                        Page = Model.Page,
+                                        TotalPage = Model.DocList.RowCount,
+                                        AjaxUrl = "/Ajax/CustomerDocsGetPage",
+                                        QueryString = "".BuildQueryStringUrl(new NameValueCollection
+                                        {
+                                            {"DocGroupId",Model.DocGroupId.ToString() },
+                                            {"FieldId",Model.FieldId.ToString() },
+                                            {"EffectStatusId",Model.EffectStatusId.ToString() },
+                                            {"DocTypeId",Model.DocTypeId.ToString() },
+                                            {"OrganId",Model.OrganId.ToString() },
+                                            {"page",(Model.Page+1).ToString() }
+                                        })
+                                    }
+                                });
+                            }
+                }
+                else
+                {
+                    <table class="tablecontent full">
+                        <body>
+                            <tr class="rows-vb">
+                                <td>
+                                    <p class="post-title vbl bold">Không tìm thấy dữ liệu phù hợp.</p>
+                                </td>
+                            </tr>
+                        </body>
+                    </table>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End ttcn-content-->
+@section FooterSection
+{
+    <script type="text/javascript">
+        jQuery(function () {
+            $('#contentsWrapper').vbluatInfiteScroll({
+                contentsWrapperSelector: '#contentsWrapper',
+                contentSelector: '.pcontent',
+                nextSelector: '#pnext'
+            });
+        });
+    </script>
+}

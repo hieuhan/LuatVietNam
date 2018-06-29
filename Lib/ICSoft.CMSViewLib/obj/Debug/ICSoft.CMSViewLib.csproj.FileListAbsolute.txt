@@ -1,0 +1,5 @@
+E:\Solutions\2017\LuatVietNamV2\DLL\ICSoft.CMSViewLib.dll
+E:\Solutions\2017\LuatVietNamV2\DLL\ICSoft.CMSViewLib.pdb
+E:\Solutions\2017\LuatVietNamV2\Lib\ICSoft.CMSViewLib\obj\Debug\ICSoft.CMSViewLib.csprojResolveAssemblyReference.cache
+E:\Solutions\2017\LuatVietNamV2\Lib\ICSoft.CMSViewLib\obj\Debug\ICSoft.CMSViewLib.dll
+E:\Solutions\2017\LuatVietNamV2\Lib\ICSoft.CMSViewLib\obj\Debug\ICSoft.CMSViewLib.pdb

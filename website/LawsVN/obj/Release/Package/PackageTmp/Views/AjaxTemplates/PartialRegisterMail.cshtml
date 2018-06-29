@@ -1,0 +1,21 @@
+﻿@model LawsVN.Models.NewsletterEmailsModel
+<div class="from-thong-bao-3">
+        @using (Ajax.BeginForm("NewsLetterEmail", "Ajax", null, new AjaxOptions
+    {
+        HttpMethod = "Post"
+        ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+        ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    }, new { id = "RegisterMailForm" }))
+    {
+            @Html.AntiForgeryToken()
+            <div class="rows-thongbao">
+                <div class="inputleft">
+                    @Html.TextBoxFor(m => m.Email, new {@class = "text-tbao"})
+                    @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
+                </div>
+                <div class="btn-right">
+                    <button class="btn-thongbao1 xn" style="height: 32px"> Gửi</button>
+                </div>
+            </div>
+        }
+</div>

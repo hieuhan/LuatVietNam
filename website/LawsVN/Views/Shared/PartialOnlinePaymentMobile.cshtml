@@ -1,0 +1,53 @@
+﻿@model LawsVN.Models.Account.PaymentMethodsOnlineModel
+@using (Ajax.BeginForm("PartialPaymentMethodsOnline", "Ajax", null, new AjaxOptions
+{
+    HttpMethod = "Post"
+    ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+    ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+    ,OnSuccess = "lawsVn.ajaxEvents.RedirectOnSuccessV2"
+}, new { id = "PaymentMethodsOnlineForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="boxboder-fix">
+        <div class="entry-p10">
+            <p> Nộp tiền mặt trực tiếp tại Văn phòng LuatVietnam</p>
+            <p> <strong>*Tại Hà Nội:</strong></p>
+            <p>Công ty Cổ phần Truyền thông Quốc tế INCOM</p>
+            <p> - Tầng 3, Tòa nhà IC, 82 phố Duy Tân, Cầu Giấy, Hà Nội</p>
+            <p> - ĐT: 024.37833688 (máy lẻ 517) - Fax: 024.37833699</p>
+            <p> <strong>*Tại TP.Hồ Chí Minh:</strong></p>
+            <p>Văn phòng đại diện Công ty Cổ phần Truyền thông Quốc tế INCOM tại TP. Hồ Chí Minh</p>
+            <p> - Tòa nhà Hà Phan, số 456 Phan Xích Long, P.2, Quận Phú Nhuận, TP. Hồ Chí Minh</p>
+            <p> - ĐT: 08.39950724 - Fax: 08.39950727</p>
+        </div>
+    </div>
+
+    @*<div class="rows-giahan">
+            <div class="pure-checkbox">
+                <input id="dongy1" name="checkbox" type="checkbox">
+                <label class="chekleft" for="dongy1"><strong>Tôi đồng ý với các <span data-js="open" class="quyuoc color1" data-toggle-target="#PaymentRegulations">Quy định thanh toán</span> của Luatvietnam.vn</strong></label>
+            </div>
+        </div>
+        <div class="rows-giahan">
+            <div class="pure-checkbox">
+                <input id="dongy2" name="checkbox" type="checkbox">
+                <label class="chekleft" for="dongy2">Yêu cầu xuất hóa đơn GTGT</label>
+            </div>
+        </div>*@
+    <div class="rowscenter">
+        <a href="#" class="btn-pay-m back-step" style="margin-right: 20px; background: #dddddd; color: #222;">Quay lại</a>
+        <a href="#" class="btn-pay-m btn-xacnhan" style="background: #a67942">Thanh toán </a>
+        @*<button class="btnbton" style="background: #eeeeee; color: #222; margin-right: 10px;">Quay lại</button>
+        <button class="btnbton">Thanh toán</button>*@
+    </div>
+    @Html.HiddenFor(m => m.ServiceId)
+    @Html.HiddenFor(m => m.ServiceName)
+    @Html.HiddenFor(m => m.ServicePackageId)
+    @Html.HiddenFor(m => m.ServicePackageName)
+    @Html.HiddenFor(m => m.Total)
+    @Html.HiddenFor(m => m.Price)
+    @Html.HiddenFor(m => m.Amount)
+    @Html.HiddenFor(m => m.PercentDecrease)
+    @Html.HiddenFor(m => m.PromotionCodeBankAccount)
+    @Html.HiddenFor(m => m.TransactionTypeId)
+}

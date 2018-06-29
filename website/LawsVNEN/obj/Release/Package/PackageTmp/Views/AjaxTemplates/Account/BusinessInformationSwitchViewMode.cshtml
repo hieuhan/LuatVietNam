@@ -1,0 +1,56 @@
+﻿@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.Account.BusinessInformation
+<div class="cat-title ">
+    <div class="cat-box-title en">@Resource.Others</div>
+    @Ajax.ActionLink(Resource.EditInformation, "BusinessInformationSwitchMode", "Ajax"
+        , new
+        {
+            mode = "edit"
+        }
+        , new AjaxOptions
+        {
+            HttpMethod = "Post"
+            ,UpdateTargetId = "thongtindoanhnghiep"
+            ,InsertionMode = InsertionMode.Replace
+            ,OnBegin = "lawsVn.ajaxEvents.OnBegin"
+            ,OnComplete = "lawsVn.ajaxEvents.OnComplete"
+        }, new { @class = "edit-tt icon-edit" })
+</div>
+<div class="cat-box-content form">
+    <div class="col-xs-2">
+        <div class="form-inline">
+            <div class="form-group1">
+                <label class="col-sm-1">@Resource.Company: </label>
+                <div class="col-sm-222">
+                    @Model.OrganName
+                </div>
+            </div>
+            <div class="form-group1">
+                <label class="col-sm-1">@Resource.AccountNumber: </label>
+                <div class="col-sm-222">
+                    @Model.AccountNumber
+                </div>
+            </div>
+            <div class="form-group1">
+                <label class="col-sm-1">@Resource.Address: </label>
+                <div class="col-sm-222">
+                    @Model.OrganAddress
+                </div>
+            </div>
+            
+            <div class="form-group1">
+                <label class="col-sm-1">@Resource.PhoneNumber: </label>
+                <div class="col-sm-222">
+                    @Model.OrganPhone
+                </div>
+            </div>
+            <div class="form-group1">
+                <label class="col-sm-1">Fax </label>
+                <div class="col-sm-222">
+                    @Model.OrganFax
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

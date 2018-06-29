@@ -1,0 +1,164 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using LawsVN.Library
+@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.Models.Docs
+@model DocsModel
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.PartialPaginationAjax.PageIndex, totalPage = Model.PartialPaginationAjax.TotalPage, pageSize = Model.PartialPaginationAjax.PageSize });}
+}
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" title="@Resource.HomePage" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a>
+            <span> »</span>  <span class="breadcrumb-item colorrumb" > @Model.EffectStatusName </span>
+        </div>
+
+        <section class="cat-box search-box">
+            @{Html.RenderAction("PartialFullSearch", "Shared", new { model = new PartialDocSearchModel { SearchOptions = 1, DocGroupId = Model.PartialPaginationAjax.DocGroupId, FieldId = Model.PartialPaginationAjax.FieldId } });}
+        </section>
+
+        <section class="cat-box">
+            <div class="tab-conten">
+                <div id="ListByFieldTab" class="tab-nav">
+                    <a class="tab-nav-item6 @(Model.EffectStatus.Equals("SapCoHieuLuc") ? "active" : string.Empty)" href="@(CmsConstants.ROOT_PATH)van-ban-sap-co-hieu-luc.html">Sắp có hiệu lực</a>
+                    <a class="tab-nav-item6 @(Model.EffectStatus.Equals("SapSuaDoi") ? "active" : string.Empty)" href="@(CmsConstants.ROOT_PATH)van-ban-sap-sua-doi.html" >Sắp sửa đổi</a>
+                    <a class="tab-nav-item6 @(Model.EffectStatus.Equals("SapHetHieuLuc") ? "active" : string.Empty)" href="@(CmsConstants.ROOT_PATH)van-ban-sap-het-hieu-luc.html" >Sắp hết hiệu lực</a>
+                    <a class="tab-nav-item6 @(Model.EffectStatus.Equals("HetHieuLuc") ? "active" : string.Empty)" href="@(CmsConstants.ROOT_PATH)van-ban-het-hieu-luc.html" >Hết hiệu lực</a>
+                </div>
+
+                <div class="cat-box-content">
+                    <div id="ListByField" class="click-1">
+                        @if (Model.ListDocsView.HasValue())
+                        {
+                            <table class="table table-bordered">
+                                <tbody>
+                                @for (int index = 0; index < Model.ListDocsView.Count; index++)
+                                {
+                                    var docView = Model.ListDocsView[index];
+                                    var number = index + (Model.PartialPaginationAjax.PageIndex > 0 ? Model.PartialPaginationAjax.PageIndex - 1 : Model.PartialPaginationAjax.PageIndex) * Model.PartialPaginationAjax.PageSize + 1;
+                                    <tr class="row-first-news @(index % 2 != 0 ? "" : "bgcolor")">
+                                        <th class="count-123 page" scope="row">@number.ToString("#00")</th>
+                                        <td class="news-left-post">
+                                            <h3>
+                                                <a href="@docView.GetDocUrl()" title="@docView.DocName.StripTags()" class="post-title lvn">@docView.DocName</a>
+                                            </h3>
+                                            <div class="item-meta">
+                                                @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView, ClassName = Model.PartialPaginationAjax.ClassTagItem } }); }
+                                            </div>
+                                        </td>
+                                        <td class="post-time-right page">
+                                            @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocsView = docView } }); }
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                            {
+                                Html.RenderAction("PartialPaginationAjax2", "Shared", new {model = Model.PartialPaginationAjax});
+                            }
+                        }
+                        else
+                        {
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr class="row-first-news">
+                                    <th class="count-123" scope="row"></th>
+                                    <td class="news-center-post">
+                                        <h3>
+                                            <span class="post-title lvn">@Resource.NoMatchingDocumentFound</span>
+                                        </h3>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @Html.Partial("PartialTaisaochonLuatVietNam")
+            @{Html.RenderAction("PartialTinVan", "Shared");}
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+                </div>
+            </div>
+            @if(Model.ListDocsViewMostView.HasValue())
+            { 
+            <div class="widget">
+                <div class="widget-top">
+                    <h4><span class="title-widget">VĂN BẢN XEM NHIỀU</span></h4>
+                </div>
+                <div class="widget-container">
+                    @foreach (DocsView docview in Model.ListDocsViewMostView)
+                    {
+                        <div class="recent-post">
+                            <span class="icon-new-2"></span>
+                            <div class="post-conten news">
+                                <a href="@docview.GetDocUrl()" title="@docview.DocName" class="post-title-widget">@((string.IsNullOrEmpty(docview.H1Tag) ? docview.DocName : docview.H1Tag).StripTags())</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            }
+            <div class="widget bottom0">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+@*@{Html.RenderAction("PartialContentViewed", "Shared");}*@
+@section ListByFields
+{
+    <div class="nav-onclick-menu">
+        <div class="onclick-menu">
+            <a href="#" class="overlayLink" data-action="">
+                <img alt="dma" src="@Url.Content("~/assets/images/icon-danh-muc.png")" />
+                Danh<br/>mục
+            </a>
+        </div>
+        <div class="overlay" style="display: none;">
+            <div class="login-wrapper">
+                <div class="login-content">
+                    <a class="close">x</a>
+                    <div class="nav_categories">
+                        <div class="widget-top"><span class="title-widget">Lĩnh vực tra cứu</span></div>
+                        @{ Html.RenderAction("PartialFieldOfSearch", "Shared", new { displayTypeId = Model.PartialPaginationAjax.DisplayTypeId, docGroupId = Model.PartialPaginationAjax.DocGroupId });}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section FooterSection
+{
+<script type="text/javascript">
+    jQuery(function () {
+        $(".datepicker").datepicker({
+            dateFormat: 'dd/mm/yy',
+            yearRange: "1945:c",
+            changeMonth: true,
+            changeYear: true
+        });
+        $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+        $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+        $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+    });
+</script>
+}

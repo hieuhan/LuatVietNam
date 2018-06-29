@@ -1,0 +1,63 @@
+﻿@using LawsVN.Library
+@using ICSoft.LawDocsLib
+@model LawsVN.Models.Templates.DocsNewest
+
+@if (Model.ListDocsView.Any())
+{
+    <table class="table table-bordered">
+        <tbody>
+        @for (int i = 0; i < Model.ListDocsView.Count; i++)
+        {
+            var number = i + (Model.PartialPaginationAjax.PageIndex > 0 ? Model.PartialPaginationAjax.PageIndex - 1 : Model.PartialPaginationAjax.PageIndex) * Model.PartialPaginationAjax.PageSize + 1;
+            <tr class="row-tr" style="vertical-align:top;">
+                                <td class="rows-td fontbold">@((i+1).ToString("#00"))</td>
+                                <td class="rows-td" style="text-align: left;">
+                                    <h2>
+                                        <a href="@Model.ListDocsView[i].GetDocUrl()" title="@Model.ListDocsView[i].DocName" class="post-title lvn">
+                                           @Model.ListDocsView[i].DocName
+                                        </a>
+                                    </h2>
+                                    <div class="item-meta">
+                                        <a href="#" class="tag-item ">Tóm tắt</a>
+                                        <a href="#" class="tag-item ">Lược đồ</a>
+                                        <a href="#" class="tag-item ">Hiệu lực</a>
+                                        <a href="#" class="tag-item ">Liên quan</a>
+                                        <a href="#" class="tag-item ">Tiếng Anh</a>
+                                        <a href="#" class="tag-item ">Tải về</a>
+                                    </div>
+                                </td>
+                                <td class="rows-td wighttime">
+                                    <p class="post-time"> Ban hành: <span class="color2">@Model.ListDocsView[i].IssueDate.ToString("dd/MM/yyyy")</span></p>
+                                    <p class="post-time"> Áp dụng: <span class="color2">@Model.ListDocsView[i].EffectDate.ToString("dd/MM/yyyy")</span></p>
+                                    <p class="post-time bottom0"> Hiệu lực: <span class="color2">@Model.ListDocsView[i].EffectStatusName</span> </p>
+                                </td>
+                                    <td class="rows-td" style="width: 100px;">
+                                        @{
+                                string FieldName = "";
+                                DocFields mDocFields = new DocFields();
+                                string linhvuc = mDocFields.DocFields_GetFieldName(1, Model.ListDocsView[i].DocId, ref FieldName);
+                                    }
+                                    @linhvuc
+                                </td>
+                                <td class="rows-td"><a href="#"><img alt="img-tthl" src="@Url.Content("~/assets/images/xoa.png")" /></a></td>
+                            </tr>
+        }
+        </tbody>
+    </table>
+    { Html.RenderAction("PartialPaginationAjax", "Shared", new { model = Model.PartialPaginationAjax }); }
+}
+else
+{
+    <table class="table table-bordered">
+        <tbody>
+        <tr class="row-first-news">
+            <th class="count-123" scope="row"></th>
+            <td class="news-center-post">
+                <h3>
+                    <span class="post-title lvn">Đang cập nhật dữ liệu.</span>
+                </h3>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+}

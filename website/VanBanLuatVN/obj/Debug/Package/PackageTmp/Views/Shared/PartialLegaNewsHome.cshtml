@@ -1,0 +1,22 @@
+﻿@using VanBanLuat.Librarys
+@model ICSoft.ViewLibV3.CategoryArticles
+@if (Model.lArticle.HasValue())
+{
+    <section class="cat-box-section">
+        <div class="cat-box-title">
+            <h2 class="title-cat"><a href="@Model.mCategory.GetCategoryUrl()" title="@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)">@Model.mCategory.CategoryDesc.TrimmedOrDefault(string.Empty)</a></h2>
+        </div>
+        <div class="cat-box-content">
+            @for (int index = 0; index < Model.lArticle.Count; index++)
+            {
+                <div class="item-col3 ">
+                    <div class="post-thumbnail @(index > 0 ? "hidenimg" : string.Empty) bt10"> <a href="@Model.lArticle[index].GetArticleUrl()" title="@Model.lArticle[index].Title"><img class="thumb-full" src="@Model.lArticle[index].GetImageUrl_Mobile()"></a> </div>
+                    <h3 class="post-title-first font1"><a href="@Model.lArticle[index].GetArticleUrl()" title="@Model.lArticle[index].Title" class="color333333">@Model.lArticle[index].Title </a> </h3>
+                    <div class="sapo hidenmobi">
+                        <p>@Model.lArticle[index].Summary </p>
+                    </div>
+                </div>
+            }
+        </div>
+    </section>
+}

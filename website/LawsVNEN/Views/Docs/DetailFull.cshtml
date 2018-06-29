@@ -1,0 +1,566 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.LawDocsLib
+@using LawsVNEN.AppCode
+@using LawsVNEN.App_GlobalResources
+@using LawsVNEN.Library
+@using LawsVNEN.Models
+@model DocsViewDetailModel
+@{
+    Layout = "~/Views/Shared/_LayoutDoc.cshtml";
+}
+
+<div class="cat-box content-wrap">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.Home </a>» 
+            @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.FieldsText))
+            {
+                <span>@Model.mDocsViewDetail.mDocsView.FieldsText</span>
+            }
+        </div>
+
+        <div class="page-head">
+            <div class="padding-left20">
+                <h1 class="page-title vblq">@Model.mDocsViewDetail.mDocsView.H1Tag.TrimmedOrDefault(Model.mDocsViewDetail.mDocsView.DocName)</h1>
+                <p class="info-page">@Model.mDocsViewDetail.mDocsView.MetaDesc</p>
+            </div>
+        </div>
+
+        <div class="cat-box-content page">
+            <div class="tab-nav" id="tabPannel">
+                <a class="tab-nav-item-ad" onclick="showTab('summary')"  href="javascript:void(0)" data-href="#summary" title="@Resource.Summary">@Resource.Summary</a>
+                <a class="tab-nav-item-ad" onclick="showTab('content')"  href="javascript:void(0)" data-href="#content" title="@Resource.Content">@Resource.Content</a>
+                <a class="tab-nav-item-ad" onclick="showTab('effect')"  href="javascript:void(0)" data-href="#effect" title="@Resource.Effect">@Resource.Effect</a>
+                <a class="tab-nav-item-ad" onclick="showTab('relate')"  href="javascript:void(0)" data-href="#relate" title="@Resource.Relate">@Resource.RelatedDocuments</a>
+                <a class="tab-nav-item-ad" onclick="showTab('vietnamese')"  href="javascript:void(0)" data-href="#vietnamese" title="@Resource.Vietnamese">@Resource.Vietnamese</a>
+                <a class="tab-nav-item-ad" onclick="showTab('download')"  href="javascript:void(0)" data-href="#download" title="@Resource.DownLoad">@Resource.DownLoad</a>
+                @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.DocContent))
+                {
+                    <div class="fontsize right">
+                        <a href="javascript:lawsVn.FontZoom(-1)" class="fontsize-item1"></a>
+                        <a href="javascript:lawsVn.FontZoom(1)" class="fontsize-item2"></a>
+                    </div>
+                }
+            </div>
+
+            <div id="summaryp" class="tabcontent" style="display: block">
+                <div class="box-content box-shadow boxsummary">
+                    <div class="padding20">
+                        <div class="box-content2">
+                            <div class="cat-title">
+                                <div class="cat-box-title vien">@Resource.Attribute</div>
+                            </div>
+                            <div class="info-2">@Model.mDocsViewDetail.mDocsView.DocName</div>
+
+                            <div class="content-giao-dich">
+                                <table class="table table-bordered">
+                                    <tbody>
+
+                                        <tr class="row-tr">
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.IssuringBody:    </td>
+                                            <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.OrgansText </td>
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.EffectiveDate:   </td>
+                                            <td class="rows-td col4">
+                                                @if (Model.mDocsViewDetail.mDocsView.EffectDate != DateTime.MinValue)
+                                                {
+                                                    if (Extensions.IsAuthenticated)
+                                                    {
+                                                        @Model.mDocsViewDetail.mDocsView.EffectDate.toString()
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <span>@Resource.Updating</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr class="row-tr">
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.OfficialNumber:  </td>
+                                            <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.DocIdentityClear</td>
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.Signer:  </td>
+                                            <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.SignersText</td>
+                                        </tr>
+                                        <tr class="row-tr">
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.LegislationType: </td>
+                                            <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.DocTypesText </td>
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.ExpiredDate:   </td>
+                                            <td class="rows-td col4">
+                                                @if (Model.mDocsViewDetail.mDocsView.ExpireDate != DateTime.MinValue)
+                                                {
+                                                    if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+                                                    {
+                                                        @Model.mDocsViewDetail.mDocsView.ExpireDate.toString()
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <span>@Resource.Updating</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr class="row-tr">
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.DateIssued:   </td>
+                                            <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.IssueDate.toString()</td>
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.Effect:  </td>
+                                            <td class="rows-td col4">
+                                                @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.EffectStatusName))
+                                                {
+                                                    if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+                                                    {
+                                                        @Model.mDocsViewDetail.mDocsView.EffectStatusName
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <span>@Resource.Updating</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        @{ Html.RenderAction("PartialPermissionDocSummary", "Shared", new { docModel = Model }); }
+                    </div>
+                </div>
+            </div>
+
+            <div id="contentp" class="tabcontent" style="display: none">
+                @{ Html.RenderAction("PartialPermissionDocContent", "Shared", new { docModel = Model }); }
+            </div>
+
+            <div id="effectp" class="tabcontent" style="display: none">
+                <div class="box-content box-shadow boxeffect">
+                    <div class="padding20">
+                        <div class="box-content2">
+                            <div class="cat-title">
+                                <div class="cat-box-title vien">@Resource.Attribute</div>
+                            </div>
+                            <div class="info-2">@Model.mDocsViewDetail.mDocsView.DocName</div>
+
+                            <div class="content-giao-dich">
+                                <table class="table table-bordered">
+                                    <tbody>
+
+                                        <tr class="row-tr">
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.IssuringBody:    </td>
+                                            <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.OrgansText </td>
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.EffectiveDate:   </td>
+                                            <td class="rows-td col4">
+                                                @if (Model.mDocsViewDetail.mDocsView.EffectDate != DateTime.MinValue)
+                                                {
+                                                    if (Extensions.IsAuthenticated)
+                                                    {
+                                                    @Model.mDocsViewDetail.mDocsView.EffectDate.toString()
+                                                    }
+                                                    else
+                                                    {
+                                                    <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <span>@Resource.Updating</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr class="row-tr">
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.OfficialNumber:  </td>
+                                            <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.DocIdentityClear</td>
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.Signer:  </td>
+                                            <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.SignersText</td>
+                                        </tr>
+                                        <tr class="row-tr">
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.LegislationType: </td>
+                                            <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.DocTypesText </td>
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.ExpiredDate:   </td>
+                                            <td class="rows-td col4">
+                                                @if (Model.mDocsViewDetail.mDocsView.ExpireDate != DateTime.MinValue)
+                                                {
+                                                    if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+                                                    {
+                                                    @Model.mDocsViewDetail.mDocsView.ExpireDate.toString()
+                                                    }
+                                                    else
+                                                    {
+                                                    <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <span>@Resource.Updating</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr class="row-tr">
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.DateIssued:   </td>
+                                            <td class="rows-td col4">@Model.mDocsViewDetail.mDocsView.IssueDate.toString()</td>
+                                            <td class="rows-td col4 bgf9f9f9">@Resource.Effect:  </td>
+                                            <td class="rows-td col4">
+                                                @if (!string.IsNullOrEmpty(Model.mDocsViewDetail.mDocsView.EffectStatusName))
+                                                {
+                                                    if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+                                                    {
+                                                    @Model.mDocsViewDetail.mDocsView.EffectStatusName
+                                                    }
+                                                    else
+                                                    {
+                                                    <span class="no-permission-view" title="@Html.Raw(Resource.NoPermission)">@Resource.Known</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <span>@Resource.Updating</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="relatep" class="tabcontent" style="display: none">
+                @{ Html.RenderAction("PartialPermissionDocRelate", "Shared", new { docModel = Model }); }
+            </div>
+
+            <div id="vietnamesep" class="tabcontent content-fixed" style="display: none">
+                @if (!string.IsNullOrEmpty(Model.mDocsViewDetailVi.mDocsView.DocContent))
+                {
+                    <div class="content-entry boxvietnamese">
+                        @Html.Raw(Model.mDocsViewDetailVi.mDocsView.DocContent)
+                    </div>
+                }
+                else
+                {
+                    DocFiles docFiles = Model.mDocsViewDetail.lDocFiles.FirstOrDefault(i => i.FilePath.ToLower().Contains(".pdf") && i.LanguageId == LawsVnLanguages.AvailableLanguages[1].LanguageId);
+                    if (docFiles == null || !string.IsNullOrEmpty(docFiles.FilePath))
+                    {
+                        <div class="thong-bao-2">
+                            <div class="thongbao-item2">
+                                <em>@Resource.ContentIsBeingUpdated</em>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {                   
+                    <embed class="content-fixed" src="@string.Concat(Constants.MEDIA_VIEWPATH, docFiles.FilePath)" width="100%" height="1000" type='application/pdf'>
+                    }
+                }
+            </div>
+
+            <div id="downloadp" class="tabcontent" style="display: none">
+                <div class="cat-box-content">
+                <div class="download-post">
+                    <div class="box-tai-vb">
+                            <div class="col-vbitem-3">
+                                <div class="cat-title">
+                                    <div class="cat-box-title vien">@Resource.Vietnamese</div>
+                                </div>
+                                @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == 1) > 0)
+                                {
+                                    foreach (DocFiles docFile in Model.mDocsViewDetail.lDocFiles)
+                                    {
+                                        var filePath = docFile.FilePath.ToLower();
+                                        if (docFile.LanguageId == 1 && (filePath.EndsWith(".doc") || filePath.EndsWith(".docx")))
+                                        {
+                                            <div class="rows-vbitem-md2">
+                                                <a href="@string.Concat(Constants.MEDIA_DOWNLOADPATH, docFile.FilePath)">
+                                                    <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc1.png")">
+                                                    @Resource.File Word (.doc)</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            if (docFile.LanguageId == 1 && filePath.EndsWith(".zip"))
+                                            {
+                                                <div class="rows-vbitem-md2">
+                                                    <a href="@(Constants.MEDIA_DOWNLOADPATH + docFile.FilePath)">
+                                                        <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc4.png")">
+                                                        @Resource.File Word @Resource.Compressed (.zip)</a>
+                                                </div>
+                                            }
+                                            else if (docFile.LanguageId == 1 && filePath.EndsWith(".pdf"))
+                                            {
+                                                <div class="rows-vbitem-md2">
+                                                    <a href="@(Constants.MEDIA_DOWNLOADPATH + docFile.FilePath)">
+                                                        <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc2.png")">
+                                                        @Resource.File PDF (.pdf)</a>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="thongbao-item2">
+                                        <em>@Resource.VietnameseTextFileIsBeingUpdated</em>
+                                    </div>
+                                }
+                            </div>
+                                @if (Model.mDocsViewDetail.lDocFiles.HasValue() && Model.mDocsViewDetail.lDocFiles.Count(i => i.LanguageId == 2) > 0)
+                                {
+                            <div class="col-vbitem-3" style="margin-right: 0;">
+                                <div class="cat-title">
+                                    <div class="cat-box-title vien">@Resource.EnglishDocument</div>
+                                </div>
+                                @if (Extensions.IsAuthenticated && LawsUser.IsInRole(Constants.RolesFull))
+                                {
+                                    foreach (DocFiles mDocFiles in Model.mDocsViewDetail.lDocFiles)
+                                    {
+                                        if (mDocFiles.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId)
+                                        {
+                                            var filePath = mDocFiles.FilePath.ToLower();
+                                            if (filePath.EndsWith(".doc") || filePath.EndsWith(".docx"))
+                                            {
+                                                if (!LawsUser.IsInRole(Constants.RolesFullEng) && mDocFiles.FileTypeId != Constants.FileTypeIdVbThamKhao)
+                                                {
+                                                    <div class="rows-vbitem-md2">
+                                                        <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc1.png")" />
+                                                            Word (.doc)</a>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div class="rows-vbitem-md2">
+                                                        <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc1.png")"/>
+                                                            Word (.doc)</a>
+                                                    </div>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (filePath.EndsWith(".zip"))
+                                                {
+                                                    if (!LawsUser.IsInRole(Constants.RolesFullEng) && mDocFiles.FileTypeId != Constants.FileTypeIdVbThamKhao)
+                                                    {
+                                                        <div class="rows-vbitem-md2">
+                                                            <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                                <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc4.png")" />
+                                                                ZIP (.zip)</a>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="rows-vbitem-md2">
+                                                            <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                                                <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc4.png")" />
+                                                                ZIP (.zip)</a>
+                                                        </div>
+                                                    }
+                                                }
+                                                else if (filePath.EndsWith(".pdf"))
+                                                {
+                                                    if (!LawsUser.IsInRole(Constants.RolesFullEng) && mDocFiles.FileTypeId != Constants.FileTypeIdVbThamKhao)
+                                                    {
+                                                        <div class="rows-vbitem-md2">
+                                                            <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                                <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc2.png")" />
+                                                                PDF (.pdf)</a>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="rows-vbitem-md2">
+                                                            <a href="@(Constants.MEDIA_DOWNLOADPATH + mDocFiles.FilePath)">
+                                                                <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc2.png")" />
+                                                                PDF (.pdf)</a>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (DocFiles mDocFiles in Model.mDocsViewDetail.lDocFiles)
+                                    {
+                                        if (mDocFiles.LanguageId == LawsVnLanguages.AvailableLanguages[0].LanguageId)
+                                        {
+                                            var filePath = mDocFiles.FilePath.ToLower();
+                                            if (filePath.EndsWith(".doc") || filePath.EndsWith(".docx"))
+                                            {
+                                                <div class="rows-vbitem-md2">
+                                                    <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                        <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc1.png")" />
+                                                         Word (.doc)</a>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                if (filePath.EndsWith(".zip"))
+                                                {
+                                                    <div class="rows-vbitem-md2">
+                                                        <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc4.png")" />
+                                                            ZIP (.zip)</a>
+                                                    </div>
+                                                }
+                                                else if (filePath.EndsWith(".pdf"))
+                                                {
+                                                    <div class="rows-vbitem-md2">
+                                                        <a href="javascript:void(0)" title="@Resource.DownloadDocNotAuthencation" class="no-permission-download">
+                                                            <img class="docthumb30x38" alt="doc" src="@Url.Content("~/assets/images/doc2.png")" />
+                                                            PDF (.pdf)</a>
+                                                    </div>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            </div>
+                                }
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialFullSearchDetail", "Shared", new PartialFullSearchDetailModel { SearchOptions = 1, DocGroupId = Constants.DocGroupIdVbpq, FieldId = Model.FieldId });}
+            @{Html.RenderPartial("PartialDocUtility", Model);}
+        </aside>
+    </div>
+
+</div>
+
+<div id="boxContentViewed" class="cat-box content-recent"></div>
+
+@section FooterSection
+{
+    <script type="text/javascript">
+        var defaultsOption = {
+            classFixed: 'fixed',
+            content: '.content-fixed',
+            width: '300px'
+        }
+        var el = $('.sidebar');
+        var content = $(defaultsOption.content);
+        var urlCurent = window.location.href;
+        var handRightPannelFix;
+        var l_activeTab = urlCurent.split("#");
+        var activeTab = 'summary';
+        if (l_activeTab.length > 1) {
+            activeTab = l_activeTab[1];
+            if (activeTab.indexOf("demuc") >= 0)
+                activeTab = 'content'
+        }
+        lawsVn.logs.docViewLogs(@Model.mDocsViewDetail.mDocsView.DocId,@Model.mDocsViewDetail.mDocsView.DocGroupId, activeTab);
+        $('div.tabcontent').hide();
+        $('#' + activeTab + 'p').show();
+        $('#docPrint').removeAttr('id');
+        $('.box' + activeTab).attr('id', 'docPrint');
+        $('a[data-href$="#' + activeTab + '"]').addClass("active");
+        if (activeTab == 'content') {
+            $('#doccontentindex').show();
+            el.width(defaultsOption.width);
+
+            if (content.length) {
+                $(window).scroll(handRightPannelFix);
+            }
+        }
+        else {
+            $('#doccontentindex').hide();
+        }
+        if (activeTab == 'content' || activeTab == 'vietnamese') {
+            $('div.fontsize').show();
+        }
+        else {
+            $('div.fontsize').hide();
+        }
+        if (activeTab == 'content' || activeTab == 'vietnamese' || activeTab == 'summary') {
+            $('div.fulldrop').css("visibility", "visible");
+            $('div.fulldrop').css("opacity", "1");
+            $('#minitoolbarhead').hide();
+        }
+        else {
+            $('div.fulldrop').css("visibility", "");
+            $('div.fulldrop').css("opacity", "");
+            $('#minitoolbarhead').show();
+        }
+        function showTab(tabid, isScrollTo) {
+            var tab = $('.tab-nav-item-ad[data-href*="'+tabid+'"]');
+            if(!tab.hasClass('active'))
+            {
+                $('.tab-nav-item-ad').removeClass('active');
+                tab.addClass('active');
+            }
+            $('.tabcontent').hide();
+            $('#' + tabid + 'p').show();
+            if(isScrollTo !== void 0)
+            {
+                $('#tabPannel').LawScrollTo();
+            }
+            $('#docPrint').removeAttr('id'); 
+            $('.box' + tabid).attr('id', 'docPrint');
+            if (tabid == 'content') {
+                $('#doccontentindex').show();
+                el.width(defaultsOption.width);
+                if (content.length) {
+                    $(window).scroll(handRightPannelFix);
+                }
+            }
+            else {
+                $('#doccontentindex').hide();
+                $(el, content).removeClass(defaultsOption.classFixed);
+                $(window).off("scroll", handRightPannelFix);
+            }
+            if (tabid == 'content' || tabid == 'vietnamese') {
+                $('div.fontsize').show();
+            }
+            else {
+                $('div.fontsize').hide();
+            }
+            if (tabid == 'content' || tabid == 'vietnamese' || tabid == 'summary') {
+                $('div.fulldrop').css("visibility", "visible");
+                $('div.fulldrop').css("opacity", "1");
+            }
+            else {
+                $('div.fulldrop').css("visibility", "");
+                $('div.fulldrop').css("opacity", "");
+            }
+            lawsVn.logs.docViewLogs(@Model.mDocsViewDetail.mDocsView.DocId,@Model.mDocsViewDetail.mDocsView.DocGroupId, tabid);
+        }
+        handRightPannelFix = function () {
+            var scroll = $(window).scrollTop();
+            var offset = content.offset();
+            var height = content.height();
+            if (offset.top <= scroll && scroll <= offset.top + height) {
+                $(el, content).addClass(defaultsOption.classFixed);
+            } else {
+                $(el, content).removeClass(defaultsOption.classFixed);
+            }
+        }
+        $('#boxContentViewed').lawsVnContentViewed({
+            doc: {
+                id: '@Model.mDocsViewDetail.mDocsView.DocId',
+                name: '@Model.mDocsViewDetail.mDocsView.TruncateDocName(45)',
+                title: '@Model.mDocsViewDetail.mDocsView.DocName',
+                summary: '',
+                datetime: '@Model.mDocsViewDetail.mDocsView.IssueDate.toString()',
+                url: '@Model.mDocsViewDetail.mDocsView.GetDocUrl()',
+                image: '@Constants.NoImageUrl'
+            }
+        });
+    </script>
+}

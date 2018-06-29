@@ -1,0 +1,109 @@
+﻿@using ICSoft.CMSViewLib
+@using LawsVN.Models
+@using LawsVN.AppCode
+@using LawsVN.Library
+@using LawsVN.App_GlobalResources
+@using ICSoft.CMSLib
+@using sms.utils
+@model ArticleViewDetailModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="page-content">
+    <div class="content-left">
+        <div class="breadcrumb">
+            <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item"><span class="icon-home"></span>@Resource.HomePage </a> »
+            <a href="@Model.m_ArticlesViewDetail.mCategoriesView.GetCategoryUrl()" class="breadcrumb-item">@Model.m_ArticlesViewDetail.mCategoriesView.CategoryDesc</a> »
+            <span class="breadcrumb-item colorrumb">@Model.m_ArticlesViewDetail.mArticlesView.Title</span>
+        </div>
+        <div class="rows" style="margin-bottom: 5px;">
+            <div class="banner-en">
+                <img src="@Url.Content("~/assets/images/banner-vb2.png")" />
+                <div class="postimg">
+                    <h1 class="tieimg1" style="padding-left:230px; width:400px;">@Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.Title.ToString())</h1>
+                </div>
+            </div>
+        </div>
+        <div id="docPrint">
+            @Html.Raw(Model.m_ArticlesViewDetail.mArticlesView.ArticleContent)
+        </div>
+        <div class="pagination">
+            <div class="right-vb1">
+                <a href="#" style="font-weight: bold;" class="docPrint"> <img class="in-print" alt="in-print" src="@Url.Content("~/assets/images/in2.png")"> Print </a>
+            </div>
+        </div>
+        @if (Model.m_ArticlesViewDetail.lArticlesOther.HasValue())
+        {
+            <div class="box-lien-quan">
+                <div class="cat-title">
+                    <h4><span class="cat-box-title">@Resource.OtherNews</span></h4>
+                </div>
+                <ul>
+                    @foreach (var articleViewOther in Model.m_ArticlesViewDetail.lArticlesOther)
+                    {
+                        <li class="post-khac">
+                            <a href="@articleViewOther.GetArticleUrl()" title="@articleViewOther.Title">@articleViewOther.Title </a>
+                            <span style="font-style: italic; font-size: 12px;">(@articleViewOther.PublishTime.ToString("dd/MM"))</span>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+
+    <div class="content-right">
+        <aside class="sidebar">
+            @{Html.RenderAction("PartialTaisaochonLuatVietNam", "Shared");}
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+                </div>
+            </div>
+            @if (Model.mArticlesMostView != null && Model.mArticlesMostView.lArticlesNewest.HasValue())
+            {
+                <div class="widget">
+                    <div class="widget-top">
+                        <h3>
+                            <span class="title-widget">@Resource.ListOfTypicalText</span>
+                        </h3>
+                    </div>
+                    <div class="widget-container">
+                        @foreach (var articleMostView in Model.mArticlesMostView.lArticlesNewest)
+                        {
+                            <div class="recent-post">
+                                        <span class="icon-new-3"></span>
+                                        <div class="post-conten ">
+                                            <a href="@articleMostView.GetArticleUrl()" class="post-title-widget">@articleMostView.Title</a> <span style="font-style: italic; font-size: 12px;">(@articleMostView.PublishTime.ToString("dd/MM"))</span>
+                                        </div>
+                                    </div>
+                        }
+                    </div>
+                </div>
+            }
+            @{Html.RenderAction("PartialTinVan", "Shared", new { model = Model.mArticlesViewMaster.lCategoriesRight1.HasValue() ? Model.mArticlesViewMaster.lCategoriesRight1[0] : null });}
+            <div class="widget">
+                <div class="banner">
+                    @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 234 });}
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+@Html.Partial("PartialContentViewed")
+@section FooterSection
+{
+    <script type="text/javascript">
+    lawsVn.logs.articleLogs(@Model.m_ArticlesViewDetail.mArticlesView.ArticleId,@Model.m_ArticlesViewDetail.mArticlesView.CategoryId);
+    $('#boxContentViewed').lawsVnContentViewed({
+        doc: {
+            id: '@Model.m_ArticlesViewDetail.mArticlesView.ArticleId'
+            , name: '@Model.m_ArticlesViewDetail.mArticlesView.TruncateTitle(30)'
+            , title: '@Model.m_ArticlesViewDetail.mArticlesView.Title'
+            , summary: ''
+            , datetime: '@Model.m_ArticlesViewDetail.mArticlesView.PublishTime.toString()'
+            , url: '@Model.m_ArticlesViewDetail.mArticlesView.GetArticleUrl()'
+            , image: '@Model.m_ArticlesViewDetail.mArticlesView.GetImageUrl_Mobile()'
+        }
+    });
+    </script>
+}   

@@ -1,0 +1,154 @@
+﻿@using ICSoft.LawDocsLib
+@using LawsVN.Library
+@using LawsVN.Models
+@model LawsVN.Models.Docs.DocsViewDetailModel
+<div class="page-content box-shadow boxlienquan">
+@if (Model.mDocsViewDetail.lDocRelates.HasValue())
+{
+    <div class="box-vblienquan">
+        <aside class="sidebar-nav page">
+            <div class="widget widget_categories">
+                <div class="widget-top">
+                    <span class="title-widget">Danh mục nội dung liên quan</span>
+                </div>
+                @if (Model.mDocsViewDetail.lRelateTypes.HasValue())
+                {
+                    <div class="widget-nav">
+                        <div class="categories-sub">
+                            <div class="nav-item-page">
+                                @Ajax.ActionLink(string.Format("Tất cả ({0})", Model.CountByRelateTypeId), string.Empty, string.Empty, null, new AjaxOptions
+                                {
+                                    HttpMethod = Model.mPartialPaginationAjax.LawsAjaxOptions.HttpMethod
+                                    , Url = Url.Action(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName, new
+                                    {
+                                        docId = Model.mDocsViewDetail.mDocsView.DocId
+                                    })
+                                    , UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                                    , InsertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                                    , OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                                    , OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');lawsVn.ajaxEvents.ListOnCompleteV2('relateTypeId','',1)", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                                }, new {@class = "fontpage active"})
+                            </div>
+                            @foreach (RelateTypes mRelateTypes in Model.mDocsViewDetail.lRelateTypes)
+                            {
+                                if (mRelateTypes.RowCount > 0 && !string.IsNullOrEmpty(mRelateTypes.RelateTypeName))
+                                {
+                                    <div class="nav-item-page">
+                                        @Ajax.ActionLink(string.Format("{0} ({1})", mRelateTypes.RelateTypeName.Truncate(30), mRelateTypes.RowCount), string.Empty, string.Empty, null, new AjaxOptions
+                                        {
+                                            HttpMethod = Model.mPartialPaginationAjax.LawsAjaxOptions.HttpMethod
+                                            , Url = Url.Action(Model.mPartialPaginationAjax.ActionName, Model.mPartialPaginationAjax.ControllerName, new
+                                            {
+                                                docId = Model.mDocsViewDetail.mDocsView.DocId,
+                                                relateTypeId = mRelateTypes.RelateTypeId,
+                                                displayPosition = mRelateTypes.DisplayPosition
+                                            })
+                                            , UpdateTargetId = Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId
+                                            , InsertionMode = Model.mPartialPaginationAjax.LawsAjaxOptions.InsertionMode
+                                            , OnBegin = string.Format("lawsVn.ajaxEvents.OnBegin('{0}')", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId)
+                                            , OnComplete = string.Format("lawsVn.ajaxEvents.OnComplete('{0}');lawsVn.ajaxEvents.ListOnCompleteV2('relateTypeId',{1},1)", Model.mPartialPaginationAjax.LawsAjaxOptions.UpdateTargetId, mRelateTypes.RelateTypeId)
+                                        }, new {@class = "fontpage"})
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="widget-nav">
+                        <span>Nội dung đang cập nhật</span>
+                    </div>
+                }
+            </div>
+        </aside>
+        <div class="content-page-right" id="ListDocRelate">
+                <div class="rows item3">
+                    @if (Model.RelateTypeId == 0)
+                    {
+                        <div class="lef-vb1">
+                            <span style="color: #a67942; text-transform: uppercase;">Danh mục đang xem: </span>
+                            <span style="font-weight: bold;">
+                                <img class="icondangxem" alt="icondangxem" src="@Url.Content("~/assets/images/dang-xem.png")">Tất cả (@Model.CountByRelateTypeId)
+                            </span>
+                        </div>
+                        <div class="right-vb1">
+                            <span style="font-weight: bold;">Loại liên kết văn bản</span>
+                        </div>
+                    }
+                    else if (Model.mDocsViewDetail.lRelateTypes.HasValue())
+                    {
+                        if (Model.RelateTypes != null && !string.IsNullOrEmpty(Model.RelateTypes.RelateTypeName))
+                        {
+                            <div class="lef-vb1">
+                                <span style="color: #a67942; text-transform: uppercase;">Danh mục đang xem: </span>
+                                <span style="font-weight: bold;">
+                                    <img class="icondangxem" alt="icondangxem" src="@Url.Content("~/assets/images/dang-xem.png")">@Model.RelateTypes.RelateTypeName (@Model.RelateTypes.RowCount)
+                                </span>
+                            </div>
+                        }
+                    }
+                </div>
+            <div class="cat-box-content">
+                @if (Model.mDocsViewDetail.lDocRelates.HasValue())
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                        @for (int index = 0; index < Model.mDocsViewDetail.lDocRelates.Count; index++)
+                        {
+                            DocRelates mDocRelates = Model.mDocsViewDetail.lDocRelates[index];
+                            <tr class="row-first-news @(index % 2 == 1 ? "bgcolor" : string.Empty)">
+                                <th class="count-123" scope="row">@((index + 1).ToString("#00"))</th>
+                                <td class="post-col1">
+                                    <h2>
+                                        <a href="@(mDocRelates.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "#" : ICSoft.CMSViewLib.DocsView.Static_GetDocUrl( mDocRelates.DocUrl,"tomtat"))" title="@mDocRelates.DocName" class="post-title lvn @(mDocRelates.DocGroupId == Constants.DocGroupIdVbkhongconoidung ? "vb-khong-co-nd" : string.Empty)">@mDocRelates.DocName</a>
+                                    </h2>
+                                    <div class="item-meta">
+                                        @{ Html.RenderAction("PartialLinkDocumentAttribute", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocRelates = mDocRelates, ClassName = "tag-item item"} });}
+                                    </div>
+                                </td>
+                                <td class="post-col2">
+                                    @{ Html.RenderAction("PartialLinkDocumentAttribute2", "Shared", new { model = new PartialLinkDocumentAttributeModel { mDocRelates = mDocRelates, EffectStatusName = mDocRelates.EffectStatusName } });}
+                                </td>
+                                @if (Model.RelateTypeId == 0)
+                                {
+                                    <td class="post-col2">
+                                        @mDocRelates.RelateTypeName
+                                    </td>
+                                }
+                            </tr>
+                        }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr class="row-first-news">
+                            <th class="count-123" scope="row"></th>
+                            <td class="news-center-post">
+                                <h3>
+                                    <span class="post-title lvn">Chưa có văn bản liên quan</span>
+                                </h3>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                }
+            </div>
+                @{Html.RenderAction("PartialPaginationAjax2", "Shared", new { model = Model.mPartialPaginationAjax }); }
+        </div>
+    </div>
+}
+else
+{
+    <div class="cat-box-content">
+        <div class="thong-bao-2">
+            <div class="thongbao-item2">
+                <em>Danh sách văn bản liên quan đang được cập nhật, Quý khách vui lòng quay lại sau!</em>
+            </div>
+        </div>
+    </div>
+}    
+</div>

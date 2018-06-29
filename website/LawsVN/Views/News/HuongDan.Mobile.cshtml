@@ -1,0 +1,105 @@
+﻿@using ICSoft.CMSLib
+@using ICSoft.CMSViewLib
+@using LawsVN.Library
+@using LawsVN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+@model NewsViewModel
+@{int indexActive = 0; string classActive = "";}
+
+@{Html.RenderAction("PartialFullSearchHomeMobile", "Shared");}
+@section SeoHeader
+{
+    <h1 style="text-indent: -20000px;position: absolute;">@Html.Raw(Model.SeoHeader.ToString())</h1>
+}
+<div class="breadcrumb">
+    <a href="@CmsConstants.ROOT_PATH" class="breadcrumb-item">Trang chủ </a>»
+    <span class="breadcrumb-item color1">Hướng dẫn</span>
+</div>
+<!-- article-->
+<article class="post-single">
+    <div class="tab-page">
+        @if (Model.mArticlesViewMaster.lCategoriesMain4.HasValue())
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    classActive = "";
+                    if (Request.Url.AbsoluteUri.Contains(Model.mArticlesViewMaster.lCategoriesMain4[i].CategoryUrl))
+                    {
+                        indexActive = i;
+                        classActive = "active";
+                    }
+                    <a href="@Model.mArticlesViewMaster.lCategoriesMain4[i].GetCategoryUrl()" class="tab-page-item @(classActive)">
+                    @Model.mArticlesViewMaster.lCategoriesMain4[i].CategoryName</a>
+                }
+            }
+    </div>
+    <div class="box-hieuluc">
+        @if (Model.mArticlesViewMaster.lCategoriesMain4.HasValue() && Model.mArticlesViewMaster.lCategoriesMain4.Count > 3)
+            {
+                for (int i = 0; i < Model.mArticlesViewMaster.lCategoriesMain4[indexActive].lArticlesView.Count; i++)
+                {
+                    ArticlesView mArticlesView = Model.mArticlesViewMaster.lCategoriesMain4[indexActive].lArticlesView[i]; 
+                    <!-- Bengin-drop-luocdo-->
+                    <div class="drop-luocdo">
+                        <div id="dropbox">
+                            <div class="dropcontent">
+                                <div class="tieloto">
+                                    <a href="#" title="@mArticlesView.Title" class="tie-drop luocdo accordion">
+                                        @(i+1). @mArticlesView.Title
+                                    </a>
+                                    <div class="dropsub accordion-content" style="display: @(i == 0 ? "block" : "none");">
+                                        <div class="content-huong-dan">
+                                            @Html.Raw(mArticlesView.ArticleContent)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End-drop-luocdo-->
+                }
+            }
+    </div>
+</article>
+<!-- end-->
+@if (Model.mArticlesViewMaster.lCategoriesMain4.HasValue() && Model.mArticlesViewMaster.lCategoriesMain4.Count > 4)
+{
+    <div class="box-section">
+        <div class="title" style="margin-bottom: 0px;">
+            <div class="title-cat"><a href="@(CmsConstants.ROOT_PATH)nhung-cau-hoi-thuong-gap.html" style="color:#fff">Những câu hỏi thường gặp</a> </div>
+        </div>
+        <div class="cat-box-content">
+            @for (int i = 0; i < Model.mArticlesViewMaster.lCategoriesMain4[4].lArticlesView.Count; i++)
+            {
+                if(i>1)
+                {
+                    break;
+                }
+                else
+                {
+                    ArticlesView mArticlesView = Model.mArticlesViewMaster.lCategoriesMain4[4].lArticlesView[i];
+                    <div class="first-news dashed">
+                        <a href="@mArticlesView.GetArticleUrl()">
+                            <strong class="stt">(@((i + 1).ToString("#00"))). </strong>
+                            @mArticlesView.TruncateTitle(150)
+                        </a>
+                    </div>
+                }
+                
+            }
+        </div>
+
+    </div>
+}
+
+<div class="box-section">
+    <div class="box-hoi-dap">
+        <p><img src="@Url.Content("~/Assets/Mobile/images/ihoidap0.png")"></p>
+        <p>Gửi câu hỏi đến trung tâm dịch vụ KH</p>
+        <div class="btnhoidap">
+            <a href="#" class="btn-nav send-question-mobile"><img src="@Url.Content("~/Assets/Mobile/images/ihoidap.png")"></a>
+        </div>
+    </div>
+</div>

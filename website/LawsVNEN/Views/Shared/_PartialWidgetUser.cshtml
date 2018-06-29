@@ -1,0 +1,83 @@
+﻿@using ICSoft.CMSLib
+@using LawsVNEN.App_GlobalResources
+@model LawsVNEN.Models.Account.WidgetUserModel
+@if (LawsVNEN.AppCode.Extensions.IsAuthenticated )
+{
+
+<div class="widget">
+    <div class="widget-top"> <span class="title-widget">@Resource.AccountInformation</span> </div>
+    <div class="widget-container-en">
+        <div class="widget-en">
+            <div class="item-tt login">
+                <a href="@(CmsConstants.ROOT_PATH)user/account-information.html" style="font-weight: bold;"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/hoten.png")">@LawsUser.CustomerName</a>
+            </div>
+            @if (!string.IsNullOrEmpty(Model.EndTime))
+            {
+                <div class="item-tt login">
+                    <a href="#"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/expired.png")">@(Resource.Expire): @Model.EndTime</a>
+                </div>
+            }
+            
+            <div class="item-tt login">
+                <a href="@(CmsConstants.ROOT_PATH)interested-documents.html"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/vanban.png")">@(Resource.InterestedDocuments) <span id="countMyDocuments" data-count="@Model.CountCustomerDocs" style="color: #b28247; font-weight: bold;">(@Model.CountCustomerDocs)</span></a>
+            </div>
+            <div class="item-tt login">
+                <a href="@(CmsConstants.ROOT_PATH)user/account-information.html"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/thongtincn.png")">@Resource.Profile</a>
+            </div>
+            <div class="item-tt login">
+                <a href="@(CmsConstants.ROOT_PATH)user/transactions-history.html"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/lichsu.png")">@(Resource.TransactionHistory) </a>
+            </div>
+            <div class="item-tt login">
+                <a href="@(CmsConstants.ROOT_PATH)user/change-password.html"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/pass.png")">@Resource.ChangePassword</a>
+            </div>
+            <div class="item-tt login">
+                <a href="#" class="lawsVnLogOut" title="@Resource.LogOut"><img class="icon-user" alt="icon-user" src="@Url.Content("~/assets/images/logout.png")">@Resource.LogOut</a>
+            </div>
+        </div>
+    </div>
+</div>
+}
+else
+{
+    <div class="widget">
+        <div class="widget-container-en" style="border: solid 1px #ddd; width: 99.6%;">
+            <div class="login-en">
+                <div class="rows" style="font-size: 16px; text-transform: uppercase; font-weight: bold; text-align: center; margin-bottom: 10px;">@Resource.Login</div>
+                        @using (Ajax.BeginForm("Login", "Account", null, new AjaxOptions
+                        {
+                            HttpMethod = "Post",
+                            OnBegin = "lawsVn.ajaxEvents.OnBegin",
+                            OnComplete = "lawsVn.ajaxEvents.OnComplete",
+                            OnSuccess = "lawsVn.ajaxEvents.AccountLoginOnSuccess"
+                        }, new { id = "LoginForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                        <div class="rows item6">
+                            @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control-input login1", placeholder = Resource.UserName })
+                            @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="rows item6">
+                            @Html.TextBoxFor(m => m.CustomerPass, new { @class = "form-control-input login2", type = "password", placeholder = Resource.Password })
+                            @Html.ValidationMessageFor(m => m.CustomerPass, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="rows ">
+                            <div class="check-left">
+                                <div class="pure-checkbox">
+                                    @Html.HiddenFor(m=>m.ReturnUrl)
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    <label for="RememberMe">@Resource.Remember</label>
+                                </div>
+                            </div>
+                            <div class="check-right"><a href="@(CmsConstants.ROOT_PATH)user/forgot-password.html" style="color: #c33333;">@Resource.ForgotPassword ?</a></div>
+                        </div>
+                        <div class="rows" style="margin: 5px 0;">
+                        <div class="check-right"><a href="@(CmsConstants.ROOT_PATH)user/register.html" style=" color :#333; text-decoration :underline;">@Resource.NewRegister</a></div> </div>
+                        <div class="rows">
+                            <button class="btn-login loginuser">@Resource.btnLogin</button>
+                        </div>
+                            
+                        }
+            </div>
+        </div>
+    </div>
+}

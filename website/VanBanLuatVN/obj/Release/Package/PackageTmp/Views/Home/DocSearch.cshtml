@@ -1,0 +1,601 @@
+﻿@using System.Collections.Specialized
+@using VanBanLuat.Librarys
+@using VanBanLuat.Models
+@using VanBanLuatVN.Models
+@{
+    Layout = "~/Views/Shared/_LayoutDocument.cshtml";
+}
+@model DocViewModel.DocSearchModel
+<div class="content-left">
+    <div class="breadcrumb">
+        <a class="breadcrumb-item" href="@Constants.ROOT_PATH" title="Trang chủ">Trang chủ</a> /
+        <span class="breadcrumb-item xanh">Tìm văn bản</span>
+    </div>
+    <section class="cat-box-section">
+        <div class="title-page">
+            <h1 class="title-cat-page bold">Tra cứu văn bản</h1>
+        </div>
+
+        @using (Html.BeginForm("DocSearch", "Home", FormMethod.Get, new { id = "SearchForm" }))
+        {
+            <div class="search-block">
+                <div class="rows search">
+                    @Html.TextBoxFor(s => s.Keywords, new { @class = "example-search pagetk", style = "font-style: normal; color: #222;", placeholder = "Nhập nội dung văn bản cần tìm...", autocapitalize = "off", autocorrect = "off" })
+                    <button class="btn-default btnsearch pagetk">Tìm văn bản</button>
+                </div>
+                <button class="advanced-search dropbtn page2">Tìm nâng cao</button>
+                <div class="dropdown-search fixwg">
+                    <div id="advanced-search-panel" class="dropdown-content">
+                        <div class="row-tim-kiem">
+                            <div class="tile-tim-kiem font16">
+                                Tìm trong:
+                            </div>
+                            <div class="loctimkiem">
+                                <div class="item-checkbox p5">
+                                    <div class="radio">
+                                        @Html.RadioButtonFor(m => m.SearchOptions, 1, new { id = "AllOption", @class = "none", @checked = "checked" })
+                                        <label for="AllOption" class="radio-label"> Tất cả </label>
+                                    </div>
+                                </div>
+                                <div class="item-checkbox p5">
+                                    <div class="radio">
+                                        @Html.RadioButtonFor(m => m.SearchOptions, 2, new { id = "TitleOption", @class = "none" })
+                                        <label for="TitleOption" class="radio-label"> Tiêu đề </label>
+                                    </div>
+                                </div>
+                                <div class="item-checkbox p5">
+                                    <div class="radio">
+                                        @Html.RadioButtonFor(m => m.SearchOptions, 3, new { id = "DocIdentityOption", @class = "none" })
+                                        <label for="DocIdentityOption" class="radio-label"> Số hiệu văn bản </label>
+                                    </div>
+                                </div>
+                                <div class="item-checkbox p5">
+                                    <div class="pure-checkbox">
+                                        <input type="checkbox" id="SearchExact" name="SearchExact" class="none" value="1" @(Model.SearchExact == 1 ? "checked" : string.Empty) />
+                                        <label for="SearchExact">Chính xác cụm từ</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cat-box-content">
+                            <div class="select-nang-cao-page">
+                                <div class="text-label">
+                                    <select name="SearchByDate" class="text-s10">
+                                        <option value="IssueDate" @(Model.SearchByDate.Equals("IssueDate") ? "selected" : string.Empty)>Ngày ban hành</option>
+                                        <option value="EffectDate" @(Model.SearchByDate.Equals("EffectDate") ? "selected" : string.Empty)>Ngày áp dụng</option>
+                                    </select>
+                                </div>
+                                <div class="text-calendar">
+                                    <div class="item-col2tk">
+                                        <div class="col-md1">
+                                            Từ ngày:
+                                        </div>
+                                        <div class="col-md2">
+                                            @Html.TextBoxFor(m => m.DateFrom, new { @class = "text-ms2 italic calendar datepicker", placeholder = "dd/mm/yyyy" })
+                                        </div>
+                                    </div>
+                                    <div class="item-col2tk ">
+                                        <div class="col-md1">
+                                            Đến ngày:
+                                        </div>
+                                        <div class="col-md2">
+                                            @Html.TextBoxFor(m => m.DateTo, new { @class = "text-ms2 italic calendar datepicker", placeholder = "dd/mm/yyyy" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="select-nang-cao-page">
+                                <label class="text-label"> Nhóm văn bản:</label>
+                                <div class="text-input-right">
+                                    <select name="DocGroupId" class="text-s11">
+                                        <option value="0">Nhóm văn bản</option>
+                                        @foreach (var item in Model.ListDocGroups)
+                                        {
+                                            <option title="@item.DocGroupDesc" value="@item.DocGroupId" @if (item.DocGroupId == Model.DocGroupId) { @: selected
+                                                    Model.DocGroupName = item.DocGroupDesc; }>
+                                                @item.DocGroupDesc
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="select-nang-cao-page">
+                                <label class="text-label"> Loại văn bản:</label>
+                                <div class="text-input-right">
+                                    <select name="DocTypeId" class="text-s11">
+                                        <option value="0">Loại văn bản</option>
+                                        @foreach (var item in Model.ListDocTypes)
+                                        {
+                                            <option title="@item.DocTypeDesc" value="@item.DocTypeId" @if (item.DocTypeId == Model.DocTypeId) { @: selected
+                                                    Model.DocTypeName = item.DocTypeDesc; }>
+                                                @item.DocTypeDesc
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="select-nang-cao-page">
+                                <label class="text-label"> Tình trạng hiệu lực:</label>
+                                <div class="text-input-right">
+                                    <select name="EffectStatusId" class="text-s11">
+                                        <option value="0">Tình trạng hiệu lực</option>
+                                        @foreach (var item in Model.ListEffectStatus)
+                                        {
+                                            <option value="@item.EffectStatusId" title="@item.EffectStatusDesc" @if (item.EffectStatusId == Model.EffectStatusId) { @: selected
+                                                    Model.EffectStatusName = item.EffectStatusDesc; }>
+                                                @item.EffectStatusDesc
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="select-nang-cao-page">
+                                <label class="text-label"> Lĩnh vực hoạt động:</label>
+                                <div class="text-input-right">
+                                    <select name="FieldId" class="text-s11">
+                                        <option value="0">Lĩnh vực hoạt động</option>
+                                        @foreach (var item in Model.ListFields)
+                                        {
+                                            <option value="@item.FieldId" title="@item.FieldDesc" @if (item.FieldId == Model.FieldId) { @: selected
+                                                    Model.FieldName = item.FieldDesc; }>
+                                                @item.FieldDesc
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="select-nang-cao-page">
+                                <label class="text-label">Cơ quan ban hành:</label>
+                                <div class="text-input-right">
+                                    <select name="OrganId" class="text-s11">
+                                        <option value="0">Cơ quan ban hành</option>
+                                        @foreach (var item in Model.ListOrgans)
+                                        {
+                                            <option value="@item.OrganId" title="@item.OrganDesc" @if (item.OrganId == Model.OrganId) { @: selected
+                                                    Model.OrganName = item.OrganDesc; }>
+                                                @item.OrganDesc
+                                            </option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="select-nang-cao-page" style="margin-bottom: 0;">
+                                <label class="text-label">Người ký văn bản:</label>
+                                <div class="text-input-right">
+                                    @Html.TextBoxFor(m => m.SignerName, new { @class = "text-s11" })
+                                    @Html.HiddenFor(m => m.SignerId)
+                                    <span id="signer-message"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div id="search-count" class="tim-thay">
+            @if (Model.DocList.RowCount > 0)
+            {
+                if (!string.IsNullOrEmpty(Model.Keywords))
+                {
+                    @:Tìm thấy<strong class="font16 bold"> @Model.DocList.RowCount.ToString("#,###") </strong> kết quả cho từ khóa: <strong class="italic" style="color: #0089d0">“@Model.Keywords”</strong>
+                }
+                else
+                {
+                    @:Tìm thấy <strong class="font16 bold"> @Model.DocList.RowCount.ToString("#,###") </strong> kết quả.
+                }
+            }
+        </div>
+
+        <div class="tag-loc font13">
+            @if (!string.IsNullOrEmpty(Model.DateFrom) || !string.IsNullOrEmpty(Model.DateTo) || !string.IsNullOrEmpty(Model.DocGroupName) || !string.IsNullOrEmpty(Model.DocTypeName) || !string.IsNullOrEmpty(Model.EffectStatusName) || !string.IsNullOrEmpty(Model.FieldName) || !string.IsNullOrEmpty(Model.OrganName))
+            {
+                <div class="taglocitem" style=""><img class="taglocicon" src="@Url.Content("~/assets/images/boloc.png")" />Đang lọc theo:</div>
+            }
+            @if (!string.IsNullOrEmpty(Model.DateFrom) || !string.IsNullOrEmpty(Model.DateTo))
+            {
+                <div id="timtheongay" class="tag-page">
+                    @if (!string.IsNullOrEmpty(Model.DateFrom))
+                    {
+                        @:Từ @Model.DateFrom
+                    }
+                    @if (!string.IsNullOrEmpty(Model.DateTo))
+                    {
+                        @:đến @Model.DateTo
+                    }
+                    <a href="#" id="xoatimtheongay" title="Xóa điều kiện lọc theo ngày @(Model.SearchByDate.Equals("IssueDate") ? "ban hành" : "áp dụng")" class="icon-dong"></a>
+                </div>
+            }
+            else
+            {
+                <div id="timtheongay" class="tag-page0"></div>
+            }
+            @if (!string.IsNullOrEmpty(Model.DocGroupName))
+            {
+                <div id="nhomvanban" class="tag-page">@Model.DocGroupName<a href="#" title="@string.Format("Xóa điều kiện lọc theo nhóm văn bản: {0}",Model.DocGroupName)" id="xoanhomvanban" class="icon-dong"></a></div>
+            }
+            else
+            {
+                <div id="nhomvanban" class="tag-page0"></div>
+            }
+            @if (!string.IsNullOrEmpty(Model.DocTypeName))
+            {
+                <div id="loaivanban" class="tag-page">@Model.DocTypeName<a href="#" title="@string.Format("Xóa điều kiện lọc theo loại văn bản: {0}",Model.DocTypeName)" id="xoaloaivanban" class="icon-dong"></a></div>
+            }
+            else
+            {
+                <div id="loaivanban" class="tag-page0"></div>
+            }
+            @if (!string.IsNullOrEmpty(Model.EffectStatusName))
+            {
+                <div id="tinhtranghieuluc" class="tag-page">@Model.EffectStatusName<a href="#" title="@string.Format("Xóa điều kiện lọc theo tình trạng hiệu lực: {0}",Model.EffectStatusName)" id="xoatinhtranghieuluc" class="icon-dong"></a></div>
+            }
+            else
+            {
+                <div id="tinhtranghieuluc" class="tag-page0"></div>
+            }
+            @if (!string.IsNullOrEmpty(Model.FieldName))
+            {
+                <div id="linhvuc" class="tag-page">@Model.FieldName<a href="#" title="@string.Format("Xóa điều kiện lọc theo lĩnh vực: {0}",Model.FieldName)" id="xoalinhvuc" class="icon-dong"></a></div>
+            }
+            else
+            {
+                <div id="linhvuc" class="tag-page0"></div>
+            }
+            @if (!string.IsNullOrEmpty(Model.OrganName))
+            {
+                <div id="coquanbanhanh" class="tag-page">
+                    @Model.OrganName<a href="#" title="@string.Format("Xóa điều kiện lọc theo cơ quan ban hành: {0}",Model.OrganName)" id="xoacoquanbanhanh" class="icon-dong"></a>
+                </div>
+            }
+            else
+            {
+                <div id="coquanbanhanh" class="tag-page0"></div>
+            }
+            @if (!string.IsNullOrEmpty(Model.SignerName))
+            {
+                <div id="nguoiky" class="tag-page">@Model.SignerName<a href="#" title="@string.Format("Xóa điều kiện lọc theo người ký: {0}",Model.SignerName)" id="xoanguoiky" class="icon-dong"></a></div>
+            }
+            else
+            {
+                <div id="nguoiky" class="tag-page0"></div>
+            }
+            @if (!string.IsNullOrEmpty(Model.DateFrom) || !string.IsNullOrEmpty(Model.DateTo) || !string.IsNullOrEmpty(Model.DocGroupName) || !string.IsNullOrEmpty(Model.DocTypeName) || !string.IsNullOrEmpty(Model.EffectStatusName) || !string.IsNullOrEmpty(Model.FieldName) || !string.IsNullOrEmpty(Model.OrganName))
+            {
+                <a class="tag-del" href="#" id="xoadieukientimkiem">Xóa tất cả</a>
+            }
+        </div>
+
+        <div class="tabtitle tab-height-auto">
+            <div class="tab-1 fixfont-tab fix-w">
+                <a class="tab-item-1 docGroupSearch @(Model.DocGroupId==0 ? "active" : string.Empty)" href="#" data-id="0">Tất cả</a>
+                <a class="tab-item-1 docGroupSearch @(Constants.DocGroupIdVbpq == Model.DocGroupId ? "active" : string.Empty)" href="#" data-id="@Constants.DocGroupIdVbpq">
+                    Văn bản pháp quy
+                    @if (Model.DocList.lCountByDocGroup.HasValue())
+                    {
+                        var item = Model.DocList.lCountByDocGroup.FirstOrDefault(m => m.DocGroupId == Constants.DocGroupIdVbpq);
+                        if (item != null)
+                        {
+                            <span class="color666">(@item.DocCount.ToString("#,###"))</span>
+                        }
+                    }
+                    else if (Model.DocList.RowCount > 0 && Constants.DocGroupIdVbpq == Model.DocGroupId)
+                    {
+                        <span class="color666">(@Model.DocList.RowCount.ToString("#,###"))</span>
+                    }
+                </a>
+                <a class="tab-item-1 docGroupSearch @(Constants.DocGroupIdCongVan == Model.DocGroupId ? "active" : string.Empty)" href="#" data-id="@Constants.DocGroupIdCongVan">
+                    Công văn
+                    @if (Model.DocList.lCountByDocGroup.HasValue())
+                    {
+                        var item = Model.DocList.lCountByDocGroup.FirstOrDefault(m => m.DocGroupId == Constants.DocGroupIdCongVan);
+                        if (item != null)
+                        {
+                            <span class="color666">(@item.DocCount.ToString("#,###"))</span>
+                        }
+                    }
+                    else if (Model.DocList.RowCount > 0 && Constants.DocGroupIdCongVan == Model.DocGroupId)
+                    {
+                        <span class="color666">(@Model.DocList.RowCount.ToString("#,###"))</span>
+                    }
+                </a>
+                <a class="tab-item-1 docGroupSearch @(Constants.DocGroupIdUbnd == Model.DocGroupId ? "active" : string.Empty)" href="#" data-id="@Constants.DocGroupIdUbnd">
+                    vb ubnd
+                    @if (Model.DocList.lCountByDocGroup.HasValue())
+                    {
+                        var item = Model.DocList.lCountByDocGroup.FirstOrDefault(m => m.DocGroupId == Constants.DocGroupIdUbnd);
+                        if (item != null)
+                        {
+                            <span class="color666">(@item.DocCount.ToString("#,###"))</span>
+                        }
+                    }
+                    else if (Model.DocList.RowCount > 0 && Constants.DocGroupIdUbnd == Model.DocGroupId)
+                    {
+                        <span class="color666">(@Model.DocList.RowCount.ToString("#,###"))</span>
+                    }
+                </a>
+                <a class="tab-item-1 docGroupSearch @(Constants.DocGroupIdVbhn == Model.DocGroupId ? "active" : string.Empty)" href="#" data-id="@Constants.DocGroupIdVbhn">
+                    vb hợp nhất
+                    @if (Model.DocList.lCountByDocGroup.HasValue())
+                    {
+                        var item = Model.DocList.lCountByDocGroup.FirstOrDefault(m => m.DocGroupId == Constants.DocGroupIdVbhn);
+                        if (item != null)
+                        {
+                            <span class="color666">(@item.DocCount.ToString("#,###"))</span>
+                        }
+                    }
+                    else if (Model.DocList.RowCount > 0 && Constants.DocGroupIdVbhn == Model.DocGroupId)
+                    {
+                        <span class="color666">(@Model.DocList.RowCount.ToString("#,###"))</span>
+                    }
+                </a>
+                <a class="tab-item-1 docGroupSearch @(Constants.DocGroupIdTcvn == Model.DocGroupId ? "active" : string.Empty)" href="#" data-id="@Constants.DocGroupIdTcvn">
+                    tcvn
+                    @if (Model.DocList.lCountByDocGroup.HasValue())
+                    {
+                        var item = Model.DocList.lCountByDocGroup.FirstOrDefault(m => m.DocGroupId == Constants.DocGroupIdTcvn);
+                        if (item != null)
+                        {
+                            <span class="color666">(@item.DocCount.ToString("#,###"))</span>
+                        }
+                    }
+                    else if (Model.DocList.RowCount > 0 && Constants.DocGroupIdTcvn == Model.DocGroupId)
+                    {
+                        <span class="color666">(@Model.DocList.RowCount.ToString("#,###"))</span>
+                    }
+                </a>
+                @*@if (Model.DocList.lDocs.HasValue() || Model.DocList.lCountByDocGroup.HasValue())
+                    {
+                        <a class="tab-item-1 docGroupSearch @(Model.DocGroupId == 0 ? "active" : string.Empty)" href="#">Tất cả</a>
+                        foreach (var item in Model.DocList.lCountByDocGroup.OrderByDescending(x => x.DocCount))
+                        {
+                            <a class="tab-item-1 docGroupSearch @(item.DocGroupId == Model.DocGroupId ? "active" : string.Empty)" href="#" data-id="@item.DocGroupId">
+                                @if (item.DocGroupId == Constants.DocGroupIdUbnd)
+                                {
+                                    @:vb ubnd
+                                }
+                                else if (item.DocGroupId == Constants.DocGroupIdVbhn)
+                                {
+                                    @:vb hợp nhất
+                                }
+                                else if (item.DocGroupId == Constants.DocGroupIdTcvn)
+                                {
+                                    @:tcvn
+                                }
+                                else
+                                {
+                                    @item.DocGroupDesc
+                                }
+                                <span class="color666">(@item.DocCount.ToString("#,###"))</span>
+                            </a>
+                        }
+                    }*@
+            </div>
+            <div class="thuoctinh-vb">
+                <a class="iconview hide-attr" href="#" rel="nofollow" title="Ẩn thuộc tính văn bản">
+                    <span class="iconview-g"></span>
+                    <span class="iconview-g"></span>
+                    <span class="iconview-g"></span>
+                </a>
+                <a class="iconview active show-attr" href="#" rel="nofollow" title="Hiện thuộc tính văn bản">
+                    <span class="iconview-bo"></span>
+                    <span class="iconview-bo1"></span>
+                    <span class="iconview-bo"></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="cat-box-content">
+            <div id="tab-item-1" class="click-1">
+                @if (Model.DocList.lDocs.HasValue())
+                {
+                    <table id="contentsWrapper" class="tablecontent">
+                        <tbody class="pcontent">
+                            @for (int index = 0; index < Model.DocList.lDocs.Count; index++)
+                            {
+                                var number = index + (Model.Page > 0 ? Model.Page - 1 : Model.Page) * 20 + 1;
+                                <tr class="rows-vb">
+                                    <td class="number bold">@string.Format("{0:#00}", number)</td>
+                                    <td>
+                                        @{ Html.RenderAction("PartialDocumentAttribute", "Shared", new { model = new SharedViewModel.DocumentAttribute { Docs = Model.DocList.lDocs[index] } });}
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    if (Model.DocList.lDocs.Count == Constants.RowAmount20)
+                    {
+                        Html.RenderAction("PartialPagination", "Shared", new
+                        {
+                            model = new PaginationModel
+                            {
+                                Page = Model.Page,
+                                TotalPage = Model.DocList.RowCount,
+                                AjaxUrl = "/docsearchgetpage.html",
+                                QueryString = "".BuildQueryStringUrl(new NameValueCollection
+                                                                        {
+                                                                            { "DocGroupId", Model.DocGroupId.ToString() },
+                                                                            { "DocTypeId", Model.DocTypeId.ToString() },
+                                                                            { "FieldId", Model.FieldId.ToString() },
+                                                                            { "EffectStatusId", Model.EffectStatusId.ToString() },
+                                                                            { "OrganId", Model.OrganId.ToString() },
+                                                                            { "SignerId", Model.SignerId.ToString() },
+                                                                            { "IsSearchExact", Model.SearchExact.ToString() },
+                                                                            { "DateFrom", Model.DateFrom },
+                                                                            { "DateTo", Model.DateTo },
+                                                                            { "SearchByDate", Model.SearchByDate },
+                                                                            { "page", (Model.Page+1).ToString() }
+                                                                        })
+                            }
+                        });
+                    }
+                }
+                else
+                {
+                    <table class="tablecontent full">
+                        <body>
+                            <tr class="rows-vb">
+                                <td>
+                                    <p class="post-title vbl bold">Không tìm thấy văn bản phù hợp.</p>
+                                </td>
+                            </tr>
+                        </body>
+                    </table>
+                }
+            </div>
+        </div>
+    </section>
+</div>
+<aside class="sidebar-270">
+    <div class="widget">
+        <div class="ads">
+            @{Html.RenderAction("PartialAdvertise", "Shared", new { advertPositionId = 233 });}
+        </div>
+    </div>
+
+    @if (Model.DocList.lCountByField.HasValue())
+    {
+        <div class="widget bgwg">
+            <div class="content-scroll-1" style="max-height: 350px;">
+                <div class="pd15">
+                    <div class="widget-top">
+                        <h3 class="widget-title lkqlv" style="color: #222;">Lọc kết quả theo lĩnh vực</h3>
+                    </div>
+                    <div class="widget-container">
+                        <ul class="ul-lqk">
+                            @foreach (var item in Model.DocList.lCountByField.OrderByDescending(x => x.DocCount))
+                            {
+                                <li class="vbluat-row-search"><a href="#" class="searchFieldId" data-id="@item.FieldId">@item.FieldDesc <span class="color888">(@item.DocCount.ToString("#,###"))</span></a></li>
+                            }
+                        </ul>
+                    </div>
+                </div><div class="linh-vuc-khac" style="padding-bottom: 15px;"><button id="load-btn" class="lvk-search">Lĩnh vực khác<img style="margin-top: 5px; float: right;" src="@Url.Content("~/assets/images/icondown.png")" /></button></div>
+            </div>
+        </div>
+    }
+
+    <div class="widget vien">
+        <div class="widget-top">
+            <h3 class="widget-title boloc"><img style="float: left;margin-right: 5px;" src="@Url.Content("~/assets/images/boloc.png")" />Bộ lọc nhanh</h3>
+        </div>
+        <div class="widget-container">
+            @using (Html.BeginForm("DocSearch", "Home", FormMethod.Get, new { @class = "form-loc" }))
+            {
+                <div class="tab-conten">
+                    <div class="tab-title2">
+                        <a class="tabs-nav-search-by-date tab-item-tab-82 @(string.IsNullOrEmpty(Model.SearchByDate) || Model.SearchByDate.Equals("IssueDate") ? "active" : string.Empty))" href="#" rel="nofollow" data-id="IssueDate">Ngày ban hành</a>
+                        <span class="spanvien">|</span>
+                        <a class="tabs-nav-search-by-date tab-item-tab-82 @(Model.SearchByDate.Equals("EffectDate") ? "active" : string.Empty)" href="#" rel="nofollow" data-id="EffectDate">Ngày áp dụng</a>
+                    </div>
+
+                    <div id="SearchByDateBox" class="cat-box-content">
+                        <div class="row-loc">
+                            <div class="form-group">
+                                <input class="datepicker text-s1 bgffffff calendar italic font13" name="DateFrom" value="@Model.DateFrom" placeholder="Từ ngày (dd/mm/yyyy)" type="text">
+                            </div>
+                            <div class="form-group">
+                                <input class="datepicker text-s1 bgffffff calendar italic font13" name="DateTo" value="@Model.DateTo" placeholder="Đến ngày (dd/mm/yyyy)" type="text">
+                            </div>
+                        </div>
+                        <input type="hidden" name="SearchByDate" value="@Model.SearchByDate.TrimmedOrDefault("IssueDate")" />
+                    </div>
+                </div>
+                if (Model.DocList.lCountByDocGroup.HasValue())
+                {
+                    <div class="row-loc bodertop">
+                        <div class="form-group ">
+                            <strong style="line-height: 22px;">Nhóm văn bản</strong>
+                        </div>
+                        <div class="form-checkbox ">
+                            @foreach (var item in Model.DocList.lCountByDocGroup)
+                            {
+                                <div class="radio bloc">
+                                    <input class="none" id="DocGroupIdR_@item.DocGroupId" name="DocGroupId" type="radio" value="@item.DocGroupId" @(Model.DocGroupId == item.DocGroupId ? "checked" : string.Empty)>
+                                    <label for="DocGroupIdR_@item.DocGroupId" class="radio-label">@item.DocGroupDesc (@item.DocCount.ToString("#,###"))</label>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                }
+                else
+                {
+                    <input type="hidden" name="DocGroupId" value="@Model.DocGroupId" />
+                }
+                if (Model.DocList.lCountByEffectStatus.HasValue())
+                {
+                    <div class="row-loc bodertop">
+                        <div class="form-group ">
+                            <strong style="line-height: 22px;">Tình trạng hiệu lực</strong>
+                        </div>
+                        <div class="form-checkbox ">
+                            @foreach (var item in Model.DocList.lCountByEffectStatus.OrderByDescending(x => x.DocCount))
+                            {
+                                <div class="radio bloc">
+                                    <input class="none" id="EffectStatusIdR_@item.EffectStatusId" name="EffectStatusId" type="radio" value="@item.EffectStatusId" @(Model.EffectStatusId == item.EffectStatusId ? "checked" : string.Empty)>
+                                    <label for="EffectStatusIdR_@item.EffectStatusId" class="radio-label">@item.EffectStatusDesc (@item.DocCount.ToString("#,###"))</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                if (Model.DocList.lCountByDocType.HasValue())
+                {
+                    <div class="row-loc bodertop">
+                        <div class="form-group ">
+                            <strong style="line-height: 22px;">Loại văn bản</strong>
+                        </div>
+                        <div class="form-checkbox ">
+                            <div class="content-scroll-1" style="max-height: 350px;">
+                                @foreach (var item in Model.DocList.lCountByDocType.OrderByDescending(x => x.DocCount))
+                                {
+                                    <div class="radio bloc vbluat-doctype-search-row">
+                                        <input class="none" id="DocTypeIdR_@item.DocTypeId" name="DocTypeId" type="radio" value="@item.DocTypeId" @(Model.DocTypeId == item.DocTypeId ? "checked" : string.Empty)>
+                                        <label for="DocTypeIdR_@item.DocTypeId" class="radio-label">@item.DocTypeDesc (@item.DocCount.ToString("#,###"))</label>
+                                    </div>
+                                }
+                                <div class="linh-vuc-khac" style="margin-bottom: 15px;"><button id="load-btn" class="lvk-doctype-search">Loại văn bản khác<img style="margin-top: 5px; float: right;" src="@Url.Content("~/assets/images/icondown.png")" /></button></div>
+                            </div>
+                            <center>
+                                <button class="btn-default apdung"> Áp dụng</button>
+                            </center>
+                        </div>
+                    </div>
+                }
+                <input type="hidden" name="Keywords" value="@Model.Keywords" />
+                <input type="hidden" name="SearchOptions" value="@Model.SearchOptions" />
+                <input type="hidden" name="SearchExact" value="@Model.SearchExact" />
+                <input type="hidden" name="OrganId" value="@Model.OrganId" />
+                <input type="hidden" name="SignerId" value="@Model.SignerId" />
+                <input type="hidden" name="SignerName" value="@Model.SignerName" />
+            }
+        </div>
+    </div>
+</aside>
+@section SEOPagination{
+    @{Html.RenderAction("PartialSEOPagination", "Shared", new { page = Model.Page, totalPage = Model.DocList.RowCount });}
+}
+@section HeaderSection{
+    @Styles.Render("~/bundles/jqueryUICss")
+}
+@section FooterSection
+{
+    <script type="text/javascript">
+        jQuery(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd/mm/yy',
+                yearRange: "1945:c",
+                changeMonth: true,
+                changeYear: true
+            });
+            $(".datepicker").datepicker("option", "monthNames", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "monthNamesShort", ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"]);
+            $(".datepicker").datepicker("option", "dayNamesMin", ["CN", "T2", "T3", "T4", "T5", "T6", "T7"]);
+            $('#contentsWrapper').vbluatInfiteScroll({
+                contentsWrapperSelector: '#contentsWrapper',
+                contentSelector: '.pcontent',
+                nextSelector: '#pnext'
+            });
+        });
+    </script>
+}
